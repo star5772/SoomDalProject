@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org/DTD config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<typeAliases>
+		<typeAlias type="com.icia.dal.entity.Jeja" alias="jeja"/>
+		<typeAlias type="com.icia.dal.entity.Dalin" alias="dalin"/>
+	</typeAliases>
+	<typeHandlers>
+		<typeHandler handler="com.icia.dal.util.typehandler.LocalDateTimeTypeHandler"/>
+	</typeHandlers>
+</configuration>
