@@ -41,6 +41,22 @@ public class MemberController {
 		return "redirect:/qna_board/read?bno="+"글 쓴 번호";
 	}
 	*/
+	@GetMapping("/member/find_id")
+	public ModelAndView findId() {
+		// 아이디 찾기 페이지로 이동
+		return new ModelAndView("main").addObject("viewName","member/find_id.jsp");
+	}
 	
+	@GetMapping("/member/reset_pwd") 
+	public ModelAndView resetPwd(){
+		// 비번 찾기 페이지로 이동
+		return new ModelAndView("main").addObject("viewName","member/reset_pwd.jsp");
+	}
+	
+	@GetMapping("/member/resign")
+	public ModelAndView resign() {
+		// 회원 탈퇴 페이지로 이동
+		return new ModelAndView("main").addObject("viewName","member/resign.jsp");
+	}
 	
 }
