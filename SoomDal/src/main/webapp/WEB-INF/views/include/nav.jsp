@@ -19,7 +19,7 @@
       <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav ml-auto">
         	<sec:authorize access="isAnonymous()">
-        		<li class="nav-item"><a class="nav-link" href="#"><i class="fas fa-search">달인 찾기</i></a></li>
+        		<li class="nav-item"><a class="nav-link" href="#"><i class="fas fa-search">&nbsp;달인 찾기</i></a></li>
         		<li class="nav-item"><a class="nav-link" href="#">아이디 찾기</a></li>
 	          	<li class="nav-item"><a class="nav-link" href="#">비밀번호 찾기</a></li>
 	          	<li class="nav-item"><a class="nav-link" href="#">회원가입</a></li>
@@ -27,7 +27,7 @@
         	</sec:authorize>
         	
         	<sec:authorize access="hasRole('ROLE_JEJA')">
-        		<li class="nav-item"><a class="nav-link" href="#"><i class="fas fa-search">달인 찾기</i></a></li>
+        		<li class="nav-item"><a class="nav-link" href="#"><i class="fas fa-search">&nbsp;달인 찾기</i></a></li>
         		<li class="nav-item"><a class="nav-link" href="#">내 정보</a></li>
         		<li class="nav-item"><a class="nav-link" href="#">쪽지함</a></li>
         		<li class="nav-item"><a class="nav-link" href="#" >로그아웃</a></li>
