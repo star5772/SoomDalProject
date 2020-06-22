@@ -58,5 +58,10 @@ public class MemberController {
 		// 회원 탈퇴 페이지로 이동
 		return new ModelAndView("main").addObject("viewName","member/resign.jsp");
 	}
+	@GetMapping("/member/chk_pwd")
+	public ModelAndView checkPwd() {
+		// 비밀번호 확인 필요한 페이지 이동 시 비밀번호 확인 페이지로 이동
+		return new ModelAndView("main").addObject("viewName","member/check_pwd.jsp");
+	}
 	
 }
