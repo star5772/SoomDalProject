@@ -1,6 +1,8 @@
 package com.icia.dal.dao;
 
 import java.util.*;
+import java.util.List;
+import java.util.Map;
 
 import javax.inject.*;
 
@@ -8,6 +10,12 @@ import org.mybatis.spring.*;
 import org.springframework.stereotype.*;
 
 import com.icia.dal.entity.*;
+import org.mybatis.spring.SqlSessionTemplate;
+import org.springframework.stereotype.Repository;
+
+import com.icia.dal.entity.Dalin;
+import com.icia.dal.entity.Jeja;
+import com.icia.dal.entity.RequestBoard;
 
 @Repository
 public class AdminDao {
