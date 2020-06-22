@@ -2,6 +2,12 @@ package com.icia.dal.entity;
 
 import java.time.*;
 
+import lombok.*;
+
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
+@Data
 public class Jeja {
 	private int jMno; // 제자 회원 번호
 	private String jEmail; // 회원 id(eamil)
@@ -10,6 +16,6 @@ public class Jeja {
 	private String jTel; // 회원 전화번호
 	private int jAccusationCnt; // 신고수
 	private boolean enabled; // 회원 상태
-	private LocalDateTime date; // 가입 날짜
+	private LocalDateTime jJoinDate; // 가입 날짜
 	
 }
