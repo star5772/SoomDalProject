@@ -7,6 +7,18 @@ import org.springframework.web.servlet.*;
 @Controller
 public class MemberController {
 	
+	@GetMapping("/")
+	public ModelAndView main() {
+		// main 페이지로 이동
+		return new ModelAndView("main");
+	}
+	
+	@GetMapping("/member/login")
+	public ModelAndView login() {
+		// 로그인 페이지로 이동
+		return new ModelAndView("main").addObject("viewName","member/login.jsp");
+	}
+	
 	@GetMapping("/request_board/list")
 	public ModelAndView requestBoard() {
 		// 요청서 게시판으로 이동
@@ -62,6 +74,11 @@ public class MemberController {
 	public ModelAndView checkPwd() {
 		// 비밀번호 확인 필요한 페이지 이동 시 비밀번호 확인 페이지로 이동
 		return new ModelAndView("main").addObject("viewName","member/check_pwd.jsp");
+	}
+	@GetMapping("/member/join_select")
+	public ModelAndView joinSelect() {
+		// 회원가입 버튼 선택 시 제자 or 달인 선택 페이지로 이동
+		return new ModelAndView("main").addObject("viewName","member/join_select.jsp");
 	}
 	
 }

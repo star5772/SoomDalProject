@@ -1,8 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="jejaMapper">
-	<select id="findById">
+
+	<!-- 가입 -->
+	<insert id="insertToJeja">
+		insert into jeja(J_MNO, J_EMAIL, J_PASSWORD, J_NAME, J_TEL,J_ACCUSATION_CNT,ENABLED,J_JOINDATE)
+		values(#{jMno},#{jEmail},#{jPassword},#{jName},#{jTel},0,1,sysdate)
+	</insert>
+	
+	<!-- 아이디 : 이름, 전화번호 -->
+	<select id="findJNameAndJTelByJejaId" resultType="string">
+		select J_EMAIL from jeja where J_NAME=#{jName} and J_TEL=#{jTel} and rownum=1	
 	</select>
+	
+	<!-- 제자 업데이트 비밀번호, 이름, 전화번호 수정가능 -->
+	<update id="updateJeja">
+		update jeja
+		<trim suffixOverrides="," prefix="set">
+			<if test="jPassword!=null">J_PASSWORD=#{jPassword},</if>
+			<if test="jName!=null">J_NAME=#{jName},</if>
+			<if test="jTel!=null">J_TEL=#{jTel},</if>
+		</trim>
+		where J_EMAIL=#{jEmail} and rownum=1
+	</update>
+	
+	<!-- 삭제 -->
+	<delete id="deleteJeja">
+		delete from jeja where J_EMAIL=#{jEmail} and rownum=1
+	</delete>
+	
 </mapper>
 
 
