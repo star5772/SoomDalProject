@@ -1,23 +1,17 @@
 package com.icia.dal.dao;
 
-<<<<<<< HEAD
 import java.util.*;
-=======
 import java.util.List;
 import java.util.Map;
->>>>>>> branch 'master' of https://github.com/star5772/SoomDalProject
 
 import javax.inject.*;
 
-<<<<<<< HEAD
 import org.mybatis.spring.*;
 import org.springframework.stereotype.*;
 
 import com.icia.dal.entity.*;
-=======
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
->>>>>>> branch 'master' of https://github.com/star5772/SoomDalProject
 
 import com.icia.dal.entity.Dalin;
 import com.icia.dal.entity.Jeja;
