@@ -152,7 +152,7 @@ CREATE TABLE Dalin (
 	D_INTRO NVARCHAR2(50), /* 한줄소개 */
 	D_DETAIL_SERVICE NVARCHAR2(500), /* 서비스상세설명 */
 	D_AREA NVARCHAR2(10), /* 활동지역 */
-	D_PAYMENT_METHOD nvarchar2(20), /* 결제 수단 */
+	D_PAYMENT_METHOD NVARCHAR2(20), /* 결제 수단 */
 	P_ATTACHMENT_CNT NUMBER(1), /* 첨부파일 수 */
 	D_LEVEL NVARCHAR2(10), /* 레벨 */
 	R_NO NUMBER(5), /* 리뷰 번호 */

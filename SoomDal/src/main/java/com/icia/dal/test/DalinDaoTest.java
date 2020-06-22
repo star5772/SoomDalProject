@@ -1,5 +1,8 @@
 package com.icia.dal.test;
 
+import static org.hamcrest.CoreMatchers.*;
+import static org.junit.Assert.*;
+
 import javax.inject.*;
 
 import org.junit.*;
@@ -16,10 +19,19 @@ public class DalinDaoTest {
 	@Inject
 	private DalinDao dao;
 	
-	@Test
+	//@Test
 	public void insertToDalinTest() {
-		Dalin dalin = Dalin.builder().dMno(1).fNo("tmvhcm").dEmail("thgus2520@naver.com").dPassword("qwer!1234").dName("spring")
+		Dalin dalin = Dalin.builder().dMno(1).fNo("k").dEmail("thgus2520@naver.com").dPassword("qwer!1234").dName("spring")
 				.dTel("01011112222").dArea("인천").dLevel(Level.NORMAL).build();
 		dao.insertToDalin(dalin);
+	}
+	
+	//@Test
+	public void findByDalinProfile() {
+		assertThat(dao.findByDalinProfile(1), is(notNullValue()));
+	}
+	
+	public void updateProfileTest() {
+		
 	}
 }
