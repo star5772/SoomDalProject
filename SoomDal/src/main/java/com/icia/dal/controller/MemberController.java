@@ -1,0 +1,46 @@
+package com.icia.dal.controller;
+
+import org.springframework.stereotype.*;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.*;
+
+@Controller
+public class MemberController {
+	
+	@GetMapping("/request_board/list")
+	public ModelAndView requestBoard() {
+		// 요청서 게시판으로 이동
+		// board/request.jsp에 뿌려줄 list 정보 필요(addObject("request",service.requestList()))
+		return new ModelAndView("main").addObject("viewName","board/request_board_list.jsp");
+	}
+	
+	@GetMapping("/qna_board/list")
+	public ModelAndView qnaBoard() {
+		// 문의 게시판으로 이동
+		// jsp에 뿌려줄 list 정보 필요 
+		return new ModelAndView("main").addObject("viewName","board/qna_board_list.jsp");
+	}
+	
+	@GetMapping("/qna_board/read")
+	public ModelAndView qnaRead() {
+		// 문의 글 읽기
+		// jsp에 작성글 정보 필요 > service.qnaRead()
+		return new ModelAndView("main").addObject("viewName","board/qna_board_read.jsp");
+	}
+	
+	@GetMapping("/qna_board/write")
+	public ModelAndView qnaWrite() {
+		// 문의 게시판 글작성 페이지로 이동
+		return new ModelAndView("main").addObject("viewName","board/qna_board_write.jsp");
+	}
+	/*
+	@PostMapping("/qna_board/write")
+	public String qnaWrite() {
+		// 문의 게시판 글작성 하기 >> 작성 후 자기가 쓴 글 읽기
+		// service.qnawrite();
+		return "redirect:/qna_board/read?bno="+"글 쓴 번호";
+	}
+	*/
+	
+	
+}
