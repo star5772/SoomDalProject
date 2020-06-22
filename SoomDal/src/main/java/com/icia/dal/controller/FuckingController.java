@@ -6,9 +6,5 @@ import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class FuckingController {
-	
-	@GetMapping("/")
-	public ModelAndView fuck() {
-		return new ModelAndView("main");
-	}
+
 }

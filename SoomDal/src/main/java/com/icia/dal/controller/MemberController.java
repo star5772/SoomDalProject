@@ -10,7 +10,7 @@ public class MemberController {
 	@GetMapping("/")
 	public ModelAndView main() {
 		// main 페이지로 이동
-		return new ModelAndView("main");
+		return new ModelAndView("main").addObject("viewName","root/rootPage.jsp");
 	}
 	
 	@GetMapping("/member/login")
