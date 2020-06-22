@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.icia.dal.dao.QnaBoardDao">
+	<!-- 문의게시판 수정 -->
+	<update id="QnaBoardUpdate">
+		update QnaBoard
+		<trim suffixOverrides="," prefix="SET">
+			<if test="qTitle!=null">Q_TITLE=#{qTitle},</if>
+			<if test="qContent!=null">Q_CONTENT=#{qContent},</if>
+		</trim>
+		where Q_CODE=#{qCode} and rownum=1
+	</update>
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
