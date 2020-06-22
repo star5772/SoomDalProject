@@ -4,6 +4,9 @@
 	<typeAliases>
 		<typeAlias type="com.icia.dal.entity.Jeja" alias="jeja"/>
 		<typeAlias type="com.icia.dal.entity.Dalin" alias="dalin"/>
+		<typeAlias type="com.icia.dal.entity.QnaBoard" alias="QnaBoard"/>
+		<typeAlias type="com.icia.dal.entity.QnaComment" alias="QnaComment"/>
+		<typeAlias type="com.icia.dal.entity.RequestBoard" alias="RequestBoard"/>
 	</typeAliases>
 	<typeHandlers>
 		<typeHandler handler="com.icia.dal.util.typehandler.LocalDateTimeTypeHandler"/>

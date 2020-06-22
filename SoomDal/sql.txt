@@ -152,6 +152,7 @@ CREATE TABLE Dalin (
 	D_INTRO NVARCHAR2(50), /* 한줄소개 */
 	D_DETAIL_SERVICE NVARCHAR2(500), /* 서비스상세설명 */
 	D_AREA NVARCHAR2(10), /* 활동지역 */
+	D_PAYMENT_METHOD nvarchar2(20), /* 결제 수단 */
 	P_ATTACHMENT_CNT NUMBER(1), /* 첨부파일 수 */
 	D_LEVEL NVARCHAR2(10), /* 레벨 */
 	R_NO NUMBER(5), /* 리뷰 번호 */
@@ -201,7 +202,8 @@ ALTER TABLE Request
 /* 신고 회원 */
 CREATE TABLE ReportedUser (
 	D_MNO NUMBER(6) NOT NULL, /* 회원 번호 */
-	J_MNO NUMBER(6) NOT NULL /* 신고당한 회원 */
+	J_MNO NUMBER(6) NOT NULL, /* 신고당한 회원 */
+	R_REPORT_REASON NVARCHAR2(100)
 );
 
 ALTER TABLE ReportedUser
