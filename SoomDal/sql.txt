@@ -153,10 +153,11 @@ CREATE TABLE Dalin (
 	D_DETAIL_SERVICE NVARCHAR2(500), /* 서비스상세설명 */
 	D_AREA NVARCHAR2(10), /* 활동지역 */
 	P_ATTACHMENT_CNT NUMBER(1), /* 첨부파일 수 */
-	D_LEVEL NVARCHAR(10), /* 레벨 */
+	D_LEVEL NVARCHAR2(10), /* 레벨 */
 	R_NO NUMBER(5), /* 리뷰 번호 */
 	P_ATTACHMENT_NO NUMBER(3), /* 프로필 첨부 파일 번호 */
 	D_Q_NO NUMBER(1) /* 질문 번호 > 기본키 */
+	
 );
 
 ALTER TABLE Dalin
