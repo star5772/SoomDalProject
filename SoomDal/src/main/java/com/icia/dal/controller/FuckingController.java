@@ -9,6 +9,6 @@ public class FuckingController {
 	
 	@GetMapping("/")
 	public ModelAndView fuck() {
-		return new ModelAndView("main");
+		return new ModelAndView("main").addObject("viewName","root/rootPage.jsp");
 	}
 }
