@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.icia.dal.dao.RequestBoardDao">
+	<!-- 요청서게시판 수정 -->
+	<update id="RequestBoardUpdate">
+		update RequestBoard
+		<trim suffixOverrides="," prefix="SET">
+			<if test="rbTitle!=null">RB_TITLE=#{rbTitle},</if>
+			<if test="rbContent!=null">RB_CONTENT=#{rbContent},</if>
+			<if test="rbReadCnt!=null">RB_READ_CNT=RB_READ_CNT +1,</if>
+			<if test="rbReportCnt!=null">RB_REPORT_CNT=RB_REPORT_CNT +1,</if>
+		</trim>
+		where RB_NO=#{rbNo} and rownum=1
+	</update>
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+

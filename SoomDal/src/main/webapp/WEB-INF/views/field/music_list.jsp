@@ -21,7 +21,7 @@
 </style>
 </head>
 <body>
-<h2 id="text">음악 서비스</h2>
+<h2 id="text">음악 서비스 </h2>
 	<div class="service">
 		<div class="card">
   			<img class="card-img-top" src="#" alt="Card image cap">

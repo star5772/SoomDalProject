@@ -22,7 +22,7 @@
 	<!-- 아래 c:forEach 로 list 개수만큼 div 반복 -->
 	<div>
 		<div id="dal_profile">
-			프로필 사진
+			프로필 사진 
 		</div>
 		<div id="dal_content">
 			<h5>달인 이름</h5>

@@ -19,7 +19,7 @@ public class FiledController {
 	}
 	@GetMapping("/field_music/list")
 	public ModelAndView musicList() {
-		// 분야 선택 후 음악 세부분야 리스트 페이지로 이동
+		// 분야 선택 후 음악 세부분야 리스트 페이지로 이동 
 		return new ModelAndView("main").addObject("viewName","field/music_list.jsp");
 	}
 	
