@@ -1,14 +1,13 @@
 package com.icia.dal.dao;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
-import javax.inject.Inject;
+import javax.inject.*;
 
-import org.apache.ibatis.session.SqlSessionFactory;
-import org.mybatis.spring.SqlSessionTemplate;
-import org.springframework.stereotype.Repository;
+import org.mybatis.spring.*;
+import org.springframework.stereotype.*;
+
+import com.icia.dal.entity.*;
 
 @Repository
 public class AdminDao {
