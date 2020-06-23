@@ -30,5 +30,12 @@ public class JejaDao {
 	public int deleteJeja(String jEmail) {
 		return tpl.delete("jejaMapper.deleteJeja",jEmail);
 	}
+	public String existsByjEmail(String jEmail) {
+		return tpl.selectOne("jejaMapper.existsByjEmail",jEmail);
+	}
+	
+	public int insertJeja(Jeja jeja) {
+		return tpl.insert("jejaMapper.insertJeja",jeja);
+	}
 	
 }

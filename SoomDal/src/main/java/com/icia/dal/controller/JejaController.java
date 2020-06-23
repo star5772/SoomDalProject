@@ -1,11 +1,18 @@
 package com.icia.dal.controller;
 
+import javax.inject.*;
+
 import org.springframework.stereotype.*;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.*;
 
+import com.icia.dal.entity.*;
+import com.icia.dal.service.*;
+
 @Controller
 public class JejaController {
+	@Inject
+	private JejaService service;
 	
 	@GetMapping("/jeja/my_info")
 	public ModelAndView jejaInfo() {
@@ -25,6 +32,11 @@ public class JejaController {
 	public ModelAndView jejaJoin() {
 		// 회원가입 구분 페이지에서 제자 누르면 이동하는 페이지
 		return new ModelAndView("main").addObject("viewName","jeja/join.jsp");
+	}
+	@PostMapping("/jeja/join")
+	public String jejaJoin(Jeja jeja) {
+		service.join(jeja);
+		return "redirect:/";
 	}
 	
 	@GetMapping("/jeja/request_write")

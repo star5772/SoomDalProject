@@ -3,7 +3,10 @@
 <mapper namespace="jejaMapper">
 
 	<!-- 가입 -->
-	<insert id="insertToJeja">
+	<insert id="insertJeja">
+		<selectKey keyProperty="jMno" resultType="int" order="BEFORE">
+			select JEJA_seq.nextval from dual
+		</selectKey>
 		insert into jeja(J_MNO, J_EMAIL, J_PASSWORD, J_NAME, J_TEL,J_ACCUSATION_CNT,ENABLED,J_JOINDATE)
 		values(#{jMno},#{jEmail},#{jPassword},#{jName},#{jTel},0,1,sysdate)
 	</insert>
@@ -29,16 +32,8 @@
 		delete from jeja where J_EMAIL=#{jEmail} and rownum=1
 	</delete>
 	
+	<!-- email 중복 체크 -->
+	<select id="existsByjEmail" resultType="String">
+		select J_EMAIL from jeja where J_EMAIL=#{jEmail} and rownum=1
+	</select>
 </mapper>
-
-
-
-
-
-
-
-
-
-
-
-
