@@ -25,40 +25,40 @@ public class DalinController {
 		return new ModelAndView("main").addObject("viewName","dalin/resign.jsp");
 	}
 	
-	@GetMapping("/dalin_info/update")
+	@GetMapping("/dalin/info_update")
 	public ModelAndView dalinInFoUpdate() {
 		// 달인 프로필 수정
-		return new ModelAndView("main").addObject("viewName","dalin/dal_info_update.jsp");
+		return new ModelAndView("main").addObject("viewName","dalin/info_update.jsp");
 	}
 	
-	@GetMapping("/dalin/update")
+	@GetMapping("/dalin/my_info_update")
 	public ModelAndView dalinMyInFoUpdate() {
 		// 달인 내정보 수정
-		return new ModelAndView("main").addObject("viewName","dalin/dalin_my_info_update.jsp");
+		return new ModelAndView("main").addObject("viewName","dalin/my_info_update.jsp");
 	}
 	
-	@GetMapping("/dalin_estimate/write")
+	@GetMapping("/dalin/estimate_write")
 	public ModelAndView dalinEstimateWrite() {
 		// 달인 견적서 작성
-		return new ModelAndView("main").addObject("viewName","dalin/dal_estimate_write.jsp");
+		return new ModelAndView("main").addObject("viewName","dalin/estimate_write.jsp");
 	}
 	
-	@GetMapping("/dalin_estimate/list")
+	@GetMapping("/dalin/estimate_list")
 	public ModelAndView dalinEstimateList() {
 		// 달인 쪽지관리(견적서)
-		return new ModelAndView("main").addObject("viewName","dalin/dal_estimate_list.jsp");
+		return new ModelAndView("main").addObject("viewName","dalin/estimate_list.jsp");
 	}
 	
-	@GetMapping("/dalin_request/list")
+	@GetMapping("/dalin/request_list")
 	public ModelAndView dalinRequestBoardList() {
 		// 달인 요청서 관리
-		return new ModelAndView("main").addObject("viewName","dalin/dal_request_board_list.jsp");
+		return new ModelAndView("main").addObject("viewName","dalin/request_board_list.jsp");
 	}
 	
-	@GetMapping("/dalin_field/list")
+	@GetMapping("/dalin/field_list")
 	public ModelAndView dalinFieldSelect() {
 		// 달인 분야선택 (달인 회원가입)
-		return new ModelAndView("main").addObject("viewName","dalin/dal_field_select.jsp");
+		return new ModelAndView("main").addObject("viewName","dalin/field_select.jsp");
 	}
 	
 	
