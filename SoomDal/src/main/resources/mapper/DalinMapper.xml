@@ -4,55 +4,62 @@
 	
 	<!-- 달인 회원가입 (이름, 이메일, 비밀번호, 휴대폰 번호, 분야, 세부분야, 활동지역) -->
 	<insert id="insertToDalin">
+		<selectKey keyProperty="dMno" order="BEFORE" resultType="int">
+			select dalin_seq.nextval from dual
+		</selectKey>
 		insert into dalin(d_mno, f_no, d_email, d_password, d_name, d_tel, enabled, d_date, d_cash, d_profile, d_main_service,
-		d_intro, d_detail_service, d_area, d_attachment_cnt, d_level, r_no, p_attachment_no, d_q_no)
-		values(${dMno}, ${fNo}, ${dEmail}, ${dPassword}, ${dName}, ${dTel}, 1, sysdate, 0, ${dProfile, jdbcType=VARCHAR}, ${dMainService, jdbcType=VARCHAR},
-		${dIntro, jdbcType=VARCHAR}, ${dDetailService, jdbcType=VARCHAR}, ${dArea}, 0, ${dLevel}, 0, 0, 0)
+		d_intro, d_detail_service, d_area, p_attachment_cnt, d_level, r_no, p_attachment_no, d_q_no)
+		values(#{dMno}, #{fNo}, #{dEmail}, #{dPassword}, #{dName}, #{dTel}, 1, sysdate, 0, #{dProfile, jdbcType=VARCHAR}, #{dMainService, jdbcType=VARCHAR},
+		#{dIntro, jdbcType=VARCHAR}, #{dDetailService, jdbcType=VARCHAR}, #{dArea}, 0, #{dLevel}, 0, 0, 0)
 	</insert>
 	<!-- 달인 프로필 읽기(프로필 사진, 이름, 대표서비스, 한줄 소개, 활동 지역, 달인 서비스 상세 설명, 결제 수단, 첨부 파일, 리뷰, 평점 -->
-	<select id="findByDalinProfile" resultMap="dalin">
+	<select id="findByDalinProfile" resultType="dalin">
 		select d_profile dProfile, d_name dName, d_main_service dMainService, d_intro dIntro, d_area dArea, d_detail_service dDetailService,
 		d_payment_method dPaymentMethod, p_attachment_cnt pAttachmentCnt, p_attachment_no pAttachmentNo, r_no rNo, d_q_no dQNo from dalin
-		where d_mno=${dMno} and rownum=1
+		where d_mno=#{dMno} and rownum=1
 	</select>
 	<!-- 프로필 수정 -->
 	<update id="updateToDalinProfile">
 		update dalin
 			<trim prefix="set" suffixOverrides=",">
-				<if test="dProfile!=null">d_profile=${dProfile},</if>
-				<if test="dName!=null">d_name=${dName},</if>
-				<if test="dIntro!=null">d_intro=${dIntro},</if>
-				<if test="dArea!=null">d_area=${dArea},</if>
-				<if test="dDetailService!=null">d_detail_service=${dDetailService},</if>
-				<if test="dPaymentMethod!=null">d_payment_method=${dPaymentMethod},</if>
-				<if test="dAttachmentNo!=null">d_attachment_No=${dAttachmentNo},</if>
-				<if test="dAttachmentCnt!=null">d_attachment_cnt=${dAttachmentCnt},</if>
-				<if test="rNo!=null">r_no=${rNo},</if>
-				<if test="dQNo!=null">d_q_no=${dQNo},</if>
-				<if test="enabled!=null">enabled=${enabled},</if>
+				<if test="dProfile!=null">d_profile=#{dProfile},</if>
+				<if test="dName!=null">d_name=#{dName},</if>
+				<if test="dIntro!=null">d_intro=#{dIntro},</if>
+				<if test="dArea!=null">d_area=#{dArea},</if>
+				<if test="dDetailService!=null">d_detail_service=#{dDetailService},</if>
+				<if test="dPaymentMethod!=null">d_payment_method=#{dPaymentMethod},</if>
+				<if test="pAttachmentNo!=null">p_attachment_No=#{dAttachmentNo},</if>
+				<if test="pAttachmentCnt!=null">p_attachment_cnt=#{pAttachmentCnt},</if>
+				<if test="rNo!=null">r_no=#{rNo},</if>
+				<if test="dQNo!=null">d_q_no=#{dQNo},</if>
+				<if test="enabled!=null">enabled=#{enabled},</if>
 			</trim>
-		where d_mno=${dMno} and rownum=1
+		where d_mno=#{dMno} and rownum=1
 	</update>
 	<!-- 내정보 읽기 (이름, 이메일, 비밀번호, 전화번호) -->
 	<select id="findByDalin" resultType="dalin">
 		select d_name dName, d_email dEmail, d_password dPassword, d_tel dTel
-		from dalin where d_mno=${dMno} and rownum=1
+		from dalin where d_mno=#{dMno} and rownum=1
 	</select>
 	<!-- 내정보 수정 -->
 	<update id="updateToDalin">
 		update dalin
 		<trim prefix="set" suffixOverrides=",">
-			<if test="dName!=null">d_name=${dName},</if>
-			<if test="dPassword!=null">d_password=${dPassword},</if>
-			<if test="dTel!=null">d_tel=${dTel},</if>
-			<if test="enabled!=null">enabled=${enabled},</if>
+			<if test="dName!=null">d_name=#{dName},</if>
+			<if test="dPassword!=null">d_password=#{dPassword},</if>
+			<if test="dTel!=null">d_tel=#{dTel},</if>
+			<if test="enabled!=null">enabled=#{enabled},</if>
 		</trim>
-		where d_mno=${dMno} and rownum=1
+		where d_mno=#{dMno} and rownum=1
 	</update>
 	<!-- 회원탈퇴 -->
 	<delete id="deleteToDalin">
-		delete from dalin where d_mno=${dMno} and rownum=1
+		delete from dalin where d_mno=#{dMno} and rownum=1
 	</delete>
+	
+	<select id="existsByEmail" resultType="boolean">
+		select count(*) from dalin where d_email=#{dEmail} and rownum=1
+	</select>
 </mapper>
 
 

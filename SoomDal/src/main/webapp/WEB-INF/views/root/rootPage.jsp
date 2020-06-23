@@ -48,12 +48,12 @@
       </a>
     </div>
 
-    <h2>Portfolio Heading</h2>
+    <h2>분야</h2>
 
     <div class="row">
       <div class="col-lg-4 col-sm-6 portfolio-item">
         <div class="card h-100">
-          <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
+          <a href="#"><img class="card-img-top" src="/image/sport.jpg"/></a>
           <div class="card-body">
             <h4 class="card-title">
               <a href="#">Project One</a>
@@ -64,7 +64,7 @@
       </div>
       <div class="col-lg-4 col-sm-6 portfolio-item">
         <div class="card h-100">
-          <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
+          <a href="#"><img class="card-img-top" src="/image/art.jpg" alt=""></a>
           <div class="card-body">
             <h4 class="card-title">
               <a href="#">Project Two</a>
@@ -75,7 +75,7 @@
       </div>
       <div class="col-lg-4 col-sm-6 portfolio-item">
         <div class="card h-100">
-          <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
+          <a href="#"><img class="card-img-top" src="/image/music.jpg" alt=""></a>
           <div class="card-body">
             <h4 class="card-title">
               <a href="#">Project Three</a>
