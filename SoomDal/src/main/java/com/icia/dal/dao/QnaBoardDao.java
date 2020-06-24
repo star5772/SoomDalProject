@@ -12,8 +12,7 @@ public interface QnaBoardDao {
 	public List<QnaBoard> findAllByQCode(String qcode);
 	
 	// 문의게시판 글추가
-	@Insert("insert into QnaBoard values(#{q.qCode}, #{q.qTitle}, #{q.qContent}, sysdate, #{q.qWriter}, #{q.cNo}, 0,0)")
-	public int insert(@Param("q")QnaBoard qnaBoard);
+	public int insert(QnaBoard qnaBoard);
 	
 	// 문의게시판 글삭제 댓글번호
 	@Delete("delete from QnaBoard where C_NO=#{cNo} and rownum=1")

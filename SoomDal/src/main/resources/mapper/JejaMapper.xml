@@ -4,6 +4,9 @@
 
 	<!-- 가입 -->
 	<insert id="insertToJeja">
+		<selectKey keyProperty="jMno" resultType="int" order="BEFORE">
+			select JEJA_seq.nextval from dual
+		</selectKey>
 		insert into jeja(J_MNO, J_EMAIL, J_PASSWORD, J_NAME, J_TEL,J_ACCUSATION_CNT,ENABLED,J_JOINDATE)
 		values(#{jMno},#{jEmail},#{jPassword},#{jName},#{jTel},0,1,sysdate)
 	</insert>

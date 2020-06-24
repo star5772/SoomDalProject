@@ -28,14 +28,14 @@ drop sequence detailfield_seq;
 drop sequence review_seq;
 drop sequence reviewattachment_seq;
 
-create sequence JEJA_seq;
+create sequence JEJA_seq; >> 만듬
 select JEJA_seq.nextval from dual;
-create sequence RepQuestion_seq;
-select RepQuestion_seq.nextval from dual;
-create sequence DALIN_seq;
+create sequence DALIN_seq; >> 만듬
 select dalin_seq.nextval from dual;
-create sequence request_seq;
+create sequence request_seq; >> dao 없음
 select request_seq.nextval from dual;
+create sequence qnaboard_seq minvalue 0; >> 만듬
+select qnaboard_seq.nextval from dual;
 create sequence qnacomment_seq;
 select qnacomment_seq.nextval from dual;
 create sequence requestboard_seq;
@@ -44,15 +44,12 @@ create sequence estimate_seq;
 select estimate_seq.nextval from dual;
 create sequence memo_seq;
 select memo_seq.nextval from dual;
-create sequence detailfield_seq;
-select detailfield_seq.nextval from dual;
 create sequence profileattachment_seq;
 select profileattachment_seq.nextval from dual;
 create sequence review_seq;
 select review_seq.nextval from dual;
 create sequence reviewattachment_seq;
 select reviewattachment_seq.nextval from dual;
-
 
 /* 문의 게시판 */
 CREATE TABLE QnaBoard (
