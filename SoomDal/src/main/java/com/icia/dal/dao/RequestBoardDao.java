@@ -11,8 +11,7 @@ public interface RequestBoardDao {
 	@Select("select RB_NO rbNo, RB_TITLE rbTitle, RB_CONTENT rbContent, RB_WRITE_DATE rbWriteDate, RB_READ_CNT rbReadCnt, R_NO rNo, J_MNO jMno from RequestBoard where RB_NO=#{rbNo}")
 	public List<RequestBoard> findAllByRbno(int rbNo);
 	
-	@Insert("insert into RequestBoard values(#{rb.rbNo}, #{rb.rbTitle}, #{rb.rbContent}, sysdate, #{rb.rbWriter}, 0, 0, 0, 0, 0, #{rb.rNo}, #{rb.jMno}) ")
-	public int insert(@Param("rb")RequestBoard requestBoard);
+	public int insert(RequestBoard requestBoard);
 	
 	@Delete("delete from RequestBoard where RB_NO=#{rbNo} and rownum=1")
 	public int delete(int rbNo);

@@ -22,7 +22,7 @@
         		<li class="nav-item"><a class="nav-link" href="#"style="color:blue; font-size:medium;"><i class="fas fa-search">&nbsp;달인 찾기</i></a></li>
         		<li class="nav-item"><a class="nav-link" href="#"style="color:blue; font-size:medium;">아이디 찾기</a></li>
 	          	<li class="nav-item"><a class="nav-link" href="#"style="color:blue; font-size:medium;">비밀번호 찾기</a></li>
-	          	<li class="nav-item"><a class="nav-link" href="#"style="color:blue; font-size:medium;">회원가입</a></li>
+	          	<li class="nav-item"><a class="nav-link" href="/dal/member/join_select"style="color:blue; font-size:medium;">회원가입</a></li>
 	          	<li class="nav-item"><a class="nav-link" href="/dal/member/login"style="color:blue; font-size: medium;">로그인</a></li>        	
         	</sec:authorize>
         	
