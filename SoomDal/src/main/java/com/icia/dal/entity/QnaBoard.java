@@ -11,7 +11,7 @@ import lombok.experimental.*;
 @Builder
 @Accessors(chain=true)
 public class QnaBoard {
-	private String qCode;
+	private int qNo;
 	private String qTitle;
 	private String qContent;
 	private LocalDateTime qWriteDate;
