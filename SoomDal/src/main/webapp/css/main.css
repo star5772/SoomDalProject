@@ -16,16 +16,13 @@ header, nav, aside, footer, section {
 
 /* 전체적인 레이아웃 설정 */
 #page {
-	width: 1205px;
+	width: 1105px;
 	margin: 0 auto;
 }
 
 
 
 section {
-	width: 1000px;
-	margin-right: 200px;
-	padding: 20px;
 	min-height: 800px;
 }
 

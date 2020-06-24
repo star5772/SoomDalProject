@@ -49,14 +49,16 @@
 	<jsp:include page="include/nav.jsp"/>
   </nav>
   
-  <div class="container" id="main">	
-	  <section>
+  <div  id="main">	
+	  <section class="container-fluid">
 	  	<jsp:include page="${viewName}"/>
 	  </section>
   </div>
   <!-- Footer -->
-  <footer class="py-5 bg-warning" id="footer">
-	<jsp:include page="include/footer.jsp"/>
+  <footer class="py-4 bg-warning" id="footer">
+  	<div class="container-fluid">
+		<jsp:include page="include/footer.jsp"/>
+	</div>
   </footer>
 </div>
   <!-- Bootstrap core JavaScript -->

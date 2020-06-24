@@ -1,12 +1,23 @@
 package com.icia.dal.controller;
 
-import org.springframework.stereotype.*;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.*;
+import javax.inject.Inject;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import com.icia.dal.dto.DalinDto;
+import com.icia.dal.service.DalinService;
 
 @Controller
 public class DalinController {
-		
+	
+	@Inject
+	private DalinService dalService;
+	
 	@GetMapping("/dalin/my_info")
 	public ModelAndView myInFo() {
 		// 달인 마이페이지
@@ -16,7 +27,13 @@ public class DalinController {
 	@GetMapping("/dalin/join")
 	public ModelAndView dalinJoin() {
 		// 달인 회원가입
-		return new ModelAndView("main").addObject("viewName","dalin/join.jsp");
+		return new ModelAndView("main").addObject("viewName","dalin/dalinJoin.jsp");
+	}
+	@PostMapping("/dalin/join")
+	public String dalinJoin(DalinDto.DtoForJoinToDalin dto,BindingResult br, RedirectAttributes ra) {
+		dalService.join(dto);
+		ra.addFlashAttribute("msg","회원가입을 축하합니다");
+		return "redirect:/system/msg";
 	}
 	
 	@GetMapping("/dalin/resign")
@@ -60,6 +77,8 @@ public class DalinController {
 		// 달인 분야선택 (달인 회원가입)
 		return new ModelAndView("main").addObject("viewName","dalin/field_select.jsp");
 	}
-	
-	
+	@GetMapping("/system/msg")
+	public ModelAndView msg() {
+		return new ModelAndView("main").addObject("viewName","system/msg.jsp");
+	}
 }
