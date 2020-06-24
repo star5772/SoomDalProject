@@ -31,4 +31,9 @@ public class JejaService {
 			throw new RuntimeException();
 	}
 	
+	public void delete(String jEmail) {
+		// 제자 회원탈퇴
+		dao.deleteJeja(jEmail);
+	}
+
 }
