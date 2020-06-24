@@ -45,9 +45,9 @@
 		<h1 id="top-h1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;숨달에 오신것을 환영합니다</h1><br>
 		</div>
 		<div class="form-group memberLogin">
-			<form class="loginForm">
 			<div class="inline-div" id="jejalogin">
 					<h3>제자회원 로그인</h3>
+					<form action="/dal/jeja/login" method="post">
 						<label for="jejaId">제자회원 아이디</label>
 						<input type="text" name="jEmail" placeholder="아이디(Email)을 입력해주세요" maxlength="50" class="form-control form-control-lg"><br>
 						<label for="jejaPwd">제자회원 비밀번호</label>
@@ -58,9 +58,11 @@
 						<button class="btn btn-warning">제자회원 로그인</button><br><br>
 						<a class="findId" href="#" style="float:left">제자 아이디 찾기</a>
 						<a class="findPwd" href="#"style="float:right">제자 비밀번호 찾기</a>
+					</form>	
 				</div>	
 				<div class="inline-div" id="dalinlogin">
 					<h3>달인회원 로그인</h3>
+					<form action="/dal/dalin/login" method="post">
 						<label for="dalinId">달인회원 아이디</label>
 						<input type="text" name="dEmail" placeholder="아이디(Email)을 입력해주세요" maxlength="50" class="form-control form-control-lg"><br>
 						<label for="dalinPwd">달인회원 비밀번호</label>
@@ -71,8 +73,8 @@
 						<button class="btn btn-success">달인회원 로그인</button><br><br>
 						<a class="findId" href="#" style="float:left">달인 아이디 찾기</a>
 						<a class="findPwd" href="#" style="float:right">달인 비밀번호 찾기</a>
+					</form>	
 				</div>
-		</form>
 	</div>
 
 </body>

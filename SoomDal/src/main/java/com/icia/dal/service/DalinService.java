@@ -56,6 +56,10 @@ public class DalinService {
 			throw new MembernameExistException();
 		return true;
 	}
+
+	public void delete(String dEmail) {
+		dalDao.deleteToDalin(dEmail);
+	}
 	
 	public DalinDto.DtoForProfileToDalin profileRead(int dMno) {
 		Dalin dalin = dalDao.findByDalin(dMno);
@@ -64,7 +68,10 @@ public class DalinService {
 	}
 	
 
+<<<<<<< HEAD
 	public void delete(String dEmail) {
 		dalDao.deleteToDalin(dEmail);
 	}
+=======
+>>>>>>> branch 'master' of https://github.com/star5772/SoomDalProject
 }

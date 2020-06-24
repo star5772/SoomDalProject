@@ -20,6 +20,7 @@ import com.icia.dal.entity.*;
 public class QnaBoardDaoTest {
 	@Inject
 	private QnaBoardDao qnaDao;
+<<<<<<< HEAD
 
 	/*
 	//@Test
@@ -51,4 +52,6 @@ public class QnaBoardDaoTest {
 		assertThat(qnaDao.delete(1), is(1));
 	}
 	*/
+=======
+>>>>>>> branch 'master' of https://github.com/star5772/SoomDalProject
 }

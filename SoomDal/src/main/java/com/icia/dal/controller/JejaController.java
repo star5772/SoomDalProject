@@ -1,14 +1,15 @@
 package com.icia.dal.controller;
 
-import java.security.*;
 
-import javax.inject.*;
+import javax.inject.Inject;
 
-import org.springframework.stereotype.*;
-import org.springframework.validation.*;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.*;
-import org.springframework.web.servlet.mvc.support.*;
+import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindException;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.icia.dal.entity.*;
 import com.icia.dal.service.*;
@@ -66,17 +67,6 @@ public class JejaController {
 		return new ModelAndView("main").addObject("viewName","jeja/estimate_list.jsp");
 	}
 	
-	@GetMapping("/jeja/resign")
-	public ModelAndView jejaResign() {
-		// 제자 회원탈퇴 페이지
-		return new ModelAndView("main").addObject("viewName","jeja/resign.jsp");
-	}
 	
-	@DeleteMapping("/jeja/resign")
-	public String jejaResign(String jEmail, Principal principal) {
-		// 제자 회원탈퇴
-		service.delete(principal.getName());
-		return "redirect:/";
-	}
 
 }

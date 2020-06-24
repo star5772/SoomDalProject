@@ -48,8 +48,15 @@ public class DalinDaoTest {
 		dao.updateToDalin(dalin);
 	}
 	
+<<<<<<< HEAD
 //	//@Test
 //	public void deleteToDalinTest() {
 //		dao.deleteToDalin(1);
 //	}
+=======
+	//@Test
+	public void deleteToDalinTest() {
+		//dao.deleteToDalin(1);
+	}
+>>>>>>> branch 'master' of https://github.com/star5772/SoomDalProject
 }

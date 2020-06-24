@@ -1,11 +1,27 @@
 package com.icia.dal.controller;
 
-import org.springframework.stereotype.*;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.*;
+
+import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.springframework.security.core.Authentication;
+import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.servlet.ModelAndView;
+
+import com.icia.dal.Exception.MembernameExistException;
+import com.icia.dal.service.DalinService;
+import com.icia.dal.service.JejaService;
 
 @Controller
 public class MemberController {
+	@Inject
+	private DalinService dalService;
+	@Inject
+	private JejaService jejaService;
 	
 	@GetMapping("/")
 	public ModelAndView main() {
@@ -80,6 +96,23 @@ public class MemberController {
 		// 회원가입 버튼 선택 시 제자 or 달인 선택 페이지로 이동
 		return new ModelAndView("main").addObject("viewName","member/join_select.jsp");
 	}
+<<<<<<< HEAD
+=======
+	
+
+	@DeleteMapping("/member/resign")
+	public String resign(SecurityContextLogoutHandler handler, HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws MembernameExistException {
+		// 제자 회원탈퇴
+		// 제자,달인 READ없어서 진행불가능.
+		/*
+		 * String username = authentication.getName(); dalService.
+		 * 
+		 * if(dalService.checkId(username)==false) { dalService.delete(username);
+		 * handler.logout(request, response, authentication);
+		 */			return "redirect:/";
+	}
+
+>>>>>>> branch 'master' of https://github.com/star5772/SoomDalProject
 	
 	// 달인 프로필 읽기
 	@GetMapping("/member/dalin_profile")

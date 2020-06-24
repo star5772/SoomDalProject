@@ -9,12 +9,11 @@
 $(document).ready(function(){
 	$("#delete").on("click",function(){
 		var params = {
-			jEmail: $jEmail,
 			_method:"delete",
 			_csrf:"${_csrf.token}"
 		}
 		$.ajax({
-			url: "/dal/jeja/resign",
+			url: "/dal/member/resign",
 			method:"post",
 			data:params
 		}).done((result)=>{$("#delete").text(result);}).fail((result)=>{console.log(result);})
