@@ -5,11 +5,44 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" href="/dal/css/login.css">
+<style>
+
+.form-group {
+	position:absolute;
+	width: 700px;
+	height: 500px;
+	margin: auto 0;
+	top:50%;
+	left: 45%;
+	margin-left:-233px;
+	margin-top: -50px;
+}
+.inline-div {
+	display: inline-block;
+	width: 300px;
+	height: 300px;
+	border: 1px solid #DDDDDD;
+	border-radius: 2px;
+}
+.topDiv {
+	margin-top: 200px;
+	margin-left: 220px;	
+}
+#top-h1 {
+	width: 100%;
+}
+#jejalogin {
+	padding: 10px 10px 10px 10px;
+}
+#dalinlogin {
+	padding: 10px 10px 10px 10px;
+}
+
+</style>
 </head>
 <body>
 		<div class="topDiv">
-		<h1 style="text-align: center;">숨달에 오신것을 환영합니다</h1><br>
+		<h1 id="top-h1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;숨달에 오신것을 환영합니다</h1><br>
 		</div>
 		<div class="form-group memberLogin">
 			<form class="loginForm">

@@ -80,5 +80,4 @@ public class MemberController {
 		// 회원가입 버튼 선택 시 제자 or 달인 선택 페이지로 이동
 		return new ModelAndView("main").addObject("viewName","member/join_select.jsp");
 	}
-	
 }

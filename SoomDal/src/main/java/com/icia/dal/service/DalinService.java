@@ -54,4 +54,6 @@ public class DalinService {
 			throw new MembernameExistException();
 		return true;
 	}
+	
+	
 }

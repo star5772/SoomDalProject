@@ -24,5 +24,6 @@
 <hr>
 <div style="float: right;">
 <button>등록</button> <button>취소</button>
+</div>
 </body>
 </html>
