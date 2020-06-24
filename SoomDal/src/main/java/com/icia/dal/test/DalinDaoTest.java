@@ -50,6 +50,6 @@ public class DalinDaoTest {
 	
 	//@Test
 	public void deleteToDalinTest() {
-		dao.deleteToDalin(1);
+		//dao.deleteToDalin(1);
 	}
 }

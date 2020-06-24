@@ -26,7 +26,7 @@ function ajaxCheck() {
 	$.ajax({
 		url:"/dal/jeja/check_email",
 		method:"get",
-		data:"jEmail="+$("#jEmail").val()
+		data:"jEmail="+$("#jEmail").val(),
 		success: function() {
 			$.ajax({
 				url: "/dal/dalin/check_email",

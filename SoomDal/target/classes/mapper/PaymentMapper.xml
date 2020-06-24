@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="paymentMapper">
+	
+	<insert id="insertToPayment">
+		insert into RequestPayment(p_code,p_money,d_mno,f_no,d_email)
+		values(#{pCode},#{pMoney},#{dMno},#{fNo},#{dEmail})
+	</insert>
+	
+	<delete id="deleteToPayment">
+		delete from requestpayment where p_code = #{pCode} and rownum=1
+	</delete>
+	
+	<select id="findByPayment" resultType="RequestPayment">
+		select p_code pCode,p_money pMoney,d_mno dMno,f_no fNo,d_email dEmail
+		from requestpayment
+		where p_code=#{pCode} and rownum=1		
+	</select>
+	
+	<select id="findAllByPayment" resultType="RequestPayment">
+		select p_code pCode,p_money pMoney,f_no fNo,d_email dEmail
+		from requestpayment
+	</select>
+		
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+

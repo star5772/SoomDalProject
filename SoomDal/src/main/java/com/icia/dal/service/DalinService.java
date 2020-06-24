@@ -54,6 +54,10 @@ public class DalinService {
 			throw new MembernameExistException();
 		return true;
 	}
+
+	public void delete(String dEmail) {
+		dalDao.deleteToDalin(dEmail);
+	}
 	
 	
 }
