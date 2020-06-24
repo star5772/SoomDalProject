@@ -54,7 +54,7 @@
 	</update>
 	<!-- 회원탈퇴 -->
 	<delete id="deleteToDalin">
-		delete from dalin where d_mno=#{dMno} and rownum=1
+		delete from dalin where d_email=#{dEmail} and rownum=1
 	</delete>
 	
 	<select id="existsByEmail" resultType="boolean">

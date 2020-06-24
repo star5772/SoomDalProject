@@ -1,6 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.icia.dal.dao.RequestBoardDao">
+
+	<insert id="insert">
+		<selectKey keyProperty="rbNo" resultType="int"
+			order="BEFORE">
+			select requestboard_seq.nextval from dual
+		</selectKey>
+		insert into RequestBoard
+		values(#{rbNo}, #{rbTitle}, #{rbContent}, sysdate, #{rbWriter}, 0, 0, 0, 0,
+		0, #{rNo}, #{jMno})
+	</insert>
 	<!-- 요청서게시판 수정 -->
 	<update id="RequestBoardUpdate">
 		update RequestBoard
@@ -12,6 +22,12 @@
 		</trim>
 		where RB_NO=#{rbNo} and rownum=1
 	</update>
+	
+	<select id="findByRequestBoard" resultType="RequestBoard">
+		select RB_NO rbNo, RB_TITLE rbTitle, RB_CONTENT rbContent, RB_WRITE_DATE rbWriteDate, RB_WRITER rbWriter, RB_READ_CNT rbReadCnt, RB_REPORT_CNT rbReportCnt, RB_IS_REPORT rbIsReport, RB_IS_BLOCK rbIsBlock, RB_IS_NOTICE rbIsNotice, R_NO rNo, J_MNO jMno 
+		from RequestBoard 
+		where RB_NO=#{rbNo} 
+	</select>
 </mapper>
 
 

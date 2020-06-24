@@ -84,4 +84,5 @@ public class DalinController {
 	public ModelAndView msg() {
 		return new ModelAndView("main").addObject("viewName","system/msg.jsp");
 	}
+	
 }
