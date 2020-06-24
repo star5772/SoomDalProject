@@ -20,7 +20,7 @@ import com.icia.dal.entity.*;
 public class QnaBoardDaoTest {
 	@Inject
 	private QnaBoardDao qnaDao;
-	
+	/*
 	//@Test
 	public void insert() {
 		QnaBoard qna = QnaBoard.builder().qCode("123456").qTitle("제목").qContent("내용").qWriter("새고개").cNo(1).build();
@@ -42,4 +42,5 @@ public class QnaBoardDaoTest {
 	public void delete() {
 		assertThat(qnaDao.delete(1), is(1));
 	}
+	*/
 }

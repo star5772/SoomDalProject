@@ -19,9 +19,9 @@ public class DalinDaoTest {
 	@Inject
 	private DalinDao dao;
 	
-	//@Test
+	@Test
 	public void insertToDalinTest() {
-		Dalin dalin = Dalin.builder().dMno(1).fNo("k").dEmail("thgus2520@naver.com").dPassword("qwer!1234").dName("spring")
+		Dalin dalin = Dalin.builder().fNo("k").dEmail("thgus2520@naver.com").dPassword("qwer!1234").dName("spring")
 				.dTel("01011112222").dArea("인천").dLevel(Level.NORMAL).build();
 		dao.insertToDalin(dalin);
 	}
