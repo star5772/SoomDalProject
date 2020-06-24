@@ -20,7 +20,6 @@ public class RequestBoardService {
 	
 	public RequestBoardDto.DtoForRead read(int rbNo, String rbWriter) {
 		RequestBoard reqBoard = reqDao.findByRequestBoard(rbNo);
-		System.out.println("---------------------------------------------------------------------------------------------------"+reqBoard);
 		RequestBoardDto.DtoForRead dto = modelMapper.map(reqBoard, RequestBoardDto.DtoForRead.class);
 		if(rbWriter!=null && rbWriter.equals(dto.getRbWriter())==false)
 			reqDao.RequestBoardUpdate(RequestBoard.builder().rbNo(rbNo).rbReadCnt(0).build());

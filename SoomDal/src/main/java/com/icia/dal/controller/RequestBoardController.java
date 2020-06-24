@@ -15,10 +15,8 @@ public class RequestBoardController {
 	@Inject
 	private RequestBoardService service;
 	
-	@GetMapping("/reqboard/read")
-	public ModelAndView read(int rbNo, Principal principal) {
-		service.read(rbNo, principal.getName());
-		System.out.println(rbNo+"----------------------------------------------------------------------------------------");
-		return new ModelAndView("main").addObject("viewName","reqboard/read.jsp");
-	}
+	//@GetMapping("/reqboard/read")
+	//public ModelAndView read(int rbNo) {
+		//return new ModelAndView("main").addObject("viewName","reqboard/read.jsp");
+	//}
 }
