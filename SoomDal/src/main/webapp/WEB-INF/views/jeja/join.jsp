@@ -27,8 +27,21 @@ function ajaxCheck() {
 		url:"/dal/jeja/check_email",
 		method:"get",
 		data:"jEmail="+$("#jEmail").val()
-	}).done(()=>{$("#jEmail_msg").text("사용가능한 아이디입니다.").css("color","green").css("font-size","0.75em");})
-	.fail(()=>{$("#jEmail_msg").text("사용중인 아이디입니다").css("color","red").css("font-size","0.75em");})
+		success: function() {
+			$.ajax({
+				url: "/dal/dalin/check_email",
+				method: "get",
+				data: "dEmail=" + $("#jEmail").val(),
+				success: function() {
+					$("#jEmail_msg").text("사용가능한 이메일입니다").css({"color":"green", "font-size":"0.75em"});
+				}.error: function() {
+					$("#jEmail_msg").text("사용중인 이메일입니다").css({"color":"red", "font-size":"0.75em"});
+				}
+			})
+		}.error: function() {
+			$("#jEmail_msg").text("사용중인 이메일입니다").css({"color":"red", "font-size":"0.75em"});
+		}	
+	})
 }
 function pwdCheck() {
 	var patt=/(?=.*[!@#$%^&*])^[A-Za-z0-9!@#$%^&*]{8,10}$/;
@@ -72,7 +85,7 @@ $(function() {
 		var result = result1 && result2 && result3 && result4 && result5;
 		if(result==false)
 			return false;
-		$.when($.ajax("/dal/jeja/check_email?jEmail=" + $("#jEmail").val())).done(()=>$("#joinFrm").submit()).fail(()=>alert("실패"))
+		$.when($.ajax("/dal/jeja/check_email?jEmail=" + $("#jEmail").val())).$.when($.ajax("/dal/dalin/check_email?dEmail=" + $("#jEmail").val())).done(()=>$("#joinFrm").submit()).fail(()=>alert("실패"))
 	});
 });
 </script>

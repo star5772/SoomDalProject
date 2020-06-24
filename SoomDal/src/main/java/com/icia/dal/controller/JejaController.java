@@ -1,13 +1,17 @@
 package com.icia.dal.controller;
 
-import javax.inject.*;
+import javax.inject.Inject;
 
-import org.springframework.stereotype.*;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.*;
+import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindException;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.icia.dal.entity.*;
-import com.icia.dal.service.*;
+import com.icia.dal.entity.Jeja;
+import com.icia.dal.service.JejaService;
 
 @Controller
 public class JejaController {
@@ -34,9 +38,12 @@ public class JejaController {
 		return new ModelAndView("main").addObject("viewName","jeja/join.jsp");
 	}
 	@PostMapping("/jeja/join")
-	public String jejaJoin(Jeja jeja) {
+	public String jejaJoin(Jeja jeja,BindingResult br,RedirectAttributes ra) throws BindException {
+		if(br.hasErrors()==true)
+			throw new BindException(br);
 		service.join(jeja);
-		return "redirect:/";
+		ra.addFlashAttribute("msg","회원가입을 축하합니다");
+		return "redirect:/system/msg";
 	}
 	
 	@GetMapping("/jeja/request_write")
