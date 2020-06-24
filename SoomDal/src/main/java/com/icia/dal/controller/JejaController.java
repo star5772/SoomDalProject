@@ -1,6 +1,12 @@
 package com.icia.dal.controller;
 
+<<<<<<< HEAD
 import javax.inject.Inject;
+=======
+import java.security.*;
+
+import javax.inject.*;
+>>>>>>> branch 'master' of https://github.com/star5772/SoomDalProject
 
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindException;
@@ -66,4 +72,17 @@ public class JejaController {
 		return new ModelAndView("main").addObject("viewName","jeja/estimate_list.jsp");
 	}
 	
+	@GetMapping("/jeja/resign")
+	public ModelAndView jejaResign() {
+		// 제자 회원탈퇴 페이지
+		return new ModelAndView("main").addObject("viewName","jeja/resign.jsp");
+	}
+	
+	@DeleteMapping("/jeja/resign")
+	public String jejaResign(String jEmail, Principal principal) {
+		// 제자 회원탈퇴
+		service.delete(principal.getName());
+		return "redirect:/";
+	}
+
 }

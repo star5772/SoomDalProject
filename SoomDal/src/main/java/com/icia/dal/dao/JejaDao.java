@@ -14,9 +14,6 @@ public class JejaDao {
 	@Inject
 	private SqlSessionTemplate tpl;
 	
-	public int insertToJeja(Jeja jeja) {
-		return tpl.insert("jejaMapper.insertToJeja",jeja);
-	}
 	public String findJNameAndJTelByJejaId(String jName, String jTel) {
 		Map<String,String> map = new HashMap<String,String>();
 		map.put("jName", jName);
@@ -36,6 +33,10 @@ public class JejaDao {
 	
 	public int insertJeja(Jeja jeja) {
 		return tpl.insert("jejaMapper.insertJeja",jeja);
+	}
+	
+	public Jeja findById(String jEmail) {
+		return tpl.selectOne("jejaMapper.findById",jEmail);
 	}
 	
 }
