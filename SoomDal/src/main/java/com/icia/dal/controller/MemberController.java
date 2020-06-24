@@ -1,6 +1,5 @@
 package com.icia.dal.controller;
 
-import java.security.Principal;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
@@ -14,7 +13,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.icia.dal.Exception.MembernameExistException;
-import com.icia.dal.Exception.UserNotFoundException;
 import com.icia.dal.service.DalinService;
 import com.icia.dal.service.JejaService;
 
@@ -112,4 +110,10 @@ public class MemberController {
 		 */			return "redirect:/";
 	}
 
+	
+	// 달인 프로필 읽기
+	@GetMapping("/member/dalin_profile")
+	public ModelAndView dalinProfileRead() {
+		return new ModelAndView("main").addObject("viewName","member/dalin_profile_read.jsp");
+	}
 }

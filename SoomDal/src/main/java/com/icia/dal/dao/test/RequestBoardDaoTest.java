@@ -3,8 +3,7 @@ package com.icia.dal.dao.test;
 import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.*;
 
-import javax.inject.*;
-
+import javax.inject.*;import org.hamcrest.core.*;
 import org.junit.*;
 import org.junit.runner.*;
 import org.springframework.test.context.*;
@@ -39,5 +38,10 @@ public class RequestBoardDaoTest {
 	//@Test
 	public void delete() {
 		assertThat(requestDao.delete(1), is(1));
+	}
+	
+	//@Test
+	public void findById() {
+		System.out.println(requestDao.findByRequestBoard(1));
 	}
 }

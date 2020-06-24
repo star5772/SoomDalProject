@@ -33,16 +33,24 @@ drop sequence detailfield_seq;
 drop sequence review_seq;
 drop sequence reviewattachment_seq;
 
+
+create sequence JEJA_seq; >> 만듬
+
 select * from tab;
 
 create sequence JEJA_seq minvalue 0;
 select JEJA_seq.nextval from dual;
+create sequence DALIN_seq; >> 만듬
 create sequence RepQuestion_seq minvalue 0;
 select RepQuestion_seq.nextval from dual;
 create sequence DALIN_seq minvalue 0;
 select dalin_seq.nextval from dual;
+create sequence request_seq; >> dao 없음
 create sequence request_seq minvalue 0;
 select request_seq.nextval from dual;
+create sequence qnaboard_seq minvalue 0; >> 만듬
+select qnaboard_seq.nextval from dual;
+create sequence qnacomment_seq;
 create sequence qnacomment_seq minvalue 0;
 select qnacomment_seq.nextval from dual;
 create sequence requestboard_seq minvalue 0;
@@ -51,6 +59,7 @@ create sequence estimate_seq minvalue 0;
 select estimate_seq.nextval from dual;
 create sequence memo_seq minvalue 0;
 select memo_seq.nextval from dual;
+create sequence profileattachment_seq;
 create sequence detailfield_seq minvalue 0;
 select detailfield_seq.nextval from dual;
 create sequence profileattachment_seq minvalue 0;
@@ -60,10 +69,9 @@ select review_seq.nextval from dual;
 create sequence reviewattachment_seq minvalue 0;
 select reviewattachment_seq.nextval from dual;
 
-
 /* 문의 게시판 */
 CREATE TABLE QnaBoard (
-   Q_CODE VARCHAR2(8) NOT NULL, /* 문의 코드 */
+   Q_NO VARCHAR2(8) NOT NULL, /* 문의 코드 */
    Q_TITLE NVARCHAR2(20), /* 제목 */
    Q_CONTENT NVARCHAR2(1000), /* 내용 */
    Q_WRITE_DATE DATE, /* 문의 날짜 */
@@ -77,7 +85,7 @@ ALTER TABLE QnaBoard
    ADD
       CONSTRAINT PK_QnaBoard
       PRIMARY KEY (
-         Q_CODE
+         Q_NO
       );
 
 ALTER TABLE QnaBoard

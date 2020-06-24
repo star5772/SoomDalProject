@@ -34,11 +34,11 @@ function ajaxCheck() {
 				data: "dEmail=" + $("#jEmail").val(),
 				success: function() {
 					$("#jEmail_msg").text("사용가능한 이메일입니다").css({"color":"green", "font-size":"0.75em"});
-				}.error: function() {
+				},error: function() {
 					$("#jEmail_msg").text("사용중인 이메일입니다").css({"color":"red", "font-size":"0.75em"});
 				}
 			})
-		}.error: function() {
+		},error: function() {
 			$("#jEmail_msg").text("사용중인 이메일입니다").css({"color":"red", "font-size":"0.75em"});
 		}	
 	})

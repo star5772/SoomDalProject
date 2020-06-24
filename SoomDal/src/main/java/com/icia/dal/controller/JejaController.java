@@ -1,20 +1,18 @@
 package com.icia.dal.controller;
 
-import java.security.Principal;
 
 import javax.inject.Inject;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindException;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.icia.dal.entity.Jeja;
-import com.icia.dal.service.JejaService;
+import com.icia.dal.entity.*;
+import com.icia.dal.service.*;
 
 @Controller
 public class JejaController {

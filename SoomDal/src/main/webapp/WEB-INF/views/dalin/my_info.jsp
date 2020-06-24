@@ -44,10 +44,20 @@
    li {
       font-size: 16px;
       color: #737373;
+      width: 675px;
    }
    .menu_span {
 	  width: 585px;
 	  display: inline-block;
+   }
+   .store {
+   		background-color: orange;
+   		border-radius: 10px;
+   		display: inline-block;
+   		width: 83px;
+   }
+   #str {
+   		width: 505px;
    }
 </style>
 </head>
@@ -63,7 +73,7 @@
          	</div>
          	<div id="user_info" style="display:inline-block; width: 540px;">
             	<div id="user_name">
-            		<span id="name_length">OOO</span>제자님
+            		<span id="name_length">OOO</span>달인님
            	 	</div>
             	<div id="user_email">
             		<span id="email_length">aaa@a.com</span>
@@ -71,6 +81,19 @@
          	</div>
          	<img src="https://assets.cdn.soomgo.com/icons/icon-mypage-list-arrow.svg"> 
          </a>
+      </div>
+      <div>
+      <hr>
+         <span><h3>숨달 캐시</h3></span>
+         <ul class="nav flex-column">
+            <li class="nav-item">
+               <a class="nav-link active" href="#"><img src="https://assets.cdn.soomgo.com/icons/icon-mypage-store.svg" style="padding: 5px;"><span id="str" class="menu_span">스토어</span><div class="store"><span>10000캐시</span></div><img src="https://assets.cdn.soomgo.com/icons/icon-mypage-list-arrow.svg"></a>
+               <hr>
+            </li>
+            <li class="nav-item">
+               <a class="nav-link" href="#"><img src="https://assets.cdn.soomgo.com/icons/icon-mypage-dashboard.svg" style="padding: 5px;"><span class="menu_span">충전/사용 내역</span><img src="https://assets.cdn.soomgo.com/icons/icon-mypage-list-arrow.svg"></a>
+            </li>
+         </ul>
       </div>
       <div id="menu">
          <hr>

@@ -27,4 +27,19 @@ public class DalinDto {
 		private String dArea;
 		private String dMainService;
 	}
+	
+	@Data
+	public static class DtoForProfileToDalin{
+		private Integer dMno;
+		private String dName;
+		private String dProfile;
+		private String dIntro;
+		private String dMainService;
+		private String dArea;
+		private String dDetailService;
+		private String dPaymentMethod;
+		private String dAttachmentNo;
+		private Integer rNo;
+		private Integer dQNo;
+	}
 }

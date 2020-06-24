@@ -11,8 +11,8 @@ import lombok.experimental.*;
 @Builder
 @Accessors(chain=true)
 public class RequestBoard {
-	private int rbNo;
-	private String rbTitle;
+	private int rbNo; 
+	private String rbTitle; 
 	private String rbContent;
 	private LocalDateTime rbWriteDate;
 	private String rbWriter;
