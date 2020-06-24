@@ -6,7 +6,7 @@
 		</encoder>
 	</appender>
 	<!--  내가 만든 클래스에 대한 로깅 설정 -->
-	<logger name="com.icia" level="Debug" />
+	<logger name="com.icia" level="info" />
 	
 	<!--
 		trace < debug < info < warn < error 
@@ -14,7 +14,7 @@
 	<!--  3rd party 로깅 설정 -->
 	<logger name="org.springframework" level="warn" />
 	<logger name="com.zaxxer.hikari" level="warn" />
-	<logger name="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping" level="Debug" />
+	<logger name="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping" level="info" />
 	
 	<!--  log4jdbc 로깅 설정 -->
 	<logger name="jdbc.resultsettable" level="info"/>
@@ -22,7 +22,7 @@
 	<logger name="jdbc.sqltiming" level="warn"/>
 	<logger name="jdbc.resultset" level="warn"/>
 	<logger name="jdbc.connection" level="warn"/>
-	<root level="Debug">
+	<root level="info">
 		<appender-ref ref="console" />
 	</root>
 </configuration>

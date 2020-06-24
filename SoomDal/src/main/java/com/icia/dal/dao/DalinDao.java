@@ -13,7 +13,9 @@ public class DalinDao {
 	private SqlSessionTemplate tpl;
 	
 	public int insertToDalin(Dalin dalin) {
+		System.out.println(dalin);
 		return tpl.insert("dalinMapper.insertToDalin", dalin);
+				
 	}
 	
 	public Dalin findByDalinProfile(Integer dMno) {
@@ -34,5 +36,9 @@ public class DalinDao {
 	
 	public int deleteToDalin(Integer dMno) {
 		return tpl.delete("dalinMapper.deleteToDalin", dMno);
+	}
+
+	public boolean existsById(String dEmail) {
+		return tpl.selectOne("dalinMapper.existsByEmail", dEmail);
 	}
 }

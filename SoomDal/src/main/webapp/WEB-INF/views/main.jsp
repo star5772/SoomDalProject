@@ -16,7 +16,7 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css" /> 
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css" />
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
@@ -27,29 +27,40 @@
 
   <!-- Custom styles for this template -->
   <link type="text/css" href="${pageContext.request.contextPath}/resources/css/modern-business.css" rel="stylesheet">
-
+  <link rel="stylesheet" href="/dal/css/main.css">
+<style>
+.container #main {
+	overflow: hidden;
+}
+#footer {
+	clear: both;
+}
+</style>
 </head>
 
 <body>
-
-  <!-- Navigation -->
-  <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark fixed-top">
-	<jsp:include page="include/nav.jsp"/>
-  </nav>
-
+<div id="page">
   <header>
 	<jsp:include page="include/header.jsp"/>
   </header>
-
-  <section class="container">
-  	<jsp:include page="${viewName}"/>
-  </section>
-
+  
+  <!-- Navigation -->
+  <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-warning fixed-top">
+	<jsp:include page="include/nav.jsp"/>
+  </nav>
+  
+  <div  id="main">	
+	  <section class="container-fluid">
+	  	<jsp:include page="${viewName}"/>
+	  </section>
+  </div>
   <!-- Footer -->
-  <footer class="py-5 bg-dark">
-	<jsp:include page="include/footer.jsp"/>
+  <footer class="py-4 bg-warning" id="footer">
+  	<div class="container-fluid">
+		<jsp:include page="include/footer.jsp"/>
+	</div>
   </footer>
-
+</div>
   <!-- Bootstrap core JavaScript -->
   <script src="<c:url value="/resources/vendor/jquery/jquery.min.js" />"></script>
   <script src="<c:url value="/resources/vendor/bootstrap/js/bootstrap.bundle.min.js" />"></script>

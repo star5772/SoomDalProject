@@ -1,5 +1,10 @@
 package com.icia.dal.dao;
 
-public interface DAO {
+import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Param;
 
+public interface DAO {
+	
+	@Insert("insert into authorities values(#{username},#{authority})")
+	public void insertAuthority(@Param("username")String username,@Param("authority")String authority);
 }

@@ -13,6 +13,7 @@ import com.icia.dal.dao.QnaBoardDao;
 import com.icia.dal.dao.QnaCommentDao;
 import com.icia.dal.dao.RequestBoardDao;
 import com.icia.dal.dao.ReviewDao;
+import com.icia.dal.entity.Dalin;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("file:src/main/webapp/WEB-INF/spring/**/*-context.xml")
@@ -32,8 +33,9 @@ public class TotalTest {
 	@Inject
 	private ReviewDao rDao;
 	
-	public void adDaoTest() {
-		
+	public void DalDaoTest() {
+		//Dalin dalin = Dalin.builder().
+		//dalDao.insertToDalin(dalin);
 	}
 
 }
