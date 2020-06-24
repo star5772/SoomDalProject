@@ -7,8 +7,9 @@
 <title>Insert title here</title>
 </head>
 <body>
-    <div class="container">
-      <a href="/dal/admin/login" style="float:left">관리자 로그인</a><p class="m-0 text-center text-white">Copyright &copy; SoomDal 2020</p>
-    </div>
+	<div>
+		<img src="/image/MainLogo.png">
+		<h1>회원가입을 환영합니다</h1>
+	</div>
 </body>
 </html>

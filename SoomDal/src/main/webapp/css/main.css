@@ -1,0 +1,31 @@
+﻿@charset "UTF-8";
+
+/* reset */
+* {
+	margin: 0;
+	padding: 0;
+}
+ul, li {
+	list-style: none;
+}
+
+@import url(http://fonts.googleapis.com/earlyaccess/nanumgothic.css);
+header, nav, aside, footer, section {
+	font-family : "Nanum Gothic", sans-serif;
+}
+
+/* 전체적인 레이아웃 설정 */
+#page {
+	width: 1105px;
+	margin: 0 auto;
+}
+
+
+
+section {
+	min-height: 800px;
+}
+
+#main {
+	overflow: hidden;
+}

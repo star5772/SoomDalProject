@@ -4,7 +4,7 @@
 	
 	<!-- 달인 회원가입 (이름, 이메일, 비밀번호, 휴대폰 번호, 분야, 세부분야, 활동지역) -->
 	<insert id="insertToDalin">
-		<selectKey keyProperty="dMno" resultType="int" order="BEFORE">
+		<selectKey keyProperty="dMno" order="BEFORE" resultType="int">
 			select dalin_seq.nextval from dual
 		</selectKey>
 		insert into dalin(d_mno, f_no, d_email, d_password, d_name, d_tel, enabled, d_date, d_cash, d_profile, d_main_service,
@@ -56,6 +56,10 @@
 	<delete id="deleteToDalin">
 		delete from dalin where d_mno=#{dMno} and rownum=1
 	</delete>
+	
+	<select id="existsByEmail" resultType="boolean">
+		select count(*) from dalin where d_email=#{dEmail} and rownum=1
+	</select>
 </mapper>
 
 
