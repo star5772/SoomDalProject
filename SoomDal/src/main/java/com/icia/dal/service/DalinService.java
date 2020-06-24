@@ -66,12 +66,6 @@ public class DalinService {
 		DalinDto.DtoForProfileToDalin dto = modelMapper.map(dalin, DalinDto.DtoForProfileToDalin.class);
 		return dto;
 	}
-	
+}	
 
-<<<<<<< HEAD
-	public void delete(String dEmail) {
-		dalDao.deleteToDalin(dEmail);
-	}
-=======
->>>>>>> branch 'master' of https://github.com/star5772/SoomDalProject
-}
+

@@ -15,10 +15,6 @@ public interface QnaBoardDao {
 	// 문의게시판 글추가
 	@Insert("insert into QnaBoard values(#{q.qNo}, #{q.qTitle}, #{q.qContent}, sysdate, #{q.qWriter}, #{q.cNo}, 0,0)")
 	public int insert(@Param("q")QnaBoard qnaBoard);
-<<<<<<< HEAD
-=======
-	
->>>>>>> branch 'master' of https://github.com/star5772/SoomDalProject
 	// 문의게시판 글 삭제
 	@Delete("delete from QnaBoard where Q_NO=#{qNo} and rownum=1")
 	public int delete(int qNo);

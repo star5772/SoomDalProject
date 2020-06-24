@@ -96,8 +96,6 @@ public class MemberController {
 		// 회원가입 버튼 선택 시 제자 or 달인 선택 페이지로 이동
 		return new ModelAndView("main").addObject("viewName","member/join_select.jsp");
 	}
-<<<<<<< HEAD
-=======
 	
 
 	@DeleteMapping("/member/resign")
@@ -112,7 +110,6 @@ public class MemberController {
 		 */			return "redirect:/";
 	}
 
->>>>>>> branch 'master' of https://github.com/star5772/SoomDalProject
 	
 	// 달인 프로필 읽기
 	@GetMapping("/member/dalin_profile")
