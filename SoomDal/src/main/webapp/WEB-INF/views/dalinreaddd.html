@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>DalinRead</title>
+<style>
+#dalinRead p{
+	font-weight: lighter;
+	font-size: 14px;
+}	
+hr{
+	border: solid 1px;
+	color: #F3F3F3;
+}
+#dalinRead{
+	height: 400px;
+	width: 700px;
+	margin: 0 auto;
+}
+
+#dalinRead #review #rWriter p{
+	font-size: 16px;
+	font-weight: bold;
+	display: inline-block;
+}
+#dalinRead #review #rWriter{
+	display: inline-block;
+}
+#rScore{
+	display: inline-block;
+}
+#rDate{
+	color : #878787;
+	display: inline-block;
+}
+#dProfile{
+	display: inline-block;
+}
+#dalinRead #dProfile p{
+	margin-left: 200px;
+	font-size: 20px;
+	font-weight: bold;
+}
+#update{
+	margin-left: 643px;
+	background-color: orange;
+	color : white;
+	outline: 0;
+	border: 0;
+	border-radius: 4px;
+	text-align: center;
+}
+#dAttachment1{
+	display: inline-block;
+}
+#dAttachment2{
+	display: inline-block;
+}
+#dAttachment3{
+	display: inline-block;
+}
+#dAttachment4{
+	display: inline-block;
+}
+
+</style>
+</head>
+<body>
+	<div id="dalinRead">
+		
+		<div id="dProfile">
+			<div style="border-radius: 50%; height: 200px; width: 200px; background-color: gray; "><p id="dName">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${dalin.dName}</p></div>
+		</div>
+		<div>
+			<button id="update">&nbsp;&nbsp;수정&nbsp;&nbsp;</button>
+		</div>
+		<div id="dName-bottom">
+			<div>
+				<hr>
+			</div>
+			<div>
+				<div>
+					<h3>한줄소개</h3>
+				</div>
+				<div>
+					<p>${dalin.dIntro}</p>
+				</div>
+			</div>
+		</div>
+		<div>
+			<div>
+				<hr>
+			</div>
+			<div>
+				<div>
+					<h3>대표서비스</h3>
+				</div>
+				<div>
+					<p>${dalin.bMainService}</p>
+				</div>
+			</div>
+		</div>
+		<div>
+			<div>
+				<hr>
+			</div>
+			<div>
+				<div>
+					<h3>활동지역</h3>
+				</div>
+				<div>
+					<p>${dalin.dArea}</p>
+				</div>
+			</div>
+		</div>
+		<div>
+			<div>
+				<hr>
+			</div>
+			<div>
+				<div>
+					<h3>서비스 상세설명</h3>
+				</div>
+				<div>
+					<p>${dalin.dDetailService}</p>
+				</div>
+			</div>
+		</div>
+		<div>
+			<div>
+				<hr>
+			</div>
+			<div>
+				<div>
+					<h3>결제수단</h3>
+				</div>
+				<div>
+					<p>${dalin.dPaymentMethod}</p>
+				</div>
+			</div>
+		</div>
+		<div>
+			<div>
+				<hr>
+			</div>
+			<div>
+				<div>
+					<h3>사진</h3>
+				</div>
+				<div >
+					<div id="dAttachment1">
+						<p>${profileAttachment.dAttachmentNo}</p>
+					</div>
+					<div id="dAttachment2">
+						<p>${profileAttachment.dAttachmentNo}</p>
+					</div>
+					<div id="dAttachment3">
+						<p>${profileAttachment.dAttachmentNo}</p>
+					</div>
+					<div id="dAttachment4">
+						<p>${profileAttachment.dAttachmentNo}</p>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div>
+			<div>
+				<hr>
+			</div>
+			<div>
+				<div>
+					<h3>리뷰</h3>
+				</div>
+				<div>
+					<h3>별점평균</h3>
+				</div>
+			</div>
+		</div>
+		<div>
+			<div>
+				<hr>
+			</div>
+			<div>
+				<div id="review" >
+					<div id="rWriter">
+						<p>${review.rWriter}</p>
+					</div>
+					<div id="rScore">
+						<p>${review.rScore}</p>
+					</div>
+					<div id="rDate">
+						<p>${review.rDate}</p>
+					</div>
+				</div>
+				<div>
+					<p>${review.rContent}</p>
+				</div>
+			</div>
+		</div>
+		<div>
+			<div>
+				<hr>
+			</div>
+			<div>
+				<div>
+					<h3>질문&amp;답변</h3>
+				</div>
+				<div>
+					<div>
+						<div>
+							<h5>Q. 서비스가 시작되기 전 어떤 절차로 진행하나요?</h5>
+						</div>
+						<div>
+							<p>&nbsp;&nbsp;&nbsp;&nbsp;${reqQuestion.dQContent}</p>
+						</div>
+					</div>
+					<div>
+						<div>
+							<h5>Q. 서비스가 시작되기 전 어떤 절차로 진행하나요?</h5>
+						</div>
+						<div>
+							<p>&nbsp;&nbsp;&nbsp;&nbsp;${reqQuestion.dQContent}</p>
+						</div>
+					</div>
+					<div>
+						<div>
+							<h5>Q. 서비스가 시작되기 전 어떤 절차로 진행하나요?</h5>
+						</div>
+						<div>
+							<p>&nbsp;&nbsp;&nbsp;&nbsp;${reqQuestion.dQContent}</p>
+						</div>
+					</div>
+					<div>
+						<div>
+							<h5>Q. 서비스가 시작되기 전 어떤 절차로 진행하나요?</h5>
+						</div>
+						<div>
+							<p>&nbsp;&nbsp;&nbsp;&nbsp;${reqQuestion.dQContent}</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	
+	
+	
+</body>
+</html>

@@ -162,7 +162,7 @@ $(function(){
 		var result = r1 && r2 && r3 && r4 && r5;
 		if(result===true) {
 		$.ajax({
-			url: "/dal/dalin/check_id",
+			url: "/dal/dalin/check_email",
 			method: "get",
 			data : "dEmail=" + $("#dEmail").val(),
 			success: function() {

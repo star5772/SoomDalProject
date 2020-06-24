@@ -17,7 +17,7 @@
 			<if test="qTitle!=null">Q_TITLE=#{qTitle},</if>
 			<if test="qContent!=null">Q_CONTENT=#{qContent},</if>
 		</trim>
-		where Q_CODE=#{qCode} and rownum=1
+		where Q_NO=#{qNo} and rownum=1
 	</update>
 </mapper>
 
