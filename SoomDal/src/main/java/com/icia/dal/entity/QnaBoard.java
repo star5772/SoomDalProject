@@ -11,7 +11,11 @@ import lombok.experimental.*;
 @Builder
 @Accessors(chain=true)
 public class QnaBoard {
+<<<<<<< HEAD
 	private String qNo;
+=======
+	private int qNo;
+>>>>>>> branch 'master' of https://github.com/star5772/SoomDalProject
 	private String qTitle;
 	private String qContent;
 	private LocalDateTime qWriteDate;
