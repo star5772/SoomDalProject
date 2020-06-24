@@ -36,4 +36,9 @@
 	<select id="existsByjEmail" resultType="String">
 		select J_EMAIL from jeja where J_EMAIL=#{jEmail} and rownum=1
 	</select>
+	
+	<!-- jEmail로 제자 찾기 -->
+	<select id="findById">
+		select jEmail,jPassword,jName,jTel,enabled from jeja where J_EMAIL=#{jEmail} and rownum=1
+	</select>
 </mapper>

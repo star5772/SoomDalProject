@@ -3,6 +3,7 @@ package com.icia.dal.controller;
 import javax.inject.Inject;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindException;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -30,7 +31,9 @@ public class DalinController {
 		return new ModelAndView("main").addObject("viewName","dalin/dalinJoin.jsp");
 	}
 	@PostMapping("/dalin/join")
-	public String dalinJoin(DalinDto.DtoForJoinToDalin dto,BindingResult br, RedirectAttributes ra) {
+	public String dalinJoin(DalinDto.DtoForJoinToDalin dto,BindingResult br, RedirectAttributes ra) throws BindException {
+		if(br.hasErrors()==true)
+			throw new BindException(br);
 		dalService.join(dto);
 		ra.addFlashAttribute("msg","회원가입을 축하합니다");
 		return "redirect:/system/msg";
@@ -81,4 +84,5 @@ public class DalinController {
 	public ModelAndView msg() {
 		return new ModelAndView("main").addObject("viewName","system/msg.jsp");
 	}
+	
 }

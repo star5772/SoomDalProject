@@ -120,13 +120,21 @@ function checkTel() {
 // ajax로 아이디 사용여부 확인
 function ajaxCheckId() {
 	$.ajax({
-		url: "/dal/dalin/check_id",
+		url: "/dal/dalin/check_email",
 		method: "get",
 		data : "dEmail=" + $("#dEmail").val(),
 		success: function() {
-			$("#dEmail_msg").text("사용가능한 이메일입니다").css({"color":"green", "font-size":"0.75em"});
-		},
-		error: function() {
+			$.ajax({
+				url: "/dal/jeja/check_email",
+				method: "get",
+				data: "jEmail=" + $("#dEmail").val(),
+				success: function() {
+					$("#dEmail_msg").text("사용가능한 이메일입니다").css({"color":"green", "font-size":"0.75em"});
+				},error: function() {
+					$("#dEmail_msg").text("사용중인 이메일입니다").css({"color":"red", "font-size":"0.75em"});
+				}
+			})
+		},error: function() {
 			$("#dEmail_msg").text("사용중인 이메일입니다").css({"color":"red", "font-size":"0.75em"});
 		}
 	});
@@ -154,14 +162,20 @@ $(function(){
 		var result = r1 && r2 && r3 && r4 && r5;
 		if(result===true) {
 		$.ajax({
-			url: "/dal/dalin/check_id",
+			url: "/dal/dalin/check_email",
 			method: "get",
 			data : "dEmail=" + $("#dEmail").val(),
 			success: function() {
-				$("#step-one").attr("style","display:none;");
-				$("#step-two").removeAttr("style");
+				$.ajax({
+					url: "/dal/jeja/check_email",
+					method: "get",
+					data: "jEmail=" + $("#dEmail").val(),
+					success: function() {
+						$("#step-one").attr("style","display:none;");
+						$("#step-two").removeAttr("style");
+					}
+				})				
 			}
-				
 		})
 	}
 })
@@ -193,16 +207,6 @@ $(function(){
 </script>
 <script>
 $(function() {
-/* 	if($("#main-sport").on("click")) {
-		$("#sport1").attr("checked",true);
-		$("#fNo").val("sport");
-	}else if($("#main-art").on("click")) {
-		$("#art1").attr("checked",true);
-		$("#fNo").val("art");
-	}else if($("main-instruement").on("click")) {
-		$("#instrument1").attr("checked",true);
-		$("#fNo").val("instrument");
-	} */
 	
   	$("#main-sport").on("click",function(){
   		$(".border").attr("checked",false);
@@ -342,7 +346,7 @@ $(function() {
 </head>
 <body>
 <form id="dalinJoinFrm" action="/dal/dalin/join" method="post">
-<div id="step-one" style="display: none;">	
+<div id="step-one" >	
 	<div>
 		<label for="dEmail" style="font-size: medium;">아이디(이메일) 입력</label>
 		<input type="text" name="dEmail" id="dEmail" placeholder="사용하실 이메일을 입력해주세요" maxlength="50" class="form-control input">
@@ -399,7 +403,7 @@ $(function() {
 	<button id="complete-step-one" type="button" class="btn btn-warning" style="margin-left:320px;">다음</button>
 </div>	
 
-<div id="step-two" >
+<div id="step-two" style="display: none;">
 	<p style="text-align: center;">달인님의 전문 분야를 선택해주세요</p><br><br><br><br>
 	<div id="main-service-sport" class="divService">
 		<label style="display: inline; margin-left: 72px;" >스포츠</label><br>

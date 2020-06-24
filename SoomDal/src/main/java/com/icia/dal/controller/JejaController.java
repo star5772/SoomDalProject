@@ -1,10 +1,14 @@
 package com.icia.dal.controller;
 
+import java.security.*;
+
 import javax.inject.*;
 
 import org.springframework.stereotype.*;
+import org.springframework.validation.*;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.*;
+import org.springframework.web.servlet.mvc.support.*;
 
 import com.icia.dal.entity.*;
 import com.icia.dal.service.*;
@@ -34,9 +38,12 @@ public class JejaController {
 		return new ModelAndView("main").addObject("viewName","jeja/join.jsp");
 	}
 	@PostMapping("/jeja/join")
-	public String jejaJoin(Jeja jeja) {
+	public String jejaJoin(Jeja jeja,BindingResult br,RedirectAttributes ra) throws BindException {
+		if(br.hasErrors()==true)
+			throw new BindException(br);
 		service.join(jeja);
-		return "redirect:/";
+		ra.addFlashAttribute("msg","회원가입을 축하합니다");
+		return "redirect:/system/msg";
 	}
 	
 	@GetMapping("/jeja/request_write")
@@ -59,4 +66,17 @@ public class JejaController {
 		return new ModelAndView("main").addObject("viewName","jeja/estimate_list.jsp");
 	}
 	
+	@GetMapping("/jeja/resign")
+	public ModelAndView jejaResign() {
+		// 제자 회원탈퇴 페이지
+		return new ModelAndView("main").addObject("viewName","jeja/resign.jsp");
+	}
+	
+	@DeleteMapping("/jeja/resign")
+	public String jejaResign(String jEmail, Principal principal) {
+		// 제자 회원탈퇴
+		service.delete(principal.getName());
+		return "redirect:/";
+	}
+
 }

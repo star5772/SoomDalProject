@@ -34,8 +34,8 @@ public class DalinDao {
 		return tpl.update("dalinMapper.updateToDalin", dalin);
 	}
 	
-	public int deleteToDalin(Integer dMno) {
-		return tpl.delete("dalinMapper.deleteToDalin", dMno);
+	public int deleteToDalin(String dEmail) {
+		return tpl.delete("dalinMapper.deleteToDalin", dEmail);
 	}
 
 	public boolean existsById(String dEmail) {
