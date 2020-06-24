@@ -48,8 +48,8 @@ public class DalinDaoTest {
 		dao.updateToDalin(dalin);
 	}
 	
-	//@Test
-	public void deleteToDalinTest() {
-		dao.deleteToDalin(1);
-	}
+//	//@Test
+//	public void deleteToDalinTest() {
+//		dao.deleteToDalin(1);
+//	}
 }
