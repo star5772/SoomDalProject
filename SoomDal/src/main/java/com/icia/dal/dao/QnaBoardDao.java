@@ -3,15 +3,17 @@ package com.icia.dal.dao;
 import java.util.*;
 
 import org.apache.ibatis.annotations.*;
+import org.springframework.stereotype.*;
 
 import com.icia.dal.entity.*;
 
+@Repository
 public interface QnaBoardDao {
 	// 문의게시판 list
 	public List<QnaBoard> findAll();
 	
 	// 문의게시판 글추가
-	@Insert("insert into QnaBoard values(#{q.qCode}, #{q.qTitle}, #{q.qContent}, sysdate, #{q.qWriter}, #{q.cNo}, 0,0)")
+	@Insert("insert into QnaBoard values(#{q.qNo}, #{q.qTitle}, #{q.qContent}, sysdate, #{q.qWriter}, #{q.cNo}, 0,0)")
 	public int insert(@Param("q")QnaBoard qnaBoard);
 	
 	// 문의게시판 글 삭제

@@ -2,12 +2,13 @@ package com.icia.dal.controller;
 
 import javax.inject.*;
 
+import org.springframework.stereotype.*;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.*;
 
 import com.icia.dal.entity.*;
 import com.icia.dal.service.*;
-
+@Controller
 public class QnaReadController {
 	@Inject
 	private QnaBoardService qnaBoardService;

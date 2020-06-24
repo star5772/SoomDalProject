@@ -4,10 +4,12 @@ import java.security.*;
 
 import javax.inject.*;
 
+import org.springframework.stereotype.*;
 
 import com.icia.dal.dao.*;
 import com.icia.dal.entity.*;
 
+@Service
 public class QnaBoardService {
 	@Inject
 	private QnaBoardDao qnaBoardDao;
