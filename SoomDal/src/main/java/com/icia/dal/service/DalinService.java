@@ -11,7 +11,9 @@ import org.springframework.stereotype.Service;
 import com.icia.dal.Exception.MembernameExistException;
 import com.icia.dal.dao.DAO;
 import com.icia.dal.dao.DalinDao;
+import com.icia.dal.dto.DalinDto;
 import com.icia.dal.dto.DalinDto.DtoForJoinToDalin;
+import com.icia.dal.dto.DalinDto.DtoForProfileToDalin;
 import com.icia.dal.entity.Dalin;
 import com.icia.dal.entity.Level;
 
@@ -54,4 +56,12 @@ public class DalinService {
 			throw new MembernameExistException();
 		return true;
 	}
+	
+	public DalinDto.DtoForProfileToDalin profileRead(int dMno) {
+		Dalin dalin = dalDao.findByDalin(dMno);
+		DalinDto.DtoForProfileToDalin dto = modelMapper.map(dalin, DalinDto.DtoForProfileToDalin.class);
+		return dto;
+	}
+	
+
 }

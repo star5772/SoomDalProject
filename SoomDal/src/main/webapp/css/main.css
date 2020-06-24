@@ -24,8 +24,9 @@ header, nav, aside, footer, section {
 
 section {
 	min-height: 800px;
+	overflow: scroll;
 }
 
-#main {
-	overflow: hidden;
+#section {
+	
 }

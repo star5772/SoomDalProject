@@ -81,4 +81,9 @@ public class MemberController {
 		return new ModelAndView("main").addObject("viewName","member/join_select.jsp");
 	}
 	
+	// 달인 프로필 읽기
+	@GetMapping("/member/dalin_profile")
+	public ModelAndView dalinProfileRead() {
+		return new ModelAndView("main").addObject("viewName","member/dalin_profile_read.jsp");
+	}
 }

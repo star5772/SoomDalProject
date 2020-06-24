@@ -20,7 +20,8 @@ public class JejaService {
 	}
 
 	public void join(Jeja jeja) {
-		dao.insertJeja(jeja);
+		if(dao.insertJeja(jeja)==0)
+			throw new RuntimeException();
 	}
 	
 }
