@@ -12,6 +12,12 @@
 		</trim>
 		where RB_NO=#{rbNo} and rownum=1
 	</update>
+	
+	<select id="findByRequestBoard" resultType="RequestBoard">
+		select RB_NO rbNo, RB_TITLE rbTitle, RB_CONTENT rbContent, RB_WRITE_DATE rbWriteDate, RB_WRITER rbWriter, RB_READ_CNT rbReadCnt, RB_REPORT_CNT rbReportCnt, RB_IS_REPORT rbIsReport, RB_IS_BLOCK rbIsBlock, RB_IS_NOTICE rbIsNotice, R_NO rNo, J_MNO jMno 
+		from RequestBoard 
+		where RB_NO=#{rbNo} 
+	</select>
 </mapper>
 
 

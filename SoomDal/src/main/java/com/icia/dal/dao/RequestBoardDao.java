@@ -18,4 +18,6 @@ public interface RequestBoardDao {
 	public int delete(int rbNo);
 	
 	public int RequestBoardUpdate(RequestBoard requestBoard);
+	
+	public RequestBoard findByRequestBoard(int rbNo);
 }

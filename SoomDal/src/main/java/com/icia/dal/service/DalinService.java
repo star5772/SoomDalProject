@@ -55,5 +55,7 @@ public class DalinService {
 		return true;
 	}
 	
-	
+	public void delete(String dEmail) {
+		dalDao.deleteToDalin(dEmail);
+	}
 }
