@@ -50,9 +50,9 @@ hr{
 }
 #dalinRead #dProfile p{
 	margin-left: 200px;
-	font-size: 20px;
+	font-size: 28px;
 	font-weight: bold;
-	width: 150px;
+	width: 200px;
 	height: 40px;
 	
 }
@@ -96,7 +96,7 @@ hr{
 			<p id="dName">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${dalin.dName}김희은</p></div>
 		</div>
 		<div>
-			<button id="update">수&nbsp;정</button>
+			<button id="update" onclick="location.href='/dal/dalin/dalin_profile_update'">수&nbsp;정</button>
 		</div>
 		<div id="dName-bottom">
 			<div>
@@ -217,7 +217,7 @@ hr{
 					</div>
 				</div>
 				<div id="rContent">
-					<p>${review.rContent}리뷰내용dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd</p>
+					<p>${review.rContent}리뷰내용</p>
 				</div>
 			</div>
 		</div>

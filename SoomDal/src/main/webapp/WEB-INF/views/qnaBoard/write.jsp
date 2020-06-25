@@ -4,9 +4,22 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Q&A 게시판 글쓰기</title>
+<title>Q&A 글쓰기</title>
 <style>
- #center{margin-left: 50px; display: inline-block; } 
+ #center{margin-left: 20px; display: inline-block; }
+ 
+ #regi{
+ width: 80px; height: 35px; background-color: #ffa500; color: white; 
+ font-size: 17px; font-weight: bold; outline: 0;border: 0;
+ border-radius: 4px; float: right;
+ }
+ 
+ #cancel{
+ width: 80px; height: 35px; background-color: #ffc968; color: white;
+  font-size: 17px; font-weight: bold; outline: 0;border: 0;
+  border-radius: 4px; float: left;
+ } 
+ 
 </style>
 </head>
 <body>
@@ -29,10 +42,9 @@
 			<input type="radio" name="isSecret" style="width: 25px; "><span style="font-size: 17px; display: inline-block;"  >비밀글</span>
 		</div>
 		<hr>
-		<div style=" float:right;">
-			<button  onclick="" style="width: 80px; height: 30px; background-color: black; color: white; font-size: 17px; font-weight: bold;">등 록</button>
-			<button  onclick="" style="width: 80px; height: 30px; background-color: #d3d3d3; font-size: 17px; font-weight: bold;">취 소</button>
-		</div>
+		<br>
+			<button id="regi" onclick="" >등 록</button>
+			<button  id="cancel" onclick="" >취 소</button>
 	</div>
 </body>
 </html>

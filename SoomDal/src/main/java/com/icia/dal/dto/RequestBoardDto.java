@@ -25,5 +25,12 @@ public class RequestBoardDto {
 		private boolean rbIsNotice;
 	}
 	
+	@Data
+	@Accessors(chain=true)
+	public static class DtoForWrite {
+		private String rbTitle;
+		private String rbContent;
+		private String rbWriter;
+	}
 	
 }

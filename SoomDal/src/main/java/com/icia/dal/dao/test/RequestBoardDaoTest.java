@@ -18,7 +18,7 @@ public class RequestBoardDaoTest {
 	@Inject
 	private RequestBoardDao requestDao;
 	
-	//@Test
+	@Test
 	public void insert() {
 		RequestBoard req = RequestBoard.builder().rbNo(1).rbTitle("제목").rbContent("내용").rbWriter("작성자").rNo(1).jMno(1).build();
 		assertThat(requestDao.insert(req), is(1));
