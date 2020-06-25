@@ -31,6 +31,7 @@ public class RequestBoardDto {
 		private String rbTitle;
 		private String rbContent;
 		private String rbWriter;
+		private LocalDateTime rbWriteTime;
 	}
 	
 }

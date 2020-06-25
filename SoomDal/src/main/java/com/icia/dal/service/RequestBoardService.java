@@ -1,5 +1,6 @@
 package com.icia.dal.service;
 
+import java.time.*;
 import java.time.format.*;
 
 import javax.inject.*;
@@ -30,6 +31,7 @@ public class RequestBoardService {
 	
 	public int write(RequestBoardDto.DtoForWrite dto) {
 		RequestBoard reqBoard = modelMapper.map(dto, RequestBoard.class);
+		reqBoard.setRbWriteDate(LocalDateTime.now());
 		reqDao.insert(reqBoard);
 		return reqBoard.getRbNo();
 	}
