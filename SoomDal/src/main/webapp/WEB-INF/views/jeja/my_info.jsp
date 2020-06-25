@@ -33,21 +33,29 @@
    #my_info_profile {
       color: black;
    }
-   a:link {color:black;}
-   a:visited {color:black;}
-   a:active {color:black;}
-   a:hover {color:black;}
+   a:link { color: #737373;}
+   a:visited { color: #737373;}
+   a:active { color: #737373;}
+   a:hover { color: #737373;}
    
    h3 {
       font-size: 18px;
+      font-weight: bold;
    }
    li {
       font-size: 16px;
-      color: #737373;
+      width: 675px;
+      font-weight: bolder;
    }
    .menu_span {
 	  width: 585px;
 	  display: inline-block;
+   }
+   h1 {
+   		font-weight: bold;
+   }
+   hr {
+   		width: 658.2px;
    }
 </style>
 </head>
@@ -61,7 +69,7 @@
          	<div id="profile">
          		<img src="/image/jeja.jpg" class="img-thumbnail" style="width: 70px; height: 70px;">
          	</div>
-         	<div id="user_info" style="display:inline-block; width: 540px;">
+         	<div id="user_info" style="display:inline-block; width: 530px; color: black;">
             	<div id="user_name">
             		<span id="name_length">OOO</span>제자님
            	 	</div>
