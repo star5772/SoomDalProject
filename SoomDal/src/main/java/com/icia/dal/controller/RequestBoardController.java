@@ -12,6 +12,7 @@ import com.icia.dal.dto.*;
 import com.icia.dal.service.*;
 
 @Controller
+@RequestMapping("/member")
 public class RequestBoardController {
 	@Inject
 	private RequestBoardService service;
@@ -19,7 +20,7 @@ public class RequestBoardController {
 	@GetMapping("/reqboard/read")
 	public ModelAndView read(int rbNo, Principal principal) {
 		service.read(rbNo, principal.getName());
-		return new ModelAndView("main").addObject("viewName","reqboard/read.jsp");
+		return new ModelAndView("main").addObject("viewName","reqboard/read.jsp").addObject("reqRead",service.read(rbNo, principal.getName()));
 	}
 	
 	@GetMapping("/reqboard/write")
@@ -29,7 +30,10 @@ public class RequestBoardController {
 	
 	@PostMapping("/reqboard/write")
 	public String write(RequestBoardDto.DtoForWrite dto, String rbWriter, Principal principal) {
+		System.out.println(dto+"--------------------------------");
+		System.out.println(rbWriter+"--------------------------------------");
+		System.out.println(principal.getName()+"-------------------------------------------");
 		dto.setRbWriter(principal.getName());
-		return "redirect:/reqboard/read?rbNo=" + service.write(dto);
+		return "redirect:/member/reqboard/read?rbNo=" + service.write(dto);
 	}
 }
