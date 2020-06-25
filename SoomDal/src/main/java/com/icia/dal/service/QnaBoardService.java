@@ -23,7 +23,7 @@ public class QnaBoardService {
 		qnaBoardDao.delete(qNo);
 	}
 	
-	public QnaBoard read(int qNo,Principal principal) {
+	public QnaBoard read(int qNo,String username) {
 		return qnaBoardDao.findByQnaBoard(qNo);
 	}
 	

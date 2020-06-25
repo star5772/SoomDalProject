@@ -27,4 +27,10 @@ public class RequestBoardService {
 		dto.setRbWriteDateStr(str);
 		return dto;
 	}
+	
+	public int write(RequestBoardDto.DtoForWrite dto) {
+		RequestBoard reqBoard = modelMapper.map(dto, RequestBoard.class);
+		reqDao.insert(reqBoard);
+		return reqBoard.getRbNo();
+	}
 }
