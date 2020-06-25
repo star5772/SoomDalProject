@@ -20,7 +20,7 @@ public class DalinDto {
 		private String dPassword;
 		@Pattern(regexp="^[가-힣]{2,5}$", message="이름은 한글 2~5자입니다")
 		private String dName;
-		@NotNull(message = "전화번호는 필수 입력입니다")
+		@Pattern(regexp="^[0,9]{8,11}$", message="전화번호는 숫자 8~11자입니다")
 		private String dTel;
 		private Boolean enabled;
 		private LocalDateTime dDate;
@@ -41,5 +41,34 @@ public class DalinDto {
 		private String dAttachmentNo;
 		private Integer rNo;
 		private Integer dQNo;
+	}
+	
+	@Data
+	public static class DtoForUpdateToDalinProfile {
+		private Integer dMno;
+		private String dProfile;
+		private String dName;
+		private String dArea;
+		private String dIntro;
+		private String dDetailService;
+		private String dPaymentMethod;
+		private Integer pAttachmentCnt;
+		private Integer rNo;
+		private Integer pAttachmentNo;
+		private Integer dQNo;
+	}
+	
+	@Data
+	public static class DtoForUpdateToDalin {
+		private Integer dMno;
+		@Pattern(regexp="^[가-힣]{2,5}$", message="이름은 한글 2~5자입니다")
+		private String dName;
+		@Pattern(regexp="(?=.*[!@#$%^&*])^[A-Za-z0-9!@#$%^&*]{8,10}$", message="비밀번호는 특수문자를 포함하는 영숫자 8~10자입니다")
+		private String dPassword;
+		@Pattern(regexp="(?=.*[!@#$%^&*])^[A-Za-z0-9!@#$%^&*]{8,10}$", message="비밀번호는 특수문자를 포함하는 영숫자 8~10자입니다")
+		private String newDPassword;
+		@Pattern(regexp="^[0,9]{8,11}$", message="전화번호는 숫자 8~11자입니다")
+		private String dTel;
+		private Integer dCash;
 	}
 }

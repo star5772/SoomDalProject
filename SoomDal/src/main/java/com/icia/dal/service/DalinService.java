@@ -1,21 +1,24 @@
 package com.icia.dal.service;
 
-import java.time.LocalDateTime;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-import javax.inject.Inject;
+import java.io.*;
+import java.time.*;
 
-import org.modelmapper.ModelMapper;
-import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.stereotype.Service;
+import javax.inject.*;
+import javax.validation.*;
 
-import com.icia.dal.Exception.MembernameExistException;
-import com.icia.dal.dao.DAO;
-import com.icia.dal.dao.DalinDao;
-import com.icia.dal.dto.DalinDto;
-import com.icia.dal.dto.DalinDto.DtoForJoinToDalin;
-import com.icia.dal.dto.DalinDto.DtoForProfileToDalin;
-import com.icia.dal.entity.Dalin;
-import com.icia.dal.entity.Level;
+import org.modelmapper.*;
+import org.springframework.beans.factory.annotation.*;
+import org.springframework.security.crypto.password.*;
+import org.springframework.stereotype.*;
+import org.springframework.web.multipart.*;
+
+import com.icia.dal.Exception.*;
+import com.icia.dal.dao.*;
+import com.icia.dal.dto.*;
+import com.icia.dal.dto.DalinDto.*;
+import com.icia.dal.entity.*;
 
 @Service
 public class DalinService {
@@ -27,6 +30,10 @@ public class DalinService {
 	private DAO dao;
 	@Inject
 	private PasswordEncoder pwdEncoder;
+	@Value("d:/project/profile")
+	private String profileFolder;
+	@Value("http://localhost:8081/profile/")
+	private String profilePath;
 
 	public void join(DtoForJoinToDalin dto) {
 		Dalin dalin = modelMapper.map(dto, Dalin.class);
@@ -65,6 +72,27 @@ public class DalinService {
 		Dalin dalin = dalDao.findByDalin(dMno);
 		DalinDto.DtoForProfileToDalin dto = modelMapper.map(dalin, DalinDto.DtoForProfileToDalin.class);
 		return dto;
+	}
+	
+	public void profileUpdate(DtoForUpdateToDalinProfile dto, MultipartFile sajin) throws IllegalStateException, IOException {
+		Dalin dalin = modelMapper.map(dto, Dalin.class);
+		if(sajin!=null && !sajin.isEmpty()) {
+			if(sajin.getContentType().toLowerCase().startsWith("image/")==true) {
+				int lastIndexOfDot = sajin.getOriginalFilename().lastIndexOf('.');
+				String extension = sajin.getOriginalFilename().substring(lastIndexOfDot+1);
+				File file = new File(profileFolder, dalin.getDMno() + "." + extension);
+				sajin.transferTo(file);
+				dalin.setDProfile(profilePath + file.getName());
+			}
+		}
+		dalDao.updateToDalinProfile(dalin);
+	}
+
+	public void update(@Valid DalinDto.DtoForUpdateToDalin dto) {
+		Dalin dalin = modelMapper.map(dto, Dalin.class);
+		String pwd = pwdEncoder.encode(dto.getNewDPassword());
+		dalin.setDPassword(pwd);
+		dalDao.updateToDalin(dalin);
 	}
 }	
 
