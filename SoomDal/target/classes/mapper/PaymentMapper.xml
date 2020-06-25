@@ -8,13 +8,17 @@
 	</insert>
 	
 	<delete id="deleteToPayment">
-		delete from requestpayment where p_code = #{pCode} and rownum=1
+		delete from requestpayment where d_email = #{dEmail} and rownum=1
 	</delete>
 	
 	<select id="findByPayment" resultType="RequestPayment">
 		select p_code pCode,p_money pMoney,d_mno dMno,f_no fNo,d_email dEmail
 		from requestpayment
-		where p_code=#{pCode} and rownum=1		
+		where dEmail=#{dEmail} and rownum=1		
+	</select>
+
+	<select id="findPaymentCode" resultType="string">
+		select p_code from requestpayment where d_email=#{dEmail} and rownum=1
 	</select>
 	
 	<select id="findAllByPayment" resultType="RequestPayment">
@@ -30,6 +34,10 @@
 	<select id="countToPayment" resultType="int">
 		select count(*) from requestpayment
 	</select>	
+	
+	<select id="findToCash" resultType="int">
+		select p_money from requestPayment where p_code=#{pCode} and rownum=1
+	</select>
 </mapper>
 
 

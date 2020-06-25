@@ -61,8 +61,8 @@ public class DalinService {
 		dalDao.deleteToDalin(dEmail);
 	}
 	
-	public DalinDto.DtoForProfileToDalin profileRead(int dMno) {
-		Dalin dalin = dalDao.findByDalin(dMno);
+	public DalinDto.DtoForProfileToDalin profileRead(String dEmail) {
+		Dalin dalin = dalDao.findByDalin(dEmail);
 		DalinDto.DtoForProfileToDalin dto = modelMapper.map(dalin, DalinDto.DtoForProfileToDalin.class);
 		return dto;
 	}

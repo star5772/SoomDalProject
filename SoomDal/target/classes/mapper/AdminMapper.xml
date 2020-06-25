@@ -14,6 +14,13 @@
 		from dalin
 	</select>
 	
+	<!-- 신고게시물(ReportedBoard) 목록  : 불러오는거 (이네이블드가 false만 읽는거)-->
+	<select id="findAllToReportedBoard" resultType="RequestBoard">
+		select rb_No rbNo, rb_title rbTitle, rb_writer rbWriter, rb_report_cnt rbReportCnt, j_mno jMno
+		from requestBoard
+		where rb_enabled=0 
+	</select>
+	
 	<!-- 신고회원 (제자) 목록 출력(아이디, 신고당한 횟수, 신고사유로 정렬) -->
 	<select id="findAllJejaReported" resultType="map">
 		select j.j_mno jMno, j.j_email jEmail, r.j_accusation jAccusation,
@@ -35,12 +42,7 @@
 		where p_refund_code=#{pRefundCode} and rownum=1
 	</update>
 	
-	<!-- 신고게시물(ReportedBoard) 목록  : 불러오는거 (이네이블드가 false만 읽는거)-->
-	<select id="findAllToReportedBoard" resultType="RequestBoard">
-		select rb_No rbNo, rb_title rbTitle, rb_writer rbWriter, rb_report_cnt rbReportCnt, j_mno jMno
-		from requestBoard
-		where rb_enabled=0 
-	</select>
+
 	
 
 	

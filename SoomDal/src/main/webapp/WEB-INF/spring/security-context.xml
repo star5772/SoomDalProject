@@ -52,6 +52,26 @@
 	<bean id="encoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder" />
 	
 	
+	<sec:http 
+	pattern="/adimin/**"
+	authentication-manager-ref="adminAuth"
+	auto-config="true">
+		<sec:csrf disabled="true"/>
+ 		<sec:form-login
+			username-parameter="username"
+			password-parameter="password"
+			login-page="/admin/login"
+			login-processing-url="/admin/loginpost"
+			authentication-success-handler-ref="loginSuccessHandler"
+			authentication-failure-handler-ref="loginFailureHandler"
+			default-target-url="/"
+		/>
+		<sec:logout
+			logout-url="/member/logout"
+			logout-success-url="/"
+		/>
+	</sec:http>
+	
 	<sec:authentication-manager id="jejaAuth">
 		<sec:authentication-provider>
 			<sec:jdbc-user-service 
@@ -71,6 +91,15 @@
 				authorities-by-username-query="select username, authority from authorities where username=?"
 			/>
 			<sec:password-encoder ref="encoder" />
+		</sec:authentication-provider>
+	</sec:authentication-manager>
+	
+	<sec:authentication-manager id="adminAuth">
+		<sec:authentication-provider>
+			<sec:user-service>
+				<sec:user name="admin" password="1234" authorities="ROLE_ADMIN"/>
+			</sec:user-service>
+			<sec:password-encoder ref="encoder"/>
 		</sec:authentication-provider>
 	</sec:authentication-manager>
 </beans>

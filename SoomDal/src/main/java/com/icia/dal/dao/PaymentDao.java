@@ -24,8 +24,8 @@ public class PaymentDao {
 		return tpl.delete("paymentMapper.deleteToPayment",pCode);
 	}
 	
-	public RequestPayment findByPayment(String pCode) {
-		return tpl.selectOne("paymentMapper.findByPayment",pCode);
+	public RequestPayment findByPayment(String dEmail) {
+		return tpl.selectOne("paymentMapper.findByPayment",dEmail);
 	}
 	
 	public List<RequestPayment> findAllByPayment(int startRowNum,int endRowNum) {
@@ -36,6 +36,13 @@ public class PaymentDao {
 	}
 	
 	public int paymentCount() {
-		return tpl.selectOne("paymentMapper.coutnToPayment");
+		return tpl.selectOne("paymentMapper.countToPayment");
+	}
+	
+	public String findPcode(String dEmail) {
+		return tpl.selectOne("paymentMapper.findPaymentCode",dEmail);
+	}
+	public int findToCash(String pCode) {
+		return tpl.selectOne("paymentMapper.findToCash",pCode);
 	}
 }

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.icia</groupId>
@@ -15,6 +16,12 @@
 		<org.slf4j-version>1.7.25</org.slf4j-version>
 	</properties>
 	<dependencies>
+		<!-- coolSMS 문자인증API -->
+		<dependency>
+		    <groupId>net.nurigo</groupId>
+		    <artifactId>javaSDK</artifactId>
+		    <version>2.2</version>
+		</dependency>
 		<!-- 웹소켓 -->
 		<dependency>
 			<groupId>org.springframework</groupId>
@@ -27,14 +34,14 @@
 			<version>1.1</version>
 			<scope>provided</scope>
 		</dependency>
-	
-		<!-- 스프링에서 자바 메일, 캐시 지원  -->
+
+		<!-- 스프링에서 자바 메일, 캐시 지원 -->
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-context-support</artifactId>
 			<version>${org.springframework-version}</version>
 		</dependency>
-		
+
 		<!-- 자바 메일 API -->
 		<dependency>
 			<groupId>javax.mail</groupId>
@@ -74,7 +81,7 @@
 			<artifactId>javax.inject</artifactId>
 			<version>1</version>
 		</dependency>
-		
+
 		<!-- 스프링 시큐리티 관련 -->
 		<dependency>
 			<groupId>org.springframework.security</groupId>
@@ -91,7 +98,7 @@
 			<artifactId>spring-security-taglibs</artifactId>
 			<version>${org.springframework.security-version}</version>
 		</dependency>
-		
+
 		<!-- map과 클래스, DTO와 엔티티간 매핑 -->
 		<dependency>
 			<groupId>org.modelmapper</groupId>
