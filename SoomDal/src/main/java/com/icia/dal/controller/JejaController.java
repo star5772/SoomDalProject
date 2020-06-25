@@ -1,15 +1,15 @@
 package com.icia.dal.controller;
 
 
-import javax.inject.Inject;
+import java.security.*;
 
-import org.springframework.stereotype.Controller;
-import org.springframework.validation.BindException;
-import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import javax.inject.*;
+
+import org.springframework.stereotype.*;
+import org.springframework.validation.*;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.*;
+import org.springframework.web.servlet.mvc.support.*;
 
 import com.icia.dal.entity.*;
 import com.icia.dal.service.*;
@@ -27,10 +27,10 @@ public class JejaController {
 	}
 	
 	@GetMapping("/jeja/my_info_update")
-	public ModelAndView jejaUpdate() {
+	public ModelAndView jejaUpdate(Principal principal) {
 		// 제자 마이페이지 수정 페이지로 이동
 		// 제자 마이페이지 정보 필요
-		return new ModelAndView("main").addObject("viewName","jeja/my_info_update.jsp");
+		return new ModelAndView("main").addObject("viewName","jeja/my_info_update.jsp").addObject("jejaRead",service.read(principal.getName()));
 	}
 	
 	@GetMapping("/jeja/join")
