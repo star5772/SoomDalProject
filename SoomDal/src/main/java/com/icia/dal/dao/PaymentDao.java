@@ -1,6 +1,8 @@
 package com.icia.dal.dao;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -26,7 +28,14 @@ public class PaymentDao {
 		return tpl.selectOne("paymentMapper.findByPayment",pCode);
 	}
 	
-	public List<RequestPayment> findAllByPayment() {
-		return tpl.selectList("paymentMapper.findAllByPayment");
+	public List<RequestPayment> findAllByPayment(int startRowNum,int endRowNum) {
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("startRowNum", startRowNum);
+		map.put("endRowNum", endRowNum);
+		return tpl.selectList("paymentMapper.findAllByPayment",map);
+	}
+	
+	public int paymentCount() {
+		return tpl.selectOne("paymentMapper.coutnToPayment");
 	}
 }

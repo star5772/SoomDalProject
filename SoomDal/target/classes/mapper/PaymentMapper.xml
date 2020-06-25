@@ -18,10 +18,18 @@
 	</select>
 	
 	<select id="findAllByPayment" resultType="RequestPayment">
-		select p_code pCode,p_money pMoney,f_no fNo,d_email dEmail
-		from requestpayment
+		<![CDATA[
+			select * from			
+				(select r.* , rownum rnum from
+					(select p_code pCode,p_money pMoney,f_no fNo,d_email dEmail from requestpayment) r
+				where rownum <=#{endRowNum})
+			where rnum >=#{startRowNum}
+		]]>			
 	</select>
 		
+	<select id="countToPayment" resultType="int">
+		select count(*) from requestpayment
+	</select>	
 </mapper>
 
 

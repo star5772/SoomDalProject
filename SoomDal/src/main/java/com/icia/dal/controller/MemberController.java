@@ -23,17 +23,23 @@ public class MemberController {
 	@Inject
 	private JejaService jejaService;
 	
-	@GetMapping("/")
+	@GetMapping({"/","/root"})
 	public ModelAndView main() {
 		// main 페이지로 이동 
 		return new ModelAndView("main").addObject("viewName","root/rootPage.jsp");
 	}
 	
 	@GetMapping("/member/login")
-	public ModelAndView login() {
+	public ModelAndView dalinlogin() {
 		// 로그인 페이지로 이동
 		return new ModelAndView("main").addObject("viewName","member/login.jsp");
 	}
+	
+	/*
+	 * @GetMapping("/jeja/login") public ModelAndView jejalogin() { // 로그인 페이지로 이동
+	 * return new ModelAndView("main").addObject("viewName","member/login.jsp"); }
+	 */
+
 	
 	@GetMapping("/request_board/list")
 	public ModelAndView requestBoard() {

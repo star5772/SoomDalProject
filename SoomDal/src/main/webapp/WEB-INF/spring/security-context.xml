@@ -6,23 +6,20 @@
 		http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd">
 	
 	<!--  HTTP를 위한 자동 설정 활성화 -->
-	<sec:http auto-config="true">
+	<sec:http pattern="/*" auto-config="true"/>
+	<sec:http pattern="/member/**" auto-config="true"/>
+	<sec:http pattern="/dal/**" auto-config="true"/>
+	<sec:http 
+	pattern="/dalin/**" 
+	authentication-manager-ref="dalinAuth"
+	auto-config="true">
 	<!-- CSRF Token Off -->
 		<sec:csrf disabled="true"/>
 		<sec:form-login
-			username-parameter="jEmail"
-			password-parameter="jPassword"
-			login-page="/jeja/login"
-			login-processing-url="/jeja/login"
-			authentication-success-handler-ref="loginSuccessHandler"
-			authentication-failure-handler-ref="loginFailureHandler"
-			default-target-url="/"
-		/>
-		<sec:form-login
 			username-parameter="dEmail"
 			password-parameter="dPassword"
-			login-page="/dalin/login"
-			login-processing-url="/dalin/login"
+			login-page="/member/login"
+			login-processing-url="/dalin/loginpost"
 			authentication-success-handler-ref="loginSuccessHandler"
 			authentication-failure-handler-ref="loginFailureHandler"
 			default-target-url="/"
@@ -33,23 +30,46 @@
 		/>
 	</sec:http>
 	
+	<sec:http 
+	pattern="/jeja/**"
+	authentication-manager-ref="jejaAuth"
+	auto-config="true">
+		<sec:csrf disabled="true"/>
+ 		<sec:form-login
+			username-parameter="jEmail"
+			password-parameter="jPassword"
+			login-page="/member/login"
+			login-processing-url="/jeja/loginpost"
+			authentication-success-handler-ref="loginSuccessHandler"
+			authentication-failure-handler-ref="loginFailureHandler"
+			default-target-url="/"
+		/>
+		<sec:logout
+			logout-url="/member/logout"
+			logout-success-url="/"
+		/>
+	</sec:http>
 	<bean id="encoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder" />
 	
-
-	<sec:authentication-manager>
+	
+	<sec:authentication-manager id="jejaAuth">
 		<sec:authentication-provider>
 			<sec:jdbc-user-service 
 				data-source-ref="dataSource"
-				users-by-username-query="select j_email, j_password, enabled from jeja where j_email=? and rownum=1"
+				users-by-username-query="select j_email,j_password,enabled from jeja where j_email=? and rownum=1"
 				authorities-by-username-query="select username, authority from authorities where username=?"
 			/>
-			<sec:jdbc-user-service data-source-ref="dataSource"
+			<sec:password-encoder ref="encoder"/>
+		</sec:authentication-provider>
+	</sec:authentication-manager>
+	
+	<sec:authentication-manager id="dalinAuth">
+		<sec:authentication-provider>
+			<sec:jdbc-user-service 
+				data-source-ref="dataSource"
 				users-by-username-query="select d_email,d_password, enabled from dalin where d_email=? and rownum=1"
 				authorities-by-username-query="select username, authority from authorities where username=?"
 			/>
-			<sec:user-service>
-				<sec:user name="admin" authorities="ROLE_ADMIN" password="1234" />
-			</sec:user-service>
 			<sec:password-encoder ref="encoder" />
 		</sec:authentication-provider>
 	</sec:authentication-manager>

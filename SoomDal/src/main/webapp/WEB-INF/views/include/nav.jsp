@@ -30,7 +30,7 @@
         		<li class="nav-item"><a class="nav-link" href="#"style="color:blue; font-size:medium;"><i class="fas fa-search">&nbsp;달인 찾기</i></a></li>
         		<li class="nav-item"><a class="nav-link" href="#"style="color:blue; font-size:medium;">내 정보</a></li>
         		<li class="nav-item"><a class="nav-link" href="#"style="color:blue; font-size:medium;">쪽지함</a></li>
-        		<li class="nav-item"><a class="nav-link" href="#"style="color:blue; font-size:medium;">로그아웃</a></li>
+        		<li class="nav-item"><a class="nav-link" href="/dal/member/logout"style="color:blue; font-size:medium;">로그아웃</a></li>
         	</sec:authorize>
         	
         	<sec:authorize access="hasRole('ROLE_DALIN')">
