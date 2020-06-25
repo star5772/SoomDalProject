@@ -23,6 +23,7 @@
 			<if test="jPassword!=null">J_PASSWORD=#{jPassword},</if>
 			<if test="jName!=null">J_NAME=#{jName},</if>
 			<if test="jTel!=null">J_TEL=#{jTel},</if>
+			<if test="enabled!=null">enabled=#{enabled}</if>
 		</trim>
 		where J_EMAIL=#{jEmail} and rownum=1
 	</update>
@@ -38,7 +39,7 @@
 	</select>
 	
 	<!-- jEmail로 제자 찾기 -->
-	<select id="findById">
-		select jEmail,jPassword,jName,jTel,enabled from jeja where J_EMAIL=#{jEmail} and rownum=1
+	<select id="findById" resultType="jeja">
+		select J_EMAIL jEmail,J_PASSWORD jPassword,J_NAME jName,J_TEL jTel,ENABLED from jeja where J_EMAIL=#{jEmail} and rownum=1
 	</select>
 </mapper>
