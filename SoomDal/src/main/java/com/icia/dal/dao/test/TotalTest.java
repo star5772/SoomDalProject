@@ -43,11 +43,5 @@ public class TotalTest {
 		Dalin dl = Dalin.builder().dCash(100000).dMno(1).build();
 		assertThat(dalDao.updateToDalin(dl),is(1));
 	}
-	@Test
-	public void DATest() {
-		dalDao.findByDalin(1);
-		Dalin dl = Dalin.builder().dLevel(Level.SILVER).dEmail("star5773@naver.com").build();
-		dalDao.updateToDalin(dl);
-	}
 
 }

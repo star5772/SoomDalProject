@@ -9,7 +9,7 @@
 <style>
  #center{margin-left: 20px; display: inline-block; }
   
- #cancel{
+ #cancel,#cancel2{
  width: 80px; height: 35px; background-color: #ffa500; color: white; font-size: 17px; 
  font-weight: bold;  outline: 0;border: 0;border-radius: 4px; float: right;
  }
@@ -18,6 +18,14 @@
  width: 80px; height: 35px; background-color: #ffc968; color: white; 
  font-size: 17px; font-weight: bold;  outline: 0;border: 0;border-radius: 4px; float: left;
  }
+ #answer{
+ 	 width: 80px; height: 35px; background-color: #ffa500; color: white; font-size: 17px; 
+ font-weight: bold;  outline: 0;border: 0;border-radius: 4px; float: right;  margin-top: 10px; 
+ }
+#formal{
+width: 80px; height: 35px;  background-color: #ffc968; color: white; font-size: 17px; 
+ font-weight: bold;  outline: 0;border: 0;border-radius: 4px;  float: left; margin-right: 15px; margin-top: 10px; border-radius: 4px;
+}
 </style>
 </head>
 <body>
@@ -43,21 +51,57 @@
 		</div>
 		<hr>
 		<div>
-			<a type="text" id="qTitle" style="width: 1027px; height: 500px; font-size: 17px; overflow: scroll;">안녕하세요안녕하세요ㅍ안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요
-			안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요
-			안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요
-			안녕하세요안녕하세요ㅍ안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요
-			안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요
-			안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요
-			안녕하세요안녕하세요ㅍ안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요
-			안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요
-			안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요
-			</a>
+			<textarea rows="20" cols="128"  style="background-color:white; font-size: 17px; overflow: scroll;" disabled="disabled">이런게 저런게 궁금해요
+			</textarea>
 		</div>
 		<hr>
 		<br>
 			<button id="cancel"  onclick="" >삭 제</button>
 			<button id="list" onclick="" >목 록</button>
 	</div>
+		<!-- 관리잔 답글 달기  sec-->
+		
+		<div style="margin-left: 20px; display: inline-block;">
+			<textarea rows="5" cols="126" placeholder="답변하실 내용을 입력해주세요." style="font-size: 17px; margin-left:20px;
+				display: inline-block; margin-top: 20px;" ></textarea>
+		
+		<table>
+			<button id="answer" onclick="" >답 변</button>
+		</table> 
+		</div>
+		<%-- <sec:authorize access="hasRole('ROLE_ADMIN')">
+		</sec:authorize> --%>
+		
+		
+		<!--   이용자들이 볼때 댓글 모양 
+		
+		<div style="margin-left: 20px; display: inline-block;"> 
+		<hr>
+			<label style="background-color: white; display: inline-block; width: 130px; text-align: center; font-size: 17px;">관리자 </label>
+			<a type="text" style="display:inline-block; color: rgb(94, 94, 94); width: 400px;font-size: 17px;">2020-06-20</a>
+		<hr>
+		<textarea rows="5" cols="125" style="font-size: 17px; margin-left:20px;
+		display: inline-block; margin-top: 20px; outline: 0;border: 0; background-color: white;" disabled="disabled">이런식으로 해결이 가능합니다! 해결완료! 우횻!~</textarea>
+		<hr>
+		</div>
+		-->
+		
+		
+		<!-- 관리자가 자신의 댓글을 볼때 sec
+		
+		<div style="margin-left: 20px; display: inline-block;">
+		<hr>
+			<label style="background-color: white; display: inline-block; width: 130px; text-align: center; font-size: 17px;">관리자 </label>
+			<a type="text" style="display:inline-block; color: rgb(94, 94, 94); width: 400px;font-size: 17px;">2020-06-20</a>
+		<hr>
+		<textarea rows="5" cols="127" style="font-size: 17px; margin-left:20px;
+		display: inline-block;  margin-top: 20px; outline: 0;border: 0;">이런식으로 해결이 가능합니다! 해결완료! 우횻!~</textarea>
+		<hr>
+		<table>
+			<button id="formal" onclick=""  >수 정</button>
+			<button id="cancel2" onclick="" >삭 제</button>
+		</table>
+		</div>
+		-->
 </body>
 </html>

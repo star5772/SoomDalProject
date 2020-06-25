@@ -1,9 +1,11 @@
 package com.icia.dal.dto;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
+
+import com.icia.dal.entity.Review;
 
 import lombok.Data;
 
@@ -41,6 +43,7 @@ public class DalinDto {
 		private String dAttachmentNo;
 		private Integer rNo;
 		private Integer dQNo;
+		private List<ReviewDto.DtoForDalinProfileReviewToread> review;
 	}
 	
 	@Data

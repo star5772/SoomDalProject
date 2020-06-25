@@ -20,8 +20,8 @@ public class DalinDao {
 		return tpl.selectOne("dalinMapper.findByDalinProfile", dMno);
 	}
 	
-	public Dalin findByDalin(Integer dMno) {
-		return tpl.selectOne("dalinMapper.findByDalin", dMno);
+	public Dalin findByDalin(String dEmail) {
+		return tpl.selectOne("dalinMapper.findByDalin", dEmail);
 	}
 	
 	public int updateToDalinProfile(Dalin dalin) {

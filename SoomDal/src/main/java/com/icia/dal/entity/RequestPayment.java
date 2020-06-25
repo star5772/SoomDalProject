@@ -4,9 +4,10 @@ import lombok.Data;
 
 @Data
 public class RequestPayment {
-	private String pCode;
-	private int pMoney;
-	private int dMno;
-	private String fNo;
-	private String dEmail;
+	private String pCode;	// 서비스에서 생성
+	private int pMoney;		// jsp에서 입력
+	private int dMno;		// 서비스에서 입력
+	private String fNo;		// 서비스에서 입력
+	private String dEmail;	// Principal에서 입력
+	private String dTel;	// 서비스에서 입력
 }

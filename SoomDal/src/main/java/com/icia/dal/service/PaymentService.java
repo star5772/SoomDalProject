@@ -1,5 +1,6 @@
 package com.icia.dal.service;
 
+import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,14 +27,26 @@ public class PaymentService {
 	@Inject
 	private ModelMapper modelMapper;
 
-	public int insertCashToDalin(RequestPayment rp) {
+	public int insertCashToDalin(RequestPayment rp,String username) {
 		// 랜덤한 코드 8자리 생성후 결제코드로 입력
-		String code = RandomStringUtils.randomAlphanumeric(8);
+		String code = RandomStringUtils.randomAlphanumeric(6);
 		rp.setPCode(code);
-		Dalin dalin = dalDao.findByDalin(rp.getDMno());
+		Dalin dalin = dalDao.findByDalin(username);
+		rp.setDMno(dalin.getDMno());
+		rp.setFNo(dalin.getFNo());
+		rp.setDTel(dalin.getDTel());
 		// 충전요청한 금액만큼 보유 캐쉬 변경
-		dalDao.updateToDalin(dalin.setDCash(rp.getPMoney()));
 		return paymentDao.insertToPayment(rp);
+	}
+	
+	public RequestPayment reqCashMember(String pCode) {
+		return paymentDao.findByPayment(pCode);
+	}
+	
+	public int addCashToDalin(String pCode,String username) {
+		int money = paymentDao.findToCash(pCode);
+		Dalin dalin = Dalin.builder().dEmail(username).dCash(money).build();
+		return dalDao.updateToDalin(dalin);
 	}
 	
 	// 캐쉬충전내역 페이징
