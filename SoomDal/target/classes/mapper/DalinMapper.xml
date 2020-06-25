@@ -23,7 +23,6 @@
 		update dalin
 			<trim prefix="SET" suffixOverrides=",">
 				<if test="dProfile!=null">d_profile=#{dProfile},</if>
-				<if test="dName!=null">d_name=#{dName},</if>
 				<if test="dIntro!=null">d_intro=#{dIntro},</if>
 				<if test="dArea!=null">d_area=#{dArea},</if>
 				<if test="dDetailService!=null">d_detail_service=#{dDetailService},</if>

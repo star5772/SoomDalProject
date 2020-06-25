@@ -6,9 +6,15 @@
 		http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd">
 	
 	<!--  HTTP를 위한 자동 설정 활성화 -->
-	<sec:http pattern="/*" auto-config="true"/>
-	<sec:http pattern="/member/**" auto-config="true"/>
-	<sec:http pattern="/dal/**" auto-config="true"/>
+	<sec:http pattern="/*" auto-config="true">
+	<sec:csrf disabled="true"/>
+	</sec:http>
+	<sec:http pattern="/member/**" auto-config="true">
+	<sec:csrf disabled="true"/>
+	</sec:http>
+	<sec:http pattern="/dal/**" auto-config="true">
+	<sec:csrf disabled="true"/>
+	</sec:http>
 	<sec:http 
 	pattern="/dalin/**" 
 	authentication-manager-ref="dalinAuth"

@@ -66,7 +66,6 @@ function telCheck() {
 	var tel2 = $("#jTel2").val();
 	var tel3 = $("#jTel3").val();
 	var $tel = tel1 + tel2 + tel3;
-	console.log($tel);
 	$("#jTel").val($tel);
 	var pattern =  /^[0-9]{9,11}$/;
 	return check($tel, pattern, $("#jTel_msg"), "휴대폰(전화번호)를 확인해주세요")
@@ -83,6 +82,7 @@ $(function() {
 	$("#jTel3").on("blur",telCheck);
 	
 	$("#join").on("click",function() {
+		console.log("dd");
 		var result1 = idCheck();
 		var result2 = pwdCheck();
 		var result3 = pwdCheck2();
@@ -91,7 +91,7 @@ $(function() {
 		var result = result1 && result2 && result3 && result4 && result5;
 		if(result==false)
 			return false;
-		$.when($.ajax("/dal/jeja/check_email?jEmail=" + $("#jEmail").val())).$.when($.ajax("/dal/dalin/check_email?dEmail=" + $("#jEmail").val())).done(()=>$("#joinFrm").submit()).fail(()=>alert("실패"))
+		$.when($.ajax("/dal/dalin/check_email?dEmail=" + $("#jEmail").val())).done(()=>$("#joinFrm").submit()).fail(()=>alert("실패"))
 	});
 });
 </script>
@@ -191,7 +191,7 @@ $(function() {
 			</div>
 		</div>
 		<div>
-			<button class="btn btn-warning" type="button">회원 가입</button>
+			<button class="btn btn-warning" type="button" id="join">회원 가입</button>
 		</div>
 	</form>
 </div>
