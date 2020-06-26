@@ -1,5 +1,6 @@
 package com.icia.dal.service;
 
+import java.time.format.*;
 import java.util.*;
 
 import javax.inject.*;
@@ -20,15 +21,19 @@ public class AdminService {
 	@Inject
 	private ModelMapper modelMapper;
 	
-	public AdminPage list(int pageno, String jName) {
+	public AdminPage adminPage(int pageno) {
 		int countOfBoard = adminDao.countToJeja();
-		AdminPage adPage = PagingUtil.getPage(pageno, countOfBoard);
+		AdminPage adPage = AdminPagingUtil.getPage(pageno, countOfBoard);
 		int srn = adPage.getStartRowNum();
 		int ern = adPage.getEndRowNum();
 		List<Jeja> adminList = adminDao.findAllToJeja(srn, ern);
 		List<AdminDto.JejaForList> dtoList = new ArrayList<AdminDto.JejaForList>();
-		for(Jeja jeja:JejaForList) {
-			
+		for(Jeja jeja:adminList) {
+			AdminDto.JejaForList dto = modelMapper.map(jeja,AdminDto.JejaForList.class);
+			dto.setJJoinDate(jeja.getJJoinDate().format(DateTimeFormatter.ofPattern("yyyy년MM월dd일")));
+			dtoList.add(dto);
 		}
+		adPage.setList(dtoList);
+		return adPage;
 	}
 }
