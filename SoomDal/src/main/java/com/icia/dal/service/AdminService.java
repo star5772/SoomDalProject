@@ -10,7 +10,6 @@ import org.springframework.stereotype.*;
 
 import com.icia.dal.dao.*;
 import com.icia.dal.dto.*;
-import com.icia.dal.dto.AdminDto.*;
 import com.icia.dal.entity.*;
 import com.icia.dal.util.*;
 
@@ -30,7 +29,7 @@ public class AdminService {
 		List<AdminDto.JejaForList> dtoList = new ArrayList<AdminDto.JejaForList>();
 		for(Jeja jeja:adminList) {
 			AdminDto.JejaForList dto = modelMapper.map(jeja,AdminDto.JejaForList.class);
-			dto.setJJoinDate(jeja.getJJoinDate().format(DateTimeFormatter.ofPattern("yyyy년MM월dd일")));
+			dto.setJJoinDate(jeja.getJJoinDate().format(DateTimeFormatter.ofPattern("yyyy년MM월dd일")));	
 			dtoList.add(dto);
 		}
 		adPage.setList(dtoList);
