@@ -8,7 +8,6 @@ import com.icia.dal.entity.*;
 
 public interface RequestBoardDao {
 	// 요청서 게시판 글읽기
-	@Select("select RB_NO rbNo, RB_TITLE rbTitle, RB_CONTENT rbContent, RB_WRITE_DATE rbWriteDate, RB_READ_CNT rbReadCnt, R_NO rNo, J_MNO jMno from RequestBoard where RB_NO=#{rbNo}")
 	public List<RequestBoard> findAllByRbno(int rbNo);
 	
 	public int insert(RequestBoard requestBoard);
@@ -19,4 +18,7 @@ public interface RequestBoardDao {
 	public int RequestBoardUpdate(RequestBoard requestBoard);
 	
 	public RequestBoard findByRequestBoard(int rbNo);
+	
+	@Select("select")
+	public int RequestBoardToCount();
 }

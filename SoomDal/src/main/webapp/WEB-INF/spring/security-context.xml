@@ -31,7 +31,7 @@
 			default-target-url="/"
 		/>
 		<sec:logout
-			logout-url="/member/logout"
+			logout-url="/dalin/logout"
 			logout-success-url="/"
 		/>
 	</sec:http>
@@ -51,7 +51,7 @@
 			default-target-url="/"
 		/>
 		<sec:logout
-			logout-url="/member/logout"
+			logout-url="/jeja/logout"
 			logout-success-url="/"
 		/>
 	</sec:http>

@@ -26,8 +26,8 @@ public class SendSMSController {
 		
 		RequestPayment reqPayment = paymentService.reqCashMember(principal.getName());
 		
-		String api_key = "NCSYXHQI2AZZ1SYV";
-		String api_secret = "RM4ORTFUGYWR54QG9LURJVJFOX55R6TB";
+		String api_key = "NCS2ICCHQZ5QEXXS";
+		String api_secret = "ENSCSTBK5GJ1GRHWDOYRDS8XNNUYFJHQ";
 		Coolsms coolsms = new Coolsms(api_key, api_secret); // 메시지보내기 객체 생성
 		String key = reqPayment.getPCode(); // 인증키 생성
 		System.out.println(key);
@@ -38,7 +38,7 @@ public class SendSMSController {
 		
 		HashMap<String, String> set = new HashMap<String, String>();
 		set.put("to", dTel); // 수신번호
-		set.put("from", "01043887868" ); // 발신번호
+		set.put("from", "01066008734" ); // 발신번호
 		set.put("text", "숨달입니다. 인증번호는 [" + key + "] 입니다."); // 문자내용
 		set.put("type", "sms"); // 문자 타입
 

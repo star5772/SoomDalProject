@@ -8,7 +8,7 @@
 	</insert>
 	
 	<delete id="deleteToPayment">
-		delete from requestpayment where d_email = #{dEmail} and rownum=1
+		delete from requestpayment where d_email = #{dEmail}
 	</delete>
 	
 	<select id="findByPayment" resultType="RequestPayment">
@@ -48,20 +48,34 @@
 	</select>
 	
 	<!--                 여기부터  결제내역 페이지                                                  -->
+	<select id="countToNowPayment" resultType="int">
+		select count(*) from  nowpayment
+	</select>
+	
+	
 	<insert id="insertNowPayment">
-		insert into nowpayment(p_code,p_date,p_refund_date,p_refund_is_ok,d_email dEmail)
-		values(#{pCode},sysdate,7,1)
+		insert into nowpayment(p_code,p_date,p_refund_date,p_refund_is_ok,d_email,p_money)
+		values(#{pCode},sysdate,7,1,#{dEmail},#{pMoney})
 	</insert>
 	
 	<select id="findByNowPaymentToAdmin" resultType="NowPayment">
-		select p_code pCode, p_date pDate, p_refund_date pRefundDate,p_refund_is_ok pRefundIsOk,d_email dEmail
-		from nowpayment
+		<![CDATA[
+			select * from		
+				(select n.*, rownum rnum from	
+					(select p_code pCode, p_date pDate, p_refund_date pRefundDate,p_refund_is_ok pRefundIsOk,d_email dEmail,p_money pMoney from nowpayment) n
+				where rownum <=#{endRowNum})	
+			where rnum >=#{startRowNum}
+		]]>			
 	</select>
 	
-	<select id="findByNowPaymentToDalin">
-		select p_code pCode, p_date pDate, p_refund_date pRefundDate, p_refund_is_ok pRefundIsOk
-		from nowpayment
-		where d_email=#{dEmail}
+	<select id="findByNowPaymentToDalin" resultType="NowPayment">
+		<![CDATA[
+			select * from		
+				(select n.*, rownum rnum from	
+					(select p_code pCode, p_date pDate, p_refund_date pRefundDate,p_refund_is_ok pRefundIsOk,d_email dEmail,p_money pMoney from nowpayment where d_email=#{dEmail}) n
+				where rownum <=#{endRowNum})	
+			where rnum >=#{startRowNum}
+		]]>	
 	</select>
 	
 	<update id="updatePaymentToDalin">
@@ -74,7 +88,7 @@
 	</update>
 	
 	<delete id="deleteToNowPayment">
-		delete from nowpayment
+		delete from nowpayment where pCode=#{pCode} and rownum=1
 	</delete>	
 </mapper>
 

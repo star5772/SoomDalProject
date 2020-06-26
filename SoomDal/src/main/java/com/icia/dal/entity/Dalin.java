@@ -13,6 +13,7 @@ import lombok.experimental.*;
 public class Dalin {
 	private Integer dMno;
 	private String fNo;
+	private String detailFName;
 	private String dEmail;
 	private String dPassword;
 	private String dName;
