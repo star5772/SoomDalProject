@@ -7,7 +7,7 @@ import org.apache.ibatis.annotations.*;
 import com.icia.dal.entity.*;
 
 public interface RequestBoardDao {
-	// 요청서 게시판 글읽기
+	// 요청서 게시판 글읽기????
 	public List<RequestBoard> findAllByRbno(int rbNo);
 	
 	public int insert(RequestBoard requestBoard);
@@ -19,6 +19,12 @@ public interface RequestBoardDao {
 	
 	public RequestBoard findByRequestBoard(int rbNo);
 	
+<<<<<<< HEAD
 	@Select("select")
 	public int RequestBoardToCount();
+	
+	public List<RequestBoard> findAll(@Param("startRowNum") int startRowNum,@Param("endRowNum") int endRowNum);
+=======
+	
+>>>>>>> branch 'master' of https://github.com/star5772/SoomDalProject
 }

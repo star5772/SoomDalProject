@@ -5,7 +5,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import java.io.*;
 import java.time.*;
 import java.time.format.DateTimeFormatter;
-import java.util.List;
+import java.util.*;
 
 import javax.inject.*;
 import javax.validation.*;
@@ -21,6 +21,7 @@ import com.icia.dal.dao.*;
 import com.icia.dal.dto.*;
 import com.icia.dal.dto.DalinDto.*;
 import com.icia.dal.entity.*;
+import com.icia.dal.util.*;
 
 @Service
 public class DalinService {
@@ -93,6 +94,21 @@ public class DalinService {
 		String pwd = pwdEncoder.encode(dto.getNewDPassword());
 		dalin.setDPassword(pwd);
 		dalDao.updateToDalin(dalin);
+	}
+
+	public PageToDalinField findDalinByDetailFName(int pageno,String detailFName) {
+		int countOfDalin = dalDao.countOfFieldDalin(detailFName);
+		PageToDalinField page = FieldPagingUtil.getPage(pageno, countOfDalin);
+		int srn = page.getStartRowNum();
+		int ern = page.getEndRowNum();
+		List<Dalin> dalinList = dalDao.findDalinByDetailFName(srn,ern);
+		List<DalinDto.DtoForFieldList> dtoList = new ArrayList<>();
+		for(Dalin d:dalinList) {
+			DalinDto.DtoForFieldList dto = modelMapper.map(d,DalinDto.DtoForFieldList.class);
+			dtoList.add(dto);
+		}
+		page.setList(dtoList);
+		return page;
 	}
 }	
 

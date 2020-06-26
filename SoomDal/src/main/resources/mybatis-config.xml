@@ -9,7 +9,11 @@
 		<typeAlias type="com.icia.dal.entity.RequestBoard" alias="RequestBoard"/>
 		<typeAlias type="com.icia.dal.entity.RequestPayment" alias="RequestPayment"/>
 		<typeAlias type="com.icia.dal.entity.NowPayment" alias="NowPayment"/>
+<<<<<<< HEAD
+		<typeAlias type="com.icia.dal.entity.Review" alias="Review"/>
+=======
 		<typeAlias type="com.icia.dal.entity.Review" alias="review"/>
+>>>>>>> branch 'master' of https://github.com/star5772/SoomDalProject
 	</typeAliases>
 	<typeHandlers>
 		<typeHandler handler="com.icia.dal.util.typehandler.LocalDateTimeTypeHandler"/>

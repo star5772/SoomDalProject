@@ -64,6 +64,14 @@
 	<select id="existsByEmail" resultType="boolean">
 		select count(*) from dalin where d_email=#{dEmail} and rownum=1
 	</select>
+	
+	<select id="countOfFieldDalin" resultType="int">
+		select count(*) from dalin where DETAIL_F_NAME=#{detailFName}
+	</select>
+	
+	<select id="findDalinByDetailFName" resultType="dalin">
+		select d_profile dProfile, d_name dName, d_intro dIntro from dalin where DETAIL_F_NAME=#{detailFName}
+	</select>
 </mapper>
 
 
