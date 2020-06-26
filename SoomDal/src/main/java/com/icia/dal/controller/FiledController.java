@@ -1,11 +1,17 @@
 package com.icia.dal.controller;
 
+import javax.inject.*;
+
 import org.springframework.stereotype.*;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.*;
 
+import com.icia.dal.service.*;
+
 @Controller
 public class FiledController {
+	@Inject
+	private DalinService dalService;
 	
 	@GetMapping("/field_sport/list")
 	public ModelAndView sportList() {
@@ -24,9 +30,11 @@ public class FiledController {
 	}
 	
 	@GetMapping("/field/list")
-	public ModelAndView fieldList() {
+	public ModelAndView fieldList(String detailFName) {
 		// 세부분야 선택 후 세부분야 페이지로 이동
 		// 세부분야의 정보, 세부분야 달인 리스트 필요
+		// .addObject("dalin",dalService.findDalinBydetialFName(String detailFName))
+		// fieldRead > dto() > 
 		return new ModelAndView("main").addObject("viewName","field/list.jsp");
 	}
 }

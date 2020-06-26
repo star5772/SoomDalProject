@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>     
 <!DOCTYPE html>
 <html>
 <head>
@@ -66,8 +67,6 @@ $(function(){
 
 
 
-${cash}
-
 
 
 <div style="width:1000px; height: 800px;" id="pmDiv">
@@ -110,6 +109,52 @@ ${cash}
 		</div>
 		</form>
 	</div>
+ 	<div style="margin-left:235px; margin-top: 30px;">
+		<table class="table table-hover" style="width:550px;height: 150px; font-size: medium;">
+		<thead>
+			<tr>
+				<th>충전코드</th>
+				<th>충전시간</th>
+				<th>환불가능일</th>
+				<th>충전금액</th>
+			</tr>
+		</thead>
+		<tbody>
+		<c:forEach items="${nowPayment.list}" var="nplist">
+			<tr>
+				<td>${nplist.PCode}</td>
+				<td>${nplist.PDateStr}</td>
+				<td>${nplist.PRefundDate}</td>
+				<td>${nplist.PMoney}</td>
+			</tr>			
+		</c:forEach>			
+		</tbody>	
+		</table>
+	<div style="text-align:center;">
+		<ul class="pagination">
+			<c:if test="${nowPayment.prev==true}">
+				<li><a href="/dal/member/payment/store?pageno=${nowPayment.startPage-1}">이전</a></li>
+			</c:if>
+			<c:forEach begin="${nowPayment.startPage}" end="${nowPayment.endPage}" var="i">
+				<c:choose>
+					<c:when test="${nowPayment.pageno eq i }">
+						<li class="active">
+							<a href="/dal/member/payment/store?pageno=${i}">${i}</a>
+						</li>
+					</c:when>
+					<c:otherwise>
+						<li><a href="/dal/member/payment/store?pageno=${i}">${i}</a></li>
+					</c:otherwise>
+				</c:choose>
+				
+			</c:forEach>
+			<c:if test="${nowPayment.next==true}">
+				<li><a href="/dal/member/payment/store?pageno=${nowPayment.endPage+1}">다음</a></li>
+			</c:if>
+		</ul>
+	</div>
+		
+	</div>
 </div>
 
 <div id="pnInput" style="display: none;">
@@ -129,7 +174,8 @@ ${cash}
 			<input type="text" id="AuthCode"name="AuthCode" maxlength="6" class="form-control" style="width:200px; height:40px; font-size: medium;" placeholder="인증번호를 입력하세요">
 			<button type="button" id="AddCashToDalin" style="width: 70px; height: 40px;font-size:small; margin-left: 65px; margin-top: 30px;" class="btn btn-info">확인</button>
 		</div>
-	</div>	
+	</div>
+
 		
 </body>
 </html>

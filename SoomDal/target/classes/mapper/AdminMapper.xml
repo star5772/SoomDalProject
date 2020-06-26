@@ -8,7 +8,7 @@
 		<![CDATA[
 			select * from
 				(select j.*,rownum as rnum from
-					(select /*+ index_desc(jeja jeja_pk_j_mno)*/j_mno jMno, j_email jEmail, j_name jName, j_accusation_cnt jAccusationCnt, j_joindate jJoinDate from jeja where j_mno=#{jMno})j
+					(select /*+ index_desc(jeja jeja_pk_j_mno)*/j_mno jMno, j_email jEmail, j_name jName, j_accusation_cnt jAccusationCnt, j_joindate jJoinDate from jeja)j
 					where rownum<=#{endRowNum})
 				where rnum>=#{startRowNum}
 		]]>
@@ -60,7 +60,7 @@
 	<select id="countToJeja" resultType="int">
 	select /*+ index_ffs(board board_pk_j_mno)*/count(*)
 	from jeja
-</select>
+	</select>
 	
 
 	

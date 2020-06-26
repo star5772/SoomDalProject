@@ -16,7 +16,8 @@ import lombok.experimental.Accessors;
 public class NowPayment {
 	private String pCode;
 	private LocalDateTime pDate;
-	private String pRefundDate;
+	private Integer pRefundDate;
 	private Boolean pRefundIsOk;
 	private String dEmail;
+	private Integer pMoney;
 }

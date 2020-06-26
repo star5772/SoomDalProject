@@ -12,6 +12,7 @@ import org.springframework.test.context.junit4.*;
 
 import com.icia.dal.dao.*;
 import com.icia.dal.entity.*;
+import com.icia.dal.service.*;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("file:src/main/webapp/WEB-INF/spring/**/*-context.xml")
@@ -26,4 +27,6 @@ public class JejaDaoTest {
 			assertThat(jejaDao.insertJeja(jeja), is(1));
 		}
 	}
+	
+	
 }
