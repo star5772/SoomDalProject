@@ -4,6 +4,7 @@ import java.security.*;
 
 import javax.inject.*;
 
+import org.springframework.lang.*;
 import org.springframework.stereotype.*;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.*;
@@ -35,5 +36,11 @@ public class RequestBoardController {
 		System.out.println(principal.getName()+"-------------------------------------------");
 		dto.setRbWriter(principal.getName());
 		return "redirect:/member/reqboard/read?rbNo=" + service.write(dto);
+	}
+	
+	
+	@GetMapping("/reqboard/list")
+	public ModelAndView list(@RequestParam(defaultValue = "1") int pageno, @Nullable String rbWriter) {
+		return new ModelAndView("main").addObject("viewName", "reqboard/list.jsp").addObject("reqPage", service.list(pageno, rbWriter));
 	}
 }

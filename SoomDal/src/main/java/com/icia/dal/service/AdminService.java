@@ -36,4 +36,20 @@ public class AdminService {
 		adPage.setList(dtoList);
 		return adPage;
 	}
+	
+	public ReportedPage reportedPage(int pageno) {
+		int countOfBoard = adminDao.countToReview();
+		ReportedPage repPage = ReportedPagingUtil.getPage(pageno, countOfBoard);
+		int srn = repPage.getStartRowNum();
+		int ern = repPage.getEndRowNum();
+		List<Review> reviewList = adminDao.findAllToReview(srn, ern);
+		List<AdminDto.ReportedReviewForList> dtoList = new ArrayList<AdminDto.ReportedReviewForList>();
+		for(Review review:reviewList) {
+			AdminDto.ReportedReviewForList dto = modelMapper.map(review,AdminDto.ReportedReviewForList.class);
+			dto.setRDate(review.getRDate().format(DateTimeFormatter.ofPattern("yyyy년MM월dd일")));
+			dtoList.add(dto);
+		}
+		repPage.setList(dtoList);
+		return repPage;
+	}
 }
