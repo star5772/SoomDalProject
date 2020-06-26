@@ -19,12 +19,9 @@ public interface RequestBoardDao {
 	
 	public RequestBoard findByRequestBoard(int rbNo);
 	
-<<<<<<< HEAD
 	@Select("select")
 	public int RequestBoardToCount();
 	
 	public List<RequestBoard> findAll(@Param("startRowNum") int startRowNum,@Param("endRowNum") int endRowNum);
-=======
 	
->>>>>>> branch 'master' of https://github.com/star5772/SoomDalProject
 }

@@ -89,11 +89,12 @@ CREATE TABLE RepQuestion (
 /*결제현황*/
 
 CREATE TABLE NowPayment (
-   P_CODE VARCHAR(8) NOT NULL, /* 결제 코드 */
+   P_CODE VARCHAR2(8) NOT NULL, /* 결제 코드 */
    P_DATE DATE, /* 결제 날짜 */
    P_REFUND_DATE number(1), /* 환불 가능일 */
    P_REFUND_IS_OK CHAR(1), /* 환불상태 */
    d_email varchar2(50),
+   p_money number(7),
    constraint pk_nowpayment primary key(p_code)
 );
 
@@ -121,13 +122,21 @@ CREATE TABLE JEJA (
    constraint pk_jeja primary key(j_mno)
 );
 
+/*세부분야*/
 
+CREATE TABLE DetailField (
+   F_NO VARCHAR2(10) NOT NULL, /* 분야 코드 */
+   DETAIL_F_NAME NVARCHAR2(20), /* 세부 분야 이름 */
+   DETAIL_F_SAJIN NVARCHAR2(70), /* 세부 분야 사진 */
+   constraint pk_detailfield primary key(f_no,detail_f_name)
+);
 
 
 /* 달인 회원 */
 
 CREATE TABLE Dalin (
    D_MNO NUMBER(7) NOT NULL, /* 달인 회원 번호 */
+   DETAIL_F_NAME NVARCHAR2(10) NOT NULL,
    F_NO VARCHAR2(10) NOT NULL, /* 분야 코드 */
    D_EMAIL varchar2(50) NOT NULL, /* 회원 id(email) */
    D_PASSWORD VARCHAR2(60), /* 비밀번호 */
@@ -147,7 +156,8 @@ CREATE TABLE Dalin (
    R_NO NUMBER(5), /* 리뷰 번호 */
    P_ATTACHMENT_NO NUMBER(3), /* 프로필 첨부 파일 번호 */
    D_Q_NO NUMBER(1), /* 질문 번호 > 기본키 */
-   constraint pk_dalin primary key(d_mno,f_no,d_email)
+   constraint pk_dalin primary key(d_mno,f_no,d_email,detail_f_name),
+   constraint fk_dalin FOREIGN key(f_no,detail_f_name)references DetailField(f_no,detail_f_name)
 );
 
 
@@ -187,7 +197,7 @@ CREATE TABLE ReportedUser (
 /*결제요청*/
 
 CREATE TABLE RequestPayment (
-   P_CODE VARCHAR(8) NOT NULL, /* 결제 코드 */
+   P_CODE VARCHAR2(8) NOT NULL, /* 결제 코드 */
    P_MONEY NUMBER(8), /* 결제 금액 */
    D_MNO NUMBER(7), /* 달인 회원 번호 */
    F_NO VARCHAR2(10), /* 분야 코드 */
@@ -199,7 +209,7 @@ CREATE TABLE RequestPayment (
 
 CREATE TABLE NowRefund (
    P_REFUND_CODE VARCHAR2(8) NOT NULL, /* 환불코드 */
-   P_CODE VARCHAR(8) NOT NULL, /* 결제 코드 */
+   P_CODE VARCHAR2(8) NOT NULL, /* 결제 코드 */
    P_REQ_REFUND_DATE DATE, /* 환불 신청 날짜 */
    P_REFUND_IS_OK CHAR(1), /* 수락 여부 */
    constraint pk_nowrefund primary key(p_refund_code,p_code)
@@ -299,14 +309,7 @@ CREATE TABLE ReviewAuthority (
    A_IS_OK CHAR(1), /* 권한 여부 */
    constraint pk_reviewauthority primary key(a_complete_code)
 );
-/*세부분야*/
 
-CREATE TABLE DetailField (
-   F_NO VARCHAR2(10) NOT NULL, /* 분야 코드 */
-   DETAIL_F_NAME NVARCHAR2(10), /* 세부 분야 이름 */
-   DETAIL_F_SAJIN NVARCHAR2(50), /* 세부 분야 사진 */
-   constraint pk_detailfield primary key(f_no)
-);
 
 /*프로필 첨부파일*/
 
@@ -345,11 +348,6 @@ CREATE TABLE Authorities (
    AUTHORITY VARCHAR2(20) NOT NULL, /* 권한 */
    constraint pk_authorities primary key(username,authority)
 );
-select * from dalin;
-select * from requestpayment;
-commit;
 select * from tab;
-select d_mno dMno, d_name dName, d_email dEmail, d_password dPassword, d_tel dTel,d_cash dCash 
-,f_no fNo from dalin where d_email='star5772@naver.com' and rownum=1;
-delete from requestpayment where d_email = 'star5772@naver.com';
+select * from nowpayment;
 
