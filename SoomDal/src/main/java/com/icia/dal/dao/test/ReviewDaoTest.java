@@ -19,10 +19,10 @@ public class ReviewDaoTest {
 	@Inject
 	private ReviewDao reviewDao;
 	
-	//@Test
+	///@Test
 	public void insert() {
-		Review rev = Review.builder().rNo(1).rContent("내용").rWriter("작성자").sNo(1).build();
-		assertThat(reviewDao.insert(rev), is(1));
+		Review rev = Review.builder().rNo(2).rContent("내용").rWriter("작성").sNo(2).build();
+		assertThat(reviewDao.insert(rev), is(2));
 	}
 	
 	//@Test
