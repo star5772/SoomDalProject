@@ -19,5 +19,14 @@ public class AdminDto {
 		private String jJoinDate;
 	}
 	
-	
+	@Data
+	@AllArgsConstructor
+	@NoArgsConstructor
+	@Builder
+	public static class ReportedReviewForList {
+		private String rDate;
+		private String rWriter;
+		private int rScore;
+		private String rContent;
+	}
 }

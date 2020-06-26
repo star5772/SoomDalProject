@@ -11,7 +11,6 @@
 <meta name="description" content="">
 <meta name="author" content="">
 
-<<<<<<< HEAD
 <title>SoomDal</title>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
@@ -23,7 +22,6 @@
 <!-- Custom styles for this template -->
 <link type="text/css" href="${pageContext.request.contextPath}/resources/css/modern-business.css" rel="stylesheet">
 <link rel="stylesheet" href="/dal/css/main.css">
-=======
   <title>SoomDal</title>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
@@ -38,7 +36,6 @@
   <!-- Custom styles for this template -->
   <link type="text/css" href="${pageContext.request.contextPath}/resources/css/modern-business.css" rel="stylesheet">
   <link rel="stylesheet" href="/dal/css/main.css">
->>>>>>> branch 'master' of https://github.com/star5772/SoomDalProject
 <style>
 .container #main {
 	overflow: hidden;
