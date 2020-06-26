@@ -1,8 +1,6 @@
 package com.icia.dal.dao;
 
 import java.util.*;
-import java.util.List;
-import java.util.Map;
 
 import javax.inject.*;
 
@@ -23,18 +21,27 @@ public class AdminDao {
 	private SqlSessionTemplate tpl;
 	
 	// 제자회원 목록 출력
-	public List<Jeja> findAllToJeja() {
-		return tpl.selectList("adminMapper.findAllToJeja");
+	public List<Jeja> findAllToJeja(int startRowNum, int endRowNum) {
+		Map<String,Object> map = new HashMap<String, Object>();
+		map.put("startRowNum",startRowNum);
+		map.put("endRowNum",endRowNum);
+		return tpl.selectList("adminMapper.findAllToJeja", map);
 	}
 	
 	// 달인회원 목록 출력
-	public List<Dalin> findAllToDalin() {
-		return tpl.selectList("adminMapper.findAllToDalin");
+	public List<Dalin> findAllToDalin(int startRowNum, int endRowNum) {
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("startRowNum",startRowNum);
+		map.put("endRowNum",endRowNum);
+		return tpl.selectList("adminMapper.findAllToDalin", map);
 	}
 	
 	// 신고회원 목록 출력
-	public List<Map> findAllJejaReported(int jMno){
-		return tpl.selectList("adminMapper.findAllJejaReported", jMno);
+	public List<Map> findAllJejaReported(int startRowNum, int endRowNum){
+		Map<String,Object> map = new HashMap<String, Object>();
+		map.put("startRowNum",startRowNum);
+		map.put("endRowNum",endRowNum);
+		return tpl.selectList("adminMapper.findAllJejaReported", map);
 	}
 	
 	// 회원 정지
@@ -48,8 +55,14 @@ public class AdminDao {
 	}
 	
 	// 신고게시물 목록 출력
-	public List<RequestBoard> findAllToReportedBoard(boolean rbEnabled) {
-		return tpl.selectList("adminMapper.findAllToReportedBoard", rbEnabled);
+	public List<RequestBoard> findAllToReportedBoard(int startRowNum, int endRowNum) {
+		Map<String,Object> map = new HashMap<String, Object>();
+		map.put("startRowNum",startRowNum);
+		map.put("endRowNum",endRowNum);
+		return tpl.selectList("adminMapper.findAllToReportedBoard", map);
 	}
 	
+	public int countToJeja() {
+		return tpl.selectOne("adminMapper.countJeja");
+	}
 }

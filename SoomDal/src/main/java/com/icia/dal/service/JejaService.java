@@ -10,6 +10,7 @@ import com.icia.dal.dao.*;
 import com.icia.dal.dto.*;
 import com.icia.dal.dto.JejaDto.*;
 import com.icia.dal.entity.*;
+import com.icia.dal.util.*;
 
 @Service
 public class JejaService {
@@ -57,5 +58,6 @@ public class JejaService {
 		System.out.println("==========");
 		System.out.println(dto);
 	}
-
+	
+	
 }
