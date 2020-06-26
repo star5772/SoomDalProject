@@ -21,11 +21,8 @@ public class ReviewDao {
 		return tpl.insert("reviewMapper.insertToReview", review);
 	}
 	
-	public List<Review> findAllReview(int startRowNum, int endRowNum){
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("startRowNum", startRowNum);
-		map.put("endRowNum", endRowNum);
-		return tpl.selectList("reviewMapper.findAllReview",map);
+	public List<Review> findAllReview(int dMno){
+		return tpl.selectList("reviewMapper.findAllReview",dMno);
 	}
 	
 	public int deleteToReview(int rNo) {
@@ -34,5 +31,13 @@ public class ReviewDao {
 	
 	public Double avgToReview() {
 		return tpl.selectOne("reviewMapper.avgToReview");
+	}
+	
+	public int countToReview() {
+		return tpl.selectOne("reviewMapper.countToReview");
+	}
+	
+	public Review findByReview(int rNo) {
+		return tpl.selectOne("reviewMapper.findByReview",rNo);
 	}
 }

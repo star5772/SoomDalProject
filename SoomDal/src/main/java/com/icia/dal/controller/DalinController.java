@@ -80,6 +80,7 @@ public class DalinController {
 		// 달인 분야선택 (달인 회원가입)
 		return new ModelAndView("main").addObject("viewName","dalin/field_select.jsp");
 	}
+	
 	@GetMapping("/member/system/msg")
 	public ModelAndView msg() {
 		return new ModelAndView("main").addObject("viewName","system/msg.jsp");

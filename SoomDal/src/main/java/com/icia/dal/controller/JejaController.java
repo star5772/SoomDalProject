@@ -67,6 +67,8 @@ public class JejaController {
 		return new ModelAndView("main").addObject("viewName","jeja/estimate_list.jsp");
 	}
 	
+	 
+	
 	
 
 }

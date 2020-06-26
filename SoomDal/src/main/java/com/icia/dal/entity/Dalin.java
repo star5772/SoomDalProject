@@ -32,4 +32,5 @@ public class Dalin {
 	private Integer pAttachmentNo;
 	private Integer dQNo;
 	private String dPaymentMethod;
+	private Integer rReviewCnt;
 }

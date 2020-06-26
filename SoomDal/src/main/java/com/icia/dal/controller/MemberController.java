@@ -12,9 +12,11 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.icia.dal.Exception.DalinNotFoundException;
 import com.icia.dal.Exception.MembernameExistException;
 import com.icia.dal.service.DalinService;
 import com.icia.dal.service.JejaService;
+import com.icia.dal.service.ReviewService;
 
 @Controller
 public class MemberController {
@@ -22,6 +24,8 @@ public class MemberController {
 	private DalinService dalService;
 	@Inject
 	private JejaService jejaService;
+	@Inject
+	private ReviewService reviewService;
 	
 	@GetMapping({"/","/root"})
 	public ModelAndView main() {
@@ -119,7 +123,7 @@ public class MemberController {
 	
 	// 달인 프로필 읽기
 	@GetMapping("/member/dalin_profile")
-	public ModelAndView dalinProfileRead() {
-		return new ModelAndView("main").addObject("viewName","member/dalin_profile_read.jsp");
+	public ModelAndView dalinProfileRead(int dMno) throws DalinNotFoundException {
+		return new ModelAndView("main").addObject("viewName","member/dalin_profile_read.jsp").addObject("readProfile",dalService.readToDalinProfile(dMno));
 	}
 }

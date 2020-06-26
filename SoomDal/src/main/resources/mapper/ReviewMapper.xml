@@ -13,13 +13,9 @@
 	
 	<!-- 읽기 -->
 	<select id="findAllReview" resultType="review">
-		<![CDATA[
-		select * from 
-			(select r.*, rownum rnum from 	
-				(select r_no rNo, r_date rDate, r_content rContent, r_score rScore, r_sajin rSajin, r_writer rWriter, s_no sNo, d_mno dMno from review where d_mno=#{dMno}) r
-			where rownum<=#{endRowNum}) 
-		where rnum>=#{startRowNum}
-		]]>
+		select r_no rNo, r_date rDate, r_content rContent, r_score rScore, r_sajin rSajin, r_writer rWriter, s_no sNo, d_mno dMno 
+		from review 
+		where d_mno=#{dMno}
 	</select>
 	
 	<!-- 삭제-->
@@ -35,6 +31,16 @@
 		from review
 	</select>
 	
+	<select id="countToReview" resultType="int">
+		select count(*)
+		from review
+	</select>
+	
+	<select id="findByReview" resultType="review">
+		select r_no rNo, r_date rDate, r_content rContent, r_score rScore, r_sajin rSajin, r_writer rWriter, s_no sNo, d_mno dMno 
+		from review
+		where r_no=#{rNo} and rownum=1
+	</select>
 
 </mapper>
 

@@ -39,6 +39,8 @@ public class DalinService {
 	private String profileFolder;
 	@Value("http://localhost:8081/profile/")
 	private String profilePath;
+	@Inject
+	private ProfileAttachmentDao profileAttachmentDao;
 
 	public void join(DtoForJoinToDalin dto) {
 		Dalin dalin = modelMapper.map(dto, Dalin.class);
@@ -109,6 +111,21 @@ public class DalinService {
 		}
 		page.setList(dtoList);
 		return page;
+	}
+	
+	// 달인 프로필 읽기
+	public DalinDto.DtoForProfileToDalin readToDalinProfile(int dMno) throws DalinNotFoundException{
+		Dalin dalin = dalDao.findByDalinProfile(dMno);
+		if(dalin==null) 
+		{
+			throw new DalinNotFoundException();
+		}
+		DalinDto.DtoForProfileToDalin dto = modelMapper.map(dalin, DalinDto.DtoForProfileToDalin.class);
+		if(dalin.getPAttachmentCnt()>0) // 사진 수가 있으면 다 보여주라고
+			dto.setProfileAttachments(profileAttachmentDao.findAllByProfileAttachment(dto.getDMno()));
+		if(dalin.getRReviewCnt()>0)
+			dto.setReviews(reviewDao.findAllReview(dto.getDMno()));
+		return dto;
 	}
 }	
 
