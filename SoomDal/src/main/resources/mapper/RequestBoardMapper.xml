@@ -26,6 +26,17 @@
 		from RequestBoard 
 		where RB_NO=#{rbNo} 
 	</select>
+	
+	<select id="findAll" resultType="RequestBoard">
+	<![CDATA[
+	select * from
+		(select rownum as rnum, rb.* from
+			(select /*+ index_desc(requestboard pk_requestboard) */ rb_no, rb_title, rb_write_date, rb_writer, rb_read_cnt, rb_report_cnt) rb
+		where rownum<=#{endRowNum})
+	where rnum>=#{startRowNum}
+	]]>
+	</select>
+	
 </mapper>
 
 

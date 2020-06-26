@@ -35,4 +35,6 @@ public class RequestBoardService {
 		reqDao.insert(reqBoard);
 		return reqBoard.getRbNo();
 	}
+	
+
 }
