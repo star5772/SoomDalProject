@@ -63,6 +63,6 @@ public class AdminDao {
 	}
 	
 	public int countToJeja() {
-		return tpl.selectOne("adminMapper.countJeja");
+		return tpl.selectOne("adminMapper.countToJeja");
 	}
 }

@@ -11,6 +11,7 @@
 <meta name="description" content="">
 <meta name="author" content="">
 
+<<<<<<< HEAD
 <title>SoomDal</title>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
@@ -22,6 +23,22 @@
 <!-- Custom styles for this template -->
 <link type="text/css" href="${pageContext.request.contextPath}/resources/css/modern-business.css" rel="stylesheet">
 <link rel="stylesheet" href="/dal/css/main.css">
+=======
+  <title>SoomDal</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css" />
+
+  
+  <!-- Bootstrap core CSS -->
+  <link type="text/css" href="${pageContext.request.contextPath}/resources/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Custom styles for this template -->
+  <link type="text/css" href="${pageContext.request.contextPath}/resources/css/modern-business.css" rel="stylesheet">
+  <link rel="stylesheet" href="/dal/css/main.css">
+>>>>>>> branch 'master' of https://github.com/star5772/SoomDalProject
 <style>
 .container #main {
 	overflow: hidden;
