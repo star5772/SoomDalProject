@@ -18,4 +18,6 @@ public class AdminDto {
 		private int jAccusationCnt;
 		private String jJoinDate;
 	}
+	
+	
 }

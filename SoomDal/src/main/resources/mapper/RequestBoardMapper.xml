@@ -26,6 +26,8 @@
 		from RequestBoard 
 		where RB_NO=#{rbNo} 
 	</select>
+	
+	
 </mapper>
 
 

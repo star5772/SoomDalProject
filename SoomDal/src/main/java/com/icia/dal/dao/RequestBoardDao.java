@@ -19,6 +19,5 @@ public interface RequestBoardDao {
 	
 	public RequestBoard findByRequestBoard(int rbNo);
 	
-	@Select("select")
-	public int RequestBoardToCount();
+	
 }

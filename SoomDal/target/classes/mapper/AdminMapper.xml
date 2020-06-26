@@ -26,11 +26,11 @@
 	</select>
 	
 	<!-- 신고게시물(ReportedBoard) 목록  : 불러오는거 (이네이블드가 false만 읽는거)-->
-	<select id="findAllToReportedBoard" resultType="RequestBoard">
+	<select id="findAllToReview" resultType="Review">
 		<![CDATA[
 			select * from
 				(select r.*,rownum as rnum from
-					(select /*+index_desc(reportedboard reportedboard_pk_rb_no)*/ rb_no rbNo, username from reportedboard)r
+					(select /*+index_desc(review review_pk_r_no)*/r_no rNo, r_date rDate, r_writer rWriter from review)r
 					where rownum<=#{endRowNum})
 				where rnum>=#{startRowNum} 
 		]]>
@@ -58,11 +58,13 @@
 	</update>
 	
 	<select id="countToJeja" resultType="int">
-	select /*+ index_ffs(board board_pk_j_mno)*/count(*)
-	from jeja
+		select /*+ index_ffs(jeja jeja_pk_j_mno)*/count(*)
+		from jeja
 	</select>
 	
-
+	<select id="countToReview" resultType="int">
+		select /*+ index_ffs(review review_pk_r_no)*/count(*) from review
+	</select>
 	
 </mapper>
 
