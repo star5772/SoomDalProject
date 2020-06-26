@@ -9,6 +9,7 @@ import javax.inject.Inject;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
+import com.icia.dal.entity.Dalin;
 import com.icia.dal.entity.RequestPayment;
 
 @Repository
@@ -20,8 +21,8 @@ public class PaymentDao {
 		return tpl.insert("paymentMapper.insertToPayment",rp);
 	}
 	
-	public int deleteToPayment(String pCode) {
-		return tpl.delete("paymentMapper.deleteToPayment",pCode);
+	public int deleteToPayment(String dEmail) {
+		return tpl.delete("paymentMapper.deleteToPayment",dEmail);
 	}
 	
 	public RequestPayment findByPayment(String dEmail) {
@@ -44,5 +45,13 @@ public class PaymentDao {
 	}
 	public int findToCash(String pCode) {
 		return tpl.selectOne("paymentMapper.findToCash",pCode);
+	}
+	
+	public int addCashToDalin(Dalin dalin) {
+		return tpl.update("paymentMapper.addCashToDalin",dalin);
+	}
+	
+	public int findByDalinCash(String dEmail) {
+		return tpl.selectOne("paymentMapper.findByDalinCash",dEmail);
 	}
 }

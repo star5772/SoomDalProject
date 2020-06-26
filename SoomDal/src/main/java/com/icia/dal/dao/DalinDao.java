@@ -29,7 +29,6 @@ public class DalinDao {
 	}
 	
 	public int updateToDalin(Dalin dalin) {
-		System.out.println(dalin.getDCash());
 		return tpl.update("dalinMapper.updateToDalin", dalin);
 	}
 	

@@ -43,7 +43,7 @@ $(function(){
 	})
 	$("#AddCashToDalin").on("click",function() {
 		var params = {
-				authCode = $("#AuthCode").val();
+				AuthCode:  $("#AuthCode").val(),
 				_csrf: "${_csrf.token}"
 			}
 		$.ajax({
@@ -63,13 +63,20 @@ $(function(){
 
 </head>
 <body>
+
+
+
+${cash}
+
+
+
 <div style="width:1000px; height: 800px;" id="pmDiv">
 	<div style="margin-left: 235px;margin-top: 70px;" >
 		<div>
 			<h2>스토어</h2>
 		</div>
 		<div style="background-color: #DDDDDD;, border: 1px solid #DDDDDD; border-radius: 3px; width: 550px; height: 50px;">
-			<h4 style="float: left;margin-top: 13px; height: 50px;">보유캐쉬</h4><h4 style="float: right;margin-top: 13px; height: 50px;">0원</h4>
+			<h4 style="float: left;margin-top: 13px; height: 50px;">보유캐쉬</h4><h4 style="float: right;margin-right:20px; margin-top: 13px; height: 50px;">${cash}원</h4>
 		</div>
 		<div style="height: 70px;"></div>
 		<hr style="width: 550px;">
@@ -79,31 +86,32 @@ $(function(){
 		</div>
 		<hr style="width: 550px;">
 		<div style="width: 550px;margin-bottom: 20px;">
-			<div><label style="margin-bottom:7px; font-size: large;">20,000</label><div style="float:right;"class="btn-group btn-group-toggle" data-toggle="buttons"><label class="btn btn-warning" style=" height: 35px; width: 100px; text-align:center; font-size: medium;color:white;border:1px solid white; border-radius: 10px">20,000원<input type="radio" name="pMoney" value=10000 autocomplete="on" ></label></div></div>
+			<div><label style="margin-bottom:7px; font-size: large;">20,000</label><div style="float:right;"class="btn-group btn-group-toggle" data-toggle="buttons"><label class="btn btn-warning" style=" height: 35px; width: 100px; text-align:center; font-size: medium;color:white;border:1px solid white; border-radius: 10px">20,000원<input type="radio" name="pMoney" value=20000 autocomplete="on" ></label></div></div>
 		</div>
 		<hr style="width: 550px;">
 		<div style="width: 550px;margin-bottom: 20px;">
-			<div><label style="margin-bottom:7px; font-size: large;">30,000</label><div style="float:right;"class="btn-group btn-group-toggle" data-toggle="buttons"><label class="btn btn-warning" style=" height: 35px; width: 100px; text-align:center; font-size: medium;color:white;border:1px solid white; border-radius: 10px">30,000원<input type="radio" name="pMoney" value=10000 autocomplete="on" ></label></div></div>
+			<div><label style="margin-bottom:7px; font-size: large;">30,000</label><div style="float:right;"class="btn-group btn-group-toggle" data-toggle="buttons"><label class="btn btn-warning" style=" height: 35px; width: 100px; text-align:center; font-size: medium;color:white;border:1px solid white; border-radius: 10px">30,000원<input type="radio" name="pMoney" value=30000 autocomplete="on" ></label></div></div>
 		</div>
 		<hr style="width: 550px;">
 		<div style="width: 550px;margin-bottom: 20px;">
-			<div><label style="margin-bottom:7px; font-size: large;">50,000</label><div style="float:right;"class="btn-group btn-group-toggle" data-toggle="buttons"><label class="btn btn-warning" style=" height: 35px; width: 100px; text-align:center; font-size: medium;color:white;border:1px solid white; border-radius: 10px">50,000원<input type="radio" name="pMoney" value=10000 autocomplete="on" ></label></div></div>
+			<div><label style="margin-bottom:7px; font-size: large;">50,000</label><div style="float:right;"class="btn-group btn-group-toggle" data-toggle="buttons"><label class="btn btn-warning" style=" height: 35px; width: 100px; text-align:center; font-size: medium;color:white;border:1px solid white; border-radius: 10px">50,000원<input type="radio" name="pMoney" value=50000 autocomplete="on" ></label></div></div>
 		</div>
 		<hr style="width: 550px;">
 		<div style="width: 550px;margin-bottom: 20px;">
-			<div><label style="margin-bottom:7px; font-size: large;">100,000</label><div style="float:right;"class="btn-group btn-group-toggle" data-toggle="buttons"><label class="btn btn-warning" style=" height: 35px; width: 100px; text-align:center; font-size: medium;color:white;border:1px solid white; border-radius: 10px">100,000원<input type="radio" name="pMoney" value=10000 autocomplete="on" ></label></div></div>
+			<div><label style="margin-bottom:7px; font-size: large;">100,000</label><div style="float:right;"class="btn-group btn-group-toggle" data-toggle="buttons"><label class="btn btn-warning" style=" height: 35px; width: 100px; text-align:center; font-size: medium;color:white;border:1px solid white; border-radius: 10px">100,000원<input type="radio" name="pMoney" value=100000 autocomplete="on" ></label></div></div>
 		</div>
 		<hr style="width: 550px;">
 		<div style="width: 550px;margin-bottom: 20px;">
-			<div><label style="margin-bottom:7px; font-size: large;">300,000</label><div style="float:right;"class="btn-group btn-group-toggle" data-toggle="buttons"><label class="btn btn-warning" style=" height: 35px; width: 100px; text-align:center; font-size: medium;color:white;border:1px solid white; border-radius: 10px">300,000원<input type="radio" name="pMoney" value=10000 autocomplete="on" ></label></div></div>
+			<div><label style="margin-bottom:7px; font-size: large;">300,000</label><div style="float:right;"class="btn-group btn-group-toggle" data-toggle="buttons"><label class="btn btn-warning" style=" height: 35px; width: 100px; text-align:center; font-size: medium;color:white;border:1px solid white; border-radius: 10px">300,000원<input type="radio" name="pMoney" value=300000 autocomplete="on" ></label></div></div>
 		</div>
 		<hr style="width: 550px;">
 		<div style="margin-left: 225px;">		
-			<button type="button" class="btn btn-info" style="width: 100px; height: 50px; font-size: medium;" id="ReqeustPayment">충전하기</button>
+			<button type="button" class="btn btn-info" style="width: 100px; height: 50px; font-size: medium;" id="RequestPayment">충전하기</button>
 		</div>
 		</form>
 	</div>
 </div>
+
 <div id="pnInput" style="display: none;">
 	<div style="margin-left: 230px; margin-top: 300px;">
 		<div  style="width: 550px;margin-bottom: 20px;">

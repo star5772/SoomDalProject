@@ -2,6 +2,8 @@ package com.icia.dal.controller;
 
 import java.security.Principal;
 
+import javax.inject.Inject;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,12 +18,13 @@ import com.icia.dal.service.PaymentService;
 @Controller
 @RequestMapping("/member")
 public class PaymentController {
-
+	@Inject
 	private PaymentService paymentService;
 	
 	@GetMapping("/payment/store")
-	public ModelAndView store() {
-		return new ModelAndView("main").addObject("viewName","payment/store.jsp").addObject("paymentList","payment/store.jpg");
+	public ModelAndView store(Principal principal) {
+		String username = principal.getName();
+		return new ModelAndView("main").addObject("viewName","payment/store.jsp").addObject("cash",paymentService.readToDalinCash(username));
 	}
 	@PostMapping("/payment/store")
 	public ResponseEntity<?> RequestPayment(RequestPayment rp,Principal principal) {
@@ -31,8 +34,10 @@ public class PaymentController {
 	
 	@PostMapping("/payment/contrast")
 	public ResponseEntity<?> ContrastPcode(String AuthCode,Principal principal) throws JobFailException {
+		System.out.println("컨트롤러 principal" + principal);
+		System.out.println("컨트롤러 AuthCode" + AuthCode);
 		String username = principal.getName();
-		if(paymentService.reqCashMember(AuthCode)==null) {
+		if(paymentService.reqCashMember(username)==null) {
 			throw new JobFailException();
 		}else {
 			paymentService.addCashToDalin(AuthCode,username);

@@ -14,7 +14,7 @@
 	<select id="findByPayment" resultType="RequestPayment">
 		select p_code pCode,p_money pMoney,d_mno dMno,f_no fNo,d_email dEmail
 		from requestpayment
-		where dEmail=#{dEmail} and rownum=1		
+		where d_Email=#{dEmail} and rownum=1		
 	</select>
 
 	<select id="findPaymentCode" resultType="string">
@@ -38,6 +38,44 @@
 	<select id="findToCash" resultType="int">
 		select p_money from requestPayment where p_code=#{pCode} and rownum=1
 	</select>
+	
+	<update id="addCashToDalin">
+		update dalin set d_cash=d_cash + #{dCash} where d_email=#{dEmail} and rownum=1
+	</update>
+	
+	<select id="findByDalinCash" resultType="int">
+		select d_cash dCash from dalin where d_email = #{dEmail} and rownum=1
+	</select>
+	
+	<!--                 여기부터  결제내역 페이지                                                  -->
+	<insert id="insertNowPayment">
+		insert into nowpayment(p_code,p_date,p_refund_date,p_refund_is_ok,d_email dEmail)
+		values(#{pCode},sysdate,7,1)
+	</insert>
+	
+	<select id="findByNowPaymentToAdmin" resultType="NowPayment">
+		select p_code pCode, p_date pDate, p_refund_date pRefundDate,p_refund_is_ok pRefundIsOk,d_email dEmail
+		from nowpayment
+	</select>
+	
+	<select id="findByNowPaymentToDalin">
+		select p_code pCode, p_date pDate, p_refund_date pRefundDate, p_refund_is_ok pRefundIsOk
+		from nowpayment
+		where d_email=#{dEmail}
+	</select>
+	
+	<update id="updatePaymentToDalin">
+		update nowpayment
+		<trim prefix="SET" suffixOverrides=",">
+			<if test="pRefundDate != null">p_refund_date = p_refund_date -1,</if>
+			<if test="pRefundIsOk != null">p_refund_is_ok = #{pRefundIsOk},</if>
+		</trim>
+		where p_code = #{pCode} and rownum=1
+	</update>
+	
+	<delete id="deleteToNowPayment">
+		delete from nowpayment
+	</delete>	
 </mapper>
 
 
