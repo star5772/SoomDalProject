@@ -26,55 +26,55 @@
 		<div class="card">
   			<img class="card-img-top" src="#" alt="Card image cap">
   			<div class="card-body">
-    			<a href="#" class="btn btn-primary">title1</a>
+    			<a href="/dal/field/list?detailFName=skateboard" class="btn btn-primary">skateboard</a>
   			</div>
 		</div>
 		<div class="card">
   			<img class="card-img-top" src="#" alt="Card image cap">
   			<div class="card-body">
-    			<a href="#" class="btn btn-primary">title2</a>
+    			<a href="/dal/field/list?detailFName=climming" class="btn btn-primary">climming</a>
   			</div>
 		</div>
 		<div class="card">
   			<img class="card-img-top" src="#" alt="Card image cap">
   			<div class="card-body">
-    			<a href="#" class="btn btn-primary">title3</a>
+    			<a href="/dal/field/list?detailFName=golf" class="btn btn-primary">golf</a>
   			</div>
 		</div>
 		<div class="card">
   			<img class="card-img-top" src="#" alt="Card image cap">
   			<div class="card-body">
-    			<a href="#" class="btn btn-primary">title4</a>
+    			<a href="/dal/field/list?detailFName=bowling" class="btn btn-primary">bowling</a>
   			</div>
 		</div>
 		<div class="card">
   			<img class="card-img-top" src="#" alt="Card image cap">
   			<div class="card-body">
-    			<a href="#" class="btn btn-primary">title5</a>
+    			<a href="/dal/field/list?detailFName=tabletennis" class="btn btn-primary">tabletennis</a>
   			</div>
 		</div>
 		<div class="card">
   			<img class="card-img-top" src="#" alt="Card image cap">
   			<div class="card-body">
-    			<a href="#" class="btn btn-primary">title6</a>
+    			<a href="/dal/field/list?detailFName=billiards" class="btn btn-primary">billiards</a>
   			</div>
 		</div>
 		<div class="card">
   			<img class="card-img-top" src="#" alt="Card image cap">
   			<div class="card-body">
-    			<a href="#" class="btn btn-primary">title7</a>
+    			<a href="/dal/field/list?detailFName=pilates" class="btn btn-primary">pilates</a>
   			</div>
 		</div>
 		<div class="card">
   			<img class="card-img-top" src="#" alt="Card image cap">
   			<div class="card-body">
-    			<a href="#" class="btn btn-primary">title8</a>
+    			<a href="/dal/field/list?detailFName=squash" class="btn btn-primary">squash</a>
   			</div>
 		</div>
 		<div class="card">
   			<img class="card-img-top" src="#" alt="Card image cap">
   			<div class="card-body">
-    			<a href="#" class="btn btn-primary">title9</a>
+    			<a href="/dal/field/list?detailFName=defense" class="btn btn-primary">defense</a>
   			</div>
 		</div>
 	</div>
