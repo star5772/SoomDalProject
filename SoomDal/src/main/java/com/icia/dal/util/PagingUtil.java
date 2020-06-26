@@ -1,6 +1,6 @@
 package com.icia.dal.util;
 
-import com.icia.dal.dto.PageToRequestPayment;
+import com.icia.dal.dto.Page;
 
 public class PagingUtil {
 	// 페이지당 글의 개수
@@ -9,7 +9,7 @@ public class PagingUtil {
 	private final static int COUNT_OF_PAGE_PER_BLOCK = 5;
 	
 	// 일반글 페이징 또는 히트글 페이징
-	public static PageToRequestPayment getPage(int pageno, int countOfBoard) {
+	public static Page getPage(int pageno, int countOfBoard) {
 		
 		System.out.println(countOfBoard);
 		// 페이지의 개수 계산
@@ -43,7 +43,7 @@ public class PagingUtil {
 		boolean isPrev = blockNo>0? true : false;
 		boolean isNext = endPage != countOfPage? true: false; 
 		
-		return PageToRequestPayment.builder().startPage(startPage).endPage(endPage)
+		return Page.builder().startPage(startPage).endPage(endPage)
 			.startRowNum(startRowNum).endRowNum(endRowNum)
 			.isPrev(isPrev).isNext(isNext).pageno(pageno).build();
 	}

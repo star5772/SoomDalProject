@@ -20,18 +20,7 @@ public class AdminService {
 	@Inject
 	private ModelMapper modelMapper;
 	
-<<<<<<< HEAD
-	/*
-	 * public AdminPage list(int pageno, String jName) { int countOfBoard =
-	 * adminDao.countToJeja(); AdminPage adPage = PagingUtil.getPage(pageno,
-	 * countOfBoard); int srn = adPage.getStartRowNum(); int ern =
-	 * adPage.getEndRowNum(); List<Jeja> adminList = adminDao.findAllToJeja(srn,
-	 * ern); List<AdminDto.JejaForList> dtoList = new
-	 * ArrayList<AdminDto.JejaForList>(); for(Jeja jeja:JejaForList) {
-	 * 
-	 * } }
-	 */
-=======
+
 	public AdminPage adminPage(int pageno) {
 		int countOfBoard = adminDao.countToJeja();
 		AdminPage adPage = AdminPagingUtil.getPage(pageno, countOfBoard);
@@ -47,5 +36,4 @@ public class AdminService {
 		adPage.setList(dtoList);
 		return adPage;
 	}
->>>>>>> branch 'master' of https://github.com/star5772/SoomDalProject
 }
