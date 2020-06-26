@@ -1,5 +1,7 @@
 package com.icia.dal.dto;
 
+import java.time.*;
+
 import lombok.*;
 import lombok.experimental.*;
 
@@ -24,4 +26,6 @@ public class JejaDto {
 		private String newPassword;
 		private String newTel;
 	}
+	
+	
 }

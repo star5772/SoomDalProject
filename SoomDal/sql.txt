@@ -327,7 +327,11 @@ CREATE TABLE Review (
    R_SAJIN_CNT NUMBER(1), /* 첨부사진 수 */
    R_WRITER NVARCHAR2(20), /* 작성자  */
    S_NO NUMBER(6), /* 사진 번호 */
+<<<<<<< HEAD
    constraint pk_review primary key(r_no)
+=======
+   D_MNO NUMBER(6) /*달인 회원번호*/
+>>>>>>> branch 'master' of https://github.com/star5772/SoomDalProject
 );
 /*리뷰 첨부파일*/
 

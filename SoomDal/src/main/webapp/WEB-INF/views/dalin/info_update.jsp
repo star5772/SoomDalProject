@@ -5,16 +5,37 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script>
+$(function() {
+	var idx = 0;
+	$("#add").on("click", function(){
+		if(idx>3) {
+			alert("첨부파일은 5개 까지입니다");
+			return false;
+		}
+		var $input = $("<input>").attr("type","file").attr("class", "form-control-file")
+		.attr("name","attachments[" + idx + "]");
+		idx++;
+		$input.appendTo($("#attachment_div"))
+	});
+	$("#update").on("click", function() {
+		alert("수정되었습니다");
+		});
+	$("#dal_profile").on("click", function() {
+		
+	});
+});
+</script>
 <style>
 h2 {
 	font-weight: bold;
 }
 
-h5 {
+h4 {
 	font-weight: bold;
 }
 
-#dalinRead p {
+#dalinUpdate p {
 	font-weight: lighter;
 	font-size: 14px;
 }
@@ -24,19 +45,19 @@ hr {
 	color: #F3F3F3;
 }
 
-#dalinRead {
+#dalinUpdate {
 	height: 600px;
 	width: 800px;
 	margin: 0 auto;
 }
 
-#dalinRead #review #rWriter p {
+#dalinUpdate #review #rWriter p {
 	font-size: 16px;
 	font-weight: bold;
 	display: inline-block;
 }
 
-#dalinRead #review #rWriter {
+#dalinUpdate #review #rWriter {
 	display: inline-block;
 }
 
@@ -54,7 +75,7 @@ hr {
 	margin-top: 100px;
 }
 
-#dalinRead #dProfile p {
+#dalinUpdate #dProfile p {
 	margin-left: 200px;
 	font-size: 28px;
 	font-weight: bold;
@@ -100,6 +121,8 @@ input {
 	width: 500px;
 	height: 30px;
 	font-size: 14px;
+	border: 0;
+	
 }
 </style>
 </head>
@@ -107,9 +130,11 @@ input {
 	<form id="profileReadFrm" action="dalin/info_update" method="get"></form>
 	<div id="dalinUpdate">
 		<div id="dProfile">
-			<div
-				style="border-radius: 50%; height: 200px; width: 200px; background-color: gray;">
+			<div style="border-radius: 50%; height: 200px; width: 200px; background-color: gray;">
 				<p id="dName">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${dalin.dName}김희은</p>
+			</div>
+			<div style="margin-left: 160px;">
+				<button type="button" style="border: 0px white; background-color: white;" id="dal_profile"><i class="fas fa-camera fa-2x"></i></button><img id="show_profile" src="${dalin.dProfile }">
 			</div>
 		</div>
 		<div>
@@ -200,12 +225,9 @@ input {
 					<br> <br>
 				</div>
 				<div>
-					<img id="show_profile" height="200px;" src="${user.profile }">
-				</div>
-				<div>
-					<input type="file" name="sajin" id="sajin"> <input
-						type="hidden" name="_csrf" value="${_csrf.token}">
-					<button type="button" id="add" >첨부파일 추가</button>
+					<input type="file" name="sajin" id="sajin" style="display: inline-block; width: 430px;"> 
+					<input type="hidden" name="_csrf" value="${_csrf.token}">
+					<button type="button" id="add">첨부파일 추가</button>
 					<div id="attachment_div"></div>
 					<div>
 						<div id="dAttachment1">
@@ -229,92 +251,54 @@ input {
 				</div>
 				<div>
 					<div>
-						<h2>리뷰</h2>
-						<br>
-					</div>
-					<div>
-						<h2>별점평균</h2>
-					</div>
-				</div>
-			</div>
-			<div>
-				<div>
-					<hr>
-				</div>
-				<div>
-					<div id="review">
-						<div id="rWriter">
-							<p>${review.rWriter}김희은</p>
-						</div>
-						<div id="rScore">
-							<p>${review.rScore}별</p>
-						</div>
-						<div id="rDate">
-							<p>${review.rDate}2020.06.18</p>
-						</div>
-					</div>
-					<div id="rContent">
-						<p>${review.rContent}리뷰내용</p>
-					</div>
-				</div>
-			</div>
-			<div>
-				<div>
-					<hr>
-				</div>
-				<div>
-					<div>
 						<h2>질문&amp;답변</h2>
 						<br> <br>
 					</div>
 					<div>
 						<div>
 							<div>
-								<h5>
-									Q. <input type="text" name="q1" id="q1"
-										value="서비스가 시작되기 전 어떤 절차로 진행하나요?">
-								</h5>
+								<h4>
+									Q. 서비스가 시작되기 전 어떤 절차로 진행하나요?
+								</h4>
 							</div>
 							<div>
-								<p>&nbsp;&nbsp;&nbsp;&nbsp;${reqQuestion.dQContent}답변</p>
+								<input type="text" name="q1" id="q1" value="${reqQuestion.dQContent}답변">
 							</div>
-						</div>
+						</div><br>
 						<div>
 							<div>
-								<h5>
-									Q. <input type="text" name="q2" id="q2"
-										value="서비스가 시작되기 전 어떤 절차로 진행하나요?">
-								</h5>
+								<h4>
+									Q. 서비스가 시작되기 전 어떤 절차로 진행하나요?
+								</h4>
 							</div>
 							<div>
-								<p>&nbsp;&nbsp;&nbsp;&nbsp;${reqQuestion.dQContent}답변</p>
+								<input type="text" name="q2" id="q2" value="${reqQuestion.dQContent}답변">
 							</div>
-						</div>
+						</div><br>
 						<div>
 							<div>
-								<h5>
-									Q. <input type="text" name="q3" id="q3"
-										value="서비스가 시작되기 전 어떤 절차로 진행하나요?">
-								</h5>
+								<h4>
+									Q. 서비스가 시작되기 전 어떤 절차로 진행하나요?
+								</h4>
 							</div>
 							<div>
-								<p>&nbsp;&nbsp;&nbsp;&nbsp;${reqQuestion.dQContent}답변</p>
+								<input type="text" name="q2" id="q2" value="${reqQuestion.dQContent}답변">
 							</div>
-						</div>
+						</div><br>
 						<div>
 							<div>
-								<h5>
-									Q. <input type="text" name="q4" id="q4"
-										value="서비스가 시작되기 전 어떤 절차로 진행하나요?">
-								</h5>
+								<h4>
+									Q. 서비스가 시작되기 전 어떤 절차로 진행하나요?
+								</h4>
 							</div>
 							<div>
-								<p>&nbsp;&nbsp;&nbsp;&nbsp;${reqQuestion.dQContent}답변</p>
+								<input type="text" name="q2" id="q2" value="${reqQuestion.dQContent}답변">
 							</div>
-						</div>
+						</div><br>
 					</div>
 				</div>
 			</div>
 		</div>
+	</div>
 </body>
 </html>

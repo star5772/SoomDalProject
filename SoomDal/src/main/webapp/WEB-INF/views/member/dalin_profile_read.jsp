@@ -12,7 +12,7 @@
 h2{
 	font-weight: bold;
 }
-h5{
+h4{
 	font-weight: bold;
 }
 #dalinRead p{
@@ -232,7 +232,7 @@ hr{
 				<div>
 					<div>
 						<div>
-							<h5>Q. 서비스가 시작되기 전 어떤 절차로 진행하나요?</h5>
+							<h4>Q. 서비스가 시작되기 전 어떤 절차로 진행하나요?</h4>
 						</div>
 						<div>
 							<p>&nbsp;&nbsp;&nbsp;&nbsp;${reqQuestion.dQContent}답변</p>
@@ -240,7 +240,7 @@ hr{
 					</div>
 					<div>
 						<div>
-							<h5>Q. 서비스가 시작되기 전 어떤 절차로 진행하나요?</h5>
+							<h4>Q. 서비스가 시작되기 전 어떤 절차로 진행하나요?</h4>
 						</div>
 						<div>
 							<p>&nbsp;&nbsp;&nbsp;&nbsp;${reqQuestion.dQContent}답변</p>
@@ -248,7 +248,7 @@ hr{
 					</div>
 					<div>
 						<div>
-							<h5>Q. 서비스가 시작되기 전 어떤 절차로 진행하나요?</h5>
+							<h4>Q. 서비스가 시작되기 전 어떤 절차로 진행하나요?</h4>
 						</div>
 						<div>
 							<p>&nbsp;&nbsp;&nbsp;&nbsp;${reqQuestion.dQContent}답변</p>
@@ -256,7 +256,7 @@ hr{
 					</div>
 					<div>
 						<div>
-							<h5>Q. 서비스가 시작되기 전 어떤 절차로 진행하나요?</h5>
+							<h4>Q. 서비스가 시작되기 전 어떤 절차로 진행하나요?</h4>
 						</div>
 						<div>
 							<p>&nbsp;&nbsp;&nbsp;&nbsp;${reqQuestion.dQContent}답변</p>
