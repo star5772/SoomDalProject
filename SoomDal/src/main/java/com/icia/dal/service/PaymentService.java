@@ -35,18 +35,25 @@ public class PaymentService {
 		rp.setDMno(dalin.getDMno());
 		rp.setFNo(dalin.getFNo());
 		rp.setDTel(dalin.getDTel());
+		rp.setDEmail(dalin.getDEmail());
 		// 충전요청한 금액만큼 보유 캐쉬 변경
 		return paymentDao.insertToPayment(rp);
 	}
 	
-	public RequestPayment reqCashMember(String pCode) {
-		return paymentDao.findByPayment(pCode);
+	public RequestPayment reqCashMember(String username) {
+		return paymentDao.findByPayment(username);
+	}
+	
+	public int readToDalinCash(String dEmail) {
+		return paymentDao.findByDalinCash(dEmail);
 	}
 	
 	public int addCashToDalin(String pCode,String username) {
+		System.out.println("서비스 pCode" + pCode);
+		System.out.println("서비스 username" + username);
 		int money = paymentDao.findToCash(pCode);
-		Dalin dalin = Dalin.builder().dEmail(username).dCash(money).build();
-		return dalDao.updateToDalin(dalin);
+		paymentDao.addCashToDalin(Dalin.builder().dEmail(username).dCash(money).build());
+		return paymentDao.deleteToPayment(username);
 	}
 	
 	// 캐쉬충전내역 페이징

@@ -36,7 +36,7 @@ public class DalinController {
 			throw new BindException(br);
 		dalService.join(dto);
 		ra.addFlashAttribute("msg","회원가입을 축하합니다");
-		return "redirect:/system/msg";
+		return "redirect:/member/system/msg";
 	}
 	
 	@GetMapping("/dalin/resign")
@@ -80,7 +80,7 @@ public class DalinController {
 		// 달인 분야선택 (달인 회원가입)
 		return new ModelAndView("main").addObject("viewName","dalin/field_select.jsp");
 	}
-	@GetMapping("/system/msg")
+	@GetMapping("/member/system/msg")
 	public ModelAndView msg() {
 		return new ModelAndView("main").addObject("viewName","system/msg.jsp");
 	}

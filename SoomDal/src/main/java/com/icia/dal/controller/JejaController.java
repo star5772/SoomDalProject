@@ -44,7 +44,7 @@ public class JejaController {
 			throw new BindException(br);
 		service.join(jeja);
 		ra.addFlashAttribute("msg","회원가입을 축하합니다");
-		return "redirect:/system/msg";
+		return "redirect:/member/system/msg";
 	}
 	
 	@GetMapping("/jeja/request_write")

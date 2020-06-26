@@ -30,14 +30,15 @@ public class SendSMSController {
 		String api_secret = "RM4ORTFUGYWR54QG9LURJVJFOX55R6TB";
 		Coolsms coolsms = new Coolsms(api_key, api_secret); // 메시지보내기 객체 생성
 		String key = reqPayment.getPCode(); // 인증키 생성
+		System.out.println(key);
 		
 		/*
 		 * Parameters 관련정보 : http://www.coolsms.co.kr/SDK_Java_API_Reference_ko#toc-0
 		 */
 		
 		HashMap<String, String> set = new HashMap<String, String>();
-		set.put("to", "01043887868"); // 수신번호
-		set.put("from", dTel ); // 발신번호
+		set.put("to", dTel); // 수신번호
+		set.put("from", "01043887868" ); // 발신번호
 		set.put("text", "숨달입니다. 인증번호는 [" + key + "] 입니다."); // 문자내용
 		set.put("type", "sms"); // 문자 타입
 
@@ -46,11 +47,6 @@ public class SendSMSController {
 			// 메시지 보내기 성공 및 전송결과 출력
 			System.out.println("성공 : " + result.get("status"));
 			System.out.println(result.get("status")); // 성공여부
-			System.out.println(result.get("group_id")); // 그룹아이디
-			System.out.println(result.get("result_code")); // 결과코드
-			System.out.println(result.get("result_message")); // 결과 메시지
-			System.out.println(result.get("success_count")); // 메시지아이디
-			System.out.println(result.get("error_count")); // 여러개 보낼시 오류난 메시지 수
 			//return "success";
 		} else {
 			// 메시지 보내기 실패
