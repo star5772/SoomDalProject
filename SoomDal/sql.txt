@@ -91,8 +91,9 @@ CREATE TABLE RepQuestion (
 CREATE TABLE NowPayment (
    P_CODE VARCHAR(8) NOT NULL, /* 결제 코드 */
    P_DATE DATE, /* 결제 날짜 */
-   P_REFUND_DATE DATE, /* 환불 가능일 */
+   P_REFUND_DATE number(1), /* 환불 가능일 */
    P_REFUND_IS_OK CHAR(1), /* 환불상태 */
+   d_email varchar2(50),
    constraint pk_nowpayment primary key(p_code)
 );
 
@@ -327,11 +328,7 @@ CREATE TABLE Review (
    R_SAJIN_CNT NUMBER(1), /* 첨부사진 수 */
    R_WRITER NVARCHAR2(20), /* 작성자  */
    S_NO NUMBER(6), /* 사진 번호 */
-<<<<<<< HEAD
    constraint pk_review primary key(r_no)
-=======
-   D_MNO NUMBER(6) /*달인 회원번호*/
->>>>>>> branch 'master' of https://github.com/star5772/SoomDalProject
 );
 /*리뷰 첨부파일*/
 
@@ -348,4 +345,11 @@ CREATE TABLE Authorities (
    AUTHORITY VARCHAR2(20) NOT NULL, /* 권한 */
    constraint pk_authorities primary key(username,authority)
 );
+select * from dalin;
+select * from requestpayment;
+commit;
 select * from tab;
+select d_mno dMno, d_name dName, d_email dEmail, d_password dPassword, d_tel dTel,d_cash dCash 
+,f_no fNo from dalin where d_email='star5772@naver.com' and rownum=1;
+delete from requestpayment where d_email = 'star5772@naver.com';
+

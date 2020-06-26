@@ -20,15 +20,14 @@ public class AdminService {
 	@Inject
 	private ModelMapper modelMapper;
 	
-	public AdminPage list(int pageno, String jName) {
-		int countOfBoard = adminDao.countToJeja();
-		AdminPage adPage = PagingUtil.getPage(pageno, countOfBoard);
-		int srn = adPage.getStartRowNum();
-		int ern = adPage.getEndRowNum();
-		List<Jeja> adminList = adminDao.findAllToJeja(srn, ern);
-		List<AdminDto.JejaForList> dtoList = new ArrayList<AdminDto.JejaForList>();
-		for(Jeja jeja:JejaForList) {
-			
-		}
-	}
+	/*
+	 * public AdminPage list(int pageno, String jName) { int countOfBoard =
+	 * adminDao.countToJeja(); AdminPage adPage = PagingUtil.getPage(pageno,
+	 * countOfBoard); int srn = adPage.getStartRowNum(); int ern =
+	 * adPage.getEndRowNum(); List<Jeja> adminList = adminDao.findAllToJeja(srn,
+	 * ern); List<AdminDto.JejaForList> dtoList = new
+	 * ArrayList<AdminDto.JejaForList>(); for(Jeja jeja:JejaForList) {
+	 * 
+	 * } }
+	 */
 }

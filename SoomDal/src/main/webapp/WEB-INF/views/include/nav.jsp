@@ -6,6 +6,36 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script>
+$(function() {
+	$("#DalinLogout").on("click", function() {
+		var param = {
+			_csrf:"${_csrf.token}"
+		}
+		$.ajax({
+			url: "/dal/dalin/logout",
+			method: "post",
+			data: param,
+			success: function() {
+				location.href = "/dal";
+			}
+		})
+	});
+	$("#JejaLogout").on("click", function() {
+		var param = {
+			_csrf:"${_csrf.token}"
+		}
+		$.ajax({
+			url: "/dal/jeja/logout",
+			method: "post",
+			data: param,
+			success: function() {
+				location.href = "/dal";
+			}
+		})
+	});
+});
+</script>	
 <style>
 #login{ margin-left: 20px; }
 </style>
@@ -30,21 +60,20 @@
         		<li class="nav-item"><a class="nav-link" href="#"style="color:blue; font-size:medium;"><i class="fas fa-search">&nbsp;달인 찾기</i></a></li>
         		<li class="nav-item"><a class="nav-link" href="#"style="color:blue; font-size:medium;">내 정보</a></li>
         		<li class="nav-item"><a class="nav-link" href="#"style="color:blue; font-size:medium;">쪽지함</a></li>
-        		<li class="nav-item"><a class="nav-link" href="/dal/member/logout"style="color:blue; font-size:medium;">로그아웃</a></li>
+        		<li class="nav-item"><a class="nav-link" href="#"style="color:blue; font-size:medium;" id="JejaLogout">로그아웃</a></li>
         	</sec:authorize>
         	
         	<sec:authorize access="hasRole('ROLE_DALIN')">
         		<li class="nav-item"><a class="nav-link" href="#"style="color:blue; font-size:medium;">내정보</a></li>
         		<li class="nav-item"><a class="nav-link" href="#"style="color:blue; font-size:medium;">쪽지함</a></li>
-        		<li class="nav-item"><a class="nav-link" href="#"style="color:blue; font-size:medium;">로그아웃</a></li>
 				<li class="nav-item dropdown">
 					<a class="nav-link dropdown-toggle" href="#" id="navbarDropdownPortfolio" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">OOO고객님</a>
 					<div>안녕하세요 OOO님</div> <!-- 나중에 작업 -->
 					<div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownPortfolio">
 					<a class="dropdown-item" href="#"style="color:blue; font-size:medium;">프로필 관리</a>
 					<a class="dropdown-item" href="#"style="color:blue; font-size:medium;">마이페이지</a>
+					<a class="dropdown-item" href="#"style="color:blue; font-size:medium;" id="DalinLogout">로그아웃</a>
 					</div>
-					<a class="dropdown-item" href="#"style="color:blue; font-size:medium;">로그아웃</a>
 				</li>
         	</sec:authorize>
         	

@@ -1,6 +1,7 @@
 package com.icia.dal.service;
 
-import java.security.Principal;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,11 +13,12 @@ import org.springframework.stereotype.Service;
 
 import com.icia.dal.dao.DalinDao;
 import com.icia.dal.dao.PaymentDao;
-import com.icia.dal.dto.PageToRequestPayment;
-import com.icia.dal.dto.RequestPaymentDto;
+import com.icia.dal.dto.NowPaymentDto;
+import com.icia.dal.dto.PageToNowPayment;
 import com.icia.dal.entity.Dalin;
+import com.icia.dal.entity.NowPayment;
 import com.icia.dal.entity.RequestPayment;
-import com.icia.dal.util.PagingUtil;
+import com.icia.dal.util.PaymentPagingUtil;
 
 @Service
 public class PaymentService {
@@ -49,30 +51,50 @@ public class PaymentService {
 	}
 	
 	public int addCashToDalin(String pCode,String username) {
-		System.out.println("서비스 pCode" + pCode);
-		System.out.println("서비스 username" + username);
 		int money = paymentDao.findToCash(pCode);
 		paymentDao.addCashToDalin(Dalin.builder().dEmail(username).dCash(money).build());
+		// 결제내역 출력을위한 결제내역 입력.
+		paymentDao.insertToNowPayment(NowPayment.builder().dEmail(username).pCode(pCode).pDate(LocalDateTime.now()).pMoney(money).build());
 		return paymentDao.deleteToPayment(username);
 	}
 	
-	// 캐쉬충전내역 페이징
-	public PageToRequestPayment reqPayment(int pageno) {
-		int countOfBoard = paymentDao.paymentCount();
-		PageToRequestPayment page = PagingUtil.getPage(pageno, countOfBoard);
+	// 관리자 캐쉬충전내역 페이징
+	public PageToNowPayment reqPayment(int pageno) {
+		int countOfBoard = paymentDao.countToNowPayment();
+		PageToNowPayment page = PaymentPagingUtil.getPage(pageno, countOfBoard);
 		int srn = page.getStartRowNum();
 		int ern = page.getEndRowNum();
-		List<RequestPayment> rpList = null;
-		rpList = paymentDao.findAllByPayment(srn, ern);
+		List<NowPayment> npList = null;
+		npList = paymentDao.findByNowPaymentToAdmin(srn, ern);
 		
-		List<RequestPaymentDto.DtoForListToReuqestPayment> list = new ArrayList<>();
-		for(RequestPayment rp:rpList) {
-			RequestPaymentDto.DtoForListToReuqestPayment dto = modelMapper.map(rp, RequestPaymentDto.DtoForListToReuqestPayment.class);
-			String money = dto.getPMoneyStr() + "원";
-			dto.setPMoneyStr(money);
+		List<NowPaymentDto.DtoForListToNowPayment> list = new ArrayList<>();
+		for(NowPayment np:npList) {
+			NowPaymentDto.DtoForListToNowPayment dto = modelMapper.map(np, NowPaymentDto.DtoForListToNowPayment.class);
+			String str = np.getPDate().format(DateTimeFormatter.ofPattern("yyyy년MM월dd일 hh시 mm분"));
+			dto.setPDateStr(str);
+			list.add(dto);
 		}
 		page.setList(list);
 		return page;
 	}
 	
+	// 달인 캐쉬충전내역 페이징
+	public PageToNowPayment reqPaymentToDalin(int pageno,String username) {
+		int countOfBoard = paymentDao.countToNowPayment();
+		PageToNowPayment page = PaymentPagingUtil.getPage(pageno, countOfBoard);
+		int srn = page.getStartRowNum();
+		int ern = page.getEndRowNum();
+		List<NowPayment> npList = null;
+		npList = paymentDao.findByNowPaymentToDalin(srn, ern,username);
+		
+		List<NowPaymentDto.DtoForListToNowPayment> list = new ArrayList<>();
+		for(NowPayment np:npList) {
+			NowPaymentDto.DtoForListToNowPayment dto = modelMapper.map(np, NowPaymentDto.DtoForListToNowPayment.class);
+			String str = np.getPDate().format(DateTimeFormatter.ofPattern("yyyy년MM월dd일 hh시 mm분"));
+			dto.setPDateStr(str);
+			list.add(dto);
+		}
+		page.setList(list);
+		return page;
+	}
 }
