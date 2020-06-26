@@ -31,7 +31,24 @@
 	<![CDATA[
 	select * from
 		(select rownum as rnum, rb.* from
-			(select /*+ index_desc(requestboard pk_requestboard) */ rb_no, rb_title, rb_write_date, rb_writer, rb_read_cnt, rb_report_cnt) rb
+			(select /*+ index_desc(requestboard pk_requestboard) */ rb_no, rb_title, rb_write_date, rb_writer, rb_read_cnt, rb_is_notice from requestboard) rb
+		where rownum<=#{endRowNum})
+	where rnum>=#{startRowNum}
+	]]>
+	</select>
+	
+	<select id="RequestBoardToCount" resultType="int">
+		select count(*) from RequestBoard
+		<where>
+			<if test="rbWriter!=null">and rb_writer=#{rbWriter}</if>
+		</where>
+	</select>
+	
+	<select id="findAllByRbWriter" resultType="RequestBoard">
+	<![CDATA[
+	select * from
+		(select rownum as rnum, rb.* from
+			(select /*+ index_desc(requestboard pk_requestboard) */  rb_no, rb_title, rb_write_date, rb_writer, rb_read_cnt, rb_is_notice from requestboard where rb_writer=#{rbWriter}) rb
 		where rownum<=#{endRowNum})
 	where rnum>=#{startRowNum}
 	]]>

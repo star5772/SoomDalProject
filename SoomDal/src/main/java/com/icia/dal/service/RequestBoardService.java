@@ -2,6 +2,7 @@ package com.icia.dal.service;
 
 import java.time.*;
 import java.time.format.*;
+import java.util.*;
 
 import javax.inject.*;
 
@@ -11,6 +12,7 @@ import org.springframework.stereotype.*;
 import com.icia.dal.dao.*;
 import com.icia.dal.dto.*;
 import com.icia.dal.entity.*;
+import com.icia.dal.util.*;
 
 @Service
 public class RequestBoardService {
@@ -36,5 +38,25 @@ public class RequestBoardService {
 		return reqBoard.getRbNo();
 	}
 	
-
+	public PageToRequestBoard list(int pageno, String rbWriter) {
+		int countOfBoard = reqDao.RequestBoardToCount(rbWriter);
+		PageToRequestBoard page = RequestBoardPagingUtil.getPage(pageno, countOfBoard);
+		int srn = page.getStartRowNum();
+		int ern = page.getEndRowNum();
+		
+		List<RequestBoard> boardList = null;
+		if(rbWriter!=null)
+			boardList = reqDao.findAllByRbWriter(srn, ern, rbWriter);
+		else
+			boardList = reqDao.findAll(srn, ern);
+		
+		List<RequestBoardDto.DtoForList> dtoList = new ArrayList<>();
+		for(RequestBoard board:boardList) {
+			RequestBoardDto.DtoForList dto = modelMapper.map(board, RequestBoardDto.DtoForList.class);
+			dto.setRbWriteDateStr(board.getRbWriteDate().format(DateTimeFormatter.ofPattern("yyyy년 MM월 dd일")));
+			dtoList.add(dto);
+		}
+		page.setList(dtoList);
+		return page;
+	}
 }
