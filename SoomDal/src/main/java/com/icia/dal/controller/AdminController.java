@@ -11,4 +11,12 @@ public class AdminController {
 	public ModelAndView adminLogin() {
 		return new ModelAndView("main").addObject("viewName","admin/adminLogin.jsp");
 	}
+	
+	@GetMapping("/admin/member_manage")
+	public ModelAndView adminManage() {
+		// 관리자 회원관리탭 - 제자 and 달인 리스트 정보 필요
+		return new ModelAndView("main").addObject("viewName","admin/member_manage.jsp");
+	}
+	
+	
 }

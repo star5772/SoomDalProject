@@ -1,24 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="adminMapper">
-
+	
+	
 	<!-- 제자회원 목록출력(jeja) : 이름, 아이디, 전화번호, 신고당한횟수, 정지여부 -->
 	<select id="findAllToJeja" resultType="jeja">
-		select j_mno jMno, j_email jEmail, j_name jName, j_tel jTel, j_accusation jAccusation, enabled
-		from jeja
+		<![CDATA[
+			select * from
+				(select j.*,rownum as rnum from
+					(select /*+ index_desc(jeja jeja_pk_j_mno)*/j_mno jMno, j_email jEmail, j_name jName, j_accusation_cnt jAccusationCnt, j_joindate jJoinDate from jeja where j_mno=#{jMno})j
+					where rownum<=#{endRowNum})
+				where rnum>=#{startRowNum}
+		]]>
 	</select>
 	
 	<!-- 달인회원 목록 출력(dalin): 이름, 아이디, 전화번호, 분야, 활동지역, 정지여부  -->
 	<select id="findAllToDalin" resultType="dalin">
-		select  d_mno dMno, d_email dEmail, d_tel dTel, f_no fNo, d_area aArea, enabled
-		from dalin
+		<![CDATA[
+			select * from
+				(select d.*,rownum as rnum from
+					(select /*+ index_desc(dalin dalin_pk_d_mno)*/ f_no fNo, d_email dEmail, d_name dName, d_tel dTel, enabled, d_date dDate, d_area dArea  from dalin)d
+					where rownum<=#{endRowNum})
+				where rnum>=#{startRowNum}
+		]]>
 	</select>
 	
 	<!-- 신고게시물(ReportedBoard) 목록  : 불러오는거 (이네이블드가 false만 읽는거)-->
 	<select id="findAllToReportedBoard" resultType="RequestBoard">
-		select rb_No rbNo, rb_title rbTitle, rb_writer rbWriter, rb_report_cnt rbReportCnt, j_mno jMno
-		from requestBoard
-		where rb_enabled=0 
+		<![CDATA[
+			select * from
+				(select r.*,rownum as rnum from
+					(select /*+index_desc(reportedboard reportedboard_pk_rb_no)*/ rb_no rbNo, username from reportedboard)r
+					where rownum<=#{endRowNum})
+				where rnum>=#{startRowNum} 
+		]]>
 	</select>
 	
 	<!-- 신고회원 (제자) 목록 출력(아이디, 신고당한 횟수, 신고사유로 정렬) -->
@@ -42,7 +57,10 @@
 		where p_refund_code=#{pRefundCode} and rownum=1
 	</update>
 	
-
+	<select id="countToJeja" resultType="int">
+	select /*+ index_ffs(board board_pk_j_mno)*/count(*)
+	from jeja
+</select>
 	
 
 	

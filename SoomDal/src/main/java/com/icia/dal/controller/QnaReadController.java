@@ -21,13 +21,13 @@ public class QnaReadController {
 	public ModelAndView read(int qNo, Principal principal) throws AccessExeption {
 		String username = principal.getName();
 		// 글을 찾아와서 그글이 비밀글이면
-		if(qnaBoardService.read(qNo).isQIsSecret()==true) {
-			if(qnaBoardService.read(qNo).getQWriter().equals(principal.getName())==true)
-				return new ModelAndView("main").addObject("viewName", "qnaBoard/read.jsp").addObject("qnaRead", qnaBoardService.read(qNo));
+		if(qnaBoardService.read(qNo).isSecret()==true) {
+			if(qnaBoardService.read(qNo).getWriter().equals(principal.getName())==true)
+				return new ModelAndView("main").addObject("viewName", "qnaBoard/read.jsp").addObject("read", qnaBoardService.read(qNo));
 			else
 				throw new AccessExeption();
 		}else
-			return new ModelAndView("main").addObject("viewName", "qnaBoard/read.jsp").addObject("qnaRead", qnaBoardService.read(qNo));
+			return new ModelAndView("main").addObject("viewName", "qnaBoard/read.jsp").addObject("read", qnaBoardService.read(qNo));
 	}
 	
 	
@@ -36,9 +36,10 @@ public class QnaReadController {
 		return new ModelAndView("main").addObject("viewName","qnaBoard/write.jsp");
 	}
 	@PostMapping("/qnaBoard/write")
-	public String write(QnaBoard qnaBoard) {
-		qnaBoardService.write(qnaBoard);
-		return "redirect:/dal/qnaBoard/list";
+	public String write(QnaBoard qnaBoard ,Principal principal) {
+		String username = principal.getName();
+		qnaBoardService.write(qnaBoard,username);
+		return "redirect:/dal/member/qnaBoard/list";
 				
 	}
 }

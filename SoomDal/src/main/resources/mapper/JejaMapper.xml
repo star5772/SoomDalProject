@@ -42,4 +42,6 @@
 	<select id="findById" resultType="jeja">
 		select J_EMAIL jEmail,J_PASSWORD jPassword,J_NAME jName,J_TEL jTel,ENABLED from jeja where J_EMAIL=#{jEmail} and rownum=1
 	</select>
+	
+	
 </mapper>

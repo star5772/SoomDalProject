@@ -29,29 +29,28 @@ width: 80px; height: 35px;  background-color: #ffc968; color: white; font-size: 
 </style>
 </head>
 <body>
-<%-- ${qnaBoard } --%>
+${read}
 	<div id="center" >
-		<div
-			style="font-size: 43px; font-weight: bold; color: rgb(243, 156, 18); ">Q&A</div>
+		<div style="font-size: 43px; font-weight: bold; color: rgb(243, 156, 18); ">Q&A</div>
 		<div style="font-size: 19px;">궁금한것 무엇이든! 물어보세요!</div>
 		<hr>
 		<div>
 			<label style="background-color: #d3d3d3; display: inline-block; width: 130px; text-align: center; font-size: 17px;">제 목</label>
 			<!-- <div type="text" style="display:inline-block; color: rgb(94, 94, 94); width: 400px;font-size: 17px;"></div> -->
-			<a type="text" style="display:inline-block; color: rgb(94, 94, 94); width: 400px;font-size: 17px;">행님덜! 인사 오지게 박습니다.</a>
+			<a type="text" style="display:inline-block; color: rgb(94, 94, 94); width: 400px;font-size: 17px;">${read.title}</a>
 			
-			<label style="background-color: #d3d3d3; display: inline-block; width: 130px; text-align: center; font-size: 17px;">작성일</label>
+			<label style="background-color: #d3d3d3; display: inline-block; width: 100px; text-align: center; font-size: 17px;">작성일</label>
 			<!-- <div type="text" style="display:inline-block; color: rgb(94, 94, 94); width: 100px;font-size: 17px; text-align: center;"></div> -->
-			<a type="text" style="display:inline-block; color: rgb(94, 94, 94); width: 120px;font-size: 17px; text-align: center;">2020-06-24</a>
+			<a type="text" style="display:inline-block; color: rgb(94, 94, 94); width: 100px;font-size: 17px; text-align: center;">${read.writeDateStr}</a>
 			
-			<label style="background-color: #d3d3d3; display: inline-block; width: 130px; text-align: center; font-size: 17px;">작성자</label>
+			<label style="background-color: #d3d3d3; display: inline-block; width: 100px; text-align: center; font-size: 17px;">작성자</label>
 			<!-- <div type="text" style="display:inline-block; color: rgb(94, 94, 94); width: 100px;font-size: 17px; text-align: center;"></div> -->
-			<a type="text" style="display:inline-block; color: rgb(94, 94, 94); width: 100px;font-size: 17px; text-align: center;">이은지</a>
+			<a type="text" style="display:inline-block; color: rgb(94, 94, 94); width: 130px;font-size: 17px; text-align: center;">${read.writer }</a>
 			
 		</div>
 		<hr>
 		<div>
-			<textarea rows="20" cols="128"  style="background-color:white; font-size: 17px; overflow: scroll;" disabled="disabled">이런게 저런게 궁금해요
+			<textarea rows="20" cols="128"  style="background-color:white; font-size: 17px; overflow: scroll;" disabled="disabled">${read.content}
 			</textarea>
 		</div>
 		<hr>

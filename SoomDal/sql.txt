@@ -622,7 +622,8 @@ CREATE TABLE Review (
    R_SCORE NUMBER(1), /* 별점 */
    R_SAJIN_CNT NUMBER(1), /* 첨부사진 수 */
    R_WRITER NVARCHAR2(20), /* 작성자  */
-   S_NO NUMBER(6) /* 사진 번호 */
+   S_NO NUMBER(6), /* 사진 번호 */
+   D_MNO NUMBER(6) /*달인 회원번호*/
 );
 
 ALTER TABLE Review
