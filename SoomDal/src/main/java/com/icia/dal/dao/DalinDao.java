@@ -1,5 +1,7 @@
 package com.icia.dal.dao;
 
+import java.util.*;
+
 import javax.inject.*;
 
 import org.mybatis.spring.*;
@@ -42,5 +44,16 @@ public class DalinDao {
 	
 	public int minusCash(int dCash) {
 		return tpl.update("dalinMapper.minusCash",dCash);
+	}
+
+	public int countOfFieldDalin(String detailFName) {
+		return tpl.selectOne("dalinMapper.countOfFieldDalin",detailFName);
+	}
+
+	public List<Dalin> findDalinByDetailFName(int startRowNum, int endRowNum) {
+		Map<String,Integer> map = new HashMap<String, Integer>();
+		map.put("startRowNum", startRowNum);
+		map.put("endRowNum", endRowNum);
+		return tpl.selectList("dalinMapper.findDalinByDetailFName");
 	}
 }

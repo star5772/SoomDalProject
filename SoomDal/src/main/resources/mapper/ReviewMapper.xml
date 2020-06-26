@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="reviewMapper">
+
+	<!-- 리뷰 작성 -->
+	<insert id="insertToReview">
+		<selectKey keyColumn="rNo" order="BEFORE" resultType="int">
+			select review_seq.nextval from dual
+		</selectKey>
+		insert into review(r_no, r_date, r_content, r_score, r_sajin, r_writer, s_no, r_mno)
+		values(#{rNo}, sysdate, #{rContent}, #{rScore}, #{rSajin, JdbcType=VARCHAR}, #{rWriter}, #{sNo}, #{dMno} )
+	</insert>
+	
+	<!-- 읽기 -->
+	<select id="findAllReview" resultType="review">
+		<![CDATA[
+		select * from 
+			(select r.*, rownum rnum from 	
+				(select r_no rNo, r_date rDate, r_content rContent, r_score rScore, r_sajin rSajin, r_writer rWriter, s_no sNo, d_mno dMno from review where d_mno=#{dMno}) r
+			where rownum<=#{endRowNum}) 
+		where rnum>=#{startRowNum}
+		]]>
+	</select>
+	
+	<!-- 삭제-->
+	<delete id="deleteToReview">
+		delete 
+		from review
+		where r_no=#{rNo} and rownum=1
+	</delete>
+	
+	<!-- 리뷰점수 평균 -->
+	<select id="avgToReview" resultType="double">
+		select avg(r_score)
+		from review
+	</select>
+	
+
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+

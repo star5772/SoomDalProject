@@ -27,6 +27,7 @@
 		where RB_NO=#{rbNo} 
 	</select>
 	
+<<<<<<< HEAD
 	<select id="findAll" resultType="RequestBoard">
 	<![CDATA[
 	select * from
@@ -36,6 +37,8 @@
 	where rnum>=#{startRowNum}
 	]]>
 	</select>
+=======
+>>>>>>> branch 'master' of https://github.com/star5772/SoomDalProject
 	
 </mapper>
 

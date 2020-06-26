@@ -74,4 +74,11 @@ public class DalinDto {
 		private String dTel;
 		private Integer dCash;
 	}
+	
+	@Data
+	public static class DtoForFieldList {
+		private String dProfile;
+		private String dName;
+		private String dIntro;
+	}
 }
