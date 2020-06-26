@@ -18,4 +18,5 @@ public class Review {
 	private int rSajin;
 	private String rWriter;
 	private int sNo;
+	private int rMno;
 }

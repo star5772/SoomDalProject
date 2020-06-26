@@ -36,7 +36,7 @@ function newPwdCheck() {
 }
 
 function newPwdCheck2() {
-	$("#jPwd2_msg").text("");
+	$("#jNewPwd2_msg").text("");
 	var pwd1 = $("#jNewPassword").val();
 	var pwd2 = $("#jNewPassword2").val();
 	if(pwd1!==pwd2) {
@@ -90,7 +90,49 @@ function telCheck() {
 				url:"/dal/jeja/info_update",
 				method:"post",
 				data:params
-			}).done(()=>alert("변경성공")).fail(()=>alert("변경실패"));
+			}).done(()=>alert("변경성공")).done(()=>location.reload()).fail(()=>alert("변경실패"));
+		});
+		
+		// 비밀번호 변경하는 경우
+		$("#changePwd").on("click",function() {
+			var result1 = pwdCheck();
+			var result2 = newPwdCheck();
+			var result3 = newPwdCheck2();
+			var result = result1 && result2 && result3;
+			console.log(result);
+			if(result==false) {
+				alert("입력하신 사항을 다시 확인해주세요");
+				return false;
+			}
+			params={
+				_method:"put",
+				_csrf: "${_csrf.token}",
+				jPassword:$("#jPassword").val(),
+				newPassword:$("#jNewPassword").val()
+			}
+			$.ajax({
+				url:"/dal/jeja/info_update",
+				method:"post",
+				data:params
+			}).done(()=>alert("변경성공")).done(()=>location.reload()).fail(()=>alert("변경실패"));
+		});
+		
+		// 연락처 변경하는 경우
+		$("#changeTel").on("click",function() {
+			if(telCheck()==false) {
+				alert("입력하신 사항을 다시 확인해주세요");
+				return false;
+			}
+			params={
+				_method:"put",
+				_csrf: "${_csrf.token}",
+				newTel: $("#jTel").val()
+			}
+			$.ajax({
+				url:"/dal/jeja/info_update",
+				method:"post",
+				data:params
+			}).done(()=>alert("변경성공")).done(()=>location.reload()).fail(()=>alert("변경실패"));
 		});
 	});
 </script>
@@ -148,7 +190,7 @@ function telCheck() {
 					<span class="key" style="padding: 5px 5px;">현재 비밀번호 : <span id="jPwd_msg"></span></span><input type="password" id="jPassword" name="jPassword" class="form-control" maxlength="10"><br>
 					<span class="key" style="padding: 5px 5px;">새 비밀번호 : <span id="jNewPwd_msg"></span></span><input type="password" id="jNewPassword" name="jNewPassword" class="form-control" maxlength="10"><br>
 					<span class="key" style="padding: 5px 5px;">새 비밀번호 확인 : <span id="jNewPwd2_msg"></span></span><input type="password" id="jNewPassword2" class="form-control" maxlength="10"><br>
-	  				<button type="button" class="btn btn-info" id="changeEmail" style="width: 80px;">수정사항 저장</button>
+	  				<button type="button" class="btn btn-info" id="changePwd" style="width: 80px;">수정사항 저장</button>
 				</div>
 			</div>
 			<div class="info_wrap">

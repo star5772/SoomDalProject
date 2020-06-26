@@ -52,10 +52,32 @@ public class JejaService {
 		return dto;
 	}
 
-	public void update(DtoForJejaUpdate dto, String jEmail) {
+	public Boolean update(DtoForJejaUpdate dto, String jEmail) {
 		Jeja jeja = dao.findById(jEmail);
+		// 후에 예외처리 해야함
+		if(jeja==null)
+			throw new RuntimeException();
 		System.out.println("==========");
 		System.out.println(dto);
+		if(dto.getNewName()!=null) {
+			jeja.setJName(dto.getNewName());
+			dao.updateJeja(jeja);
+			return true;
+		}
+		if(dto.getJPassword()!=null && dto.getNewPassword()!=null) {
+			// 후에 예외처리 다시
+			if(pwdEncoder.matches(dto.getJPassword(), jeja.getJPassword())==false)
+				throw new RuntimeException();
+			jeja.setJPassword(pwdEncoder.encode(dto.getNewPassword()));
+			dao.updateJeja(jeja);
+			return true;
+		}
+		if(dto.getNewTel()!=null) {
+			jeja.setJTel(dto.getNewTel());
+			dao.updateJeja(jeja);
+			return true;
+		}
+		return false;
 	}
 
 }
