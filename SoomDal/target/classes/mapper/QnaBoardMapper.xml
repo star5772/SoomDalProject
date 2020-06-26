@@ -11,15 +11,22 @@
 		#{qWriter}, #{cNo}, 0,0)
 	</insert>
 	
+	<select id="count" resultType="int">
+		select count(*) from qnaBoard
+		<where>
+			<if test="qWriter != null">q_writer = #{qWriter}</if>
+		</where>
+	</select>
+	
 	<delete id="deleteToQnaBoard">
 		delete from QnaBoard where Q_NO=#{qNo} and rownum=1
 	</delete>
 	
-	<select id="findByQnaBoard" resultType="">
+	<select id="findByQnaBoard" resultType="QnaBoard">
 		select Q_NO qNo, Q_TITLE qTitle, Q_CONTENT qContent, Q_WRITER qWriter, Q_WRITE_DATE qWriteDate, C_NO cNo, Q_IS_SECRET qIsSecret, Q_IS_NOTICE qIsNotice from QnaBoard where Q_NO=#{qNo} and rownum=1
 	</select>
 	
-	<select id="findAll" resultType="list">
+	<select id="findAllByQnaBoard" resultType="QnaBoard">
  	<![CDATA[
  		select * from
  			select rownum as rnum, b.* from
@@ -29,8 +36,14 @@
 	]]> 
 	</select>
 	
-	<select id="findAllByWriter" resultType="list">
-		
+	<select id="findAllByWriter" resultType="QnaBoard">
+	 	<![CDATA[
+	 		select * from
+	 			select rownum as rnum, b.* from
+					(select /*+ index_desc(qnaboard qnaboard_pk_qno) */ Q_NO,Q_TITLE,Q_WRITER,Q_WRITE_DATE from qnaboard where q_writer=#{qWriter}) b
+				where rownum>=#{endRowNum})
+			where rnum>=#{startRowNum}
+		]]> 		
 	</select>
 </mapper>
 

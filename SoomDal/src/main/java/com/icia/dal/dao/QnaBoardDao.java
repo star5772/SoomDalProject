@@ -10,15 +10,13 @@ import com.icia.dal.entity.*;
 @Repository
 public interface QnaBoardDao {
 	// 문의게시판 list
-	public List<QnaBoard> findAll(@Param("startRowNum") int startRowNum,@Param("endRowNum")int endRowNum);
+	public List<QnaBoard> findAllByQnaBoard(@Param("startRowNum") int startRowNum,@Param("endRowNum")int endRowNum);
 	
 	// 문의게시판 글추가
 	public int insert(QnaBoard qnaBoard);
 	// 문의게시판 글 삭제
-	@Delete("delete from QnaBoard where Q_NO=#{qNo} and rownum=1")
-	public int delete(int qNo);
+	public int deleteToQnaBoard(int qNo);
 	
-	@Select("select Q_NO qNo, Q_TITLE qTitle, Q_CONTENT qContent, Q_WRITER qWriter, Q_WRITE_DATE qWriteDate, C_NO cNo, Q_IS_SECRET qIsSecret, Q_IS_NOTICE qIsNotice from QnaBoard where Q_NO=#{qNo} and rownum=1")
 	public QnaBoard findByQnaBoard(int qNo);
 
 	public List<QnaBoard> findAllByWriter(@Param("srn") int srn,@Param("ern") int ern, String qWriter);
