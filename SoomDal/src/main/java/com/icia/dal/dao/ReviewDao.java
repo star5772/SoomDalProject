@@ -1,27 +1,38 @@
 package com.icia.dal.dao;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
-import org.apache.ibatis.annotations.*;
+import javax.inject.Inject;
 
-import com.icia.dal.entity.*;
+import org.mybatis.spring.SqlSessionTemplate;
+import org.springframework.stereotype.Repository;
 
-public interface ReviewDao {
+import com.icia.dal.entity.Review;
+
+@Repository
+public class ReviewDao {
+
+	@Inject
+	private SqlSessionTemplate tpl;
 	
-	// 리뷰 작성
-	@Insert("insert into Review values(#{r.rNo}, sysdate, #{r.rContent}, 0, 0, #{r.rWriter}, #{r.sNo})")
-	public int insert(@Param("r")Review review);
+	public int insertToReview(Review review) {
+		return tpl.insert("reviewMapper.insertToReview", review);
+	}
 	
-	// 리뷰 리뷰번호로 삭제
-	@Delete("delete from Review where R_NO=#{rNo} and rownum=1")
-	public int delete(int rno);
+	public List<Review> findAllReview(int startRowNum, int endRowNum){
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("startRowNum", startRowNum);
+		map.put("endRowNum", endRowNum);
+		return tpl.selectList("reviewMapper.findAllReview",map);
+	}
 	
-	// 리뷰 글보기
-	@Select("select R_NO rNo, R_DATE rDate, R_CONTENT rContent, R_SCORE rScore, R_SAJIN_CNT rSajinCnt, R_WRITER rWriter, S_NO sNo from Review where R_NO=#{rNo}")
-	public List<Review> findAllByRno(int rNo);
+	public int deleteToReview(int rNo) {
+		return tpl.delete("reviewMapper.deleteToReview",rNo);
+	}
 	
-	// 리뷰 평균내기
-	
-	@Select("select avg(r_score ) from review where r_writer=#{rWriter}")
-	public int avgAllReview(String rWriter);
+	public Double avgToReview() {
+		return tpl.selectOne("reviewMapper.avgToReview");
+	}
 }
