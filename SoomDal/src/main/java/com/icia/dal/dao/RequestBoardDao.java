@@ -19,9 +19,10 @@ public interface RequestBoardDao {
 	
 	public RequestBoard findByRequestBoard(int rbNo);
 	
-	@Select("select")
-	public int RequestBoardToCount();
+	public int RequestBoardToCount(String rbWriter);
 	
-	public List<RequestBoard> findAll(@Param("startRowNum") int startRowNum,@Param("endRowNum") int endRowNum);
+	public List<RequestBoard> findAll(@Param("startRowNum") int startRowNum, @Param("endRowNum") int endRowNum);
+	
+	public List<RequestBoard> findAllByRbWriter(@Param("startRowNum") int startRowNum, @Param("endRowNum") int endRowNum, @Param("rbWriter") String rbWriter);
 	
 }

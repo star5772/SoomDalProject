@@ -1,16 +1,19 @@
 package com.icia.dal.service;
 
-import java.security.*;
-import java.time.format.*;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.List;
 
-import javax.inject.*;
+import javax.inject.Inject;
 
-import org.modelmapper.*;
-import org.springframework.stereotype.*;
+import org.modelmapper.ModelMapper;
+import org.springframework.stereotype.Service;
 
-import com.icia.dal.dao.*;
-import com.icia.dal.dto.*;
-import com.icia.dal.entity.*;
+import com.icia.dal.dao.QnaBoardDao;
+import com.icia.dal.dto.PageToQnaBoard;
+import com.icia.dal.dto.QnaDto;
+import com.icia.dal.entity.QnaBoard;
+import com.icia.dal.util.QnaBoardPagingUtil;
 
 @Service
 public class QnaBoardService {
@@ -37,5 +40,29 @@ public class QnaBoardService {
 		dto.setWriteDateStr(str).setCno(qnaBoard.getCNo()).setTitle(qnaBoard.getQTitle()).setContent(qnaBoard.getQContent()).setWriter(qnaBoard.getQWriter()).setQno(qnaBoard.getQNo()).setSecret(qnaBoard.isQIsSecret());
 		return dto;
 	}
+
+	public PageToQnaBoard list(int pageno, String qWriter) {
+		int counOfQnaBoard = qnaBoardDao.count(qWriter);
+		PageToQnaBoard page = QnaBoardPagingUtil.getPage(pageno, counOfQnaBoard);
+		int srn = page.getStartRowNum();
+		int ern = page.getEndRowNum();
+		
+		List<QnaBoard> qnaBoardList = null;
+		if(qWriter!=null)
+			qnaBoardList = qnaBoardDao.findAllByWriter(srn, ern, qWriter);
+		else
+			qnaBoardList = qnaBoardDao.findAll(srn,ern);
+		
+		List<QnaDto.DtoForQnaList> qnaList = new ArrayList<QnaDto.DtoForQnaList>();
+		for(QnaBoard qnaBoard:qnaBoardList) {
+			QnaDto.DtoForQnaList dto = modelMapper.map(qnaBoard, QnaDto.DtoForQnaList.class);
+			dto.setQWriteDateStr(qnaBoard.getQWriteDate().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
+			qnaList.add(dto);
+		}
+		page.setList(qnaList);
+		return page;
+	
+	}
+	
 	
 }

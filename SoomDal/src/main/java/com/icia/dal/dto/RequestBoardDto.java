@@ -34,4 +34,15 @@ public class RequestBoardDto {
 		private LocalDateTime rbWriteTime;
 	}
 	
+	@Data
+	@Accessors(chain=true)
+	public static class DtoForList {
+		private Integer rbNo;
+		private String rbTitle;
+		private String rbWriteDateStr;
+		private String rbWriter;
+		private Integer rbReadCnt;
+		private Boolean rbIsNotice;
+	}
+	
 }
