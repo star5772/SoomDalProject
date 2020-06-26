@@ -156,6 +156,7 @@ CREATE TABLE Dalin (
    R_NO NUMBER(5), /* 리뷰 번호 */
    P_ATTACHMENT_NO NUMBER(3), /* 프로필 첨부 파일 번호 */
    D_Q_NO NUMBER(1), /* 질문 번호 > 기본키 */
+   r_review_cnt number(7),
    constraint pk_dalin primary key(d_mno,f_no,d_email,detail_f_name),
    constraint fk_dalin FOREIGN key(f_no,detail_f_name)references DetailField(f_no,detail_f_name)
 );
@@ -317,7 +318,9 @@ CREATE TABLE ProfileAttachment (
    P_ATTACHMENT_NO NUMBER(3) NOT NULL, /* 프로필 첨부 파일 번호 */
    P_ORIGINAL_FILE_NAME NVARCHAR2(20), /* 원래파일이름 */
    P_SAVE_FILE_NAME NVARCHAR2(30), /* 저장용파일이름 */
+   p_attachment_cnt number(1), /* 프로필 사진 개수 */
    P_IS_OK CHAR(1), /* 사진파일여부 */
+   d_mno number(7),
    constraint pk_profileattachment primary key(p_attachment_no)
 );
 
@@ -331,6 +334,7 @@ CREATE TABLE Review (
    R_SAJIN_CNT NUMBER(1), /* 첨부사진 수 */
    R_WRITER NVARCHAR2(20), /* 작성자  */
    S_NO NUMBER(6), /* 사진 번호 */
+   d_mno number(7), /* 리뷰가 달린 달인 회원번호 */
    constraint pk_review primary key(r_no)
 );
 /*리뷰 첨부파일*/
