@@ -20,4 +20,15 @@ public class QnaDto {
 		private boolean secret;
 		
 	}
+	
+	@Data
+	@Accessors(chain=true)
+	public static class DtoForQnaList {
+		private int qNo;
+		private String qTitle;
+		private String qWriter;
+		private String qWriteDateStr;
+		private Boolean qIsSecret;
+		private Boolean qIsNotice;
+	}
 }

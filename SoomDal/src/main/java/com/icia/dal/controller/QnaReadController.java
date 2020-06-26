@@ -4,6 +4,7 @@ import java.security.*;
 
 import javax.inject.*;
 
+import org.springframework.lang.Nullable;
 import org.springframework.stereotype.*;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.*;
@@ -16,6 +17,12 @@ import com.icia.dal.service.*;
 public class QnaReadController {
 	@Inject
 	private QnaBoardService qnaBoardService;
+	
+	@GetMapping("/qnaBoard/list")
+	public ModelAndView list(@RequestParam(defaultValue = "1") int pageno,@Nullable String qWriter) {
+		return new ModelAndView("main").addObject("viewName", "qnaBoard/list.jsp").addObject("list",qnaBoardService.list(pageno,qWriter));
+	}
+	
 	
 	@GetMapping("/qnaBoard/read")
 	public ModelAndView read(int qNo, Principal principal) throws AccessExeption {
@@ -35,6 +42,7 @@ public class QnaReadController {
 	public ModelAndView wirte() {
 		return new ModelAndView("main").addObject("viewName","qnaBoard/write.jsp");
 	}
+	
 	@PostMapping("/qnaBoard/write")
 	public String write(QnaBoard qnaBoard ,Principal principal) {
 		String username = principal.getName();

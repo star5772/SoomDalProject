@@ -24,5 +24,9 @@ public class AdminController {
 		return new ModelAndView("main").addObject("viewName","admin/member_manage.jsp").addObject("jeja",adminService.adminPage(pageno));
 	}
 	
+	@GetMapping("/admin/report_manage")
+	public ModelAndView reportManage(@RequestParam(defaultValue = "1") int pageno) {
+		return new ModelAndView("main").addObject("viewName","admin/member_manage.jsp").addObject("report",adminService.reportedPage(pageno));
+	}
 	
 }

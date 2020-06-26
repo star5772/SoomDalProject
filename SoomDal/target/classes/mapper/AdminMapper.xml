@@ -30,7 +30,7 @@
 		<![CDATA[
 			select * from
 				(select r.*,rownum as rnum from
-					(select /*+index_desc(review review_pk_r_no)*/r_no rNo, r_date rDate, r_writer rWriter from review)r
+					(select /*+index_desc(review review_pk_r_no)*/r_no rNm, r_date rDate, r_writer rWriter from review)r
 					where rownum<=#{endRowNum})
 				where rnum>=#{startRowNum} 
 		]]>
