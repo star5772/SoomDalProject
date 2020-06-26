@@ -8,6 +8,7 @@
 <title>Insert title here</title>
 </head>
 <body>
+${jeja }
 	<div id="manage_title" style="display: inline-block; width: 250px; text-align: center; position: absolute; left: 40%">
 		<h1>회원 관리</h1>
 	</div>
@@ -44,53 +45,18 @@
 				<th>신고당한 횟수</th>
 				<th>블락 여부</th>
 			</tr>
-			<tr>
-				<td>정현석</td>
-				<td>aa@a.com</td>
-				<td>01050455610</td>
-				<td>5</td>
-				<td>true</td>
-			</tr>
-			<tr>
-				<td>정현석</td>
-				<td>aa@a.com</td>
-				<td>01050455610</td>
-				<td>5</td>
-				<td>true</td>
-			</tr>
-			<tr>
-				<td>정현석</td>
-				<td>aa@a.com</td>
-				<td>01050455610</td>
-				<td>5</td>
-				<td>true</td>
-			</tr>
-			<tr>
-				<td>정현석</td>
-				<td>aa@a.com</td>
-				<td>01050455610</td>
-				<td>5</td>
-				<td>true</td>
-			</tr>
-			<tr>
-				<td>정현석</td>
-				<td>aa@a.com</td>
-				<td>01050455610</td>
-				<td>5</td>
-				<td>true</td>
-			</tr>
-			<!-- 
-			if 써서 처리 하면 가능할듯
+		
+			<!--  
 			<c:forEach items="${jeja }" var="j">
 				<tr>
 					<td>${j.jName }</td>
 					<td>${j.jEmail }</td>
-					<td>${j.jTel }</td>
+					<td>${j.jMno }</td>
 					<td>${j.jAccusationCnt }</td>
 					<td>${j.enabled }</td>
 				</tr>
 			</c:forEach>
-			 -->
+			-->
 		</table>
 	</div>
 </div>
