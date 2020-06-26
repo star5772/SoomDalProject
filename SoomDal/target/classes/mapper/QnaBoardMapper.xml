@@ -10,15 +10,7 @@
 		insert into QnaBoard values(#{qNo}, #{qTitle}, #{qContent}, sysdate,
 		#{qWriter}, #{cNo}, 0,0)
 	</insert>
-	<!-- 문의게시판 수정 -->
-	<update id="QnaBoardUpdate">
-		update QnaBoard
-		<trim suffixOverrides="," prefix="SET">
-			<if test="qTitle!=null">Q_TITLE=#{qTitle},</if>
-			<if test="qContent!=null">Q_CONTENT=#{qContent},</if>
-		</trim>
-		where Q_NO=#{qNo} and rownum=1
-	</update>
+
 </mapper>
 
 

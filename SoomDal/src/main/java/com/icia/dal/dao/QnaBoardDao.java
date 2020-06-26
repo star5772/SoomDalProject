@@ -18,7 +18,7 @@ public interface QnaBoardDao {
 	@Delete("delete from QnaBoard where Q_NO=#{qNo} and rownum=1")
 	public int delete(int qNo);
 	
-	@Select("select Q_NO qNo, Q_TITLE qTitle, Q_CONTENT qContent, Q_WRITER qWriter, Q_WRITE_DATE qWriteDate, C_NO cNo, Q_IS_SECRET qIsSecret, Q_IS_NOTICE qIsNotice from QnaBoard where Q_NO=#{qNo}")
+	@Select("select Q_NO qNo, Q_TITLE qTitle, Q_CONTENT qContent, Q_WRITER qWriter, Q_WRITE_DATE qWriteDate, C_NO cNo, Q_IS_SECRET qIsSecret, Q_IS_NOTICE qIsNotice from QnaBoard where Q_NO=#{qNo} and rownum=1")
 	public QnaBoard findByQnaBoard(int qNo);
 	
 	
