@@ -19,19 +19,19 @@ public class ReviewDaoTest {
 	@Inject
 	private ReviewDao reviewDao;
 	
-	///@Test
+	//@Test
 	public void insert() {
 		Review rev = Review.builder().rNo(2).rContent("내용").rWriter("작성").sNo(2).build();
-		assertThat(reviewDao.insert(rev), is(2));
+		//assertThat(reviewDao.insert(rev), is(2));
 	}
 	
 	//@Test
 	public void findAll() {
-		System.out.println(reviewDao.findAllByRno(1));
+		//System.out.println(reviewDao.findAllByRno(1));
 	}
 	
 	//@Test
 	public void delete() {
-		assertThat(reviewDao.delete(1), is(1));
+		//assertThat(reviewDao.delete(1), is(1));
 	}
 }

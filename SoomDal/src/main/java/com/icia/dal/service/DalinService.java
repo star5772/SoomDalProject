@@ -72,25 +72,7 @@ public class DalinService {
 		dalDao.deleteToDalin(dEmail);
 	}
 	
-	public DalinDto.DtoForProfileToDalin profileRead(String dEmail, int rNo) {
-		Dalin dalin = dalDao.findByDalin(dEmail);
-		List<Review> review = reviewDao.findAllByRno(rNo);
-		
-		DalinDto.DtoForProfileToDalin dto = modelMapper.map(dalin, DalinDto.DtoForProfileToDalin.class);
-		ReviewDto.DtoForDalinProfileReviewToread reviewDto = modelMapper.map(review, ReviewDto.DtoForDalinProfileReviewToread.class);
-		// 모든 리뷰작성자한테 입력받은 rScore 평균내기
-		Double score = (double) reviewDao.avgAllReview(dEmail);
-		reviewDto.setRScoreAverage(score);
-		// 리뷰 날짜 변경하기
-		for(Review r : review) {
-			String str = r.getRDate().format(DateTimeFormatter.ofPattern("yyyy년 MM월 dd일"));
-			
-		}
-		
-		
-		
-		return dto;
-	}
+
 	
 	public void profileUpdate(DtoForUpdateToDalinProfile dto, MultipartFile sajin) throws IllegalStateException, IOException {
 		Dalin dalin = modelMapper.map(dto, Dalin.class);
