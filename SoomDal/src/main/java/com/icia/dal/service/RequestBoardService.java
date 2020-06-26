@@ -48,7 +48,7 @@ public class RequestBoardService {
 		if(rbWriter!=null)
 			boardList = reqDao.findAllByRbWriter(srn, ern, rbWriter);
 		else
-			boardList = reqDao.findAll(srn, ern);
+			boardList = reqDao.findAllByRequestBoard(srn, ern);
 		
 		List<RequestBoardDto.DtoForList> dtoList = new ArrayList<>();
 		for(RequestBoard board:boardList) {

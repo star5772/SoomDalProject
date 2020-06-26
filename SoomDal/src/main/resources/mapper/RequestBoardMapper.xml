@@ -27,7 +27,7 @@
 		where RB_NO=#{rbNo} 
 	</select>
 	
-	<select id="findAll" resultType="RequestBoard">
+	<select id="findAllByRequestBoard" resultType="RequestBoard">
 	<![CDATA[
 	select * from
 		(select rownum as rnum, rb.* from

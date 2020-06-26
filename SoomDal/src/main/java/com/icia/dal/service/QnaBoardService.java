@@ -29,7 +29,7 @@ public class QnaBoardService {
 	}
 	
 	public void delete(int qNo) {
-		qnaBoardDao.delete(qNo);
+		qnaBoardDao.deleteToQnaBoard(qNo);
 	}
 	
 	
@@ -51,7 +51,7 @@ public class QnaBoardService {
 		if(qWriter!=null)
 			qnaBoardList = qnaBoardDao.findAllByWriter(srn, ern, qWriter);
 		else
-			qnaBoardList = qnaBoardDao.findAll(srn,ern);
+			qnaBoardList = qnaBoardDao.findAllByQnaBoard(srn,ern);
 		
 		List<QnaDto.DtoForQnaList> qnaList = new ArrayList<QnaDto.DtoForQnaList>();
 		for(QnaBoard qnaBoard:qnaBoardList) {
