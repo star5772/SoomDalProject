@@ -64,14 +64,12 @@ $(function() {
         	</sec:authorize>
         	
         	<sec:authorize access="hasRole('ROLE_DALIN')">
-        		<li class="nav-item"><a class="nav-link" href="#"style="color:blue; font-size:medium;">내정보</a></li>
-        		<li class="nav-item"><a class="nav-link" href="#"style="color:blue; font-size:medium;">쪽지함</a></li>
-				<li class="nav-item dropdown">
-					<a class="nav-link dropdown-toggle" href="#" id="navbarDropdownPortfolio" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">OOO고객님</a>
-					<div>안녕하세요 OOO님</div> <!-- 나중에 작업 -->
+        		<li class="nav-item" style="width: 100px;"><a class="nav-link" href="#"style="color:blue; font-size:medium;">쪽지함</a></li>
+				<li class="nav-item dropdown" style="width: 100px;">
+					<a class="nav-link dropdown-toggle" href="#" id="navbarDropdownPortfolio" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >OOO고객님</a>
 					<div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownPortfolio">
 					<a class="dropdown-item" href="#"style="color:blue; font-size:medium;">프로필 관리</a>
-					<a class="dropdown-item" href="#"style="color:blue; font-size:medium;">마이페이지</a>
+					<a class="dropdown-item" href="/dal/dalin/my_info"style="color:blue; font-size:medium;">마이페이지</a>
 					<a class="dropdown-item" href="#"style="color:blue; font-size:medium;" id="DalinLogout">로그아웃</a>
 					</div>
 				</li>

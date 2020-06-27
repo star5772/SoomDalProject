@@ -122,15 +122,6 @@ CREATE TABLE JEJA (
    constraint pk_jeja primary key(j_mno)
 );
 
-/*세부분야*/
-
-CREATE TABLE DetailField (
-   F_NO VARCHAR2(10) NOT NULL, /* 분야 코드 */
-   DETAIL_F_NAME NVARCHAR2(20), /* 세부 분야 이름 */
-   DETAIL_F_SAJIN NVARCHAR2(70), /* 세부 분야 사진 */
-   constraint pk_detailfield primary key(f_no,detail_f_name)
-);
-
 
 /* 달인 회원 */
 
@@ -157,10 +148,18 @@ CREATE TABLE Dalin (
    P_ATTACHMENT_NO NUMBER(3), /* 프로필 첨부 파일 번호 */
    D_Q_NO NUMBER(1), /* 질문 번호 > 기본키 */
    r_review_cnt number(7),
-   constraint pk_dalin primary key(d_mno,f_no,d_email,detail_f_name),
-   constraint fk_dalin FOREIGN key(f_no,detail_f_name)references DetailField(f_no,detail_f_name)
+   constraint pk_dalin primary key(d_mno,f_no,d_email,detail_f_name)
 );
 
+
+/*세부분야*/
+
+CREATE TABLE DetailField (
+   F_NO VARCHAR2(10) NOT NULL, /* 분야 코드 */
+   DETAIL_F_NAME NVARCHAR2(20), /* 세부 분야 이름 */
+   DETAIL_F_SAJIN NVARCHAR2(70), /* 세부 분야 사진 */
+   constraint pk_detailfield primary key(f_no,detail_f_name)
+);
 
 /* 요청서 */
 
@@ -177,7 +176,7 @@ CREATE TABLE Request (
    R_WANT_TIME NVARCHAR2(10), /* 원하는 수업시간 */
    R_AGE NVARCHAR2(3), /* 연령 */
    R_GENDER CHAR(1), /* 성별 */
-   R_DALIN_ISOK CHAR(1), /* 달인 수락 상태 */
+   R_DALIN_IS_OK CHAR(1), /* 달인 수락 상태 */
    R_WANNABLE NVARCHAR2(100), /* 기타 문의 및 희망사항 */
    R_WANT_AREA NVARCHAR2(10), /* 희망 지역 */
    R_WRITE_DATE DATE, /* 작성 시간 */
@@ -278,13 +277,14 @@ CREATE TABLE Estimate (
    D_MNO NUMBER(7) NOT NULL, /* 달인 회원 번호 */
    F_NO VARCHAR2(10) NOT NULL, /* 분야 코드 */
    J_MNO NUMBER(7) NOT NULL, /* 제자 회원 번호 */
-   R_NUMBER NUMBER(6) NOT NULL, /* 요청서번호 */
+   R_NO NUMBER(6) NOT NULL, /* 요청서번호 */
    D_EMAIL varchar2(50) NOT NULL, /* 회원 id(email) */
    E_MONEY NUMBER(8), /* 견적금액 */
    E_CONTENT NVARCHAR2(500), /* 견적내용 */
    E_TEL_TYPE NVARCHAR2(20), /* 연락수단 */
-   J_ISOK CHAR(1), /* 수락 여부 */
+   J_IS_OK CHAR(1), /* 수락 여부 */
    E_CASH NUMBER(5), /* 필요 캐시 */
+   d_name nvarchar2(6), /* 달인 이름 */
    constraint pk_estimate primary key(e_no,d_mno)
 );
 
@@ -335,6 +335,7 @@ CREATE TABLE Review (
    R_WRITER NVARCHAR2(20), /* 작성자  */
    S_NO NUMBER(6), /* 사진 번호 */
    d_mno number(7), /* 리뷰가 달린 달인 회원번호 */
+   j_Auccusation_cnt number(6), /* 리뷰 신고당한 횟수 */
    constraint pk_review primary key(r_no)
 );
 /*리뷰 첨부파일*/
@@ -352,6 +353,14 @@ CREATE TABLE Authorities (
    AUTHORITY VARCHAR2(20) NOT NULL, /* 권한 */
    constraint pk_authorities primary key(username,authority)
 );
+/* 레슨내역 */
+create Table LESSONHISTORY (
+    a_complete_code varchar2(8),
+    D_MNO number(7),
+    J_MNO number(7),
+    L_START_DATE date,
+    constraint pk_LESSONHISTORY primary key(a_complete_code)
+)
 select * from tab;
 select * from nowpayment;
-
+select * from dalin;

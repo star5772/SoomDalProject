@@ -44,5 +44,9 @@
 		select J_EMAIL jEmail,J_PASSWORD jPassword,J_NAME jName,J_TEL jTel,ENABLED from jeja where J_EMAIL=#{jEmail} and rownum=1
 	</select>
 	
+	<!-- jMno로 제자찾기 (견적서,요청서 필요) -->
+	<select id="findByJejaToJMno" resultType="jeja">
+		select  J_EMAIL jEmail,J_PASSWORD jPassword,J_NAME jName,J_TEL jTel,ENABLED from jeja where J_MNO=#{jMno} and rownum=1
+	</select>
 	
 </mapper>

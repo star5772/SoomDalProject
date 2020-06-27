@@ -53,7 +53,7 @@
   </header>
   
   <!-- Navigation -->
-  <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-warning fixed-top">
+  <nav class="navbar fixed-top navbar-expand-md navbar-dark bg-warning fixed-top">
 	<jsp:include page="include/nav.jsp"/>
   </nav>
   
