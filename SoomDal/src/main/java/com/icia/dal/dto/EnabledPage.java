@@ -6,10 +6,9 @@ import lombok.*;
 
 @Data
 @Builder
-public class ReportedPage {
+public class EnabledPage {
 	private int startRowNum;
 	private int endRowNum;
-	private int jAccusationCnt;
 	
 	private int pageno;
 	private boolean isPrev;
@@ -17,5 +16,5 @@ public class ReportedPage {
 	private boolean isNext;
 	private int startPage;
 	
-	List<AdminDto.ReportedReviewForList> list;
+	List<AdminDto.JejaEnabledList> list;
 }

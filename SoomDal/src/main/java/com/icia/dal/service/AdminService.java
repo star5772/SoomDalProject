@@ -38,6 +38,23 @@ public class AdminService {
 	}
 	
 	public ReportedPage reportedPage(int pageno) {
+		int countOfBoard = adminDao.countToReportedJeja();
+		ReportedPage repPage = ReportedPagingUtil.getPage(pageno, countOfBoard);
+		int srn = repPage.getStartRowNum();
+		int ern = repPage.getEndRowNum();
+		int jac = repPage.getJAccusationCnt();
+		List<Jeja> jejaRpList = adminDao.findAllToRpList(srn, ern, jac);
+		List<AdminDto.ReportedReviewForList> dtoList = new ArrayList<AdminDto.ReportedReviewForList>();
+		for(Jeja jeja:jejaRpList) {
+			AdminDto.ReportedReviewForList dto = modelMapper.map(jeja,AdminDto.ReportedReviewForList.class);
+			dto.setRDate(jeja.getJJoinDate().format(DateTimeFormatter.ofPattern("yyyy년MM월dd일")));
+			dtoList.add(dto);
+		}
+		repPage.setList(dtoList);
+		return repPage;
+	}
+	
+	public ReportedPage ReviewPage(int pageno) {
 		int countOfBoard = adminDao.countToReview();
 		ReportedPage repPage = ReportedPagingUtil.getPage(pageno, countOfBoard);
 		int srn = repPage.getStartRowNum();
@@ -51,5 +68,21 @@ public class AdminService {
 		}
 		repPage.setList(dtoList);
 		return repPage;
+	}
+	
+	public EnabledPage EnabledPage(int pageno) {
+		int countOfBoard = adminDao.countToJejaEnabled();
+		EnabledPage enaPage = EnabledPagingUtil.getPage(pageno, countOfBoard);
+		int srn = enaPage.getStartRowNum();
+		int ern = enaPage.getEndRowNum();
+		List<Jeja> enabledList = adminDao.findAllEnabledToJeja(srn, ern);
+		List<AdminDto.JejaEnabledList> dtoList = new ArrayList<AdminDto.JejaEnabledList>();
+		for(Jeja jeja:enabledList) {
+			AdminDto.JejaEnabledList dto = modelMapper.map(jeja,AdminDto.JejaEnabledList.class);
+			dto.setJJoinDate(jeja.getJJoinDate().format(DateTimeFormatter.ofPattern("yyyy년MM월dd일")));
+			dtoList.add(dto);
+		}
+		enaPage.setList(dtoList);
+		return enaPage;
 	}
 }

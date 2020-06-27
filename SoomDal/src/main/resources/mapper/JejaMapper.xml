@@ -23,7 +23,8 @@
 			<if test="jPassword!=null">J_PASSWORD=#{jPassword},</if>
 			<if test="jName!=null">J_NAME=#{jName},</if>
 			<if test="jTel!=null">J_TEL=#{jTel},</if>
-			<if test="enabled!=null">enabled=#{enabled}</if>
+			<if test="enabled!=null">enabled=#{enabled},</if>
+			<if test="jAccusationCnt!=null">j_accusation_cnt=#{jAccusationCnt},</if>
 		</trim>
 		where J_EMAIL=#{jEmail} and rownum=1
 	</update>

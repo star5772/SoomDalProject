@@ -66,7 +66,30 @@ public class AdminDao {
 		return tpl.selectOne("adminMapper.countToJeja");
 	}
 	
+	public int countToReportedJeja() {
+		return tpl.selectOne("adminMapper.countToReportedJeja");
+	}
+	
+	public List<Jeja> findAllToRpList(int startRowNum, int endRowNum, int jAccusationCnt) {
+		Map<String,Object> map = new HashMap<String, Object>();
+		map.put("startRowNum",startRowNum);
+		map.put("endRowNum",endRowNum);
+		map.put("jAccusation",jAccusationCnt);
+		return tpl.selectList("adminMapper.findAllToRpList", map);
+	}
+	
 	public int countToReview() {
 		return tpl.selectOne("adminMapper.countToReview");
+	}
+	
+	public List<Jeja> findAllEnabledToJeja(int startRowNum, int endRowNum) {
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("startRowNum",startRowNum);
+		map.put("endRowNum",endRowNum);
+		return tpl.selectList("adminMapper.findAllEnabledToJeja", map);
+	}
+	
+	public int countToJejaEnabled() {
+		return tpl.selectOne("adminMapper.countToJejaEnabled");
 	}
 }

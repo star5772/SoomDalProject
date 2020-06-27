@@ -40,4 +40,8 @@ public class ReviewDao {
 	public Review findByReview(int rNo) {
 		return tpl.selectOne("reviewMapper.findByReview",rNo);
 	}
+	
+	public int updateToReview(Review review) {
+		return tpl.update("reviewMapper.updateToReview",review);
+	}
 }
