@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="estimateMapper">
+	
+	<!-- 견적서 작성 -->
+	<insert id="insertToEstimate">
+		<selectKey>
+			select estimate_seq.nextval from dual
+		</selectKey>
+		insert into estimate(e_no,d_mno,f_no,j_mno,r_no,d_email,e_money,e_content,e_tel_type,j_is_ok,e_cash)
+		values(#{eNo},#{dMno},#{fNo},#{jMno},#{rNo},#{dEmail},#{eMoney},#{eContent},#{eTelType},0,1700)
+	</insert>
+	<!-- 견적서 읽기 -->
+	<select id="findByEstimate" resultType="estimate">
+		select * from estimate where e_no = #{eNo} and rownum=1
+	</select>
+	<!-- 견적서 목록 -->
+	<select id="findAllByEstimate" resultType="estimate">
+		<![CDATA[
+			select * from
+				(select e.*,rownum rnum from
+					(select * from estimate) e
+				where rownum<=#{endRowNum})
+			where rnum>=#{startRowNum}
+		]]>			
+	</select>
+	<!-- 견적서 삭제 -->
+	<delete id="deleteToEstimate">
+		delete from estimate where e_no=#{eNo} and rownum=1
+	</delete>
+	
+	<select id="countToEstimate" resultType="int">
+		select count(*) from estimate
+	</select>
+	
+	<update id="setIsOk">
+		update estimate set j_is_ok=1 where e_no=#{eNo} and rownum=1
+	</update>
+	
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+

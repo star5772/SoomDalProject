@@ -18,8 +18,8 @@
 </style>
 </head>
 <body>
-	<div id="header" class="col s12">
-		<p style="margin-right: 50px;">Welcome To SoomDal</p>
+	<div id="header" class="col s12 pt-5">
+		<p style="margin-right: 50px;"></p>
 	</div>
 </body>
 </html>

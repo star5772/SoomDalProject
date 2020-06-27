@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="useCashMapper">
+	
+	<insert id="insertToUseCash">
+		insert into usecash(e_no,d_mno,ca_estimate_cash,ca_use_date)
+		values(#{eNo},#{dMno},#{caEstimateCash},sysdate)
+	</insert>
+	
+	<select id="findAllByUseCash" resultType="usecash">
+		<![CDATA[
+			select * from
+				(select u.*,rownum rnum from
+					(select * from usecash where d_mno=#{dMno}) u
+				where rownum<=#{endRowNum})
+			where rnum>=#{startRowNum}
+		]]>			
+	</select>
+	
+	<delete id="deleteByUseCash">
+		delete from usecash where e_no=#{eNo} and rownum=1
+	</delete>
+
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+

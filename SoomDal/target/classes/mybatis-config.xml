@@ -11,6 +11,10 @@
 		<typeAlias type="com.icia.dal.entity.NowPayment" alias="NowPayment"/>
 		<typeAlias type="com.icia.dal.entity.Review" alias="review"/>
 		<typeAlias type="com.icia.dal.entity.ProfileAttachment" alias="profileAttachment"/>
+		<typeAlias type="com.icia.dal.entity.Estimate" alias="estimate"/>
+		<typeAlias type="com.icia.dal.entity.LessonHistory" alias="lessonhistory"/>
+		<typeAlias type="com.icia.dal.entity.UseCash" alias="usecash"/>
+		<typeAlias type="com.icia.dal.entity.Request" alias="request"/>
 	</typeAliases>
 	<typeHandlers>
 		<typeHandler handler="com.icia.dal.util.typehandler.LocalDateTimeTypeHandler"/>
