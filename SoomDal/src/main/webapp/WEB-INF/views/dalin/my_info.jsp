@@ -5,6 +5,19 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script>
+var openWin;
+
+function openChild()
+{
+    // window.name = "부모창 이름"; 
+    window.name = "dalinMyInfo";
+    // window.open("open할 window", "자식창 이름", "팝업창 옵션");
+    openWin = window.open("/dal/dalin/usedCashList?dMno=${myInfo.DMno}",
+            "usedCash", "width=700, height=700, resizable = no, scrollbars = no");    
+}
+
+</script>
 <style>
    #profile {
       display: inline-block;
@@ -84,10 +97,11 @@
          	</div>
          	<div id="user_info" style="display:inline-block; width: 530px;  color: black;">
             	<div id="user_name">
-            		<span id="name_length">OOO</span>달인님
+            		<span id="name_length">${myInfo.DName}</span> 달인님
            	 	</div>
             	<div id="user_email">
-            		<span id="email_length">aaa@a.com</span>
+            		<span id="email_length">${myInfo.DEmail}</span><br>
+            		<span id="level_length">${myInfo.DLevelStr}</span>
             	</div>
          	</div>
          	<img src="https://assets.cdn.soomgo.com/icons/icon-mypage-list-arrow.svg">
@@ -98,11 +112,11 @@
          <span><h3>숨달 캐시</h3></span>
          <ul class="nav flex-column">
             <li class="nav-item">
-               <a class="nav-link active" href="#"><img src="https://assets.cdn.soomgo.com/icons/icon-mypage-store.svg" style="padding: 5px;"><span id="str" class="menu_span">스토어</span><div class="store"><span>0 캐시</span></div><img src="https://assets.cdn.soomgo.com/icons/icon-mypage-list-arrow.svg"></a>
+               <a class="nav-link active" href="/dal/member/payment/store"><img src="https://assets.cdn.soomgo.com/icons/icon-mypage-store.svg" style="padding: 5px;"><span id="str" class="menu_span">스토어</span><div class="store"><span>${myInfo.DCash} 캐시</span></div><img src="https://assets.cdn.soomgo.com/icons/icon-mypage-list-arrow.svg"></a>
                <hr>
             </li>
             <li class="nav-item">
-               <a class="nav-link" href="#"><img src="https://assets.cdn.soomgo.com/icons/icon-mypage-dashboard.svg" style="padding: 5px;"><span class="menu_span">충전/사용 내역</span><img src="https://assets.cdn.soomgo.com/icons/icon-mypage-list-arrow.svg"></a>
+               <a class="nav-link" onclick="openChild()" href="#"><img src="https://assets.cdn.soomgo.com/icons/icon-mypage-dashboard.svg" style="padding: 5px;"><span class="menu_span">사용 내역</span><img src="https://assets.cdn.soomgo.com/icons/icon-mypage-list-arrow.svg"></a>
             </li>
          </ul>
       </div>

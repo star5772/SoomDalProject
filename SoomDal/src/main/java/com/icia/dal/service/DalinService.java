@@ -18,6 +18,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.icia.dal.Exception.DalinNotFoundException;
 import com.icia.dal.Exception.MembernameExistException;
+import com.icia.dal.Exception.UserNotFoundException;
 import com.icia.dal.dao.DAO;
 import com.icia.dal.dao.DalinDao;
 import com.icia.dal.dao.ProfileAttachmentDao;
@@ -84,6 +85,16 @@ public class DalinService {
 		dalDao.deleteToDalin(dEmail);
 	}
 	
+	
+	public DalinDto.DtoForMyInfo readToMyInfo(String username) throws UserNotFoundException {
+		Dalin dalin = dalDao.findByDalin(username);
+		if(dalin==null)
+			throw new UserNotFoundException();
+		DalinDto.DtoForMyInfo dto = modelMapper.map(dalin,DalinDto.DtoForMyInfo.class);
+		Level lev = dalin.getDLevel();
+		dto.setDLevelStr(lev.name());
+		return dto;
+	}
 
 	
 	public void profileUpdate(DtoForUpdateToDalinProfile dto, MultipartFile sajin) throws IllegalStateException, IOException {

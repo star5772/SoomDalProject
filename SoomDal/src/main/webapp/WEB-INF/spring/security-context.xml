@@ -57,9 +57,8 @@
 	</sec:http>
 	<bean id="encoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder" />
 	
-	
 	<sec:http 
-	pattern="/adimin/**"
+	pattern="/admin/**"
 	authentication-manager-ref="adminAuth"
 	auto-config="true">
 		<sec:csrf disabled="true"/>
@@ -77,6 +76,8 @@
 			logout-success-url="/"
 		/>
 	</sec:http>
+	
+	
 	
 	<sec:authentication-manager id="jejaAuth">
 		<sec:authentication-provider>
@@ -103,7 +104,7 @@
 	<sec:authentication-manager id="adminAuth">
 		<sec:authentication-provider>
 			<sec:user-service>
-				<sec:user name="admin" password="1234" authorities="ROLE_ADMIN"/>
+				<sec:user name="admin" password="1234" authorities="ROLE_ADMIN" disabled="true"/>
 			</sec:user-service>
 			<sec:password-encoder ref="encoder"/>
 		</sec:authentication-provider>

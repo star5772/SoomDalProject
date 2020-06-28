@@ -93,7 +93,7 @@ public class AdminDao {
 		return tpl.selectList("adminMapper.findAllDetailField",fNo);
 	}
 	
-	public Field findByDetailField(String fNo,String detailFName) {
+	public DetailField findByDetailField(String fNo,String detailFName) {
 		Map<String,Object> map = new HashMap<String, Object>();
 		map.put("fNo", fNo);
 		map.put("detailFName", detailFName);
@@ -104,7 +104,7 @@ public class AdminDao {
 		return tpl.selectList("adminMapper.findAllField");
 	}
 	
-	public DetailField findByField(String fNo) {
+	public Field findByField(String fNo) {
 		return tpl.selectOne("adminMapper.findByField",fNo);
 	}
 	
@@ -129,4 +129,5 @@ public class AdminDao {
 	public int deleteToField(String fNo) {
 		return tpl.delete("adminMapper.deleteToField",fNo);
 	}
+
 }

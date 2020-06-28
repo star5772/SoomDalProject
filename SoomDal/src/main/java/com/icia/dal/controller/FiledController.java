@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.*;
 
 import com.icia.dal.service.*;
-
+@RequestMapping("/member")
 @Controller
 public class FiledController {
 	@Inject

@@ -20,7 +20,9 @@ public class AdminRestController {
 	private AdminService adService;
 	
 	@PostMapping("/admin/insertField")
-	public ResponseEntity<Void> insertFieldSajin(Field fl,MultipartFile sajin) throws IllegalStateException, IOException {
+	public ResponseEntity<Void> insertFieldSajin(String fNo,String fName,MultipartFile sajin) throws IllegalStateException, IOException {
+		System.out.println(sajin);
+		Field fl = Field.builder().fName(fName).fNo(fNo).build();
 		adService.insertFieldSajin(fl, sajin);
 		return ResponseEntity.ok(null);
 	}

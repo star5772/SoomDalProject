@@ -2,7 +2,7 @@ package com.icia.dal.dto.page;
 
 import java.util.List;
 
-import com.icia.dal.entity.UseCash;
+import com.icia.dal.dto.UseCashDto;
 
 import lombok.Builder;
 import lombok.Data;
@@ -19,5 +19,5 @@ public class PageToUseCash {
 	private boolean isPrev;
 	private boolean isNext;
 	
-	List<UseCash> list;
+	List<UseCashDto.DtoForList> list;
 }
