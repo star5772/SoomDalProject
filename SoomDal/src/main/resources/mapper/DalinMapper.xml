@@ -70,15 +70,6 @@
 	</select>
 
 	<select id="findDalinByDetailFName" resultType="dalin">
-<<<<<<< HEAD
-		<![CDATA[
-			select * from
-				(select f.*, rownum r from
-					(select d_profile dProfile, d_name dName, d_intro dIntro from dalin where DETAIL_F_NAME=#{detailFName}) f
-				where rownum<=#{endRowNum})
-			where r>=#{startRowNum}
-		]]>
-=======
 	<![CDATA[
 		select * from
 			(select f.*, rownum r from
@@ -86,26 +77,5 @@
 			where rownum<=#{endRowNum})
 		where r>=#{startRowNum}
 	]]>
->>>>>>> branch 'master' of https://github.com/star5772/SoomDalProject
 	</select>
-<<<<<<< HEAD
 </mapper>
-=======
-<<<<<<< HEAD
-
-=======
->>>>>>> branch 'master' of https://github.com/star5772/SoomDalProject
-</mapper>
-
-
-
-
-
-
-
-
-
-
-
-
->>>>>>> branch 'master' of https://github.com/star5772/SoomDalProject
