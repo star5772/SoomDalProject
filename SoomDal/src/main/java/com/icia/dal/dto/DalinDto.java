@@ -79,6 +79,7 @@ public class DalinDto {
 	
 	@Data
 	public static class DtoForFieldList {
+		private String dMno;
 		private String dProfile;
 		private String dName;
 		private String dIntro;

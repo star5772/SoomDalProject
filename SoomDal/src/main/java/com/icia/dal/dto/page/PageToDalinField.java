@@ -17,5 +17,6 @@ public class PageToDalinField {
 	private int endPage;
 	private boolean isPrev;
 	private boolean isNext;
+	private int count;
 	List<DalinDto.DtoForFieldList> list;
 }
