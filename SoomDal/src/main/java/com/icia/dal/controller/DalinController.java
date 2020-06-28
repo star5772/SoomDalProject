@@ -1,5 +1,7 @@
 package com.icia.dal.controller;
 
+import java.security.Principal;
+
 import javax.inject.Inject;
 
 import org.springframework.stereotype.Controller;
@@ -7,22 +9,28 @@ import org.springframework.validation.BindException;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.icia.dal.Exception.UserNotFoundException;
 import com.icia.dal.dto.DalinDto;
 import com.icia.dal.service.DalinService;
+import com.icia.dal.service.PaymentService;
 
 @Controller
 public class DalinController {
 	
 	@Inject
 	private DalinService dalService;
+	@Inject
+	private PaymentService paymentService;
 	
 	@GetMapping("/dalin/my_info")
-	public ModelAndView myInFo() {
+	public ModelAndView myInFo(Principal principal) throws UserNotFoundException {
 		// 달인 마이페이지
-		return new ModelAndView("main").addObject("viewName","dalin/my_info.jsp");
+		String username = principal.getName();
+		return new ModelAndView("main").addObject("viewName","dalin/my_info.jsp").addObject("myInfo",dalService.readToMyInfo(username));
 	}
 	
 	@GetMapping("/dalin/join")
@@ -84,6 +92,10 @@ public class DalinController {
 	@GetMapping("/member/system/msg")
 	public ModelAndView msg() {
 		return new ModelAndView("main").addObject("viewName","system/msg.jsp");
+	}
+	@GetMapping("/dalin/usedCashList")
+	public ModelAndView useCashPage(@RequestParam(defaultValue = "1")int pageno,Principal principal,int dMno) {
+		return new ModelAndView("payment/usedCash").addObject("uc",paymentService.useCashList(pageno, principal.getName(), dMno));
 	}
 	
 }

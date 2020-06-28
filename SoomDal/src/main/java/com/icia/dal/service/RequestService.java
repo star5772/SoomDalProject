@@ -72,8 +72,9 @@ public class RequestService {
 		List<RequestDto.DtoForList> dtoList = new ArrayList<>();
 		for(Request rq:rqList) {
 			RequestDto.DtoForList dto = modelMapper.map(rq,RequestDto.DtoForList.class);
-			String str = rq.getRWriteDate().format(DateTimeFormatter.ofPattern("yyyy년MM월dd일 HH시 mm분"));
+			String str = rq.getRWriteDate().format(DateTimeFormatter.ofPattern("yyyy년 MM월 dd일"));
 			dto.setRWriteDateStr(str);
+			dto.setJName(jejaDao.findByJejaToJMno(rq.getJMno()).getJName());
 			dtoList.add(dto);
 		}
 		page.setList(dtoList);
@@ -83,15 +84,17 @@ public class RequestService {
 	// 요청서 읽기
 	public RequestDto.DtoForRead readRequest(@NotNull Integer rNo) throws ReadFailException {
 		Request rq = rqDao.findByRequest(rNo);
+		Jeja jeja = jejaDao.findByJejaToJMno(rq.getJMno());
+		System.out.println(rq);
 		if(rq==null)
 			throw new ReadFailException();
 		RequestDto.DtoForRead dto = modelMapper.map(rq,RequestDto.DtoForRead.class);
 		String wantDate = rq.getRWantDate().format(DateTimeFormatter.ofPattern("MM월dd일"));
-		String wantTime = rq.getRWantTime().format(DateTimeFormatter.ofPattern("HH시간"));
-		String writeDate = rq.getRWriteDate().format(DateTimeFormatter.ofPattern("yyyy년MM월dd일 HH시mm분"));
+		String writeDate = rq.getRWriteDate().format(DateTimeFormatter.ofPattern("yyyy년 MM월 dd일 HH시 mm분"));
 		dto.setRWantDateStr(wantDate);
-		dto.setRWantTimeStr(wantTime);
 		dto.setRWriteDateStr(writeDate);
+		dto.setJName(jeja.getJName());
+		dto.setJEmail(jeja.getJEmail());
 		return dto;
 	}
 	

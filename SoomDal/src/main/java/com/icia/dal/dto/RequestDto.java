@@ -21,6 +21,7 @@ public class RequestDto {
 		private String rWriteDateStr;
 		private int dMno;
 		private Boolean rbEnabled;
+		private String jName;
 	}
 	
 	@Data
@@ -35,7 +36,8 @@ public class RequestDto {
 		private String rYourLevel;
 		private String rLessonType;
 		private String rWantDateStr;
-		private String rWantTimeStr;
+		private String rWantTime;
+		private String rItemExists;
 		private String rAge;
 		private Boolean rGender;
 		private Boolean rDalinIsOk;
@@ -44,6 +46,8 @@ public class RequestDto {
 		private String rWriteDateStr;
 		private int dMno;
 		private Boolean rbEnabled;
+		private String jName;
+		private String jEmail;
 	}
 	
 }

@@ -22,8 +22,8 @@ public class Request {
 	private String rYourLevel;
 	private String rItemExists;
 	private String rLessonType;
-	private LocalDate rWantDate;
-	private LocalTime rWantTime;
+	private LocalDateTime rWantDate;
+	private String rWantTime;
 	private String rAge;
 	private Boolean rGender;
 	private Boolean rDalinIsOk;

@@ -333,7 +333,8 @@ $(function() {
 	height: 30px;
 	font-size: medium;
 	font-weight: bold;
-	font-style:oblique;
+	font-style:inherit;
+	color: aqua;
 	text-align: center;
 	line-height: 50%;
 }

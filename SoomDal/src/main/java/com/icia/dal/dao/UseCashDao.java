@@ -31,4 +31,10 @@ public class UseCashDao {
 	public int deleteToUseCash(int eNo) {
 		return tpl.delete("useCashMapper.deleteByUseCash",eNo);
 	}
+	
+
+	public int countToUseCash(int dMno) {
+		System.out.println(dMno);
+		return tpl.selectOne("useCashMapper.countToUseCash",dMno);
+	}
 }
