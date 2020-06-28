@@ -45,7 +45,7 @@ public class DalinController {
 		return new ModelAndView("main").addObject("viewName","dalin/resign.jsp");
 	}
 	
-	@GetMapping("/dalin/info_update")
+	@GetMapping("/dalin/profile_update")
 	public ModelAndView dalinInFoUpdate() {
 		// 달인 프로필 수정
 		return new ModelAndView("main").addObject("viewName","dalin/info_update.jsp");

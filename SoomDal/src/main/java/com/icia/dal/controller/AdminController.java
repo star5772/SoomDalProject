@@ -21,12 +21,17 @@ public class AdminController {
 	@GetMapping("/admin/member_manage")
 	public ModelAndView adminManage(@RequestParam(defaultValue = "1") int pageno) {
 		// 관리자 회원관리탭 - 제자 and 달인 리스트 정보 필요
-		return new ModelAndView("main").addObject("viewName","admin/member_manage.jsp").addObject("jeja",adminService.adminPage(pageno));
+		return new ModelAndView("main").addObject("viewName","admin/member_manage.jsp").addObject("jeja",adminService.adminPage(pageno)).addObject("review",adminService.ReviewPage(pageno))
+				.addObject("enabled",adminService.EnabledPage(pageno));
 	}
 	
-	@GetMapping("/admin/report_manage")
-	public ModelAndView reportManage(@RequestParam(defaultValue = "1") int pageno) {
-		return new ModelAndView("main").addObject("viewName","admin/member_manage.jsp").addObject("report",adminService.reportedPage(pageno));
-	}
+	
+	/*
+	 * @GetMapping("/admin/report_manage") public ModelAndView
+	 * reportManage(@RequestParam(defaultValue = "1") int pageno) { return new
+	 * ModelAndView("main").addObject("viewName","admin/member_manage.jsp");
+	 * 
+	 * }
+	 */
 	
 }

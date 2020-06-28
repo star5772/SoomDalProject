@@ -17,10 +17,19 @@
 </style>
 </head>
 <body>
-<h3>달인 리스트</h3>
+<div id="title_image" style="height: 200px;">
+	<div id="title_wrap">
+		<h1 style="padding: 10px;">해당 필드 이름</h1>
+		<div id="field_statistics" style="height: 45px;">
+			<div style="border-right: 1px solid black; display: inline-block; padding: 0 10px;"><span>고수 숫자</span><p>활동 고수</p></div>
+			<div style="display: inline-block; padding: 0 10px;"><span>별</span><p>평점</p></div>
+		</div>
+	</div>
+</div>
 <div>
+${dalin }
 	<!-- 아래 c:forEach 로 list 개수만큼 div 반복 -->
-	<div>
+	<div style="padding: 24px 0;">
 		<div id="dal_profile">
 			프로필 사진 
 		</div>

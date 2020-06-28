@@ -50,10 +50,11 @@ public class DalinDao {
 		return tpl.selectOne("dalinMapper.countOfFieldDalin",detailFName);
 	}
 
-	public List<Dalin> findDalinByDetailFName(int startRowNum, int endRowNum) {
-		Map<String,Integer> map = new HashMap<String, Integer>();
+	public List<Dalin> findDalinByDetailFName(int startRowNum, int endRowNum, String detailFName) {
+		Map<String,Object> map = new HashMap<String, Object>();
 		map.put("startRowNum", startRowNum);
 		map.put("endRowNum", endRowNum);
-		return tpl.selectList("dalinMapper.findDalinByDetailFName");
+		map.put("detailFName", detailFName);
+		return tpl.selectList("dalinMapper.findDalinByDetailFName",map);
 	}
 }

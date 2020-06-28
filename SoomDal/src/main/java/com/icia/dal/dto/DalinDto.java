@@ -25,10 +25,10 @@ public class DalinDto {
 		private String dName;
 		@Pattern(regexp="^[0,9]{8,11}$", message="전화번호는 숫자 8~11자입니다")
 		private String dTel;
+		private String detailFName;
 		private Boolean enabled;
 		private LocalDateTime dDate;
 		private String dArea;
-		private String dMainService;
 	}
 	
 	@Data

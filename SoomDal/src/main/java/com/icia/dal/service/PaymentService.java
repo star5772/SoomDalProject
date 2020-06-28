@@ -14,11 +14,11 @@ import org.springframework.stereotype.Service;
 import com.icia.dal.dao.DalinDao;
 import com.icia.dal.dao.PaymentDao;
 import com.icia.dal.dto.NowPaymentDto;
-import com.icia.dal.dto.PageToNowPayment;
+import com.icia.dal.dto.page.PageToNowPayment;
 import com.icia.dal.entity.Dalin;
 import com.icia.dal.entity.NowPayment;
 import com.icia.dal.entity.RequestPayment;
-import com.icia.dal.util.PaymentPagingUtil;
+import com.icia.dal.util.pagingutil.PaymentPagingUtil;
 
 @Service
 public class PaymentService {
