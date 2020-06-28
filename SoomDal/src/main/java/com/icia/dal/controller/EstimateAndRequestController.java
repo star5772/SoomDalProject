@@ -79,7 +79,7 @@ public class EstimateAndRequestController {
 	// 달인 -> 받은요청서목록
 	@GetMapping("/request/receiveRequest")
 	public ModelAndView receiveRequestList(@RequestParam(defaultValue = "1")int pageno,int dMno) {
-		return new ModelAndView("main").addObject("viewName","request/requestList.jsp").addObject("receiveRequest",requestService.receiveRequestList(pageno, dMno));
+		return new ModelAndView("main").addObject("viewName","request/requestList.jsp").addObject("receiveRequest",requestService.receiveRequestList(pageno, dMno)).addObject("dMno",dMno);
 	}
 	
 	// 제자 -> 보낸요청서목록

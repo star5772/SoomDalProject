@@ -28,7 +28,7 @@ public class FiledController {
 		// 분야 선택 후 음악 세부분야 리스트 페이지로 이동 
 		return new ModelAndView("main").addObject("viewName","field/music_list.jsp");
 	}
-	
+
 	@GetMapping("/field/list")
 	public ModelAndView fieldList(@RequestParam(defaultValue="1") int pageno, String detailFName) {
 		// 세부분야 선택 후 세부분야 페이지로 이동
