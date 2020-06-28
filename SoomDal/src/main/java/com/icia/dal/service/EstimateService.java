@@ -11,6 +11,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import com.icia.dal.Exception.EstimateNotFoundException;
+import com.icia.dal.Exception.ReadFailException;
 import com.icia.dal.dao.DalinDao;
 import com.icia.dal.dao.EstimateDao;
 import com.icia.dal.dao.JejaDao;
@@ -58,9 +59,9 @@ public class EstimateService {
 		handler.sendMessage(dalin.getDName(), jeja.getJName(),dalin.getDName() + "님으로부터 견적서가 도착하였습니다");
 	}
 	
-	// 견적서 목록 페이징
+	// 보낸 견적서 목록 페이징
 	public PageToEstimate sendEstimateList(int pageno, int dMno) {
-		int countOfEstimate = estimateDao.countToEstimate();
+		int countOfEstimate = estimateDao.countToEstimate(dMno);
 		PageToEstimate page = EstimatePagingUtil.getPage(pageno, countOfEstimate);
 		int srn = page.getStartRowNum();
 		int ern = page.getEndRowNum();
@@ -74,19 +75,11 @@ public class EstimateService {
 		return page;
 	}
 	
-	// 견적서 읽기(달인)
-	public EstimateDto.DtoForRead readToSendEstimateToDalin(@NotNull Integer eNo) throws EstimateNotFoundException {
+	// 견적서 읽기
+	public EstimateDto.DtoForRead readToSendEstimate(@NotNull Integer eNo) throws ReadFailException {
 		Estimate et = estimateDao.findByEstimate(eNo);
 		if(et==null)
-			throw new EstimateNotFoundException();
-		EstimateDto.DtoForRead dto = modelMapper.map(et,EstimateDto.DtoForRead.class);
-		return dto;
-	}
-	// 견적서 읽기(제자)
-	public EstimateDto.DtoForRead readToSendEstimateToJeja(@NotNull Integer eNo) throws EstimateNotFoundException {
-		Estimate et = estimateDao.findByEstimate(eNo);
-		if(et==null)
-			throw new EstimateNotFoundException();
+			throw new ReadFailException();
 		EstimateDto.DtoForRead dto = modelMapper.map(et,EstimateDto.DtoForRead.class);
 		return dto;
 	}
@@ -127,6 +120,21 @@ public class EstimateService {
 		UseCash uc = UseCash.builder().caEstimateCash(et.getECash()).dMno(et.getDMno()).eNo(et.getENo()).build();
 		ucDao.insertToUseCash(uc);
 		handler.sendMessage(dal.getDName(),jeja.getJName(),jeja.getJName() + "님이 견적서를 수락하였습니다");
+	}
+
+	public PageToEstimate receiveEstimateList(int pageno, int jMno) {
+		int countOfEstimate = estimateDao.countToEstimateForJeja(jMno);
+		PageToEstimate page = EstimatePagingUtil.getPage(pageno, countOfEstimate);
+		int srn = page.getStartRowNum();
+		int ern = page.getEndRowNum();
+		List<Estimate> etList = estimateDao.findAllByEstimateToJeja(srn,ern,jMno);
+		List<EstimateDto.DtoForList> dtoList = new ArrayList<>();
+		for(Estimate et:etList) {
+			EstimateDto.DtoForList dto = modelMapper.map(et,EstimateDto.DtoForList.class);
+			dtoList.add(dto);
+		}
+		page.setList(dtoList);
+		return page;
 	}
 	
 	

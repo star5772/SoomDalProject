@@ -72,6 +72,8 @@
 	<select id="findDalinByDetailFName" resultType="dalin">
 		select d_profile dProfile, d_name dName, d_intro dIntro from dalin where DETAIL_F_NAME=#{detailFName}
 	</select>
+	
+	
 </mapper>
 
 

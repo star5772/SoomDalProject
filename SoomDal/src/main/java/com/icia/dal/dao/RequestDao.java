@@ -20,13 +20,22 @@ public class RequestDao {
 		return tpl.insert("requestMapper.insertToRequest",rq);
 	}
 	
-	public List<Request> findAllRequest(int startRowNum,int endRowNum,int jMno) {
+	public List<Request> findAllRequestToJeja(int startRowNum,int endRowNum,int jMno) {
 		Map<String,Object> map = new HashMap<String, Object>();
 		map.put("startRowNum", startRowNum);
 		map.put("endRowNum", endRowNum);
 		map.put("jMno", jMno);
 		return tpl.selectList("requestMapper.findAllByRequest",map);
 	}
+	public List<Request> findAllRequestToDalin(int startRowNum,int endRowNum,int dMno) {
+		Map<String,Object> map = new HashMap<String, Object>();
+		map.put("startRowNum", startRowNum);
+		map.put("endRowNum", endRowNum);
+		map.put("jMno", dMno);
+		return tpl.selectList("requestMapper.findAllByRequest",map);
+	}
+
+	
 	
 	public int deleteToRequest(int rNo) {
 		return tpl.delete("requestMapper.deleteToRequest",rNo);
@@ -34,6 +43,14 @@ public class RequestDao {
 	
 	public Request findByRequest(int rNo) {
 		return tpl.selectOne("requestMapper.findByRequest",rNo);
+	}
+
+	public int countToRequest(int jMno) {
+		return tpl.selectOne("requestMapper.countToRequest",jMno);
+	}
+
+	public int countToRequestforDalin(int dMno) {
+		return tpl.selectOne("requestMapper.countToRequestForDalin",dMno);
 	}
 	
 }

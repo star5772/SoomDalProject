@@ -1,0 +1,99 @@
+package com.icia.dal.service;
+
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.inject.Inject;
+import javax.validation.constraints.NotNull;
+
+import org.modelmapper.ModelMapper;
+import org.springframework.stereotype.Service;
+
+import com.icia.dal.Exception.ReadFailException;
+import com.icia.dal.dao.DalinDao;
+import com.icia.dal.dao.JejaDao;
+import com.icia.dal.dao.RequestDao;
+import com.icia.dal.dto.RequestDto;
+import com.icia.dal.dto.page.PageToRequest;
+import com.icia.dal.entity.Dalin;
+import com.icia.dal.entity.Jeja;
+import com.icia.dal.entity.Request;
+import com.icia.dal.util.pagingutil.RequestPagingUtil;
+import com.icia.dal.util.websocket.MessageWebSocketHandler;
+
+@Service
+public class RequestService {
+	
+	@Inject
+	private ModelMapper modelMapper;
+	@Inject
+	private MessageWebSocketHandler handler;
+	@Inject
+	private JejaDao jejaDao;
+	@Inject
+	private DalinDao dalDao;
+	@Inject
+	private RequestDao rqDao;
+	
+	// 요청서작성
+	public void writeToRequest(Request rq) {
+		rqDao.insertToRequest(rq);
+		Jeja jeja = jejaDao.findByJejaToJMno(rq.getJMno());
+		Dalin dalin = dalDao.findByDalinProfile(rq.getDMno());
+		handler.sendMessage(jeja.getJName(), dalin.getDName(), jeja.getJName() + "님으로부터 요청서가 도착하였습니다");
+	}
+	
+	// 보낸요청서출력 (제자)
+	public PageToRequest sendRequestList(int pageno, int jMno) {
+		int countOfRequest = rqDao.countToRequest(jMno);
+		PageToRequest page = RequestPagingUtil.getPage(pageno, countOfRequest);
+		int srn = page.getStartRowNum();
+		int ern = page.getEndRowNum();
+		List<Request> rqList = rqDao.findAllRequestToJeja(srn,ern,jMno);
+		List<RequestDto.DtoForList> dtoList = new ArrayList<>();
+		for(Request rq:rqList) {
+			RequestDto.DtoForList dto = modelMapper.map(rq,RequestDto.DtoForList.class);
+			String str = rq.getRWriteDate().format(DateTimeFormatter.ofPattern("yyyy년MM월dd일 HH시 mm분"));
+			dto.setRWriteDateStr(str);
+			dtoList.add(dto);
+		}
+		page.setList(dtoList);
+		return page;
+	}
+	
+	// 받은요청서 출력(달인)
+	public PageToRequest receiveRequestList(int pageno,int dMno) {
+		int countOfRequest = rqDao.countToRequestforDalin(dMno);
+		PageToRequest page = RequestPagingUtil.getPage(pageno, countOfRequest);
+		int srn = page.getStartRowNum();
+		int ern = page.getEndRowNum();
+		List<Request> rqList = rqDao.findAllRequestToDalin(srn,ern,dMno);
+		List<RequestDto.DtoForList> dtoList = new ArrayList<>();
+		for(Request rq:rqList) {
+			RequestDto.DtoForList dto = modelMapper.map(rq,RequestDto.DtoForList.class);
+			String str = rq.getRWriteDate().format(DateTimeFormatter.ofPattern("yyyy년MM월dd일 HH시 mm분"));
+			dto.setRWriteDateStr(str);
+			dtoList.add(dto);
+		}
+		page.setList(dtoList);
+		return page;
+	}
+	
+	// 요청서 읽기
+	public RequestDto.DtoForRead readRequest(@NotNull Integer rNo) throws ReadFailException {
+		Request rq = rqDao.findByRequest(rNo);
+		if(rq==null)
+			throw new ReadFailException();
+		RequestDto.DtoForRead dto = modelMapper.map(rq,RequestDto.DtoForRead.class);
+		String wantDate = rq.getRWantDate().format(DateTimeFormatter.ofPattern("MM월dd일"));
+		String wantTime = rq.getRWantTime().format(DateTimeFormatter.ofPattern("HH시간"));
+		String writeDate = rq.getRWriteDate().format(DateTimeFormatter.ofPattern("yyyy년MM월dd일 HH시mm분"));
+		dto.setRWantDateStr(wantDate);
+		dto.setRWantTimeStr(wantTime);
+		dto.setRWriteDateStr(writeDate);
+		return dto;
+	}
+	
+
+}

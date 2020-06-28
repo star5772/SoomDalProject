@@ -56,4 +56,5 @@ public class DalinDao {
 		map.put("endRowNum", endRowNum);
 		return tpl.selectList("dalinMapper.findDalinByDetailFName");
 	}
+
 }

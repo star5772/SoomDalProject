@@ -1,6 +1,8 @@
 package com.icia.dal.entity;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -20,8 +22,8 @@ public class Request {
 	private String rYourLevel;
 	private String rItemExists;
 	private String rLessonType;
-	private LocalDateTime rWantDate;
-	private LocalDateTime rWantTime;
+	private LocalDate rWantDate;
+	private LocalTime rWantTime;
 	private String rAge;
 	private Boolean rGender;
 	private Boolean rDalinIsOk;

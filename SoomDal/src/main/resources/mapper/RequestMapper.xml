@@ -33,6 +33,14 @@
 		delete from request where r_no=#{rNo} and rownum=1
 	</delete>
 	
+	<select id="countToRequest" resultType="int">
+		select count(*) from request j_mno = #{jMno}
+	</select>
+	
+	<select id="countToRequestForDalin" resultType="int">
+		select count(*) from request d_mno = #{dMno}
+	</select>
+	
 </mapper>
 
 
