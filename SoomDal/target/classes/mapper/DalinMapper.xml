@@ -78,11 +78,7 @@
 		where r>=#{startRowNum}
 	]]>
 	</select>
-	
-<<<<<<< HEAD
-	
-=======
->>>>>>> branch 'master' of https://github.com/star5772/SoomDalProject
+
 </mapper>
 
 

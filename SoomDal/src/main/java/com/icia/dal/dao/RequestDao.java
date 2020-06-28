@@ -25,14 +25,14 @@ public class RequestDao {
 		map.put("startRowNum", startRowNum);
 		map.put("endRowNum", endRowNum);
 		map.put("jMno", jMno);
-		return tpl.selectList("requestMapper.findAllByRequest",map);
+		return tpl.selectList("requestMapper.findAllByRequestToJeja",map);
 	}
 	public List<Request> findAllRequestToDalin(int startRowNum,int endRowNum,int dMno) {
 		Map<String,Object> map = new HashMap<String, Object>();
 		map.put("startRowNum", startRowNum);
 		map.put("endRowNum", endRowNum);
-		map.put("jMno", dMno);
-		return tpl.selectList("requestMapper.findAllByRequest",map);
+		map.put("dMno", dMno);
+		return tpl.selectList("requestMapper.findAllByRequestToDalin",map);
 	}
 
 	
