@@ -73,12 +73,15 @@
 	<![CDATA[
 		select * from
 			(select f.*, rownum r from
-				(select d_profile dProfile, d_name dName, d_intro dIntro from dalin where DETAIL_F_NAME=#{detailFName}) f
+				(select /*+ index_desc(dalin pk_dalin) */ d_mno dMno, d_profile dProfile, d_name dName, d_intro dIntro from dalin where DETAIL_F_NAME=#{detailFName}) f
 			where rownum<=#{endRowNum})
 		where r>=#{startRowNum}
 	]]>
 	</select>
+<<<<<<< HEAD
 
+=======
+>>>>>>> branch 'master' of https://github.com/star5772/SoomDalProject
 </mapper>
 
 

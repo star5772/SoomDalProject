@@ -32,6 +32,6 @@ public class FieldPagingUtil {
 		
 		return PageToDalinField.builder().startPage(startPage).endPage(endPage)
 			.startRowNum(startRowNum).endRowNum(endRowNum)
-			.isPrev(isPrev).isNext(isNext).pageno(pageno).build();
+			.isPrev(isPrev).isNext(isNext).pageno(pageno).count(countOfBoard).build();
 	}
 }
