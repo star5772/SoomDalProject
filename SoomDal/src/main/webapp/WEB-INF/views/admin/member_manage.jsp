@@ -156,7 +156,7 @@ $(document).ready(function() {
 							</c:otherwise>
 						</c:choose>
 					</c:forEach>
-					<c:if test="${report.next==true }">
+					<c:if test="${jeja.next==true }">
 						<li><a href="/dal/admin/member_manage?pageno=${jeja.endPage+1 }">다음</a></li>
 					</c:if>
 				</ul>
