@@ -29,4 +29,14 @@ public class AdminDto {
 		private int rScore;
 		private String rContent;
 	}
+	
+	@Data
+	@AllArgsConstructor
+	@NoArgsConstructor
+	@Builder
+	public static class JejaEnabledList {
+		private String jName;
+		private String jJoinDate;
+		private boolean enabled;
+	}
 }

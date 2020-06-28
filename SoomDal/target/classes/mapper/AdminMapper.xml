@@ -30,7 +30,7 @@
 		<![CDATA[
 			select * from
 				(select r.*,rownum as rnum from
-					(select /*+index_desc(review review_pk_r_no)*/r_no rNm, r_date rDate, r_writer rWriter from review)r
+					(select /*+index_desc(review review_pk_r_no)*/r_no rNm, r_date rDate, r_writer rWriter from review where j_accusation_cnt!=0)r
 					where rownum<=#{endRowNum})
 				where rnum>=#{startRowNum} 
 		]]>
@@ -62,10 +62,41 @@
 		from jeja
 	</select>
 	
-	<select id="countToReview" resultType="int">
-		select /*+ index_ffs(review review_pk_r_no)*/count(*) from review
+	<select id="countToReportedJeja" resultType="int">
+		select /*+ index_ffs(jeja jeja_pk_j_mno)*/count(*) 
+		from jeja where j_accusation_cnt!=0 
 	</select>
 	
+	<!-- 신고횟수있는 제자목록 페이징 -->
+	<select id="findAllToRpList" resultType="jeja">
+		<![CDATA[
+			select * from
+				(select j.*,rownum as rnum from
+					(select /*+ index_desc(jeja jeja_pk_j_mno)*/j_mno jMno, j_email jEmail, j_name jName, j_accusation_cnt jAccusationCnt, j_joindate jJoinDate from jeja where j_accusation_cnt!=0)j
+					where rownum<=#{endRowNum})
+				where rnum>=#{startRowNum}
+		]]>
+	</select>	
+	
+	<select id="countToReview" resultType="int">
+		select /*+ index_ffs(review review_pk_r_no)*/count(*)
+		from review 
+	</select>
+	
+	<select id="findAllEnabledToJeja" resultType="jeja">
+		<![CDATA[
+			select * from
+				(select j.*,rownum as rnum from
+					(select /*+ index_desc(jeja jeja_pk_j_mno)*/j_mno jMno, j_email jEmail, j_name jName, j_accusation_cnt jAccusationCnt, j_joindate jJoinDate, enabled from jeja)j
+					where rownum<=#{endRowNum})
+				where rnum>=#{startRowNum}
+		]]>
+	</select>
+	
+	<select id="countToJejaEnabled" resultType="int">
+		select /*+ index_ffs(jeja jeja_pk_j_mno)*/count(*)
+		from jeja
+	</select>
 </mapper>
 
 
