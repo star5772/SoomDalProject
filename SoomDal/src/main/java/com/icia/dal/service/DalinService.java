@@ -112,7 +112,7 @@ public class DalinService {
 		PageToDalinField page = FieldPagingUtil.getPage(pageno, countOfDalin);
 		int srn = page.getStartRowNum();
 		int ern = page.getEndRowNum();
-		List<Dalin> dalinList = dalDao.findDalinByDetailFName(srn,ern);
+		List<Dalin> dalinList = dalDao.findDalinByDetailFName(srn,ern,detailFName);
 		List<DalinDto.DtoForFieldList> dtoList = new ArrayList<>();
 		for(Dalin d:dalinList) {
 			DalinDto.DtoForFieldList dto = modelMapper.map(d,DalinDto.DtoForFieldList.class);
