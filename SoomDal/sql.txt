@@ -285,6 +285,7 @@ CREATE TABLE Estimate (
    J_IS_OK CHAR(1), /* 수락 여부 */
    E_CASH NUMBER(5), /* 필요 캐시 */
    d_name nvarchar2(6), /* 달인 이름 */
+   E_WRITE_TIME DATE, /*견적서 보낸 시간*/
    constraint pk_estimate primary key(e_no,d_mno)
 );
 

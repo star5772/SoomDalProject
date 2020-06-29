@@ -10,13 +10,13 @@ $(document).ready(function(){
 	$("#delete").on("click",function(){
 		var params = {
 			_method:"delete",
-			_csrf:"${_csrf.token}"
+			_csrf:"${_csrf.token}",
 		}
 		$.ajax({
 			url: "/dal/member/resign",
 			method:"post",
 			data:params
-		}).done((result)=>{$("#delete").text(result);}).fail((result)=>{console.log(result);})
+		}).done(()=>alert("삭제완료")).done(()=>{location.href="/dal"}).fail(()=>{console.log("fail");})
 	})
 })
 </script>

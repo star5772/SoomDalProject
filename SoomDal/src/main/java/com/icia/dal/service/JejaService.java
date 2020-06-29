@@ -43,6 +43,10 @@ public class JejaService {
 	
 	public void delete(String jEmail) {
 		// 제자 회원탈퇴
+		Jeja jeja = dao.findById(jEmail);
+		if(jeja==null)
+			throw new RuntimeException();
+		authDao.deleteAuthority(jEmail);
 		dao.deleteJeja(jEmail);
 	}
 	
@@ -51,7 +55,7 @@ public class JejaService {
 		System.out.println();
 		JejaDto.DtoForJejaRead dto = modelMapper.map(jeja,JejaDto.DtoForJejaRead.class);
 		dto.setEmail(jeja.getJEmail()).setName(jeja.getJName()).setTel(jeja.getJTel()).setJMno(jeja.getJMno());
-		System.out.println(dto);
+		System.out.println("------Dto---------"+dto);
 		return dto;
 	}
 

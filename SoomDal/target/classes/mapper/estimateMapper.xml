@@ -7,8 +7,8 @@
 		<selectKey>
 			select estimate_seq.nextval from dual
 		</selectKey>
-		insert into estimate(e_no,d_mno,f_no,j_mno,r_no,d_email,e_money,e_content,e_tel_type,j_is_ok,e_cash)
-		values(#{eNo},#{dMno},#{fNo},#{jMno},#{rNo},#{dEmail},#{eMoney},#{eContent},#{eTelType},0,1700)
+		insert into estimate(e_no,d_mno,f_no,j_mno,r_no,d_email,e_money,e_content,e_tel_type,j_is_ok,e_cash, e_write_time)
+		values(#{eNo},#{dMno},#{fNo},#{jMno},#{rNo},#{dEmail},#{eMoney},#{eContent},#{eTelType},0,1700, sysdate)
 	</insert>
 	<!-- 견적서 읽기 -->
 	<select id="findByEstimate" resultType="estimate">

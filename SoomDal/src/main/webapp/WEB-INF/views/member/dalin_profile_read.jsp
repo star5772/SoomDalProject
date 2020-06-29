@@ -87,7 +87,7 @@ hr{
 
 </style>
 </head>
-<body style="overflow: scroll;">
+<body>
 	<form id="profileReadFrm" action="member/profile/read" method="get"></form>
 	<div id="dalinRead">
 		<div id="dProfile">

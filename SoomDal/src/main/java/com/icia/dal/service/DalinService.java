@@ -82,7 +82,10 @@ public class DalinService {
 	}
 
 	public void delete(String dEmail) {
+		if(dalDao.findByDalin(dEmail)==null)
+			throw new RuntimeException();
 		dalDao.deleteToDalin(dEmail);
+		dao.deleteAuthority(dEmail);
 	}
 	
 	

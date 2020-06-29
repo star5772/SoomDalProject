@@ -17,6 +17,9 @@ public class EstimateDto {
 		private int rNo;
 		private String dEmail;
 		private Boolean jIsOk;
+		private String rSubject;
+		private String eWriteDateStr;
+		private String dName;
 	}
 	
 	@Data

@@ -64,5 +64,9 @@ public class DalinDao {
 		map.put("dTel", dTel);
 		return tpl.selectOne("dalinMapper.findJNameAndJTelByDalinId",map);
 	}
+	
+	public Dalin findByDalinToDMno(int dMno){
+		return tpl.selectOne("dalinMapper.findByDalinToDMno",dMno);
+	}
 
 }
