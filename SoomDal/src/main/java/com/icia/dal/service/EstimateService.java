@@ -11,12 +11,12 @@ import org.apache.commons.lang3.RandomStringUtils;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
-import com.icia.dal.Exception.EstimateNotFoundException;
 import com.icia.dal.Exception.ReadFailException;
 import com.icia.dal.dao.DalinDao;
 import com.icia.dal.dao.EstimateDao;
 import com.icia.dal.dao.JejaDao;
 import com.icia.dal.dao.LessonHistoryDao;
+import com.icia.dal.dao.RequestDao;
 import com.icia.dal.dao.ReviewAuthorityDao;
 import com.icia.dal.dao.UseCashDao;
 import com.icia.dal.dto.EstimateDto;
@@ -26,6 +26,7 @@ import com.icia.dal.entity.Estimate;
 import com.icia.dal.entity.Jeja;
 import com.icia.dal.entity.LessonHistory;
 import com.icia.dal.entity.Level;
+import com.icia.dal.entity.Request;
 import com.icia.dal.entity.ReviewAuthority;
 import com.icia.dal.entity.UseCash;
 import com.icia.dal.util.pagingutil.EstimatePagingUtil;
@@ -50,6 +51,8 @@ public class EstimateService {
 	private LessonHistoryDao lhDao;
 	@Inject
 	private UseCashDao ucDao;
+	@Inject
+	private RequestDao requestDao;
 	
 	
 	// 견적서작성
@@ -70,6 +73,12 @@ public class EstimateService {
 		List<EstimateDto.DtoForList> dtoList = new ArrayList<>();
 		for(Estimate et:etList) {
 			EstimateDto.DtoForList dto = modelMapper.map(et,EstimateDto.DtoForList.class);
+			String str = et.getEWriteTime().format(DateTimeFormatter.ofPattern("yyyy년 MM월 dd일"));
+			Request request = requestDao.findByRequest(et.getRNo());
+			Jeja jeja = jejaDao.findByJejaToJMno(et.getJMno());
+			dto.setJName(jeja.getJName());
+			dto.setRSubject(request.getRSubject());
+			dto.setEWriteTimeStr(str);
 			dtoList.add(dto);
 		}
 		page.setList(dtoList);
@@ -78,10 +87,14 @@ public class EstimateService {
 	
 	// 견적서 읽기
 	public EstimateDto.DtoForRead readToSendEstimate(@NotNull Integer eNo) throws ReadFailException {
+
 		Estimate et = estimateDao.findByEstimate(eNo);
+		Dalin dalin = dalDao.findByDalinToDMno(et.getDMno());
+		System.out.println(et);
 		if(et==null)
 			throw new ReadFailException();
 		EstimateDto.DtoForRead dto = modelMapper.map(et,EstimateDto.DtoForRead.class);
+		
 		return dto;
 	}
 	
@@ -133,8 +146,14 @@ public class EstimateService {
 		for(Estimate et:etList) {
 			EstimateDto.DtoForList dto = modelMapper.map(et,EstimateDto.DtoForList.class);
 			String str = et.getEWriteTime().format(DateTimeFormatter.ofPattern("yyyy년 MM월 dd일"));
-			dto.setEWriteDateStr(str);
+			System.out.println("============="+et);
+			Request request = requestDao.findByRequest(et.getRNo());
+			Dalin dalin = dalDao.findByDalinToDMno(et.getDMno());
+			dto.setDName(dalin.getDName());
+			dto.setRSubject(request.getRSubject());
+			dto.setEWriteTimeStr(str);
 			dto.setDName(dalDao.findByDalinToDMno(et.getDMno()).getDName());
+			
 			dtoList.add(dto);
 		}
 		page.setList(dtoList);

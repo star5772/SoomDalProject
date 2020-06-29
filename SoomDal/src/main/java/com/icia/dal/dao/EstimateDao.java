@@ -30,7 +30,7 @@ public class EstimateDao {
 		map.put("startRowNum",startRowNum);
 		map.put("endRowNum",endRowNum);
 		map.put("dMno",dMno);
-		return tpl.selectList("estimateMapper.findAllByEstimate",map);
+		return tpl.selectList("estimateMapper.findAllByEstimateToDalin",map);
 	}
 	// 제자(받은견적서목록)
 	public List<Estimate> findAllByEstimateToJeja(int startRowNum,int endRowNum,int jMno) {
@@ -38,7 +38,8 @@ public class EstimateDao {
 		map.put("startRowNum",startRowNum);
 		map.put("endRowNum",endRowNum);
 		map.put("jMno",jMno);
-		return tpl.selectList("estimateMapper.findAllByEstimate",map);
+		System.out.println("ddddddddddd");
+		return tpl.selectList("estimateMapper.findAllByEstimateToJeja",map);
 	}
 	// 견적서 수락여부 업데이트
 	public int setIsOk(int eNo) {
