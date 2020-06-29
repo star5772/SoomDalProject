@@ -37,7 +37,7 @@ margin-left: 20px; display: inline-block;
 		</colgroup>
 		<thead>
 			<tr class="waring">
-				<th style=" ">번호</th>
+				<th>번호</th>
 				<th style="border-right: 1px solid #dcdcdc;">제목</th>
 				<th style="border-right: 1px solid #dcdcdc;">작성자</th>
 				<th>작성일</th>
@@ -45,14 +45,14 @@ margin-left: 20px; display: inline-block;
 		</thead>
 		<tbody>
 			<tr style="text-align: center; ">
-				<td class="num">공지</td>
+				<td class="num" >공지</td>
 				<td class="subject">공지 알려드립니다. 공지 알려드려</td>
 				<td class="writer">관리자</td>
 				<td class="date">2020-06-26</td>
 			</tr>
 			
 			<tr style="text-align: center; ">
-				<td class="num">100</td>
+				<td class="num">${list.qNo}</td>
 				<td class="subject">수학 보조선생님 구합니다. 연락주세요.</td>
 				<td class="writer">이은지</td>
 				<td class="date">2020-06-26</td>

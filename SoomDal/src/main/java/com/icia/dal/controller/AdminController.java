@@ -24,5 +24,5 @@ public class AdminController {
 		return new ModelAndView("main").addObject("viewName","admin/member_manage.jsp").addObject("jeja",adminService.adminPage(pageno)).addObject("review",adminService.ReviewPage(pageno))
 				.addObject("enabled",adminService.EnabledPage(pageno));
 	}
-	
+
 }
