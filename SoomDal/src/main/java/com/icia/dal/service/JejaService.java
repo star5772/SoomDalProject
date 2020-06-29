@@ -42,6 +42,10 @@ public class JejaService {
 	
 	public void delete(String jEmail) {
 		// 제자 회원탈퇴
+		Jeja jeja = dao.findById(jEmail);
+		if(jeja==null)
+			throw new RuntimeException();
+		authDao.deleteAuthority(jEmail);
 		dao.deleteJeja(jEmail);
 	}
 	

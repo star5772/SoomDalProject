@@ -110,11 +110,19 @@ public class MemberController {
 	}
 
 	@DeleteMapping("/member/resign")
-	public String resign(SecurityContextLogoutHandler handler, HttpServletRequest request, HttpServletResponse response, Principal principal) throws MembernameExistException {
-		jejaService.delete(principal.getName());
-		return "redirect:/";
-	}
-
+	public String resign(SecurityContextLogoutHandler handler, HttpServletRequest request, HttpServletResponse response, Authentication authentication) {
+		System.out.println(jejaService.read(authentication.getName()));
+		System.out.println("===");
+		if(jejaService.read(authentication.getName())!=null) {
+			jejaService.delete(authentication.getName());
+		    handler.logout(request, response, authentication);
+		} else {
+			System.out.println("=========================");
+			dalService.delete(authentication.getName());
+		    handler.logout(request, response, authentication);
+		}
+	      return "redirect:/";
+	   }
 	
 	// 달인 프로필 읽기
 	@GetMapping("/member/dalin_profile")
