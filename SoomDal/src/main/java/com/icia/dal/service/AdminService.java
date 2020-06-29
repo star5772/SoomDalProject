@@ -1,18 +1,28 @@
 package com.icia.dal.service;
 
-import java.time.format.*;
-import java.util.*;
+import java.io.File;
+import java.io.IOException;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.List;
 
-import javax.inject.*;
+import javax.inject.Inject;
 
-import org.modelmapper.*;
-import org.springframework.stereotype.*;
+import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
-import com.icia.dal.dao.*;
-import com.icia.dal.dto.*;
+import com.icia.dal.dao.AdminDao;
+import com.icia.dal.dto.AdminDto;
+import com.icia.dal.dto.EnabledPage;
+import com.icia.dal.dto.ReportedPage;
 import com.icia.dal.dto.page.AdminPage;
-import com.icia.dal.entity.*;
-import com.icia.dal.util.*;
+import com.icia.dal.entity.DetailField;
+import com.icia.dal.entity.Field;
+import com.icia.dal.entity.Jeja;
+import com.icia.dal.entity.Review;
+import com.icia.dal.util.EnabledPagingUtil;
 import com.icia.dal.util.pagingutil.AdminPagingUtil;
 import com.icia.dal.util.pagingutil.ReportedPagingUtil;
 
@@ -22,6 +32,10 @@ public class AdminService {
 	private AdminDao adminDao;
 	@Inject
 	private ModelMapper modelMapper;
+	@Value("${FieldFolder}")
+	private String fieldFolder;
+	@Value("${FieldPath}")
+	private String fieldPath;
 	
 
 	public AdminPage adminPage(int pageno) {
@@ -72,7 +86,7 @@ public class AdminService {
 		repPage.setList(dtoList);
 		return repPage;
 	}
-	
+	// 블락유저(제자) 페이징
 	public EnabledPage EnabledPage(int pageno) {
 		int countOfBoard = adminDao.countToJejaEnabled();
 		EnabledPage enaPage = EnabledPagingUtil.getPage(pageno, countOfBoard);
@@ -88,4 +102,56 @@ public class AdminService {
 		enaPage.setList(dtoList);
 		return enaPage;
 	}
+	
+	// 세부분야 목록 출력
+	public List<DetailField> detailFnameList(String fNo) {
+		List<DetailField> dfList = adminDao.findAllDetailField(fNo);
+		return dfList;
+	}
+	
+	public int insertDetailFieldSajin(DetailField df,MultipartFile sajin) throws IllegalStateException, IOException {
+
+		if(sajin != null && sajin.isEmpty()==false) {
+			if(sajin.getContentType().toLowerCase().startsWith("image/")==true) {
+				int lastIndexOfDot = sajin.getOriginalFilename().lastIndexOf(".");
+				String extension = sajin.getOriginalFilename().substring(lastIndexOfDot+1);
+				File fieldSajin = new File(fieldFolder,df.getDetailFName() + "." + extension);
+				
+				sajin.transferTo(fieldSajin);
+				df.setDetailFSajin(fieldPath + fieldSajin.getName()); 
+			}else {
+				df.setDetailFSajin(fieldPath + "anony.jpg");
+			}
+		}else {
+			df.setDetailFSajin(fieldPath+ "anony.jpg");
+		}
+		return adminDao.insertToDetailFName(df);
+	}
+	
+	public List<Field> fieldList() {
+		List<Field> fList = adminDao.findAllField();
+		return fList;
+	}
+	
+	public int insertFieldSajin(Field fl,MultipartFile sajin) throws IllegalStateException, IOException {
+		adminDao.deleteToField(fl.getFNo());
+		System.out.println(sajin);
+		if(sajin != null && sajin.isEmpty()==false) {
+			System.out.println(sajin);
+			if(sajin.getContentType().toLowerCase().startsWith("image/")==true) {
+				int lastIndexOfDot = sajin.getOriginalFilename().lastIndexOf(".");
+				String extension = sajin.getOriginalFilename().substring(lastIndexOfDot+1);
+				File fieldSajin = new File(fieldFolder,fl.getFName() + "." + extension);
+				
+				sajin.transferTo(fieldSajin);
+				fl.setFSajin(fieldPath + fieldSajin.getName()); 
+			}else {
+				fl.setFSajin(fieldPath + "anony.jpg");
+			}
+		}else {
+			fl.setFSajin(fieldPath+ "anony.jpg");
+		}
+		return adminDao.insertToField(fl);
+	}
+
 }

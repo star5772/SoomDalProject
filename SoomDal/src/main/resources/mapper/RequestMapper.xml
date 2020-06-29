@@ -14,25 +14,46 @@
 		#{rYourLevel},#{rItemExists},#{rLessonType},#{rWantDate},#{rWantTime},
 		#{rAge},#{rGender},0,#{rWannable},#{rWantArea},sysdate,#{dMno},1)
 	</insert>
-	
+
 	<select id="findByRequest" resultType="request">
-		select * from request where r_no=#{rNo} and rownum=1
+		select r_no rNo, j_mno jMno, r_field rField, r_subject rSubject, r_lesson_purpose rLessonPurpose, r_your_level rYourLevel, r_item_exists rItemExists, r_lesson_type rLessonType, r_want_date rWantDate, r_want_time rWantTime, r_age rAge, r_gender rGender, r_dalin_is_ok rDalinIsOk, r_wannable rWannable, r_want_area rWantArea, r_write_date rWriteDate, d_mno dMno, rb_enabled rbEnabled from request where r_no=#{rNo} and rownum=1
 	</select>
-	
-	<select id="findAllByRequest" resultType="request">
+	<!-- 제자가 작성한 요청서 목록 -->
+	<select id="findAllByRequestToJeja" resultType="request">
 		<![CDATA[
 			select * from
 				(select r.* ,rownum rnum from
 					(select * from request where j_mno = #{jMno}) r
 				where rownum<=#{endRowNum})
 			where rnum>=#{startRowNum}
-		]]>	
+		]]>
 	</select>
 	
+	<!-- 달인이 받은 요청서 목록 -->
+	<select id="findAllByRequestToDalin" resultType="request">
+		<![CDATA[
+			select * from
+				(select r.* ,rownum rnum from
+					(select r_no rNo,j_mno jMno, r_subject rSubject, r_field rField, r_dalin_is_ok rDalinIsOk, r_want_area rWantArea, r_write_date rWriteDate, d_mno dMno, rb_enabled rbEnabled from request where d_mno = #{dMno}) r
+				where rownum<=#{endRowNum})
+			where rnum>=#{startRowNum}
+		]]> 
+	</select>
+
 	<delete id="deleteToRequest">
 		delete from request where r_no=#{rNo} and rownum=1
 	</delete>
-	
+
+	<select id="countToRequest" resultType="int">
+		select count(*) from
+		request where j_mno = #{jMno}
+	</select>
+
+	<select id="countToRequestForDalin" resultType="int">
+		select count(*)
+		from request where d_mno = #{dMno}
+	</select>
+
 </mapper>
 
 

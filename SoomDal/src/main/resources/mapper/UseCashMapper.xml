@@ -11,7 +11,7 @@
 		<![CDATA[
 			select * from
 				(select u.*,rownum rnum from
-					(select * from usecash where d_mno=#{dMno}) u
+					(select e_no eNo, d_mno dMno, ca_estimate_cash caEstimateCash, ca_use_date caUseDate from usecash where d_mno=#{dMno}) u
 				where rownum<=#{endRowNum})
 			where rnum>=#{startRowNum}
 		]]>			
@@ -20,6 +20,10 @@
 	<delete id="deleteByUseCash">
 		delete from usecash where e_no=#{eNo} and rownum=1
 	</delete>
+	
+	<select id="countToUseCash" resultType="int">
+		select count(*) from usecash where d_mno=#{dMno}
+	</select>
 
 </mapper>
 

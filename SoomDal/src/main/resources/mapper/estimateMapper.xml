@@ -30,12 +30,16 @@
 	</delete>
 	
 	<select id="countToEstimate" resultType="int">
-		select count(*) from estimate
+		select count(*) from estimate where d_mno = #{dMno}
 	</select>
 	
 	<update id="setIsOk">
 		update estimate set j_is_ok=1 where e_no=#{eNo} and rownum=1
 	</update>
+	
+	<select id="countToEstimateForJeja" resultType="int">
+		select count(*) from estimate where j_mno = #{jMno}
+	</select>
 	
 </mapper>
 

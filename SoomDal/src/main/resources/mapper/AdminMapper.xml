@@ -97,6 +97,43 @@
 		select /*+ index_ffs(jeja jeja_pk_j_mno)*/count(*)
 		from jeja
 	</select>
+	
+	<!-- 세부분야 & 분야 페이즈 -->
+	<select id="findAllDetailField" resultType="detailField">
+		select f_no fNo,detail_f_name detailFName, detail_f_sajin detailFSajin from detailfield where f_no = #{fNo}
+	</select>
+
+	<select id="findByDetailField" resultType="detailField">
+		select f_no fNo,detail_f_name detailFName, detail_f_sajin detailFSajin from detailfield where f_no = #{fNo} and detail_f_name = #{detailFName}
+	</select>
+	
+	<insert id="insertToDetailFName">
+		insert into DetailField(f_no,detail_f_name,detail_f_sajin)
+		VALUES(#{fNo},#{detailFName},#{detailFSajin})
+	</insert>
+	
+	<insert id="insertToField">
+		insert into field(f_no,f_name,f_sajin)
+		VALUES(#{fNo},#{fName},#{fSajin})
+	</insert>
+	
+	<select id="findAllField" resultType="field">
+		select f_no fNo,f_name fName,f_sajin fSajin from field
+	</select>
+	
+	<select id="findByField" resultType="field">
+		select f_no fNo,f_name fName,f_sajin fSajin from field where f_no=#{fNo}
+	</select>
+	
+	<delete id="deleteToField">
+		delete from field where f_no=#{fNo} and rownum=1
+	</delete>
+	
+	<delete id="deleteToDetailField">
+		delete from detailfield where f_no=#{fNo} and detail_f_name=#{detailFName} and rownum=1
+	</delete>
+
+	
 </mapper>
 
 

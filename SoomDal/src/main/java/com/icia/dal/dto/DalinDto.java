@@ -47,6 +47,15 @@ public class DalinDto {
 		private List<Review> reviews;
 		private List<ProfileAttachment> ProfileAttachments;
 	}
+	@Data
+	public static class DtoForMyInfo {
+		private int dMno;
+		private String dName;
+		private	String dEmail;
+		private String dProfile;
+		private int dCash;
+		private String dLevelStr;
+	}
 	
 	@Data
 	public static class DtoForUpdateToDalinProfile {
@@ -79,8 +88,10 @@ public class DalinDto {
 	
 	@Data
 	public static class DtoForFieldList {
+		private String dMno;
 		private String dProfile;
 		private String dName;
 		private String dIntro;
 	}
+	
 }

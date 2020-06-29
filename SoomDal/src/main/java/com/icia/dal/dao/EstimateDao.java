@@ -48,8 +48,12 @@ public class EstimateDao {
 	public int deleteToEstimate(int eNo) {
 		return tpl.delete("estimateMapper.deleteToEstimate",eNo);
 	}
-	// 견적서 숫자 카운트
-	public int countToEstimate() {
-		return tpl.selectOne("estimateMapper.countToEstimate");
+	// 달인 견적서 숫자 카운트
+	public int countToEstimate(int dMno) {
+		return tpl.selectOne("estimateMapper.countToEstimate",dMno);
+	}
+	// 제자 견적서 숫자 카운트
+	public int countToEstimateForJeja(int jMno) {
+		return tpl.selectOne("estimateMapper.countToEstimateForJeja",jMno);
 	}
 }

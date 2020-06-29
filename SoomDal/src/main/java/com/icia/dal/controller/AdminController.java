@@ -25,13 +25,4 @@ public class AdminController {
 				.addObject("enabled",adminService.EnabledPage(pageno));
 	}
 	
-	
-	/*
-	 * @GetMapping("/admin/report_manage") public ModelAndView
-	 * reportManage(@RequestParam(defaultValue = "1") int pageno) { return new
-	 * ModelAndView("main").addObject("viewName","admin/member_manage.jsp");
-	 * 
-	 * }
-	 */
-	
 }

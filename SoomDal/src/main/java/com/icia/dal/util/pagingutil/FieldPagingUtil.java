@@ -1,6 +1,5 @@
 package com.icia.dal.util.pagingutil;
 
-import com.icia.dal.dto.*;
 import com.icia.dal.dto.page.PageToDalinField;
 
 public class FieldPagingUtil {
@@ -15,7 +14,9 @@ public class FieldPagingUtil {
 		if(pageno>countOfPage)
 			pageno=countOfPage;
 		
+		System.out.println(pageno);
 		int startRowNum = (pageno-1)*COUNT_OF_BOARD_PER_PAGE +1;
+		System.out.println(startRowNum);
 		int endRowNum = startRowNum + COUNT_OF_BOARD_PER_PAGE - 1;
 		
 		endRowNum = (endRowNum>countOfBoard)?countOfBoard:endRowNum;
@@ -31,6 +32,6 @@ public class FieldPagingUtil {
 		
 		return PageToDalinField.builder().startPage(startPage).endPage(endPage)
 			.startRowNum(startRowNum).endRowNum(endRowNum)
-			.isPrev(isPrev).isNext(isNext).pageno(pageno).build();
+			.isPrev(isPrev).isNext(isNext).pageno(pageno).count(countOfBoard).build();
 	}
 }
