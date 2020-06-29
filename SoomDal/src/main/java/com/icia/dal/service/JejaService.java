@@ -6,6 +6,7 @@ import org.modelmapper.*;
 import org.springframework.security.crypto.password.*;
 import org.springframework.stereotype.*;
 
+import com.icia.dal.Exception.UserNotFoundException;
 import com.icia.dal.dao.*;
 import com.icia.dal.dto.*;
 import com.icia.dal.dto.JejaDto.*;
@@ -80,6 +81,12 @@ public class JejaService {
 			return true;
 		}
 		return false;
+	}
+
+	public String findId(String jName, String jTel) throws UserNotFoundException {
+		if(dao.findJNameAndJTelByJejaId(jName, jTel)==null)
+			throw new UserNotFoundException();
+		return dao.findJNameAndJTelByJejaId(jName, jTel);		
 	}
 	
 	

@@ -44,7 +44,7 @@ function openChild()
     // window.name = "부모창 이름"; 
     window.name = "main";
     // window.open("open할 window", "자식창 이름", "팝업창 옵션");
-    openWin = window.open("/dal/member/dalin/find_id",
+    openWin = window.open("/dal/member/find_id",
             "FindDalinId", "width=700, height=700, resizable = no, scrollbars = no");    
 }
 

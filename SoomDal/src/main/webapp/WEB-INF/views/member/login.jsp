@@ -5,8 +5,19 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script>
+var openWin;
 
+function openChild()
+{
+    // window.name = "부모창 이름"; 
+    window.name = "main";
+    // window.open("open할 window", "자식창 이름", "팝업창 옵션");
+    openWin = window.open("/dal/member/find_id",
+            "FindDalinId", "width=700, height=700, resizable = no, scrollbars = no");    
+}
 
+</script>	
 <style>
 
 .form-group {
@@ -58,7 +69,7 @@
 						<input type="hidden" name="${_csrf.parameterName}"
 							value="${_csrf.token}">
 						<button type="submit" class="btn btn-warning">제자회원 로그인</button><br><br>
-						<a class="findId" href="#" style="float:left">제자 아이디 찾기</a>
+						<a class="findId" href="#" onclick="openChild()" style="float:left">제자 아이디 찾기</a>
 						<a class="findPwd" href="#"style="float:right">제자 비밀번호 찾기</a>
 					</form>	
 				</div>	
@@ -73,7 +84,7 @@
 						<input type="hidden" name="${_csrf.parameterName}"
 							value="${_csrf.token}">
 						<button type="submit" class="btn btn-success">달인회원 로그인</button><br><br>
-						<a class="findId" href="#" style="float:left">달인 아이디 찾기</a>
+						<a class="findId" href="#" onclick="openChild()" style="float:left">달인 아이디 찾기</a>
 						<a class="findPwd" href="#" style="float:right">달인 비밀번호 찾기</a>
 					</form>	
 				</div>

@@ -19,10 +19,20 @@ function inputTel() {
 	var $tel = tel1 + tel2 + tel3;
 	$("#dTel").val($tel);
 }
+function inputTel1() {
+	var tel1 = $("#jtel-one").val();
+	var tel2 = $("#jtel-two").val();
+	var tel3 = $("#jtel-three").val();
+	var $tel = tel1 + tel2 + tel3;
+	$("#jTel").val($tel);
+}
 $(function(){
 	$("#tel-one").on("change",inputTel)
 	$("#tel-two").on("blur",inputTel)
 	$("#tel-three").on("blur",inputTel);
+	$("#jtel-one").on("change",inputTel1)
+	$("#jtel-two").on("blur",inputTel1)
+	$("#jtel-three").on("blur",inputTel1);
 
 	$("#findDalin").on("click",function(){
 		var formData = $("#findDalinFrm").serialize();
@@ -32,19 +42,20 @@ $(function(){
 			method: "post",
 			success: function(result) {
 				$("#div").css("display","none");
-				$("#FindId_msg").text("회원님의 아이디는" + result + "입니다");
+				$("#FindDalinId_msg").text("회원님의 아이디는" + result + "입니다");
 			}
 		})
 	})
 	$("#findJeja").on("click",function() {
 		var formData = $("#findJejaFrm").serialize();
 		$.ajax({
-			url: "/dal/member/dalin/find_id",
+			url: "/dal/member/jeja/find_id",
 			data: formData,
 			method: "post",
 			success: function(result) {
 				$("#div").css("display","none");
-				$("#FindId_msg").text("회원님의 아이디는" + result + "입니다");
+				$("#div2").css("display","none");
+				$("#FindJejaId_msg").text("회원님의 아이디는" + result + "입니다");
 			}
 		})
 	})
@@ -53,69 +64,70 @@ $(function(){
 <style type="text/css">
 #tel-one,#jtel-one {
 	display: inline-block;
-	width:140px;
-	height: 40px;
-	font-size: medium; 
+	width:80px;
+	height: 30px;
+	font-size: small; 
 }
 #tel-two,#jtel-two {
 	display: inline-block;
-	width:125px;
-	height: 40px;
-	font-size: large; 
+	width:80px;
+	height: 30px;
+	font-size: small; 
 }
 #tel-three,#jtel-three {
 	display: inline-block;
-	width:125px;
-	height: 40px;
-	font-size: large; 
+	width:80px;
+	height: 30px;
+	font-size: small; 
 }
 </style>
 </head>
 <body>
-<img alt="" src="/image/MainLogo.png">
-<div style="width: 300px; height: 300px; display: inline-block;">
-	<h2 style="text-align: center;">달인 아이디찾기</h2>
-	<span id="FindId_msg"></span>
-	<div id="div" style="margin-left:0px;">
-		<form id="findDalinFrm">
-			<label for="dTel" style="font-size: medium;">연락처</label><br>
-			<select id="tel-one" class="form-control">
-				<option value="010">휴대폰 - 010</option>
-				<option value="011">휴대폰 - 011</option>
-			</select>
-			<input type="text" id="tel-two" class="form-control" maxlength="4"> - 
-			<input type="text" id="tel-three" class="form-control" maxlength="4">
-			<input type="hidden" id="dTel"name="dTel" value="">
-			<br>
-			<label for="dName" style="font-size: medium;">이름</label>
-			<input type="text" name="dName" placeholder="가입시 입력했던 이름을 입력해주세요" class="form-control" style="width: 407px;font-size: medium;">
-			<br><br>
-			<button type="button" id="findDalin" class="btn btn-success">찾기</button>
-		</form>
-	</div>
-</div>
-
-<div style="width: 300px; height: 300px; display: inline-block;">
-	<h2 style="text-align: center;">제자 아이디찾기</h2>
-	<span id="FindId_msg"></span>
-	<div id="div" style="margin-left:0px;">
-		<form id="findJejaFrm">
-			<label for="jTel" style="font-size: medium;">연락처</label><br>
-			<select id="jtel-one" class="form-control">
-				<option value="010">휴대폰 - 010</option>
-				<option value="011">휴대폰 - 011</option>
-			</select>
-			<input type="text" id="jtel-two" class="form-control" maxlength="4"> - 
-			<input type="text" id="jtel-three" class="form-control" maxlength="4">
-			<input type="hidden" id="jTel"name="jTel" value="">
-			<br>
-			<label for="dName" style="font-size: medium;">이름</label>
-			<input type="text" name="jName" placeholder="가입시 입력했던 이름을 입력해주세요" class="form-control" style="width: 407px;font-size: medium;">
-			<br><br>
-			<button type="button" id="findJeja" class="btn btn-success">찾기</button>
-		</form>
-	</div>
-</div>
-	
+<div>
+	<img alt="" src="/image/MainLogo.png">
+		<div style="width: 300px; height: 300px; float:left; display: inline-block;">
+			<h2 style="text-align: center;">달인 아이디찾기</h2>
+			<span id="FindDalinId_msg"></span>
+			<div id="div" style="border: 1px solid #DDDDDD; padding: 5px 5px 5px 5px;">
+				<form id="findDalinFrm">
+					<label for="dTel" style="font-size: medium;">연락처</label><br>
+					<select id="tel-one" class="form-control">
+						<option value="010">010</option>
+						<option value="011">011</option>
+					</select> - 
+					<input type="text" id="tel-two" class="form-control" maxlength="4"> - 
+					<input type="text" id="tel-three" class="form-control" maxlength="4">
+					<input type="hidden" id="dTel"name="dTel" value="">
+					<br>
+					<label for="dName" style="font-size: medium;">이름</label>
+					<input type="text" name="dName" placeholder="가입시 입력했던 이름을 입력해주세요" class="form-control" style="width: 150px;font-size: small;">
+					<br><br>
+					<button type="button" id="findDalin" class="btn btn-success" style="margin-left:120px;">찾기</button>
+				</form>
+			</div>
+		</div>
+		
+		<div style="width: 300px; height: 300px; float:right; display: inline-block; ">
+			<h2 style="text-align: center;">제자 아이디찾기</h2>
+			<span id="FindJejaId_msg"></span>
+			<div id="div2"style="border: 1px solid #DDDDDD; padding: 5px 5px 5px 5px;">
+				<form id="findJejaFrm">
+					<label for="jTel" style="font-size: medium;">연락처</label><br>
+					<select id="jtel-one" class="form-control">
+						<option value="010">010</option>
+						<option value="011">011</option>
+					</select> - 
+					<input type="text" id="jtel-two" class="form-control" maxlength="4"> - 
+					<input type="text" id="jtel-three" class="form-control" maxlength="4">
+					<input type="hidden" id="jTel"name="jTel" value="">
+					<br>
+					<label for="jName" style="font-size: medium;">이름</label>
+					<input type="text" name="jName" placeholder="가입시 입력했던 이름을 입력해주세요" class="form-control" style="width: 150px;font-size: small;">
+					<br><br>
+					<button type="button" id="findJeja" class="btn btn-success" style="margin-left:120px;">찾기</button>
+				</form>
+			</div>
+		</div>
+</div>	
 </body>
 </html>
