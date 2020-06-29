@@ -13,12 +13,17 @@ import org.springframework.stereotype.Service;
 
 import com.icia.dal.dao.DalinDao;
 import com.icia.dal.dao.PaymentDao;
+import com.icia.dal.dao.UseCashDao;
 import com.icia.dal.dto.NowPaymentDto;
-import com.icia.dal.dto.PageToNowPayment;
+import com.icia.dal.dto.UseCashDto;
+import com.icia.dal.dto.page.PageToNowPayment;
+import com.icia.dal.dto.page.PageToUseCash;
 import com.icia.dal.entity.Dalin;
 import com.icia.dal.entity.NowPayment;
 import com.icia.dal.entity.RequestPayment;
-import com.icia.dal.util.PaymentPagingUtil;
+import com.icia.dal.entity.UseCash;
+import com.icia.dal.util.pagingutil.PaymentPagingUtil;
+import com.icia.dal.util.pagingutil.UseCashPagingUtil;
 
 @Service
 public class PaymentService {
@@ -28,6 +33,8 @@ public class PaymentService {
 	private DalinDao dalDao;
 	@Inject
 	private ModelMapper modelMapper;
+	@Inject
+	private UseCashDao ucDao;
 
 	public int insertCashToDalin(RequestPayment rp,String username) {
 		// 랜덤한 코드 8자리 생성후 결제코드로 입력
@@ -92,6 +99,24 @@ public class PaymentService {
 			NowPaymentDto.DtoForListToNowPayment dto = modelMapper.map(np, NowPaymentDto.DtoForListToNowPayment.class);
 			String str = np.getPDate().format(DateTimeFormatter.ofPattern("yyyy년MM월dd일 hh시 mm분"));
 			dto.setPDateStr(str);
+			list.add(dto);
+		}
+		page.setList(list);
+		return page;
+	}
+	
+	public PageToUseCash useCashList(int pageno,String username,int dMno) {
+		int countOfUseCash = ucDao.countToUseCash(dMno);
+		PageToUseCash page = UseCashPagingUtil.getPage(pageno, countOfUseCash);
+		int srn = page.getStartRowNum();
+		int ern = page.getEndRowNum();
+		List<UseCash> ucList = null;
+		ucList = ucDao.findAllByUseCash(srn, ern, dMno);
+		List<UseCashDto.DtoForList> list = new ArrayList<>();
+		for(UseCash uc:ucList) {
+			UseCashDto.DtoForList dto = modelMapper.map(uc, UseCashDto.DtoForList.class);
+			String str = uc.getCaUseDate().format(DateTimeFormatter.ofPattern("yyyy년MM월dd일 HH시 mm분"));
+			dto.setCaUseDateStr(str);
 			list.add(dto);
 		}
 		page.setList(list);

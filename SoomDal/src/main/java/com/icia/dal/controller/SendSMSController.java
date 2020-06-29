@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.icia.dal.entity.RequestPayment;
 import com.icia.dal.service.PaymentService;
-import com.icia.dal.util.Coolsms;
+import com.icia.dal.util.sms.Coolsms;
 
 @RequestMapping("/member")
 @Controller

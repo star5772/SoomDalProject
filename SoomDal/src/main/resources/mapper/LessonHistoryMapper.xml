@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="historyMapper">
+
+
+	<insert id="insertToLessonHistory">
+		insert into LessonHistory(a_complete_code,d_mno,j_mno,l_start_date)
+		values(#{aCompleteCode},#{dMno},#{jMno},sysdate)
+	</insert>
+	
+	<select id="findAllByLessonHistory" resultType="lessonHistory">
+		<![CDATA[
+			select * from
+				(select l.*,rownum rnum from	
+					(select * from LessonHistory where a_complete_code=#{aCompleteCode}) l
+				where rownum<=#{endRowNum})
+			where rnum>=#{startRowNum}
+		]]>			
+	</select>
+	
+	<delete id="deleteToLessonHistory">
+		delete from lessonhistory where a_complete_code=#{aCompleteCode} and rownum=1
+	</delete>
+
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+

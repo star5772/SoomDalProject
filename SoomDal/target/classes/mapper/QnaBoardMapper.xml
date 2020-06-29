@@ -7,8 +7,8 @@
 			order="BEFORE">
 			select qnaboard_seq.nextval from dual
 		</selectKey>
-		insert into QnaBoard values(#{qNo}, #{qTitle}, #{qContent}, sysdate,
-		#{qWriter}, #{cNo}, 0,0)
+		insert into QnaBoard(Q_NO, Q_TITLE, Q_CONTENT, Q_WRITER,Q_WRITE_DATE, Q_IS_SECRET, Q_IS_NOTICE) values(#{qNo}, #{qTitle}, #{qContent}, #{qWriter},
+		sysdate, 0,0)
 	</insert>
 	
 	<select id="count" resultType="int">
@@ -30,7 +30,7 @@
  	<![CDATA[
  		select * from
  			select rownum as rnum, b.* from
-				(select /*+ index_desc(qnaboard qnaboard_pk_qno) */ Q_NO,Q_TITLE,Q_WRITER,Q_WRITE_DATE from qnaboard) b
+				(select /*+ index_desc(qnaboard qnaboard_pk_qno) */ Q_NO, Q_TITLE, Q_WRITER, Q_WRITE_DATE from qnaboard) b
 			where rownum>=#{endRowNum})
 		where rnum>=#{startRowNum}
 	]]> 

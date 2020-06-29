@@ -10,10 +10,10 @@ import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import com.icia.dal.dao.QnaBoardDao;
-import com.icia.dal.dto.PageToQnaBoard;
 import com.icia.dal.dto.QnaDto;
+import com.icia.dal.dto.page.PageToQnaBoard;
 import com.icia.dal.entity.QnaBoard;
-import com.icia.dal.util.QnaBoardPagingUtil;
+import com.icia.dal.util.pagingutil.QnaBoardPagingUtil;
 
 @Service
 public class QnaBoardService {
@@ -24,7 +24,7 @@ public class QnaBoardService {
 	
 	public int write(QnaBoard qnaBoard,String username) {
 		qnaBoard.setQWriter(username);
-		qnaBoardDao.insert(qnaBoard);
+		qnaBoardDao.insertToQnaBoard(qnaBoard);
 		return qnaBoard.getQNo();
 	}
 	

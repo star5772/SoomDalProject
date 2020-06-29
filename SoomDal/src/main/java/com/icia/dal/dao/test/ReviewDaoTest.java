@@ -28,4 +28,20 @@ public class ReviewDaoTest {
 	public void delete() {
 		//assertThat(reviewDao.delete(1), is(1));
 	}
+	
+	//@Test
+	public void insertTest() {
+		for(int i=0; i<100; i++) {
+		Review review = Review.builder().rNo(1).rContent("냉무").rScore(1).rSajinCnt(1).rWriter("새고개").sNo(1).build();
+		assertThat(reviewDao.insertToReview(review), is(1));
+		}
+	}
+	
+	//@Test
+	public void updateTest() {
+		for(int i=0; i<100; i++) {
+			Review review = Review.builder().rNo(i+1).jAccusationCnt(1).build();
+			reviewDao.updateToReview(review);
+		}
+	}
 }

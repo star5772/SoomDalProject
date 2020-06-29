@@ -19,7 +19,7 @@
 		<property name="driverClassName" value="net.sf.log4jdbc.DriverSpy" />
 		<property name="url" value="jdbc:log4jdbc:oracle:thin:@127.0.0.1:1521:XE" />
 		<property name="username" value="soomdal" />
-		<property name="password" value="cktofhdl" />		
+		<property name="password" value="1234" />		
 		<property name="maxTotal" value="10" />			<!-- 최대 활성 연결수 -->
 		<property name="maxIdle" value="10" />			<!-- 최대 비활성 연결수 -->
 		<property name="maxWaitMillis" value="3000" />	<!-- Connection이 모두 사용중일때 최대 대기 시간을 3초로 지정 -->
@@ -66,10 +66,6 @@
 	
 	<bean id="mailUtil" class="com.icia.dal.util.MailUtil" />
 
-	<!-- 아파치 commons file upload를 이용하는 일반적인 설정 -->
-	<!-- 
-		<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver" />
-	-->
 
 	<!-- 
 		스프링 시큐리티를 사용해 csrf를 포함하는 경우 파일 업로드 객체를 변경해야한다	
@@ -80,11 +76,6 @@
          <property name="maxUploadSize" value="1048576" />
 	</bean>
 	
-	<!-- 
-		DAO를 생성하는 방법
-			클래스의 경우 @Repository를 통해 스프링이 빈 생성
-			인터페이스의 경우 마이바티스가 빈 생성 -> 마이바티스에 검색할 패키지를 지정해야 한다
-	 -->
 	<mybatis-spring:scan base-package="com.icia.dal.dao"/>
 	
 	<!-- context:exclude-filter :  특정 어노테이션 컴포넌트 스캔 제외
