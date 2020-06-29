@@ -147,6 +147,12 @@ public class DalinService {
 			dto.setReviews(reviewDao.findAllReview(dto.getDMno()));
 		return dto;
 	}
+
+	public String findId(String dName, String dTel) throws UserNotFoundException {
+		if(dalDao.findJNameAndJTelByDalinId(dName, dTel)==null)
+			throw new UserNotFoundException();
+		return dalDao.findJNameAndJTelByDalinId(dName, dTel);
+	}
 	
 }	
 

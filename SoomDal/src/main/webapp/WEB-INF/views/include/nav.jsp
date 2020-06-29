@@ -35,6 +35,19 @@ $(function() {
 		})
 	});
 });
+</script>
+<script>
+var openWin;
+
+function openChild()
+{
+    // window.name = "부모창 이름"; 
+    window.name = "main";
+    // window.open("open할 window", "자식창 이름", "팝업창 옵션");
+    openWin = window.open("/dal/member/dalin/find_id",
+            "FindDalinId", "width=700, height=700, resizable = no, scrollbars = no");    
+}
+
 </script>	
 <style>
 #login{ margin-left: 20px; }
@@ -50,7 +63,7 @@ $(function() {
         <ul class="navbar-nav ml-auto">
         	<sec:authorize access="isAnonymous()">
         		<li class="nav-item"><a class="nav-link" href="#"style="color:black; font-size:medium;"><i class="fas fa-search">&nbsp;달인 찾기</i></a></li>
-        		<li class="nav-item"><a class="nav-link" href="#"style="color:black; font-size:medium;">아이디 찾기</a></li>
+        		<li class="nav-item"><a class="nav-link" href="#" onclick="openChild()" style="color:black; font-size:medium;">아이디 찾기</a></li>
 	          	<li class="nav-item"><a class="nav-link" href="#"style="color:black; font-size:medium;">비밀번호 찾기</a></li>
 	          	<li class="nav-item"><a class="nav-link" href="/dal/member/join_select"style="color:black; font-size:medium;">회원가입</a></li>
 	          	<li class="nav-item"><a class="nav-link" href="/dal/member/login"style="color:black; font-size: medium;">로그인</a></li>        	

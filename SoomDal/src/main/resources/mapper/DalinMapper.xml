@@ -70,12 +70,17 @@
 	</select>
 
 	<select id="findDalinByDetailFName" resultType="dalin">
-	<![CDATA[
-		select * from
-			(select f.*, rownum r from
-				(select /*+ index_desc(dalin pk_dalin) */ d_mno dMno, d_profile dProfile, d_name dName, d_intro dIntro from dalin where DETAIL_F_NAME=#{detailFName}) f
-			where rownum<=#{endRowNum})
-		where r>=#{startRowNum}
-	]]>
+		<![CDATA[
+			select * from
+				(select f.*, rownum r from
+					(select /*+ index_desc(dalin pk_dalin) */ d_mno dMno, d_profile dProfile, d_name dName, d_intro dIntro from dalin where DETAIL_F_NAME=#{detailFName}) f
+				where rownum<=#{endRowNum})
+			where r>=#{startRowNum}
+		]]>
 	</select>
+	
+	<select id="findJNameAndJTelByDalinId" resultType="string">
+		select d_email dEmail from dalin where d_tel = #{dTel} and d_name = #{dName} and rownum=1
+	</select>
+	
 </mapper>
