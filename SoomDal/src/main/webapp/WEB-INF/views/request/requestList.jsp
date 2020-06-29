@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -69,6 +71,7 @@ a {
 </style>
 </head>
 <body>
+<sec:authorize access="hasRole('ROLE_DALIN')">
 	<div class="request">
 		<div style="padding-bottom: 30px; padding-left: 10px;">
 			<h2>받은 요청서</h2>
@@ -114,6 +117,54 @@ a {
 		</ul>
 		</div>
 	</div>
+</sec:authorize>
+<sec:authorize access="hasRole('ROLE_JEJA')">
+	<div class="request">
+		<div style="padding-bottom: 30px; padding-left: 10px;">
+			<h2>보낸 요청서</h2>
+		</div>
+	<c:forEach items="${sendRequest.list }" var="request">
+		<div class="card">
+			<div class="card-top">
+				<br>
+				<div><h5>${request.RSubject }</h5></div>
+				<div><p>${request.RWriteDateStr }</p></div>
+			</div>
+			<div class="card-body">
+				<div>${request.JName } 제자</div>			
+			</div>	
+			<div class="card-bottom" id="button">
+				<div><hr></div>
+				<button onclick="location.href='/dal/member/request/readToRequestForSend?rNo=${request.RNo}'" class="btn btn-warning">요청서 보기</button>
+			</div>
+		</div>
+	</c:forEach>
+	</div>
+	<div id="page_wrap" style="text-align:center;">
+		<div id="inner">
+		<ul class="pagination">
+			<c:if test="${sendRequest.prev==true}">
+				<li><a style="color: black;" href="/dal/member/request/sendRequest?pageno=${sendRequest.startPage-1}&jMno=${jMno}">이전</a></li>
+			</c:if>
+			<c:forEach begin="${sendRequest.startPage}" end="${sendRequest.endPage}" var="i">
+				<c:choose>
+					<c:when test="${sendRequest.pageno eq i }">
+						<li>
+							<a style="background-color: orange; color: white;" href="/dal/member/request/sendRequest?pageno=${i}&jMno=${jMno}">${i}</a>
+						</li>
+					</c:when>
+					<c:otherwise>
+						<li><a style="color: black;" href="/dal/member/request/sendRequest?pageno=${i}&jMno=${jMno}">${i}</a></li>
+					</c:otherwise>
+				</c:choose>
+			</c:forEach>
+			<c:if test="${sendRequest.next==true}">
+				<li><a style="color: black;" href="/dal/member/request/sendRequest?pageno=${sendRequest.endPage+1}&jMno=${jMno}">다음</a></li>
+			</c:if>
+		</ul>
+		</div>
+	</div>
+</sec:authorize>
 
 	
 </body>

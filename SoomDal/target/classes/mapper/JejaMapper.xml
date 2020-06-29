@@ -41,7 +41,7 @@
 	
 	<!-- jEmail로 제자 찾기 -->
 	<select id="findById" resultType="jeja">
-		select J_EMAIL jEmail,J_PASSWORD jPassword,J_NAME jName,J_TEL jTel,ENABLED from jeja where J_EMAIL=#{jEmail} and rownum=1
+		select J_EMAIL jEmail,J_PASSWORD jPassword,J_NAME jName,J_TEL jTel, j_mno jMno, ENABLED from jeja where J_EMAIL=#{jEmail} and rownum=1
 	</select>
 	
 	<!-- jMno로 제자찾기 (견적서,요청서 필요) -->

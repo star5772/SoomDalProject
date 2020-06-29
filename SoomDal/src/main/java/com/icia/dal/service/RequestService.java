@@ -54,7 +54,7 @@ public class RequestService {
 		List<RequestDto.DtoForList> dtoList = new ArrayList<>();
 		for(Request rq:rqList) {
 			RequestDto.DtoForList dto = modelMapper.map(rq,RequestDto.DtoForList.class);
-			String str = rq.getRWriteDate().format(DateTimeFormatter.ofPattern("yyyy년MM월dd일 HH시 mm분"));
+			String str = rq.getRWriteDate().format(DateTimeFormatter.ofPattern("yyyy년 MM월 dd일 HH시 mm분"));
 			dto.setRWriteDateStr(str);
 			dtoList.add(dto);
 		}

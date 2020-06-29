@@ -47,8 +47,9 @@ public class JejaService {
 	
 	public JejaDto.DtoForJejaRead read(String jEmail) {
 		Jeja jeja = dao.findById(jEmail);
+		System.out.println();
 		JejaDto.DtoForJejaRead dto = modelMapper.map(jeja,JejaDto.DtoForJejaRead.class);
-		dto.setEmail(jeja.getJEmail()).setName(jeja.getJName()).setTel(jeja.getJTel());
+		dto.setEmail(jeja.getJEmail()).setName(jeja.getJName()).setTel(jeja.getJTel()).setJMno(jeja.getJMno());
 		System.out.println(dto);
 		return dto;
 	}
