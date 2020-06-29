@@ -60,11 +60,11 @@ $(function(){
 </style>
 </head>
 <body>
-<div style="width: 800px; height: 500px;">
-	<img alt="" src="/image/MainLogo.png">
+<img alt="" src="/image/MainLogo.png">
+<div style="width: 300px; height: 300px; display: inline-block;">
 	<h2 style="text-align: center;">달인 아이디찾기</h2>
 	<span id="FindId_msg"></span>
-	<div id="div" style="margin-left:190px;">
+	<div id="div" style="margin-left:0px;">
 		<form id="findIdFrm">
 			<label for="dTel" style="font-size: medium;">연락처</label><br>
 			<select id="tel-one" class="form-control">
@@ -78,7 +78,29 @@ $(function(){
 			<label for="dName" style="font-size: medium;">이름</label>
 			<input type="text" name="dName" placeholder="가입시 입력했던 이름을 입력해주세요" class="form-control" style="width: 407px;font-size: medium;">
 			<br><br>
-			<button type="button" id="find" class="btn btn-success">찾기</button>
+			<button type="button" id="findDalin" class="btn btn-success">찾기</button>
+		</form>
+	</div>
+</div>
+
+<div style="width: 300px; height: 300px; display: inline-block;">
+	<h2 style="text-align: center;">제자 아이디찾기</h2>
+	<span id="FindId_msg"></span>
+	<div id="div" style="margin-left:0px;">
+		<form id="findIdFrm">
+			<label for="dTel" style="font-size: medium;">연락처</label><br>
+			<select id="tel-one" class="form-control">
+				<option value="010">휴대폰 - 010</option>
+				<option value="011">휴대폰 - 011</option>
+			</select>
+			<input type="text" id="tel-two" class="form-control" maxlength="4"> - 
+			<input type="text" id="tel-three" class="form-control" maxlength="4">
+			<input type="hidden" id="dTel"name="dTel" value="">
+			<br>
+			<label for="dName" style="font-size: medium;">이름</label>
+			<input type="text" name="dName" placeholder="가입시 입력했던 이름을 입력해주세요" class="form-control" style="width: 407px;font-size: medium;">
+			<br><br>
+			<button type="button" id="findJeja" class="btn btn-success">찾기</button>
 		</form>
 	</div>
 </div>
