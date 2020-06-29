@@ -50,7 +50,7 @@ public class JejaService {
 		System.out.println();
 		JejaDto.DtoForJejaRead dto = modelMapper.map(jeja,JejaDto.DtoForJejaRead.class);
 		dto.setEmail(jeja.getJEmail()).setName(jeja.getJName()).setTel(jeja.getJTel()).setJMno(jeja.getJMno());
-		System.out.println(dto);
+		System.out.println("------Dto---------"+dto);
 		return dto;
 	}
 

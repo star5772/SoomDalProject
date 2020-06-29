@@ -1,5 +1,7 @@
 package com.icia.dal.entity;
 
+import java.time.LocalDateTime;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -21,4 +23,5 @@ public class Estimate {
 	private String eTelType;
 	private Boolean jIsOk;
 	private Integer eCash;
+	private LocalDateTime eWriteTime;
 }

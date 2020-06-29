@@ -1,5 +1,6 @@
 package com.icia.dal.service;
 
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -131,6 +132,9 @@ public class EstimateService {
 		List<EstimateDto.DtoForList> dtoList = new ArrayList<>();
 		for(Estimate et:etList) {
 			EstimateDto.DtoForList dto = modelMapper.map(et,EstimateDto.DtoForList.class);
+			String str = et.getEWriteTime().format(DateTimeFormatter.ofPattern("yyyy년 MM월 dd일"));
+			dto.setEWriteDateStr(str);
+			dto.setDName(dalDao.findByDalinToDMno(et.getDMno()).getDName());
 			dtoList.add(dto);
 		}
 		page.setList(dtoList);

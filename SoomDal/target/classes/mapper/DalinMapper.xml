@@ -83,4 +83,11 @@
 		select d_email dEmail from dalin where d_tel = #{dTel} and d_name = #{dName} and rownum=1
 	</select>
 	
+	<!-- dMno로 달인 찾기(견적서, 요청서 필요) -->
+	<select id="findByDalinToDMno" resultType="dalin">
+		select d_mno dMno, f_no fNo, detail_f_name detailFName, d_email dEmail, d_password dPassword, d_name dName, d_tel dTel
+		from dalin
+		where d_mno=#{dMno} and rownum=1
+	</select>
+	
 </mapper>

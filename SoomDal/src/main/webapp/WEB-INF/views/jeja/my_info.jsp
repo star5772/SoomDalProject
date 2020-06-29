@@ -65,16 +65,16 @@
          <h1>마이페이지</h1>
       </div>
       <div id="my_info_profile" style="height: 100px;">
-         <a href="#" style="text-decoration:none">
+               <a href="#" style="text-decoration:none">
          	<div id="profile">
          		<img src="/image/jeja.jpg" class="img-thumbnail" style="width: 70px; height: 70px;">
          	</div>
          	<div id="user_info" style="display:inline-block; width: 530px; color: black;">
             	<div id="user_name">
-            		<span id="name_length">OOO</span>제자님
+            		<span id="name_length">${read.name }</span> 제자님
            	 	</div>
             	<div id="user_email">
-            		<span id="email_length">aaa@a.com</span>
+            		<span id="email_length">${read.email }</span>
             	</div>
          	</div>
          	<img src="https://assets.cdn.soomgo.com/icons/icon-mypage-list-arrow.svg"> 
@@ -89,7 +89,7 @@
                <hr>
             </li>
             <li class="nav-item">
-               <a class="nav-link" href="#"><img src="https://assets.cdn.soomgo.com/icons/icon-mypage-quote-template.svg" style="padding: 5px;"><span class="menu_span">견적서</span><img src="https://assets.cdn.soomgo.com/icons/icon-mypage-list-arrow.svg"></a>
+               <a class="nav-link" href="/dal/member/estimate/receiveEstimateList?jMno=${read.JMno }"><img src="https://assets.cdn.soomgo.com/icons/icon-mypage-quote-template.svg" style="padding: 5px;"><span class="menu_span">견적서</span><img src="https://assets.cdn.soomgo.com/icons/icon-mypage-list-arrow.svg"></a>
                <hr>
             </li>
             <li class="nav-item">
