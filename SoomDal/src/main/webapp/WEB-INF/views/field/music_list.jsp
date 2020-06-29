@@ -18,6 +18,13 @@
 	#text {
 		text-align: center;
 	}
+	.card img {
+		width: 270px;
+		height: 300px;
+	}
+	.btn {
+		font-size: medium;
+	}
 </style>
 </head>
 <body>
@@ -26,55 +33,55 @@
 		<div class="card">
   			<img class="card-img-top" src="#" alt="Card image cap">
   			<div class="card-body">
-    			<a href="#" class="btn btn-primary">title1</a>
+    			<a href="/dal/member/field/list?detailFName=piano" class="btn btn-primary">피아노 레슨</a>
   			</div>
 		</div>
 		<div class="card">
   			<img class="card-img-top" src="#" alt="Card image cap">
   			<div class="card-body">
-    			<a href="#" class="btn btn-primary">title2</a>
+    			<a href="/dal/member/field/list?detailFName=elecguitar" class="btn btn-primary">일렉기타 레슨</a>
   			</div>
 		</div>
 		<div class="card">
   			<img class="card-img-top" src="#" alt="Card image cap">
   			<div class="card-body">
-    			<a href="#" class="btn btn-primary">title3</a>
+    			<a href="/dal/member/field/list?detailFName=drum" class="btn btn-primary">드럼 레슨</a>
   			</div>
 		</div>
 		<div class="card">
   			<img class="card-img-top" src="#" alt="Card image cap">
   			<div class="card-body">
-    			<a href="#" class="btn btn-primary">title4</a>
+    			<a href="/dal/member/field/list?detailFName=baseguitar" class="btn btn-primary">베이스기타 레슨</a>
   			</div>
 		</div>
 		<div class="card">
   			<img class="card-img-top" src="#" alt="Card image cap">
   			<div class="card-body">
-    			<a href="#" class="btn btn-primary">title5</a>
+    			<a href="/dal/member/field/list?detailFName=violinn" class="btn btn-primary">바이올린 레슨</a>
   			</div>
 		</div>
 		<div class="card">
   			<img class="card-img-top" src="#" alt="Card image cap">
   			<div class="card-body">
-    			<a href="#" class="btn btn-primary">title6</a>
+    			<a href="/dal/member/field/list?detailFName=saxophone" class="btn btn-primary">색소폰 레슨</a>
   			</div>
 		</div>
 		<div class="card">
   			<img class="card-img-top" src="#" alt="Card image cap">
   			<div class="card-body">
-    			<a href="#" class="btn btn-primary">title7</a>
+    			<a href="/dal/member/field/list?detailFName=trumpet" class="btn btn-primary">트럼펫 레슨</a>
   			</div>
 		</div>
 		<div class="card">
   			<img class="card-img-top" src="#" alt="Card image cap">
   			<div class="card-body">
-    			<a href="#" class="btn btn-primary">title8</a>
+    			<a href="/dal/member/field/list?detailFName=flute" class="btn btn-primary">플루트 레슨</a>
   			</div>
 		</div>
 		<div class="card">
   			<img class="card-img-top" src="#" alt="Card image cap">
   			<div class="card-body">
-    			<a href="#" class="btn btn-primary">title9</a>
+    			<a href="/dal/member/field/list?detailFName=celle" class="btn btn-primary">첼로 레슨</a>
   			</div>
 		</div>
 	</div>

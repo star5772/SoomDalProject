@@ -85,7 +85,7 @@
          <span><h3>레슨 관리</h3></span>
          <ul class="nav flex-column">
             <li class="nav-item">
-               <a class="nav-link active" href="#"><img src="https://assets.cdn.soomgo.com/icons/icon-mypage-quote-template.svg" style="padding: 5px;"><span class="menu_span">요청서</span><img src="https://assets.cdn.soomgo.com/icons/icon-mypage-list-arrow.svg"></a>
+               <a class="nav-link active" href="/dal/member/request/sendRequestList?jMno=${read.JMno}" ><img src="https://assets.cdn.soomgo.com/icons/icon-mypage-quote-template.svg" style="padding: 5px;"><span class="menu_span">요청서</span><img src="https://assets.cdn.soomgo.com/icons/icon-mypage-list-arrow.svg"></a>
                <hr>
             </li>
             <li class="nav-item">

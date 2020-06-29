@@ -7,13 +7,12 @@ import org.springframework.stereotype.*;
 
 import com.icia.dal.entity.*;
 
-@Repository
 public interface QnaBoardDao {
 	// 문의게시판 list
 	public List<QnaBoard> findAllByQnaBoard(@Param("startRowNum") int startRowNum,@Param("endRowNum")int endRowNum);
 	
 	// 문의게시판 글추가
-	public int insert(QnaBoard qnaBoard);
+	public int insertToQnaBoard(QnaBoard qnaBoard);
 	// 문의게시판 글 삭제
 	public int deleteToQnaBoard(int qNo);
 	

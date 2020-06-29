@@ -24,7 +24,7 @@ public class QnaBoardService {
 	
 	public int write(QnaBoard qnaBoard,String username) {
 		qnaBoard.setQWriter(username);
-		qnaBoardDao.insert(qnaBoard);
+		qnaBoardDao.insertToQnaBoard(qnaBoard);
 		return qnaBoard.getQNo();
 	}
 	
