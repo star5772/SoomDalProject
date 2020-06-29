@@ -6,6 +6,28 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<style>
+	th {
+		font-size: 16px;
+	}
+	td {
+		font-size: 12px;
+	}
+	.table {
+		text-align: center;
+	}
+	#page_wrap {
+      position: relative;
+      width: 1075px;
+      height: 60px;
+   }
+   #inner {
+      position: absolute;
+      left: 40%;
+      top: 50%;
+      margin: auto;
+   }
+</style>
 </head>
 <body>
 	<div>
@@ -30,7 +52,7 @@
 			<c:forEach items="${reqPage.list}" var="RequestBoard">
 				<tr>
 					<td>${RequestBoard.rbNo }</td>
-					<td><a href="/dal/reqboard/read?bno=${RequestBoard.rbNo}">${RequestBoard.rbTitle}</a></td>
+					<td><a href="/dal/member/reqboard/read?rbNo=${RequestBoard.rbNo}">${RequestBoard.rbTitle}</a></td>
 					<td>${RequestBoard.rbWriter}</td>
 					<td>${RequestBoard.rbWriteDateStr}</td>
 					<td>${RequestBoard.rbReadCnt}</td>
@@ -39,30 +61,32 @@
 			</tbody>
 		</table>
 	</div>
-	<div style="text-align:center;">
+	<div id="page_wrap">
+		<div id="inner">
 		<ul class="pagination">
 			<c:if test="${reqPage.prev==true }">
-				<li><a href="/dal/reqboard/list?pageno=${reqPage.startPage-1}">이전</a></li>
+				<li><a href="/dal/member/reqboard/list?pageno=${reqPage.startPage-1}">이전</a></li>
 			</c:if>
 			<c:forEach begin="${reqPage.startPage}" end="${reqPage.endPage}" var="i">
 				<c:choose>
 					<c:when test="${reqPage.pageno eq i}">
 						<li class="active">
-							<a href="/dal/reqboard/list?pageno=${i}">${i}</a>
+							<a href="/dal/member/reqboard/list?pageno=${i}">${i}</a>
 						</li>
 					</c:when>
 					<c:otherwise>
-						<li><a href="/dal/reqboard/list?pageno=${i}">${i}</a></li>
+						<li><a href="/dal/member/reqboard/list?pageno=${i}">${i}</a></li>
 					</c:otherwise>
 				</c:choose>
 			</c:forEach>
 			<c:if test="${reqPage.next==true }">
-				<li><a href="/dal/reqboard/list?pageno=${reqPage.endPage+1}">다음</a></li>
+				<li><a href="/dal/member/reqboard/list?pageno=${reqPage.endPage+1}">다음</a></li>
 			</c:if>
 		</ul>
+		</div>
 	</div>
 	<div class="form-group">
-		<a class="btn btn-info" href="/dal/reqboard/write">글쓰기</a>
+		<a class="btn btn-info" href="/dal/member/reqboard/write">글쓰기</a>
 	</div>
 </body>
 </html>

@@ -5,6 +5,7 @@ import java.security.*;
 
 import javax.inject.*;
 
+import org.springframework.security.web.authentication.logout.*;
 import org.springframework.stereotype.*;
 import org.springframework.validation.*;
 import org.springframework.web.bind.annotation.*;
@@ -66,8 +67,6 @@ public class JejaController {
 		// 해당 제자가 받은 요청 정보 필요
 		return new ModelAndView("main").addObject("viewName","jeja/estimate_list.jsp");
 	}
-	
-	 
 	
 	
 

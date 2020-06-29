@@ -20,4 +20,12 @@ import com.icia.dal.entity.*;
 public class QnaBoardDaoTest {
 	@Inject
 	private QnaBoardDao qnaDao;
+	
+//	@Test
+	public void insertToQnaBoardTest() {
+		QnaBoard qna = QnaBoard.builder().qTitle("제목입니다").qContent("내용이다 내용").qWriter("이은지")
+				.qWriteDate(LocalDateTime.now()).qIsSecret(false).qIsNotice(false).build();
+		assertThat(qnaDao.insertToQnaBoard(qna),is(1));
+	}
 }
+ 
