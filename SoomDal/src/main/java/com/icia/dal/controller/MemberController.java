@@ -132,16 +132,14 @@ public class MemberController {
 		return new ModelAndView("main").addObject("viewName","member/detail_field_select.jsp").addObject("detailField",adminService.detailFnameList(fNo));
 	}
 	
-<<<<<<< HEAD
 	// FAQ게시판
 	@GetMapping("/member/faqBoard")
 	public ModelAndView faqBoard() {
 		return new ModelAndView("main").addObject("viewName","faqBoard/list.jsp");
-=======
+	}	
 	// 달인 찾기 
 	@GetMapping("/member/search")
 	public ModelAndView search(@RequestParam(defaultValue = "1") int pageno,@Nullable String searchType,@Nullable String keyword) {
 		return new ModelAndView("main").addObject("viewName","member/search.jsp").addObject("search",dalService.dalSearch(pageno,searchType,keyword));
->>>>>>> branch 'master' of https://github.com/star5772/SoomDalProject
 	}
 }
