@@ -10,7 +10,7 @@ public class QnaDto {
 	@Data
 	@Accessors(chain=true)
 	public static class DtoForQnaRead{
-		private int qno;
+		private int qNo;
 		private String title;
 		private String content;
 		private String writeDateStr;

@@ -29,9 +29,9 @@
 	<select id="findAllByQnaBoard" resultType="QnaBoard">
  	<![CDATA[
  		select * from
- 			select rownum as rnum, b.* from
-				(select /*+ index_desc(qnaboard qnaboard_pk_qno) */ Q_NO, Q_TITLE, Q_WRITER, Q_WRITE_DATE from qnaboard) b
-			where rownum>=#{endRowNum})
+ 			(select rownum as rnum, b.* from
+				(select /*+ index_desc(qnaboard qnaboard_pk_qno) */ Q_NO qNo, Q_TITLE qTitle, Q_WRITER qWriter, Q_WRITE_DATE qWriteDate  from qnaboard) b
+			where rownum<=#{endRowNum})
 		where rnum>=#{startRowNum}
 	]]> 
 	</select>
@@ -41,7 +41,7 @@
 	 		select * from
 	 			select rownum as rnum, b.* from
 					(select /*+ index_desc(qnaboard qnaboard_pk_qno) */ Q_NO,Q_TITLE,Q_WRITER,Q_WRITE_DATE from qnaboard where q_writer=#{qWriter}) b
-				where rownum>=#{endRowNum})
+				where rownum<=#{endRowNum})
 			where rnum>=#{startRowNum}
 		]]> 		
 	</select>

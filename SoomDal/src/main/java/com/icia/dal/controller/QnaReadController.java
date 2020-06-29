@@ -20,7 +20,7 @@ public class QnaReadController {
 	
 	@GetMapping("/qnaBoard/list")
 	public ModelAndView list(@RequestParam(defaultValue = "1") int pageno,@Nullable String qWriter) {
-		return new ModelAndView("main").addObject("viewName", "qnaBoard/list.jsp").addObject("list",qnaBoardService.list(pageno,qWriter));
+		return new ModelAndView("main").addObject("viewName", "qnaBoard/list.jsp").addObject("qnaPage",qnaBoardService.list(pageno,qWriter));
 	}
 	
 	
@@ -47,7 +47,12 @@ public class QnaReadController {
 	public String write(QnaBoard qnaBoard ,Principal principal) {
 		String username = principal.getName();
 		qnaBoardService.write(qnaBoard,username);
-		return "redirect:/dal/member/qnaBoard/list";
+		return "redirect:/member/qnaBoard/read?qNo="+qnaBoardService.write(qnaBoard, username);
 				
+	}
+	@PostMapping("/qnaBoard/delete")
+	public String deleteToQnaBoard(int qNo) {
+		qnaBoardService.delete(qNo);
+		return "redirect:/member/qnaBoard/list";
 	}
 }
