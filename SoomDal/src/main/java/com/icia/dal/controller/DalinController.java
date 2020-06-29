@@ -60,9 +60,9 @@ public class DalinController {
 	}
 	
 	@GetMapping("/dalin/my_info_update")
-	public ModelAndView dalinMyInFoUpdate() {
+	public ModelAndView dalinMyInFoUpdate(Principal principal) throws UserNotFoundException {
 		// 달인 내정보 수정
-		return new ModelAndView("main").addObject("viewName","dalin/my_info_update.jsp");
+		return new ModelAndView("main").addObject("viewName","dalin/my_info_update.jsp").addObject("dalinRead", dalService.readToMyInfo(principal.getName()));
 	}
 	
 	@GetMapping("/dalin/estimate_write")

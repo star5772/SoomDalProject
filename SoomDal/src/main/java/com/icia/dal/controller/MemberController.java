@@ -133,4 +133,10 @@ public class MemberController {
 	public ModelAndView detailFieldSelect(String fNo) {
 		return new ModelAndView("main").addObject("viewName","member/detail_field_select.jsp").addObject("detailField",adminService.detailFnameList(fNo));
 	}
+	
+	// FAQ게시판
+	@GetMapping("/member/faqBoard")
+	public ModelAndView faqBoard() {
+		return new ModelAndView("main").addObject("viewName","faqBoard/list.jsp");
+	}
 }

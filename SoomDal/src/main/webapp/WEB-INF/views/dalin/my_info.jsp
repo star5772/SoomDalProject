@@ -91,7 +91,7 @@ function openChild()
          <h1>마이페이지</h1>
       </div>
       <div id="my_info_profile" style="height: 100px;">
-         <a href="#" style="text-decoration:none">
+         <a href="/dal/dalin/my_info_update" style="text-decoration:none">
          	<div id="profile">
          		<img src="/image/jeja.jpg" class="img-thumbnail" style="width: 70px; height: 70px;">
          	</div>

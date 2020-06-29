@@ -48,10 +48,11 @@ public class DalinRestController {
 	@PutMapping("/dalin/my_info_update")
 	public ResponseEntity<Void> update(@Valid DalinDto.DtoForUpdateToDalin dto, BindingResult results
 			, Principal principal) throws BindException {
+		System.out.println(dto.getDTel());
 		if(results.hasErrors())
 			throw  new BindException(results);
-		dalService.update(dto);
-		dto.setDName(principal.getName());
+		System.out.println("2===========");
+		dalService.update(dto, principal.getName());
 		return ResponseEntity.ok(null);
 	}
 	
