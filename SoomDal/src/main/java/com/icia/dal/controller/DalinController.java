@@ -1,15 +1,19 @@
 package com.icia.dal.controller;
 
+import java.io.*;
 import java.security.Principal;
 
 import javax.inject.Inject;
+import javax.validation.*;
 
+import org.springframework.http.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindException;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -55,7 +59,6 @@ public class DalinController {
 	
 	@GetMapping("/dalin/profile_update")
 	public ModelAndView dalinInFoUpdate() {
-		// 달인 프로필 수정
 		return new ModelAndView("main").addObject("viewName","dalin/info_update.jsp");
 	}
 	
@@ -97,5 +100,6 @@ public class DalinController {
 	public ModelAndView useCashPage(@RequestParam(defaultValue = "1")int pageno,Principal principal,int dMno) {
 		return new ModelAndView("payment/usedCash").addObject("uc",paymentService.useCashList(pageno, principal.getName(), dMno));
 	}
+	
 	
 }

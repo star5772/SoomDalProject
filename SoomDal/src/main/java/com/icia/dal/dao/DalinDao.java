@@ -69,4 +69,20 @@ public class DalinDao {
 		return tpl.selectOne("dalinMapper.findByDalinToDMno",dMno);
 	}
 
+	public int countOfSearch(String searchType, String keyword) {
+		Map<String,Object> map = new HashMap<>();
+		map.put("searchType", searchType);
+		map.put("keyword", keyword);
+		return tpl.selectOne("dalinMapper.countOfSearch",map);
+	}
+
+	public List<Dalin> findDalinBySearch(int startRowNum, int endRowNum, String searchType, String keyword) {
+		Map<String,Object> map = new HashMap<>();
+		map.put("startRowNum", startRowNum);
+		map.put("endRowNum", endRowNum);
+		map.put("searchType", searchType);
+		map.put("keyword", keyword);
+		return tpl.selectList("dalinMapper.findDalinBySearch",map);
+	}
+
 }

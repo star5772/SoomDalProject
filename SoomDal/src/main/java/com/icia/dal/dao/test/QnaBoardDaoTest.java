@@ -23,9 +23,12 @@ public class QnaBoardDaoTest {
 	
 //	@Test
 	public void insertToQnaBoardTest() {
-		QnaBoard qna = QnaBoard.builder().qTitle("제목입니다").qContent("내용이다 내용").qWriter("이은지")
+		for(int i=0; i<86; i++) {
+			QnaBoard qna = QnaBoard.builder().qTitle("제목입니다").qContent("내용이다 내용").qWriter("이은지")
 				.qWriteDate(LocalDateTime.now()).qIsSecret(false).qIsNotice(false).build();
-		assertThat(qnaDao.insertToQnaBoard(qna),is(1));
+			assertThat(qnaDao.insertToQnaBoard(qna),is(1));
+		}
 	}
+	
 }
  

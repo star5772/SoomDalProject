@@ -5,10 +5,17 @@
 <head>
 <meta charset="UTF-8">
 <title>Q&A 글쓰기</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+	$("#write").on("click",function(){
+		$("#writeForm").submit();
+	}) 
+})
+</script>
 <style>
  #center{margin-left: 20px; display: inline-block; }
- 
- #regi{
+ #write{
  width: 80px; height: 35px; background-color: #ffa500; color: white; 
  font-size: 17px; font-weight: bold; outline: 0;border: 0;
  border-radius: 4px; float: right;
@@ -28,7 +35,7 @@
 			style="font-size: 43px; font-weight: bold; color: rgb(243, 156, 18); ">Q&A</div>
 		<div style="font-size: 19px;">궁금한것 무엇이든! 물어보세요!</div>
 		<hr>
-	<form action="/dal/member/qnaBoard/write" method="post">
+	<form action="/dal/member/qnaBoard/write" method="post" id="writeForm">
 		<div>
 			<label style="background-color: #d3d3d3; display: inline-block; width: 130px; text-align: center; font-size: 17px;">제 목</label>
 			<input type="text" placeholder="제목을 입력해주세요." style="color: rgb(94, 94, 94); width: 780px;font-size: 17px;" name="qTitle">
@@ -43,8 +50,8 @@
 		</div>
 		<hr>
 		<br>
-			<button id="regi" onclick="submit" >등 록</button>
-			<button  id="cancel" onclick="" >취 소</button>
+			<button id="write" onclick="submit" type="button" class="btn btn-warning" >등 록</button>
+			<button  id="cancel" onclick="location.href='list'" type="button">취 소</button>
 	</form>
 	</div>
 
