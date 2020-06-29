@@ -56,13 +56,8 @@ public class JejaController {
 		return new ModelAndView("main").addObject("viewName","jeja/request_write.jsp");
 	}
 	
-	@GetMapping("/jeja/request_list")
-	public ModelAndView jejaRequestList() {
-		// 제자가 요청서탭 클릭 시 요청서 리스트를 보는 페이지로 이동
-		// 해당 제자의 요청서 정보 필요
-		return new ModelAndView("main").addObject("viewName","jeja/request_list.jsp");
-	}
 	
+<<<<<<< HEAD
 	@GetMapping("/jeja/estimate_list")
 	public ModelAndView jejaEstimateList() {
 		// 제자가 견적서탭 클릭 시 견적서 리스트를 보는 페이지로 이동
@@ -73,6 +68,8 @@ public class JejaController {
 	public ModelAndView listToLesson(@RequestParam(defaultValue = "1")int pageno,int jMno) {
 		return new ModelAndView("main").addObject("viewName","member/lessonHistory.jsp").addObject("LHlist", service.lessonListToJeja(pageno, jMno)).addObject("jMno",jMno);
 	}
+=======
+>>>>>>> branch 'master' of https://github.com/star5772/SoomDalProject
 	
 	
 

@@ -28,8 +28,8 @@ public class QnaBoardService {
 		return qnaBoard.getQNo();
 	}
 	
-	public void delete(int qNo) {
-		qnaBoardDao.deleteToQnaBoard(qNo);
+	public int delete(int qNo) {
+		return qnaBoardDao.deleteToQnaBoard(qNo);
 	}
 	
 	
@@ -37,7 +37,7 @@ public class QnaBoardService {
 		QnaBoard qnaBoard = qnaBoardDao.findByQnaBoard(qNo);
 		QnaDto.DtoForQnaRead dto = modelMapper.map(qnaBoard, QnaDto.DtoForQnaRead.class);
 		String str = qnaBoard.getQWriteDate().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-		dto.setWriteDateStr(str).setCno(qnaBoard.getCNo()).setTitle(qnaBoard.getQTitle()).setContent(qnaBoard.getQContent()).setWriter(qnaBoard.getQWriter()).setQno(qnaBoard.getQNo()).setSecret(qnaBoard.isQIsSecret());
+		dto.setWriteDateStr(str).setCno(qnaBoard.getCNo()).setTitle(qnaBoard.getQTitle()).setContent(qnaBoard.getQContent()).setWriter(qnaBoard.getQWriter()).setQNo(qnaBoard.getQNo()).setSecret(qnaBoard.isQIsSecret());
 		return dto;
 	}
 

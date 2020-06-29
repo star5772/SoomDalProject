@@ -53,6 +53,7 @@ public class DalinDto {
 		private String dName;
 		private	String dEmail;
 		private String dProfile;
+		private String dTel;
 		private int dCash;
 		private String dLevelStr;
 	}
@@ -81,7 +82,7 @@ public class DalinDto {
 		private String dPassword;
 		@Pattern(regexp="(?=.*[!@#$%^&*])^[A-Za-z0-9!@#$%^&*]{8,10}$", message="비밀번호는 특수문자를 포함하는 영숫자 8~10자입니다")
 		private String newDPassword;
-		@Pattern(regexp="^[0,9]{8,11}$", message="전화번호는 숫자 8~11자입니다")
+		@Pattern(regexp="^[0-9]{8,11}$", message="전화번호는 숫자 8~11자입니다")
 		private String dTel;
 		private Integer dCash;
 	}

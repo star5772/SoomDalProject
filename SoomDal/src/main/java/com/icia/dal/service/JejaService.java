@@ -129,5 +129,7 @@ public class JejaService {
 		return dao.findJNameAndJTelByJejaId(jName, jTel);		
 	}
 	
-	
+	public Jeja findById(String jEmail) {
+		return dao.findById(jEmail);
+	}
 }
