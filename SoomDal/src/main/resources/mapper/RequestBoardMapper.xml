@@ -31,7 +31,7 @@
 	<![CDATA[
 	select * from
 		(select rownum as rnum, rb.* from
-			(select /*+ index_desc(requestboard pk_requestboard) */ rb_no, rb_title, rb_write_date, rb_writer, rb_read_cnt, rb_is_notice from requestboard) rb
+			(select /*+ index_desc(requestboard pk_requestboard) */ rb_no rbNo, rb_title rbTitle, rb_write_date rbWriteDate, rb_writer rbWriter, rb_read_cnt rbReadCnt, rb_is_notice rbIsNotice from requestboard) rb
 		where rownum<=#{endRowNum})
 	where rnum>=#{startRowNum}
 	]]>

@@ -1,27 +1,36 @@
 package com.icia.dal.service;
 
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-import java.io.*;
-import java.time.*;
-import java.time.format.DateTimeFormatter;
-import java.util.*;
+import java.io.File;
+import java.io.IOException;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
-import javax.inject.*;
-import javax.validation.*;
+import javax.inject.Inject;
+import javax.validation.Valid;
 
-import org.modelmapper.*;
-import org.springframework.beans.factory.annotation.*;
-import org.springframework.security.crypto.password.*;
-import org.springframework.stereotype.*;
-import org.springframework.web.multipart.*;
+import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
-import com.icia.dal.Exception.*;
-import com.icia.dal.dao.*;
-import com.icia.dal.dto.*;
-import com.icia.dal.dto.DalinDto.*;
-import com.icia.dal.entity.*;
-import com.icia.dal.util.*;
+import com.icia.dal.Exception.DalinNotFoundException;
+import com.icia.dal.Exception.MembernameExistException;
+import com.icia.dal.Exception.UserNotFoundException;
+import com.icia.dal.dao.DAO;
+import com.icia.dal.dao.DalinDao;
+import com.icia.dal.dao.ProfileAttachmentDao;
+import com.icia.dal.dao.ReviewDao;
+import com.icia.dal.dto.DalinDto;
+import com.icia.dal.dto.DalinDto.DtoForJoinToDalin;
+import com.icia.dal.dto.DalinDto.DtoForUpdateToDalinProfile;
+import com.icia.dal.dto.page.PageToDalinField;
+import com.icia.dal.entity.Dalin;
+import com.icia.dal.entity.DetailField;
+import com.icia.dal.entity.Level;
+import com.icia.dal.util.pagingutil.FieldPagingUtil;
 
 @Service
 public class DalinService {
@@ -35,12 +44,13 @@ public class DalinService {
 	private DAO dao;
 	@Inject
 	private PasswordEncoder pwdEncoder;
-	@Value("d:/project/profile")
+	@Value("${profileFolder}")
 	private String profileFolder;
-	@Value("http://localhost:8081/profile/")
+	@Value("${profilePath}")
 	private String profilePath;
 	@Inject
 	private ProfileAttachmentDao profileAttachmentDao;
+	
 
 	public void join(DtoForJoinToDalin dto) {
 		Dalin dalin = modelMapper.map(dto, Dalin.class);
@@ -75,6 +85,16 @@ public class DalinService {
 		dalDao.deleteToDalin(dEmail);
 	}
 	
+	
+	public DalinDto.DtoForMyInfo readToMyInfo(String username) throws UserNotFoundException {
+		Dalin dalin = dalDao.findByDalin(username);
+		if(dalin==null)
+			throw new UserNotFoundException();
+		DalinDto.DtoForMyInfo dto = modelMapper.map(dalin,DalinDto.DtoForMyInfo.class);
+		Level lev = dalin.getDLevel();
+		dto.setDLevelStr(lev.name());
+		return dto;
+	}
 
 	
 	public void profileUpdate(DtoForUpdateToDalinProfile dto, MultipartFile sajin) throws IllegalStateException, IOException {
@@ -103,7 +123,7 @@ public class DalinService {
 		PageToDalinField page = FieldPagingUtil.getPage(pageno, countOfDalin);
 		int srn = page.getStartRowNum();
 		int ern = page.getEndRowNum();
-		List<Dalin> dalinList = dalDao.findDalinByDetailFName(srn,ern);
+		List<Dalin> dalinList = dalDao.findDalinByDetailFName(srn,ern,detailFName);
 		List<DalinDto.DtoForFieldList> dtoList = new ArrayList<>();
 		for(Dalin d:dalinList) {
 			DalinDto.DtoForFieldList dto = modelMapper.map(d,DalinDto.DtoForFieldList.class);
@@ -127,6 +147,7 @@ public class DalinService {
 			dto.setReviews(reviewDao.findAllReview(dto.getDMno()));
 		return dto;
 	}
+	
 }	
 
 

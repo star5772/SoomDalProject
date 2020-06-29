@@ -14,6 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.icia.dal.Exception.DalinNotFoundException;
 import com.icia.dal.Exception.MembernameExistException;
+import com.icia.dal.service.AdminService;
 import com.icia.dal.service.DalinService;
 import com.icia.dal.service.JejaService;
 import com.icia.dal.service.ReviewService;
@@ -26,6 +27,8 @@ public class MemberController {
 	private JejaService jejaService;
 	@Inject
 	private ReviewService reviewService;
+	@Inject
+	private AdminService adminService;
 	
 	@GetMapping({"/","/root"})
 	public ModelAndView main() {
@@ -125,5 +128,9 @@ public class MemberController {
 	@GetMapping("/member/dalin_profile")
 	public ModelAndView dalinProfileRead(int dMno) throws DalinNotFoundException {
 		return new ModelAndView("main").addObject("viewName","member/dalin_profile_read.jsp").addObject("readProfile",dalService.readToDalinProfile(dMno));
+	}
+	@GetMapping("/member/select_detailField")
+	public ModelAndView detailFieldSelect(String fNo) {
+		return new ModelAndView("main").addObject("viewName","member/detail_field_select.jsp").addObject("detailField",adminService.detailFnameList(fNo));
 	}
 }

@@ -11,8 +11,10 @@ import org.springframework.stereotype.*;
 
 import com.icia.dal.dao.*;
 import com.icia.dal.dto.*;
+import com.icia.dal.dto.page.PageToRequestBoard;
 import com.icia.dal.entity.*;
 import com.icia.dal.util.*;
+import com.icia.dal.util.pagingutil.RequestBoardPagingUtil;
 
 @Service
 public class RequestBoardService {
@@ -22,6 +24,7 @@ public class RequestBoardService {
 	private ModelMapper modelMapper;
 	
 	public RequestBoardDto.DtoForRead read(int rbNo, String rbWriter) {
+		System.out.println(rbNo);
 		RequestBoard reqBoard = reqDao.findByRequestBoard(rbNo);
 		RequestBoardDto.DtoForRead dto = modelMapper.map(reqBoard, RequestBoardDto.DtoForRead.class);
 		if(rbWriter!=null && rbWriter.equals(dto.getRbWriter())==false)
@@ -47,9 +50,9 @@ public class RequestBoardService {
 		List<RequestBoard> boardList = null;
 		if(rbWriter!=null)
 			boardList = reqDao.findAllByRbWriter(srn, ern, rbWriter);
-		else
+		else {
 			boardList = reqDao.findAllByRequestBoard(srn, ern);
-		
+		}
 		List<RequestBoardDto.DtoForList> dtoList = new ArrayList<>();
 		for(RequestBoard board:boardList) {
 			RequestBoardDto.DtoForList dto = modelMapper.map(board, RequestBoardDto.DtoForList.class);

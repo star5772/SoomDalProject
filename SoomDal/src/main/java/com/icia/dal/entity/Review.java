@@ -18,8 +18,9 @@ public class Review {
 	private LocalDateTime rDate;
 	private String rContent;
 	private int rScore;
-	private int rSajin;
+	private int rSajinCnt;
 	private String rWriter;
 	private int sNo;
+	private int jAccusationCnt;
 	private int dMno; // 달인회원번호
 }

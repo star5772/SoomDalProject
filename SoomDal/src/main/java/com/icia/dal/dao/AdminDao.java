@@ -11,10 +11,6 @@ import com.icia.dal.entity.*;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
-import com.icia.dal.entity.Dalin;
-import com.icia.dal.entity.Jeja;
-import com.icia.dal.entity.RequestBoard;
-
 @Repository
 public class AdminDao {
 	@Inject
@@ -66,7 +62,72 @@ public class AdminDao {
 		return tpl.selectOne("adminMapper.countToJeja");
 	}
 	
+	public int countToReportedJeja() {
+		return tpl.selectOne("adminMapper.countToReportedJeja");
+	}
+	
+	public List<Jeja> findAllToRpList(int startRowNum, int endRowNum, int jAccusationCnt) {
+		Map<String,Object> map = new HashMap<String, Object>();
+		map.put("startRowNum",startRowNum);
+		map.put("endRowNum",endRowNum);
+		map.put("jAccusation",jAccusationCnt);
+		return tpl.selectList("adminMapper.findAllToRpList", map);
+	}
+	
 	public int countToReview() {
 		return tpl.selectOne("adminMapper.countToReview");
 	}
+	
+	public List<Jeja> findAllEnabledToJeja(int startRowNum, int endRowNum) {
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("startRowNum",startRowNum);
+		map.put("endRowNum",endRowNum);
+		return tpl.selectList("adminMapper.findAllEnabledToJeja", map);
+	}
+	
+	public int countToJejaEnabled() {
+		return tpl.selectOne("adminMapper.countToJejaEnabled");
+	}
+	
+	public List<DetailField> findAllDetailField(String fNo) {
+		return tpl.selectList("adminMapper.findAllDetailField",fNo);
+	}
+	
+	public DetailField findByDetailField(String fNo,String detailFName) {
+		Map<String,Object> map = new HashMap<String, Object>();
+		map.put("fNo", fNo);
+		map.put("detailFName", detailFName);
+		return tpl.selectOne("adminMapper.findByDetailField",map);
+	}
+	
+	public List<Field> findAllField() {
+		return tpl.selectList("adminMapper.findAllField");
+	}
+	
+	public Field findByField(String fNo) {
+		return tpl.selectOne("adminMapper.findByField",fNo);
+	}
+	
+	// 세부분야 사진파일 DB에 저장
+	public int insertToDetailFName(DetailField df) {
+		return tpl.insert("adminMapper.insertToDetailFName",df);
+	}
+	
+	// 대분야 사진파일 DB에 저장
+	public int insertToField(Field field) {
+		return tpl.insert("adminMapper.insertToField",field);
+	}
+	
+	// 세부분야 삭제
+	public int deleteToDetailField(String fNo,String detailFName) {
+		Map<String,Object> map = new HashMap<String, Object>();
+		map.put("fNo", fNo);
+		map.put("detailFName", detailFName);
+		return tpl.delete("adminMapper.deleteToDetailField",map);
+	}
+	// 대분야 삭제
+	public int deleteToField(String fNo) {
+		return tpl.delete("adminMapper.deleteToField",fNo);
+	}
+
 }

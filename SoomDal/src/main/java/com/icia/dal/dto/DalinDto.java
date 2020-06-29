@@ -25,10 +25,10 @@ public class DalinDto {
 		private String dName;
 		@Pattern(regexp="^[0,9]{8,11}$", message="전화번호는 숫자 8~11자입니다")
 		private String dTel;
+		private String detailFName;
 		private Boolean enabled;
 		private LocalDateTime dDate;
 		private String dArea;
-		private String dMainService;
 	}
 	
 	@Data
@@ -46,6 +46,15 @@ public class DalinDto {
 		private Integer dQNo;
 		private List<Review> reviews;
 		private List<ProfileAttachment> ProfileAttachments;
+	}
+	@Data
+	public static class DtoForMyInfo {
+		private int dMno;
+		private String dName;
+		private	String dEmail;
+		private String dProfile;
+		private int dCash;
+		private String dLevelStr;
 	}
 	
 	@Data
@@ -79,8 +88,10 @@ public class DalinDto {
 	
 	@Data
 	public static class DtoForFieldList {
+		private String dMno;
 		private String dProfile;
 		private String dName;
 		private String dIntro;
 	}
+	
 }

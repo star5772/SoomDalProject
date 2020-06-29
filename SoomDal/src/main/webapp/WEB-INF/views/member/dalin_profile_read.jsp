@@ -40,8 +40,8 @@ hr{
 #rScore{
 	display: inline-block;
 }
-#rDate{
 	color : #878787;
+#rDate{
 	display: inline-block;
 }
 #dProfile{

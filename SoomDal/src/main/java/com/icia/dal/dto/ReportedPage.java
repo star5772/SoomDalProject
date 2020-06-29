@@ -9,6 +9,7 @@ import lombok.*;
 public class ReportedPage {
 	private int startRowNum;
 	private int endRowNum;
+	private int jAccusationCnt;
 	
 	private int pageno;
 	private boolean isPrev;
