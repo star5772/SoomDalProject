@@ -85,15 +85,14 @@ hr{
 	height: 50px;
 }
 
-
 </style>
 </head>
-<body>
+<body style="overflow: scroll;">
 	<form id="profileReadFrm" action="member/profile/read" method="get"></form>
 	<div id="dalinRead">
 		<div id="dProfile">
 			<div style="border-radius: 50%; height: 200px; width: 200px; background-color: gray; ">
-			<p id="dName">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${dalin.dName}김희은</p></div>
+			<p id="dName">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${readProfile.DName}</p></div>
 		</div>
 		<div>
 			<button id="update" onclick="location.href='/dal/dalin/dalin_profile_update'">수&nbsp;정</button>
@@ -107,7 +106,7 @@ hr{
 					<h2>한줄소개</h2><br><br>
 				</div>
 				<div>
-					<p>${dalin.dIntro}한줄소개</p>
+					<p>${readProfile.DIntro}</p>
 				</div>
 			</div>
 		</div>
@@ -120,7 +119,7 @@ hr{
 					<h2>대표서비스</h2><br><br>
 				</div>
 				<div>
-					<p>${dalin.bMainService}대표서비스</p>
+					<p>${readProfile.DMainService}</p>
 				</div>
 			</div>
 		</div>
@@ -133,7 +132,7 @@ hr{
 					<h2>활동지역</h2><br><br>
 				</div>
 				<div>
-					<p>${dalin.dArea}활동지역</p>
+					<p>${readProfile.DArea}</p>
 				</div>
 			</div>
 		</div>
@@ -146,7 +145,7 @@ hr{
 					<h2>서비스 상세설명</h2><br><br>
 				</div>
 				<div>
-					<p>${dalin.dDetailService}서비스상세설명</p>
+					<p>${readProfile.DDetailService}</p>
 				</div>
 			</div>
 		</div>
@@ -159,7 +158,7 @@ hr{
 					<h2>결제수단</h2><br><br>
 				</div>
 				<div>
-					<p>${dalin.dPaymentMethod}결제수단</p>
+					<p>${readProfile.DPaymentMethod}결제수단</p>
 				</div>
 			</div>
 		</div>
