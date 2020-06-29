@@ -65,7 +65,7 @@
          <h1>마이페이지</h1>
       </div>
       <div id="my_info_profile" style="height: 100px;">
-               <a href="#" style="text-decoration:none">
+               <a href="/dal/jeja/my_info_update" style="text-decoration:none">
          	<div id="profile">
          		<img src="/image/jeja.jpg" class="img-thumbnail" style="width: 70px; height: 70px;">
          	</div>
@@ -93,7 +93,7 @@
                <hr>
             </li>
             <li class="nav-item">
-               <a class="nav-link" href="#"><img src="https://assets.cdn.soomgo.com/icons/icon-mypage-auto-quote.svg" style="padding: 5px;"><span class="menu_span">레슨 내역</span><img src="https://assets.cdn.soomgo.com/icons/icon-mypage-list-arrow.svg"></a>
+               <a class="nav-link" href="/dal/jeja/lessonList?jMno=${read.JMno}"><img src="https://assets.cdn.soomgo.com/icons/icon-mypage-auto-quote.svg" style="padding: 5px;"><span class="menu_span">레슨 내역</span><img src="https://assets.cdn.soomgo.com/icons/icon-mypage-list-arrow.svg"></a>
             </li>
          </ul>
       </div>

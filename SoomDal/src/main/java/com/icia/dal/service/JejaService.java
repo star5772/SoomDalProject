@@ -1,17 +1,28 @@
 package com.icia.dal.service;
 
-import javax.inject.*;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.List;
 
-import org.modelmapper.*;
-import org.springframework.security.crypto.password.*;
-import org.springframework.stereotype.*;
+import javax.inject.Inject;
+
+import org.modelmapper.ModelMapper;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Service;
 
 import com.icia.dal.Exception.UserNotFoundException;
-import com.icia.dal.dao.*;
-import com.icia.dal.dto.*;
-import com.icia.dal.dto.JejaDto.*;
-import com.icia.dal.entity.*;
-import com.icia.dal.util.*;
+import com.icia.dal.dao.DAO;
+import com.icia.dal.dao.DalinDao;
+import com.icia.dal.dao.JejaDao;
+import com.icia.dal.dao.LessonHistoryDao;
+import com.icia.dal.dto.JejaDto;
+import com.icia.dal.dto.JejaDto.DtoForJejaUpdate;
+import com.icia.dal.dto.LHDto;
+import com.icia.dal.dto.page.PageToLessonHistory;
+import com.icia.dal.entity.Dalin;
+import com.icia.dal.entity.Jeja;
+import com.icia.dal.entity.LessonHistory;
+import com.icia.dal.util.pagingutil.LessonHistoryPagingUtil;
 
 @Service
 public class JejaService {
@@ -20,9 +31,13 @@ public class JejaService {
 	@Inject
 	private DAO authDao;
 	@Inject
+	private DalinDao dalDao;
+	@Inject
 	private PasswordEncoder pwdEncoder;
 	@Inject
 	private ModelMapper modelMapper;
+	@Inject
+	private LessonHistoryDao lhDao;
 
 	public void existsByEmail(String jEmail) {
 		String email = dao.existsByjEmail(jEmail);
@@ -86,7 +101,28 @@ public class JejaService {
 		}
 		return false;
 	}
-
+	
+	public PageToLessonHistory lessonListToJeja(int pageno,int jMno) {
+		int countOfLesson = lhDao.countOfLessonToJeja(jMno);
+		PageToLessonHistory page = LessonHistoryPagingUtil.getPage(pageno, countOfLesson);
+		int srn = page.getStartRowNum();
+		int ern = page.getEndRowNum();
+		List<LessonHistory> lhList = lhDao.findAllByLessonHistoryToJeja(srn, ern, jMno);
+		List<LHDto.DtoForList> dtoList = new ArrayList<>();
+		for(LessonHistory l:lhList) {
+			LHDto.DtoForList dto = modelMapper.map(l,LHDto.DtoForList.class);
+			Dalin dal = dalDao.findByDalinToDMno(l.getDMno());
+			String str = l.getLStartDate().format(DateTimeFormatter.ofPattern("yyyy년MM월dd일"));
+			dto.setLStartDate(str);
+			dto.setDetailFName(dal.getDetailFName());
+			dto.setDProfile(dal.getDProfile());
+			dto.setDName(dal.getDName());
+			dtoList.add(dto);
+		}
+		page.setList(dtoList);
+		return page;		
+	}
+	
 	public String findId(String jName, String jTel) throws UserNotFoundException {
 		if(dao.findJNameAndJTelByJejaId(jName, jTel)==null)
 			throw new UserNotFoundException();

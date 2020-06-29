@@ -26,8 +26,8 @@
 <link type="text/css" href="${pageContext.request.contextPath}/resources/css/modern-business.css" rel="stylesheet">
 <link rel="stylesheet" href="/dal/css/main.css">
 <style>
-.container #main {
-	overflow: hidden;
+#main .container-fluid{
+	overflow: auto;
 }
 #footer {
 	clear: both;
@@ -46,7 +46,7 @@
 	<jsp:include page="include/nav.jsp"/>
   </nav>
   
-  <div  id="main">	
+  <div id="main">	
 	  <section class="container-fluid">
 	  	<jsp:include page="${viewName}"/>
 	  </section>

@@ -3,7 +3,7 @@ package com.icia.dal.util.pagingutil;
 import com.icia.dal.dto.page.PageToLessonHistory;
 
 public class LessonHistoryPagingUtil {
-		private final static int COUNT_OF_BOARD_PER_PAGE = 10;
+		private final static int COUNT_OF_BOARD_PER_PAGE = 5;
 		private final static int COUNT_OF_BOARD_PER_BLOCK = 5;
 		
 		public static PageToLessonHistory getPage(int pageno, int countOfBoard) {

@@ -2,7 +2,7 @@ package com.icia.dal.dto.page;
 
 import java.util.List;
 
-import com.icia.dal.entity.LessonHistory;
+import com.icia.dal.dto.LHDto;
 
 import lombok.Builder;
 import lombok.Data;
@@ -19,5 +19,5 @@ public class PageToLessonHistory {
 	private boolean isPrev;
 	private boolean isNext;
 	
-	List<LessonHistory> list;
+	List<LHDto.DtoForList> list;
 }

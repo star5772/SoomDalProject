@@ -71,7 +71,7 @@ function openChild()
         	
         	<sec:authorize access="hasRole('ROLE_JEJA')">
         		<li class="nav-item"><a class="nav-link" href="#"style="color:black; font-size:medium;"><i class="fas fa-search">&nbsp;달인 찾기</i></a></li>
-        		<li class="nav-item"><a class="nav-link" href="#"style="color:black; font-size:medium;">내 정보</a></li>
+        		<li class="nav-item"><a class="nav-link" href="/dal/jeja/my_info"style="color:black; font-size:medium;">내 정보</a></li>
         		<li class="nav-item"><a class="nav-link" href="#"style="color:black; font-size:medium;">쪽지함</a></li>
         		<li class="nav-item"><a class="nav-link" href="#"style="color:black; font-size:medium;" id="JejaLogout">로그아웃</a></li>
         	</sec:authorize>

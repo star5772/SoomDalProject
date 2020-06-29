@@ -8,19 +8,38 @@
 		values(#{aCompleteCode},#{dMno},#{jMno},sysdate)
 	</insert>
 	
-	<select id="findAllByLessonHistory" resultType="lessonHistory">
+	<select id="findAllByLessonHistoryToJeja" resultType="lessonHistory">
 		<![CDATA[
 			select * from
 				(select l.*,rownum rnum from	
-					(select * from LessonHistory where a_complete_code=#{aCompleteCode}) l
+					(select a_complete_code aCompleteCode,d_mno dMno,j_mno jMno,l_start_date lStartDate from LessonHistory where j_mno=#{jMno}) l
 				where rownum<=#{endRowNum})
 			where rnum>=#{startRowNum}
 		]]>			
 	</select>
+
+	<select id="findAllByLessonHistoryToDalin" resultType="lessonHistory">
+		<![CDATA[
+			select * from
+				(select l.*,rownum rnum from	
+					(select a_complete_code aCompleteCode,d_mno dMno,j_mno jMno,l_start_date lStartDate from LessonHistory where d_mno=#{dMno}) l
+				where rownum<=#{endRowNum})
+			where rnum>=#{startRowNum}
+		]]>			
+	</select>	
 	
 	<delete id="deleteToLessonHistory">
 		delete from lessonhistory where a_complete_code=#{aCompleteCode} and rownum=1
 	</delete>
+	
+	<select id="countOfLessonToJeja" resultType="int">
+		select count(*) from lessonhistory where j_mno=#{jMno}
+	</select>
+
+	<select id="countOfLessonToDalin" resultType="int">
+		select count(*) from lessonhistory where d_mno=#{dMno}
+	</select>
+
 
 </mapper>
 

@@ -42,23 +42,23 @@ th {
 	<div style="text-align:center; margin-top:300px;">
 		<ul class="pagination">
 			<c:if test="${uc.prev==true}">
-				<li><a href="/dal/dalin/usedCashList?pageno=${uc.startPage-1}">이전</a></li>
+				<li><a href="/dal/dalin/usedCashList?pageno=${uc.startPage-1}&dMno=${dMno}">이전</a></li>
 			</c:if>
 			<c:forEach begin="${uc.startPage}" end="${uc.endPage}" var="i">
 				<c:choose>
 					<c:when test="${uc.pageno eq i }">
 						<li class="active">
-							<a href="/dal/dalin/usedCashList?pageno=${i}">${i}</a>
+							<a href="/dal/dalin/usedCashList?pageno=${i}&dMno=${dMno}">${i}</a>
 						</li>
 					</c:when>
 					<c:otherwise>
-						<li><a href="/dal/dalin/usedCashList?pageno=${i}">${i}</a></li>
+						<li><a href="/dal/dalin/usedCashList?pageno=${i}&dMno=${dMno}">${i}</a></li>
 					</c:otherwise>
 				</c:choose>
 				
 			</c:forEach>
 			<c:if test="${uc.next==true}">
-				<li><a href="/dal/dalin/usedCashList?pageno=${uc.endPage+1}">다음</a></li>
+				<li><a href="/dal/dalin/usedCashList?pageno=${uc.endPage+1}&dMno=${dMno}">다음</a></li>
 			</c:if>
 		</ul>
 	</div>

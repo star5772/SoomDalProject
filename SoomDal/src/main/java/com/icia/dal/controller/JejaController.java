@@ -1,19 +1,21 @@
 package com.icia.dal.controller;
 
 
-import java.security.*;
+import java.security.Principal;
 
-import javax.inject.*;
+import javax.inject.Inject;
 
-import org.springframework.security.web.authentication.logout.*;
-import org.springframework.stereotype.*;
-import org.springframework.validation.*;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.*;
-import org.springframework.web.servlet.mvc.support.*;
+import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindException;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.icia.dal.entity.*;
-import com.icia.dal.service.*;
+import com.icia.dal.entity.Jeja;
+import com.icia.dal.service.JejaService;
 
 @Controller
 public class JejaController {
@@ -66,6 +68,10 @@ public class JejaController {
 		// 제자가 견적서탭 클릭 시 견적서 리스트를 보는 페이지로 이동
 		// 해당 제자가 받은 요청 정보 필요
 		return new ModelAndView("main").addObject("viewName","jeja/estimate_list.jsp");
+	}
+	@GetMapping("/jeja/lessonList")
+	public ModelAndView listToLesson(@RequestParam(defaultValue = "1")int pageno,int jMno) {
+		return new ModelAndView("main").addObject("viewName","member/lessonHistory.jsp").addObject("LHlist", service.lessonListToJeja(pageno, jMno)).addObject("jMno",jMno);
 	}
 	
 	
