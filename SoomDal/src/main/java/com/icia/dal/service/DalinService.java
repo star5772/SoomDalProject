@@ -157,6 +157,9 @@ public class DalinService {
 		return dalDao.findJNameAndJTelByDalinId(dName, dTel);
 	}
 	
+	public Dalin findById(String dEmail) {
+		return dalDao.findByDalin(dEmail);
+	}
 }	
 
 

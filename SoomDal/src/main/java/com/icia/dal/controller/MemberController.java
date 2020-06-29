@@ -15,8 +15,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.icia.dal.Exception.DalinNotFoundException;
-import com.icia.dal.Exception.MembernameExistException;
+import com.icia.dal.Exception.*;
 import com.icia.dal.service.AdminService;
 import com.icia.dal.service.DalinService;
 import com.icia.dal.service.JejaService;
@@ -111,17 +110,16 @@ public class MemberController {
 
 	@DeleteMapping("/member/resign")
 	public String resign(SecurityContextLogoutHandler handler, HttpServletRequest request, HttpServletResponse response, Authentication authentication) {
-		System.out.println(jejaService.read(authentication.getName()));
-		System.out.println("===");
-		if(jejaService.read(authentication.getName())!=null) {
+		if(jejaService.findById(authentication.getName())!=null) {
 			jejaService.delete(authentication.getName());
 		    handler.logout(request, response, authentication);
-		} else {
-			System.out.println("=========================");
+		    return "redirect:/";
+		} else if(dalService.findById(authentication.getName())!=null) {
 			dalService.delete(authentication.getName());
 		    handler.logout(request, response, authentication);
-		}
-	      return "redirect:/";
+		    return "redirect:/";
+		} else
+			return "redirect:/dal/member/resign";
 	   }
 	
 	// 달인 프로필 읽기

@@ -25,6 +25,81 @@ $(function() {
 		
 	});
 });
+
+$(document).ready(function() {
+	$("#intro").on("click", function() {
+		var params = {
+			_method:"put",
+			_csrf:"${_csrf.token}",
+			dIntro:$("#dIntro").val()
+		}
+		$.ajax({
+			url:"/dal/dalin/my_info_update",
+			method:"post",
+			data:params,
+		}).done(()=>{toastr.info("이름변경 성공")}).fail(()=>{toastr.warning("이름변경 실패")})
+	})
+})
+
+$(document).ready(function() {
+	$("#mainService").on("click",function() {
+		var params = {
+			_method: "put",
+			_csrf:"${_csrf.token}",
+			dMainService:$("#dMainService").val()
+		}
+		$.ajax({
+			url:"/dal/dalin/my_info_update",
+			method:"post",
+			data:params,
+		}).done(()=>{toastr.info("변경성공")}).fail(()=>{toastr.warning("변경실패")})
+	})
+})
+
+$(document).ready(function() {
+	$("#area").on("click",function() {
+		var params = {
+			_method:"put",
+			_csrf:"${_csrf.token}",
+			dArea:$("#dArea").val()
+		}
+		$.ajax({
+			url:"/dal/dalin/my_info_update",
+			method:"post",
+			data:params,
+		}).done(()=>{toastr.info("변경성공")}).fail(()=>{toastr.warning("변경실패")})
+	})
+})
+
+$(document).ready(function() {
+	$("#detailService").on("click",function(){
+		var params={
+			_method:"put",
+			_csrf:"${_csrf.token}",
+			dDetailService:$("#dDetailService").val()
+		}
+		$.ajax({
+			url:"/dal/dalin/my_info_update",
+			method:"post",
+			data:params,
+		}).done(()=>{toastr.info("변경성공")}).fail(()=>{toastr.warning("변경실패")})
+	})
+})
+
+$(document).ready(function() {
+	$("#patmentMethod").on("click",function(){
+		var params={
+			_method:"put",
+			_csrf:"${_csrf.token}",
+			dPatmentMehod:$("#dPatmentMehod").val()
+		}
+		$.ajax({
+			url:"/dal/dalin/my_info_update",
+			method:"post",
+			data:params,
+		}).done(()=>{toastr.info("변경성공")}).fail(()=>{toastr.warning("변경실패")})
+	})
+})
 </script>
 <style>
 h2 {
@@ -123,6 +198,10 @@ input {
 	font-size: 14px;
 	border: 0;
 	
+}
+
+body {
+	overflow: scroll;
 }
 </style>
 </head>
