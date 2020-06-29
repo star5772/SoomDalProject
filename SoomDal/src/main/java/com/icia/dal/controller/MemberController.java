@@ -8,15 +8,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.lang.*;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.icia.dal.Exception.DalinNotFoundException;
-import com.icia.dal.Exception.MembernameExistException;
+import com.icia.dal.Exception.*;
 import com.icia.dal.service.AdminService;
 import com.icia.dal.service.DalinService;
 import com.icia.dal.service.JejaService;
@@ -111,17 +110,16 @@ public class MemberController {
 
 	@DeleteMapping("/member/resign")
 	public String resign(SecurityContextLogoutHandler handler, HttpServletRequest request, HttpServletResponse response, Authentication authentication) {
-		System.out.println(jejaService.read(authentication.getName()));
-		System.out.println("===");
-		if(jejaService.read(authentication.getName())!=null) {
+		if(jejaService.findById(authentication.getName())!=null) {
 			jejaService.delete(authentication.getName());
 		    handler.logout(request, response, authentication);
-		} else {
-			System.out.println("=========================");
+		    return "redirect:/";
+		} else if(dalService.findById(authentication.getName())!=null) {
 			dalService.delete(authentication.getName());
 		    handler.logout(request, response, authentication);
-		}
-	      return "redirect:/";
+		    return "redirect:/";
+		} else
+			return "redirect:/dal/member/resign";
 	   }
 	
 	// 달인 프로필 읽기
@@ -132,5 +130,11 @@ public class MemberController {
 	@GetMapping("/member/select_detailField")
 	public ModelAndView detailFieldSelect(String fNo) {
 		return new ModelAndView("main").addObject("viewName","member/detail_field_select.jsp").addObject("detailField",adminService.detailFnameList(fNo));
+	}
+	
+	// 달인 찾기 
+	@GetMapping("/member/search")
+	public ModelAndView search(@RequestParam(defaultValue = "1") int pageno,@Nullable String searchType,@Nullable String keyword) {
+		return new ModelAndView("main").addObject("viewName","member/search.jsp").addObject("search",dalService.dalSearch(pageno,searchType,keyword));
 	}
 }

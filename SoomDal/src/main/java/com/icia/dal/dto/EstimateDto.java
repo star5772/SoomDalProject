@@ -2,6 +2,7 @@ package com.icia.dal.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 public class EstimateDto {
 	private EstimateDto() {}
@@ -9,6 +10,7 @@ public class EstimateDto {
 	
 	@Data
 	@AllArgsConstructor
+	@NoArgsConstructor
 	public static class DtoForList {
 		private int eNo;
 		private int dMno;
@@ -18,8 +20,9 @@ public class EstimateDto {
 		private String dEmail;
 		private Boolean jIsOk;
 		private String rSubject;
-		private String eWriteDateStr;
+		private String eWriteTimeStr;
 		private String dName;
+		private String jName;
 	}
 	
 	@Data
