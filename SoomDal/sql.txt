@@ -147,7 +147,7 @@ CREATE TABLE Dalin (
    R_NO NUMBER(5), /* 리뷰 번호 */
    P_ATTACHMENT_NO NUMBER(3), /* 프로필 첨부 파일 번호 */
    D_Q_NO NUMBER(1), /* 질문 번호 > 기본키 */
-   r_review_cnt number(7),
+   R_REVIEW_CNT number(7),
    constraint pk_dalin primary key(d_mno,f_no,d_email,detail_f_name)
 );
 

@@ -163,7 +163,7 @@ $(document).ready(function() {
 			</div>
 		</div>		
 		
-		<div id="table_review_wrap" style="display:none;">
+		 <div id="table_review_wrap" style="display:none;">
 			<table class="table table-hover" style="width: 700px; display: inline-block; padding: 100px 0; float: left;">
 			<colgroup>
 					<col width="20%">
