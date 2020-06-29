@@ -1,36 +1,26 @@
 package com.icia.dal.service;
 
 
-import java.io.File;
-import java.io.IOException;
-import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
+import java.io.*;
+import java.time.*;
+import java.util.*;
 
-import javax.inject.Inject;
-import javax.validation.Valid;
+import javax.inject.*;
+import javax.validation.*;
 
-import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
+import org.modelmapper.*;
+import org.springframework.beans.factory.annotation.*;
+import org.springframework.security.crypto.password.*;
+import org.springframework.stereotype.*;
+import org.springframework.web.multipart.*;
 
-import com.icia.dal.Exception.DalinNotFoundException;
-import com.icia.dal.Exception.MembernameExistException;
-import com.icia.dal.Exception.UserNotFoundException;
-import com.icia.dal.dao.DAO;
-import com.icia.dal.dao.DalinDao;
-import com.icia.dal.dao.ProfileAttachmentDao;
-import com.icia.dal.dao.ReviewDao;
-import com.icia.dal.dto.DalinDto;
-import com.icia.dal.dto.DalinDto.DtoForJoinToDalin;
-import com.icia.dal.dto.DalinDto.DtoForUpdateToDalinProfile;
-import com.icia.dal.dto.page.PageToDalinField;
-import com.icia.dal.entity.Dalin;
-import com.icia.dal.entity.DetailField;
-import com.icia.dal.entity.Level;
-import com.icia.dal.util.pagingutil.FieldPagingUtil;
+import com.icia.dal.Exception.*;
+import com.icia.dal.dao.*;
+import com.icia.dal.dto.*;
+import com.icia.dal.dto.DalinDto.*;
+import com.icia.dal.dto.page.*;
+import com.icia.dal.entity.*;
+import com.icia.dal.util.pagingutil.*;
 
 @Service
 public class DalinService {
@@ -155,6 +145,19 @@ public class DalinService {
 		if(dalDao.findJNameAndJTelByDalinId(dName, dTel)==null)
 			throw new UserNotFoundException();
 		return dalDao.findJNameAndJTelByDalinId(dName, dTel);
+	}
+
+	public PageToSearch dalSearch(int pageno, String searchType, String keyword) {
+		int countOfSearch = dalDao.countOfSearch(searchType,keyword);
+		PageToSearch page = SearchPagingUtil.getPage(pageno, countOfSearch);
+		List<Dalin> list = dalDao.findDalinBySearch(page.getStartRowNum(),page.getEndRowNum(),searchType,keyword);
+		List<DalinDto.DtoForFieldList> dtoList = new ArrayList<>();
+		for(Dalin d:list) {
+			DalinDto.DtoForFieldList dto = modelMapper.map(d,DalinDto.DtoForFieldList.class);
+			dtoList.add(dto);
+		}
+		page.setList(dtoList);
+		return page;
 	}
 	
 	public Dalin findById(String dEmail) {
