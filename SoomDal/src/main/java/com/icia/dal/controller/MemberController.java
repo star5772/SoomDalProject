@@ -7,6 +7,7 @@ import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
@@ -87,7 +88,7 @@ public class MemberController {
 	@GetMapping("/member/find_id")
 	public ModelAndView findId() {
 		// 아이디 찾기 페이지로 이동
-		return new ModelAndView("main").addObject("viewName","member/find_id.jsp");
+		return new ModelAndView("member/find_id");
 	}
 	
 	@GetMapping("/member/reset_pwd") 
@@ -101,17 +102,12 @@ public class MemberController {
 		// 회원 탈퇴 페이지로 이동
 		return new ModelAndView("main").addObject("viewName","member/resign.jsp");
 	}
-	@GetMapping("/member/chk_pwd")
-	public ModelAndView checkPwd() {
-		// 비밀번호 확인 필요한 페이지 이동 시 비밀번호 확인 페이지로 이동
-		return new ModelAndView("main").addObject("viewName","member/check_pwd.jsp");
-	}
+
 	@GetMapping("/member/join_select")
 	public ModelAndView joinSelect() {
 		// 회원가입 버튼 선택 시 제자 or 달인 선택 페이지로 이동
 		return new ModelAndView("main").addObject("viewName","member/join_select.jsp");
 	}
-	
 
 	@DeleteMapping("/member/resign")
 	public String resign(SecurityContextLogoutHandler handler, HttpServletRequest request, HttpServletResponse response, Principal principal) throws MembernameExistException {

@@ -3,6 +3,8 @@ package com.icia.dal.dao.test;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
+import java.util.*;
+
 import javax.inject.Inject;
 
 import org.junit.Test;
@@ -22,16 +24,18 @@ public class RequestBoardDaoTest {
 	
 	@Inject
 	private AdminDao adDao;
-	@Test
+	//@Test
 	public void asdasTe() {
 		assertThat(adDao.findByField("sport").getFName(),is("ㅇㅇㅇ"));
 	}
 	
 	
-	//@Test
+	@Test
 	public void insert() {
-		RequestBoard req = RequestBoard.builder().rbNo(1).rbTitle("제목").rbContent("내용").rbWriter("작성자").rNo(1).jMno(1).build();
-		assertThat(requestDao.insert(req), is(1));
+		for(int i=0; i<86; i++) {
+			RequestBoard req = RequestBoard.builder().rbTitle(i+"번째 글").rbContent("냉무").rbWriter("spring").rbReadCnt(0).rbReportCnt(0).rbIsBlock(false).rbIsNotice(false).rNo(0).jMno(0).build();
+			requestDao.insert(req);
+		}
 	}
 	
 	//@Test

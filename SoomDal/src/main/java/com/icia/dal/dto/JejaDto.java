@@ -16,6 +16,7 @@ public class JejaDto {
 		private String email;
 		private String name;
 		private String tel;
+		private int jMno;
 	}
 	
 	@Data

@@ -82,7 +82,7 @@ public class EstimateAndRequestController {
 		return new ModelAndView("main").addObject("viewName","request/requestList.jsp").addObject("receiveRequest",requestService.receiveRequestList(pageno, dMno)).addObject("dMno",dMno);
 	}
 	
-	// 제자 -> 보낸요청서목록
+	// 제자 -> 보낸요청서목록 지금 하고있는거
 	@GetMapping("/request/sendRequestList")
 	public ModelAndView sendRequestList(@RequestParam(defaultValue = "1")int pageno,int jMno) {
 		return new ModelAndView("main").addObject("viewName","request/requestList.jsp").addObject("sendRequest",requestService.sendRequestList(pageno,jMno));
@@ -90,7 +90,7 @@ public class EstimateAndRequestController {
 	
 	// 달인프로필 -> 제자읽기 -> 요청서 작성화면 출력
 	@GetMapping("/request/sendRequest")
-	public ModelAndView sendRequest(@RequestParam@NotNull Integer dMno) throws DalinNotFoundException {
+	public ModelAndView sendRequest(@RequestParam @NotNull Integer dMno) throws DalinNotFoundException {
 		return new ModelAndView("main").addObject("viewName","request/sendRequest.jsp").addObject("dalin",dalService.readToDalinProfile(dMno));
 	}
 	

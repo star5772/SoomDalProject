@@ -31,10 +31,10 @@ public class DalinDaoTest {
 	@Inject
 	private RequestDao rDao;
 	
-	//@Test
+	@Test
 	public void insertToDalinTest() {
 			Dalin dalin = Dalin.builder().fNo("1").dProfile("profile경로").dIntro("짧은 소개글").detailFName("skateboard").dEmail("thg520@naver.com").dPassword("qwer!1234").dName("winter")
-					.dTel("01011112222").dArea("인천").dLevel(Level.NORMAL).build();
+					.dTel("01011112222").dArea("인천").dLevel(Level.NORMAL).rReviewCnt(0).build();
 			dao.insertToDalin(dalin);
 	}
 	
@@ -54,7 +54,7 @@ public class DalinDaoTest {
 		Dalin dalin = Dalin.builder().dMno(1).dName("전우치").dPassword("1234").dTel("01011111111").build();
 		dao.updateToDalin(dalin);
 	}
-	@Test
+	//@Test
 	public void requestInsert() {
 		Request r = Request.builder()
 				.jMno(1)

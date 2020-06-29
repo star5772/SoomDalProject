@@ -57,5 +57,12 @@ public class DalinDao {
 		map.put("detailFName", detailFName);
 		return tpl.selectList("dalinMapper.findDalinByDetailFName",map);
 	}
+	
+	public String findJNameAndJTelByDalinId(String dName,String dTel) {
+		Map<String,String> map = new HashMap<String, String>();
+		map.put("dName", dName);
+		map.put("dTel", dTel);
+		return tpl.selectOne("dalinMapper.findJNameAndJTelByDalinId",map);
+	}
 
 }

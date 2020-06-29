@@ -395,24 +395,8 @@ $(function() {
 	<div>
 		<label for="tel" style="font-size: medium;">연락처</label><br>
 		<select id="tel-one" class="form-control">
-			<option value="02">서울 - 02 </option>
-			<option value="031">경기 - 031</option>
-			<option value="032">인천 - 032</option>
-			<option value="033">강원 - 033</option>
-			<option value="041">충남 - 041</option>
-			<option value="042">대전 - 042</option>
-			<option value="043">충북 - 043</option>
-			<option value="044">세종 - 044</option>
-			<option value="051">부산 - 051</option>
-			<option value="052">울산 - 052</option>
-			<option value="053">대구 - 053</option>
-			<option value="054">경북 - 054</option>
-			<option value="055">경남 - 055</option>
-			<option value="061">전남 - 061</option>
-			<option value="062">광주 - 062</option>
-			<option value="063">전북 - 063</option>
-			<option value="064">제주 - 064</option>
 			<option value="010">휴대폰 - 010</option>
+			<option value="011">휴대폰 - 011</option>
 		</select>
 		<input type="text" id="tel-two" class="form-control" maxlength="4">
 		<input type="text" id="tel-three" class="form-control" maxlength="4">

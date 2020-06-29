@@ -21,10 +21,10 @@ public class JejaController {
 	private JejaService service;
 	
 	@GetMapping("/jeja/my_info")
-	public ModelAndView jejaInfo() {
+	public ModelAndView jejaInfo(Principal principal) {
 		// 제자 마이페이지로 이동
 		// 제자 정보 필요
-		return new ModelAndView("main").addObject("viewName","jeja/my_info.jsp");
+		return new ModelAndView("main").addObject("viewName","jeja/my_info.jsp").addObject("read",service.read(principal.getName()));
 	}
 	
 	@GetMapping("/jeja/my_info_update")
