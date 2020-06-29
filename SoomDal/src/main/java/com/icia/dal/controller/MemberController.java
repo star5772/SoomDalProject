@@ -111,16 +111,6 @@ public class MemberController {
 
 	@DeleteMapping("/member/resign")
 	public String resign(SecurityContextLogoutHandler handler, HttpServletRequest request, HttpServletResponse response, Principal principal) throws MembernameExistException {
-		// 제자 회원탈퇴
-		// 제자,달인 READ없어서 진행불가능.
-		/*
-		 * String username = authentication.getName();
-		 * dalService.delete(authentication.getName());
-		 * if(dalService.checkId(username)==false) { dalService.delete(username);
-		 * 
-		 * } handler.logout(request, response, authentication); return "redirect:/";
-		 */
-		  
 		jejaService.delete(principal.getName());
 		return "redirect:/";
 	}
