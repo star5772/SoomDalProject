@@ -15,6 +15,7 @@ public class AdminDto {
 		private String jMno;
 		private String jEmail;
 		private String jName;
+		private String jTel;
 		private int jAccusationCnt;
 		private String jJoinDate;
 	}
