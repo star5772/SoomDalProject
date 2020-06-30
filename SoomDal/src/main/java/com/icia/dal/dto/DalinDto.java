@@ -94,6 +94,7 @@ public class DalinDto {
 		private String dProfile;
 		private String dName;
 		private String dIntro;
+		private Double avgScore;
 	}
 	
 }
