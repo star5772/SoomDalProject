@@ -175,6 +175,7 @@ public class DalinService {
 		List<DalinDto.DtoForFieldList> dtoList = new ArrayList<>();
 		for(Dalin d:list) {
 			DalinDto.DtoForFieldList dto = modelMapper.map(d,DalinDto.DtoForFieldList.class);
+			dto.setAvgScore(reviewDao.avgToReview(d.getDMno()));
 			dtoList.add(dto);
 		}
 		page.setSearchType(searchType);
