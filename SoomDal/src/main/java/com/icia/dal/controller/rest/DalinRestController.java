@@ -25,7 +25,6 @@ public class DalinRestController {
 	
 	@Inject
 	private DalinService dalService;
-
 	
 	@GetMapping("/dalin/check_email")
 	public ResponseEntity<Void> ableEmail(String dEmail) throws MembernameExistException {
@@ -37,7 +36,6 @@ public class DalinRestController {
 	//@PreAuthorize("isAuthenticated()")
 	@PutMapping("/dalin/info_update")
 	public ResponseEntity<Void> profileUpdate(DalinDto.DtoForUpdateToDalinProfile dto, @RequestParam("sajin") @Nullable MultipartFile sajin, Principal principal) {
-		System.out.println(dto+"-------------------------------------------");
 		dto.setDName(principal.getName());
 		try {
 			dalService.profileUpdate(dto, sajin);
@@ -61,5 +59,5 @@ public class DalinRestController {
 		return ResponseEntity.ok(null);
 	}
 	
-	
+
 }
