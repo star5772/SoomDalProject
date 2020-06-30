@@ -291,8 +291,9 @@ $(function() {
 	top:50%;
 	left: 50%;
 	margin-left: -450px;
-	margin-top: -350px;
+	margin-top: -250px;
 	font-size: large; 
+	
 }
 #step-three-instruement {
 	position:absolute;
@@ -302,7 +303,7 @@ $(function() {
 	top:50%;
 	left: 50%;
 	margin-left: -450px;
-	margin-top: -350px;
+	margin-top: -250px;
 	font-size: large; 
 }
 #step-three-art {
@@ -313,8 +314,8 @@ $(function() {
 	top:50%;
 	left: 50%;
 	margin-left: -450px;
-	margin-top: -350px;
-	font-size: large; 
+	margin-top: -250px;
+	font-size: medium; 
 }
 #sample6_postcode {
 	margin-bottom: 5px;
@@ -334,7 +335,7 @@ $(function() {
 	font-size: medium;
 	font-weight: bold;
 	font-style:inherit;
-	color: aqua;
+	color: white;
 	text-align: center;
 	line-height: 50%;
 }
@@ -354,7 +355,7 @@ $(function() {
 }
 .radio:checked +label{  
   /* selected styled */
-  background-color: #FE0200;
+  background-color: #ffc107;
   color: white;
   text-shadow: 1px 1px 3px #8e8e8e;
 }
@@ -366,12 +367,15 @@ $(function() {
 	margin-left: 148px;
 	margin-top: 50px;
 }
+#service-art{
+	width: 600px;
+}
 
 </style>
 </head>
 <body>
 <form id="dalinJoinFrm" action="/dal/dalin/join" method="post">
-<div id="step-one" >	
+<div id="step-one" style="display: none;">	
 	<div>
 		<label for="dEmail" style="font-size: medium;">아이디(이메일) 입력</label>
 		<input type="text" name="dEmail" id="dEmail" placeholder="사용하실 이메일을 입력해주세요" maxlength="50" class="form-control input">
@@ -431,59 +435,63 @@ $(function() {
 		<input type="radio" name="radio1" id="art1"class="border"value="art" style="margin-left: 100px;">
 	</div>
 	<div style="height: 100px; width: 630px; margin-top: 100px;">
-		<button id="back-to-step-one" type="button" class="btn btn-danger btn-one" style="margin-left: 50px;">이전</button>
+		<button id="back-to-step-one" type="button" class="btn btn-warning btn-one" style="margin-left: 50px;">이전</button>
 		<button id="complete-step-two" type="button" class="btn btn-warning btn-one" style="float: right; ">다음</button>
 	</div>
 </div>
 	
 <div id="step-three-sport"  style="display: none;" class="step-three">
-	<p style="text-align: center;">달인님이 가장 자신있는 스포츠 종목을 선택해주세요</p>
+	<p style="text-align: center; font-size: 30px; margin-bottom: 30px;">달인님이 가장 자신있는 스포츠 종목을 선택해주세요!</p>
+	<hr>
 	<div id="service-sport">
-		<input type="radio" name="detailFName" value="골프"id="golf" class="radio" style="display:none;"><label for="golf" class="detail-service-sport btn btn-success">골프 레슨</label>
-		<input type="radio" name="detailFName" value="당구" class="radio" id="Billiards" style="display:none;"><label for="Billiards" class="detail-service-sport btn btn-success">당구 레슨</label>
-		<input type="radio" name="detailFName" value="볼링" class="radio" id="Bowling" style="display:none;"><label for="Bowling" class="detail-service-sport btn btn-success">볼링 레슨</label>
-		<input type="radio" name="detailFName" value="스케이트보드" class="radio" id="Skateboard" style="display:none;"><label for="Skateboard" class="detail-service-sport btn btn-success">스케이트보드 레슨</label>
-		<input type="radio" name="detailFName" value="스쿼시" class="radio" id="Squash" style="display:none;"><label for="Squash" class="detail-service-sport btn btn-success">스쿼시 레슨</label>
-		<input type="radio" name="detailFName" value="필라테스"  class="radio"	id="Pilates" style="display:none;"><label for="Pilates" class="detail-service-sport btn btn-success">필라테스 레슨</label>
-		<input type="radio" name="detailFName" value="호신술" class="radio" id="self-defense" style="display:none;"><label for="self-defense" class="detail-service-sport btn btn-success">호신술 레슨</label>
-		<input type="radio" name="detailFName" value="탁구"	class="radio" id="Table tennis" style="display:none;"><label for="Table tennis" class="detail-service-sport btn btn-success">탁구 레슨</label>
-		<input type="radio" name="detailFName" value="클라이밍" class="radio" id="Climbing" style="display:none;"><label for="Climbing" class="detail-service-sport btn btn-success">클라이밍 레슨</label>
+		<input type="radio" name="detailFName" value="골프"id="golf" class="radio" style="display:none;background-color:rgb(234,234,234);"><label for="golf" class="detail-service-sport">골프 레슨</label>
+		<input type="radio" name="detailFName" value="당구" class="radio" id="Billiards" style="display:none;background-color:rgb(234,234,234);"><label for="Billiards" class="detail-service-sport ">당구 레슨</label>
+		<input type="radio" name="detailFName" value="볼링" class="radio" id="Bowling" style="display:none;background-color:rgb(234,234,234);"><label for="Bowling" class="detail-service-sport ">볼링 레슨</label>
+		<input type="radio" name="detailFName" value="스케이트보드" class="radio" id="Skateboard" style="display:none;background-color:rgb(234,234,234);"><label for="Skateboard" class="detail-service-sport">스케이트보드 레슨</label>
+		<input type="radio" name="detailFName" value="스쿼시" class="radio" id="Squash" style="display:none;background-color:rgb(234,234,234);"><label for="Squash" class="detail-service-sport ">스쿼시 레슨</label>
+		<input type="radio" name="detailFName" value="필라테스"  class="radio"	id="Pilates" style="display:none;background-color:rgb(234,234,234);"><label for="Pilates" class="detail-service-sport">필라테스 레슨</label>
+		<input type="radio" name="detailFName" value="호신술" class="radio" id="self-defense" style="display:none;background-color:rgb(234,234,234);"><label for="self-defense" class="detail-service-sport">호신술 레슨</label>
+		<input type="radio" name="detailFName" value="탁구"	class="radio" id="Table tennis" style="display:none;background-color:rgb(234,234,234);"><label for="Table tennis" class="detail-service-sport">탁구 레슨</label>
+		<input type="radio" name="detailFName" value="클라이밍" class="radio" id="Climbing" style="display:none;background-color:rgb(234,234,234);"><label for="Climbing" class="detail-service-sport">클라이밍 레슨</label>
 	</div>
-	<button id="back-to-step-two" class="back-to-step-two btn btn-danger" type="button">이전</button>
+	<button id="back-to-step-two" class="back-to-step-two btn btn-warning" type="button">이전</button>
 	<button class="complete-step-three btn btn-warning" type="button" >가입하기</button>
 </div>	
 
 <div id="step-three-instruement" style="display: none;" class="step-three">
-	<p style="text-align: center;">달인님이 가장 자신있는 악기를 선택해주세요</p>
+	<p style="text-align: center; font-size: 30px; margin-bottom: 30px;">달인님이 가장 자신있는 악기를 선택해주세요!</p>
+	<hr>
 	<div id="service-instruement">
-		<input type="radio" name="detailFName" value="피아노" class="radio" id="piano" style="display:none;"><label for="piano" class="detail-service-sport btn btn-success">피아노 레슨</label>
-		<input type="radio" name="detailFName" value="일렉기타" class="radio" id="ElectricGuitar" style="display:none;"><label for="ElectricGuitar" class="detail-service-sport btn btn-success">일렉기타 레슨</label>
-		<input type="radio" name="detailFName" value="드럼" class="radio" id="drum" style="display:none;"><label for="drum" class="detail-service-sport btn btn-success">드럼 레슨</label>
-		<input type="radio" name="detailFName" value="베이스" class="radio" id="base" style="display:none;"><label for="base" class="detail-service-sport btn btn-success">베이스 레슨</label>
-		<input type="radio" name="detailFName" value="바이올린" class="radio" id="Violin" style="display:none;"><label for="Violin" class="detail-service-sport btn btn-success">바이올린 레슨</label>
-		<input type="radio" name="detailFName" value="색소폰"  class="radio"	id="Saxophone" style="display:none;"><label for="Saxophone" class="detail-service-sport btn btn-success">색소폰 레슨</label>
-		<input type="radio" name="detailFName" value="트럼펫" class="radio" id="Trumpet" style="display:none;"><label for="Trumpet" class="detail-service-sport btn btn-success">트럼펫 레슨</label>
-		<input type="radio" name="detailFName" value="플룻"	class="radio" id="Flute" style="display:none;"><label for="Flute" class="detail-service-sport btn btn-success">플룻 레슨</label>
-		<input type="radio" name="detailFName" value="첼로" class="radio" id="Cello" style="display:none;"><label for="Cello" class="detail-service-sport btn btn-success">첼로 레슨</label>
+		<input type="radio" name="detailFName" value="피아노" class="radio" id="piano" style="display:none;background-color:rgb(234,234,234);"><label for="piano" class="detail-service-sport">피아노 레슨</label>
+		<input type="radio" name="detailFName" value="일렉기타" class="radio" id="ElectricGuitar" style="display:none;background-color:rgb(234,234,234);"><label for="ElectricGuitar" class="detail-service-sport">일렉기타 레슨</label>
+		<input type="radio" name="detailFName" value="드럼" class="radio" id="drum" style="display:none;background-color:rgb(234,234,234);"><label for="drum" class="detail-service-sport  ">드럼 레슨</label>
+		<input type="radio" name="detailFName" value="베이스" class="radio" id="base" style="display:none;background-color:rgb(234,234,234);"><label for="base" class="detail-service-sport  ">베이스 레슨</label>
+		<input type="radio" name="detailFName" value="바이올린" class="radio" id="Violin" style="display:none;background-color:rgb(234,234,234);"><label for="Violin" class="detail-service-sport ">바이올린 레슨</label>
+		<input type="radio" name="detailFName" value="색소폰"  class="radio"	id="Saxophone" style="display:none;background-color:rgb(234,234,234);"><label for="Saxophone" class="detail-service-sport ">색소폰 레슨</label>
+		<input type="radio" name="detailFName" value="트럼펫" class="radio" id="Trumpet" style="display:none;background-color:rgb(234,234,234);"><label for="Trumpet" class="detail-service-sport ">트럼펫 레슨</label>
+		<input type="radio" name="detailFName" value="플룻"	class="radio" id="Flute" style="display:none;background-color:rgb(234,234,234);"><label for="Flute" class="detail-service-sport">플룻 레슨</label>
+		<input type="radio" name="detailFName" value="첼로" class="radio" id="Cello" style="display:none;background-color:rgb(234,234,234);"><label for="Cello" class="detail-service-sport">첼로 레슨</label>
 	</div>
-	<button id="back-to-step-two" class="back-to-step-two btn btn-danger" type="button">이전</button>
+	<button id="back-to-step-two" class="back-to-step-two btn btn-warning" type="button">이전</button>
 	<button class="complete-step-three btn btn-warning" type="button">가입하기</button>
 </div>	
 
-<div id="step-three-art" style="display: none;" class="step-three">
-	<p style="text-align: center;">달인님이 가장 자신있는 장르를 선택해주세요</p>
+<div id="step-three-art" style="" class="step-three">
+	<p style="text-align: center; font-size: 30px; margin-bottom: 30px;">달인님이 가장 자신있는 장르를 선택해주세요!</p>
+	<hr>
+	<br>
 	<div id="service-art">
-		<input type="radio" name="detailFName" value="회화" class="radio" id="painting" style="display:none;"><label for="painting" class="detail-service-sport btn btn-success">회화 레슨</label>
-		<input type="radio" name="detailFName" value="만화" class="radio" id="comic" style="display:none;"><label for="comic" class="detail-service-sport btn btn-success">만화,웹툰,애니 레슨</label>
-		<input type="radio" name="detailFName" value="아동미술" class="radio" id="children's art" style="display:none;"><label for="children's art" class="detail-service-sport btn btn-success">아동미술 레슨</label>
-		<input type="radio" name="detailFName" value="샌드아트" class="radio" id="sandart" style="display:none;"><label for="sandart" class="detail-service-sport btn btn-success">샌드아트 레슨</label>
-		<input type="radio" name="detailFName" value="팝아트" class="radio" id="popart" style="display:none;"><label for="popart" class="detail-service-sport btn btn-success">팝아트 레슨</label>
-		<input type="radio" name="detailFName" value="목공예"  class="radio"	id="woodworking" style="display:none;"><label for="woodworking" class="detail-service-sport btn btn-success">가구,목공예 레슨</label>
-		<input type="radio" name="detailFName" value="도예" class="radio" id="Pottery" style="display:none;"><label for="Pottery" class="detail-service-sport btn btn-success">도예 레슨</label>
-		<input type="radio" name="detailFName" value="소묘"	class="radio" id="drawingart" style="display:none;"><label for="drawingart" class="detail-service-sport btn btn-success">소묘 레슨</label>
-		<input type="radio" name="detailFName" value="켈리그라피" class="radio" id="kelligrapy" style="display:none;"><label for="kelligrapy" class="detail-service-sport btn btn-success">켈리그라피 레슨</label>
+		<input type="radio" name="detailFName" value="회화" class="radio" id="painting" style="display:none;  background-color:rgb(234,234,234);"><label for="painting" class="detail-service-sport">회화 레슨</label>
+		<input type="radio" name="detailFName" value="만화" class="radio" id="comic" style="display:none; background-color:rgb(234,234,234); "><label for="comic" class="detail-service-sport">만화,웹툰,애니 레슨</label>
+		<input type="radio" name="detailFName" value="아동미술" class="radio" id="children's art" style="display:none; background-color:rgb(234,234,234);"><label for="children's art" class="detail-service-sport">아동미술 레슨</label>
+		<input type="radio" name="detailFName" value="샌드아트" class="radio" id="sandart" style="display:none;background-color:rgb(234,234,234);"><label for="sandart" class="detail-service-sport ">샌드아트 레슨</label>
+		<input type="radio" name="detailFName" value="팝아트" class="radio" id="popart" style="display:none;background-color:rgb(234,234,234);"><label for="popart" class="detail-service-sport  ">팝아트 레슨</label>
+		<input type="radio" name="detailFName" value="목공예"  class="radio"	id="woodworking" style="display:none;background-color:rgb(234,234,234);"><label for="woodworking" class="detail-service-sport ">가구,목공예 레슨</label>
+		<input type="radio" name="detailFName" value="도예" class="radio" id="Pottery" style="display:none;background-color:rgb(234,234,234);"><label for="Pottery" class="detail-service-sport ">도예 레슨</label>
+		<input type="radio" name="detailFName" value="소묘"	class="radio" id="drawingart" style="display:none;background-color:rgb(234,234,234);"><label for="drawingart" class="detail-service-sport ">소묘 레슨</label>
+		<input type="radio" name="detailFName" value="켈리그라피" class="radio" id="kelligrapy" style="display:none;background-color:rgb(234,234,234);"><label for="kelligrapy" class="detail-service-sport ">켈리그라피 레슨</label>
 	</div>
-	<button id="back-to-step-two" class="back-to-step-two btn btn-danger" type="button">이전</button>
+	<button id="back-to-step-two" class="back-to-step-two btn btn-warning" type="button">이전</button>
 	<button class="complete-step-three btn btn-warning" type="button">가입하기</button>
 </div>	
 </form>	

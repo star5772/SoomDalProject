@@ -80,9 +80,9 @@ width: 80px; height: 35px;  background-color: #ffc968; color: white; font-size: 
 			<button id="answer" onclick="" >답 변</button>
 		</table> 
 		</div>
-	</sec:authorize> 
+	
 		
-		<!-- 관리자가 자신의 댓글을 볼때 sec
+		<!-- 관리자가 자신의 댓글을 볼때 sec -->
 		
 		<div style="margin-left: 20px; display: inline-block;">
 		<hr>
@@ -97,7 +97,7 @@ width: 80px; height: 35px;  background-color: #ffc968; color: white; font-size: 
 			<button id="cancel2" onclick="" >삭 제</button>
 		</table>
 		</div>
-		-->
+	</sec:authorize> 
 	
 </body>
 </html>
