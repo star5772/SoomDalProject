@@ -139,11 +139,11 @@ $(document).ready(function(){
 		formData.append("_method","put");
 		/* if($("#dAttachment1")[0].files[0]!=undefined)
 			formData.append("sajin", $("#dAttachment1")[0].files[0]);
-		if($("#dAttachment2")[0].files[0]!=undefined)
+		if($("#dAttachment2")[0].files[1]!=undefined)
 			formData.append("sajin", $("#dAttachment2")[0].files[0]);
-		if($("#dAttachment3")[0].files[0]!=undefined)
+		if($("#dAttachment3")[0].files[2]!=undefined)
 			formData.append("sajin", $("#dAttachment3")[0].files[0]);
-		if($("#dAttachment4")[0].files[0]!=undefined)
+		if($("#dAttachment4")[0].files[3]!=undefined)
 			formData.append("sajin", $("#dAttachment4")[0].files[0]); */
 		$.ajax({
 			url:"/dal/dalin/info_update",

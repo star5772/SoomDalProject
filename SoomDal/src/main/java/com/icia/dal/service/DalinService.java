@@ -56,9 +56,9 @@ public class DalinService {
 		dalin.setDDate(LocalDateTime.now());
 		// 가입지역 "지역구"만 저장
 		String addr = dalin.getDArea();
-		int city = addr.indexOf("시");
 		int gu = addr.indexOf("구");
-		String area = addr.substring(city+1 , gu+1);
+		System.out.println(addr + "---------------------------------------------------------");
+		String area = addr.substring(0, gu+1);
 		dalin.setDArea(area);
 		System.out.println(area);
 		System.out.println(dalin);

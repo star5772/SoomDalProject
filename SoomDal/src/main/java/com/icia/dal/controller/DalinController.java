@@ -40,6 +40,7 @@ public class DalinController {
 	public String dalinJoin(DalinDto.DtoForJoinToDalin dto,BindingResult br, RedirectAttributes ra) throws BindException {
 		if(br.hasErrors()==true)
 			throw new BindException(br);
+		System.out.println(dto);
 		dalService.join(dto);
 		ra.addFlashAttribute("msg","회원가입을 축하합니다");
 		return "redirect:/member/system/msg";
