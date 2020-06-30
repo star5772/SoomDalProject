@@ -61,7 +61,7 @@ function openChild()
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarResponsive">
-      <sec:authentication property="principal.username" var="username"/>
+      
         <ul class="navbar-nav ml-auto">
         	<sec:authorize access="isAnonymous()">
         		<li class="nav-item"><a class="nav-link" href="#"style="color:black; font-size:medium;"><i class="fas fa-search">&nbsp;달인 찾기</i></a></li>
@@ -72,6 +72,7 @@ function openChild()
         	</sec:authorize>
         	
         	<sec:authorize access="hasRole('ROLE_JEJA')">
+        		<sec:authentication property="principal.username" var="username"/>
         		<li class="nav-item"><a class="nav-link" href="#"style="color:black; font-size:medium;"><i class="fas fa-search">&nbsp;달인 찾기</i></a></li>
         		<li class="nav-item"><a class="nav-link" href="/dal/jeja/my_info"style="color:black; font-size:medium;">내 정보</a></li>
         		<li class="nav-item"><a class="nav-link" href="/dal/member/memo/memo_receiveList?dEmail=${username }" style="color:black; font-size:medium;">쪽지함</a></li>
@@ -79,6 +80,7 @@ function openChild()
         	</sec:authorize>
         	
         	<sec:authorize access="hasRole('ROLE_DALIN')">
+        		<sec:authentication property="principal.username" var="username"/>
         		<li class="nav-item" style="width: 100px;"><a class="nav-link" href="/dal/member/memo/memo_receiveList?dEmail=${username }"style="color:black; font-size:medium;">쪽지함</a></li>
 				<li class="nav-item dropdown" style="width: 100px;">
 					<a class="nav-link dropdown-toggle" href="#" id="navbarDropdownPortfolio" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: black;">OOO고객님</a>
