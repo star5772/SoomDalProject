@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.validation.constraints.Pattern;
 
+import com.icia.dal.dao.*;
 import com.icia.dal.entity.*;
 
 import lombok.Data;
@@ -43,6 +44,7 @@ public class DalinDto {
 		private String dAttachmentNo;
 		private Integer rNo;
 		private Integer dQNo;
+		private List<RepQuestion> rep;
 		private List<Review> reviews;
 		private List<ProfileAttachment> ProfileAttachments;
 	}

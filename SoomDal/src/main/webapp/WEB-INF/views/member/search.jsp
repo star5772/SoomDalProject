@@ -9,6 +9,8 @@
 <script>
 	$(function() {
 		var pageno = ${search.pageno};
+		if(pageno==0) 
+			pageno=1;
 		$("#search_btn").on("click", function(e) {
 			e.preventDefault();
 			var url = "${pageContext.request.contextPath}/member/search";
@@ -48,30 +50,40 @@
 	display: inline-block;
 	margin: 0 0 0 24px;
 }
+	a:link { color: black;}
+	a:visited { color: black;}
+	a:active { color: black;}
+	a:hover { text-decoration: none;}
+.menu_span {
+	font-size: 14px;
+	padding: 0px 35px;
+	font-weight: bold;
+}
 </style>
 </head>
 <body>
 	<div id="search_wrap">
 		<div id="head">
 			<div id="title" style="padding: 20px 0;">
-				<h1>달인 찾기</h1>
+				<h1 style="font-weight: bold; font-size: 34px;">달인 찾기</h1>
 			</div>
+			<div><p>숨달 > 지역, 카테고리</p></div>
 			<div id="search_div">
-				<div style="padding-right: 10px" class="form-group">
-					<select id="search" class="form-control" name="searchType">
+				<div style="padding-right: 2px;" class="form-group">
+					<select id="search" class="form-control" name="searchType" style="height: 30px;">
 						<option value="DNAME">달인</option>
 						<option value="DAREA">지역</option>
 					</select>
 				</div>
-				<div style="padding-right: 10px" class="form-group">
+				<div style="padding-right: 2px" class="form-group">
 					<input type="text" id="keyword" name='keyword' class="form-control"
-						style="width: 180px;" placeholder="달인, 지역을  검색해보세요">
+						style="width: 240px; height: 30px;" placeholder="달인, 지역을  검색해보세요">
 				</div>
 				<div>
-					<button type="button" id="search_btn" class="btn btn-info">검색</button>
+					<button type="button" id="search_btn" class="btn btn-info" style="height: 28px; width: 40px; background-color: #999999; color: white; border: 0; outline: 0;">검색</button>
 				</div>
 				<div>
-					<button type="button" style="margin-left: 50px;" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">카테고리</button>
+					<button type="button" style="margin-left: 335px; background-color: white; color: #999999; width: 100px; height: 30px; border: 1px solid #999999; border-radius: 5px; font-size: 14px;"  data-toggle="modal" data-target="#myModal"><i class="fas fa-th-large"></i>  카테고리</button>
 				</div>
 			</div>
 		</div>
@@ -79,19 +91,19 @@
 			<!-- 아래 c:forEach 로 list 개수만큼 div 반복 -->
 			<c:forEach items="${search.list }" var="list">
 				<div style="padding: 24px 0;">
-					<div id="dal_profile"><img style="border-radius: 10px; border: 1px solid black;" src="${list.DProfile }" width="100px" height="100px"></div>
+					<div id="dal_profile"><img style="border-radius: 10px;" src="${list.DProfile }" width="100px" height="100px"></div>
 					<div id="dal_content">
 						<h5>
-							<a href="#">${list.DName }</a>
+							<a href="#"><h5 style="font-weight: bold; font-size: 18px;">${list.DName }</h5></a>
 						</h5>
-						<p>${list.DIntro }</p>
+						<p style="font-size: 14px;">${list.DIntro }</p>
 						<div>
 							<span>
 								<c:forEach begin="1" end="${list.avgScore }">
 									<img src="https://assets.cdn.soomgo.com/icons/icon-common-review-star-small-full.svg">
 								</c:forEach>
 							</span>
-							<span>${list.avgScore }</span>
+							<span style="font-size: 16px; font-weight: bold;">${list.avgScore }</span>
 						</div>
 					</div>
 				</div>
@@ -141,13 +153,14 @@
 		</div>
 	</div>
 	<div class="modal fade" id="myModal" role="dialog">
-		<div class="modal-dialog">
+		<div class="modal-dialog" style="width: 450px;">
 			<div class="modal-content">
 				<div class="modal-header">
-          			<h4 class="modal-title">서비스 선택</h4>
+          			<h4 class="modal-title" style="font-weight: bold; font-size: 24px;">서비스 선택</h4>
         		</div>
 				<div class="modal-body">
-					<a href="#demo" data-toggle="collapse"><div>스포츠</div></a>
+					<a href="#demo" data-toggle="collapse"><div style="font-size: 18px; padding: 20px 29px; font-weight: bold;">스포츠<i class="fas fa-angle-down" style="margin-left: 80%; color: #CFCFCF;"></i></div></a>
+					<hr>
 						<div id="demo" class="collapse">
        					  <ul class="nav flex-column">
           					  <li class="nav-item">
@@ -187,7 +200,8 @@
            					</li>
            				</ul>
 						</div>
-						<a href="#demo1" data-toggle="collapse"><div>미술</div></a>
+						<a href="#demo1" data-toggle="collapse"><div style="font-size: 18px; padding: 20px 29px; font-weight: bold;">미술<i class="fas fa-angle-down" style="margin-left: 85%; color: #CFCFCF;"></i></div></a>
+						<hr>
 						<div id="demo1" class="collapse">
        					  <ul class="nav flex-column">
           					  <li class="nav-item">
@@ -227,7 +241,7 @@
            					</li>
            				</ul>
 						</div>
-						<a href="#demo2" data-toggle="collapse"><div>음악</div></a>
+						<a href="#demo2" data-toggle="collapse"><div style="font-size: 18px; padding: 20px 29px; font-weight: bold;">음악<i class="fas fa-angle-down" style="margin-left: 85%; color: #CFCFCF;"></i></div></a>
 						<div id="demo2" class="collapse">
        					  <ul class="nav flex-column">
           					  <li class="nav-item">
