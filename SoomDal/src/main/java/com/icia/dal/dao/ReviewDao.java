@@ -29,8 +29,8 @@ public class ReviewDao {
 		return tpl.delete("reviewMapper.deleteToReview",rNo);
 	}
 	
-	public Double avgToReview() {
-		return tpl.selectOne("reviewMapper.avgToReview");
+	public Double avgToReview(int dMno) {
+		return tpl.selectOne("reviewMapper.avgToReview",dMno);
 	}
 	
 	public int countToReview() {
