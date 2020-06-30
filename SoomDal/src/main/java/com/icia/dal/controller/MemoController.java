@@ -7,6 +7,7 @@ import javax.inject.Inject;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.icia.dal.Exception.MemoNotFoundException;
@@ -20,9 +21,9 @@ public class MemoController {
 	private MemoService memoService;
 	
 	@GetMapping("/memo/memo_receiveList")
-	public ModelAndView MemoList(Principal principal) {
+	public ModelAndView MemoList(@RequestParam(defaultValue = "1")int pageno, Principal principal) {
 		String username = principal.getName();
-		return new ModelAndView("main").addObject("viewName","memo/memo_list.jsp").addObject("memoList",memoService.findAllByMemo(username));
+		return new ModelAndView("main").addObject("viewName","memo/memo_list.jsp").addObject("memoList",memoService.listToMemo(pageno, username));
 	}
 	
 	@GetMapping("/memo/memo_read")
