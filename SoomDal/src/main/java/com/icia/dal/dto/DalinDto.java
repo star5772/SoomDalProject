@@ -5,8 +5,7 @@ import java.util.List;
 
 import javax.validation.constraints.Pattern;
 
-import com.icia.dal.entity.Review;
-import com.icia.dal.entity.ProfileAttachment;
+import com.icia.dal.entity.*;
 
 import lombok.Data;
 
@@ -72,6 +71,7 @@ public class DalinDto {
 		private Integer rNo;
 		private Integer pAttachmentNo;
 		private Integer dQNo;
+		
 	}
 	
 	@Data
@@ -94,6 +94,7 @@ public class DalinDto {
 		private String dProfile;
 		private String dName;
 		private String dIntro;
+		private Double avgScore;
 	}
 	
 }

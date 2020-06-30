@@ -103,6 +103,9 @@
 				<if test="searchType=='DAREA'">
 					AND D_AREA like '%' || #{keyword} || '%'
 				</if>
+				<if test="searchType=='DETAILFNAME'">
+					AND DETAIL_F_NAME like '%' || #{keyword} || '%'
+				</if>
      		 </if>
 			</trim>
 	</select>
@@ -117,6 +120,9 @@
 							</if>
 							<if test="searchType=='DAREA' and keyword != null and keyword != '' ">
 								AND D_AREA like '%' || #{keyword} || '%'
+							</if>
+							<if test="searchType=='DETAILFNAME' and keyword != null and keyword != '' ">
+								AND DETAIL_F_NAME like '%' || #{keyword} || '%'
 							</if>
 				</trim>) b
 			where rownum&lt;=#{endRowNum})

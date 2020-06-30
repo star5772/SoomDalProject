@@ -90,19 +90,21 @@ height: 30px; margin-left: 20px; width: 1024px;  text-align: center;
    input[id*="d"] + label {
       display:block;
       padding:20px;
-      border:1px solid #00FF40;
       border-bottom:0;
-      color: white;
+      color: BLACK;
       font-weight: 900;
-      font-size: 16px;
-      background: #00FF40;
+      font-size: 17px;
+      background: white;
       cursor:pointer;
       position:relative;
+       border: 0;
+	  border-radius: 5px;
+	  
    }
    input[id*="d"] + label + div {
       max-height: 0;
       overflow: hidden;
-      background: #FF00FF;
+      background: #F6F6F6;
       font-size: 11px;
    }
    input[id*="d"] + label + div p {
@@ -120,19 +122,20 @@ height: 30px; margin-left: 20px; width: 1024px;  text-align: center;
    input[id*="j"] + label {
       display:block;
       padding:20px;
-      border:1px solid aqua;
       border-bottom:0;
-      color: white;
+      color: BLACK;
       font-weight: 900;
-      font-size: 16px;
-      background: aqua;
+      font-size: 17px;
+      background: WHITE;
       cursor:pointer;
       position:relative;
+       border: 0;
+	  border-radius: 5px;
    }
    input[id*="j"] + label + div {
       max-height: 0;
       overflow: hidden;
-      background: #DDDDDD;
+      background: #F6F6F6;
       font-size: 11px;
    }
    input[id*="j"] + label + div p {
@@ -150,14 +153,15 @@ height: 30px; margin-left: 20px; width: 1024px;  text-align: center;
    input[id*="Q"] + label {
       display:block;
       padding:20px;
-      border:1px solid orange;
       border-bottom:0;
-      color: white;
+      color: black;
       font-weight: 900;
-      font-size: 16px;
-      background: orange;
+      font-size: 17px;
+      background: white;
       cursor:pointer;
       position:relative;
+      border: 0;
+	  border-radius: 5px;
    }
    input[id*="Q"] + label + div {
       max-height: 0;
@@ -171,13 +175,12 @@ height: 30px; margin-left: 20px; width: 1024px;  text-align: center;
       font-size: 12px;
    }
    input[id*="Q"]:checked + label + div {
-      max-height: 100px;
+      max-height: 120px;
    }
-   
    .radio:checked +label{  
   /* selected styled */
-  background-color: #FE0200;
-  color: white;
+  background-color: #FFA500;
+    color: white;
   text-shadow: 1px 1px 3px #8e8e8e;
 }
    
@@ -187,39 +190,45 @@ height: 30px; margin-left: 20px; width: 1024px;  text-align: center;
 <body id="g">
 
 
-	<div id="QNAtop">
+	<div id="QNAtop" >
 		<div style="font-size: 43px; font-weight: bold; color: rgb(243, 156, 18); ">Q&A</div>
 		<div style="font-size: 19px;">궁금한것 무엇이든! 물어보세요!</div>
 	</div>
 	<div id="FAQtop" style="display:none;">
-		<div style="font-size: 43px; font-weight: bold; color: rgb(243, 156, 18); ">자주묻는질문</div>
-		<div style="font-size: 19px;">궁금한것 무엇이든! 물어보세요!</div>
+		<div style="font-size: 43px; font-weight: bold; color: rgb(243, 156, 18); ">FAQ</div>
+		<div style="font-size: 19px;">자주하는 질문들을 모아! 모아!</div>
 	</div>
+	
 	<div id="dGUIDEtop" style="display:none;">
-		<div style="font-size: 43px; font-weight: bold; color: rgb(243, 156, 18); ">달인 가이드</div>
-		<div style="font-size: 19px;">궁금한것 무엇이든! 물어보세요!</div>
+		<div style="font-size: 43px; font-weight: bold; color: rgb(243, 156, 18); ">DALIN</div>
+		<div style="font-size: 19px;">달인님이 궁금하신것들 모았습니다!</div>
 	</div>
+	
 	<div id="jGUIDEtop" style="display:none;">
-		<div style="font-size: 43px; font-weight: bold; color: rgb(243, 156, 18); ">제자 가이드</div>
-		<div style="font-size: 19px;">궁금한것 무엇이든! 물어보세요!</div>
+		<div style="font-size: 43px; font-weight: bold; color: rgb(243, 156, 18); ">JEJA</div>
+		<div style="font-size: 19px;">제자님이 궁금하신것들 모았습니다!</div>
 	</div>	
+	
 	<br>
-<div style="width: 170px; height: 60px; border: 1px solid gray; margin-top: 50px; display: inline-block;">
-	<input type="radio" class="radio" id="AQNA" name="radio" style="display:none;"><label for="AQNA">QNA</label>
+<div style="width: 150px;   display: inline-block; text-align: center;">
+	<input type="radio" class="radio" id="AQNA" name="radio" style="display:none; margin-bottom: 20px; " ><label for="AQNA">Q&A게시판</label>
 </div>
-<div style="width: 170px; height: 60px; border: 1px solid gray; margin-top: 50px; margin-left:-5px; display: inline-block;">
-	<input type="radio" class="radio" id="FAQ" name="radio" style="display:none;"><label for="FAQ">FAQ</label>
+
+<div style="width: 150px; ;  margin-left:-5px; display: inline-block;text-align: center;">
+	<input type="radio" class="radio" id="FAQ" name="radio" style="display:none;margin-bottom: 20px;"><label for="FAQ">FAQ게시판</label>
 </div>
-<div style="width: 170px; height: 60px; border: 1px solid gray; margin-top: 50px; margin-left:-5px; display: inline-block;">
-	<input type="radio" class="radio" id="dGUIDE" name="radio" style="display:none;"><label for="dGUIDE">DALIN</label>
+
+<div style="width: 150px;    margin-left:-5px; display: inline-block;text-align: center;">
+	<input type="radio" class="radio" id="dGUIDE" name="radio" style="display:none;margin-bottom: 20px;"><label for="dGUIDE">DALIN가이드</label>
 </div>
-<div style="width: 170px; height: 60px; border: 1px solid gray; margin-top: 50px; margin-left:-5px; display: inline-block;">
-	<input type="radio" class="radio" id="jGUIDE" name="radio" style="display:none;"><label for="jGUIDE">JEJA</label>
+
+<div style="width: 150px;     margin-left:-5px; display: inline-block;text-align: center;">
+	<input type="radio" class="radio" id="jGUIDE" name="radio" style="display:none;margin-bottom: 20px;"><label for="jGUIDE">JEJA가이드</label>
 </div>
 
 <div id="QNAboard">		
 	<div>
-		<table style="height: 30px; margin-left: 20px; width: 1024px;  text-align: center;" class="table table-hover" id="ta">
+		<table style="height: 30px; width: 1024px;  text-align: center;" class="table table-hover" id="ta">
 			<colgroup >
 				<col width="10%">
 				<col width="50%">
@@ -277,31 +286,65 @@ height: 30px; margin-left: 20px; width: 1024px;  text-align: center;
 <div id="FAQboard" style="display:none;">
    <div style="margin-top: 30px;">
       <input type="radio" name="faq" id="Q1">
-      <label for="Q1">1.자주묻는 질문<em></em></label>
+      <label for="Q1" >1. 아이디와 비밀번호를 잊어버렸어요!<em></em></label>
       <div><p>
-         아이디와 비밀번호를 잃어버렸어요!
+      	 숨달의 아이디는 이메일 주소입니다.
+      	 <br>
+      	 숨달의 요청서를 작성하셨었다면 요청서 작성 마지막 단계에서 입력하셨던 이메일 주소가 숨달의 아이디입니다.
+      	 <br>
+      	 기억이 나지 않으신다면, 숨달 고객센터 이메일을 통해 문의주시면 도와드리겠습니다.
+      	 <br>
+      	 비밀번호가 기억나지 않으신다면, 아래 경로를 통해 비밀번호 재설정을 하실 수 있습니다.
+      	 <br>
+      	 비밀번호 찾기 클릭 
       </p>
       </div>
       <input type="radio" name="faq" id="Q2">
-      <label for="Q2">2.자주묻는 질문<em></em></label>
+      <label for="Q2">2. 인증번호 문자가 오지 않아요.<em></em></label>
       <div><p>
-         아이디와 비밀번호를 잃어버렸어요!
+		휴대폰 본인 인증 문자가 오지 않는 경우, 아래 두 가지를 확인해주세요.
+		<br>
+		- 숨고의 고객센터 번호 1599-5319가 스팸 번호로 등록되어있어 숨고에서 전송한 문자가 스팸 문자로 분류된 경우
+		<br>
+	 	- 통신사 무료 부가서비스 중 스팸 필터링 부가서비스에 가입되어있는 경우
+	 	<br>
+	 	스팸 문자함을 살펴봐 주시고,  통신사에 해당 부가서비스에 가입되어있는지 확인 부탁드립니다.
+	 	<br>
+	 	위 두 가지에 해당하지 않을 때는 숨고 고객센터로 연락해 주시면 도와드리겠습니다. 
       </p>
       </div>
       <input type="radio" name="faq" id="Q3">
-      <label for="Q3">3.자주묻는 질문<em></em></label>
+      <label for="Q3">3. 고수 카테고리 추가/삭제는 어떻게 하나요?<em></em></label>
       <div><p>
          아이디와 비밀번호를 잃어버렸어요!
       </p>
       </div>
       <input type="radio" name="faq" id="Q4">
-      <label for="Q4">4.자주묻는 질문<em></em></label>
+      <label for="Q4">4. 견적서 보내는 방법을 잘 모르겠어요.<em></em></label>
       <div><p>
          아이디와 비밀번호를 잃어버렸어요!
       </p>
       </div>
       <input type="radio" name="faq" id="Q5">
-      <label for="Q5">5.자주묻는 질문<em></em></label>
+      <label for="Q5">5. 저는 견적서를 보낸적이 없는데 보내졌어요!<em></em></label>
+      <div><p>
+         아이디와 비밀번호를 잃어버렸어요!
+      </p>
+      </div>
+          <input type="radio" name="faq" id="Q6">
+      <label for="Q6" >6. 요청서 작성은 어떻게 하나요?<em></em></label>
+      <div><p>
+         아이디와 비밀번호를 잃어버렸어요!
+      </p>
+      </div>
+          <input type="radio" name="faq" id="Q7">
+      <label for="Q7" >7. 요청서 내용을 수정하고 싶어요!<em></em></label>
+      <div><p>
+         아이디와 비밀번호를 잃어버렸어요!
+      </p>
+      </div>
+          <input type="radio" name="faq" id="Q8">
+      <label for="Q8" >8. 견적서가 도착했아요. 견적서는 무엇인가요?<em></em></label>
       <div><p>
          아이디와 비밀번호를 잃어버렸어요!
       </p>
@@ -311,31 +354,31 @@ height: 30px; margin-left: 20px; width: 1024px;  text-align: center;
 <div id="dGUIDEboard" style="display:none;">
    <div style="margin-top: 30px;">
       <input type="radio" name="dGUIDE" id="d1">
-      <label for="d1">1.자주묻는 질문<em></em></label>
+      <label for="d1">1. 자주묻는 질문<em></em></label>
       <div><p>
          아이디와 비밀번호를 잃어버렸어요!
       </p>
       </div>
       <input type="radio" name="dGUIDE" id="d2">
-      <label for="d2">2.자주묻는 질문<em></em></label>
+      <label for="d2">2. 자주묻는 질문<em></em></label>
       <div><p>
          아이디와 비밀번호를 잃어버렸어요!
       </p>
       </div>
       <input type="radio" name="dGUIDE" id="d3">
-      <label for="d3">3.자주묻는 질문<em></em></label>
+      <label for="d3">3. 자주묻는 질문<em></em></label>
       <div><p>
          아이디와 비밀번호를 잃어버렸어요!
       </p>
       </div>
       <input type="radio" name="dGUIDE" id="d4">
-      <label for="d4">4.자주묻는 질문<em></em></label>
+      <label for="d4">4. 자주묻는 질문<em></em></label>
       <div><p>
          아이디와 비밀번호를 잃어버렸어요!
       </p>
       </div>
       <input type="radio" name="dGUIDE" id="d5">
-      <label for="d5">5.자주묻는 질문<em></em></label>
+      <label for="d5">5. 자주묻는 질문<em></em></label>
       <div><p>
          아이디와 비밀번호를 잃어버렸어요!
       </p>
@@ -345,31 +388,31 @@ height: 30px; margin-left: 20px; width: 1024px;  text-align: center;
 <div id="jGUIDEboard" style="display:none;">
    <div style="margin-top: 30px;">
       <input type="radio" name="jGUIDE" id="j1">
-      <label for="j1">1.자주묻는 질문<em></em></label>
+      <label for="j1">Q. 왜 NEW 숨고캐시로 바뀌나요 ?<em></em></label>
       <div><p>
          아이디와 비밀번호를 잃어버렸어요!
       </p>
       </div>
       <input type="radio" name="jGUIDE" id="j2">
-      <label for="j2">2.자주묻는 질문<em></em></label>
+      <label for="j2">2. 자주묻는 질문<em></em></label>
       <div><p>
          아이디와 비밀번호를 잃어버렸어요!
       </p>
       </div>
       <input type="radio" name="jGUIDE" id="j3">
-      <label for="j3">3.자주묻는 질문<em></em></label>
+      <label for="j3">3. 자주묻는 질문<em></em></label>
       <div><p>
          아이디와 비밀번호를 잃어버렸어요!
       </p>
       </div>
       <input type="radio" name="jGUIDE" id="j4">
-      <label for="j4">4.자주묻는 질문<em></em></label>
+      <label for="j4">4. 자주묻는 질문<em></em></label>
       <div><p>
          아이디와 비밀번호를 잃어버렸어요!
       </p>
       </div>
       <input type="radio" name="jGUIDE" id="j5">
-      <label for="j5">5.자주묻는 질문<em></em></label>
+      <label for="j5">5. 자주묻는 질문<em></em></label>
       <div><p>
          아이디와 비밀번호를 잃어버렸어요!
       </p>

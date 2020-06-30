@@ -118,6 +118,8 @@ a {
 		</div>
 	</div>
 </sec:authorize>
+
+
 <sec:authorize access="hasRole('ROLE_JEJA')">
 	<div class="request">
 		<div style="padding-bottom: 30px; padding-left: 10px;">
