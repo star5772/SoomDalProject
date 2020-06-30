@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="memoMapper">
+
 	<insert id="insert">
-		insert into memo(mno, title, content, sender, receiver, write_time, is_read, disable_by_sender, disable_by_receiver)
+		insert into memo(m_no, title, content, sender, receiver, write_time, is_read, disable_by_sender, disable_by_receiver)
 		values(memo_seq.nextval, #{title}, #{content}, #{sender}, #{receiver}, sysdate, 0, 0, 0)
 	</insert>
 	
 	<select id="findByMemo" resultType="memo">
-		select mno, title, content, sender, receiver, write_time writeTime, is_read isRead, disable_by_sender disableBySender, disable_by_receiver disableByReceiver
+		select m_no, title, content, sender, receiver, write_time writeTime, is_read isRead, disable_by_sender disableBySender, disable_by_receiver disableByReceiver
 		from memo where mno=#{mno} and rownum=1
 	</select>
 	
@@ -15,25 +16,25 @@
 		<![CDATA[
 			select * from	
 				(select m.*,rownum rnum from
-					(select mno, title, sender, receiver, write_time writeTime, is_read isRead from memo where receiver=#{receiver} and disable_by_receiver=0) m
+					(select m_no, title, sender, receiver, write_time writeTime, is_read isRead from memo where receiver=#{receiver} and disable_by_receiver=0) m
 				where rownum<=#{endRowNum})
 			where rnum>=#{startRowNum}
 		]]>	
 	</select>
 	
 	<update id="setRead">
-		update memo set is_read=1 where mno=#{mno} and rownum=1
+		update memo set is_read=1 where m_no=#{mno} and rownum=1
 	</update>
 	
 	<update id="disableBySender">
-		update memo set disable_by_sender=1 where mno in
+		update memo set disable_by_sender=1 where m_no in
 		 <foreach collection="list" item="item" index="index" separator="," open="(" close=")">
 		 	#{item}
 		 </foreach>
 	</update>
 	
 	<update id="disableByReceiver">
-		update memo set disable_by_receiver=1 where mno in
+		update memo set disable_by_receiver=1 where m_no in
 		 <foreach collection="list" item="item" index="index" separator="," open="(" close=")">
 		 	#{item}
 		 </foreach>
@@ -46,6 +47,13 @@
 	<select id="isNotReadMemoExist" resultType="boolean">
 		select count(*) from users where is_read= and receiver=#{username} and rownum=1
 	</select>
+	
+	<select id="countToMemo" resultType="int">
+		select count(*)
+		from memo
+		where receiver=#{receiver} and disable_by_receiver=0
+	</select>
+	
 </mapper>
 
 
