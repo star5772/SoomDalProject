@@ -15,7 +15,6 @@
 	padding-left: 15px;
 }
 #readRequestRead{
-	
 	width: 60%;
 	margin: 0 auto;
 }
