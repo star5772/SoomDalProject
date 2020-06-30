@@ -64,11 +64,14 @@ public class EstimateAndRequestController {
 	public ModelAndView readToSendEstimate(@RequestParam@NotNull Integer eNo) throws ReadFailException {
 		return new ModelAndView("main").addObject("viewName","estimate/readEstimate.jsp").addObject("readEstimate",estimateService.readToSendEstimate(eNo));
 	}
+	
 	// 받은 견적서 읽기
 	@GetMapping("/estimate/readToReceiveEstimate")
 	public ModelAndView readToReceiveEstimate(@RequestParam@NotNull Integer eNo) throws ReadFailException {
+		System.out.println("eNo : "+eNo);
 		return new ModelAndView("main").addObject("viewName","estimate/readEstimate.jsp").addObject("readEstimate",estimateService.readToSendEstimate(eNo));
 	}
+	
 	// 제자->견적서 수락
 	@PostMapping("/estimate/readToEstimate")
 	public ResponseEntity<?> readToEstimateJeja(boolean jIsOk,int eNo,int dMno,int jMno) {

@@ -7,14 +7,15 @@
 		<selectKey>
 			select estimate_seq.nextval from dual
 		</selectKey>
-		insert into estimate(e_no,d_mno,f_no,j_mno,r_no,d_email,e_money,e_content,e_tel_type,j_is_ok,e_cash, e_write_time)
-		values(#{eNo},#{dMno},#{fNo},#{jMno},#{rNo},#{dEmail},#{eMoney},#{eContent},#{eTelType},0,1700, sysdate)
+		insert into estimate(e_no,d_mno,f_no,j_mno,r_no,d_email,e_money,e_content,e_tel_type,j_is_ok,e_cash, e_write_time,e_is_read)
+		values(#{eNo},#{dMno},#{fNo},#{jMno},#{rNo},#{dEmail},#{eMoney},#{eContent},#{eTelType},0,1700, sysdate,0)
 	</insert>
 	
 	<!-- 견적서 읽기 -->
 	<select id="findByEstimate" resultType="estimate">
-		select  e_no eNo, d_mno dMno, f_no fNo, j_mno jMno, r_no rNo, d_email dEmail, e_money eMoney, e_content eContent, e_tel_type eTelType, j_is_ok jIsOk, e_cash eCash, d_name dName, e_write_time eWriteTime 
-		from estimate where e_no = #{eNo} and rownum=1
+		select  e_no eNo, d_mno dMno, f_no fNo, j_mno jMno, r_no rNo, d_email dEmail, e_money eMoney, e_content eContent, e_tel_type eTelType, j_is_ok jIsOk, e_cash eCash, e_write_time eWriteTime,e_is_read eIsRead 
+		from estimate
+		where e_no = #{eNo} and rownum=1
 	</select>
 	
 	<!-- 견적서 목록 -->
@@ -22,7 +23,7 @@
 		<![CDATA[
 			select * from
 				(select e.*,rownum rnum from
-					(select e_no eNo, d_mno dMno, f_no fNo, j_mno jMno, r_no rNo, d_email dEmail, e_money eMoney, e_content eContent, e_tel_type eTelType, j_is_ok jIsOk, e_cash eCash, d_name dName, e_write_time eWriteTime from estimate where d_mno=#{dMno}) e
+					(select e_no eNo, d_mno dMno, f_no fNo, j_mno jMno, r_no rNo, d_email dEmail, e_money eMoney, e_content eContent, e_tel_type eTelType, j_is_ok jIsOk, e_cash eCash, e_write_time eWriteTime,e_is_read eIsRead from estimate where d_mno=#{dMno}) e
 				where rownum<=#{endRowNum})
 			where rnum>=#{startRowNum}
 		]]>			
@@ -49,11 +50,25 @@
 		<![CDATA[
 			select * from
 				(select e.*,rownum rnum from
-					(select e_no eNo, d_mno dMno, f_no fNo, j_mno jMno, r_no rNo, d_email dEmail, e_money eMoney, e_content eContent, e_tel_type eTelType, j_is_ok jIsOk, e_cash eCash, d_name dName, e_write_time eWriteTime from estimate where j_mno=#{jMno}) e
+					(select e_no eNo, d_mno dMno, f_no fNo, j_mno jMno, r_no rNo, d_email dEmail, e_money eMoney, e_content eContent, e_tel_type eTelType, j_is_ok jIsOk, e_cash eCash, e_write_time eWriteTime,e_is_read eIsRead from estimate where j_mno=#{jMno}) e
 				where rownum<=#{endRowNum})
 			where rnum>=#{startRowNum}
 		]]>			
 	</select>
+	
+	
+	
+	
+	
+	
+	
+	<select id="isNotReadEstimate" resultType="boolean">
+		select count(*) from estimate where e_is_read = and j_Mno = #{jMno} and rownum=1
+	</select>
+	
+	<update id="setRead">
+		update estimate set e_is_read = 1 where e_no = #{eNo} and rownum=1
+	</update>
 	
 </mapper>
 
