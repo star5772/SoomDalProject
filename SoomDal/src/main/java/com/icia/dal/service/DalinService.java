@@ -177,6 +177,8 @@ public class DalinService {
 			DalinDto.DtoForFieldList dto = modelMapper.map(d,DalinDto.DtoForFieldList.class);
 			dtoList.add(dto);
 		}
+		page.setSearchType(searchType);
+		page.setKeyword(keyword);
 		page.setList(dtoList);
 		return page;
 	}
