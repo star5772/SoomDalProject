@@ -24,4 +24,5 @@ public class Estimate {
 	private Boolean jIsOk;
 	private Integer eCash;
 	private LocalDateTime eWriteTime;
+	private Boolean eIsRead;
 }

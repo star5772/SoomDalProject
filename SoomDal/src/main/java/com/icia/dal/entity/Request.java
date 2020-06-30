@@ -31,5 +31,6 @@ public class Request {
 	private String rWantArea;
 	private LocalDateTime rWriteDate;
 	private Integer dMno;
-	private Boolean rbEnabled;				// 달인이 요청서 수락전이면 삭제가능.
+	private Boolean rbEnabled;				// 달인이 요청서 수락전이면 삭제가능
+	private Boolean rIsRead;
 }
