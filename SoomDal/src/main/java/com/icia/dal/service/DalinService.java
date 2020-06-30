@@ -2,6 +2,7 @@ package com.icia.dal.service;
 
 
 import java.io.*;
+import java.security.*;
 import java.time.*;
 import java.util.*;
 
@@ -40,6 +41,8 @@ public class DalinService {
 	private String profilePath;
 	@Inject
 	private ProfileAttachmentDao profileAttachmentDao;
+	@Inject
+	private RepQuestionDao repDao;
 	
 
 	public void join(DtoForJoinToDalin dto) {
@@ -56,9 +59,9 @@ public class DalinService {
 		dalin.setDDate(LocalDateTime.now());
 		// 가입지역 "지역구"만 저장
 		String addr = dalin.getDArea();
-		int city = addr.indexOf("시");
 		int gu = addr.indexOf("구");
-		String area = addr.substring(city+1 , gu+1);
+		System.out.println(addr + "---------------------------------------------------------");
+		String area = addr.substring(0, gu+1);
 		dalin.setDArea(area);
 		System.out.println(area);
 		System.out.println(dalin);
@@ -101,6 +104,7 @@ public class DalinService {
 				dalin.setDProfile(profilePath + file.getName());
 			}
 		}
+		
 		dalDao.updateToDalinProfile(dalin);
 	}
 
@@ -159,6 +163,8 @@ public class DalinService {
 			dto.setProfileAttachments(profileAttachmentDao.findAllByProfileAttachment(dto.getDMno()));
 		if(dalin.getRReviewCnt()>0)
 			dto.setReviews(reviewDao.findAllReview(dto.getDMno()));
+		if(dalin.getDQNo()!=0)
+			dto.setRep(repDao.findAllToRequestion(dalDao.findByDalinToDMno(dMno).getDEmail()));
 		return dto;
 	}
 
@@ -187,6 +193,8 @@ public class DalinService {
 	public Dalin findById(String dEmail) {
 		return dalDao.findByDalin(dEmail);
 	}
+
+	
 }	
 
 

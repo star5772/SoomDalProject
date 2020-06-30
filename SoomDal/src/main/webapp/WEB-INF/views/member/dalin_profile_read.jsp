@@ -57,7 +57,7 @@ hr{
 	
 }
 #update{
-	margin-left: 750px;
+	margin-left:400px;
 	background-color: orange;
 	color : white;
 	outline: 0;
@@ -65,6 +65,19 @@ hr{
 	border-radius: 4px;
 	text-align: center;
 	width: 50px;
+	height: 25px;
+	font-size: 12px;
+}
+#buttonDiv #writeRequest{
+	margin-left:-380px;
+	display:inline-block;
+	background-color: gray;
+	color : white;
+	outline: 0;
+	border: 0;
+	border-radius: 4px;
+	text-align: center;
+	width: 80px;
 	height: 25px;
 	font-size: 12px;
 }
@@ -84,18 +97,22 @@ hr{
 	width: 100px;
 	height: 50px;
 }
+#buttonDiv {
+	margin-left: 650px;
+}
 
 </style>
 </head>
 <body>
-	<form id="profileReadFrm" action="member/profile/read" method="get"></form>
 	<div id="dalinRead">
 		<div id="dProfile">
 			<div style="border-radius: 50%; height: 200px; width: 200px; background-color: gray; ">
 			<p id="dName">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${readProfile.DName}</p></div>
 		</div>
 		<div>
-			<button id="update" onclick="location.href='/dal/dalin/dalin_profile_update'">수&nbsp;정</button>
+			<div id="buttonDiv">
+				<button id="writeRequest" onclick="location.href='/dal/member/request/sendRequest?dMno=${readProfile.DMno}'">요청서작성</button><button id="update" onclick="location.href='/dal/dalin/profile_update'">수&nbsp;정</button>
+			</div>
 		</div>
 		<div id="dName-bottom">
 			<div>
