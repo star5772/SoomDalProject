@@ -7,6 +7,31 @@
 <head>
 <meta charset="UTF-8">
 <title>관리자 페이지</title>
+<style>
+	h1 {
+		font-weight: bolder;
+		margin-top: 65px;
+		text-align: left;
+		font-size: 28px;
+	}
+	table {
+		margin-top: 150px;
+	}
+	#manage_wrap a {
+		font-size: 14px;
+		font-weight: bold;
+	}
+	th {
+		font-size: 14px;
+		font-weight: bold;
+	}
+	td {
+		font-size: 12px;
+	}
+	.list-group-item {
+		margin-bottom: 1px;
+	}
+</style>
 <script>
 $(document).ready(function() {
 	$("#report").on("click",function() {
@@ -49,37 +74,38 @@ $(document).ready(function() {
 <body>
 
 
-	<div id="manage_title" style="display: inline-block; width: 250px; text-align: center; position: absolute; left: 40%">
-		<h1>회원 관리</h1>
-	</div>
-	<div style="display: inline-block; width: 80px; position: absolute; left: 69.8%; top: 25%; display: none;">
-		<select>
+	
+	<div style="display: inline-block; width: 80px; position: absolute; left: 69.7%; top: 220px; border: 0; outline: 0;">
+		<select style="border-style: none;">
 			<option>제자회원</option>
 			<option>달인회원</option>
 		</select>
 	</div>
 <div id="manage_wrap">
 	<div id="menu_wrap" style="width: 200px; display: inline-block; text-align: center; padding: 150px 20px; float: left;">
-		<div class="list-group">
+		<div class="list-group" style="border:#CFCFCF;">
     		<a href="#" class="list-group-item" id="user">회원 관리</a>
     		<a href="#" class="list-group-item" id="review">게시물 관리</a>
-    		<a href="#" class="list-group-item" id="report">신고 회원관리</a>
+    		<a href="#" class="list-group-item" id="report">신고회원 관리</a>
     		<a href="#" class="list-group-item" id="enabled">블락회원 관리</a>
     		<a href="#" class="list-group-item">환불 관리</a>
   		</div>
 	</div>
 
 	<div id="table_wrap" >
-		<table class="table table-hover" style="width: 700px; padding: 100px 0; float: left; margin-top: 60px; text-align: center;">
+	<div id="manage_title1" style="display: inline-block; position: absolute; left: 28%">
+		<h1>회원 관리</h1>
+	</div>
+		<table class="table table-hover" style="width: 700px; padding: 100px 0; float: left; text-align: center;">
 			<colgroup>
-				<col width="20%">
+				<col width="15%">
 				<col width="30%">
 				<col width="20%">
-				<col width="15%">
+				<col width="20%">
 				<col width="15%">
 			</colgroup>
 			<thead>
-			<tr class="warning">
+			<tr class="active">
 				<th>이름</th>
 				<th>아이디</th>
 				<th>전화번호</th>
@@ -92,7 +118,7 @@ $(document).ready(function() {
 				<tr>
 					<td>${list.JName}</td>
 					<td>${list.JEmail }</td>
-					<td>${list.JMno }</td>
+					<td>${list.JTel }</td>
 					<td>${list.JAccusationCnt }</td>
 					<td>${list.JJoinDate }</td>
 				</tr>
@@ -123,7 +149,10 @@ $(document).ready(function() {
 			</div>
 	</div>	
 		<div id="table_report_wrap" style="display:none;">
-			<table class="table table-hover" style="width: 700px; padding: 100px 0; float: left; margin-top: 60px; text-align: center;">
+			<div id="manage_title2" style="display: inline-block; position: absolute; left: 28%">
+				<h1>신고회원 관리</h1>
+			</div>
+			<table class="table table-hover" style="width: 700px; padding: 100px 0; float: left; text-align: center;">
 			<colgroup>
 					<col width="20%">
 					<col width="30%">
@@ -132,7 +161,7 @@ $(document).ready(function() {
 					<col width="15%">
 				</colgroup>
 				<thead>
-				<tr class="warning">
+				<tr class="active">
 					<th>가입일</th>
 					<th>작성자</th>
 					<th>회원이름</th>
@@ -175,7 +204,10 @@ $(document).ready(function() {
 		</div>		
 		
 		 <div id="table_review_wrap" style="display:none;">
-			<table class="table table-hover" style="width: 700px; padding: 100px 0; float: left; margin-top: 60px; text-align: center;">
+		 	<div id="manage_title3" style="display: inline-block; position: absolute; left: 28%">
+				<h1>게시물 관리</h1>
+			</div>
+			<table class="table table-hover" style="width: 700px; padding: 100px 0; float: left; text-align: center;">
 			<colgroup>
 					<col width="20%">
 					<col width="30%">
@@ -184,7 +216,7 @@ $(document).ready(function() {
 					<col width="15%">
 				</colgroup>
 				<thead>
-				<tr class="warning">
+				<tr class="active">
 					<th>아이디</th>
 					<th>신고게시물</th>
 					<th>신고당한 횟수</th>
@@ -226,7 +258,10 @@ $(document).ready(function() {
 		</div>
 			
 			<div id="table_enabled_wrap" style="display:none;">
-			<table class="table table-hover" style="width: 700px; padding: 100px 0; float: left; margin-top: 60px; text-align: center;">
+				<div id="manage_title4" style="display: inline-block; position: absolute; left: 28%">
+					<h1>블락회원 관리</h1>
+				</div>
+			<table class="table table-hover" style="width: 700px; padding: 100px 0; float: left; text-align: center;">
 			<colgroup>
 					<col width="20%">
 					<col width="30%">
@@ -235,7 +270,7 @@ $(document).ready(function() {
 					<col width="15%">
 				</colgroup>
 				<thead>
-				<tr class="warning">
+				<tr class="active">
 					<th>아이디</th>
 					<th>정지당한시간</th>
 				</tr>
