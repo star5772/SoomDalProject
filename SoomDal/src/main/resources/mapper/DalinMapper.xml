@@ -120,4 +120,6 @@
 			where rownum&lt;=#{endRowNum})
 		where r&gt;=#{startRowNum}
 	</select>
+	
+
 </mapper>

@@ -66,6 +66,7 @@ public class DalinDto {
 		private String dArea;
 		private String dIntro;
 		private String dDetailService;
+		private String dMainService;
 		private String dPaymentMethod;
 		private Integer pAttachmentCnt;
 		private Integer rNo;

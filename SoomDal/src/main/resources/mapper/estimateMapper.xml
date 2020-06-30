@@ -13,7 +13,7 @@
 	
 	<!-- 견적서 읽기 -->
 	<select id="findByEstimate" resultType="estimate">
-		select  e_no eNo, d_mno dMno, f_no fNo, j_mno jMno, r_no rNo, d_email dEmail, e_money eMoney, e_content eContent, e_tel_type eTelType, j_is_ok jIsOk, e_cash eCash, d_name dName, e_write_time eWriteTime 
+		select  e_no eNo, d_mno dMno, f_no fNo, j_mno jMno, r_no rNo, d_email dEmail, e_money eMoney, e_content eContent, e_tel_type eTelType, j_is_ok jIsOk, e_cash eCash, e_write_time eWriteTime 
 		from estimate where e_no = #{eNo} and rownum=1
 	</select>
 	
