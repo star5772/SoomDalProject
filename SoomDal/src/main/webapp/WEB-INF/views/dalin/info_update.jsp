@@ -25,81 +25,31 @@ $(function() {
 		
 	});
 });
-
-$(document).ready(function() {
-	$("#intro").on("click", function() {
-		var params = {
-			_method:"put",
-			_csrf:"${_csrf.token}",
-			dIntro:$("#dIntro").val()
-		}
+$(document).ready(function(){
+	$("#update").on("click",function() {
+		var formData = new FormData();
+		formData.append("dIntro", $("#dIntro").val());
+		formData.append("dMainService",$("#dMainService").val());
+		formData.append("dArea",$("#dArea").val());
+		formData.append("dDetailService",$("#dDetailService").val());
+		formData.append("dPaymentMethod",$("#dPaymentMethod").val());
+		formData.append("dMno",$("#dMno").val());
+		formData.append("q1",$("#q1").val());
+		formData.append("q2",$("#q2").val());
+		formData.append("q3",$("#q3").val());
+		formData.append("q4",$("#q4").val());
+		formData.append("_csrf","${_csrf.token}");
+		formData.append("_method","put");
 		$.ajax({
-			url:"/dal/dalin/my_info_update",
+			url:"/dal/dalin/info_update",
+			data:formData,
 			method:"post",
-			data:params,
-		}).done(()=>{toastr.info("이름변경 성공")}).fail(()=>{toastr.warning("이름변경 실패")})
+			processData:false,
+			contentType:false
+		}).done(()=>{toastr.info("변경 성공");}).fail(()=>{toastr.info("변경 실패");})
 	})
 })
 
-$(document).ready(function() {
-	$("#mainService").on("click",function() {
-		var params = {
-			_method: "put",
-			_csrf:"${_csrf.token}",
-			dMainService:$("#dMainService").val()
-		}
-		$.ajax({
-			url:"/dal/dalin/my_info_update",
-			method:"post",
-			data:params,
-		}).done(()=>{toastr.info("변경성공")}).fail(()=>{toastr.warning("변경실패")})
-	})
-})
-
-$(document).ready(function() {
-	$("#area").on("click",function() {
-		var params = {
-			_method:"put",
-			_csrf:"${_csrf.token}",
-			dArea:$("#dArea").val()
-		}
-		$.ajax({
-			url:"/dal/dalin/my_info_update",
-			method:"post",
-			data:params,
-		}).done(()=>{toastr.info("변경성공")}).fail(()=>{toastr.warning("변경실패")})
-	})
-})
-
-$(document).ready(function() {
-	$("#detailService").on("click",function(){
-		var params={
-			_method:"put",
-			_csrf:"${_csrf.token}",
-			dDetailService:$("#dDetailService").val()
-		}
-		$.ajax({
-			url:"/dal/dalin/my_info_update",
-			method:"post",
-			data:params,
-		}).done(()=>{toastr.info("변경성공")}).fail(()=>{toastr.warning("변경실패")})
-	})
-})
-
-$(document).ready(function() {
-	$("#patmentMethod").on("click",function(){
-		var params={
-			_method:"put",
-			_csrf:"${_csrf.token}",
-			dPatmentMehod:$("#dPatmentMehod").val()
-		}
-		$.ajax({
-			url:"/dal/dalin/my_info_update",
-			method:"post",
-			data:params,
-		}).done(()=>{toastr.info("변경성공")}).fail(()=>{toastr.warning("변경실패")})
-	})
-})
 </script>
 <style>
 h2 {
@@ -210,15 +160,15 @@ body {
 	<div id="dalinUpdate">
 		<div id="dProfile">
 			<div style="border-radius: 50%; height: 200px; width: 200px; background-color: gray;">
-				<p id="dName">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${dalin.dName}김희은</p>
+				<p id="dName">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${dalin.DName}</p>
 			</div>
 			<div style="margin-left: 160px;">
-				<button type="button" style="border: 0px white; background-color: white;" id="dal_profile"><i class="fas fa-camera fa-2x"></i></button><img id="show_profile" src="${dalin.dProfile }">
+				<button type="button" style="border: 0px white; background-color: white;" id="dal_profile"><i class="fas fa-camera fa-2x"></i></button><img id="show_profile" src="${dalin.DProfile }">
 			</div>
 		</div>
+		<input type="hidden" name="dMno" id="dMno" value="${dalin.DMno}">
 		<div>
-			<button id="update"
-				onclick="location.href='/dal/dalin/dalin_profile_update'">수&nbsp;정</button>
+			<button id="update" class="btn btn-info">수&nbsp;정</button>
 		</div>
 		<div id="dName-bottom">
 			<div>
@@ -230,8 +180,8 @@ body {
 					<br> <br>
 				</div>
 				<div>
-					<input type="text" id="intro" name="intro"
-						value="${dalin.dIntro}한줄소개">
+					<input type="text" id="dIntro" name="dIntro"
+						value="${dalin.DIntro}">
 				</div>
 			</div>
 		</div>
@@ -245,8 +195,8 @@ body {
 					<br> <br>
 				</div>
 				<div>
-					<input type="text" id="mainService" name="mainService"
-						value="${dalin.dMainService}대표서비스">
+					<input type="text" id="dMainService" name="dMainService"
+						value="${dalin.DMainService}">
 				</div>
 			</div>
 		</div>
@@ -260,7 +210,7 @@ body {
 					<br> <br>
 				</div>
 				<div>
-					<input type="text" id="area" name="area" value="${dalin.dArea}활동지역">
+					<input type="text" id="dArea" name="dArea" value="${dalin.DArea}">
 				</div>
 			</div>
 		</div>
@@ -274,8 +224,8 @@ body {
 					<br> <br>
 				</div>
 				<div>
-					<input type="text" id="detailService" name="detailService"
-						value="${dalin.dDetailService}서비스상세설명">
+					<input type="text" id="dDetailService" name="dDetailService"
+						value="${dalin.DDetailService}">
 				</div>
 			</div>
 		</div>
@@ -289,8 +239,8 @@ body {
 					<br> <br>
 				</div>
 				<div>
-					<input type="text" id="patmentMethod" name="patmentMethod"
-						value="${dalin.dPaymentMethod}결제수단">
+					<input type="text" id="dPaymentMethod" name="dPaymentMethod"
+						value="${dalin.DPaymentMethod}">
 				</div>
 			</div>
 		</div>
@@ -310,16 +260,16 @@ body {
 					<div id="attachment_div"></div>
 					<div>
 						<div id="dAttachment1">
-							<p>${profileAttachment.dAttachmentNo}사진1</p>
+							<p>${profileAttachment.DAttachmentNo}</p>
 						</div>
 						<div id="dAttachment2">
-							<p>${profileAttachment.dAttachmentNo}사진2</p>
+							<p>${profileAttachment.DAttachmentNo}</p>
 						</div>
 						<div id="dAttachment3">
-							<p>${profileAttachment.dAttachmentNo}사진3</p>
+							<p>${profileAttachment.DAttachmentNo}</p>
 						</div>
 						<div id="dAttachment4">
-							<p>${profileAttachment.dAttachmentNo}사진4</p>
+							<p>${profileAttachment.DAttachmentNo}</p>
 						</div>
 					</div>
 				</div>
@@ -361,7 +311,7 @@ body {
 								</h4>
 							</div>
 							<div>
-								<input type="text" name="q2" id="q2" value="${reqQuestion.dQContent}답변">
+								<input type="text" name="q3" id="q3" value="${reqQuestion.dQContent}답변">
 							</div>
 						</div><br>
 						<div>
@@ -371,7 +321,7 @@ body {
 								</h4>
 							</div>
 							<div>
-								<input type="text" name="q2" id="q2" value="${reqQuestion.dQContent}답변">
+								<input type="text" name="q4" id="q4" value="${reqQuestion.dQContent}답변">
 							</div>
 						</div><br>
 					</div>
