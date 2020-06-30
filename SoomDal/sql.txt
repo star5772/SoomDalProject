@@ -105,7 +105,7 @@ select * from nowpayment;
 
 select * from dalin;
 /* 제자회원*/
-
+select * from jeja;
 CREATE TABLE JEJA (
    J_MNO NUMBER(7) NOT NULL, /* 제자 회원 번호 */
    J_EMAIL VARCHAR2(50) NOT NULL, /* 회원 id(email) */
@@ -340,7 +340,7 @@ CREATE TABLE Review (
    R_WRITER NVARCHAR2(20), /* 작성자  */
    S_NO NUMBER(6), /* 사진 번호 */
    d_mno number(7), /* 리뷰가 달린 달인 회원번호 */
-   j_Auccusation_cnt number(6), /* 리뷰 신고당한 횟수 */
+   j_Accusation_cnt number(6), /* 리뷰 신고당한 횟수 */
    constraint pk_review primary key(r_no)
 );
 /*리뷰 첨부파일*/

@@ -52,6 +52,10 @@ p{
 h2{
 	font-size: 25px;
 	font-weight: bold;
+	padding-bottom: 30px;
+	padding-left: 10px;
+	padding-top: 50px;
+
 }
 #page_wrap {
     position: relative;

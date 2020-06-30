@@ -1,26 +1,19 @@
 package com.icia.dal.controller;
 
-import java.io.*;
-import java.security.Principal;
+import java.security.*;
 
-import javax.inject.Inject;
-import javax.validation.*;
+import javax.inject.*;
 
-import org.springframework.http.*;
-import org.springframework.stereotype.Controller;
-import org.springframework.validation.BindException;
-import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.*;
-import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.stereotype.*;
+import org.springframework.validation.*;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.*;
+import org.springframework.web.servlet.mvc.support.*;
 
-import com.icia.dal.Exception.UserNotFoundException;
-import com.icia.dal.dto.DalinDto;
-import com.icia.dal.service.DalinService;
-import com.icia.dal.service.PaymentService;
+import com.icia.dal.Exception.*;
+import com.icia.dal.dto.*;
+import com.icia.dal.entity.*;
+import com.icia.dal.service.*;
 
 @Controller
 public class DalinController {
@@ -58,8 +51,9 @@ public class DalinController {
 	}
 	
 	@GetMapping("/dalin/profile_update")
-	public ModelAndView dalinInFoUpdate() {
-		return new ModelAndView("main").addObject("viewName","dalin/info_update.jsp");
+	public ModelAndView dalinInFoUpdate(Principal principal) throws DalinNotFoundException {
+		Dalin dalin = dalService.findById(principal.getName());
+		return new ModelAndView("main").addObject("viewName","dalin/info_update.jsp").addObject("dalin",dalService.readToDalinProfile(dalin.getDMno()));
 	}
 	
 	@GetMapping("/dalin/my_info_update")

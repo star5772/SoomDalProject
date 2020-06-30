@@ -12,14 +12,16 @@ $(document).ready(function() {
 	$("#report").on("click",function() {
 		$("#table_wrap").css("display","none");
 		$("#table_review_wrap").css("display","none");
+		$("#table_enabled_wrap").css("display","none");
 		$("#table_report_wrap").removeAttr("style");
 	})
 })
 
  $(document).ready(function(){
 	$("#user").on("click",function() {
-		$("#table_report_wrap").css("diplay","none");
+		$("#table_report_wrap").css("display","none");
 		$("#table_review_wrap").css("display","none");
+		$("#table_enabled_wrap").css("display","none");
 		$("#table_wrap").removeAttr("style");
 	})
 }) 
@@ -28,6 +30,7 @@ $(document).ready(function() {
 	$("#review").on("click",function() {
 		$("#table_wrap").css("display","none");
 		$("#table_report_wrap").css("display","none");
+		$("#table_enabled_wrap").css("display","none");
 		$("#table_review_wrap").removeAttr("style");
 	})
 })
@@ -39,6 +42,7 @@ $(document).ready(function() {
 		$("#table_review_wrap").css("display","none");
 		$("#table_enabled_wrap").removeAttr("style");
 	})
+	
 })
 </script>
 </head>
@@ -66,7 +70,7 @@ $(document).ready(function() {
 	</div>
 
 	<div id="table_wrap" >
-		<table class="table table-hover" style="width: 700px; display: inline-block; padding: 100px 0; float: left; ">
+		<table class="table table-hover" style="width: 700px; padding: 100px 0; float: left; margin-top: 60px; text-align: center;">
 			<colgroup>
 				<col width="20%">
 				<col width="30%">
@@ -74,6 +78,7 @@ $(document).ready(function() {
 				<col width="15%">
 				<col width="15%">
 			</colgroup>
+			<thead>
 			<tr class="warning">
 				<th>이름</th>
 				<th>아이디</th>
@@ -81,7 +86,8 @@ $(document).ready(function() {
 				<th>신고당한 횟수</th>
 				<th>블락 여부</th>
 			</tr>
-			
+			</thead>
+			<tbody>
  			 <c:forEach items="${jeja.list }" var="list">
 				<tr>
 					<td>${list.JName}</td>
@@ -91,6 +97,7 @@ $(document).ready(function() {
 					<td>${list.JJoinDate }</td>
 				</tr>
 			</c:forEach> 
+			</tbody>
 		</table>
 			<div style="text-align: center; display: inline-block; margin-left: 35%">
 				<ul class="pagination">
@@ -116,7 +123,7 @@ $(document).ready(function() {
 			</div>
 	</div>	
 		<div id="table_report_wrap" style="display:none;">
-			<table class="table table-hover" style="width: 700px; display: inline-block; padding: 100px 0; float: left;">
+			<table class="table table-hover" style="width: 700px; padding: 100px 0; float: left; margin-top: 60px; text-align: center;">
 			<colgroup>
 					<col width="20%">
 					<col width="30%">
@@ -124,12 +131,15 @@ $(document).ready(function() {
 					<col width="15%">
 					<col width="15%">
 				</colgroup>
+				<thead>
 				<tr class="warning">
 					<th>가입일</th>
 					<th>작성자</th>
 					<th>회원이름</th>
 					<th>신고횟수</th>
 				</tr>
+				</thead>
+				<tbody>
 		 		<c:forEach items="${jeja.list}" var="j">
 					<tr>
 						<td>${j.JJoinDate}</td>
@@ -138,6 +148,7 @@ $(document).ready(function() {
 						<td>${j.JAccusationCnt }</td>
 					</tr>
 				</c:forEach>
+				</tbody>
 			</table>
 			<div style="text-align: center; display: inline-block; margin-left: 35%; display: none;">
 				<ul class="pagination">
@@ -164,7 +175,7 @@ $(document).ready(function() {
 		</div>		
 		
 		 <div id="table_review_wrap" style="display:none;">
-			<table class="table table-hover" style="width: 700px; display: inline-block; padding: 100px 0; float: left;">
+			<table class="table table-hover" style="width: 700px; padding: 100px 0; float: left; margin-top: 60px; text-align: center;">
 			<colgroup>
 					<col width="20%">
 					<col width="30%">
@@ -172,11 +183,14 @@ $(document).ready(function() {
 					<col width="15%">
 					<col width="15%">
 				</colgroup>
+				<thead>
 				<tr class="warning">
 					<th>아이디</th>
 					<th>신고게시물</th>
 					<th>신고당한 횟수</th>
 				</tr>
+				</thead>
+				<tbody>
 				<c:forEach items="${review.list }" var="v">
 					<tr>
 						<td>${v.RDate }</td>
@@ -185,6 +199,7 @@ $(document).ready(function() {
 						<td>${v.RContent }</td>
 					</tr>
 				</c:forEach>
+				</tbody>
 			</table>
 				<div style="text-align: center; display: inline-block; margin-left: 35%">
 				<ul class="pagination">
@@ -211,7 +226,7 @@ $(document).ready(function() {
 		</div>
 			
 			<div id="table_enabled_wrap" style="display:none;">
-			<table class="table table-hover" style="width: 700px; display: inline-block; padding: 100px 0; float: left;">
+			<table class="table table-hover" style="width: 700px; padding: 100px 0; float: left; margin-top: 60px; text-align: center;">
 			<colgroup>
 					<col width="20%">
 					<col width="30%">
@@ -219,16 +234,20 @@ $(document).ready(function() {
 					<col width="15%">
 					<col width="15%">
 				</colgroup>
+				<thead>
 				<tr class="warning">
 					<th>아이디</th>
 					<th>정지당한시간</th>
 				</tr>
+				</thead>
+				<tbody>
 				<c:forEach items="${enabled.list }" var="e">
 					<tr>
 						<td>${e.JName}</td>
 						<td>${e.JJoinDate }</td>
 					</tr>
 				</c:forEach>
+				</tbody>
 			</table>
 				<div style="text-align: center; display: inline-block; margin-left: 35%">
 				<ul class="pagination">

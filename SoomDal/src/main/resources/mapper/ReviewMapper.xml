@@ -29,6 +29,7 @@
 	<select id="avgToReview" resultType="double">
 		select avg(r_score)
 		from review
+		where d_mno=#{dMno} 
 	</select>
 	
 	<select id="countToReview" resultType="int">
