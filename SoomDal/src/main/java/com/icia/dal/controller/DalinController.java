@@ -7,6 +7,7 @@ import javax.inject.*;
 import org.springframework.stereotype.*;
 import org.springframework.validation.*;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.*;
 import org.springframework.web.servlet.*;
 import org.springframework.web.servlet.mvc.support.*;
 
@@ -51,7 +52,7 @@ public class DalinController {
 	}
 	
 	@GetMapping("/dalin/profile_update")
-	public ModelAndView dalinInFoUpdate(Principal principal) throws DalinNotFoundException {
+	public ModelAndView dalinInFoUpdate(Principal principal, DalinDto.DtoForUpdateToDalinProfile dto, MultipartFile sajin) throws DalinNotFoundException {
 		Dalin dalin = dalService.findById(principal.getName());
 		return new ModelAndView("main").addObject("viewName","dalin/info_update.jsp").addObject("dalin",dalService.readToDalinProfile(dalin.getDMno()));
 	}

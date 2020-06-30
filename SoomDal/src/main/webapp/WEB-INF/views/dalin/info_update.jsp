@@ -6,6 +6,98 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script>
+function loadAttach() {
+	var file = $("#sajin")[0].files[0];
+	var maxSize = 1024*1024; // 1MB
+	if(file.size>maxSize) {
+		Swal.fire({
+			icon: 'error',
+		  	title: '크기 오류',
+			text: '파일크기는 1MB를 넘을 수 없습니다'
+		});
+		$("#sajin").val("");
+		return false;
+	}
+	var reader = new FileReader();
+	   reader.onload = function(e) {
+	      $("#show_attach1").attr("src", e.target.result);
+	   }
+	   reader.readAsDataURL(file);
+}
+function loadAttach1() {
+	var file1 = $("#attach0")[0].files[0];
+	var maxSize = 1024*1024; // 1MB
+	if(file1.size>maxSize) {
+		Swal.fire({
+			icon: 'error',
+		  	title: '크기 오류',
+			text: '파일크기는 1MB를 넘을 수 없습니다'
+		});
+		$("#attach0").val("");
+		return false;
+	}
+	var reader = new FileReader();
+	   reader.onload = function(e) {
+	      $("#show_attach2").attr("src", e.target.result);
+	   }
+	reader.readAsDataURL(file1);
+}
+function loadAttach2() {
+	var file2 = $("#attach1")[0].files[0];
+	var maxSize = 1024*1024; // 1MB
+	if(file2.size>maxSize) {
+		Swal.fire({
+			icon: 'error',
+		  	title: '크기 오류',
+			text: '파일크기는 1MB를 넘을 수 없습니다'
+		});
+		$("#attach1").val("");
+		return false;
+	}
+	var reader = new FileReader();
+	   reader.onload = function(e) {
+	      $("#show_attach3").attr("src", e.target.result);
+	   }
+	reader.readAsDataURL(file2);
+}
+function loadAttach3() {
+	var file3 = $("#attach2")[0].files[0];
+	var maxSize = 1024*1024; // 1MB
+	if(file3.size>maxSize) {
+		Swal.fire({
+			icon: 'error',
+		  	title: '크기 오류',
+			text: '파일크기는 1MB를 넘을 수 없습니다'
+		});
+		$("#attach2").val("");
+		return false;
+	}
+	var reader = new FileReader();
+	   reader.onload = function(e) {
+	      $("#show_attach4").attr("src", e.target.result);
+	   }
+	reader.readAsDataURL(file3);
+}
+function loadAttach4() {
+	var file4 = $("#attach3")[0].files[0];
+	var maxSize = 1024*1024; // 1MB
+	if(file4.size>maxSize) {
+		Swal.fire({
+			icon: 'error',
+		  	title: '크기 오류',
+			text: '파일크기는 1MB를 넘을 수 없습니다'
+		});
+		$("#attach3").val("");
+		return false;
+	}
+	var reader = new FileReader();
+	   reader.onload = function(e) {
+	      $("#show_attach5").attr("src", e.target.result);
+	   }
+	reader.readAsDataURL(file4);
+}
+
+
 $(function() {
 	var idx = 0;
 	$("#add").on("click", function(){
@@ -13,8 +105,8 @@ $(function() {
 			alert("첨부파일은 5개 까지입니다");
 			return false;
 		}
-		var $input = $("<input>").attr("type","file").attr("class", "form-control-file")
-		.attr("name","attachments[" + idx + "]");
+		var $input = $("<input>").attr("type","file").attr("class", "form-control-file attach")
+		.attr("name","attachments[" + idx + "]").attr("id","attach"+idx).attr("accept",".jpg,.jpeg,.png,.gif,.bmp");
 		idx++;
 		$input.appendTo($("#attachment_div"))
 	});
@@ -26,6 +118,11 @@ $(function() {
 	});
 });
 $(document).ready(function(){
+	$("#sajin").on("change",loadAttach);
+	$("#inp").on("change","#attach0",loadAttach1);
+	$("#inp").on("change","#attach1",loadAttach2);
+	$("#inp").on("change","#attach2",loadAttach3);
+	$("#inp").on("change","#attach3",loadAttach4);
 	$("#update").on("click",function() {
 		var formData = new FormData();
 		formData.append("dIntro", $("#dIntro").val());
@@ -40,6 +137,14 @@ $(document).ready(function(){
 		formData.append("q4",$("#q4").val());
 		formData.append("_csrf","${_csrf.token}");
 		formData.append("_method","put");
+		/* if($("#dAttachment1")[0].files[0]!=undefined)
+			formData.append("sajin", $("#dAttachment1")[0].files[0]);
+		if($("#dAttachment2")[0].files[0]!=undefined)
+			formData.append("sajin", $("#dAttachment2")[0].files[0]);
+		if($("#dAttachment3")[0].files[0]!=undefined)
+			formData.append("sajin", $("#dAttachment3")[0].files[0]);
+		if($("#dAttachment4")[0].files[0]!=undefined)
+			formData.append("sajin", $("#dAttachment4")[0].files[0]); */
 		$.ajax({
 			url:"/dal/dalin/info_update",
 			data:formData,
@@ -49,7 +154,6 @@ $(document).ready(function(){
 		}).done(()=>{toastr.info("변경 성공");}).fail(()=>{toastr.info("변경 실패");})
 	})
 })
-
 </script>
 <style>
 h2 {
@@ -251,25 +355,31 @@ body {
 			<div>
 				<div>
 					<h2>사진</h2>
-					<br> <br>
+					<div>
+						<div style="display: inline-block; "><img id="show_attach1" height="200px" width="150px;"></div>
+						<div style="display: inline-block; "><img id="show_attach2" height="200px" width="150px;"></div>
+						<div style="display: inline-block; "><img id="show_attach3" height="200px" width="150px;"></div>
+						<div style="display: inline-block; "><img id="show_attach4" height="200px" width="150px;"></div>
+						<div style="display: inline-block; "><img id="show_attach5" height="200px" width="150px;"></div>
+					</div>
 				</div>
-				<div>
-					<input type="file" name="sajin" id="sajin" style="display: inline-block; width: 430px;"> 
+				<div id="inp">
+					<input type="file" name="sajin" id="sajin" style="display: inline-block; width: 430px;" accept=".jpg,.jpeg,.png,.gif,.bmp"> 
 					<input type="hidden" name="_csrf" value="${_csrf.token}">
 					<button type="button" id="add">첨부파일 추가</button>
 					<div id="attachment_div"></div>
 					<div>
 						<div id="dAttachment1">
-							<p>${profileAttachment.DAttachmentNo}</p>
+							<p>${dal.DAttachmentNo}</p>
 						</div>
 						<div id="dAttachment2">
-							<p>${profileAttachment.DAttachmentNo}</p>
+							<p>${dal.DAttachmentNo}</p>
 						</div>
 						<div id="dAttachment3">
-							<p>${profileAttachment.DAttachmentNo}</p>
+							<p>${dal.DAttachmentNo}</p>
 						</div>
 						<div id="dAttachment4">
-							<p>${profileAttachment.DAttachmentNo}</p>
+							<p>${dal.DAttachmentNo}</p>
 						</div>
 					</div>
 				</div>
@@ -291,7 +401,7 @@ body {
 								</h4>
 							</div>
 							<div>
-								<input type="text" name="q1" id="q1" value="${reqQuestion.dQContent}답변">
+								<input type="text" name="q1" id="q1" value="${dal.DQContent}답변">
 							</div>
 						</div><br>
 						<div>
@@ -301,7 +411,7 @@ body {
 								</h4>
 							</div>
 							<div>
-								<input type="text" name="q2" id="q2" value="${reqQuestion.dQContent}답변">
+								<input type="text" name="q2" id="q2" value="${dal.DQContent}답변">
 							</div>
 						</div><br>
 						<div>
@@ -311,7 +421,7 @@ body {
 								</h4>
 							</div>
 							<div>
-								<input type="text" name="q3" id="q3" value="${reqQuestion.dQContent}답변">
+								<input type="text" name="q3" id="q3" value="${dal.DQContent}답변">
 							</div>
 						</div><br>
 						<div>
@@ -321,7 +431,7 @@ body {
 								</h4>
 							</div>
 							<div>
-								<input type="text" name="q4" id="q4" value="${reqQuestion.dQContent}답변">
+								<input type="text" name="q4" id="q4" value="${dal.DQContent}답변">
 							</div>
 						</div><br>
 					</div>
