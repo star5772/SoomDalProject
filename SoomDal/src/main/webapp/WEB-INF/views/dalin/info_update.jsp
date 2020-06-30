@@ -117,6 +117,7 @@ $(function() {
 		
 	});
 });
+
 $(document).ready(function(){
 	$("#sajin").on("change",loadAttach);
 	$("#inp").on("change","#attach0",loadAttach1);
@@ -137,14 +138,16 @@ $(document).ready(function(){
 		formData.append("q4",$("#q4").val());
 		formData.append("_csrf","${_csrf.token}");
 		formData.append("_method","put");
-		/* if($("#dAttachment1")[0].files[0]!=undefined)
-			formData.append("sajin", $("#dAttachment1")[0].files[0]);
-		if($("#dAttachment2")[0].files[0]!=undefined)
-			formData.append("sajin", $("#dAttachment2")[0].files[0]);
-		if($("#dAttachment3")[0].files[0]!=undefined)
-			formData.append("sajin", $("#dAttachment3")[0].files[0]);
-		if($("#dAttachment4")[0].files[0]!=undefined)
-			formData.append("sajin", $("#dAttachment4")[0].files[0]); */
+		if($("#sajin")[0].files[0]!=undefined)
+			formData.append("sajin", $("#sajin")[0].files[0]);
+		if($("#attach0")[0].files[0]!=undefined)
+			formData.append("inp", $("#attach0")[0].files[0]);
+		if($("#attach1")[0].files[0]!=undefined)
+			formData.append("inp", $("#attach1")[0].files[0]);
+		if($("#attach2")[0].files[0]!=undefined)
+			formData.append("inp", $("#attach2")[0].files[0]);
+		if($("#attach3")[0].files[0]!=undefined)
+			formData.append("inp", $("#attach3")[0].files[0]);
 		$.ajax({
 			url:"/dal/dalin/info_update",
 			data:formData,
@@ -260,6 +263,7 @@ body {
 </style>
 </head>
 <body>
+${dalin }
 	<form id="profileReadFrm" action="dalin/info_update" method="get"></form>
 	<div id="dalinUpdate">
 		<div id="dProfile">
@@ -360,7 +364,7 @@ body {
 						<div style="display: inline-block; "><img id="show_attach2" height="200px" width="150px;"></div>
 						<div style="display: inline-block; "><img id="show_attach3" height="200px" width="150px;"></div>
 						<div style="display: inline-block; "><img id="show_attach4" height="200px" width="150px;"></div>
-						<div style="display: inline-block; "><img id="show_attach5" height="200px" width="150px;"></div>
+						<div style="display: inline-block; "><img id="show_attach5" height="200px" width="150px;"></div>				
 					</div>
 				</div>
 				<div id="inp">
@@ -368,20 +372,7 @@ body {
 					<input type="hidden" name="_csrf" value="${_csrf.token}">
 					<button type="button" id="add">첨부파일 추가</button>
 					<div id="attachment_div"></div>
-					<div>
-						<div id="dAttachment1">
-							<p>${dal.DAttachmentNo}</p>
-						</div>
-						<div id="dAttachment2">
-							<p>${dal.DAttachmentNo}</p>
-						</div>
-						<div id="dAttachment3">
-							<p>${dal.DAttachmentNo}</p>
-						</div>
-						<div id="dAttachment4">
-							<p>${dal.DAttachmentNo}</p>
-						</div>
-					</div>
+
 				</div>
 			</div>
 			<div>
@@ -401,7 +392,7 @@ body {
 								</h4>
 							</div>
 							<div>
-								<input type="text" name="q1" id="q1" value="${dal.DQContent}답변">
+								<input type="text" name="q1" id="q1" value="${dalin.rep[0].DQcontent}">
 							</div>
 						</div><br>
 						<div>
@@ -411,7 +402,7 @@ body {
 								</h4>
 							</div>
 							<div>
-								<input type="text" name="q2" id="q2" value="${dal.DQContent}답변">
+								<input type="text" name="q2" id="q2" value="${dalin.rep[1].DQcontent}">
 							</div>
 						</div><br>
 						<div>
@@ -421,7 +412,7 @@ body {
 								</h4>
 							</div>
 							<div>
-								<input type="text" name="q3" id="q3" value="${dal.DQContent}답변">
+								<input type="text" name="q3" id="q3" value="${dalin.rep[2].DQcontent}">
 							</div>
 						</div><br>
 						<div>
@@ -431,7 +422,7 @@ body {
 								</h4>
 							</div>
 							<div>
-								<input type="text" name="q4" id="q4" value="${dal.DQContent}답변">
+								<input type="text" name="q4" id="q4" value="${dalin.rep[3].DQcontent}">
 							</div>
 						</div><br>
 					</div>

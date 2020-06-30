@@ -2,6 +2,7 @@ package com.icia.dal.service;
 
 
 import java.io.*;
+import java.security.*;
 import java.time.*;
 import java.util.*;
 
@@ -40,6 +41,8 @@ public class DalinService {
 	private String profilePath;
 	@Inject
 	private ProfileAttachmentDao profileAttachmentDao;
+	@Inject
+	private RepQuestionDao repDao;
 	
 
 	public void join(DtoForJoinToDalin dto) {
@@ -101,6 +104,7 @@ public class DalinService {
 				dalin.setDProfile(profilePath + file.getName());
 			}
 		}
+		
 		dalDao.updateToDalinProfile(dalin);
 	}
 
@@ -159,6 +163,8 @@ public class DalinService {
 			dto.setProfileAttachments(profileAttachmentDao.findAllByProfileAttachment(dto.getDMno()));
 		if(dalin.getRReviewCnt()>0)
 			dto.setReviews(reviewDao.findAllReview(dto.getDMno()));
+		if(dalin.getDQNo()!=0)
+			dto.setRep(repDao.findAllToRequestion(dalDao.findByDalinToDMno(dMno).getDEmail()));
 		return dto;
 	}
 
@@ -187,6 +193,8 @@ public class DalinService {
 	public Dalin findById(String dEmail) {
 		return dalDao.findByDalin(dEmail);
 	}
+
+	
 }	
 
 
