@@ -9,14 +9,14 @@
 		insert into request(r_no,j_mno,r_field,r_subject,r_lesson_purpose,
 		r_your_level,r_item_exists,r_lesson_type,r_want_date,r_want_time,r_age,
 		r_gender,r_dalin_is_ok,r_wannable,r_want_area,r_write_date,
-		d_mno,rb_enabled)
+		d_mno,rb_enabled,r_is_ok)
 		values(#{rNo},#{jMno},#{rField},#{rSubject},#{rLessonPurpose},
 		#{rYourLevel},#{rItemExists},#{rLessonType},#{rWantDate},#{rWantTime},
-		#{rAge},#{rGender},0,#{rWannable},#{rWantArea},sysdate,#{dMno},1)
+		#{rAge},#{rGender},0,#{rWannable},#{rWantArea},sysdate,#{dMno},1,0)
 	</insert>
 
 	<select id="findByRequest" resultType="request">
-		select r_no rNo, j_mno jMno, r_field rField, r_subject rSubject, r_lesson_purpose rLessonPurpose, r_your_level rYourLevel, r_item_exists rItemExists, r_lesson_type rLessonType, r_want_date rWantDate, r_want_time rWantTime, r_age rAge, r_gender rGender, r_dalin_is_ok rDalinIsOk, r_wannable rWannable, r_want_area rWantArea, r_write_date rWriteDate, d_mno dMno, rb_enabled rbEnabled from request where r_no=#{rNo} and rownum=1
+		select r_no rNo, j_mno jMno, r_field rField, r_subject rSubject, r_lesson_purpose rLessonPurpose, r_your_level rYourLevel, r_item_exists rItemExists, r_lesson_type rLessonType, r_want_date rWantDate, r_want_time rWantTime, r_age rAge, r_gender rGender, r_dalin_is_ok rDalinIsOk, r_wannable rWannable, r_want_area rWantArea, r_write_date rWriteDate, d_mno dMno, rb_enabled rbEnabled,r_is_ok rIsOk from request where r_no=#{rNo} and rownum=1
 	</select>
 	
 	<!-- 제자가 작성한 요청서 목록 -->
@@ -24,7 +24,7 @@
 		<![CDATA[
 			select * from
 				(select r.* ,rownum rnum from
-					(select r_no rNo, j_mno jMno, r_field rField, r_subject rSubject, r_lesson_purpose rlessonPurpose, R_YOUR_LEVEL rYourLevel, R_ITEM_EXISTS rItemExists, r_lesson_type rLessonType, r_want_time rWantTime, r_age rAge, r_gender rGender, r_dalin_is_ok rDalinIsOk, r_wannable rWannable, r_want_area rWantArea, r_write_date rWriteDate, d_mno dMno, rb_enabled rbEnabled from request where j_mno = #{jMno}) r
+					(select r_no rNo, j_mno jMno, r_field rField, r_subject rSubject, r_lesson_purpose rlessonPurpose, R_YOUR_LEVEL rYourLevel, R_ITEM_EXISTS rItemExists, r_lesson_type rLessonType, r_want_time rWantTime, r_age rAge, r_gender rGender, r_dalin_is_ok rDalinIsOk, r_wannable rWannable, r_want_area rWantArea, r_write_date rWriteDate, d_mno dMno, rb_enabled rbEnabled,r_is_ok rIsOk from request where j_mno = #{jMno}) r
 				where rownum<=#{endRowNum})
 			where rnum>=#{startRowNum}
 		]]>
@@ -35,7 +35,7 @@
 		<![CDATA[
 			select * from
 				(select r.* ,rownum rnum from
-					(select r_no rNo,j_mno jMno, r_subject rSubject, r_field rField, r_dalin_is_ok rDalinIsOk, r_want_area rWantArea, r_write_date rWriteDate, d_mno dMno, rb_enabled rbEnabled from request where d_mno = #{dMno}) r
+					(select r_no rNo,j_mno jMno, r_subject rSubject, r_field rField, r_dalin_is_ok rDalinIsOk, r_want_area rWantArea, r_write_date rWriteDate, d_mno dMno, rb_enabled rbEnabled,r_is_ok rIsOk from request where d_mno = #{dMno}) r
 				where rownum<=#{endRowNum})
 			where rnum>=#{startRowNum}
 		]]> 
@@ -54,7 +54,15 @@
 		select count(*)
 		from request where d_mno = #{dMno}
 	</select>
-
+	
+	<select id="isNotReadRequest" resultType="boolean">
+		select count(*) from request where e_is_read = and d_Mno = #{dMno} and rownum=1
+	</select>
+	
+	<update id="setRead">
+		update request set r_is_read = 1 where r_no = #{rNo} and rownum=1
+	</update>
+	
 </mapper>
 
 
