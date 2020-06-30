@@ -301,14 +301,14 @@ CREATE TABLE Estimate (
 
 CREATE TABLE Memo (
    M_NO NUMBER(6) NOT NULL, /* 쪽지번호 */
-   RECIVER NVARCHAR2(20), /* 수신자 -  */
+   RECEIVER NVARCHAR2(20), /* 수신자 -  */
    SENDER NVARCHAR2(20), /* 발신자 -  */
    WRITE_TIME DATE, /* 시간 - */
    CONTENT NVARCHAR2(500), /* 내용 */
    TITLE NVARCHAR2(100), /* 제목 */
    IS_READ CHAR(1), /* 읽음안읽음 - */
    DISABLE_BY_SENDER CHAR(1),
-   DISABLE_BY_RECEIER CHAR(1),
+   DISABLE_BY_RECEIVER CHAR(1),
    constraint pk_memo primary key(m_no)
 );
 
