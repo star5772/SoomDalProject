@@ -7,8 +7,8 @@
 		<selectKey keyProperty="jMno" resultType="int" order="BEFORE">
 			select JEJA_seq.nextval from dual
 		</selectKey>
-		insert into jeja(J_MNO, J_EMAIL, J_PASSWORD, J_NAME, J_TEL,J_ACCUSATION_CNT,ENABLED,J_JOINDATE)
-		values(#{jMno},#{jEmail},#{jPassword},#{jName},#{jTel},0,1,sysdate)
+		insert into jeja(J_MNO, J_EMAIL, J_PASSWORD, J_NAME, J_TEL,J_ACCUSATION_CNT,ENABLED,J_JOINDATE, J_LOGIN_FAILURE_CNT)
+		values(#{jMno},#{jEmail},#{jPassword},#{jName},#{jTel},0,1,sysdate,0)
 	</insert>
 	
 	<!-- 아이디 : 이름, 전화번호 -->
@@ -25,6 +25,8 @@
 			<if test="jTel!=null">J_TEL=#{jTel},</if>
 			<if test="enabled!=null">enabled=#{enabled},</if>
 			<if test="jAccusationCnt!=null">j_accusation_cnt=#{jAccusationCnt},</if>
+			<if test="jLoginFaiureCnt == 1">j_login_failure_cnt = j_login_failure_cnt +1 , </if>
+			<if test="jLoginFaiureCnt == 2">j_login_failure_cnt = 0 , </if>
 		</trim>
 		where J_EMAIL=#{jEmail} and rownum=1
 	</update>
@@ -41,7 +43,7 @@
 	
 	<!-- jEmail로 제자 찾기 -->
 	<select id="findById" resultType="jeja">
-		select J_EMAIL jEmail,J_PASSWORD jPassword,J_NAME jName,J_TEL jTel, j_mno jMno, ENABLED from jeja where J_EMAIL=#{jEmail} and rownum=1
+		select J_EMAIL jEmail,J_PASSWORD jPassword,J_NAME jName,J_TEL jTel, j_mno jMno, ENABLED, j_login_failure_cnt jLoginFailureCnt, j_is_block jIsBlock from jeja where J_EMAIL=#{jEmail} and rownum=1
 	</select>
 	
 	<!-- jMno로 제자찾기 (견적서,요청서 필요) -->

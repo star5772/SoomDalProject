@@ -27,7 +27,8 @@ public class EstimateDto {
 	
 	@Data
 	@AllArgsConstructor
-	public class DtoForRead {
+	@NoArgsConstructor
+	public static class DtoForRead {
 		private int eNo;
 		private int dMno;
 		private int jMno;
@@ -37,5 +38,9 @@ public class EstimateDto {
 		private String eContent;
 		private String eTelType;
 		private Boolean jIsOk;
+		private String eWriteTimeStr;
+		private String dName;
+		private String jName;
+		private String rSubject;
 	}
 }

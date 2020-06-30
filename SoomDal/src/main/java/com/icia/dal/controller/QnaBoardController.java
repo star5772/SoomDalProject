@@ -14,7 +14,7 @@ import com.icia.dal.entity.*;
 import com.icia.dal.service.*;
 @RequestMapping("/member")
 @Controller
-public class QnaReadController {
+public class QnaBoardController {
 	@Inject
 	private QnaBoardService qnaBoardService;
 	

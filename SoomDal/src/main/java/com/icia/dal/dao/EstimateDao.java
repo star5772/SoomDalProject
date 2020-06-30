@@ -57,4 +57,12 @@ public class EstimateDao {
 	public int countToEstimateForJeja(int jMno) {
 		return tpl.selectOne("estimateMapper.countToEstimateForJeja",jMno);
 	}
+	// 제자가 받은 견적서중 읽지않은 견적서 카운팅을 위한 메소드
+	public boolean isNotReadEstimate(int jMno) {
+		return tpl.selectOne("estimateMapper.isNotReadEstimate",jMno);
+	}
+	// 제자가 받은 견적서를 읽음 으로 바꿈
+	public int setRead(int eNo) {
+		return tpl.selectOne("estimateMapper.setRead",eNo);
+	}
 }

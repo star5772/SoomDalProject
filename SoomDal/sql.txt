@@ -97,19 +97,15 @@ CREATE TABLE NowPayment (
    p_money number(7),
    constraint pk_nowpayment primary key(p_code)
 );
+select * from nowpayment;
 
 
 
 /*분야*/
 
-CREATE TABLE FIELD (
-   F_NO VARCHAR2(10) NOT NULL, /* 분야 코드 */
-   F_NAME NVARCHAR2(10), /* 분야 이름 */
-   F_SAJIN VARCHAR2(50), /* 분야 사진 */
-   constraint pk_field primary key(f_no)
-);
+select * from dalin;
 /* 제자회원*/
-
+select * from jeja;
 CREATE TABLE JEJA (
    J_MNO NUMBER(7) NOT NULL, /* 제자 회원 번호 */
    J_EMAIL VARCHAR2(50) NOT NULL, /* 회원 id(email) */
@@ -119,6 +115,8 @@ CREATE TABLE JEJA (
    J_ACCUSATION_CNT NUMBER(5), /* 신고 수 */
    ENABLED CHAR(1), /* 회원  상태(enabled) */
    J_JOINDATE DATE, /* 가입 날짜 */
+   j_login_failure_cnt number(1), /* 로그인 실패횟수 */
+   j_is_block char(1), /* 계정 블락 여부 */
    constraint pk_jeja primary key(j_mno)
 );
 
@@ -147,7 +145,8 @@ CREATE TABLE Dalin (
    R_NO NUMBER(5), /* 리뷰 번호 */
    P_ATTACHMENT_NO NUMBER(3), /* 프로필 첨부 파일 번호 */
    D_Q_NO NUMBER(1), /* 질문 번호 > 기본키 */
-   R_REVIEW_CNT number(7),
+   D_login_failure_cnt number(1), /* 로그인 실패 횟수 */
+   r_review_cnt number(7),
    constraint pk_dalin primary key(d_mno,f_no,d_email,detail_f_name)
 );
 
@@ -182,6 +181,7 @@ CREATE TABLE Request (
    R_WRITE_DATE DATE, /* 작성 시간 */
    D_MNO NUMBER(6), /* 달인회원번호 */
    RB_ENABLED CHAR(1),
+   R_IS_READ char(1), /* 읽음여부 */
    constraint pk_request primary key(r_no,j_mno)
 );
 
@@ -242,6 +242,10 @@ CREATE TABLE UseCash (
    constraint pk_usecash primary key(e_no,d_mno)
 );
 
+select * from usecash;
+select count(*) from usecash where d_mno=1;
+insert into usecash values(1,1,2000,sysdate);
+commit;
 /*문의 답글*/
 
 CREATE TABLE QnaComment (
@@ -285,7 +289,7 @@ CREATE TABLE Estimate (
    J_IS_OK CHAR(1), /* 수락 여부 */
    E_CASH NUMBER(5), /* 필요 캐시 */
    d_name nvarchar2(6), /* 달인 이름 */
-   E_WRITE_TIME DATE, /*견적서 보낸 시간*/
+   e_is_read char(1), /* 읽음 여부 */
    constraint pk_estimate primary key(e_no,d_mno)
 );
 
@@ -336,7 +340,7 @@ CREATE TABLE Review (
    R_WRITER NVARCHAR2(20), /* 작성자  */
    S_NO NUMBER(6), /* 사진 번호 */
    d_mno number(7), /* 리뷰가 달린 달인 회원번호 */
-   j_Auccusation_cnt number(6), /* 리뷰 신고당한 횟수 */
+   j_Accusation_cnt number(6), /* 리뷰 신고당한 횟수 */
    constraint pk_review primary key(r_no)
 );
 /*리뷰 첨부파일*/
@@ -354,14 +358,20 @@ CREATE TABLE Authorities (
    AUTHORITY VARCHAR2(20) NOT NULL, /* 권한 */
    constraint pk_authorities primary key(username,authority)
 );
-/* 레슨내역 */
+
 create Table LESSONHISTORY (
     a_complete_code varchar2(8),
     D_MNO number(7),
     J_MNO number(7),
     L_START_DATE date,
     constraint pk_LESSONHISTORY primary key(a_complete_code)
-)
+);
 select * from tab;
 select * from nowpayment;
 select * from dalin;
+select * from jeja;
+
+select * from lessonhistory;
+insert into lessonhistory values('9s1gs42s',1,1,sysdate);
+commit;
+update dalin set d_profile='localhost8081:/
