@@ -13,11 +13,13 @@ import org.springframework.stereotype.Service;
 import com.icia.dal.Exception.ReadFailException;
 import com.icia.dal.dao.DalinDao;
 import com.icia.dal.dao.JejaDao;
+import com.icia.dal.dao.MemoDao;
 import com.icia.dal.dao.RequestDao;
 import com.icia.dal.dto.RequestDto;
 import com.icia.dal.dto.page.PageToRequest;
 import com.icia.dal.entity.Dalin;
 import com.icia.dal.entity.Jeja;
+import com.icia.dal.entity.Memo;
 import com.icia.dal.entity.Request;
 import com.icia.dal.util.pagingutil.RequestPagingUtil;
 import com.icia.dal.util.websocket.MessageWebSocketHandler;
@@ -35,12 +37,15 @@ public class RequestService {
 	private DalinDao dalDao;
 	@Inject
 	private RequestDao rqDao;
+	@Inject
+	private MemoDao memoDao;
 	
 	// 요청서작성
 	public void writeToRequest(Request rq) {
 		rqDao.insertToRequest(rq);
 		Jeja jeja = jejaDao.findByJejaToJMno(rq.getJMno());
 		Dalin dalin = dalDao.findByDalinProfile(rq.getDMno());
+		memoDao.insert(Memo.builder().receiver(dalin.getDEmail()).title(jeja.getJName() + "님으로부터 요청서가 도착했습니다").content(rq.getRWriteDate() + "에 견적서가 도착했습니다. 견적서를 확인해주세요").sender(jeja.getJEmail()).build());
 		handler.sendMessage(jeja.getJName(), dalin.getDName(), jeja.getJName() + "님으로부터 요청서가 도착하였습니다");
 	}
 	

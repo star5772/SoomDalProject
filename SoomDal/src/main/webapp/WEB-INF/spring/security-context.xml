@@ -26,8 +26,8 @@
 			password-parameter="dPassword"
 			login-page="/member/login"
 			login-processing-url="/dalin/loginpost"
-			authentication-success-handler-ref="loginSuccessHandler"
-			authentication-failure-handler-ref="loginFailureHandler"
+			authentication-success-handler-ref="DalinloginSuccessHandler"
+			authentication-failure-handler-ref="DalinloginFailureHandler"
 			default-target-url="/"
 		/>
 		<sec:logout

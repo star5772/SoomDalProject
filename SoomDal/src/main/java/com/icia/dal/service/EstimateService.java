@@ -16,6 +16,7 @@ import com.icia.dal.dao.DalinDao;
 import com.icia.dal.dao.EstimateDao;
 import com.icia.dal.dao.JejaDao;
 import com.icia.dal.dao.LessonHistoryDao;
+import com.icia.dal.dao.MemoDao;
 import com.icia.dal.dao.RequestDao;
 import com.icia.dal.dao.ReviewAuthorityDao;
 import com.icia.dal.dao.UseCashDao;
@@ -26,6 +27,7 @@ import com.icia.dal.entity.Estimate;
 import com.icia.dal.entity.Jeja;
 import com.icia.dal.entity.LessonHistory;
 import com.icia.dal.entity.Level;
+import com.icia.dal.entity.Memo;
 import com.icia.dal.entity.Request;
 import com.icia.dal.entity.ReviewAuthority;
 import com.icia.dal.entity.UseCash;
@@ -53,13 +55,16 @@ public class EstimateService {
 	private UseCashDao ucDao;
 	@Inject
 	private RequestDao requestDao;
+	@Inject
+	private MemoDao memoDao;
 	
 	
 	// 견적서작성
 	public void writeToEstimate(Estimate et) {
 		estimateDao.insertToEstimate(et);
 		Jeja jeja = jejaDao.findByJejaToJMno(et.getJMno());
-		Dalin dalin = dalDao.findByDalin(et.getDEmail());
+		Dalin dalin = dalDao.findByDalin(et.getDEmail());	
+		memoDao.insert(Memo.builder().receiver(jeja.getJEmail()).title(dalin.getDName() + "님으로부터 견적서가 도착했습니다").content(et.getEWriteTime() + "에 견적서가 도착했습니다. 견적서를 확인해주세요").sender(et.getDEmail()).build());
 		handler.sendMessage(dalin.getDName(), jeja.getJName(),dalin.getDName() + "님으로부터 견적서가 도착하였습니다");
 	}
 	

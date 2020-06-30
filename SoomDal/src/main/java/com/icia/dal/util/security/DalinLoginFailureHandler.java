@@ -23,38 +23,36 @@ import com.icia.dal.entity.Jeja;
 
 
 
-@Component("loginFailureHandler")
-public class LoginFailureHandler extends SimpleUrlAuthenticationFailureHandler {
+@Component("DalinloginFailureHandler")
+public class DalinLoginFailureHandler extends SimpleUrlAuthenticationFailureHandler {
 	
 	@Inject
 	private DalinDao dalDao;
-	@Inject
-	private JejaDao jejaDao;
 	
 	private RedirectStrategy rs = new DefaultRedirectStrategy();
 	
 	@Override
 	public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response,
 			AuthenticationException exception) throws IOException, ServletException {
-		String JejaId = request.getParameter("jEmail");
+		String DalinId = request.getParameter("dEmail");
 		HttpSession session = request.getSession();
-		
+	
 		if(exception instanceof BadCredentialsException) {
-			Jeja jeja = jejaDao.findById(JejaId);
-			if(jeja==null) {
-				session.setAttribute("jidmsg", "아이디를 찾을 수 없습니다");
-			}
-				int loginFailureCnt = jeja.getJLoginFailureCnt()+1;
+			Dalin dalin = dalDao.findByDalin(DalinId);
+			if(dalin==null) {
+				session.setAttribute("didmsg", "아이디를 찾을 수 없습니다");
+			}else {
+				System.out.println(dalin);
+				int loginFailureCnt = dalin.getDLoginFailureCnt()+1;
 				if(loginFailureCnt<5) {
-					jejaDao.updateJeja(Jeja.builder().jEmail(JejaId).jLoginFailureCnt(1).build());
-					session.setAttribute("msg", loginFailureCnt + "회 로그인에 실패했습니다");
-				} else if(jeja.getJIsBlock()==true) {
-					session.setAttribute("jmsg", "정책위반으로 인해 정지된 계정입니다 관리자에게 문의해주세요");
-				}else {
-					jejaDao.updateJeja(Jeja.builder().jEmail(JejaId).jLoginFailureCnt(1).build());
-					session.setAttribute("jmsg", "로그인에 5회 실패해 계정이 블록되었습니다");
-				}
-			
+					dalDao.updateToDalin(Dalin.builder().dEmail(DalinId).dLoginFailureCnt(1).build());
+					session.setAttribute("dmsg", loginFailureCnt + "회 로그인에 실패했습니다");
+				} else {
+					dalDao.updateToDalin(Dalin.builder().dEmail(DalinId).dLoginFailureCnt(1).enabled(false).build());
+					session.setAttribute("dmsg", "로그인에 5회 실패해 계정이 블록되었습니다");
+				}				
+			}
+		} else if(exception instanceof DisabledException) {
 			session.setAttribute("dmsg", "정지된 계정입니다. 관리자에게 문의하세요");
 		}
 		rs.sendRedirect(request, response, "/member/login");

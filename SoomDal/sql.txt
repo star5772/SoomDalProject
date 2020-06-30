@@ -20,6 +20,7 @@ drop table review cascade constraints;
 drop table reviewattachment cascade constraints;
 drop table reviewauthority cascade constraints;
 drop table usecash cascade constraints;
+DROP TABLE MEMO CASCADE CONSTRAINTS;
 
 drop sequence jeja_seq;
 drop sequence repquestion_seq;
@@ -32,6 +33,7 @@ drop sequence memo_seq;
 drop sequence detailfield_seq;
 drop sequence review_seq;
 drop sequence reviewattachment_seq;
+DROP SEQUENCE MEMO_SEQ;
 
 select * from tab;
 
@@ -61,6 +63,8 @@ create sequence review_seq minvalue 0;
 select review_seq.nextval from dual;
 create sequence reviewattachment_seq minvalue 0;
 select reviewattachment_seq.nextval from dual;
+CREATE SEQUENCE MEMO_SEQ MINVALUE 0;
+SELECT MEMO_SEQ.NEXTVAL FROM DUAL;
 
 
 /* 문의 게시판 */
@@ -297,12 +301,14 @@ CREATE TABLE Estimate (
 
 CREATE TABLE Memo (
    M_NO NUMBER(6) NOT NULL, /* 쪽지번호 */
-   M_RECIVER NVARCHAR2(20), /* 수신자 -  */
-   M_SENDER NVARCHAR2(20), /* 발신자 -  */
-   M_WRITE_TIME DATE, /* 시간 - */
-   M_CONTENT NVARCHAR2(500), /* 내용 */
-   M_TITLE NVARCHAR2(100), /* 제목 */
-   M_IS_READ CHAR(1), /* 읽음안읽음 - */
+   RECIVER NVARCHAR2(20), /* 수신자 -  */
+   SENDER NVARCHAR2(20), /* 발신자 -  */
+   WRITE_TIME DATE, /* 시간 - */
+   CONTENT NVARCHAR2(500), /* 내용 */
+   TITLE NVARCHAR2(100), /* 제목 */
+   IS_READ CHAR(1), /* 읽음안읽음 - */
+   DISABLE_BY_SENDER CHAR(1),
+   DISABLE_BY_RECEIER CHAR(1),
    constraint pk_memo primary key(m_no)
 );
 
@@ -366,12 +372,6 @@ create Table LESSONHISTORY (
     L_START_DATE date,
     constraint pk_LESSONHISTORY primary key(a_complete_code)
 );
-select * from tab;
-select * from nowpayment;
-select * from dalin;
-select * from jeja;
 
-select * from lessonhistory;
-insert into lessonhistory values('9s1gs42s',1,1,sysdate);
-commit;
-update dalin set d_profile='localhost8081:/
+select * from tab;
+

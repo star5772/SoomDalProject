@@ -23,8 +23,10 @@ import com.icia.dal.dao.MemoDao;
 import com.icia.dal.entity.Dalin;
 import com.icia.dal.entity.Jeja;
 
-@Component("loginSuccessHandler")
-public class LoginSuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
+@Component("DalinloginSuccessHandler")
+public class DalinLoginSuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
+	@Inject
+	private DalinDao dalDao;
 	@Inject
 	private JejaDao jejaDao;
 	@Inject
@@ -37,24 +39,23 @@ public class LoginSuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
 	@Override
 	public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
 			Authentication authentication) throws IOException, ServletException {
-		Jeja jeja = Jeja.builder().jEmail(authentication.getName()).jLoginFailureCnt(2).build();
-		jejaDao.updateJeja(jeja);
+		Dalin dalin = Dalin.builder().dEmail(authentication.getName()).dLoginFailureCnt(2).build();
+		dalDao.updateToDalin(dalin);
 		
 		String Id = authentication.getName();
-		String jejaPassword = request.getParameter("jPassword");
+		String dalinPassword = request.getParameter("dPassword");
 		
 		SavedRequest req = cache.getRequest(request, response);
-		if(jejaPassword.length() >= 20) {
+		if(dalinPassword.length() >= 20) {
 			HttpSession session = request.getSession();
 			session.setAttribute("msg", "임시비밀번호로 로그인 하셨습니다. 비밀번호를 변경해주세요.");
 			
 			if(memoDao.isNotReadMemoExist(Id)==true)
 				session.setAttribute("memoMsg", "새로운 쪽지가 있습니다");
-			rs.sendRedirect(request, response, "/dal/member/resetToJejaPwd");
+			rs.sendRedirect(request, response, "/dal/member/resetToDalinPwd");
 		}else if(req != null)
 			rs.sendRedirect(request, response, req.getRedirectUrl());
 		else
 			rs.sendRedirect(request, response, "/");
-
 	}
 }

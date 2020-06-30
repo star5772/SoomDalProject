@@ -17,6 +17,7 @@
 		<typeAlias type="com.icia.dal.entity.Request" alias="request"/>
 		<typeAlias type="com.icia.dal.entity.DetailField" alias="detailField"/>
 		<typeAlias type="com.icia.dal.entity.Field" alias="field"/>
+		<typeAlias type="com.icia.dal.entity.Memo" alias="memo"/>
 	</typeAliases>
 	<typeHandlers>
 		<typeHandler handler="com.icia.dal.util.typehandler.LocalDateTimeTypeHandler"/>

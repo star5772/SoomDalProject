@@ -56,12 +56,6 @@
 		]]>			
 	</select>
 	
-	
-	
-	
-	
-	
-	
 	<select id="isNotReadEstimate" resultType="boolean">
 		select count(*) from estimate where e_is_read = and j_Mno = #{jMno} and rownum=1
 	</select>
