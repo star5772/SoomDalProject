@@ -1,10 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %> 	
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>estimateRead</title>
+<sec:authorize access="hasAnyRole('ROLE_JEJA','ROLE_DALIN','ROLE_ADMIN')">
+	<script src="/dal/script/webS.js"></script>
+</sec:authorize>
 <style>
 #imgdiv {
 	margin: 0 auto;

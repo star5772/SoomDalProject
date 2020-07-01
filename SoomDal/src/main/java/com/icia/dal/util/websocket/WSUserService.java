@@ -2,6 +2,7 @@ package com.icia.dal.util.websocket;
 
 import java.util.*;
 
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.*;
 import org.springframework.web.socket.*;
 
@@ -13,7 +14,7 @@ public class WSUserService {
 	// 새로운 웹소켓 세션이 연결되면 기존 유저의 새로운 세션인지
 	// 아니면 새로운 유저인지 판단
 	public void add(WebSocketSession session) {
-		System.out.println("웹 소켓 연결 : " + session.getId());
+		System.out.println("웹소켓=====================================================" + session.getPrincipal());
 		String username = session.getPrincipal().getName();
 		// WSUser에서 리스트에서 username을 찾는다
 		for(int i=0; i<list.size(); i++) {

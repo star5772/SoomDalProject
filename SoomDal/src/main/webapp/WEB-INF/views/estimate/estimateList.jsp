@@ -7,6 +7,9 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<sec:authorize access="hasAnyRole('ROLE_JEJA','ROLE_DALIN','ROLE_ADMIN')">
+	<script src="/dal/script/webS.js"></script>
+</sec:authorize>
 <style>
 .card {
 	display: inline-block;

@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.DefaultRedirectStrategy;
 import org.springframework.security.web.RedirectStrategy;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler;
@@ -57,5 +58,7 @@ public class DalinLoginSuccessHandler extends SimpleUrlAuthenticationSuccessHand
 			rs.sendRedirect(request, response, req.getRedirectUrl());
 		else
 			rs.sendRedirect(request, response, "/");
+		
+		System.out.println("시큐리티" + SecurityContextHolder.getContext().hashCode());
 	}
 }

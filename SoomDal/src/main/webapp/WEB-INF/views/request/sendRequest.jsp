@@ -6,8 +6,8 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<sec:authorize access="hasRole('ROLE_JEJA')">
-	<script src="/dal/script/wsocket.js"></script>
+<sec:authorize access="hasAnyRole('ROLE_JEJA','ROLE_DALIN','ROLE_ADMIN')">
+	<script src="/dal/script/webS.js"></script>
 </sec:authorize>
 <script>
 $(function(){
@@ -47,9 +47,7 @@ $(function(){
 		$("#step-nine").css("display","none");
 		$("#step-ten").removeAttr("style");
 	})
-	$("#next10").on("click",function(){
-		$("#reqFrm").submit();
-	})	
+
 	$("#prev1").on("click",function(){
 		$("#step-two").css("display","none");
 		$("#step-one").removeAttr("style");
@@ -85,8 +83,10 @@ $(function(){
 	$("#prev9").on("click",function(){
 		$("#step-ten").css("display","none");
 		$("#step-nine").removeAttr("style");
-	})								
-									
+	})
+	$("#next10").on("click",function(){
+		$("#reqFrm").submit();
+	})															
 })	
 </script>
 <style>
@@ -131,6 +131,12 @@ $(function(){
 	font-size: medium;
 	float: left;
 }
+.radio:checked +label{  
+  /* selected styled */
+  background-color: #ffc107;
+  color: white;
+  text-shadow: 1px 1px 3px #8e8e8e;
+}
 </style>
 </head>
 <body>
@@ -139,9 +145,10 @@ $(function(){
 		<div>
 			<h1 style="text-align: center; margin-top: 15px;">요청서</h1>
 		</div>
-	
-	<form id="reqFrm" action="/dal/member/request/sendRequest" method="post">
+	<form id="reqFrm" action="/dal/member/request/writeRequest"  method="post">
 		<div id="step-one"  style="" class="request">
+		<input type="hidden" name="dMno" value="${dMno}">
+		<input type="hidden" name="_csrf" value="${_csrf.token}">
 			<p style="text-align: center; margin-left: 80px; font-size: 30px;">1단계: 레슨의 목적</p>
 			<div id="step-one-rLessonPurpose">
 				<input type="radio" name="rLessonPurpose" value="취미생활" class="radio" id="a1" style="display:none;"><label for="a1" class="req request-step-one btn btn-success">취미생활</label>
@@ -153,7 +160,6 @@ $(function(){
 			</div>
 			<button class="com complete-step-one btn btn-warning" id="next1" type="button" >다음 단계</button>
 		</div>
-		
 		<div id="step-two"  style="display:none;" class="request">
 			<p style="text-align: center; margin-left: 80px; font-size: 30px;">2단계: 본인의 수준</p>
 			<div id="step-two-rYourLevel">
@@ -180,16 +186,14 @@ $(function(){
 			<button class="back back-to-prev-page btn btn-danger"id="prev2" type="button">이전 단계</button>
 			<button class="com complete-step-one btn btn-warning"id="next3" type="button" >다음 단계</button>
 		</div>	
-		
 		<div id="step-four"  style="display:none" class="request">
 			<p style="text-align: center; margin-left: 80px; font-size: 30px;">4단계: 레슨 시작일</p>
 			<div id="step-four-rWantDate">
-				<input type="date" name="rWantDate" id="date">
+				<input type="date" name="rWantDate"  id="date">
 			</div>
 			<button class="back back-to-prev-page btn btn-danger"id="prev3" type="button">이전 단계</button>
 			<button class="com complete-step-one btn btn-warning"id="next4" type="button" >다음 단계</button>
 		</div>
-		
 		<div id="step-five"  style="display:none" class="request">
 			<p style="text-align: center; margin-left: 80px; font-size: 30px;">5단계: 레슨 시간</p>
 			<div id="step-five-rWantTime">
@@ -202,6 +206,7 @@ $(function(){
 			<button class="back back-to-prev-page btn btn-danger"id="prev4" type="button">이전 단계</button>
 			<button class="com complete-step-one btn btn-warning"id="next5" type="button" >다음 단계</button>
 		</div>	
+		
 								
 		<div id="step-six"  style="display: none;" class="request">
 			<p style="text-align: center; margin-left: 80px; font-size: 30px;">6단계: 장비 유무</p>
@@ -214,7 +219,7 @@ $(function(){
 			<button class="back back-to-prev-page btn btn-danger"id="prev5" type="button">이전 단계</button>
 			<button class="com complete-step-one btn btn-warning"id="next6" type="button" >다음 단계</button>
 		</div>
-		
+
 		<div id="step-seven"  style="display: none;" class="request">
 			<p style="text-align: center; margin-left: 80px; font-size: 30px;">7단계: 연령대</p>
 			<div id="step-seven-rAge">
@@ -222,23 +227,23 @@ $(function(){
 				<input type="radio" name="rAge" value="20대" class="radio" id="g2" style="display:none;"><label for="g2" class="req request-step-two btn btn-success">20대</label>
 				<input type="radio" name="rAge" value="30대" class="radio" id="g3" style="display:none;"><label for="g3" class="req request-step-two btn btn-success">30대</label>
 				<input type="radio" name="rAge" value="40대" class="radio" id="g4" style="display:none;"><label for="g4" class="req request-step-two btn btn-success">40대</label>
-				<input type="radio" name="rAge" value="50대" class="radio" id="g4" style="display:none;"><label for="g4" class="req request-step-two btn btn-success">50대</label>
-				<input type="radio" name="rAge" value="60대" class="radio" id="g4" style="display:none;"><label for="g4" class="req request-step-two btn btn-success">60대</label>
+				<input type="radio" name="rAge" value="50대" class="radio" id="g5" style="display:none;"><label for="g5" class="req request-step-two btn btn-success">50대</label>
+				<input type="radio" name="rAge" value="60대" class="radio" id="g6" style="display:none;"><label for="g6" class="req request-step-two btn btn-success">60대</label>
 			</div>
 			<button class="back back-to-prev-page btn btn-danger"id="prev6" type="button">이전 단계</button>
 			<button class="com complete-step-one btn btn-warning"id="next7" type="button" >다음 단계</button>
 		</div>
-
+	
 		<div id="step-eight"  style="display: none;" class="request">
 			<p style="text-align: center; margin-left: 80px; font-size: 30px;">8단계: 성별</p>
 			<div id="step-eight-rGender">
-				<input type="radio" name="rGender" value="10대" class="radio" id="h1" style="display:none;"><label for="h1" class="req request-step-two btn btn-success" style="margin-top:150px;">남자</label>
-				<input type="radio" name="rGender" value="20대" class="radio" id="h2" style="display:none;"><label for="h2" class="req request-step-two btn btn-success" >여자</label>
+				<input type="radio" name="rGender" value="0" class="radio" id="h1" style="display:none;"><label for="h1" class="req request-step-two btn btn-success" style="margin-top:150px;">남자</label>
+				<input type="radio" name="rGender" value="1" class="radio" id="h2" style="display:none;"><label for="h2" class="req request-step-two btn btn-success" >여자</label>
 			</div>
 			<button class="back back-to-prev-page btn btn-danger"id="prev7" type="button" >이전 단계</button>
 			<button class="com complete-step-one btn btn-warning"id="next8" type="button" >다음 단계</button>
 		</div>
-		
+
 		<div id="step-nine"  style="display:none;" class="request">
 			<p style="text-align: center; margin-left: 80px; font-size: 30px;">9단계: 원하는점</p>
 			<div id="step-nine-rWannable">
@@ -260,7 +265,7 @@ $(function(){
 				<input type="radio" name="rWantArea" value="부평구" class="radio" id="i8" style="display:none;"><label for="i8" class="req request-step-two btn btn-success" >부평구</label>
 			</div>
 			<button class="back back-to-prev-page btn btn-danger"id="prev9" type="button" >이전 단계</button>
-			<button class="com complete-step-one btn btn-warning"id="next10" type="button" >다음 단계</button>
+			<button class="com complete-step-one btn btn-warning"id="next10"  type="button">요청서 작성완료</button>
 		</div>
 	</form>							
 </div>

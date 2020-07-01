@@ -2,6 +2,7 @@ package com.icia.dal.controller;
 
 
 import java.security.Principal;
+import java.time.LocalDateTime;
 
 import javax.inject.Inject;
 import javax.validation.constraints.NotNull;
@@ -10,7 +11,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindException;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -23,6 +26,7 @@ import com.icia.dal.entity.Request;
 import com.icia.dal.service.DalinService;
 import com.icia.dal.service.EstimateService;
 import com.icia.dal.service.RequestService;
+import com.icia.dal.util.editor.DatePropertyEditor;
 
 @RequestMapping("/member")
 @Controller
@@ -33,6 +37,11 @@ public class EstimateAndRequestController {
 	private RequestService requestService;
 	@Inject
 	private DalinService dalService;
+	
+	@InitBinder
+	public void init(WebDataBinder wdb) {
+		wdb.registerCustomEditor(LocalDateTime.class,"rWantDate", new DatePropertyEditor());
+	}
 	
 	// 받은 견적서 목록
 	@GetMapping("/estimate/receiveEstimateList")
@@ -93,17 +102,17 @@ public class EstimateAndRequestController {
 	
 	// 달인프로필 -> 제자읽기 -> 요청서 작성화면 출력
 	@GetMapping("/request/sendRequest")
-	public ModelAndView sendRequest(@RequestParam @NotNull Integer dMno) throws DalinNotFoundException {
-		return new ModelAndView("main").addObject("viewName","request/sendRequest.jsp");
+	public ModelAndView sendRequest(int dMno) throws DalinNotFoundException {
+		return new ModelAndView("main").addObject("viewName","request/sendRequest.jsp").addObject("dMno",dMno);
 	}
 	
 	// 요청서 보내기
-	@PostMapping("/request/sendRequest")
-	public ModelAndView sendRequest(Request rq,BindingResult br,Principal principal) throws BindException {
-		if(br.hasErrors())
-			throw new BindException(br);
-		requestService.writeToRequest(rq);
-		return new ModelAndView("redirect:/member/request/list");
+	@PostMapping("/request/writeRequest")
+	public String sendRequest(Request rq,Principal principal) {
+		System.out.println(rq);
+		String username = principal.getName();
+		requestService.writeToRequest(rq,username);
+		return "redirect:/member/request/sendRequestList";
 	}
 	// 제자 -> 보낸 요청서읽기
 	@GetMapping("/request/readToRequestForSend")

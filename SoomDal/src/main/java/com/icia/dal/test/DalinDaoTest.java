@@ -56,31 +56,6 @@ public class DalinDaoTest {
 		Dalin dalin = Dalin.builder().dMno(1).dName("전우치").dPassword("1234").dTel("01011111111").build();
 		dao.updateToDalin(dalin);
 	}
-	//@Test
-	public void requestInsert() {
-		Request r = Request.builder()
-				.jMno(1)
-				.rField("climming")
-				.rSubject("dsf")
-				.rLessonPurpose("sdfds")
-				.rYourLevel("sdf")
-				.rItemExists("sdf")
-				.rLessonType("sdf")
-				.rWantDate(LocalDateTime.now())
-				.rWantTime("sdf")
-				.rAge("54")
-				.rGender(true)
-				.rDalinIsOk(true)
-				.rWannable("sdf")
-				.rWantArea("sdf")
-				.rWriteDate(LocalDateTime.now())
-				.dMno(1)
-				.rbEnabled(true)
-				.build();
-		rDao.insertToRequest(r);
-				
-				
-	}
 	
 	
 }

@@ -15,6 +15,7 @@ public class MessageWebSocketHandler extends TextWebSocketHandler {
 	// 웹 소켓 연결을 생성
 	@Override
 	public void afterConnectionEstablished(WebSocketSession session) throws Exception {
+		System.out.println(session);
 		WebScoketService.add(session);
 	}
 	// 웹소켓 세션 종료 : 화면을 닫은 경우

@@ -4,6 +4,7 @@ import java.security.*;
 
 import javax.inject.*;
 
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.*;
 import org.springframework.validation.*;
 import org.springframework.web.bind.annotation.*;
@@ -27,6 +28,7 @@ public class DalinController {
 	@GetMapping("/dalin/my_info")
 	public ModelAndView myInFo(Principal principal) throws UserNotFoundException {
 		// 달인 마이페이지
+		System.out.println(SecurityContextHolder.getContext().hashCode());
 		String username = principal.getName();
 		return new ModelAndView("main").addObject("viewName","dalin/my_info.jsp").addObject("myInfo",dalService.readToMyInfo(username));
 	}

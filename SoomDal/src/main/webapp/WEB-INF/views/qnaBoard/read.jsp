@@ -6,6 +6,9 @@
 <head>
 <meta charset="UTF-8">
 <title>Q&A 게시판 글읽기</title>
+<sec:authorize access="hasAnyRole('ROLE_JEJA','ROLE_DALIN','ROLE_ADMIN')">
+	<script src="/dal/script/webS.js"></script>
+</sec:authorize>
 <style>
  #center{margin-left: 20px; display: inline-block; }
   

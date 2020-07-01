@@ -42,7 +42,7 @@
 	
 	<!-- 웹소켓 핸들러 설정 -->
 	<websocket:handlers>
-      <websocket:mapping path="/web/socket" handler="messageWebSocketHandler" />
+    	<websocket:mapping path="/member/socket" handler="messageWebSocketHandler" />
    </websocket:handlers>
 	
 	<!--(로그인 했을때 하면 안되는거 막는거)Interceptor설정  발동하는거 경로-->

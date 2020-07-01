@@ -41,10 +41,15 @@ public class RequestService {
 	private MemoDao memoDao;
 	
 	// 요청서작성
-	public void writeToRequest(Request rq) {
-		rqDao.insertToRequest(rq);
-		Jeja jeja = jejaDao.findByJejaToJMno(rq.getJMno());
+	public void writeToRequest(Request rq,String username) {
+		Jeja jeja = jejaDao.findById(username);
 		Dalin dalin = dalDao.findByDalinProfile(rq.getDMno());
+		Dalin dal = dalDao.findByDalinToDMno(rq.getDMno());
+		rq.setJMno(jeja.getJMno());
+		rq.setRField(dalin.getFNo());
+		rq.setRSubject(dal.getDetailFName());
+		System.out.println(rq);
+		rqDao.insertToRequest(rq);
 		memoDao.insert(Memo.builder().receiver(dalin.getDEmail()).title(jeja.getJName() + "님으로부터 요청서가 도착했습니다").content(rq.getRWriteDate() + "에 견적서가 도착했습니다. 견적서를 확인해주세요").sender(jeja.getJEmail()).build());
 		handler.sendMessage(jeja.getJName(), dalin.getDName(), jeja.getJName() + "님으로부터 요청서가 도착하였습니다");
 	}
@@ -94,9 +99,7 @@ public class RequestService {
 		if(rq==null)
 			throw new ReadFailException();
 		RequestDto.DtoForRead dto = modelMapper.map(rq,RequestDto.DtoForRead.class);
-		String wantDate = rq.getRWantDate().format(DateTimeFormatter.ofPattern("MM월dd일"));
 		String writeDate = rq.getRWriteDate().format(DateTimeFormatter.ofPattern("yyyy년 MM월 dd일 HH시 mm분"));
-		dto.setRWantDateStr(wantDate);
 		dto.setRWriteDateStr(writeDate);
 		dto.setJName(jeja.getJName());
 		dto.setJEmail(jeja.getJEmail());
