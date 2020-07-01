@@ -100,8 +100,10 @@ public class RequestService {
 			throw new ReadFailException();
 		RequestDto.DtoForRead dto = modelMapper.map(rq,RequestDto.DtoForRead.class);
 		String writeDate = rq.getRWriteDate().format(DateTimeFormatter.ofPattern("yyyy년 MM월 dd일 HH시 mm분"));
+		String strr = rq.getRWantDate().format(DateTimeFormatter.ofPattern("yyyy년 MM월 dd일"));
 		dto.setRWriteDateStr(writeDate);
 		dto.setJName(jeja.getJName());
+		dto.setRWantDateStr(strr);
 		dto.setJEmail(jeja.getJEmail());
 		return dto;
 	}
