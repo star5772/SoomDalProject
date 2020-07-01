@@ -207,7 +207,7 @@ height: 30px; margin-left: 20px; width: 1024px;  text-align: center;
 	
 	<br>
 <div style="width: 150px;   display: inline-block; text-align: center;">
-	<input type="radio" class="radio" id="AQNA" name="radio" style="display:none; margin-bottom: 20px; " ><label for="AQNA">Q&A게시판</label>
+	<input checked="checked" type="radio" class="radio" id="AQNA" name="radio" style="display:none; margin-bottom: 20px; " ><label for="AQNA">Q&A게시판</label>
 </div>
 
 <div style="width: 150px; ;  margin-left:-5px; display: inline-block;text-align: center;">
