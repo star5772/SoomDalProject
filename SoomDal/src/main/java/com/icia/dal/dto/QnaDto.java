@@ -17,7 +17,7 @@ public class QnaDto {
 		private String writer;
 		private int cno;
 		private boolean secret;
-		
+		private String name;
 	}
 	
 	@Data
@@ -29,5 +29,6 @@ public class QnaDto {
 		private String qWriteDateStr;
 		private Boolean qIsSecret;
 		private Boolean qIsNotice;
+		private String qName;
 	}
 }

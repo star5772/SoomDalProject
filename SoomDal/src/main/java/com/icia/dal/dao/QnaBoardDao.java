@@ -18,9 +18,10 @@ public interface QnaBoardDao {
 	
 	public QnaBoard findByQnaBoard(int qNo);
 
-	public List<QnaBoard> findAllByWriter(@Param("srn") int srn,@Param("ern") int ern, String qWriter);
+	public List<QnaBoard> findAllByWriter(@Param("startRowNum") int startRowNum,@Param("endRowNum")int endRowNum,@Param("qName") String qName);
 
-	public int count(String qWriter);
+	public int count();
 	
+	public int countByName(String qName);
 	
 }

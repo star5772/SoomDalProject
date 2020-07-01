@@ -69,14 +69,15 @@ SELECT MEMO_SEQ.NEXTVAL FROM DUAL;
 
 /* 문의 게시판 */
 CREATE TABLE QnaBoard (
-   Q_no VARCHAR2(8) NOT NULL, /* 문의 코드 */
+   Q_NO NUMBER(8) NOT NULL, /* 문의 코드 */
    Q_TITLE NVARCHAR2(20), /* 제목 */
    Q_CONTENT NVARCHAR2(1000), /* 내용 */
    Q_WRITE_DATE DATE, /* 문의 날짜 */
-   Q_WRITER NVARCHAR2(20), /* 작성자 */
+   Q_WRITER NVARCHAR2(20), /* 작성자  아이디 */
    C_NO NUMBER(7), /* 댓글 번호 */
    Q_IS_SECRET CHAR(1), /* 비밀글여부 */
    Q_IS_NOTICE CHAR(1), /* 공지사항여부 */
+   Q_NAME NVARCHAR2(15), /* 작성자 이름 */
    constraint pk_qnaboard primary key(q_no)
 );
 
@@ -254,7 +255,7 @@ commit;
 
 CREATE TABLE QnaComment (
    C_NO NUMBER(7) NOT NULL, /* 댓글 번호 */
-   C_CODE VARCHAR2(8), /* 문의 코드 */
+   Q_NO NUMBER(8), /* 댓글 단 게시물 번호 */
    C_CONTENT NVARCHAR2(500), /* 내용 */
    C_WRITE_DATE DATE, /* 작성 시간 */
    AD_EMAIL VARCHAR2(50), /* 관리자이메일 */

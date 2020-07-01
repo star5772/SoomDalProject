@@ -12,7 +12,7 @@ import lombok.experimental.*;
 @Accessors(chain=true)
 public class QnaComment {
 	private int cNo;
-	private String cCode;
+	private int qNo;
 	private String cContent;
 	private LocalDateTime cWrite;
 	private String adEmail;
