@@ -19,8 +19,8 @@ public class QnaBoardController {
 	private QnaBoardService qnaBoardService;
 	
 	@GetMapping("/qnaBoard/list")
-	public ModelAndView list(@RequestParam(defaultValue = "1") int pageno,@Nullable String qWriter) {
-		return new ModelAndView("main").addObject("viewName", "qnaBoard/list.jsp").addObject("qnaPage",qnaBoardService.list(pageno,qWriter));
+	public ModelAndView list(@RequestParam(defaultValue = "1") int pageno,@Nullable String qName) {
+		return new ModelAndView("main").addObject("viewName", "qnaBoard/list.jsp").addObject("qnaPage",qnaBoardService.list(pageno,qName));
 	}
 	
 	
@@ -46,8 +46,8 @@ public class QnaBoardController {
 	@PostMapping("/qnaBoard/write")
 	public String write(QnaBoard qnaBoard ,Principal principal) {
 		String username = principal.getName();
-		qnaBoardService.write(qnaBoard,username);
-		return "redirect:/member/qnaBoard/read?qNo="+qnaBoardService.write(qnaBoard, username);
+		int qno = qnaBoardService.write(qnaBoard,username);
+		return "redirect:/member/qnaBoard/read?qNo="+qno;
 				
 	}
 	@PostMapping("/qnaBoard/delete")
