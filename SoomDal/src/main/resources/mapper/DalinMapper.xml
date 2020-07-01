@@ -14,7 +14,7 @@
 	</insert>
 	<!-- 달인 프로필 읽기(프로필 사진, 이름, 대표서비스, 한줄 소개, 활동 지역, 달인 서비스 상세 설명, 결제 수단, 첨부 파일, 리뷰, 평점 -->
 	<select id="findByDalinProfile" resultType="dalin">
-		select d_mno dMno, d_profile dProfile, d_name dName, d_main_service dMainService, d_intro dIntro, d_area dArea, d_detail_service dDetailService,f_no fNo,
+		select d_mno dMno,d_email dEmail, d_profile dProfile, d_name dName, d_main_service dMainService, d_intro dIntro, d_area dArea, d_detail_service dDetailService,f_no fNo,
 		d_payment_method dPaymentMethod, p_attachment_cnt pAttachmentCnt, p_attachment_no pAttachmentNo, r_no rNo, d_q_no dQNo, r_review_cnt rReviewCnt,d_login_failure_cnt dLoginFailureCnt from dalin
 		where d_mno=#{dMno} and rownum=1
 	</select>

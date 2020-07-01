@@ -133,14 +133,12 @@ $(function(){
 	font-size: medium;
 	float: left;
 }
-<<<<<<< HEAD
 .radio:checked +label{  
   /* selected styled */
   background-color: #ffc107;
   color: white;
   text-shadow: 1px 1px 3px #8e8e8e;
 }
-=======
 
 .radio:checked + label{
 	background-color: #FFA500;
@@ -152,7 +150,6 @@ p {
 	padding: 50px;
 }
 
->>>>>>> branch 'master' of https://github.com/star5772/SoomDalProject
 </style>
 </head>
 <body>
@@ -160,23 +157,11 @@ p {
 			<h1 style="text-align: center; margin-top: 50px; font-weight: bold; font-size: 50px;">요청서</h1>
 	</div>
 	<div id="totalDiv">
-<<<<<<< HEAD
-		<div>
-			<h1 style="text-align: center; margin-top: 15px;">요청서</h1>
-		</div>
 	<form id="reqFrm" action="/dal/member/request/writeRequest"  method="post">
-=======
-		
-	<form id="reqFrm" action="/dal/member/request/sendRequest" method="post">
->>>>>>> branch 'master' of https://github.com/star5772/SoomDalProject
 		<div id="step-one"  style="" class="request">
-<<<<<<< HEAD
 		<input type="hidden" name="dMno" value="${dMno}">
 		<input type="hidden" name="_csrf" value="${_csrf.token}">
-			<p style="text-align: center; margin-left: 80px; font-size: 30px;">1단계: 레슨의 목적</p>
-=======
 			<p style="text-align: center; margin-left: 80px; font-size: 30px; font-weight: bold;">1단계: 레슨의 목적</p>
->>>>>>> branch 'master' of https://github.com/star5772/SoomDalProject
 			<div id="step-one-rLessonPurpose">
 				<input type="radio" name="rLessonPurpose" value="취미생활" class="radio" id="a1" style="display:none;"><label for="a1" class="req request-step-one btn btn-light" style="border: 1px solid #D5D5D5;">취미생활</label>
 				<input type="radio" name="rLessonPurpose" value="자기계발" class="radio" id="a2" style="display:none;"><label for="a2" class="req request-step-one btn btn-light" style="border: 1px solid #D5D5D5;">자기계발</label>
@@ -216,11 +201,7 @@ p {
 		<div id="step-four"  style="display:none" class="request">
 			<p style="text-align: center; margin-left: 80px; font-size: 30px; font-weight: bold;">4단계: 레슨 시작일</p>
 			<div id="step-four-rWantDate">
-<<<<<<< HEAD
-				<input type="date" name="rWantDate"  id="date">
-=======
 				<input type="date" name="rWantDate" id="date" style="background-color: white; text-align:center; font-weight: bold; font-size: 16px; border: 2px solid #878787; border-radius: 4px;">
->>>>>>> branch 'master' of https://github.com/star5772/SoomDalProject
 			</div>
 			<button class="back back-to-prev-page btn btn-secondary"id="prev3" type="button" style="color: white; font-weight: bold;">이전 단계</button>
 			<button class="com complete-step-one btn btn-warning"id="next4" type="button" style="color: white; font-weight: bold;">다음 단계</button>
@@ -254,21 +235,12 @@ p {
 		<div id="step-seven"  style="display: none;" class="request">
 			<p style="text-align: center; margin-left: 80px; font-size: 30px; font-weight: bold;">7단계: 연령대</p>
 			<div id="step-seven-rAge">
-<<<<<<< HEAD
-				<input type="radio" name="rAge" value="10대" class="radio" id="g1" style="display:none;"><label for="g1" class="req request-step-two btn btn-success">10대</label>
-				<input type="radio" name="rAge" value="20대" class="radio" id="g2" style="display:none;"><label for="g2" class="req request-step-two btn btn-success">20대</label>
-				<input type="radio" name="rAge" value="30대" class="radio" id="g3" style="display:none;"><label for="g3" class="req request-step-two btn btn-success">30대</label>
-				<input type="radio" name="rAge" value="40대" class="radio" id="g4" style="display:none;"><label for="g4" class="req request-step-two btn btn-success">40대</label>
-				<input type="radio" name="rAge" value="50대" class="radio" id="g5" style="display:none;"><label for="g5" class="req request-step-two btn btn-success">50대</label>
-				<input type="radio" name="rAge" value="60대" class="radio" id="g6" style="display:none;"><label for="g6" class="req request-step-two btn btn-success">60대</label>
-=======
 				<input type="radio" name="rAge" value="10대" class="radio" id="g1" style="display:none;"><label for="g1" class="req request-step-two btn btn-light" style="border: 1px solid #878787;">10대</label>
 				<input type="radio" name="rAge" value="20대" class="radio" id="g2" style="display:none;"><label for="g2" class="req request-step-two btn btn-light" style="border: 1px solid #878787;">20대</label>
 				<input type="radio" name="rAge" value="30대" class="radio" id="g3" style="display:none;"><label for="g3" class="req request-step-two btn btn-light" style="border: 1px solid #878787;">30대</label>
 				<input type="radio" name="rAge" value="40대" class="radio" id="g4" style="display:none;"><label for="g4" class="req request-step-two btn btn-light" style="border: 1px solid #878787;">40대</label>
 				<input type="radio" name="rAge" value="50대" class="radio" id="g5" style="display:none;"><label for="g5" class="req request-step-two btn btn-light" style="border: 1px solid #878787;">50대</label>
 				<input type="radio" name="rAge" value="60대" class="radio" id="g6" style="display:none;"><label for="g6" class="req request-step-two btn btn-light" style="border: 1px solid #878787;">60대</label>
->>>>>>> branch 'master' of https://github.com/star5772/SoomDalProject
 			</div>
 			<button class="back back-to-prev-page btn btn-secondary"id="prev6" type="button" style="color: white; font-weight: bold;">이전 단계</button>
 			<button class="com complete-step-one btn btn-warning"id="next7" type="button" style="color: white; font-weight: bold;">다음 단계</button>
@@ -277,13 +249,8 @@ p {
 		<div id="step-eight"  style="display: none;" class="request">
 			<p style="text-align: center; margin-left: 80px; font-size: 30px; font-weight: bold;">8단계: 성별</p>
 			<div id="step-eight-rGender">
-<<<<<<< HEAD
-				<input type="radio" name="rGender" value="0" class="radio" id="h1" style="display:none;"><label for="h1" class="req request-step-two btn btn-success" style="margin-top:150px;">남자</label>
-				<input type="radio" name="rGender" value="1" class="radio" id="h2" style="display:none;"><label for="h2" class="req request-step-two btn btn-success" >여자</label>
-=======
-				<input type="radio" name="rGender" value="10대" class="radio" id="h1" style="display:none;"><label for="h1" class="req request-step-two btn btn-light" style="margin-top:150px; border: 1px solid #878787;">남자</label>
-				<input type="radio" name="rGender" value="20대" class="radio" id="h2" style="display:none;"><label for="h2" class="req request-step-two btn btn-light" style="border: 1px solid #878787;">여자</label>
->>>>>>> branch 'master' of https://github.com/star5772/SoomDalProject
+				<input type="radio" name="rGender" value="0" class="radio" id="h1" style="display:none;"><label for="h1" class="req request-step-two btn btn-light" style="margin-top:150px; border: 1px solid #878787;">남자</label>
+				<input type="radio" name="rGender" value="1" class="radio" id="h2" style="display:none;"><label for="h2" class="req request-step-two btn btn-light" style="border: 1px solid #878787;" >여자</label>
 			</div>
 			<button class="back back-to-prev-page btn btn-secondary"id="prev7" type="button" style="color: white; font-weight: bold;">이전 단계</button>
 			<button class="com complete-step-one btn btn-warning"id="next8" type="button" style="color: white; font-weight: bold;">다음 단계</button>
@@ -309,13 +276,8 @@ p {
 				<input type="radio" name="rWantArea" value="연수구" class="radio" id="i7" style="display:none;"><label for="i7" class="req request-step-two btn btn-light" style="border: 1px solid #878787;">연수구</label>
 				<input type="radio" name="rWantArea" value="부평구" class="radio" id="i8" style="display:none;"><label for="i8" class="req request-step-two btn btn-light" style="border: 1px solid #878787;">부평구</label>
 			</div>
-<<<<<<< HEAD
-			<button class="back back-to-prev-page btn btn-danger"id="prev9" type="button" >이전 단계</button>
-			<button class="com complete-step-one btn btn-warning"id="next10"  type="button">요청서 작성완료</button>
-=======
 			<button class="back back-to-prev-page btn btn-secondary"id="prev9" type="button" style="color: white; font-weight: bold;">이전 단계</button>
 			<button class="com complete-step-one btn btn-warning"id="next10" type="button" style="color: white; font-weight: bold; width: 120px; text-align: center;">요청서 보내기</button>
->>>>>>> branch 'master' of https://github.com/star5772/SoomDalProject
 		</div>
 	</form>							
 </div>

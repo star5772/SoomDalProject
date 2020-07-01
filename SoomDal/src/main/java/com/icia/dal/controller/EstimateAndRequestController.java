@@ -25,6 +25,7 @@ import com.icia.dal.entity.Estimate;
 import com.icia.dal.entity.Request;
 import com.icia.dal.service.DalinService;
 import com.icia.dal.service.EstimateService;
+import com.icia.dal.service.JejaService;
 import com.icia.dal.service.RequestService;
 import com.icia.dal.util.editor.DatePropertyEditor;
 
@@ -37,6 +38,8 @@ public class EstimateAndRequestController {
 	private RequestService requestService;
 	@Inject
 	private DalinService dalService;
+	@Inject
+	private JejaService jejaService;
 	
 	@InitBinder
 	public void init(WebDataBinder wdb) {
@@ -111,8 +114,9 @@ public class EstimateAndRequestController {
 	public String sendRequest(Request rq,Principal principal) {
 		System.out.println(rq);
 		String username = principal.getName();
+		int no = jejaService.findById(username).getJMno();
 		requestService.writeToRequest(rq,username);
-		return "redirect:/member/request/sendRequestList";
+		return "redirect:/member/request/sendRequestList?jMno="+ no;
 	}
 	// 제자 -> 보낸 요청서읽기
 	@GetMapping("/request/readToRequestForSend")
