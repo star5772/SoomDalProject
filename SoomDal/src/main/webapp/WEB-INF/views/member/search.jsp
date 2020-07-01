@@ -102,6 +102,9 @@
 								<c:forEach begin="1" end="${list.avgScore }">
 									<img src="https://assets.cdn.soomgo.com/icons/icon-common-review-star-small-full.svg">
 								</c:forEach>
+								<c:forEach begin="${list.avgScore+1 }" end="5">
+									<img src="https://assets.cdn.soomgo.com/icons/icon-common-review-star-small-empty.svg">
+								</c:forEach>
 							</span>
 							<span style="font-size: 16px; font-weight: bold;">${list.avgScore }</span>
 						</div>
