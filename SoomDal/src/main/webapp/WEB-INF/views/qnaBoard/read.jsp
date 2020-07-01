@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -36,7 +37,7 @@ width: 80px; height: 35px;  background-color: #ffc968; color: white; font-size: 
 </script>
 </head>
 <body>
-${read }
+${read.comment }
 <form action="/dal/member/qnaBoard/delete" method="post">
 	<div id="center" >
 		<div style="font-size: 43px; font-weight: bold; color: rgb(243, 156, 18); ">Q&A</div>
@@ -68,16 +69,23 @@ ${read }
 			<button id="list"  onclick="location.href='list'" type="button" >목 록</button>
 	</div>
 </form>	
-	<!--   이용자들이 볼때 댓글 모양--> 
-	<div style="margin-left: 20px; display: inline-block;"> 
+	<!--   이용자들이 볼때 댓글 모양-->
+	<c:choose>
+		<c:when test="${read.cno eq null }">
+			
+		</c:when>
+		<c:otherwise>
+			<div style="margin-left: 20px; display: inline-block;"> 
 		<hr>
 			<label style="background-color: white; display: inline-block; width: 130px; text-align: center; font-size: 17px;">관리자 </label>
-			<a type="text" style="display:inline-block; color: rgb(94, 94, 94); width: 400px;font-size: 17px;">2020-06-20</a>
+			<a type="text" style="display:inline-block; color: rgb(94, 94, 94); width: 400px;font-size: 17px;">${read.comment.CWrite }</a>
 		<hr>
 		<textarea rows="5" cols="125" style="font-size: 17px; margin-left:20px;
-		display: inline-block; margin-top: 20px; outline: 0;border: 0; background-color: white;" disabled="disabled">이런식으로 해결이 가능합니다! 해결완료! 우횻!~</textarea>
+		display: inline-block; margin-top: 20px; outline: 0;border: 0; background-color: white;" disabled="disabled">${read.comment.CContent }</textarea>
 		<hr>
 	</div>
+		</c:otherwise>
+	</c:choose>
 	<!-- 관리잔 답글 달기  sec-->
 	<sec:authorize access="hasRole('ROLE_ADMIN')">
 		<div style="margin-left: 20px; display: inline-block;">
