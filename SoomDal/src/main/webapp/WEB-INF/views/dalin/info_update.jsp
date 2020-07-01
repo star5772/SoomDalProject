@@ -392,11 +392,11 @@ body {
 					<div>
 						<ul id="attachment">
 						</ul>
-						<div style="display: inline-block; "><img id="show_attach1" name="show_attach1" height="200px" width="150px;" ></div>
-						<div style="display: inline-block; "><img id="show_attach2" name="show_attach2" height="200px" width="150px;" ></div>
-						<div style="display: inline-block; "><img id="show_attach3" name="show_attach3" height="200px" width="150px;" ></div>
-						<div style="display: inline-block; "><img id="show_attach4" name="show_attach4" height="200px" width="150px;" ></div>
-						<div style="display: inline-block; "><img id="show_attach5" name="show_attach5" height="200px" width="150px;" ></div>				
+						<div style="display: inline-block; "><img id="show_attach1" name="show_attach1" height="200px" width="150px;" src="${dalin.PAttachmentNo }"></div>
+						<div style="display: inline-block; "><img id="show_attach2" name="show_attach2" height="200px" width="150px;" src="${dalin.PAttachmentNo }"></div>
+						<div style="display: inline-block; "><img id="show_attach3" name="show_attach3" height="200px" width="150px;" src="${dalin.PAttachmentNo }"></div>
+						<div style="display: inline-block; "><img id="show_attach4" name="show_attach4" height="200px" width="150px;" src="${dalin.PAttachmentNo }"></div>
+						<div style="display: inline-block; "><img id="show_attach5" name="show_attach5" height="200px" width="150px;" src="${dalin.PAttachmentNo }"></div>				
 					</div>
 				</div>
 				<div id="inp">

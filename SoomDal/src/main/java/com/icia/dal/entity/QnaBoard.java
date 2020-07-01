@@ -16,7 +16,7 @@ public class QnaBoard {
 	private String qContent;
 	private LocalDateTime qWriteDate;
 	private String qWriter;
-	private int cNo;
+	private Integer cNo;
 	private Boolean qIsSecret;
 	private Boolean qIsNotice;
 	private String qName;

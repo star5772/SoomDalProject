@@ -30,8 +30,13 @@ width: 80px; height: 35px;  background-color: #ffc968; color: white; font-size: 
  font-weight: bold;  outline: 0;border: 0;border-radius: 4px;  float: left; margin-right: 15px; margin-top: 10px; border-radius: 4px;
 }
 </style>
+<script>
+	$(function() {
+	});
+</script>
 </head>
 <body>
+${read }
 <form action="/dal/member/qnaBoard/delete" method="post">
 	<div id="center" >
 		<div style="font-size: 43px; font-weight: bold; color: rgb(243, 156, 18); ">Q&A</div>
