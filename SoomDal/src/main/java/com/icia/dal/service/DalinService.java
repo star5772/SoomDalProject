@@ -4,6 +4,7 @@ package com.icia.dal.service;
 import java.io.*;
 import java.security.*;
 import java.time.*;
+import java.time.format.*;
 import java.util.*;
 
 import javax.inject.*;
@@ -196,8 +197,11 @@ public class DalinService {
 	}
 
 	public ProfileAttachment readAttachment(Integer pAttachmentNo) {
+		System.out.println(pAttachmentNo+"------------------------------------------");
 		return profileAttachmentDao.findByProfileAttachment(pAttachmentNo);
 	}
+	
+
 }	
 
 

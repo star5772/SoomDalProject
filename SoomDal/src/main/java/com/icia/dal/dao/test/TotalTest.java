@@ -10,14 +10,8 @@ import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import com.icia.dal.dao.AdminDao;
-import com.icia.dal.dao.DalinDao;
-import com.icia.dal.dao.JejaDao;
-import com.icia.dal.dao.QnaBoardDao;
-import com.icia.dal.dao.QnaCommentDao;
-import com.icia.dal.dao.RequestBoardDao;
-import com.icia.dal.dao.ReviewDao;
-import com.icia.dal.entity.Dalin;
+import com.icia.dal.dao.*;
+import com.icia.dal.entity.*;
 import com.icia.dal.service.PaymentService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -45,9 +39,10 @@ public class TotalTest {
 		Dalin dl = Dalin.builder().dCash(100000).dMno(1).build();
 		assertThat(dalDao.updateToDalin(dl),is(1));
 	}
-	@Test
+	//@Test
 	public void payServiceTest() {
 		paymentService.addCashToDalin("TjOVeC", "star5772@naver.com");
 	}
+	
 
 }
