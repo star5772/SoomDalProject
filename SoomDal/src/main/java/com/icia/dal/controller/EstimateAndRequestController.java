@@ -94,7 +94,7 @@ public class EstimateAndRequestController {
 	// 달인프로필 -> 제자읽기 -> 요청서 작성화면 출력
 	@GetMapping("/request/sendRequest")
 	public ModelAndView sendRequest(@RequestParam @NotNull Integer dMno) throws DalinNotFoundException {
-		return new ModelAndView("main").addObject("viewName","request/sendRequest.jsp").addObject("dalin",dalService.readToDalinProfile(dMno));
+		return new ModelAndView("main").addObject("viewName","request/sendRequest.jsp");
 	}
 	
 	// 요청서 보내기
