@@ -76,10 +76,10 @@ $(function(){
 <div style="width:1000px; height: 800px;" id="pmDiv">
 	<div style="margin-left: 235px;margin-top: 70px;" >
 		<div>
-			<h2>스토어</h2>
+			<h2 style="font-weight: bold; font-size: 30px;">스토어</h2><br><br>
 		</div>
 		<div style="background-color: #DDDDDD;, border: 1px solid #DDDDDD; border-radius: 3px; width: 550px; height: 50px;">
-			<h4 style="float: left;margin-top: 13px; height: 50px;">보유캐쉬</h4><h4 style="float: right;margin-right:20px; margin-top: 13px; height: 50px;">${cash}원</h4>
+			<h4 style="float: left;margin-top: 13px; height: 50px; font-weight: bold;">보유캐쉬</h4><h4 style="float: right;margin-right:20px; margin-top: 13px; height: 50px; font-weight: bold;">${cash}원</h4>
 		</div>
 		<div style="height: 70px;"></div>
 		<hr style="width: 550px;">
