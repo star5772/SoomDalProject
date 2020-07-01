@@ -46,13 +46,13 @@ public class EstimateAndRequestController {
 	// 받은 견적서 목록
 	@GetMapping("/estimate/receiveEstimateList")
 	public ModelAndView receiveEstimateList(@RequestParam(defaultValue = "1")int pageno, int jMno) {
-		return new ModelAndView("main").addObject("viewName","estimate/estimateList.jsp").addObject("receiveEstimate",estimateService.receiveEstimateList(pageno,jMno));
+		return new ModelAndView("main").addObject("viewName","estimate/estimateList.jsp").addObject("receiveEstimate",estimateService.receiveEstimateList(pageno,jMno)).addObject("jMno",jMno);
 	}
 	
 	// 보낸 견적서 목록
 	@GetMapping("/estimate/sendEstimateList")
 	public ModelAndView sendEstimateList(@RequestParam(defaultValue = "1") int pageno,int dMno) {
-		return new ModelAndView("main").addObject("viewName","estimate/estimateList.jsp").addObject("sendEstimate",estimateService.sendEstimateList(pageno,dMno));
+		return new ModelAndView("main").addObject("viewName","estimate/estimateList.jsp").addObject("sendEstimate",estimateService.sendEstimateList(pageno,dMno)).addObject("dMno",dMno);
 	}
 	// 견적서 보내기 화면출력
 	@GetMapping("/estimate/sendEstimate")

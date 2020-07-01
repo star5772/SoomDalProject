@@ -13,6 +13,10 @@
 <script>
 $(document).ready(function(){
 	$("#write").on("click",function(){
+		if($("#qTitle").val().length==0 || $("#qContent").val().length==0) {
+			Swal.fire("실패!","제목과 본문을 작성하세요","info")
+			return;
+		}
 		$("#writeForm").submit();
 	}) 
 })
@@ -42,10 +46,10 @@ $(document).ready(function(){
 	<form action="/dal/member/qnaBoard/write" method="post" id="writeForm">
 		<div>
 			<label style="background-color: #d3d3d3; display: inline-block; width: 130px; text-align: center; font-size: 17px;">제 목</label>
-			<input type="text" placeholder="제목을 입력해주세요." style="color: rgb(94, 94, 94); width: 780px;font-size: 17px;" name="qTitle">
+			<input type="text" placeholder="제목을 입력해주세요." style="color: rgb(94, 94, 94); width: 780px;font-size: 17px;" name="qTitle" id="qTitle">
 		</div>
 		<hr>
-		<textarea rows="20" cols="126" placeholder="궁금하신 내용을 입력해주세요." style="font-size: 17px;" name="qContent"></textarea>
+		<textarea rows="20" cols="126" placeholder="궁금하신 내용을 입력해주세요." style="font-size: 17px;" name="qContent" id="qContent"></textarea>
 		<hr>
 		<div>
 			<label style="width:130px;  text-align: center; background-color: #d3d3d3; display: inline-block; font-size: 17px;">비밀글설정</label>

@@ -4,7 +4,7 @@ import com.icia.dal.dto.page.PageToEstimate;
 
 public class EstimatePagingUtil {
 	// 페이지당 글의 개수
-	private final static int COUNT_OF_BOARD_PER_PAGE = 10;
+	private final static int COUNT_OF_BOARD_PER_PAGE = 6;
 	// 블록당 페이지의 개수
 	private final static int COUNT_OF_PAGE_PER_BLOCK = 5;
 	

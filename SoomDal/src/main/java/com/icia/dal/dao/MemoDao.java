@@ -25,7 +25,6 @@ public class MemoDao {
 		map.put("startRowNum", startRowNum);
 		map.put("endRowNum", endRowNum);
 		map.put("receiver", receiver);
-		System.out.println("receiver========: "+ receiver);
 		return tpl.selectList("memoMapper.findAllByReceiver", map);
 	}
 
@@ -33,6 +32,9 @@ public class MemoDao {
 		return tpl.selectOne("memoMapper.findById", mno);
 	}
 
+	public Memo findByMemo(Integer mno) {
+		return tpl.selectOne("memoMapper.findByMemo",mno);
+	}
 	public int setRead(Integer mno) {
 		return tpl.update("memoMapper.setRead", mno);
 	}
@@ -56,4 +58,6 @@ public class MemoDao {
 	public int countToMemo(String username) {
 		return tpl.selectOne("memoMapper.countToMemo",username);
 	}
+
+	
 }

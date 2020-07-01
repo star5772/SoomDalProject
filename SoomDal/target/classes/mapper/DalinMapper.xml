@@ -28,7 +28,7 @@
 				<if test="dArea!=null">d_area=#{dArea},</if>
 				<if test="dDetailService!=null">d_detail_service=#{dDetailService},</if>
 				<if test="dPaymentMethod!=null">d_payment_method=#{dPaymentMethod},</if>
-				<if test="pAttachmentNo!=null">p_attachment_No=#{dAttachmentNo},</if>
+				<if test="pAttachmentNo!=null">p_attachment_No=#{pAttachmentNo},</if>
 				<if test="pAttachmentCnt!=null">p_attachment_cnt=#{pAttachmentCnt},</if>
 				<if test="rNo!=null">r_no=#{rNo},</if>
 				<if test="dQNo!=null">d_q_no=#{dQNo},</if>

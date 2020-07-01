@@ -52,6 +52,10 @@ $(function(){
 		$("#jGUIDEboard").css("display","none");
 		$("#FAQboard").css("display","none");
 	})
+	$("#sah").on("click",function() {
+		var qName = $("#search").val();
+		location.href="/dal/member/qnaBoard/list?qName="+qName;
+	});
 })
 </script>
 <style> 
@@ -187,9 +191,28 @@ height: 30px; margin-left: 20px; width: 1024px;  text-align: center;
     color: white;
   text-shadow: 1px 1px 3px #8e8e8e;
 }
+.container-1 input#search{
+  width: 200px;
+  height: 30px;
+  background: white;
+  border: none;
+  font-size: 10pt;
+  float: left;
+  color: #262626;
+  -webkit-border-radius: 5px;
+ 
+   
+    -webkit-transition: background .55s ease;
+  -moz-transition: background .55s ease;
+  -ms-transition: background .55s ease;
+  -o-transition: background .55s ease;
+  transition: background .55s ease;
+}
+
 </style>
 </head>
 <body id="g">
+	
 	<div id="QNAtop" >
 		<div style="font-size: 43px; font-weight: bold; color: rgb(243, 156, 18); ">Q&A</div>
 		<div style="font-size: 19px;">궁금한것 무엇이든! 물어보세요!</div>
@@ -211,7 +234,7 @@ height: 30px; margin-left: 20px; width: 1024px;  text-align: center;
 	
 	<br>
 <div style="width: 150px;   display: inline-block; text-align: center;">
-	<input type="radio" class="radio" id="AQNA" name="radio" style="display:none; margin-bottom: 20px; " ><label for="AQNA">Q&A게시판</label>
+	<input checked="checked" type="radio" class="radio" id="AQNA" name="radio" style="display:none; margin-bottom: 20px; " ><label for="AQNA">Q&A게시판</label>
 </div>
 
 <div style="width: 150px; ;  margin-left:-5px; display: inline-block;text-align: center;">
@@ -226,7 +249,17 @@ height: 30px; margin-left: 20px; width: 1024px;  text-align: center;
 	<input type="radio" class="radio" id="jGUIDE" name="radio" style="display:none;margin-bottom: 20px;"><label for="jGUIDE">JEJA가이드</label>
 </div>
 
-<div id="QNAboard">		
+<div class="box" style="display: inline-block; margin-left: 200px; ">
+  <div class="container-1">
+      <input type="search" id="search" placeholder=" 작성자 검색" style="  border-bottom: solid 1px black; " />
+      <button type="button" id="sah" style="border: none; background-color: white; margin-left: 5px; margin-top: 4px;"><i class="fa fa-search fa-lg"></i></button>
+  </div>
+</div>
+
+<div id="QNAboard">
+<sec:authorize access="isAuthenticated()">
+	<sec:authentication property="principal.username" var="username"/>
+</sec:authorize>	
 	<div>
 		<table style="height: 30px; width: 1024px;  text-align: center;" class="table table-hover" id="ta">
 			<colgroup >
@@ -247,8 +280,15 @@ height: 30px; margin-left: 20px; width: 1024px;  text-align: center;
 			<c:forEach items="${qnaPage.list}" var="q">
 				<tr>
 					<td class="num">${q.QNo}</td>
-					<td class="subject" ><a href="/dal/member/qnaBoard/read?qNo=${q.QNo}">${q.QTitle}</a></td>
-					<td class="writer">${q.QWriter}</td>
+					<c:choose>
+						<c:when test="${q.QIsSecret eq true && q.QWriter ne username}">
+							<td class="subject">비밀글 입니다 <i class="fas fa-lock"></i></td>
+						</c:when>
+						<c:otherwise>
+							<td class="subject" ><a href="/dal/member/qnaBoard/read?qNo=${q.QNo}">${q.QTitle}</a></td>
+						</c:otherwise>
+					</c:choose>
+					<td class="writer">${q.QName}</td>
 					<td class="date">${q.QWriteDateStr}</td>
 				</tr>
 			</c:forEach>
@@ -279,8 +319,11 @@ height: 30px; margin-left: 20px; width: 1024px;  text-align: center;
 			</ul>
 			</div>
 		</div>
-		<div class="form-group" style="float: right; margin-right: 100px;">
-			<a class="btn btn-info" href="/dal/member/qnaBoard/write" style="font-size: 14px;">글쓰기</a>
+		<div class="form-group" style="float: right; margin-right: 100px; ">
+			<a class="btn btn-info" href="/dal/member/qnaBoard/write" style="font-size: 14px; width: 73px;">글쓰기</a>
+		</div>
+		<div class="form-group" style="float: left; margin-left: 10px;">
+			<a class="btn btn-info" href="/dal/member/qnaBoard/list" style="font-size: 14px;">전체목록</a>
 		</div>
 </div>
 <div id="FAQboard" style="display:none;">

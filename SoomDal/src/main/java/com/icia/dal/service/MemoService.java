@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.validation.constraints.NotNull;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -34,12 +35,16 @@ public class MemoService {
 
 
 
-	public Memo findById(Integer mno) throws MemoNotFoundException {
+	public MemoDto.DtoForMemoRead findById(@NotNull Integer mno) throws MemoNotFoundException {
 		Memo memo = memoDao.findById(mno);
 		if(memo==null)
 			throw new MemoNotFoundException();
-		memoDao.setRead(mno);
-		return memo;
+		MemoDto.DtoForMemoRead dto = modelMapper.map(memo, MemoDto.DtoForMemoRead.class);
+		String str = memo.getWriteTime().format(DateTimeFormatter.ofPattern("yyyy년 MM월 dd일"));
+		dto.setWriteTimeStr(str);
+		Memo memoo = memoDao.findByMemo(memo.getMno());
+		dto.setMno(memoo.getMno());
+		return dto;
 	}
 
 	@Scheduled(cron="0 0 4 1/1 * ?")
@@ -58,6 +63,8 @@ public class MemoService {
 		for(Memo mm:mmList) {
 			MemoDto.DtoForMemoList dto = modelMapper.map(mm,MemoDto.DtoForMemoList.class);
 			String str = mm.getWriteTime().format(DateTimeFormatter.ofPattern("yyyy년 MM월 dd일"));
+			Memo memo = memoDao.findByMemo(mm.getMno());
+			dto.setMno(memo.getMno());
 			dto.setWriteTimeStr(str);
 			dtoList.add(dto);
 		}

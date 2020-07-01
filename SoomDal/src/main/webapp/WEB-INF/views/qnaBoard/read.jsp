@@ -49,7 +49,7 @@ width: 80px; height: 35px;  background-color: #ffc968; color: white; font-size: 
 			
 			<label style="background-color: #d3d3d3; display: inline-block; width: 100px; text-align: center; font-size: 17px;">작성자</label>
 			<!-- <div type="text" style="display:inline-block; color: rgb(94, 94, 94); width: 100px;font-size: 17px; text-align: center;"></div> -->
-			<a type="text" style="display:inline-block; color: rgb(94, 94, 94); width: 130px;font-size: 17px; text-align: center;">${read.writer }</a>
+			<a type="text" style="display:inline-block; color: rgb(94, 94, 94); width: 130px;font-size: 17px; text-align: center;">${read.name }</a>
 			
 		</div>
 		<hr>
@@ -88,13 +88,7 @@ width: 80px; height: 35px;  background-color: #ffc968; color: white; font-size: 
 		<!-- 관리자가 자신의 댓글을 볼때 sec -->
 		
 		<div style="margin-left: 20px; display: inline-block;">
-		<hr>
-			<label style="background-color: white; display: inline-block; width: 130px; text-align: center; font-size: 17px;">관리자 </label>
-			<a type="text" style="display:inline-block; color: rgb(94, 94, 94); width: 400px;font-size: 17px;">2020-06-20</a>
-		<hr>
-		<textarea rows="5" cols="127" style="font-size: 17px; margin-left:20px;
-		display: inline-block;  margin-top: 20px; outline: 0;border: 0;">이런식으로 해결이 가능합니다! 해결완료! 우횻!~</textarea>
-		<hr>
+		
 		<table>
 			<button id="formal" onclick=""  >수 정</button>
 			<button id="cancel2" onclick="" >삭 제</button>

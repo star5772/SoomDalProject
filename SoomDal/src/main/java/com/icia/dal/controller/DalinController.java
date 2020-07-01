@@ -55,7 +55,7 @@ public class DalinController {
 	}
 	
 	@GetMapping("/dalin/profile_update")
-	public ModelAndView dalinInFoUpdate(Principal principal, DalinDto.DtoForUpdateToDalinProfile dto, MultipartFile sajin) throws DalinNotFoundException {
+	public ModelAndView dalinInFoUpdate(Principal principal, DalinDto.DtoForUpdateToDalinProfile dto, MultipartFile sajin ) throws DalinNotFoundException {
 		Dalin dalin = dalService.findById(principal.getName());
 		return new ModelAndView("main").addObject("viewName","dalin/info_update.jsp").addObject("dalin",dalService.readToDalinProfile(dalin.getDMno()));
 	}
@@ -70,12 +70,6 @@ public class DalinController {
 	public ModelAndView dalinEstimateWrite() {
 		// 달인 견적서 작성
 		return new ModelAndView("main").addObject("viewName","dalin/estimate_write.jsp");
-	}
-	
-	@GetMapping("/dalin/estimate_list")
-	public ModelAndView dalinEstimateList() {
-		// 달인 쪽지관리(견적서)
-		return new ModelAndView("main").addObject("viewName","dalin/estimate_list.jsp");
 	}
 	
 	@GetMapping("/dalin/request_list")

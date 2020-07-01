@@ -23,7 +23,7 @@ public class MemoDto {
 	@AllArgsConstructor
 	@NoArgsConstructor
 	public static class DtoForMemoRead{
-		private String mno;
+		private int mno;
 		private String title;
 		private String content;
 		private String sender;
