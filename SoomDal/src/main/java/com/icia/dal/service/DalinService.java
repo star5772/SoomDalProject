@@ -195,7 +195,9 @@ public class DalinService {
 		return dalDao.findByDalin(dEmail);
 	}
 
-	
+	public ProfileAttachment readAttachment(Integer pAttachmentNo) {
+		return profileAttachmentDao.findByProfileAttachment(pAttachmentNo);
+	}
 }	
 
 

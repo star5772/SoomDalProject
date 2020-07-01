@@ -41,7 +41,7 @@ public class DalinDto {
 		private String dArea;
 		private String dDetailService;
 		private String dPaymentMethod;
-		private String dAttachmentNo;
+		private String pAttachmentNo;
 		private Integer rNo;
 		private Integer dQNo;
 		private List<RepQuestion> rep;
