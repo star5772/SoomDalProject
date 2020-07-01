@@ -70,12 +70,6 @@ public class DalinController {
 		return new ModelAndView("main").addObject("viewName","dalin/estimate_write.jsp");
 	}
 	
-	@GetMapping("/dalin/estimate_list")
-	public ModelAndView dalinEstimateList() {
-		// 달인 쪽지관리(견적서)
-		return new ModelAndView("main").addObject("viewName","dalin/estimate_list.jsp");
-	}
-	
 	@GetMapping("/dalin/request_list")
 	public ModelAndView dalinRequestBoardList() {
 		// 달인 요청서 관리

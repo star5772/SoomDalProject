@@ -28,7 +28,7 @@ public class MemoController {
 	
 	@GetMapping("/memo/memo_read")
 	public ModelAndView MemoRead(int mno) throws MemoNotFoundException {
-		return new ModelAndView("main").addObject("viewname","memo/memo_read.jsp").addObject("memoRead", memoService.findById(mno));
+		return new ModelAndView("main").addObject("viewName","memo/memo_read.jsp").addObject("memoRead", memoService.findById(mno));
 	}
 
 }

@@ -92,23 +92,19 @@ public class EstimateService {
 	
 	// 견적서 읽기
 	public EstimateDto.DtoForRead readToSendEstimate(@NotNull Integer eNo) throws ReadFailException {
+		System.out.println("eno::::============"+eNo);
 		Estimate et = estimateDao.findByEstimate(eNo);	//여기
-		System.out.println("et : "+ et);
-		System.out.println("eNo : "+eNo);
+		System.out.println("eno:::::::========================="+eNo);
 		Dalin dalin = dalDao.findByDalinToDMno(et.getDMno());
-		System.out.println(et);
-		System.out.println("달인달인달인"+dalin);
 		if(et==null)
 			throw new ReadFailException();
 		EstimateDto.DtoForRead dto = modelMapper.map(et,EstimateDto.DtoForRead.class);
-		System.out.println("dtodtodtodtodtodto:::::::::"+dto);
 		String str = et.getEWriteTime().format(DateTimeFormatter.ofPattern("yyyy년 MM월 dd일"));
 		Request request = requestDao.findByRequest(et.getRNo());
 		dto.setDName(dalin.getDName());
 		dto.setRSubject(request.getRSubject());
 		dto.setEWriteTimeStr(str);
 		dto.setDName(dalDao.findByDalinToDMno(et.getDMno()).getDName());
-		System.out.println("dtodtodtodtodtodto"+dto);
 		
 		return dto;
 	}

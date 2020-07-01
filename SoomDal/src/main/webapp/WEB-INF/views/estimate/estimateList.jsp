@@ -19,6 +19,7 @@
 
 .request{
 	padding: 50px 0;
+	padding-left: 85px;
 }
 .btn{
 	width: 205px;
@@ -43,7 +44,7 @@ hr{
 .estimate{
 	height: 600px;
 	width: 90%;
-	margin: 0 auto;
+	margin-left: 100px;
 }
 p{
 	font-size: 12px;
@@ -64,7 +65,7 @@ h2{
 }
 #inner {
     position: absolute;
-    left: 50%;
+    left: 47%;
     margin: auto;
 }
 a {
@@ -105,13 +106,13 @@ a {
 			</c:if>
 			<c:forEach begin="${receiveEstimate.startPage}" end="${receiveEstimate.endPage}" var="i">
 				<c:choose>
-					<c:when test="${receiveRequest.pageno eq i }">
+					<c:when test="${receiveEstimate.pageno eq i }">
 						<li>
-							<a style="background-color: orange; color: white;" href="/dal/member/estimate/receiveEstimateList?pageno=${i}&dMno=${jMno}">${i}</a>
+							<a style="background-color: orange; color: white;" href="/dal/member/estimate/receiveEstimateList?pageno=${i}&jMno=${jMno}">${i}</a>
 						</li>
 					</c:when>
 					<c:otherwise>
-						<li><a style="color: black;" href="/dal/member/estimate/receiveEstimateList?pageno=${i}&dMno=${jMno}">${i}</a></li>
+						<li><a style="color: black;" href="/dal/member/estimate/receiveEstimateList?pageno=${i}&jMno=${jMno}">${i}</a></li>
 					</c:otherwise>
 				</c:choose>
 			</c:forEach>
@@ -124,6 +125,14 @@ a {
 </sec:authorize>
 
 
+
+
+
+
+
+
+
+
 <sec:authorize access="hasRole('ROLE_DALIN')">
 	<div class="request">
 		<div style="padding-bottom: 30px; padding-left: 10px;">
@@ -134,14 +143,14 @@ a {
 			<div class="card-top">
 				<br>
 				<div><h5>${estimatee.RSubject }</h5></div>
-				<div><p>${estimatee.RWriteDateStr }</p></div>
+				<div><p>${estimatee.EWriteTimeStr }</p></div>
 			</div>
 			<div class="card-body">
 				<div>${estimatee.JName } 제자</div>			
 			</div>	
 			<div class="card-bottom" id="button">
 				<div><hr></div>
-				<button onclick="location.href='/dal/member//estimate/readToSendEstimate?eNo=${request.ENo}'" class="btn btn-warning">견적서 보기</button>
+				<button onclick="location.href='/dal/member/estimate/readToSendEstimate?eNo=${estimatee.ENo}'" class="btn btn-warning">견적서 보기</button>
 			</div>
 		</div>
 	</c:forEach>
@@ -149,23 +158,23 @@ a {
 	<div id="page_wrap" style="text-align:center;">
 		<div id="inner">
 		<ul class="pagination">
-			<c:if test="${sendRequest.prev==true}">
-				<li><a style="color: black;" href="/dal/member/estimate/sendEstimateList?pageno=${sendRequest.startPage-1}&dMno=${DMno}">이전</a></li>
+			<c:if test="${sendEstimate.prev==true}">
+				<li><a style="color: black;" href="/dal/member/estimate/sendEstimateList?pageno=${sendEstimate.startPage-1}&dMno=${dMno}">이전</a></li>
 			</c:if>
-			<c:forEach begin="${sendRequest.startPage}" end="${sendRequest.endPage}" var="i">
+			<c:forEach begin="${sendEstimate.startPage}" end="${sendEstimate.endPage}" var="i">
 				<c:choose>
-					<c:when test="${sendRequest.pageno eq i }">
+					<c:when test="${sendEstimate.pageno eq i }">
 						<li>
-							<a style="background-color: orange; color: white;" href="/dal/member/estimate/sendEstimateList?pageno=${i}&dMno=${DMno}">${i}</a>
+							<a style="background-color: orange; color: white;" href="/dal/member/estimate/sendEstimateList?pageno=${i}&dMno=${dMno}">${i}</a>
 						</li>
 					</c:when>
 					<c:otherwise>
-						<li><a style="color: black;" href="/dal/member/estimate/sendEstimateList?pageno=${i}&dMno=${DMno}">${i}</a></li>
+						<li><a style="color: black;" href="/dal/member/estimate/sendEstimateList?pageno=${i}&dMno=${dMno}">${i}</a></li>
 					</c:otherwise>
 				</c:choose>
 			</c:forEach>
-			<c:if test="${sendRequest.next==true}">
-				<li><a style="color: black;" href="/dal/member/estimate/sendEstimateList?pageno=${sendRequest.endPage+1}&dMno=${DMno}">다음</a></li>
+			<c:if test="${sendEstimate.next==true}">
+				<li><a style="color: black;" href="/dal/member/estimate/sendEstimateList?pageno=${sendEstimate.endPage+1}&dMno=${dMno}">다음</a></li>
 			</c:if>
 		</ul>
 		</div>

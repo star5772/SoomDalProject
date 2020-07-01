@@ -3,20 +3,28 @@
 <mapper namespace="memoMapper">
 
 	<insert id="insert">
+		<selectKey keyProperty="mno" order="BEFORE" resultType="int">
+			select memo_seq.nextval from dual
+		</selectKey>
 		insert into memo(m_no, title, content, sender, receiver, write_time, is_read, disable_by_sender, disable_by_receiver)
-		values(memo_seq.nextval, #{title}, #{content}, #{sender}, #{receiver}, sysdate, 0, 0, 0)
+		values(#{mno}, #{title}, #{content}, #{sender}, #{receiver}, sysdate, 0, 0, 0)
 	</insert>
 	
 	<select id="findByMemo" resultType="memo">
-		select m_no, title, content, sender, receiver, write_time writeTime, is_read isRead, disable_by_sender disableBySender, disable_by_receiver disableByReceiver
-		from memo where mno=#{mno} and rownum=1
+		select m_no mno, title, content, sender, receiver, write_time writeTime, is_read isRead, disable_by_sender disableBySender, disable_by_receiver disableByReceiver
+		from memo where m_no=#{mno} and rownum=1
+	</select>
+	
+	<select id="findById" resultType="memo">
+		select m_no mno, title, content, sender, receiver, write_time writeTime, is_read isRead, disable_by_sender disableBySender, disable_by_receiver disableByReceiver
+		from memo where m_no=#{mno} and rownum=1
 	</select>
 	
 	<select id="findAllByReceiver" resultType="memo">
 		<![CDATA[
 			select * from	
 				(select m.*,rownum rnum from
-					(select m_no, title, sender, receiver, write_time writeTime, is_read isRead from memo where receiver=#{receiver} and disable_by_receiver=0) m
+					(select m_no mno, title, sender, receiver, write_time writeTime, is_read isRead from memo where receiver=#{receiver} and disable_by_receiver=0) m
 				where rownum<=#{endRowNum})
 			where rnum>=#{startRowNum}
 		]]>	
