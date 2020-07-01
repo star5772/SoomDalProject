@@ -28,10 +28,10 @@ public class QnaCommentDaoTest {
 //	}
 //	
 	//@Test
-	public void findAllByCno() {
-		System.out.println(qnacDao.findAllByCno(1));
-	}
-	
+//	public void findAllByCno() {
+//		System.out.println(qnacDao.findAllByCno(1));
+//	}
+//	
 	//@Test
 	public void delete() {
 		assertThat(qnacDao.delete(1), is(1));

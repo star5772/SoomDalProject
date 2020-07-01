@@ -1,6 +1,8 @@
 package com.icia.dal.dto;
 
 
+import com.icia.dal.entity.QnaComment;
+
 import lombok.*;
 import lombok.experimental.*;
 
@@ -15,9 +17,10 @@ public class QnaDto {
 		private String content;
 		private String writeDateStr;
 		private String writer;
-		private int cno;
+		private Integer cno;
 		private boolean secret;
 		private String name;
+		private QnaComment comment;
 	}
 	
 	@Data

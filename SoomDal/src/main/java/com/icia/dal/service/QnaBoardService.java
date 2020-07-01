@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import com.icia.dal.dao.DalinDao;
 import com.icia.dal.dao.JejaDao;
 import com.icia.dal.dao.QnaBoardDao;
+import com.icia.dal.dao.QnaCommentDao;
 import com.icia.dal.dto.QnaDto;
 import com.icia.dal.dto.page.PageToQnaBoard;
 import com.icia.dal.entity.QnaBoard;
@@ -27,6 +28,8 @@ public class QnaBoardService {
 	private DalinDao dalinDao;
 	@Inject
 	private JejaDao jejaDao;
+	@Inject
+	private QnaCommentDao qnaCommentDao;
 	
 	public int write(QnaBoard qnaBoard,String username) {
 		qnaBoard.setQWriter(username);
@@ -51,7 +54,7 @@ public class QnaBoardService {
 		QnaBoard qnaBoard = qnaBoardDao.findByQnaBoard(qNo);
 		QnaDto.DtoForQnaRead dto = modelMapper.map(qnaBoard, QnaDto.DtoForQnaRead.class);
 		String str = qnaBoard.getQWriteDate().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-		dto.setWriteDateStr(str).setCno(qnaBoard.getCNo()).setTitle(qnaBoard.getQTitle()).setName(qnaBoard.getQName()).setContent(qnaBoard.getQContent()).setWriter(qnaBoard.getQWriter()).setQNo(qnaBoard.getQNo()).setSecret(qnaBoard.getQIsSecret());
+		dto.setWriteDateStr(str).setCno(qnaBoard.getCNo()).setComment(qnaCommentDao.findByCno(qNo)).setTitle(qnaBoard.getQTitle()).setName(qnaBoard.getQName()).setContent(qnaBoard.getQContent()).setWriter(qnaBoard.getQWriter()).setQNo(qnaBoard.getQNo()).setSecret(qnaBoard.getQIsSecret());
 		return dto;
 	}
 
