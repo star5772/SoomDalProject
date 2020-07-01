@@ -186,6 +186,7 @@ height: 30px; margin-left: 20px; width: 1024px;  text-align: center;
 </style>
 </head>
 <body id="g">
+	
 	<div id="QNAtop" >
 		<div style="font-size: 43px; font-weight: bold; color: rgb(243, 156, 18); ">Q&A</div>
 		<div style="font-size: 19px;">궁금한것 무엇이든! 물어보세요!</div>
