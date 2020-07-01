@@ -94,7 +94,7 @@
 					<div id="dal_profile"><img style="border-radius: 10px;" src="${list.DProfile }" width="100px" height="100px"></div>
 					<div id="dal_content">
 						<h5>
-							<a href="#"><h5 style="font-weight: bold; font-size: 18px;">${list.DName }</h5></a>
+							<a href="/dal/member/dalin_profile?dMno=${list.DMno }"><h5 style="font-weight: bold; font-size: 18px;">${list.DName }</h5></a>
 						</h5>
 						<p style="font-size: 14px;">${list.DIntro }</p>
 						<div>
