@@ -46,16 +46,17 @@ button {
 	<div style="margin-top: 50px; margin-left: 200px; width: 600px;">
 		<div>
 			<c:forEach items="${memoList.list}" var="memolist">
-				<div style="display: inline-block;">
+				<div>
+				<div style="display: inline-block; ">
 					<img style="border-radius: 50%; width: 60px; height: 60px;">
-					
 				</div>
-				<div style="display: inline-block; height: 80px;">
-					<div>
-						<p style="font-size: 12px; font-weight: bold; margin-left: 30px;">${memolist.title }김희은 달인님의 견적서가 도착했습니다.</p>
-						<p style="font-size: 10px; margin-left: 30px; display: inline-block;">${memolist.writeTimeStr }2020.05.03</p>
+				<div style="display: inline-block; height: 50px; text-align: center; width: 300px; margin-top: 50px;">
+					
+						<p style="font-size: 12px; font-weight: bold; margin-left: 0px; display: inline-block; padding-left: 0px;">${memolist.title }김희은 달인님의 견적서가 도착했습니다.</p>
+						<p style="font-size: 10px; font-weight: bold; margin-left: 30px; display: inline-block;">${memolist.writeTimeStr }2020.05.03</p>
+				</div>
 						<button>삭&nbsp;제</button>
-					</div>
+					
 				</div>
 				<hr>
 			</c:forEach>
