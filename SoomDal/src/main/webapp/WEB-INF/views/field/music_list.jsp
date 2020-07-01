@@ -85,7 +85,7 @@
 		<div class="card">
   			<img class="card-img-top" src="#" alt="Card image cap">
   			<div class="card-body">
-    			<a href="/dal/member/field/list?detailFName=celle" class="btn btn-primary">첼로 레슨</a>
+    			<a href="/dal/member/field/list?detailFName=cello" class="btn btn-primary">첼로 레슨</a>
   			</div>
 		</div>
 	</div>
