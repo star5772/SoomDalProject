@@ -5,6 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
 <script>
 function loadAttach() {
 	var file = $("#sajin")[0].files[0];
@@ -138,27 +139,21 @@ $(document).ready(function(){
 		formData.append("q4",$("#q4").val());
 		formData.append("_csrf","${_csrf.token}");
 		formData.append("_method","put");
-<<<<<<< HEAD
-		/* if($("#dAttachment1")[0].files[0]!=undefined)
-			formData.append("sajin", $("#dAttachment1")[0].files[0]);
-		if($("#dAttachment2")[0].files[1]!=undefined)
-			formData.append("sajin", $("#dAttachment2")[0].files[0]);
-		if($("#dAttachment3")[0].files[2]!=undefined)
-			formData.append("sajin", $("#dAttachment3")[0].files[0]);
-		if($("#dAttachment4")[0].files[3]!=undefined)
-			formData.append("sajin", $("#dAttachment4")[0].files[0]); */
-=======
-		if($("#sajin")[0].files[0]!=undefined)
+		if($("#sajin")[0].files[0]!=undefined){
 			formData.append("sajin", $("#sajin")[0].files[0]);
-		if($("#attach0")[0].files[0]!=undefined)
+		}
+		else if($("#attach0")[0].files[0]!=undefined){
 			formData.append("inp", $("#attach0")[0].files[0]);
-		if($("#attach1")[0].files[0]!=undefined)
+		}
+		else if($("#attach1")[0].files[0]!=undefined){
 			formData.append("inp", $("#attach1")[0].files[0]);
-		if($("#attach2")[0].files[0]!=undefined)
+		}
+		else if($("#attach2")[0].files[0]!=undefined){
 			formData.append("inp", $("#attach2")[0].files[0]);
-		if($("#attach3")[0].files[0]!=undefined)
+		}
+		else if($("#attach3")[0].files[0]!=undefined){
 			formData.append("inp", $("#attach3")[0].files[0]);
->>>>>>> branch 'master' of https://github.com/star5772/SoomDalProject
+		}
 		$.ajax({
 			url:"/dal/dalin/info_update",
 			data:formData,
@@ -274,7 +269,7 @@ body {
 </style>
 </head>
 <body>
-${dalin }
+	
 	<form id="profileReadFrm" action="dalin/info_update" method="get"></form>
 	<div id="dalinUpdate">
 		<div id="dProfile">
