@@ -48,7 +48,6 @@ public class RequestService {
 		rq.setJMno(jeja.getJMno());
 		rq.setRField(dalin.getFNo());
 		rq.setRSubject(dal.getDetailFName());
-		System.out.println(rq);
 		rqDao.insertToRequest(rq);
 		memoDao.insert(Memo.builder().receiver(dalin.getDEmail()).title(jeja.getJName() + "님으로부터 요청서가 도착했습니다").content(rq.getRWriteDate() + "에 견적서가 도착했습니다. 견적서를 확인해주세요").sender(jeja.getJEmail()).build());
 		handler.sendMessage(jeja.getJName(), dalin.getDName(), jeja.getJName() + "님으로부터 요청서가 도착하였습니다");
@@ -95,16 +94,16 @@ public class RequestService {
 	public RequestDto.DtoForRead readRequest(@NotNull Integer rNo) throws ReadFailException {
 		Request rq = rqDao.findByRequest(rNo);
 		Jeja jeja = jejaDao.findByJejaToJMno(rq.getJMno());
-		System.out.println(rq);
+
 		if(rq==null)
 			throw new ReadFailException();
 		RequestDto.DtoForRead dto = modelMapper.map(rq,RequestDto.DtoForRead.class);
-		String writeDate = rq.getRWriteDate().format(DateTimeFormatter.ofPattern("yyyy년 MM월 dd일 HH시 mm분"));
+		String writeDate = rq.getRWriteDate().format(DateTimeFormatter.ofPattern("yyyy년 MM월 dd일"));
 		String strr = rq.getRWantDate().format(DateTimeFormatter.ofPattern("yyyy년 MM월 dd일"));
 		dto.setRWriteDateStr(writeDate);
 		dto.setJName(jeja.getJName());
 		dto.setRWantDateStr(strr);
-		dto.setJEmail(jeja.getJEmail());
+
 		return dto;
 	}
 	

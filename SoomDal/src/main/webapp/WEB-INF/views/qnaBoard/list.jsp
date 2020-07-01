@@ -277,12 +277,16 @@ height: 30px; margin-left: 20px; width: 1024px;  text-align: center;
 				</tr>
 			</thead>
 			<tbody id="list">
+			${username }
 			<c:forEach items="${qnaPage.list}" var="q">
 				<tr>
 					<td class="num">${q.QNo}</td>
 					<c:choose>
 						<c:when test="${q.QIsSecret eq true && q.QWriter ne username}">
 							<td class="subject">비밀글 입니다 <i class="fas fa-lock"></i></td>
+						</c:when>
+						<c:when test="${username eq admin }">
+							<td class="subject" ><a href="/dal/member/qnaBoard/read?qNo=${q.QNo}">${q.QTitle}</a></td>
 						</c:when>
 						<c:otherwise>
 							<td class="subject" ><a href="/dal/member/qnaBoard/read?qNo=${q.QNo}">${q.QTitle}</a></td>
