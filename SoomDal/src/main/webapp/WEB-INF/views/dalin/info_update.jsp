@@ -7,6 +7,7 @@
 <title>Insert title here</title>
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
 <script>
+
 function loadAttach() {
 	var file = $("#sajin")[0].files[0];
 	var maxSize = 1024*1024; // 1MB
@@ -24,6 +25,7 @@ function loadAttach() {
 	      $("#show_attach1").attr("src", e.target.result);
 	   }
 	   reader.readAsDataURL(file);
+	   return true;
 }
 function loadAttach1() {
 	var file1 = $("#attach0")[0].files[0];
@@ -42,6 +44,7 @@ function loadAttach1() {
 	      $("#show_attach2").attr("src", e.target.result);
 	   }
 	reader.readAsDataURL(file1);
+	return true;
 }
 function loadAttach2() {
 	var file2 = $("#attach1")[0].files[0];
@@ -60,6 +63,7 @@ function loadAttach2() {
 	      $("#show_attach3").attr("src", e.target.result);
 	   }
 	reader.readAsDataURL(file2);
+	return true;
 }
 function loadAttach3() {
 	var file3 = $("#attach2")[0].files[0];
@@ -78,6 +82,7 @@ function loadAttach3() {
 	      $("#show_attach4").attr("src", e.target.result);
 	   }
 	reader.readAsDataURL(file3);
+	return true;
 }
 function loadAttach4() {
 	var file4 = $("#attach3")[0].files[0];
@@ -96,6 +101,7 @@ function loadAttach4() {
 	      $("#show_attach5").attr("src", e.target.result);
 	   }
 	reader.readAsDataURL(file4);
+	return true;
 }
 
 
@@ -114,11 +120,21 @@ $(function() {
 	$("#update").on("click", function() {
 		alert("수정되었습니다");
 		});
-	$("#dal_profile").on("click", function() {
-		
-	});
-});
 
+});
+ function printAttachment(attachments) {
+	var $ul = $("#attachment");
+	$ul.empty();
+	$.each(attachments, function(i, attachment) {
+		var $li = $("<li>").appendTo($ul);
+		if(attachment.isImage==true)
+			$("<i class='fa fa-file-image-o'></i>").appendTo($li);
+		else 
+			$("<i class='fa fa-paperclip'></i>").appendTo($li);
+		
+		$("<a href='/dal/attachment/view?pAttachmentNo=" + attachment.pAttachmentNo +"'>" + attachment.originalFileName + "</a>").appendTo($li);
+	})
+} 
 $(document).ready(function(){
 	$("#sajin").on("change",loadAttach);
 	$("#inp").on("change","#attach0",loadAttach1);
@@ -163,6 +179,8 @@ $(document).ready(function(){
 		}).done(()=>{toastr.info("변경 성공");}).fail(()=>{toastr.info("변경 실패");})
 	})
 })
+
+
 </script>
 <style>
 h2 {
@@ -270,14 +288,16 @@ body {
 </head>
 <body>
 	
-	<form id="profileReadFrm" action="dalin/info_update" method="get"></form>
+	<form id="profileReadFrm" action="dalin/info_update" method="get" enctype="multipart/form-data"></form>
 	<div id="dalinUpdate">
 		<div id="dProfile">
-			<div style="border-radius: 50%; height: 200px; width: 200px; background-color: gray;">
 				<p id="dName">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${dalin.DName}</p>
+			<div>
+				<img id="show_profile" src="${dalin.DProfile }" style="border-radius: 50%; height: 200px; width: 200px;">
 			</div>
 			<div style="margin-left: 160px;">
-				<button type="button" style="border: 0px white; background-color: white;" id="dal_profile"><i class="fas fa-camera fa-2x"></i></button><img id="show_profile" src="${dalin.DProfile }">
+			<input type="file" name="sajin" id="sajin" style="display: none; width: 430px;" accept=".jpg,.jpeg,.png,.gif,.bmp">
+				<button type="button" style="border: 0px white; background-color: white;" id="dal_profile"><i class="fas fa-camera fa-2x"></i></button>
 			</div>
 		</div>
 		<input type="hidden" name="dMno" id="dMno" value="${dalin.DMno}">
@@ -364,17 +384,19 @@ body {
 			</div>
 			<div>
 				<div>
-					<h2>사진</h2>
+					<h2>사진</h2>				
 					<div>
-						<div style="display: inline-block; "><img id="show_attach1" height="200px" width="150px;"></div>
-						<div style="display: inline-block; "><img id="show_attach2" height="200px" width="150px;"></div>
-						<div style="display: inline-block; "><img id="show_attach3" height="200px" width="150px;"></div>
-						<div style="display: inline-block; "><img id="show_attach4" height="200px" width="150px;"></div>
-						<div style="display: inline-block; "><img id="show_attach5" height="200px" width="150px;"></div>				
+						<ul id="attachment">
+						</ul>
+						<div style="display: inline-block; "><img id="show_attach1" name="show_attach1" height="200px" width="150px;" ></div>
+						<div style="display: inline-block; "><img id="show_attach2" name="show_attach2" height="200px" width="150px;" ></div>
+						<div style="display: inline-block; "><img id="show_attach3" name="show_attach3" height="200px" width="150px;" ></div>
+						<div style="display: inline-block; "><img id="show_attach4" name="show_attach4" height="200px" width="150px;" ></div>
+						<div style="display: inline-block; "><img id="show_attach5" name="show_attach5" height="200px" width="150px;" ></div>				
 					</div>
 				</div>
 				<div id="inp">
-					<input type="file" name="sajin" id="sajin" style="display: inline-block; width: 430px;" accept=".jpg,.jpeg,.png,.gif,.bmp"> 
+					<input type="file" name="sajin" id="sajin" style="display: inline-block; width: 430px;" accept=".jpg,.jpeg,.png,.gif,.bmp" > 
 					<input type="hidden" name="_csrf" value="${_csrf.token}">
 					<button type="button" id="add">첨부파일 추가</button>
 					<div id="attachment_div"></div>
