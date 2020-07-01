@@ -16,6 +16,10 @@
 		select J_EMAIL from jeja where J_NAME=#{jName} and J_TEL=#{jTel} and rownum=1	
 	</select>
 	
+	<select id="findIdByName" resultType="string">
+		select j_email jEmail from jeja where j_name=#{jName} and rownum=1
+	</select>
+	
 	<!-- 제자 업데이트 비밀번호, 이름, 전화번호 수정가능 -->
 	<update id="updateJeja">
 		update jeja

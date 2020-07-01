@@ -15,7 +15,6 @@ public class MessageWebSocketHandler extends TextWebSocketHandler {
 	// 웹 소켓 연결을 생성
 	@Override
 	public void afterConnectionEstablished(WebSocketSession session) throws Exception {
-		System.out.println(session);
 		WebScoketService.add(session);
 	}
 	// 웹소켓 세션 종료 : 화면을 닫은 경우
@@ -26,6 +25,9 @@ public class MessageWebSocketHandler extends TextWebSocketHandler {
 	
 	// 클라에서 메시지를 보냈을 때 : handleTextMessage() 
 	public void sendMessage(String sender, String receiver, String msg) {
+		System.out.println("센드 메시지 동작+++++++++++++++++++++++++++");
+		System.out.println(sender + "센더==================================");
+		System.out.println(receiver + "리시버++++++++++++++++++++++++++++++++++++++++");
 		WebScoketService.sendMsg(sender, receiver, msg);
 	}
 	

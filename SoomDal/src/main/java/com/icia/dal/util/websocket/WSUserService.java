@@ -1,20 +1,28 @@
 package com.icia.dal.util.websocket;
 
-import java.util.*;
+import java.util.List;
+import java.util.Vector;
 
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.stereotype.*;
-import org.springframework.web.socket.*;
+import javax.inject.Inject;
+
+import org.springframework.stereotype.Component;
+import org.springframework.web.socket.WebSocketSession;
+
+import com.icia.dal.dao.DalinDao;
+import com.icia.dal.dao.JejaDao;
 
 // 여러명의 WSUser 관리
 @Component
 public class WSUserService {
 	private List<WSUser> list = new Vector<>();
-	
+	@Inject
+	private DalinDao dalDao;
+	@Inject
+	private JejaDao jejaDao;
 	// 새로운 웹소켓 세션이 연결되면 기존 유저의 새로운 세션인지
 	// 아니면 새로운 유저인지 판단
 	public void add(WebSocketSession session) {
-		System.out.println("웹소켓=====================================================" + session.getPrincipal());
+		System.out.println("접속:" + session.getPrincipal().getName());
 		String username = session.getPrincipal().getName();
 		// WSUser에서 리스트에서 username을 찾는다
 		for(int i=0; i<list.size(); i++) {
@@ -51,9 +59,10 @@ public class WSUserService {
 	// 메시지 보내기 1: 보내는 사람, 받는 사람
 	public void sendMsg(String sender, String receiver, String msg) {
 		System.out.println("보내는 사람 : " + receiver);
+		System.out.println("받는 사람: " + sender);
 		for(WSUser user:list) {
 			System.out.println("리스트에 저장된 유저 : " + user);
-			if(user.getUsername().equals(receiver)) {
+			if(user.getUsername().equals(jejaDao.findIdByName(receiver)) || user.getUsername().equals(dalDao.findIdByName(receiver))) {
 				user.sendMessage(sender+"의 메시지:" + msg);
 			}
 		}

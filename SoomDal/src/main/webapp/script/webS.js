@@ -16,8 +16,7 @@ $(function() {
 				// "홍길동의 메모: 안녕하세요"
 				console.log(evt)
 				var data = evt.data.split(":");
-				alert("---------------");
-				/*toastr.success(data[1], data[0]);*/
+				toastr.success(data[1], data[0]);
 			}
 		}
 	}

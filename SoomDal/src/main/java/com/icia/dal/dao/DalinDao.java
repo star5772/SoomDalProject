@@ -84,6 +84,10 @@ public class DalinDao {
 		map.put("keyword", keyword);
 		return tpl.selectList("dalinMapper.findDalinBySearch",map);
 	}
+	
+	public String findIdByName(String dName) {
+		return tpl.selectOne("dalinMapper.findIdByName",dName);
+	}
 
 	
 }

@@ -18,6 +18,11 @@
 		d_payment_method dPaymentMethod, p_attachment_cnt pAttachmentCnt, p_attachment_no pAttachmentNo, r_no rNo, d_q_no dQNo, r_review_cnt rReviewCnt,d_login_failure_cnt dLoginFailureCnt from dalin
 		where d_mno=#{dMno} and rownum=1
 	</select>
+	
+	<select id="findIdByName" resultType="string">
+		select d_email dEmail from dalin where d_name=#{dName} and rownum=1
+	</select>
+	
 	<!-- 프로필 수정 -->
 	<update id="updateToDalinProfile">
 		update dalin
