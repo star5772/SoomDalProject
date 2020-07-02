@@ -13,9 +13,11 @@ import com.icia.dal.dao.DalinDao;
 import com.icia.dal.dao.JejaDao;
 import com.icia.dal.dao.QnaBoardDao;
 import com.icia.dal.dao.QnaCommentDao;
+import com.icia.dal.dto.QnaCommentDto;
 import com.icia.dal.dto.QnaDto;
 import com.icia.dal.dto.page.PageToQnaBoard;
 import com.icia.dal.entity.QnaBoard;
+import com.icia.dal.entity.QnaComment;
 import com.icia.dal.util.pagingutil.QnaBoardPagingUtil;
 
 @Service
@@ -54,7 +56,17 @@ public class QnaBoardService {
 		QnaBoard qnaBoard = qnaBoardDao.findByQnaBoard(qNo);
 		QnaDto.DtoForQnaRead dto = modelMapper.map(qnaBoard, QnaDto.DtoForQnaRead.class);
 		String str = qnaBoard.getQWriteDate().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-		dto.setWriteDateStr(str).setCno(qnaBoard.getCNo()).setComment(qnaCommentDao.findByCno(qNo)).setTitle(qnaBoard.getQTitle()).setName(qnaBoard.getQName()).setContent(qnaBoard.getQContent()).setWriter(qnaBoard.getQWriter()).setQNo(qnaBoard.getQNo()).setSecret(qnaBoard.getQIsSecret());
+		
+		QnaComment qnaComment = qnaCommentDao.findByCno(qNo);
+		QnaCommentDto.DtoForCommentRead commentDto = null;
+		System.out.println(qnaComment);
+		if(qnaComment!=null) {
+			System.out.println("123");
+			commentDto = modelMapper.map(qnaComment,QnaCommentDto.DtoForCommentRead.class);
+			String str1 = qnaComment.getCWriteDate().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+			commentDto.setCWriteDateStr(str1);
+		}
+		dto.setWriteDateStr(str).setCno(qnaBoard.getCNo()).setComment(commentDto).setTitle(qnaBoard.getQTitle()).setName(qnaBoard.getQName()).setContent(qnaBoard.getQContent()).setWriter(qnaBoard.getQWriter()).setQNo(qnaBoard.getQNo()).setSecret(qnaBoard.getQIsSecret());
 		return dto;
 	}
 

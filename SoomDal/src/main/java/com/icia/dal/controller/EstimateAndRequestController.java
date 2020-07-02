@@ -21,6 +21,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.icia.dal.Exception.DalinNotFoundException;
 import com.icia.dal.Exception.ReadFailException;
+import com.icia.dal.Exception.UserNotFoundException;
 import com.icia.dal.entity.Estimate;
 import com.icia.dal.entity.Request;
 import com.icia.dal.service.DalinService;
@@ -64,11 +65,14 @@ public class EstimateAndRequestController {
 	}
 	// 견적서 보내기
 	@PostMapping("/estimate/sendEstimate")
-	public ModelAndView sendEstimate(Estimate et,BindingResult br,Principal principal) throws BindException {
+	public ModelAndView sendEstimate(Estimate et,BindingResult br,Principal principal) throws BindException, UserNotFoundException {
 		if(br.hasErrors())
 			throw new BindException(br);
-		estimateService.writeToEstimate(et);
-		return new ModelAndView("redirect:/member/estimate/list");
+		String username = principal.getName();
+		estimateService.writeToEstimate(et,username); 
+		int no = dalService.readToMyInfo(username).getDMno();
+		return new ModelAndView("redirect:/member/estimate/sendEstimateList?dMno="+no);
+		 
 	}
 	
 	// 보낸 견적서 읽기

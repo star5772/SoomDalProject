@@ -9,6 +9,41 @@
 <sec:authorize access="hasAnyRole('ROLE_JEJA','ROLE_DALIN','ROLE_ADMIN')">
 	<script src="/dal/script/webS.js"></script>
 </sec:authorize>
+<script>
+$(document).ready(function(){
+	$("#ok").on("click",function(){
+		$("#jIsOk").val(1);
+		var isOk = $("#jIsOk").val();
+		
+
+		var params={
+			_method:"post",
+			_csrf: "${_csrf.token}",
+			jIsOk : isOk,
+			jMno : $("#jMno").val(),
+			eNo : $("#eNo").val(),
+			dMno : $("#dMno").val()
+		}
+		$.ajax({
+			data : params,
+			url : "/dal/member/estimate/readToEstimate",
+			method : "post",
+			success : function(){
+				$("#ok").css("display","none");
+				$("#no").css("display","none");
+				$("#eTelType").removeAttr("style");
+				$("#list").removeAttr("style");					
+			}		
+		})
+	})
+});
+$(document).ready(function(){
+	$("#ok").on("click",function(){
+		
+	})
+})
+
+</script>
 <style>
 #imgdiv {
 	margin: 0 auto;
@@ -77,8 +112,75 @@ hr{
 </style>
 </head>
 <body>
+${readEstimate }
+	<sec:authorize access="hasRole('ROLE_JEJA')">
 	<div>
 		<h2>받은 견적서</h2>
+		<div style="border: 2px solid #F6F6F6; width: 700px; padding-left: 45px; margin-left: 200px;">
+		<div class='readEstimate' style="padding: 30px 30px 30px 30px; margin: 0 auto;">
+			<div id="pppprofile"> 
+				<div id="imgdiv">
+					<img src="/image/dalin.jpg" style='width: 80px; height: 80px;'>
+				</div>
+				<input type="hidden" name="jMno" id="jMno" value="${readEstimate.JMno }">
+				<input type="hidden" name="eNo"  id="eNo" value="${readEstimate.ENo }">
+				<input type="hidden" name="dMno" id="dMno" value="${readEstimate.DMno }">
+				<div id="profile">
+					<span style="font-weight: bold; margin-top: 100px; font-size: 15px;">${readEstimate.DName }달인</span><br>
+					<span>${readEstimate.DEmail }</span>
+				</div>
+				<div id="date">
+					<span>${readEstimate.EWriteTimeStr }</span>
+				</div>
+
+			</div>
+			<hr>
+			<div id="estimate">
+				<div>
+					<div class="request">
+						<h4>1. 견적 금액</h4>
+					</div>
+					<div class="dap" style="width: 510px; height: 80px; margin-left: 20px; font-size: 13px;">
+						<p>${readEstimate.EMoney}</p>
+					</div>
+				</div>
+				<div>
+					<div class="request">
+						<h4>2. 견적 내용</h4>
+					</div>
+					<div class="dap" style="width: 510px; height: 120px; margin-left: 20px;  font-size: 13px;">
+						<p style="white-space: pre-line;">${readEstimate.EContent }</p>
+					</div>
+				</div>
+				<div id="eTelType" style="display: none;">
+					<div class="request">
+						<h4>3. 연락수단</h4>
+					</div>
+					<div class="dap" style="width: 510px; height: 100px; margin-left: 20px;  font-size: 13px;">
+						<p style="white-space: pre-line;">${readEstimate.ETelType}</p>
+					</div>
+				</div>
+			</div>
+		</div>
+		</div>
+		<div id="btn">
+			<button class="btn btn-secondary" style="width: 50px;" id="no">거절</button>
+			&nbsp;&nbsp;
+			<button class="btn btn-warning" style="width: 50px;"  id="ok">수락</button>
+			<input type="hidden" name="jIsOk" id="jIsOk" value="">
+			<button class="btn btn-warning" style="width: 80px; display: none;" id="list">목록</button>
+		</div>
+	</div>
+	</sec:authorize>
+	
+	
+	
+	
+	
+	
+	<sec:authorize access="hasRole('ROLE_DALIN')">
+	<div>
+		<h2>보낸 견적서</h2>
 		<div style="border: 2px solid #F6F6F6; width: 700px; padding-left: 45px; margin-left: 200px;">
 		<div class='readEstimate' style="padding: 30px 30px 30px 30px; margin: 0 auto;">
 			<div id="pppprofile"> 
@@ -101,7 +203,7 @@ hr{
 					<div class="request">
 						<h4>1. 견적 금액</h4>
 					</div>
-					<div class="dap" style="width: 510px; height: 120px; margin-left: 20px; font-size: 13px;">
+					<div class="dap" style="width: 510px; height: 80px; margin-left: 20px; font-size: 13px;">
 						<p>${readEstimate.EMoney}</p>
 					</div>
 				</div>
@@ -109,19 +211,27 @@ hr{
 					<div class="request">
 						<h4>2. 견적 내용</h4>
 					</div>
-					<div class="dap" style="width: 510px; height: 200px; margin-left: 20px;  font-size: 13px;">
+					<div class="dap" style="width: 510px; height: 120px; margin-left: 20px;  font-size: 13px;">
 						<p style="white-space: pre-line;">${readEstimate.EContent }</p>
 					</div>
 				</div>
+				<div>
+					<div class="request">
+						<h4>3. 연락수단</h4>
+					</div>
+					<div class="dap" style="width: 510px; height: 100px; margin-left: 20px;  font-size: 13px;">
+						<p style="white-space: pre-line;">${readEstimate.ETelType}</p>
+					</div>
+				</div>
+			</div>			
+		</div>
+		</div>
+			<div id="btn">
+				<button class="btn btn-secondary" style="width: 50px; text-align: center;" onclick="location.href='/dal/member/estimate/sendEstimateList?dMno=${readEstimate.DMno}'">목 록</button>
 			</div>
-		</div>
-		</div>
-		<div id="btn">
-			<button class="btn btn-secondary" style="width: 50px;">거절</button>
-			&nbsp;&nbsp;
-			<button class="btn btn-warning" style="width: 50px;">수락</button>
-		</div>
 	</div>
+	</sec:authorize>
+	
 
 
 </body>

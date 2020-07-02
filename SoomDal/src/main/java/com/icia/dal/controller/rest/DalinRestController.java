@@ -2,6 +2,7 @@ package com.icia.dal.controller.rest;
 
 import java.io.*;
 import java.security.*;
+import java.util.*;
 
 import javax.inject.Inject;
 import javax.validation.*;
@@ -35,7 +36,7 @@ public class DalinRestController {
 	// 달인 프로필 정보 변경
 	//@PreAuthorize("isAuthenticated()")
 	@PutMapping("/dalin/info_update")
-	public ResponseEntity<Void> profileUpdate(@Valid DalinDto.DtoForUpdateToDalinProfile dto, @RequestParam("sajin") @Nullable MultipartFile sajin, Principal principal) {
+	public ResponseEntity<Void> profileUpdate(DalinDto.DtoForProfileUpdateToDalin dto, @RequestParam("sajin") @Nullable MultipartFile sajin, Principal principal) {
 		dto.setDName(principal.getName());
 		try {
 			dalService.profileUpdate(dto, sajin);
@@ -59,30 +60,5 @@ public class DalinRestController {
 		return ResponseEntity.ok(null);
 	}
 	
-	@GetMapping("/attachment/view")
-	public ResponseEntity<?> view(Integer pAttachmentNo) throws IOException {
-		ProfileAttachment p = dalService.readAttachment(pAttachmentNo);
-		String originalFileName = p.getPOriginalFileName();
-		
-		File saveFile = new File("c:/project/attachment", p.getPSaveFileName());
-		HttpHeaders headers = new HttpHeaders();
-		if(p.getPIsOk()==true) {
-			String ext = originalFileName.substring(originalFileName.lastIndexOf(".")+1).toUpperCase();
-			if(ext.equals("JPG") || ext.equals("JPEG"))
-				headers.setContentType(MediaType.IMAGE_JPEG);
-			else if(ext.equals("PNG"))
-				headers.setContentType(MediaType.IMAGE_PNG);
-			else if(ext.equals("GIF"))
-				headers.setContentType(MediaType.IMAGE_GIF);
-			headers.add("Content-Disposition", "inline;filename="+originalFileName);
-		} else {
-			headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
-			headers.add("Content-Disposition", "attachment;filename="+originalFileName);
-		}
-		
-		InputStream in = new FileInputStream(saveFile);
-		byte[] attachmentFile = IOUtils.toByteArray(in);
-		in.close();
-		return ResponseEntity.ok().headers(headers).body(attachmentFile);
-	}
+	
 }
