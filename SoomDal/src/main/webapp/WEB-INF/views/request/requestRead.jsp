@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>     
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>     
 <!DOCTYPE html>
 <html>
 <head>
@@ -35,7 +36,6 @@ h2{
 	margin-bottom: 80px;
 	font-size: 25px;
 	font-weight: bold;
-	font-size: 25px;
 }
 .readRequest{
 	padding-bottom: 5px;
@@ -140,7 +140,14 @@ hr{
 				<h4>8. 당신의 성별을 선택해 주세요!</h4>
 			</div>
 			<div class="dap" style="width: 700px; height: 70px; margin-left: 20px;  font-size: 13px;">
-				<p>${readRequest.RGender }</p>
+				<c:choose>
+					<c:when test="${readRequest.RGender == false }">
+						<p>남자</p>
+					</c:when>
+					<c:otherwise>
+						<p>여자</p>
+					</c:otherwise>
+				</c:choose>
 			</div>
 		</div>
 		<div>

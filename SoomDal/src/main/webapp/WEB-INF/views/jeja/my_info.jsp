@@ -106,7 +106,7 @@
          <span><h3>설정</h3></span>
          <ul class="nav flex-column">
             <li class="nav-item">
-               <a class="nav-link active" href="#"><img src="https://assets.cdn.soomgo.com/icons/icon-mypage-alarm.svg" style="padding: 5px;"><span class="menu_span">알림</span><img src="https://assets.cdn.soomgo.com/icons/icon-mypage-list-arrow.svg"></a>
+               <a class="nav-link active" href="/dal/member/memo/memo_receiveList"><img src="https://assets.cdn.soomgo.com/icons/icon-mypage-alarm.svg" style="padding: 5px;"><span class="menu_span">알림</span><img src="https://assets.cdn.soomgo.com/icons/icon-mypage-list-arrow.svg"></a>
                <hr>
             </li>
             <li class="nav-item">
@@ -114,7 +114,7 @@
                <hr>
             </li>
             <li class="nav-item">
-               <a class="nav-link" href="#"><img src="https://assets.cdn.soomgo.com/icons/icon-mypage-soomgo-notice.svg" style="padding: 5px;"><span class="menu_span">제자 가이드</span><img src="https://assets.cdn.soomgo.com/icons/icon-mypage-list-arrow.svg"></a>
+               <a class="nav-link" href="/dal/member/qnaBoard/list"><img src="https://assets.cdn.soomgo.com/icons/icon-mypage-soomgo-notice.svg" style="padding: 5px;"><span class="menu_span">제자 가이드</span><img src="https://assets.cdn.soomgo.com/icons/icon-mypage-list-arrow.svg"></a>
             </li>
          </ul>
       </div>
