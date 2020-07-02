@@ -59,8 +59,8 @@ public class EstimateAndRequestController {
 	}
 	// 견적서 보내기 화면출력
 	@GetMapping("/estimate/sendEstimate")
-	public ModelAndView sendEstimate(@RequestParam@NotNull int jMno) {
-		return new ModelAndView("main").addObject("viewName","estimate/estimateWrite.jsp").addObject("jMno",jMno);
+	public ModelAndView sendEstimate(@RequestParam@NotNull int rNo) {
+		return new ModelAndView("main").addObject("viewName","estimate/estimateWrite.jsp").addObject("rNo",rNo);
 	}
 	// 견적서 보내기
 	@PostMapping("/estimate/sendEstimate")
