@@ -66,8 +66,6 @@
 			password-parameter="password"
 			login-page="/admin/login"
 			login-processing-url="/admin/loginpost"
-			authentication-success-handler-ref="loginSuccessHandler"
-			authentication-failure-handler-ref="loginFailureHandler"
 			default-target-url="/"
 		/>
 		<sec:logout
@@ -103,7 +101,7 @@
 	<sec:authentication-manager id="adminAuth">
 		<sec:authentication-provider>
 			<sec:user-service>
-				<sec:user name="admin" password="1234" authorities="ROLE_ADMIN" disabled="true"/>
+				<sec:user name="admin" password="1234" authorities="ROLE_ADMIN" />
 			</sec:user-service>
 			<sec:password-encoder ref="encoder"/>
 		</sec:authentication-provider>
