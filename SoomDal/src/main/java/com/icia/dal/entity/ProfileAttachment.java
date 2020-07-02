@@ -10,6 +10,7 @@ import lombok.experimental.Accessors;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
+@Accessors(chain=true)
 public class ProfileAttachment {
 	private Integer pAttachmentNo; // 프로필 첨부파일 번호
 	private String pOriginalFileName; // 원래  파일 이름

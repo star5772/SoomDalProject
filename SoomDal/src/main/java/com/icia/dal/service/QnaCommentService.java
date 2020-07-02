@@ -25,5 +25,13 @@ public class QnaCommentService {
 		int cNo = qnaCommentDao.findByCno(qNo).getCNo();
 		qnaBoardDao.update(qNo,cNo);
 	}
+	
+	public void delete(int cNo, int qNo) {
+		QnaComment comment = qnaCommentDao.findByCno(qNo);
+		if(comment.getQNo()!=qNo)
+			throw new JobFailException();
+		qnaCommentDao.delete(cNo);
+		qnaBoardDao.update(qNo,0);
+	}
 
 }

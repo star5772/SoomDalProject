@@ -36,7 +36,7 @@ public class DalinRestController {
 	// 달인 프로필 정보 변경
 	//@PreAuthorize("isAuthenticated()")
 	@PutMapping("/dalin/info_update")
-	public ResponseEntity<Void> profileUpdate(@Valid DalinDto.DtoForUpdateToDalinProfile dto, @RequestParam("sajin") @Nullable MultipartFile sajin, Principal principal) {
+	public ResponseEntity<Void> profileUpdate(DalinDto.DtoForProfileUpdateToDalin dto, @RequestParam("sajin") @Nullable MultipartFile sajin, Principal principal) {
 		dto.setDName(principal.getName());
 		try {
 			dalService.profileUpdate(dto, sajin);
