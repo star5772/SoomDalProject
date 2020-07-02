@@ -1,5 +1,6 @@
 package com.icia.dal.service;
 
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
@@ -60,11 +61,17 @@ public class EstimateService {
 	
 	
 	// 견적서작성
-	public void writeToEstimate(Estimate et) {
+	public void writeToEstimate(Estimate et, String username) {
+		Dalin dalin = dalDao.findByDalin(username);
+		Request rq = requestDao.findByRequest(et.getRNo());
+		et.setDEmail(username);
+		et.setDMno(dalin.getDMno());
+		et.setFNo(dalin.getFNo());
+		et.setJMno(rq.getJMno());
 		estimateDao.insertToEstimate(et);
 		Jeja jeja = jejaDao.findByJejaToJMno(et.getJMno());
-		Dalin dalin = dalDao.findByDalin(et.getDEmail());	
-		memoDao.insert(Memo.builder().receiver(jeja.getJEmail()).title(dalin.getDName() + "님으로부터 견적서가 도착했습니다").content(et.getEWriteTime() + "에 견적서가 도착했습니다. 견적서를 확인해주세요").sender(et.getDEmail()).build());
+		Memo memo = Memo.builder().receiver(jeja.getJEmail()).title(dalin.getDName() + "님으로부터 견적서가 도착했습니다").content(LocalDateTime.now() + "에 견적서가 도착했습니다. 견적서를 확인해주세요").sender(et.getDEmail()).build();
+		memoDao.insert(memo);
 		handler.sendMessage(dalin.getDName(), jeja.getJName(),dalin.getDName() + "님으로부터 견적서가 도착하였습니다");
 	}
 	
@@ -96,12 +103,14 @@ public class EstimateService {
 		Estimate et = estimateDao.findByEstimate(eNo);	//여기
 		System.out.println("eno:::::::========================="+eNo);
 		Dalin dalin = dalDao.findByDalinToDMno(et.getDMno());
+		Jeja jeja = jejaDao.findByJejaToJMno(et.getJMno());
 		if(et==null)
 			throw new ReadFailException();
 		EstimateDto.DtoForRead dto = modelMapper.map(et,EstimateDto.DtoForRead.class);
 		String str = et.getEWriteTime().format(DateTimeFormatter.ofPattern("yyyy년 MM월 dd일"));
 		Request request = requestDao.findByRequest(et.getRNo());
 		dto.setDName(dalin.getDName());
+		dto.setJName(jeja.getJName());
 		dto.setRSubject(request.getRSubject());
 		dto.setEWriteTimeStr(str);
 		dto.setDName(dalDao.findByDalinToDMno(et.getDMno()).getDName());
@@ -144,7 +153,7 @@ public class EstimateService {
 		// 캐시사용내역 추가
 		UseCash uc = UseCash.builder().caEstimateCash(et.getECash()).dMno(et.getDMno()).eNo(et.getENo()).build();
 		ucDao.insertToUseCash(uc);
-		handler.sendMessage(dal.getDName(),jeja.getJName(),jeja.getJName() + "님이 견적서를 수락하였습니다");
+		handler.sendMessage(jeja.getJName(),dal.getDName(),jeja.getJName() + "님이 견적서를 수락하였습니다");
 	}
 
 	public PageToEstimate receiveEstimateList(int pageno, int jMno) {
