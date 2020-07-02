@@ -24,5 +24,5 @@ public interface QnaBoardDao {
 	
 	public int countByName(String qName);
 	
-	public int update(@Param("qNo") int qNo,@Param("cNo") int cNo);
+	public int update(@Param("qNo") int qNo,@Param("cNo") Integer cNo);
 }
