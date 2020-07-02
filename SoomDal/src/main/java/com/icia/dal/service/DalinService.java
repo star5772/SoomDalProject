@@ -132,9 +132,6 @@ public class DalinService {
 			return true;
 		}
 		return false;
-//		String pwd = pwdEncoder.encode(dto.getNewDPassword());
-//		dalin.setDPassword(pwd);
-//		dalDao.updateToDalin(dalin);
 	}
 
 	public PageToDalinField findDalinByDetailFName(int pageno,String detailFName) {
