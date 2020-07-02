@@ -5,8 +5,11 @@ import java.util.List;
 
 import javax.validation.constraints.Pattern;
 
-import com.icia.dal.dao.*;
-import com.icia.dal.entity.*;
+import org.springframework.web.multipart.MultipartFile;
+
+import com.icia.dal.entity.ProfileAttachment;
+import com.icia.dal.entity.RepQuestion;
+import com.icia.dal.entity.Review;
 
 import lombok.Data;
 
@@ -32,6 +35,23 @@ public class DalinDto {
 	}
 	
 	@Data
+	public static class DtoForProfileUpdateToDalin{
+		private Integer dMno;
+		private String dName;
+		private String dProfile;
+		private String dIntro;
+		private String dMainService;
+		private String dArea;
+		private String dDetailService;
+		private String dPaymentMethod;
+		private String pAttachmentNo;
+		private Integer rNo;
+		private Integer dQNo;
+		private List<RepQuestion> rep;
+		private List<Review> reviews;
+		private List<MultipartFile> ProfileAttachments;
+	}
+	@Data
 	public static class DtoForProfileToDalin{
 		private Integer dMno;
 		private String dName;
@@ -47,7 +67,7 @@ public class DalinDto {
 		private List<RepQuestion> rep;
 		private List<Review> reviews;
 		private List<ProfileAttachment> ProfileAttachments;
-	}
+	}	
 	@Data
 	public static class DtoForMyInfo {
 		private int dMno;
@@ -59,7 +79,10 @@ public class DalinDto {
 		private String dLevelStr;
 	}
 	
+<<<<<<< HEAD
 
+=======
+>>>>>>> branch 'master' of https://github.com/star5772/SoomDalProject
 	
 	@Data
 	public static class DtoForUpdateToDalin {
