@@ -153,6 +153,7 @@ $(document).ready(function(){
 		formData.append("dDetailService",$("#dDetailService").val());
 		formData.append("dPaymentMethod",$("#dPaymentMethod").val());
 		formData.append("dMno",$("#dMno").val());
+		formData.append("inp",$("#inp").val());
 		formData.append("q1",$("#q1").val());
 		formData.append("q2",$("#q2").val());
 		formData.append("q3",$("#q3").val());
@@ -175,9 +176,9 @@ $(document).ready(function(){
 			formData.append("inp", $("#attach3")[0].files[0]);
 		}
 		$.ajax({
-			url:"/dal/dalin/info_update",
+			url:"/dal/dalin/profile_update",
 			data:formData,
-			method:"post",
+			method:"get",
 			processData:false,
 			contentType:false
 		}).done(()=>{toastr.info("변경 성공");}).fail(()=>{toastr.info("변경 실패");})
@@ -291,7 +292,7 @@ body {
 </style>
 </head>
 <body>
-	
+	${dalin }
 	<form id="profileReadFrm" action="dalin/info_update" method="get" enctype="multipart/form-data"></form>
 	<div id="dalinUpdate">
 		<div id="dProfile">
