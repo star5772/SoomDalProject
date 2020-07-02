@@ -5,6 +5,14 @@
 <head>
 <meta charset="UTF-8">
 <title>estimate_write</title>
+<script>
+$(function(){
+	$("#send").on("click",function(){
+		$("#sendFrm").submit();
+	})
+})
+</script>
+
 <style>
 #imgdiv {
 	margin: 0 auto;
@@ -95,10 +103,10 @@ hr{
 </head>
 <body>
 <div>
-<form action="/dal/member/estimate/sendEstimate" method="post">
+<form action="/dal/member/estimate/sendEstimate" method="post" id="sendFrm">
 	<h2>견적서 작성</h2>
 	<div style="border: 2px solid #F6F6F6; width: 700px; padding-left: 45px; margin-left: 200px;">
-		<input type="hidden" name="rNo" value="${RNo}">
+		<input type="hidden" name="rNo" value="${rNo}">
 		<div class='readEstimate' style="padding: 30px 30px 30px 30px; margin: 0 auto;">
 			<div id="pppprofile"> 
 				<div id="imgdiv">
@@ -112,7 +120,7 @@ hr{
 						<h4>1. 견적 금액</h4>
 					</div>
 					<div class="dap" style="width: 510px; height: 30px; margin-left: 20px; font-size: 13px;">
-						<textarea rows="1" cols="80" style="border: 1px solid #dddddd;" name="eMoney"></textarea>
+						<input type="text" name="eMoney" placeholder="숫자로 입력해주세요." >
 					</div>
 				</div>
 				<div>
@@ -135,9 +143,9 @@ hr{
 		</div>
 		</div>
 		<div id="btn">
-			<button id="back" onclick="location.href='/dal/member/request/readToRequestForReceive?rNo=${RNo}'" >뒤로가기</button>
+			<button id="back" onclick="location.href='/dal/member/request/readToRequestForReceive?rNo=${rNo}'" >뒤로가기</button>
 			&nbsp;&nbsp;
-			<button id="send">보내기</button>
+			<button id="send" type="button">보내기</button>
 		</div>
 	</form>
 </div>

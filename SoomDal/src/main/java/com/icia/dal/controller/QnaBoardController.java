@@ -26,6 +26,7 @@ public class QnaBoardController {
 	
 	@GetMapping("/qnaBoard/read")
 	public ModelAndView read(int qNo, Principal principal) throws AccessExeption {
+		System.out.println("111111");
 		String username = principal.getName();
 		// 글을 찾아와서 그글이 비밀글이면
 		if(qnaBoardService.read(qNo).isSecret()==true) {
@@ -33,8 +34,10 @@ public class QnaBoardController {
 				return new ModelAndView("main").addObject("viewName", "qnaBoard/read.jsp").addObject("read", qnaBoardService.read(qNo));
 			else
 				throw new AccessExeption();
-		}else
+		}else {
+			System.out.println("22222222222");
 			return new ModelAndView("main").addObject("viewName", "qnaBoard/read.jsp").addObject("read", qnaBoardService.read(qNo));
+		}
 	}
 	
 	

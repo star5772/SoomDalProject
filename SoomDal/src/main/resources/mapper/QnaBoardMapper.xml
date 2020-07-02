@@ -46,6 +46,10 @@
 			where rnum>=#{startRowNum}
 		]]> 		
 	</select>
+	
+	<update id="update">
+		update qnaBoard set c_no=#{cNo} where q_no=#{qNo}
+	</update>
 </mapper>
 
 

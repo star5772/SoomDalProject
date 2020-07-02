@@ -25,7 +25,7 @@ h2 {
 	border-radius: 4px;
 	font-weight: normal;
 	margin-left: 500px;
-	margin-top: 250px;
+	margin-top: 30px;
 	font-size: 11px;
 	font-weight: bolder;
 	
@@ -49,9 +49,9 @@ h2 {
 <body>
 	<h2>쪽지함</h2>
 
-	<div>
-		<div>
-			<div style="margin-left: 250px; width: 600px;">
+	<div style="border: 2px solid #F6F6F6; width: 700px; padding-left: 45px; margin-left: 200px; padding-bottom: 100px;" >
+		<div style="padding: 30px 30px 30px 30px; margin: 0 auto;">
+			<div style="margin-left: px; width: 600px;">
 				<div style="display: inline-block;">
 					<img style="border-radius: 50%; width: 60px; height: 60px;">
 				</div>
@@ -65,8 +65,8 @@ h2 {
 				<p style="padding-left: 20px; padding-top: 10px; font-size: 13px;">${memoRead.content }</p>
 			</div>
 		</div>
-				<button id="back" onclick="location.href='/dal/member/memo/memo_receiveList?username=${memoRead.receiver}'">뒤로가기</button>
 	</div>
+				<button id="back" onclick="location.href='/dal/member/memo/memo_receiveList?username=${memoRead.receiver}'">뒤로가기</button>
 
 </body>
 </html>

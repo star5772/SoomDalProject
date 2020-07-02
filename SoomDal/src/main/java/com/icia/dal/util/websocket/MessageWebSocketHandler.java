@@ -25,9 +25,6 @@ public class MessageWebSocketHandler extends TextWebSocketHandler {
 	
 	// 클라에서 메시지를 보냈을 때 : handleTextMessage() 
 	public void sendMessage(String sender, String receiver, String msg) {
-		System.out.println("센드 메시지 동작+++++++++++++++++++++++++++");
-		System.out.println(sender + "센더==================================");
-		System.out.println(receiver + "리시버++++++++++++++++++++++++++++++++++++++++");
 		WebScoketService.sendMsg(sender, receiver, msg);
 	}
 	

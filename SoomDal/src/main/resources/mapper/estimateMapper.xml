@@ -4,11 +4,11 @@
 	
 	<!-- 견적서 작성 -->
 	<insert id="insertToEstimate">
-		<selectKey>
+		<selectKey keyProperty="eNo" order="BEFORE" resultType="int">
 			select estimate_seq.nextval from dual
 		</selectKey>
 		insert into estimate(e_no,d_mno,f_no,j_mno,r_no,d_email,e_money,e_content,e_tel_type,j_is_ok,e_cash, e_write_time,e_is_read)
-		values(#{eNo},#{dMno},#{fNo},#{jMno},#{rNo},#{dEmail},#{eMoney},#{eContent},#{eTelType},0,1700, sysdate,0)
+		values(#{eNo},#{dMno},#{fNo},#{jMno},#{rNo},#{dEmail},#{eMoney},#{eContent},#{eTelType},0,2000, sysdate,0)
 	</insert>
 	
 	<!-- 견적서 읽기 -->
