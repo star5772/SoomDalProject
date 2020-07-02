@@ -59,22 +59,7 @@ public class DalinDto {
 		private String dLevelStr;
 	}
 	
-	@Data
-	public static class DtoForUpdateToDalinProfile {
-		private Integer dMno;
-		private String dProfile;
-		private String dName;
-		private String dArea;
-		private String dIntro;
-		private String dDetailService;
-		private String dMainService;
-		private String dPaymentMethod;
-		private Integer pAttachmentCnt;
-		private Integer rNo;
-		private Integer pAttachmentNo;
-		private Integer dQNo;
-		
-	}
+
 	
 	@Data
 	public static class DtoForUpdateToDalin {

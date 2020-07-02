@@ -126,19 +126,7 @@ $(function() {
 		});
 
 });
- function printAttachment(attachments) {
-	var $ul = $("#attachment");
-	$ul.empty();
-	$.each(attachments, function(i, attachment) {
-		var $li = $("<li>").appendTo($ul);
-		if(attachment.isImage==true)
-			$("<i class='fa fa-file-image-o'></i>").appendTo($li);
-		else 
-			$("<i class='fa fa-paperclip'></i>").appendTo($li);
-		
-		$("<a href='/dal/attachment/view?pAttachmentNo=" + attachment.pAttachmentNo +"'>" + attachment.originalFileName + "</a>").appendTo($li);
-	})
-} 
+
 $(document).ready(function(){
 	$("#sajin").on("change",loadAttach);
 	$("#inp").on("change","#attach0",loadAttach1);
@@ -181,7 +169,7 @@ $(document).ready(function(){
 			method:"get",
 			processData:false,
 			contentType:false
-		}).done(()=>{toastr.info("변경 성공");}).fail(()=>{toastr.info("변경 실패");})
+		}).done(()=>{toastr.info("변경 성공");}).fail(()=>{toastr.info("변경 실패");}).ajax("/dal/dalin/profile_update?dEmail="+$("#dMno").val()))
 	})
 })
 

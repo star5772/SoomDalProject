@@ -31,6 +31,7 @@
 			<if test="jAccusationCnt!=null">j_accusation_cnt=#{jAccusationCnt},</if>
 			<if test="jLoginFailureCnt == 1">j_login_failure_cnt = j_login_failure_cnt +1 , </if>
 			<if test="jLoginFailureCnt == 2">j_login_failure_cnt = 0 , </if>
+			<if test="jIsBlock!=null">j_is_block=#{jIsBlock},</if>
 		</trim>
 		where J_EMAIL=#{jEmail} and rownum=1
 	</update>
