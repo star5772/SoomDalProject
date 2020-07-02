@@ -42,8 +42,11 @@ public class DalinDao {
 		return tpl.selectOne("dalinMapper.existsByEmail", dEmail);
 	}
 	
-	public int minusCash(int dCash) {
-		return tpl.update("dalinMapper.minusCash",dCash);
+	public int minusCash(int dCash, int dMno) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("dCash", dCash);
+		map.put("dMno", dMno);
+		return tpl.update("dalinMapper.minusCash",map);
 	}
 
 	public int countOfFieldDalin(String detailFName) {

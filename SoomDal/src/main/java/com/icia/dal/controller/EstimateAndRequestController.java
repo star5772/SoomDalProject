@@ -63,6 +63,7 @@ public class EstimateAndRequestController {
 	public ModelAndView sendEstimate(@RequestParam@NotNull int rNo) {
 		return new ModelAndView("main").addObject("viewName","estimate/estimateWrite.jsp").addObject("rNo",rNo);
 	}
+	
 	// 견적서 보내기
 	@PostMapping("/estimate/sendEstimate")
 	public ModelAndView sendEstimate(Estimate et,BindingResult br,Principal principal) throws BindException, UserNotFoundException {
@@ -95,6 +96,8 @@ public class EstimateAndRequestController {
 			estimateService.acceptToEstimate(eNo,dMno,jMno);
 		return ResponseEntity.ok(null);
 	}
+	
+	
 	// 달인 -> 받은요청서목록
 	@GetMapping("/request/receiveRequest")
 	public ModelAndView receiveRequestList(@RequestParam(defaultValue = "1")int pageno,int dMno) {
