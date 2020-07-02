@@ -20,7 +20,7 @@ public class QnaDto {
 		private Integer cno;
 		private boolean secret;
 		private String name;
-		private QnaComment comment;
+		private QnaCommentDto.DtoForCommentRead comment;
 	}
 	
 	@Data
@@ -34,4 +34,5 @@ public class QnaDto {
 		private Boolean qIsNotice;
 		private String qName;
 	}
+	
 }

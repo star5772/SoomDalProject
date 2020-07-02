@@ -12,7 +12,7 @@ public interface QnaCommentDao {
 	public QnaComment findByCno(int qNo);
 	
 	// 문의댓글 작성
-	@Insert("insert into QnaComment values(#{c.cNo},#{c.cCode},#{c.cContent},sysdate,#{c.adEmail})")
+	@Insert("insert into QnaComment values(qnacomment_seq.nextval,#{c.qNo},#{c.cContent},sysdate,'admin')")
 	public int insert(@Param("c")QnaComment qnaComment); 
 	
 	// 문의댓글삭제

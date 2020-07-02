@@ -14,6 +14,6 @@ public class QnaComment {
 	private int cNo;
 	private int qNo;
 	private String cContent;
-	private LocalDateTime cWrite;
+	private LocalDateTime cWriteDate;
 	private String adEmail;
 }

@@ -43,13 +43,19 @@ width: 80px; height: 35px;  background-color: #ffc968; color: white; font-size: 
 				url:"/dal/comment/write",
 				method:"post",
 				data:params
-			}).done((result)=>location.reload).fail(()=>Swal.fire("실패!","제목과 본문을 작성하세요","info"))
+			}).done(()=>location.reload()).fail(()=>Swal.fire("실패!","fail","info"))
 		})
+		
+		$("#cancel2").on("click", function(){
+			params = {
+				
+			}
+		});
 	});
 </script>
 </head>
 <body>
-${read.comment }
+${read }
 <form action="/dal/member/qnaBoard/delete" method="post">
 	<div id="center" >
 		<div style="font-size: 43px; font-weight: bold; color: rgb(243, 156, 18); ">Q&A</div>
@@ -90,7 +96,7 @@ ${read.comment }
 			<div style="margin-left: 20px; display: inline-block;"> 
 		<hr>
 			<label style="background-color: white; display: inline-block; width: 130px; text-align: center; font-size: 17px;">관리자 </label>
-			<a type="text" style="display:inline-block; color: rgb(94, 94, 94); width: 400px;font-size: 17px;">${read.comment.CWrite }</a>
+			<a type="text" style="display:inline-block; color: rgb(94, 94, 94); width: 400px;font-size: 17px;">${read.comment.CWriteDateStr }</a>
 		<hr>
 		<textarea rows="5" cols="125" style="font-size: 17px; margin-left:20px;
 		display: inline-block; margin-top: 20px; outline: 0;border: 0; background-color: white;" disabled="disabled">${read.comment.CContent }</textarea>
@@ -100,6 +106,7 @@ ${read.comment }
 	</c:choose>
 	<!-- 관리잔 답글 달기  sec-->
 	<sec:authorize access="hasRole('ROLE_ADMIN')">
+		<c:if test="${read.cno eq null }">
 		<div style="margin-left: 20px; display: inline-block;">
 			<textarea id="comment" rows="5" cols="126" placeholder="답변하실 내용을 입력해주세요." style="font-size: 17px; margin-left:20px;
 				display: inline-block; margin-top: 20px;" ></textarea>
@@ -107,7 +114,7 @@ ${read.comment }
 			<button id="answer">답 변</button>
 		</table> 
 		</div>
-	
+		</c:if>
 		
 		<!-- 관리자가 자신의 댓글을 볼때 sec -->
 		

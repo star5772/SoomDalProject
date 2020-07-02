@@ -160,7 +160,7 @@ public class DalinService {
 			throw new DalinNotFoundException();
 		}
 		DalinDto.DtoForProfileToDalin dto = modelMapper.map(dalin, DalinDto.DtoForProfileToDalin.class);
-		if(dalin.getPAttachmentCnt()>0) // 사진 수가 있으면 다 보여주라고
+		if(dalin.getPAttachmentCnt()!=0) // 사진 수가 있으면 다 보여주라고
 			dto.setProfileAttachments(profileAttachmentDao.findAllByProfileAttachment(dto.getDMno()));
 		if(dalin.getRReviewCnt()>0)
 			dto.setReviews(reviewDao.findAllReview(dto.getDMno()));
@@ -195,13 +195,9 @@ public class DalinService {
 	public Dalin findById(String dEmail) {
 		return dalDao.findByDalin(dEmail);
 	}
-
-	public ProfileAttachment readAttachment(Integer pAttachmentNo) {
-		System.out.println(pAttachmentNo+"------------------------------------------");
-		return profileAttachmentDao.findByProfileAttachment(pAttachmentNo);
-	}
 	
-
-}	
-
+	public List<ProfileAttachment> reAttachments(int dMno) {
+		return profileAttachmentDao.findAllByProfileAttachment(dMno);
+	}
+}
 
