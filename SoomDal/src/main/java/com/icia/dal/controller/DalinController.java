@@ -59,11 +59,7 @@ public class DalinController {
 	}
 	
 	@GetMapping("/dalin/profile_update")
-<<<<<<< HEAD
-	public ModelAndView dalinInFoUpdate(Principal principal, DtoForUpdateToDalin dto, MultipartFile sajin ) throws DalinNotFoundException {
-=======
 	public ModelAndView dalinInFoUpdate(Principal principal, DalinDto.DtoForProfileToDalin dto) throws DalinNotFoundException {
->>>>>>> branch 'master' of https://github.com/star5772/SoomDalProject
 		Dalin dalin = dalService.findById(principal.getName());
 		return new ModelAndView("main").addObject("viewName","dalin/info_update.jsp").addObject("dalin",dalService.readToDalinProfile(dalin.getDMno()));
 	}

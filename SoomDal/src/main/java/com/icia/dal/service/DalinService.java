@@ -95,11 +95,7 @@ public class DalinService {
 	}
 
 	
-<<<<<<< HEAD
-	public void profileUpdate(DtoForProfileToDalin dto, MultipartFile sajin) throws IllegalStateException, IOException {
-=======
 	public void profileUpdate(DalinDto.DtoForProfileUpdateToDalin dto, MultipartFile sajin) throws IllegalStateException, IOException {
->>>>>>> branch 'master' of https://github.com/star5772/SoomDalProject
 		Dalin dalin = modelMapper.map(dto, Dalin.class);
 		if(dto.getProfileAttachments() != null)
 			dalin.setPAttachmentCnt(dto.getProfileAttachments().size());
@@ -218,7 +214,6 @@ public class DalinService {
 		return dalDao.findByDalin(dEmail);
 	}
 	
-<<<<<<< HEAD
 	public void profileSajin(DalinDto.DtoForProfileToDalin dto, MultipartFile sajins) throws IllegalStateException, IOException {
 		Dalin dalin = modelMapper.map(dto, Dalin.class);
 		
@@ -233,8 +228,6 @@ public class DalinService {
 			}
 		}
 	}
-=======
 
->>>>>>> branch 'master' of https://github.com/star5772/SoomDalProject
 }
 

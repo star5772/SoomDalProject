@@ -79,10 +79,7 @@ public class DalinDto {
 		private String dLevelStr;
 	}
 	
-<<<<<<< HEAD
 
-=======
->>>>>>> branch 'master' of https://github.com/star5772/SoomDalProject
 	
 	@Data
 	public static class DtoForUpdateToDalin {
