@@ -6,6 +6,7 @@ import javax.inject.Inject;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -19,6 +20,11 @@ public class QnaRestCotroller {
 	@PostMapping("/comment/write")
 	public ResponseEntity<Void> commentWrite(String cContent, int qNo) {
 		qnaCommentService.write(cContent, qNo);
+		return ResponseEntity.ok(null);
+	}
+	@DeleteMapping("/comment/delete")
+	public ResponseEntity<Void> commentDelete(int cNo,int qNo){
+		qnaCommentService.delete(cNo, qNo);
 		return ResponseEntity.ok(null);
 	}
 }

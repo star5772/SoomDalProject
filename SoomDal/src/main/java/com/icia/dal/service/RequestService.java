@@ -84,6 +84,7 @@ public class RequestService {
 			String str = rq.getRWriteDate().format(DateTimeFormatter.ofPattern("yyyy년 MM월 dd일"));
 			dto.setRWriteDateStr(str);
 			dto.setJName(jejaDao.findByJejaToJMno(rq.getJMno()).getJName());
+			
 			dtoList.add(dto);
 		}
 		page.setList(dtoList);
@@ -103,9 +104,14 @@ public class RequestService {
 		dto.setRWriteDateStr(writeDate);
 		dto.setJName(jeja.getJName());
 		dto.setRWantDateStr(strr);
+		dto.setJEmail(jeja.getJEmail());
 
 		return dto;
 	}
+
+	
+		
+}
 	
 
-}
+

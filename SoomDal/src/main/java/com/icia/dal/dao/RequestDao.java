@@ -53,4 +53,8 @@ public class RequestDao {
 		return tpl.selectOne("requestMapper.countToRequestForDalin",dMno);
 	}
 	
+	public int setIsOk(int rNo) {
+		return tpl.update("requestMapper.setIsOk",rNo);
+	}
+	
 }

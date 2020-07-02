@@ -63,6 +63,7 @@ public class EstimateService {
 	// 견적서작성
 	public void writeToEstimate(Estimate et, String username) {
 		Dalin dalin = dalDao.findByDalin(username);
+		requestDao.setIsOk(et.getRNo());
 		Request rq = requestDao.findByRequest(et.getRNo());
 		et.setDEmail(username);
 		et.setDMno(dalin.getDMno());
@@ -146,7 +147,7 @@ public class EstimateService {
 			et.setECash(Gold);
 		}else
 			et.setECash(Platiunm);
-		dalDao.minusCash(et.getECash());
+		dalDao.minusCash(et.getECash(),dMno);
 		// 레슨내역 추가
 		LessonHistory lh = LessonHistory.builder().aCompleteCode(ra.getACompleteCode()).dMno(ra.getDMno()).jMno(ra.getJMno()).build();
 		lhDao.insertToLessonHistory(lh);

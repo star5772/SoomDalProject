@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %> 	
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%> 	
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,7 +18,6 @@ $(document).ready(function(){
 		
 
 		var params={
-			_method:"post",
 			_csrf: "${_csrf.token}",
 			jIsOk : isOk,
 			jMno : $("#jMno").val(),
@@ -30,9 +30,8 @@ $(document).ready(function(){
 			method : "post",
 			success : function(){
 				$("#ok").css("display","none");
-				$("#no").css("display","none");
-				$("#eTelType").removeAttr("style");
-				$("#list").removeAttr("style");					
+				$("#no").css("display","none");	
+				window.location.reload();			
 			}		
 		})
 	})
@@ -152,23 +151,33 @@ ${readEstimate }
 						<p style="white-space: pre-line;">${readEstimate.EContent }</p>
 					</div>
 				</div>
-				<div id="eTelType" style="display: none;">
-					<div class="request">
-						<h4>3. 연락수단</h4>
+				<c:if test="${readEstimate.JIsOk == 'true' }">
+					<div id="eTelType" >
+						<div class="request">
+							<h4>3. 연락수단</h4>
+						</div>
+						<div class="dap" style="width: 510px; height: 100px; margin-left: 20px;  font-size: 13px;">
+							<p style="white-space: pre-line;">${readEstimate.ETelType}</p>
+						</div>
 					</div>
-					<div class="dap" style="width: 510px; height: 100px; margin-left: 20px;  font-size: 13px;">
-						<p style="white-space: pre-line;">${readEstimate.ETelType}</p>
-					</div>
-				</div>
+				</c:if>
 			</div>
 		</div>
 		</div>
 		<div id="btn">
-			<button class="btn btn-secondary" style="width: 50px;" id="no">거절</button>
-			&nbsp;&nbsp;
-			<button class="btn btn-warning" style="width: 50px;"  id="ok">수락</button>
-			<input type="hidden" name="jIsOk" id="jIsOk" value="">
-			<button class="btn btn-warning" style="width: 80px; display: none;" id="list">목록</button>
+			<c:choose>
+				<c:when test="${readEstimate.JIsOk == false }">			
+					<button class="btn btn-secondary" style="width: 50px;" id="no">거절</button>
+					&nbsp;&nbsp;
+					<button class="btn btn-warning" style="width: 50px;"  id="ok">수락</button>
+					<input type="hidden" name="jIsOk" id="jIsOk" value="">
+				</c:when>
+				<c:otherwise>
+					<button class="btn btn-warning" style="width: 80px;" id="list">목록</button>
+				</c:otherwise>
+			</c:choose>
+					
+				
 		</div>
 	</div>
 	</sec:authorize>
@@ -227,7 +236,7 @@ ${readEstimate }
 		</div>
 		</div>
 			<div id="btn">
-				<button class="btn btn-secondary" style="width: 50px; text-align: center;" onclick="location.href='/dal/member/estimate/sendEstimateList?dMno=${readEstimate.DMno}'">목 록</button>
+				<button class="btn btn-secondary" style="width: 50px; text-align: center; onclick="location.href='/dal/member/estimate/sendEstimateList?dMno=${readEstimate.DMno}'">목 록</button>
 			</div>
 	</div>
 	</sec:authorize>

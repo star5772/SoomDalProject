@@ -48,7 +48,12 @@
 	</select>
 	
 	<update id="update">
-		update qnaBoard set c_no=#{cNo} where q_no=#{qNo}
+		update qnaBoard
+		<trim prefix="set" suffixOverrides=",">
+			<if test="cNo!=0">c_no=#{cNo},</if>
+			<if test="cNo==0">c_no=null</if>
+		</trim>
+		where q_no=#{qNo}
 	</update>
 </mapper>
 
