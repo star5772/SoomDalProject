@@ -170,7 +170,7 @@ hr{
 	</div>
 		<div id="btn">
 			<button id="no"class="btn btn-secondary" style="width:50px;">거절</button>&nbsp;&nbsp;
-			<button class="btn btn-warning" style="width:50px;">수락</button>
+			<button class="btn btn-warning" style="width:50px;" onclick="location.href='/dal/member/estimate/sendEstimate?rNo=${readRequest.RNo}'">수락</button>
 		</div>
 	</div>
 
