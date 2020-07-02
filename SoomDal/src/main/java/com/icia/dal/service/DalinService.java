@@ -14,6 +14,7 @@ import org.modelmapper.*;
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.security.crypto.password.*;
 import org.springframework.stereotype.*;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.web.multipart.*;
 
 import com.icia.dal.Exception.*;
@@ -94,9 +95,29 @@ public class DalinService {
 	}
 
 	
-	public void profileUpdate(DtoForUpdateToDalinProfile dto, MultipartFile sajin) throws IllegalStateException, IOException {
+	public void profileUpdate(DalinDto.DtoForProfileUpdateToDalin dto, MultipartFile sajin) throws IllegalStateException, IOException {
 		Dalin dalin = modelMapper.map(dto, Dalin.class);
-		if(sajin!=null && !sajin.isEmpty()) {
+		if(dto.getProfileAttachments() != null)
+			dalin.setPAttachmentCnt(dto.getProfileAttachments().size());
+		else
+			dalin.setPAttachmentCnt(0);
+		dalDao.updateToDalinProfile(dalin);
+		
+		List<MultipartFile> attachments = dto.getProfileAttachments();
+		if(attachments != null) {
+			for(MultipartFile mf: attachments) {
+				ProfileAttachment pattachment = new ProfileAttachment();
+				String originalFName = mf.getOriginalFilename();
+				long time = System.nanoTime();
+				String saveFName = time + "-" + originalFName;
+				boolean isImage = mf.getContentType().toLowerCase().startsWith("image/");
+				pattachment.setDMno(dalin.getDMno()).setPIsOk(isImage).setPOriginalFileName(originalFName).setPSaveFileName(saveFName);
+				File file = new File("c:/project/attachment",saveFName);
+				FileCopyUtils.copy(mf.getBytes(), file);
+				profileAttachmentDao.insertToProfileAttachment(pattachment);
+			}
+		}
+			if(sajin!=null && !sajin.isEmpty()) {
 			if(sajin.getContentType().toLowerCase().startsWith("image/")==true) {
 				int lastIndexOfDot = sajin.getOriginalFilename().lastIndexOf('.');
 				String extension = sajin.getOriginalFilename().substring(lastIndexOfDot+1);
@@ -157,7 +178,7 @@ public class DalinService {
 			throw new DalinNotFoundException();
 		}
 		DalinDto.DtoForProfileToDalin dto = modelMapper.map(dalin, DalinDto.DtoForProfileToDalin.class);
-		if(dalin.getPAttachmentCnt()>0) // 사진 수가 있으면 다 보여주라고
+		if(dalin.getPAttachmentCnt()!=0) // 사진 수가 있으면 다 보여주라고
 			dto.setProfileAttachments(profileAttachmentDao.findAllByProfileAttachment(dto.getDMno()));
 		if(dalin.getRReviewCnt()>0)
 			dto.setReviews(reviewDao.findAllReview(dto.getDMno()));
@@ -192,13 +213,7 @@ public class DalinService {
 	public Dalin findById(String dEmail) {
 		return dalDao.findByDalin(dEmail);
 	}
-
-	public ProfileAttachment readAttachment(Integer pAttachmentNo) {
-		System.out.println(pAttachmentNo+"------------------------------------------");
-		return profileAttachmentDao.findByProfileAttachment(pAttachmentNo);
-	}
 	
 
-}	
-
+}
 
