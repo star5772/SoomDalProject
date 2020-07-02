@@ -33,6 +33,18 @@ width: 80px; height: 35px;  background-color: #ffc968; color: white; font-size: 
 </style>
 <script>
 	$(function() {
+		$("#answer").on("click",function() {
+			params= {
+				_csrf:"${_csrf.token}",
+				cContent:$("#comment").val(),
+				qNo:${read.QNo}
+			}
+			$.ajax({
+				url:"/dal/comment/write",
+				method:"post",
+				data:params
+			}).done((result)=>location.reload).fail(()=>Swal.fire("실패!","제목과 본문을 작성하세요","info"))
+		})
 	});
 </script>
 </head>
@@ -89,11 +101,10 @@ ${read.comment }
 	<!-- 관리잔 답글 달기  sec-->
 	<sec:authorize access="hasRole('ROLE_ADMIN')">
 		<div style="margin-left: 20px; display: inline-block;">
-			<textarea rows="5" cols="126" placeholder="답변하실 내용을 입력해주세요." style="font-size: 17px; margin-left:20px;
+			<textarea id="comment" rows="5" cols="126" placeholder="답변하실 내용을 입력해주세요." style="font-size: 17px; margin-left:20px;
 				display: inline-block; margin-top: 20px;" ></textarea>
-		
 		<table>
-			<button id="answer" onclick="" >답 변</button>
+			<button id="answer">답 변</button>
 		</table> 
 		</div>
 	
@@ -103,8 +114,8 @@ ${read.comment }
 		<div style="margin-left: 20px; display: inline-block;">
 		
 		<table>
-			<button id="formal" onclick=""  >수 정</button>
-			<button id="cancel2" onclick="" >삭 제</button>
+			<button id="formal">수 정</button>
+			<button id="cancel2">삭 제</button>
 		</table>
 		</div>
 	</sec:authorize> 
