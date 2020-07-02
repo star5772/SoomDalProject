@@ -66,11 +66,6 @@ public class DalinController {
 		return new ModelAndView("main").addObject("viewName","dalin/my_info_update.jsp").addObject("dalinRead", dalService.readToMyInfo(principal.getName()));
 	}
 	
-	@GetMapping("/dalin/estimate_write")
-	public ModelAndView dalinEstimateWrite() {
-		// 달인 견적서 작성
-		return new ModelAndView("main").addObject("viewName","dalin/estimate_write.jsp");
-	}
 	
 	@GetMapping("/dalin/request_list")
 	public ModelAndView dalinRequestBoardList() {

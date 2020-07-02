@@ -55,9 +55,9 @@ h2 {
 				<div style="display: inline-block;">
 					<img style="border-radius: 50%; width: 60px; height: 60px;">
 				</div>
-				<div style="display: inline-table; height: 50px; text-align: center; width: 300px;">
-					<div style="text-align: justify; padding-left: 50px; height: 50px;">
-						<p style="font-size: 16px; font-weight: bold;">[${memoRead.mno }]&nbsp;${memoRead.title }</p>
+				<div style="display: inline-table; height: 50px; text-align: center; width: 500px;">
+					<div style="text-align: left; padding-left: 50px; height: 50px;">
+						<p style="font-size: 15px; font-weight: bold;">[${memoRead.mno }]&nbsp;${memoRead.title }</p>
 						<p style="font-size: 11px; font-weight: 200; margin-left: 0px; padding-right: 140px;">${memoRead.writeTimeStr }</p>
 					</div>
 				</div>
@@ -65,8 +65,7 @@ h2 {
 				<p style="padding-left: 20px; padding-top: 10px; font-size: 13px;">${memoRead.content }</p>
 			</div>
 		</div>
-				<button id="back">뒤로가기</button>
-				<button id="estimateRead">견적서 보기</button>
+				<button id="back" onclick="location.href='/dal/member/memo/memo_receiveList?username=${memoRead.receiver}'">뒤로가기</button>
 	</div>
 
 </body>
