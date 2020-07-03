@@ -160,11 +160,9 @@ CREATE TABLE Dalin (
 CREATE TABLE DetailField (
    F_NO VARCHAR2(10) NOT NULL, /* 분야 코드 */
    DETAIL_F_NAME NVARCHAR2(20), /* 세부 분야 이름 */
-   DETAIL_F_SAJIN NVARCHAR2(70), /* 세부 분야 사진 */
+   DETAIL_F_SAJIN NVARCHAR2(150), /* 세부 분야 사진 */
    constraint pk_detailfield primary key(f_no,detail_f_name)
 );
-
-
 
 
 /* 요청서 */

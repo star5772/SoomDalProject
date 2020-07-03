@@ -104,4 +104,12 @@ public class DalinDto {
 		private Double avgScore;
 	}
 	
+	@Data
+	public static class DtoForFieldInfo {
+		private String fNo;
+		private String detailFName;
+		private String detailSajin;
+		private Double avgScore;
+	}
+	
 }
