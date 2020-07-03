@@ -122,4 +122,6 @@ public class DalinController {
 		ra.addFlashAttribute("msg", "가입하신 이메일로 임시비밀번호를 보냈습니다");
 		return "redirect:/member/login";
 	}
+	
+
 }

@@ -12,8 +12,6 @@ import com.icia.dal.service.*;
 public class FiledController {
 	@Inject
 	private DalinService dalService;
-	@Inject
-	private FieldService fieldService;
 	
 	@GetMapping("/field_sport/list")
 	public ModelAndView sportList() {
@@ -35,6 +33,6 @@ public class FiledController {
 	public ModelAndView fieldList(@RequestParam(defaultValue="1") int pageno, String detailFName, String name) {
 		// 세부분야 선택 후 세부분야 페이지로 이동
 		// 세부분야의 정보, 세부분야 달인 리스트 필요
-		return new ModelAndView("main").addObject("detail", fieldService.info(detailFName)).addObject("viewName","field/list.jsp").addObject("name",name).addObject("dalin",dalService.findDalinByDetailFName(pageno,detailFName));
+		return new ModelAndView("main").addObject("detail",dalService.fieldInfo(detailFName)).addObject("viewName","field/list.jsp").addObject("name",name).addObject("dalin",dalService.findDalinByDetailFName(pageno,detailFName));
 	}
 }

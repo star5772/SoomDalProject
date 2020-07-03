@@ -87,4 +87,8 @@ public class PaymentDao {
 	public int deleteToNowPayment(String pCode) {
 		return tpl.delete("paymentMapper.deleteToNowPayment",pCode);
 	}
+	
+	public NowPayment findByNowpayment(String dEmail) {
+		return tpl.selectOne("paymentMapper.findByNowpayment",dEmail);
+	}
 }

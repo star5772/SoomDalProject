@@ -2,7 +2,6 @@ package com.icia.dal.service;
 
 import java.io.File;
 import java.io.IOException;
-import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
@@ -16,6 +15,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.icia.dal.dao.AdminDao;
 import com.icia.dal.dao.JejaDao;
+import com.icia.dal.dao.PaymentDao;
 import com.icia.dal.dto.AdminDto;
 import com.icia.dal.dto.EnabledPage;
 import com.icia.dal.dto.RefundDto;
@@ -45,6 +45,8 @@ public class AdminService {
 	private String fieldPath;
 	@Inject
 	private JejaDao jejaDao;
+	@Inject
+	private PaymentDao npDao;
 
 	public AdminPage adminPage(int pageno) {
 		int countOfBoard = adminDao.countToJeja();
@@ -122,8 +124,12 @@ public class AdminService {
 		List<RefundDto.DtoForListToRefund> dtoList = new ArrayList<RefundDto.DtoForListToRefund>();
 		for(NowRefund nowRefund:refundList) { 
 			RefundDto.DtoForListToRefund dto = modelMapper.map(nowRefund, RefundDto.DtoForListToRefund.class);
+			NowPayment np = npDao.findByNowpayment(dto.getDEmail());
 			dto.setPReqRefundDate(nowRefund.getPReqRefundDate().format(DateTimeFormatter.ofPattern("yyyy년 MM월 dd일")));
+			String str = np.getPDate().format(DateTimeFormatter.ofPattern("yyyy년 MM월 dd일"));
+			dto.setPDate(str);
 			dtoList.add(dto);
+			
 		}
 		refundPage.setList(dtoList);
 		return refundPage;

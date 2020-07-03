@@ -52,6 +52,8 @@ public class DalinService {
 	private RepQuestionDao repDao;
 	@Inject
 	private MailUtil mailUtil;
+	@Inject
+	private DetailFieldDao detailFieldDao;
 
 	public void join(DtoForJoinToDalin dto) {
 		Dalin dalin = modelMapper.map(dto, Dalin.class);
@@ -282,6 +284,10 @@ public class DalinService {
 			String newEncodedPassword = pwdEncoder.encode(newPassword);
 			dalDao.updateToDalin(Dalin.builder().dPassword(newEncodedPassword).dEmail(dEmail).build());
 		}
+	}
+	
+	public DetailField fieldInfo(String detailFName) {
+		return detailFieldDao.findByDetailFName(detailFName);
 	}
 }
 

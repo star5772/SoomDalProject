@@ -4,6 +4,7 @@ package com.icia.dal.controller;
 import java.security.Principal;
 
 import javax.inject.Inject;
+import javax.mail.*;
 import javax.validation.constraints.*;
 
 import org.springframework.stereotype.Controller;
@@ -70,14 +71,18 @@ public class JejaController {
 	}
 	
 	@GetMapping("/jeja/change_pwd")
-	public ModelAndView changePassword() {
+	public ModelAndView resetPassword() {
 		return new ModelAndView("main").addObject("viewName","jeja/change_pwd.jsp");
 	}
 	
 	@PostMapping("/jeja/change_pwd")
-	public String changePassword(@RequestParam @NotNull String jPassword, @RequestParam String newPassword, Principal principal, RedirectAttributes ra) throws JejaNotFoundException {
-		service.changePwd(jPassword, newPassword, principal.getName());
-		ra.addFlashAttribute("msg","비밀번호를 변경했습니다");
-		return "redirect:/";
+	public String resetPassword(@RequestParam @NotNull String jEmail, @RequestParam @NotNull String jTel, RedirectAttributes ra) {
+		try {
+			service.resetPassword(jEmail, jTel);
+		} catch (JejaNotFoundException | MessagingException e) {
+			e.printStackTrace();
+		}
+		ra.addFlashAttribute("msg","가입하신 이메일로 임시비밀번호를 보냈습니다");
+		return "redirect:/member/login";
 	}
 }

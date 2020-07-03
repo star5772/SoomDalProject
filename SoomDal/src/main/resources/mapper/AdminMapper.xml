@@ -151,7 +151,7 @@
 	
 	<insert id="insertToRefund">
 		insert into nowrefund(p_refund_code, p_code, p_req_refund_date, p_refund_is_ok, p_money, d_email)
-		values(#{pRefundCode}, #{pCode}, sysout, #{pRefundIsOk}, #{pMoney}, #{dEmail})
+		values(#{pRefundCode}, #{pCode}, sysdate, #{pRefundIsOk}, #{pMoney}, #{dEmail})
 	</insert>
 	
 
