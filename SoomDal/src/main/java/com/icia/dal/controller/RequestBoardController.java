@@ -20,7 +20,6 @@ public class RequestBoardController {
 	
 	@GetMapping("/reqboard/read")
 	public ModelAndView read(int rbNo, Principal principal) {
-		service.read(rbNo, principal.getName());
 		return new ModelAndView("main").addObject("viewName","reqboard/read.jsp").addObject("reqRead",service.read(rbNo, principal.getName()));
 	}
 	
@@ -42,5 +41,10 @@ public class RequestBoardController {
 	@GetMapping("/reqboard/list")
 	public ModelAndView list(@RequestParam(defaultValue = "1") int pageno, @Nullable String rbWriter) {
 		return new ModelAndView("main").addObject("viewName", "reqboard/list.jsp").addObject("reqPage", service.list(pageno, rbWriter));
+	}
+	
+	@GetMapping("/reqboard/report")
+	public ModelAndView report(int rbNo) {
+		return new ModelAndView("reqboard/report").addObject("rbNo",rbNo);
 	}
 }
