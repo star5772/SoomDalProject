@@ -79,6 +79,7 @@ public class DalinDto {
 		private String dLevelStr;
 	}
 	
+
 	
 	@Data
 	public static class DtoForUpdateToDalin {

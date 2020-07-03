@@ -5,9 +5,7 @@ import java.io.IOException;
 import javax.inject.Inject;
 
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.icia.dal.entity.Field;
@@ -24,6 +22,14 @@ public class AdminRestController {
 		System.out.println(sajin);
 		Field fl = Field.builder().fName(fName).fNo(fNo).build();
 		adService.insertFieldSajin(fl, sajin);
+		return ResponseEntity.ok(null);
+	}
+	
+	@PostMapping("/admin/member_manage")
+	public ResponseEntity<Void> memberManage(Boolean jIsBlock,String jEmail) {
+		System.out.println(jIsBlock+"----------------------------------");
+		
+		adService.updateJenabled(jIsBlock, jEmail);
 		return ResponseEntity.ok(null);
 	}
 }

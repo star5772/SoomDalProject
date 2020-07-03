@@ -277,7 +277,6 @@ height: 30px; margin-left: 20px; width: 1024px;  text-align: center;
 				</tr>
 			</thead>
 			<tbody id="list">
-			${username }
 			<c:forEach items="${qnaPage.list}" var="q">
 				<tr>
 					<td class="num">${q.QNo}</td>

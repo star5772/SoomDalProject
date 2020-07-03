@@ -13,8 +13,9 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.icia.dal.dao.AdminDao;
+import com.icia.dal.dao.*;
 import com.icia.dal.dto.AdminDto;
+import com.icia.dal.dto.AdminDto.*;
 import com.icia.dal.dto.EnabledPage;
 import com.icia.dal.dto.ReportedPage;
 import com.icia.dal.dto.page.AdminPage;
@@ -36,7 +37,8 @@ public class AdminService {
 	private String fieldFolder;
 	@Value("${FieldPath}")
 	private String fieldPath;
-	
+	@Inject
+	private JejaDao jejaDao;
 
 	public AdminPage adminPage(int pageno) {
 		int countOfBoard = adminDao.countToJeja();
@@ -153,5 +155,14 @@ public class AdminService {
 		}
 		return adminDao.insertToField(fl);
 	}
-
+	
+	public void updateJenabled(boolean jIsBlock, String jEmail) {
+		if(jIsBlock==true) {
+			Jeja jeja = Jeja.builder().jEmail(jEmail).jIsBlock(jIsBlock).enabled(false).build();
+			jejaDao.updateJeja(jeja);
+		} else {
+			Jeja jeja = Jeja.builder().jEmail(jEmail).jIsBlock(jIsBlock).enabled(true).build();
+			jejaDao.updateJeja(jeja);
+		}
+	}
 }

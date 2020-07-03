@@ -1,8 +1,11 @@
 package com.icia.dal.controller;
 
+import java.io.*;
 import java.security.*;
 
+import javax.annotation.*;
 import javax.inject.*;
+import javax.validation.*;
 
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.*;
@@ -14,6 +17,7 @@ import org.springframework.web.servlet.mvc.support.*;
 
 import com.icia.dal.Exception.*;
 import com.icia.dal.dto.*;
+import com.icia.dal.dto.DalinDto.*;
 import com.icia.dal.entity.*;
 import com.icia.dal.service.*;
 
@@ -60,6 +64,17 @@ public class DalinController {
 		return new ModelAndView("main").addObject("viewName","dalin/info_update.jsp").addObject("dalin",dalService.readToDalinProfile(dalin.getDMno()));
 	}
 	
+	@PostMapping("/dalin/profile_update")
+	public String dalinInFoUpdate(@Valid DalinDto.DtoForProfileToDalin dto, @Nullable MultipartFile sajins, RedirectAttributes ra, BindingResult bindingResult) throws BindException {
+		if(bindingResult.hasErrors()==true)
+			throw new BindException(bindingResult);
+		try {
+			dalService.profileSajin(dto, sajins);
+		} catch (IllegalStateException | IOException e) {
+			e.printStackTrace();
+		}
+		return "redirect:/";
+	}
 	@GetMapping("/dalin/my_info_update")
 	public ModelAndView dalinMyInFoUpdate(Principal principal) throws UserNotFoundException {
 		// 달인 내정보 수정

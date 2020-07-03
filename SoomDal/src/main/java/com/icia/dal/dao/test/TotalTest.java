@@ -44,5 +44,5 @@ public class TotalTest {
 		paymentService.addCashToDalin("TjOVeC", "star5772@naver.com");
 	}
 	
-
+	
 }

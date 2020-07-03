@@ -36,8 +36,13 @@ public class AdminDto {
 	@NoArgsConstructor
 	@Builder
 	public static class JejaEnabledList {
+		private int jMno;
 		private String jName;
 		private String jJoinDate;
 		private boolean enabled;
+		private boolean jIsBlock;
+		private String jEmail;
 	}
+	
+	
 }

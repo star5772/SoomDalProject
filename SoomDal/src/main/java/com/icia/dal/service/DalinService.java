@@ -214,6 +214,20 @@ public class DalinService {
 		return dalDao.findByDalin(dEmail);
 	}
 	
+	public void profileSajin(DalinDto.DtoForProfileToDalin dto, MultipartFile sajins) throws IllegalStateException, IOException {
+		Dalin dalin = modelMapper.map(dto, Dalin.class);
+		
+		if(sajins!=null && sajins.isEmpty()==false) {
+			if(sajins.getContentType().toLowerCase().startsWith("image/")==true) {
+				int lastIndexOfDot = sajins.getOriginalFilename().lastIndexOf('.');
+				String extension = sajins.getOriginalFilename().substring(lastIndexOfDot+1);
+				File profile = new File(profileFolder, dalin.getDEmail() + "." + extension);
+				
+				sajins.transferTo(profile);
+				dalin.setDProfile(profilePath + profile.getName());
+			}
+		}
+	}
 
 }
 

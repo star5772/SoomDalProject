@@ -7,15 +7,20 @@
 <head>
 <meta charset="UTF-8">
 <title>Q&A 게시판 글읽기</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <sec:authorize access="hasAnyRole('ROLE_JEJA','ROLE_DALIN','ROLE_ADMIN')">
 	<script src="/dal/script/webS.js"></script>
 </sec:authorize>
 <style>
  #center{margin-left: 20px; display: inline-block; }
   
- #cancel,#cancel2{
+ #cancel{
  width: 80px; height: 35px; background-color: #ffa500; color: white; font-size: 17px; 
  font-weight: bold;  outline: 0;border: 0;border-radius: 4px; float: right;
+ }
+ #cancel2{
+ width: 80px; height: 35px; background-color: #ffa500; color: white; font-size: 17px; 
+ font-weight: bold;  outline: 0;border: 0;border-radius: 4px; float: left;  margin-top: 10px;  margin-bottom: 20px;
  }
  
  #list{
@@ -24,7 +29,7 @@
  }
  #answer{
  	 width: 80px; height: 35px; background-color: #ffa500; color: white; font-size: 17px; 
- font-weight: bold;  outline: 0;border: 0;border-radius: 4px; float: right;  margin-top: 10px; 
+ font-weight: bold;  outline: 0;border: 0;border-radius: 4px; float: right;  margin-top: 10px;  margin-bottom: 20px;
  }
 #formal{
 width: 80px; height: 35px;  background-color: #ffc968; color: white; font-size: 17px; 
@@ -34,28 +39,40 @@ width: 80px; height: 35px;  background-color: #ffc968; color: white; font-size: 
 <script>
 	$(function() {
 		$("#answer").on("click",function() {
+			if($("#cContent").val().length==0){
+				Swal.fire("실패!", "답변 내용을 작성하세요", "info")
+				return false;
+			}
 			params= {
 				_csrf:"${_csrf.token}",
-				cContent:$("#comment").val(),
+				cContent:$("#cContent").val(),
 				qNo:${read.QNo}
 			}
 			$.ajax({
 				url:"/dal/comment/write",
 				method:"post",
 				data:params
-			}).done(()=>location.reload()).fail(()=>Swal.fire("실패!","fail","info"))
+			}).done(()=>location.reload()).fail(()=>Swal.fire("실패!","fail","warning"))
 		})
 		
 		$("#cancel2").on("click", function(){
 			params = {
-				
+				_csrf:"${_csrf.token}",
+				_method:"delete",
+				qNo:${read.QNo},
+				cNo:"${read.comment.CNo}"
 			}
+			$.ajax({
+				url:"/dal/comment/delete",
+				method:"post",
+				data:params
+			}).done(()=>location.reload()).fail(()=>Swal.fire("실패!","fail","warning"))
 		});
 	});
+
 </script>
 </head>
 <body>
-${read }
 <form action="/dal/member/qnaBoard/delete" method="post">
 	<div id="center" >
 		<div style="font-size: 43px; font-weight: bold; color: rgb(243, 156, 18); ">Q&A</div>
@@ -83,7 +100,12 @@ ${read }
 		</div>
 		<hr>
 		<br>
-			<button id="cancel"  class="btn btn-success" type="submit">삭 제</button>
+			<sec:authorize access="isAuthenticated()">
+				<sec:authentication property="principal.username" var="username"/>
+			</sec:authorize>
+			<c:if test="${read.writer eq username }">
+				<button id="cancel"  class="btn btn-success" type="submit">삭 제</button>
+			</c:if>
 			<button id="list"  onclick="location.href='list'" type="button" >목 록</button>
 	</div>
 </form>	
@@ -98,7 +120,7 @@ ${read }
 			<label style="background-color: white; display: inline-block; width: 130px; text-align: center; font-size: 17px;">관리자 </label>
 			<a type="text" style="display:inline-block; color: rgb(94, 94, 94); width: 400px;font-size: 17px;">${read.comment.CWriteDateStr }</a>
 		<hr>
-		<textarea rows="5" cols="125" style="font-size: 17px; margin-left:20px;
+		<textarea rows="5" cols="125" style="font-size: 17px; margin-left:20px; 
 		display: inline-block; margin-top: 20px; outline: 0;border: 0; background-color: white;" disabled="disabled">${read.comment.CContent }</textarea>
 		<hr>
 	</div>
@@ -108,24 +130,20 @@ ${read }
 	<sec:authorize access="hasRole('ROLE_ADMIN')">
 		<c:if test="${read.cno eq null }">
 		<div style="margin-left: 20px; display: inline-block;">
-			<textarea id="comment" rows="5" cols="126" placeholder="답변하실 내용을 입력해주세요." style="font-size: 17px; margin-left:20px;
+			<textarea name="cContent"  id="cContent" rows="7" cols="126" placeholder="답변하실 내용을 입력해주세요." style="font-size: 17px; margin-left:15px;
 				display: inline-block; margin-top: 20px;" ></textarea>
-		<table>
 			<button id="answer">답 변</button>
-		</table> 
 		</div>
 		</c:if>
-		
 		<!-- 관리자가 자신의 댓글을 볼때 sec -->
 		
-		<div style="margin-left: 20px; display: inline-block;">
-		
-		<table>
-			<button id="formal">수 정</button>
+		<div style="margin-left:20px; float: left; display: inline-block;">
+		<c:if test="${not empty read.cno}">
 			<button id="cancel2">삭 제</button>
-		</table>
+		</c:if>	
 		</div>
 	</sec:authorize> 
+
 	
 </body>
 </html>

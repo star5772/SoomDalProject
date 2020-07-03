@@ -10,7 +10,7 @@ public class QnaCommentDto {
 	@Data
 	public static class DtoForCommentRead {
 		private int cNo;
-		private int qNo;
+		private Integer qNo;
 		private String cContent;
 		private String cWriteDateStr;
 	}

@@ -63,6 +63,12 @@
 		update request set r_is_read = 1 where r_no = #{rNo} and rownum=1
 	</update>
 	
+	<update id="setIsOk">
+		update request 
+		set r_dalin_is_ok=1 
+		where r_no=#{rNo} and rownum=1
+	</update>
+	
 </mapper>
 
 

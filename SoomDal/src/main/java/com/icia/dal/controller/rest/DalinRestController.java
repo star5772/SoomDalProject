@@ -18,6 +18,7 @@ import org.springframework.web.multipart.*;
 import com.icia.dal.Exception.MembernameExistException;
 import com.icia.dal.dao.*;
 import com.icia.dal.dto.*;
+import com.icia.dal.dto.DalinDto.*;
 import com.icia.dal.entity.*;
 import com.icia.dal.service.DalinService;
 
