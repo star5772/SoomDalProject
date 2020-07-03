@@ -19,8 +19,10 @@
 				reason:radioVal
 			}
 			$.ajax({
-				
-			})
+				url:"/dal/member/reqboard/report",
+				method:"post",
+				data:params
+			}).done(()=>Swal.fire("의견 감사합니다!", "신고가 접수되었습니다", "success")).fail(()=>Swal.fire("실패!", "중복신고는 불가능합니다", "info"));
 		});
 	});
 </script>

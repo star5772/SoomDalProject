@@ -30,7 +30,6 @@ function report_pop() {
 </script>
 </head>
 <body>
-${reqRead }
 	<div>
 		<h1 style="font-size: 30px; font-weight: bold; line-height: 1.5em;">요청서</h1>
 	</div>

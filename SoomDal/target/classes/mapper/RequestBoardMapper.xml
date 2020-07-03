@@ -17,6 +17,7 @@
 			<if test="rbContent!=null">RB_CONTENT=#{rbContent},</if>
 			<if test="rbReadCnt!=null">RB_READ_CNT=RB_READ_CNT +1,</if>
 			<if test="rbReportCnt!=null">RB_REPORT_CNT=RB_REPORT_CNT +1,</if>
+			<if test="rbIsReport!=null">RB_IS_REPORT=#{rbIsReport}</if>
 		</trim>
 		where RB_NO=#{rbNo} and rownum=1
 	</update>
