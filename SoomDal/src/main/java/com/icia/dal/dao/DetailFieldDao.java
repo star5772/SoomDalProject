@@ -1,14 +1,10 @@
 package com.icia.dal.dao;
 
-import org.springframework.stereotype.Repository;
+import org.apache.ibatis.annotations.*;
 
-import com.icia.dal.entity.DetailField;
+import com.icia.dal.entity.*;
 
-@Repository
-public class DetailFieldDao {
-
-	public DetailField findByName(String detailFName) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+public interface DetailFieldDao {
+	@Select("select f_no fNo, detail_f_name detailFName, detail_f_sajin detailFSajin from detailField where detail_f_name=#{detailFName}")
+	public DetailField findByDetailFName(String detailFName);
 }
