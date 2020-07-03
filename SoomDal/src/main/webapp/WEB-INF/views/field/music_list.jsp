@@ -18,9 +18,11 @@
 	}
 	.service {
 		padding: 50px 0;
+		margin-left: 60px;
 	}
 	#text {
 		text-align: center;
+		margin-top: 20px;
 	}
 	.card img {
 		width: 270px;
@@ -29,63 +31,87 @@
 	.btn {
 		font-size: medium;
 	}
+button {
+  width: 150px;
+  height: 45px;
+  font-family: 'Roboto', sans-serif;
+  font-size: small;
+  text-transform: uppercase;
+  letter-spacing: 2.5px;
+  font-weight: 500;
+  color: #000;
+  background-color: #fff;
+  border-radius : 40px;
+  border: none;
+  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease 0s;
+  cursor: pointer;
+  outline: none;
+  }
+button:hover {
+  background-color: #FFC459;
+  box-shadow: 0px 15px 20px rgba(46, 229, 157, 0.4);
+  color: #fff;
+  transform: translateY(-7px);
+}
 </style>
 </head>
 <body>
 <h2 id="text">음악 서비스 </h2>
+<h3 id="text">음악 서비스에 오신걸 환영합니다 ! 하고싶은 Instrument를 배우세요 !</h3>
 	<div class="service">
 		<div class="card">
   			<img class="card-img-top" src="#" alt="Card image cap">
   			<div class="card-body">
-    			<a href="/dal/member/field/list?detailFName=piano" class="btn btn-primary">피아노 레슨</a>
+  			<button onclick="location.href='/dal/member/field/list?detailFName=piano'" style="margin-left: 45px; font-weight: bold;" >피아노 레슨</button>
   			</div>
 		</div>
 		<div class="card">
   			<img class="card-img-top" src="#" alt="Card image cap">
   			<div class="card-body">
-    			<a href="/dal/member/field/list?detailFName=elecguitar" class="btn btn-primary">일렉기타 레슨</a>
+  			<button onclick="location.href='/dal/member/field/list?detailFName=elecguitar'" style="margin-left: 45px; font-weight: bold;" >일렉기타 레슨</button>
   			</div>
 		</div>
 		<div class="card">
   			<img class="card-img-top" src="#" alt="Card image cap">
   			<div class="card-body">
-    			<a href="/dal/member/field/list?detailFName=drum" class="btn btn-primary">드럼 레슨</a>
+  			<button onclick="location.href='/dal/member/field/list?detailFName=drum'" style="margin-left: 45px; font-weight: bold;" >드럼 레슨</button>
   			</div>
 		</div>
 		<div class="card">
   			<img class="card-img-top" src="#" alt="Card image cap">
   			<div class="card-body">
-    			<a href="/dal/member/field/list?detailFName=baseguitar" class="btn btn-primary">베이스기타 레슨</a>
+  			<button onclick="location.href='/dal/member/field/list?detailFName=baseguitar'" style="margin-left: 45px; font-weight: bold;" >베이스기타 레슨</button>
   			</div>
 		</div>
 		<div class="card">
   			<img class="card-img-top" src="#" alt="Card image cap">
   			<div class="card-body">
-    			<a href="/dal/member/field/list?detailFName=violinn" class="btn btn-primary">바이올린 레슨</a>
+  			<button onclick="location.href='/dal/member/field/list?detailFName=violinn'" style="margin-left: 45px; font-weight: bold;" >바이올린 레슨</button>
   			</div>
 		</div>
 		<div class="card">
   			<img class="card-img-top" src="#" alt="Card image cap">
   			<div class="card-body">
-    			<a href="/dal/member/field/list?detailFName=saxophone" class="btn btn-primary">색소폰 레슨</a>
+  			<button onclick="location.href='/dal/member/field/list?detailFName=saxophone'" style="margin-left: 45px; font-weight: bold;" >색소폰 레슨</button>
   			</div>
 		</div>
 		<div class="card">
   			<img class="card-img-top" src="#" alt="Card image cap">
   			<div class="card-body">
-    			<a href="/dal/member/field/list?detailFName=trumpet" class="btn btn-primary">트럼펫 레슨</a>
+  			<button onclick="location.href='/dal/member/field/list?detailFName=trumpet'" style="margin-left: 45px; font-weight: bold;" >트럼펫 레슨</button>
   			</div>
 		</div>
 		<div class="card">
   			<img class="card-img-top" src="#" alt="Card image cap">
   			<div class="card-body">
-    			<a href="/dal/member/field/list?detailFName=flute" class="btn btn-primary">플루트 레슨</a>
+  			<button onclick="location.href='/dal/member/field/list?detailFName=flute'" style="margin-left: 45px; font-weight: bold;" >플루트 레슨</button>
   			</div>
 		</div>
 		<div class="card">
   			<img class="card-img-top" src="#" alt="Card image cap">
   			<div class="card-body">
-    			<a href="/dal/member/field/list?detailFName=cello" class="btn btn-primary">첼로 레슨</a>
+  			<button onclick="location.href='/dal/member/field/list?detailFName=cello'" style="margin-left: 45px; font-weight: bold;" >첼로 레슨</button>
   			</div>
 		</div>
 	</div>

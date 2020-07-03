@@ -85,11 +85,11 @@ $(function(){
 <body>
 <div>
 	<img alt="" src="/image/MainLogo.png">
-		<div style="width: 300px; height: 300px; float:left; display: inline-block;">
-			<h2 style="text-align: center;">달인 아이디찾기</h2>
+		<div style="width: 300px; height: 300px; float:left; display: inline-block; margin-left: 20px;">
+			<h3 style="text-align: center; font-weight: bold; ">DALIN 아이디 찾기</h3>
 			<span id="FindDalinId_msg"></span>
-			<div id="div" style="border: 1px solid #DDDDDD; padding: 5px 5px 5px 5px;">
-				<form id="findDalinFrm">
+			<div id="div" style="border: 1px solid #DDDDDD; padding: 5px 5px 5px 5px; margin-top: 30px;">
+				<form id="findDalinFrm" style="margin-left: 10px;">
 					<label for="dTel" style="font-size: medium;">연락처</label><br>
 					<select id="tel-one" class="form-control">
 						<option value="010">010</option>
@@ -99,19 +99,18 @@ $(function(){
 					<input type="text" id="tel-three" class="form-control" maxlength="4">
 					<input type="hidden" id="dTel"name="dTel" value="">
 					<br>
-					<label for="dName" style="font-size: medium;">이름</label>
+					<label for="dName" style="font-size: medium; margin-top: 10px;">이름</label>
 					<input type="text" name="dName" placeholder="가입시 입력했던 이름을 입력해주세요" class="form-control" style="width: 150px;font-size: small;">
 					<br><br>
-					<button type="button" id="findDalin" class="btn btn-success" style="margin-left:120px;">찾기</button>
+					<button type="button" id="findDalin" class="btn btn-success" style=" margin-left:120px; margin-top: 20px;">찾기</button>
 				</form>
 			</div>
 		</div>
-		
-		<div style="width: 300px; height: 300px; float:right; display: inline-block; ">
-			<h2 style="text-align: center;">제자 아이디찾기</h2>
-			<span id="FindJejaId_msg"></span>
+		<div style="width: 300px; height: 300px; margin-right:20px; float:right; display: inline-block; ">
+			<h3 style="text-align: center; font-weight: bold;">JEJA 아이디 찾기</h3>
+			<span id="FindJejaId_msg" style="margin-left: 20px;"></span>
 			<div id="div2"style="border: 1px solid #DDDDDD; padding: 5px 5px 5px 5px;">
-				<form id="findJejaFrm">
+				<form id="findJejaFrm" style="margin-left: 10px;">
 					<label for="jTel" style="font-size: medium;">연락처</label><br>
 					<select id="jtel-one" class="form-control">
 						<option value="010">010</option>
@@ -121,10 +120,10 @@ $(function(){
 					<input type="text" id="jtel-three" class="form-control" maxlength="4">
 					<input type="hidden" id="jTel"name="jTel" value="">
 					<br>
-					<label for="jName" style="font-size: medium;">이름</label>
+					<label for="jName" style="font-size: medium; margin-top: 10px;">이름</label>
 					<input type="text" name="jName" placeholder="가입시 입력했던 이름을 입력해주세요" class="form-control" style="width: 150px;font-size: small;">
 					<br><br>
-					<button type="button" id="findJeja" class="btn btn-success" style="margin-left:120px;">찾기</button>
+					<button type="button" id="findJeja" class="btn btn-success" style=" margin-left:120px; margin-top: 20px;">찾기</button>
 				</form>
 			</div>
 		</div>
