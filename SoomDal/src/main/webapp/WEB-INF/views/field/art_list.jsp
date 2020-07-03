@@ -64,91 +64,55 @@ button:hover {
 		<div class="card">
   			<img class="card-img-top" src="/image/회화.jpg" alt="Card image cap">
   			<div class="card-body">
-<<<<<<< HEAD
-    			<a href="/dal/member/field/list?detailFName=painting&name=회화 레슨" class="btn btn-primary" style="margin-left: 84px;">회화 레슨</a>
-=======
-  			<button onclick="location.href='/dal/member/field/list?detailFName=painting'" style="margin-left: 60px; font-weight: bold;" >회화 레슨</button>
->>>>>>> branch 'master' of https://github.com/star5772/SoomDalProject
+  			<button onclick="location.href='/dal/member/field/list?detailFName=painting'" style="margin-left: 45px; font-weight: bold;" >회화 레슨</button>
   			</div>
 		</div>
 		<div class="card">
   			<img class="card-img-top" src="/image/만화,웹툰,애니.jpg" alt="Card image cap">
   			<div class="card-body">
-<<<<<<< HEAD
-    			<a href="/dal/member/field/list?detailFName=toonart&name=만화,웹툰,애니 레슨" class="btn btn-primary" style="margin-left: 45px;">만화,웹툰,애니 레슨</a>
-=======
-  			<button onclick="location.href='/dal/member/field/list?detailFName=toonart'" style="margin-left: 60px; font-weight: bold;" >만화,웹툰,애니 레슨</button>
->>>>>>> branch 'master' of https://github.com/star5772/SoomDalProject
+  			<button onclick="location.href='/dal/member/field/list?detailFName=toonart'" style="margin-left: 45px; font-weight: bold;" >만화,웹툰,애니 레슨</button>
   			</div>
 		</div>
 		<div class="card">
   			<img class="card-img-top" src="/image/아동미술.png" alt="Card image cap">
   			<div class="card-body">
-<<<<<<< HEAD
-    			<a href="/dal/member/field/list?detailFName=childart&name=아동미술 레슨" class="btn btn-primary" style="margin-left: 60px;">아동미술 레슨</a>
-=======
-  			<button onclick="location.href='/dal/member/field/list?detailFName=childart'" style="margin-left: 60px; font-weight: bold;" >아동미술 레슨</button>
->>>>>>> branch 'master' of https://github.com/star5772/SoomDalProject
+  			<button onclick="location.href='/dal/member/field/list?detailFName=childart'" style="margin-left: 45px; font-weight: bold;" >아동미술 레슨</button>
   			</div>
 		</div>
 		<div class="card">
   			<img class="card-img-top" src="/image/샌드아트.jpg" alt="Card image cap">
   			<div class="card-body">
-<<<<<<< HEAD
-    			<a href="/dal/member/field/list?detailFName=sandart&name=샌드아트 레슨" class="btn btn-primary" style="margin-left: 65px;">샌드아트 레슨</a>
-=======
-  			<button onclick="location.href='/dal/member/field/list?detailFName=sandart'" style="margin-left: 55px; font-weight: bold;" >샌드아트 레슨</button>
->>>>>>> branch 'master' of https://github.com/star5772/SoomDalProject
+  			<button onclick="location.href='/dal/member/field/list?detailFName=sandart'" style="margin-left: 45px; font-weight: bold;" >샌드아트 레슨</button>
   			</div>
 		</div>
 		<div class="card">
   			<img class="card-img-top" src="/image/팝아트.jpg" alt="Card image cap">
   			<div class="card-body">
-<<<<<<< HEAD
-    			<a href="/dal/member/field/list?detailFName=popart&name=팝아트 레슨" class="btn btn-primary" style="margin-left: 70px;">팝아트 레슨</a>
-=======
-  			<button onclick="location.href='/dal/member/field/list?detailFName=popart'" style="margin-left: 60px; font-weight: bold;" >팝아트 레슨</button>
->>>>>>> branch 'master' of https://github.com/star5772/SoomDalProject
+  			<button onclick="location.href='/dal/member/field/list?detailFName=popart'" style="margin-left: 45px; font-weight: bold;" >팝아트 레슨</button>
   			</div>
 		</div>
 		<div class="card">
   			<img class="card-img-top" src="/image/목공예.jpg" alt="Card image cap">
   			<div class="card-body">
-<<<<<<< HEAD
-    			<a href="/dal/member/field/list?detailFName=woodworking&name=가구,목공예 레슨" class="btn btn-primary" style="margin-left: 55px;">가구,목공예 레슨</a>
-=======
-  			<button onclick="location.href='/dal/member/field/list?detailFName=woodworking'" style="margin-left: 55px; font-weight: bold;" >가구,목공예 레슨</button>
->>>>>>> branch 'master' of https://github.com/star5772/SoomDalProject
+  			<button onclick="location.href='/dal/member/field/list?detailFName=woodworking'" style="margin-left: 45px; font-weight: bold;" >가구,목공예 레슨</button>
   			</div>
 		</div>
 		<div class="card">
   			<img class="card-img-top" src="/image/도예.jpg" alt="Card image cap">
   			<div class="card-body">
-<<<<<<< HEAD
-    			<a href="/dal/member/field/list?detailFName=pottery&name=도예 레슨" class="btn btn-primary" style="margin-left: 78px;">도예 레슨</a>
-=======
-  			<button onclick="location.href='/dal/member/field/list?detailFName=pottery'" style="margin-left: 60px; font-weight: bold;" >도예 레슨</button>
->>>>>>> branch 'master' of https://github.com/star5772/SoomDalProject
+  			<button onclick="location.href='/dal/member/field/list?detailFName=pottery'" style="margin-left: 45px; font-weight: bold;" >도예 레슨</button>
   			</div>
 		</div>
 		<div class="card">
   			<img class="card-img-top" src="/image/소묘.jpg" alt="Card image cap">
   			<div class="card-body">
-<<<<<<< HEAD
-    			<a href="/dal/member/field/list?detailFName=drawing&name=소묘 레슨" class="btn btn-primary" style="margin-left: 80px;">소묘 레슨</a>
-=======
-  			<button onclick="location.href='/dal/member/field/list?detailFName=drawing'" style="margin-left: 60px; font-weight: bold;" >소묘 레슨</button>
->>>>>>> branch 'master' of https://github.com/star5772/SoomDalProject
+  			<button onclick="location.href='/dal/member/field/list?detailFName=drawing'" style="margin-left: 45px; font-weight: bold;" >소묘 레슨</button>
   			</div>
 		</div>
 		<div class="card">
   			<img class="card-img-top" src="/image/켈리그라피.jpg" alt="Card image cap">
   			<div class="card-body">
-<<<<<<< HEAD
-    			<a href="/dal/member/field/list?detailFName=kelligrapy&name=켈리그라피 레슨" class="btn btn-primary" style="margin-left: 60px;">켈리그라피 레슨</a>
-=======
-    			<button onclick="location.href='/dal/member/field/list?detailFName=kelligrapy'" style="margin-left: 55px; font-weight: bold;" >캘리그라피 레슨</button>
->>>>>>> branch 'master' of https://github.com/star5772/SoomDalProject
+    			<button onclick="location.href='/dal/member/field/list?detailFName=kelligrapy'" style="margin-left: 45px; font-weight: bold;" >캘리그라피 레슨</button>
   			</div>
 		</div>
 	</div>
