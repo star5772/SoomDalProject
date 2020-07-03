@@ -128,7 +128,7 @@ public class EstimateService {
 		// -> 레슨완료코드 (랜덤8자) 생성
 		String completeCode = RandomStringUtils.randomAlphanumeric(8);
 		// -> 견적서번호 ,해당 견적서보낸 달인번호,해당 견적 요청한 제자번호 입력
-		ReviewAuthority ra = ReviewAuthority.builder().aCompleteCode(completeCode).dMno(dMno).jMno(jMno).build();
+		ReviewAuthority ra = ReviewAuthority.builder().aCompleteCode(completeCode).dMno(dMno).jMno(jMno).jEmail(jeja.getJEmail()).build();
 		reviewAuthorityDao.insertReviewAuthority(ra);
 		// -> 견적서 수락누르면 견적서 요금만큼 캐쉬차감해야함.
 		// -> 견적서 요금 차감시키는 코드

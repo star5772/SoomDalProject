@@ -218,6 +218,8 @@ CREATE TABLE NowRefund (
 CREATE TABLE ReportedBoard (
    RB_NO NUMBER(6) NOT NULL, /* 글번호 */
    USERNAME VARCHAR2(50) NOT NULL, /* 회원아이디 */
+   RB_REPORTED_RESON NVARCHAR(100),
+   
    constraint pk_reportedboard primary key(rb_no,username)
 );
 
@@ -332,9 +334,7 @@ CREATE TABLE Review (
    R_DATE DATE, /* 작성날짜 */
    R_CONTENT NVARCHAR2(100), /* 작성 내용 */
    R_SCORE NUMBER(1), /* 별점 */
-   R_SAJIN_CNT NUMBER(1), /* 첨부사진 수 */
    R_WRITER NVARCHAR2(20), /* 작성자  */
-   S_NO NUMBER(6), /* 사진 번호 */
    d_mno number(7), /* 리뷰가 달린 달인 회원번호 */
    j_Accusation_cnt number(6), /* 리뷰 신고당한 횟수 */
    constraint pk_review primary key(r_no)
