@@ -5,23 +5,26 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.mail.*;
+import javax.validation.constraints.*;
 
+import org.apache.commons.lang.*;
 import org.modelmapper.ModelMapper;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.icia.dal.Exception.UserNotFoundException;
+import com.icia.dal.Exception.*;
 import com.icia.dal.dao.DAO;
 import com.icia.dal.dao.DalinDao;
 import com.icia.dal.dao.JejaDao;
 import com.icia.dal.dao.LessonHistoryDao;
-import com.icia.dal.dto.JejaDto;
+import com.icia.dal.dto.*;
 import com.icia.dal.dto.JejaDto.DtoForJejaUpdate;
-import com.icia.dal.dto.LHDto;
 import com.icia.dal.dto.page.PageToLessonHistory;
 import com.icia.dal.entity.Dalin;
 import com.icia.dal.entity.Jeja;
 import com.icia.dal.entity.LessonHistory;
+import com.icia.dal.util.*;
 import com.icia.dal.util.pagingutil.LessonHistoryPagingUtil;
 
 @Service
@@ -38,7 +41,9 @@ public class JejaService {
 	private ModelMapper modelMapper;
 	@Inject
 	private LessonHistoryDao lhDao;
-
+	@Inject
+	private MailUtil mailUtil;
+	
 	public void existsByEmail(String jEmail) {
 		String email = dao.existsByjEmail(jEmail);
 		// 나중에 예외처리 다시 해야함
@@ -131,5 +136,33 @@ public class JejaService {
 	
 	public Jeja findById(String jEmail) {
 		return dao.findById(jEmail);
+	}
+	
+	public void resetPassword(String jEmail, String jTel) throws JejaNotFoundException, MessagingException {
+		Jeja jeja = dao.findById(jEmail);
+		if(jeja==null)
+			throw new JejaNotFoundException();
+		if(jeja.getJEmail().equals(jEmail)==false)
+			throw new JejaNotFoundException();
+		
+		String newPassword = RandomStringUtils.randomAlphanumeric(20);
+		String encodePwd = pwdEncoder.encode(newPassword);
+		Jeja.builder().jEmail(jEmail).jPassword(encodePwd).build();
+		StringBuffer text = new StringBuffer("<p>임시비밀번호를 발급했습니다</p>");
+		text.append("<p>임시 비밀번호:").append(newPassword).append("</p>");
+		text.append("<p>보안을 위해 로그인 후 바로 비밀번호를 변경하세요</p>");
+		Mail mail = Mail.builder().sender("webmaster@icia.com").receiver(jEmail).title("임시비밀번호 발급 안내").content(text.toString()).build();
+		mailUtil.sendMail(mail);
+	}
+	
+	public void changePwd(@NotNull String jPassword, String newPassword, String jEmail) throws JejaNotFoundException {
+		Jeja jeja = dao.findById(jEmail);
+		if(jeja==null)
+			throw new JejaNotFoundException();
+		String encodedPassword = jeja.getJPassword();
+		if(pwdEncoder.matches(jPassword, encodedPassword)==true) {
+			String newEncodedPassword = pwdEncoder.encode(newPassword);
+			dao.updateJeja(Jeja.builder().jPassword(newEncodedPassword).jEmail(jEmail).build());
+		}
 	}
 }

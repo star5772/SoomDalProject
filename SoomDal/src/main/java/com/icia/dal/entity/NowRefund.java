@@ -15,8 +15,10 @@ import lombok.experimental.Accessors;
 @Builder
 @Accessors(chain=true)
 public class NowRefund {
-	private String pRefundCode;
-	private String pCode;
-	private LocalDateTime pReqRefundDate;
-	private Boolean pRefundIsOk;
+	private String pRefundCode; // 환불코드
+	private String pCode; // 결제코드
+	private LocalDateTime pReqRefundDate; // 환불날짜
+	private Boolean pRefundIsOk; // 수락여부
+	private Integer pMoney; // 돈
+	private String dEmail; // 달인 아이디
 }

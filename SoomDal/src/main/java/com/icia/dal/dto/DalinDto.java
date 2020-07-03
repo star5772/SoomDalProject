@@ -93,6 +93,7 @@ public class DalinDto {
 		@Pattern(regexp="^[0-9]{8,11}$", message="전화번호는 숫자 8~11자입니다")
 		private String dTel;
 		private Integer dCash;
+		private String dEmail;
 	}
 	
 	@Data
@@ -101,6 +102,14 @@ public class DalinDto {
 		private String dProfile;
 		private String dName;
 		private String dIntro;
+		private Double avgScore;
+	}
+	
+	@Data
+	public static class DtoForFieldInfo {
+		private String fNo;
+		private String detailFName;
+		private String detailSajin;
 		private Double avgScore;
 	}
 	

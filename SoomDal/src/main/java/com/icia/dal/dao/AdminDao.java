@@ -1,5 +1,6 @@
 package com.icia.dal.dao;
 
+import java.time.LocalDateTime;
 import java.util.*;
 
 import javax.inject.*;
@@ -51,7 +52,7 @@ public class AdminDao {
 	}
 	
 	// 환불신청 페이징
-	public List<NowPayment> findAllNowRefundList(int startRowNum, int endRowNum) {
+	public List<NowRefund> findAllNowRefundList(int startRowNum, int endRowNum) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("startRowNum", startRowNum);
 		map.put("endRowNum", endRowNum);
@@ -141,5 +142,14 @@ public class AdminDao {
 	public int deleteToField(String fNo) {
 		return tpl.delete("adminMapper.deleteToField",fNo);
 	}
+	
+	// 환불
+	public int insertToRefund(NowRefund nowRefund) {
+		return tpl.insert("adminMapper.insertToRefund", nowRefund);
+	}
+	
+	//public String findByPReqRefundDate() {
+		//return tpl.selectOne("adminMapper.findByPReqRefundDate");
+	//}
 
 }

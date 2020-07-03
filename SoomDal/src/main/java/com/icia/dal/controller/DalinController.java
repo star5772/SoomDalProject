@@ -5,7 +5,9 @@ import java.security.*;
 
 import javax.annotation.*;
 import javax.inject.*;
+import javax.mail.*;
 import javax.validation.*;
+import javax.validation.constraints.*;
 
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.*;
@@ -20,6 +22,8 @@ import com.icia.dal.dto.*;
 import com.icia.dal.dto.DalinDto.*;
 import com.icia.dal.entity.*;
 import com.icia.dal.service.*;
+
+import oracle.jdbc.proxy.annotation.*;
 
 @Controller
 public class DalinController {
@@ -103,5 +107,19 @@ public class DalinController {
 		return new ModelAndView("payment/usedCash").addObject("uc",paymentService.useCashList(pageno, principal.getName(), dMno)).addObject("dMno",dMno);
 	}
 	
+	@GetMapping("/dalin/change_pwd")
+	public ModelAndView resetPassword() {
+		return new ModelAndView("main").addObject("viewName","dalin/change_pwd.jsp");
+	}
 	
+	@PostMapping("/dalin/change_pwd")
+	public String resetPassword(@RequestParam @NotNull String dEmail, @RequestParam @NotNull String dTel, RedirectAttributes ra) {
+		try {
+			dalService.resetPassword(dEmail, dTel);
+		} catch (DalinNotFoundException | MessagingException e) {
+			e.printStackTrace();
+		}
+		ra.addFlashAttribute("msg", "가입하신 이메일로 임시비밀번호를 보냈습니다");
+		return "redirect:/member/login";
+	}
 }

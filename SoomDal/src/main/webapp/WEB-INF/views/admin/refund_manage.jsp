@@ -93,7 +93,7 @@ ${refund }
 						<td>${r.DEmail}</td>
 						<td>${r.PReqRefundDate }</td>
 						<td>${r.PRefundDate }</td>
-						<td>${r.PRequestMoney }</td>
+						<td>${r.PMoney }</td>
 						<c:choose>
 							<c:when test="${r.PRefundIsOk ==true}">
 								<td>환불</td>

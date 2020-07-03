@@ -53,7 +53,7 @@
 	</delete>
 	
 	<select id="isNotReadMemoExist" resultType="boolean">
-		select count(*) from users where is_read= and receiver=#{username} and rownum=1
+		select count(*) from memo where is_read= and receiver=#{username} and rownum=1
 	</select>
 	
 	<select id="countToMemo" resultType="int">
