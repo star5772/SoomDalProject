@@ -216,6 +216,8 @@ CREATE TABLE NowRefund (
    P_REQ_REFUND_DATE DATE, /* 환불 신청 날짜 */
    P_REFUND_IS_OK CHAR(1), /* 수락 여부 */
    p_request_money NUMBER(8), /*환불 요청금액*/
+   d_email varchar2(50),
+   p_money number(7),
    constraint pk_nowrefund primary key(p_refund_code,p_code)
 );
 

@@ -89,7 +89,13 @@
 	
 	<delete id="deleteToNowPayment">
 		delete from nowpayment where pCode=#{pCode} and rownum=1
-	</delete>	
+	</delete>
+	
+	<select id="findByNowpayment" resultType="NowPayment">
+		select p_code pCode, p_date pDate, p_refund_date pRefundDate, p_refund_is_ok pRefundIsOk, d_email dEmail, p_money pMoney, p_request_refund pRequestRefund
+		from nowpayment
+		where d_email=#{dEmail} and rownum=1
+	</select>	
 </mapper>
 
 
