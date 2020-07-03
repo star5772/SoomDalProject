@@ -99,6 +99,7 @@ CREATE TABLE NowPayment (
    P_REFUND_IS_OK CHAR(1), /* 환불상태 */
    d_email varchar2(50),
    p_money number(7),
+   p_request_refund char(1), /* 환불 요청 여부 */ 
    constraint pk_nowpayment primary key(p_code)
 );
 
@@ -210,6 +211,7 @@ CREATE TABLE NowRefund (
    P_CODE VARCHAR2(8) NOT NULL, /* 결제 코드 */
    P_REQ_REFUND_DATE DATE, /* 환불 신청 날짜 */
    P_REFUND_IS_OK CHAR(1), /* 수락 여부 */
+   p_request_money NUMBER(8), /*환불 요청금액*/
    constraint pk_nowrefund primary key(p_refund_code,p_code)
 );
 

@@ -2,6 +2,7 @@ package com.icia.dal.entity;
 
 import java.time.LocalDateTime;
 
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -13,12 +14,9 @@ import lombok.experimental.Accessors;
 @NoArgsConstructor
 @Builder
 @Accessors(chain=true)
-public class NowPayment {
+public class NowRefund {
+	private String pRefundCode;
 	private String pCode;
-	private LocalDateTime pDate;
-	private Integer pRefundDate;
+	private LocalDateTime pReqRefundDate;
 	private Boolean pRefundIsOk;
-	private String dEmail;
-	private Integer pMoney;
-	private Boolean pRequestRefund;
 }
