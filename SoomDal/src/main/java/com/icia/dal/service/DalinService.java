@@ -8,12 +8,16 @@ import java.time.format.*;
 import java.util.*;
 
 import javax.inject.*;
+import javax.mail.*;
 import javax.validation.*;
+import javax.validation.constraints.*;
 
+import org.apache.commons.lang.*;
 import org.modelmapper.*;
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.security.crypto.password.*;
 import org.springframework.stereotype.*;
+import org.springframework.stereotype.Service;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.multipart.*;
 
@@ -23,6 +27,7 @@ import com.icia.dal.dto.*;
 import com.icia.dal.dto.DalinDto.*;
 import com.icia.dal.dto.page.*;
 import com.icia.dal.entity.*;
+import com.icia.dal.util.*;
 import com.icia.dal.util.pagingutil.*;
 
 @Service
@@ -45,8 +50,8 @@ public class DalinService {
 	private ProfileAttachmentDao profileAttachmentDao;
 	@Inject
 	private RepQuestionDao repDao;
-
-	
+	@Inject
+	private MailUtil mailUtil;
 
 	public void join(DtoForJoinToDalin dto) {
 		Dalin dalin = modelMapper.map(dto, Dalin.class);
@@ -251,5 +256,32 @@ public class DalinService {
 	
 
 
+	public void resetPassword(String dEmail, String dTel) throws DalinNotFoundException, MessagingException {
+		Dalin dalin = dalDao.findByDalin(dEmail);
+		if(dalin==null)
+			throw new DalinNotFoundException();
+		if(dalin.getDEmail().equals(dEmail)==false)
+			throw new DalinNotFoundException();
+		
+		String newPassword = RandomStringUtils.randomAlphanumeric(20);
+		String encodePwd = pwdEncoder.encode(newPassword);
+		dalDao.updateToDalin(Dalin.builder().dEmail(dEmail).dPassword(encodePwd).build());
+		StringBuffer text = new StringBuffer("<p>임시비밀번호를 발급했습니다</p>");
+		text.append("<p>임시 비밀번호:").append(newPassword).append("</p>");
+		text.append("<p>보안을 위해 로그인 후 바로 비밀번호를 변경하세요</p>");
+		Mail mail = Mail.builder().sender("webmaster@icia.com").receiver(dEmail).title("임시비밀번호 발급 안내").content(text.toString()).build();
+		mailUtil.sendMail(mail);
+	}
+
+	public void changePwd(@NotNull String dPassword, String newPassword, String dEmail) throws DalinNotFoundException {
+		Dalin dalin = dalDao.findByDalin(dEmail);
+		if(dalin==null)
+			throw new DalinNotFoundException();
+		String encodedPassword = dalin.getDPassword();
+		if(pwdEncoder.matches(dPassword, encodedPassword)==true) {
+			String newEncodedPassword = pwdEncoder.encode(newPassword);
+			dalDao.updateToDalin(Dalin.builder().dPassword(newEncodedPassword).dEmail(dEmail).build());
+		}
+	}
 }
 

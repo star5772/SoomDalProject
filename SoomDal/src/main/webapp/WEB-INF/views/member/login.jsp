@@ -88,7 +88,7 @@ $(function() {
 						  	</div>
 					  	</div>		
 						<label for="dalinPwd">달인회원 비밀번호</label>
-						<input type="password" name="dPassword" placeholder="비밀번호를 입력하세요" maxlength="10" class="form-control form-control-lg"><br>
+						<input type="password" name="dPassword" placeholder="비밀번호를 입력하세요" maxlength="20" class="form-control form-control-lg"><br>
 						<div style="height: 30px;">
 							<div class="alert alert-success alert-dismissible" id="dmsg" style="display:none;">
 						    	<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
@@ -99,7 +99,7 @@ $(function() {
 							value="${_csrf.token}">
 						<button type="submit" class="btn btn-warning">달인회원 로그인</button><br><br>
 						<a class="findId" href="#" onclick="openChild()" style="float:left">달인 아이디 찾기</a>
-						<a class="findPwd" href="#" style="float:right">달인 비밀번호 찾기</a>
+						<a class="findPwd" href="/dal/dalin/change_pwd" style="float:right">달인 비밀번호 찾기</a>
 					</form>	
 				</div>
 			<div class="inline-div" id="jejalogin">
@@ -125,7 +125,7 @@ $(function() {
 							value="${_csrf.token}">
 						<button type="submit" class="btn btn-success">제자회원 로그인</button><br><br>
 						<a class="findId" href="#" onclick="openChild()" style="float:left">제자 아이디 찾기</a>
-						<a class="findPwd" href="#"style="float:right">제자 비밀번호 찾기</a>
+						<a class="findPwd" href="/dal/jeja/change_pwd"style="float:right">제자 비밀번호 찾기</a>
 					</form>	
 				</div>	
 		</div>

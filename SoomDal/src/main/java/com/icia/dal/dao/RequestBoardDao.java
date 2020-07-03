@@ -25,4 +25,11 @@ public interface RequestBoardDao {
 	
 	public List<RequestBoard> findAllByRbWriter(@Param("startRowNum") int startRowNum, @Param("endRowNum") int endRowNum, @Param("rbWriter") String rbWriter);
 	
+	// 중복으로 신고한 회원이지 확인
+	@Select("select count(*) from reportedBoard where rb_No=#{rbNo} and username=#{username} and rownum=1")
+	public boolean findReportUser(@Param("rbNo") int rbNo,@Param("username") String username);
+	// reported 테이블에 추가
+	@Insert("insert into reportedBoard values(#{rbNo},#{username},#{reason})")
+	public void insertReport(@Param("rbNo") int rbNo,@Param("username") String username,@Param("reason") String reason);
+	
 }

@@ -31,12 +31,12 @@
 </style>
 </head>
 <body>
-<div id="title_image" style="height: 200px;">
+<div id="title_image" style="height: 300px; padding: 3.75rem; background-image: url('https://dmmj3ljielax6.cloudfront.net/upload/service-bg/service_13f0815c-8d41-4656-a7a7-291a817b2d0a.jpg'); background-size: cover; position: ">
 	<div id="title_wrap">
-		<h1 style="padding: 10px;">해당 필드 이름</h1>
+		<h1 style="padding: 20px 0px; font-weight: bold; font-size: 40px; color: white;">${name }</h1>
 		<div id="field_statistics" style="height: 45px;">
-			<div style="border-right: 1px solid black; display: inline-block; padding: 0 10px;"><span>${dalin.count }</span><p>활동 고수</p></div>
-			<div style="display: inline-block; padding: 0 10px;"><span>별</span><p>평점</p></div>
+			<div style="border-right: 1px solid black; display: inline-block; padding: 0 10px; color: white; font-weight: bold;"><span style="font-size: 22px;">${dalin.count }</span><p style="font-size: 14px;">활동 고수</p></div>
+			<div style="display: inline-block; padding: 0 10px; color: white; font-weight: bold;"><span>별</span><p style="font-size: 14px;">평점</p></div>
 		</div>
 	</div>
 </div>
@@ -53,6 +53,24 @@
 				<div>별점</div>
 			</div>
 		</div>
+		<div id="search_div">
+				<div style="padding-right: 2px;" class="form-group">
+					<select id="search" class="form-control" name="searchType" style="height: 30px;">
+						<option value="DNAME">달인</option>
+						<option value="DAREA">지역</option>
+					</select>
+				</div>
+				<div style="padding-right: 2px" class="form-group">
+					<input type="text" id="keyword" name='keyword' class="form-control"
+						style="width: 240px; height: 30px;" placeholder="달인, 지역을  검색해보세요">
+				</div>
+				<div>
+					<button type="button" id="search_btn" class="btn btn-info" style="height: 28px; width: 40px; background-color: #999999; color: white; border: 0; outline: 0;">검색</button>
+				</div>
+				<div>
+					<button type="button" style="margin-left: 335px; background-color: white; color: #999999; width: 100px; height: 30px; border: 1px solid #999999; border-radius: 5px; font-size: 14px;"  data-toggle="modal" data-target="#myModal"><i class="fas fa-th-large"></i>  카테고리</button>
+				</div>
+			</div>
 		<hr>
 	</c:forEach>
 	<div id="page_wrap">

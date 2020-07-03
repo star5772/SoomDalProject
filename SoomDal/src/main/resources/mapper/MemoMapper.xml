@@ -20,7 +20,7 @@
 		from memo where m_no=#{mno} and rownum=1
 	</select>
 	
-	<select id="findAllByReceiver" resultType="memo">
+	<select id="findAllByMemo" resultType="memo">
 		<![CDATA[
 			select * from	
 				(select m.*,rownum rnum from
@@ -53,7 +53,7 @@
 	</delete>
 	
 	<select id="isNotReadMemoExist" resultType="boolean">
-		select count(*) from users where is_read= and receiver=#{username} and rownum=1
+		select count(*) from memo where is_read= and receiver=#{username} and rownum=1
 	</select>
 	
 	<select id="countToMemo" resultType="int">
