@@ -39,9 +39,13 @@ width: 80px; height: 35px;  background-color: #ffc968; color: white; font-size: 
 <script>
 	$(function() {
 		$("#answer").on("click",function() {
+			if($("#cContent").val().length==0){
+				Swal.fire("실패!", "답변 내용을 작성하세요", "info")
+				return false;
+			}
 			params= {
 				_csrf:"${_csrf.token}",
-				cContent:$("#comment").val(),
+				cContent:$("#cContent").val(),
 				qNo:${read.QNo}
 			}
 			$.ajax({
@@ -65,15 +69,7 @@ width: 80px; height: 35px;  background-color: #ffc968; color: white; font-size: 
 			}).done(()=>location.reload()).fail(()=>Swal.fire("실패!","fail","warning"))
 		});
 	});
-$(document).ready(function(){
-	$("#answer").on("click", function(){
-		if($("#cContent").val().length==0){
-			Swal.fire("실패!", "답변 내용을 작성하세요", "info")
-			return;
-		}
-		$("#commentForm").submit();
-	})
-})
+
 </script>
 </head>
 <body>
@@ -130,19 +126,15 @@ $(document).ready(function(){
 	</div>
 		</c:otherwise>
 	</c:choose>
-<form action="/dal/member/qnaBoard/read" method="post" id="commentForm">
 	<!-- 관리잔 답글 달기  sec-->
 	<sec:authorize access="hasRole('ROLE_ADMIN')">
 		<c:if test="${read.cno eq null }">
 		<div style="margin-left: 20px; display: inline-block;">
 			<textarea name="cContent"  id="cContent" rows="7" cols="126" placeholder="답변하실 내용을 입력해주세요." style="font-size: 17px; margin-left:15px;
 				display: inline-block; margin-top: 20px;" ></textarea>
-		<table>
 			<button id="answer">답 변</button>
-		</table> 
 		</div>
 		</c:if>
-		
 		<!-- 관리자가 자신의 댓글을 볼때 sec -->
 		
 		<div style="margin-left:20px; float: left; display: inline-block;">
@@ -151,7 +143,7 @@ $(document).ready(function(){
 		</c:if>	
 		</div>
 	</sec:authorize> 
-</form>
+
 	
 </body>
 </html>

@@ -38,4 +38,9 @@ public class AdminController {
 	public ModelAndView reviewManage(@RequestParam(defaultValue = "1") int pageno) {
 		return new ModelAndView("main").addObject("viewName","admin/review_manage.jsp").addObject("review",adminService.ReviewPage(pageno));
 	}
+	
+	@GetMapping("/admin/refund_manage")
+	public ModelAndView refundManage(@RequestParam(defaultValue = "1") int pageno) {
+		return new ModelAndView("main").addObject("viewName","admin/refund_manage.jsp").addObject("refund",adminService.RefundPage(pageno));
+	}
 }

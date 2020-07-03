@@ -61,5 +61,11 @@ public class DalinRestController {
 		return ResponseEntity.ok(null);
 	}
 	
+	@PostMapping("/dalin/review/writeReview")
+	public ResponseEntity<?> writeReview(Review rv,Principal principal) {
+		rv.setRWriter(principal.getName());
+		return ResponseEntity.ok(dalService.writeReview(rv));
+	}
+	
 	
 }

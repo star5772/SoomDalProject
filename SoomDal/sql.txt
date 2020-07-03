@@ -99,6 +99,7 @@ CREATE TABLE NowPayment (
    P_REFUND_IS_OK CHAR(1), /* 환불상태 */
    d_email varchar2(50),
    p_money number(7),
+   p_request_refund char(1), /* 환불 요청 여부 */ 
    constraint pk_nowpayment primary key(p_code)
 );
 
@@ -210,6 +211,7 @@ CREATE TABLE NowRefund (
    P_CODE VARCHAR2(8) NOT NULL, /* 결제 코드 */
    P_REQ_REFUND_DATE DATE, /* 환불 신청 날짜 */
    P_REFUND_IS_OK CHAR(1), /* 수락 여부 */
+   p_request_money NUMBER(8), /*환불 요청금액*/
    constraint pk_nowrefund primary key(p_refund_code,p_code)
 );
 
@@ -217,8 +219,14 @@ CREATE TABLE NowRefund (
 
 CREATE TABLE ReportedBoard (
    RB_NO NUMBER(6) NOT NULL, /* 글번호 */
+<<<<<<< HEAD
    USERNAME VARCHAR2(50) NOT NULL, /* 신고한 회원아이디 */
    REASON NVARCHAR2(100),
+=======
+   USERNAME VARCHAR2(50) NOT NULL, /* 회원아이디 */
+   RB_REPORTED_RESON NVARCHAR(100),
+   
+>>>>>>> branch 'master' of https://github.com/star5772/SoomDalProject
    constraint pk_reportedboard primary key(rb_no,username)
 );
 
@@ -333,9 +341,7 @@ CREATE TABLE Review (
    R_DATE DATE, /* 작성날짜 */
    R_CONTENT NVARCHAR2(100), /* 작성 내용 */
    R_SCORE NUMBER(1), /* 별점 */
-   R_SAJIN_CNT NUMBER(1), /* 첨부사진 수 */
    R_WRITER NVARCHAR2(20), /* 작성자  */
-   S_NO NUMBER(6), /* 사진 번호 */
    d_mno number(7), /* 리뷰가 달린 달인 회원번호 */
    j_Accusation_cnt number(6), /* 리뷰 신고당한 횟수 */
    constraint pk_review primary key(r_no)

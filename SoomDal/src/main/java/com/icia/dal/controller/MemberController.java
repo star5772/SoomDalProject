@@ -125,7 +125,7 @@ public class MemberController {
 	// 달인 프로필 읽기
 	@GetMapping("/member/dalin_profile")
 	public ModelAndView dalinProfileRead(int dMno) throws DalinNotFoundException {
-		return new ModelAndView("main").addObject("viewName","member/dalin_profile_read.jsp").addObject("readProfile",dalService.readToDalinProfile(dMno));
+		return new ModelAndView("main").addObject("viewName","member/dalin_profile_read.jsp").addObject("readProfile",dalService.readToDalinProfile(dMno)).addObject("reviewAuth",dalService.reviewAuthList(dMno));
 	}
 	@GetMapping("/member/select_detailField")
 	public ModelAndView detailFieldSelect(String fNo) {

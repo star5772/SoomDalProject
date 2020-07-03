@@ -50,12 +50,24 @@ public class AdminDao {
 		return tpl.update("adminMapper.updateToRefund",pRefundCode);
 	}
 	
+	// 환불신청 페이징
+	public List<NowPayment> findAllNowRefundList(int startRowNum, int endRowNum) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("startRowNum", startRowNum);
+		map.put("endRowNum", endRowNum);
+		return tpl.selectList("adminMapper.findAllNowRefundList",map);
+	}
+	
 	// 신고게시물 목록 출력
 	public List<Review> findAllToReview(int startRowNum, int endRowNum) {
 		Map<String,Object> map = new HashMap<String, Object>();
 		map.put("startRowNum",startRowNum);
 		map.put("endRowNum",endRowNum);
 		return tpl.selectList("adminMapper.findAllToReview", map);
+	}
+	
+	public int countToRefund() {
+		return tpl.selectOne("adminMapper.countToRefund");
 	}
 	
 	public int countToJeja() {
