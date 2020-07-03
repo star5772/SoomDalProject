@@ -37,12 +37,7 @@
 	</select>
 	
 
-	<!-- 신고회원 (제자) 목록 출력(아이디, 신고당한 횟수, 신고사유로 정렬) -->
-	<select id="findAllJejaReported" resultType="map">
-		select j.j_mno jMno, j.j_email jEmail, r.j_accusation jAccusation,
-		from jeja j, reportedUser r
-		where j.j_mno=#{jMno} and r.j_mno=#{jMno}
-	</select>
+
 	
 	<!-- 회원 정지 -->	
 	<update id="updateToEnabled" >
@@ -139,11 +134,11 @@
 	</update>
 	
 	<!-- 환불 신청 페이징 -->
-	<select id="findAllNowRefundList" resultType="NowPayment">
+	<select id="findAllNowRefundList" resultType="nowrefund">
 		<![CDATA[
 		select*from
 			(select r.*,rownum as rnum from
-				(select /*+ index_desc(nowpayment nowpayment_pk_p_code)*/ p_code pcode, p_date pDate, p_refund_date pRefundDate, p_refund_is_ok pRefundIsOk, d_email dEmail, p_money pMoney, p_request_refund pRequestRefund from nowpayment where p_request_refund!=0)r
+				(select /*+ index_desc(nowRefund nowRefund_pk_p_code)*/ p_refund_code pRefundCode, p_code pCode, p_req_refund_date pReqRefundDate, p_refund_is_ok pRefundIsOk, p_money pMoney, d_email dEmail from nowrefund)r
 			where rownum<=#{endRowNum})
 		where rnum>=#{startRowNum}
 		]]>
@@ -154,7 +149,12 @@
 		from nowrefund
 	</select>
 	
+	<insert id="insertToRefund">
+		insert into nowrefund(p_refund_code, p_code, p_req_refund_date, p_refund_is_ok, p_money, d_email)
+		values(#{pRefundCode}, #{pCode}, sysout, #{pRefundIsOk}, #{pMoney}, #{dEmail})
+	</insert>
 	
+
 </mapper>
 
 

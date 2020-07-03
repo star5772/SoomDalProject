@@ -2,6 +2,7 @@ package com.icia.dal.service;
 
 import java.io.File;
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
@@ -117,13 +118,11 @@ public class AdminService {
 		PageToRefund refundPage = RefundPagingUtil.getPage(pageno, countOfBoard);
 		int srn = refundPage.getStartRowNum();
 		int ern = refundPage.getEndRowNum();
-		List<NowPayment> refundList = adminDao.findAllNowRefundList(srn, ern);
+		List<NowRefund> refundList = adminDao.findAllNowRefundList(srn, ern);
 		List<RefundDto.DtoForListToRefund> dtoList = new ArrayList<RefundDto.DtoForListToRefund>();
-		for(NowPayment nowPayment:refundList) { 
-			RefundDto.DtoForListToRefund dto = modelMapper.map(nowPayment, RefundDto.DtoForListToRefund.class);
-			dto.setPDate(nowPayment.getPDate().format(DateTimeFormatter.ofPattern("yyyy년 MM월 dd일")));
-			//dto.setPReqRefundDate(nowPayment.getPRefundDate().format(DateTimeFormatter.ofPattern("yyyy년 MM월 dd일")));			 
-			 
+		for(NowRefund nowRefund:refundList) { 
+			RefundDto.DtoForListToRefund dto = modelMapper.map(nowRefund, RefundDto.DtoForListToRefund.class);
+			dto.setPReqRefundDate(nowRefund.getPReqRefundDate().format(DateTimeFormatter.ofPattern("yyyy년 MM월 dd일")));
 			dtoList.add(dto);
 		}
 		refundPage.setList(dtoList);
