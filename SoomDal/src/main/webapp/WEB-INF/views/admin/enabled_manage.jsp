@@ -37,7 +37,26 @@
 	}
 </style>
 <script>
-
+$(document).ready(function() {
+	$("#jIsBlock").on("change", function() {
+		var params = {
+			_csrf:"${_csrf.token}",
+			jIsBlock:$("#jIsBlock").val(),
+			jEmail:$("#jEmail").val()
+		}
+		$.ajax({
+			url:"/dal/member/admin/member_manage",
+			method:"post",
+			data:params,
+			success: function() {
+				window.location.reload();
+				toastr.info("변경성공");
+			},error: function() {
+				toastr.info("변경 실패")
+			}
+		})
+	})
+})
 </script>
 </head>
 <body>
