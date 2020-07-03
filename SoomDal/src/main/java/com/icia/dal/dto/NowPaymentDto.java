@@ -19,4 +19,8 @@ public class NowPaymentDto {
 		private String dEmail;
 		private int pMoney;
 	}
+	
+	
+
+	
 }

@@ -13,18 +13,23 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.icia.dal.dao.*;
+import com.icia.dal.dao.AdminDao;
+import com.icia.dal.dao.JejaDao;
 import com.icia.dal.dto.AdminDto;
-import com.icia.dal.dto.AdminDto.*;
 import com.icia.dal.dto.EnabledPage;
+import com.icia.dal.dto.RefundDto;
 import com.icia.dal.dto.ReportedPage;
 import com.icia.dal.dto.page.AdminPage;
+import com.icia.dal.dto.page.PageToRefund;
 import com.icia.dal.entity.DetailField;
 import com.icia.dal.entity.Field;
 import com.icia.dal.entity.Jeja;
+import com.icia.dal.entity.NowPayment;
+import com.icia.dal.entity.NowRefund;
 import com.icia.dal.entity.Review;
 import com.icia.dal.util.EnabledPagingUtil;
 import com.icia.dal.util.pagingutil.AdminPagingUtil;
+import com.icia.dal.util.pagingutil.RefundPagingUtil;
 import com.icia.dal.util.pagingutil.ReportedPagingUtil;
 
 @Service
@@ -88,6 +93,7 @@ public class AdminService {
 		repPage.setList(dtoList);
 		return repPage;
 	}
+	
 	// 블락유저(제자) 페이징
 	public EnabledPage EnabledPage(int pageno) {
 		int countOfBoard = adminDao.countToJejaEnabled();
@@ -104,6 +110,27 @@ public class AdminService {
 		enaPage.setList(dtoList);
 		return enaPage;
 	}
+	
+	// 환불요청 페이징
+	public PageToRefund RefundPage(int pageno) {
+		int countOfBoard = adminDao.countToRefund();
+		PageToRefund refundPage = RefundPagingUtil.getPage(pageno, countOfBoard);
+		int srn = refundPage.getStartRowNum();
+		int ern = refundPage.getEndRowNum();
+		List<NowPayment> refundList = adminDao.findAllNowRefundList(srn, ern);
+		List<RefundDto.DtoForListToRefund> dtoList = new ArrayList<RefundDto.DtoForListToRefund>();
+		for(NowPayment nowPayment:refundList) { 
+			RefundDto.DtoForListToRefund dto = modelMapper.map(nowPayment, RefundDto.DtoForListToRefund.class);
+			dto.setPDate(nowPayment.getPDate().format(DateTimeFormatter.ofPattern("yyyy년 MM월 dd일")));
+			//dto.setPReqRefundDate(nowPayment.getPRefundDate().format(DateTimeFormatter.ofPattern("yyyy년 MM월 dd일")));			 
+			 
+			dtoList.add(dto);
+		}
+		refundPage.setList(dtoList);
+		return refundPage;
+	}
+	
+	
 	
 	// 세부분야 목록 출력
 	public List<DetailField> detailFnameList(String fNo) {
@@ -165,4 +192,6 @@ public class AdminService {
 			jejaDao.updateJeja(jeja);
 		}
 	}
+	
+	 
 }
