@@ -12,7 +12,7 @@
 		d_mno,rb_enabled,r_is_read)
 		values(#{rNo},#{jMno},#{rField},#{rSubject},#{rLessonPurpose},
 		#{rYourLevel},#{rItemExists},#{rLessonType},#{rWantDate},#{rWantTime},
-		#{rAge},#{rGender},0,#{rWannable.JdbcType=NVARCHAR},#{rWantArea},sysdate,#{dMno},1,0)
+		#{rAge},#{rGender},0,#{rWannable,jdbcType=NVARCHAR},#{rWantArea},sysdate,#{dMno},1,0)
 	</insert>
 
 	<select id="findByRequest" resultType="request">

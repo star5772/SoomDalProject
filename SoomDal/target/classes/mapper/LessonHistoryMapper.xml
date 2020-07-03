@@ -40,7 +40,11 @@
 		select count(*) from lessonhistory where d_mno=#{dMno}
 	</select>
 
-
+	<select id="findByCompleteCodeToLH" resultType="string">
+		select a_complete_code aCompleteCode from lessonhistory where j_mno = #{jMno}
+	</select>
+	
+	
 </mapper>
 
 

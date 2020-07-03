@@ -35,7 +35,10 @@ public class LessonHistoryDao {
 		map.put("dMno", dMno);
 		return tpl.selectList("historyMapper.findAllByLessonHistoryToDalin",map);
 	}
-
+	
+	public String findByCompleteCodeToLH(int jMno) {
+		return tpl.selectOne("historyMapper.findByCompleteCodeToLH",jMno);
+	}
 	
 	public int deleteToLessonHistory(String aCompleteCode) {
 		return tpl.delete("historyMapper.deleteToLessonHistory",aCompleteCode);

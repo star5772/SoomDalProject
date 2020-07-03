@@ -45,8 +45,7 @@ public class DalinService {
 	private ProfileAttachmentDao profileAttachmentDao;
 	@Inject
 	private RepQuestionDao repDao;
-	@Inject
-	private ReviewAuthorityDao reviewAuthDao;
+
 	
 
 	public void join(DtoForJoinToDalin dto) {
@@ -250,9 +249,7 @@ public class DalinService {
 		return reviewDao.findAllReview(dMno);
 	}
 	
-	public List<ReviewAuthority> reviewAuthList(int dMno) {
-		return reviewAuthDao.findAllByReviewAuth(dMno);
-	}
+
 
 }
 

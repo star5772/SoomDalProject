@@ -1,21 +1,26 @@
 package com.icia.dal.controller;
 
 
-import java.security.*;
+import java.security.Principal;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.http.ResponseEntity;
-import org.springframework.lang.*;
+import org.springframework.lang.Nullable;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.icia.dal.Exception.*;
+import com.icia.dal.Exception.DalinNotFoundException;
+import com.icia.dal.Exception.JobFailException;
+import com.icia.dal.entity.Review;
 import com.icia.dal.service.AdminService;
 import com.icia.dal.service.DalinService;
 import com.icia.dal.service.JejaService;
@@ -125,8 +130,18 @@ public class MemberController {
 	// 달인 프로필 읽기
 	@GetMapping("/member/dalin_profile")
 	public ModelAndView dalinProfileRead(int dMno) throws DalinNotFoundException {
-		return new ModelAndView("main").addObject("viewName","member/dalin_profile_read.jsp").addObject("readProfile",dalService.readToDalinProfile(dMno)).addObject("reviewAuth",dalService.reviewAuthList(dMno));
+		return new ModelAndView("main").addObject("viewName","member/dalin_profile_read.jsp").addObject("readProfile",dalService.readToDalinProfile(dMno));
 	}
+	
+	@PostMapping("/member/reviewWrite")
+	public ResponseEntity<Boolean> reviewWrite(Review rv,Principal principal) {
+		String username = principal.getName();
+		System.out.println(rv);
+		if(reviewService.reviewAuthChkAndWrite(rv, username)==false)
+			throw new JobFailException();
+		return ResponseEntity.ok(reviewService.reviewAuthChkAndWrite(rv, username));
+	}
+	
 	@GetMapping("/member/select_detailField")
 	public ModelAndView detailFieldSelect(String fNo) {
 		return new ModelAndView("main").addObject("viewName","member/detail_field_select.jsp").addObject("detailField",adminService.detailFnameList(fNo));

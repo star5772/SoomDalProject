@@ -16,20 +16,29 @@ $(function(){
 		var params = {
 				_csrf: "${_csrf.token}",
 				rContent: $("#rContent").val(),
-				jEmail: username
+				rWriter: "${username}",
+				rScore: $("#reviewScore").val(),
+				dMno: $("#dMno").val()
 			}
 		$.ajax({
-			url: ,
-			data: , 
-			method: ,
-			success: function
+			url: "/dal/member/reviewWrite",
+			data: params, 
+			method: "post",
+			success: function(result){
+				if(result==true)
+					alert("리뷰 작성완료");
+				else
+					alert("리뷰 작성권한이 없습니다");
+			}
 		})
 	})
 })
 
 </script>
 <style>
-
+#rWrite{
+	font-size: 15px;
+}
 h2{
 	font-weight: bold;
 }
@@ -258,14 +267,15 @@ hr{
 				<div id="rContent">
 					<p>${review.rContent}리뷰내용</p>
 				</div>
-				<c:if test="${reviewAuth.jEmail eq username }">
-				<div>
-					<textarea rows="3" cols="70" name="rContent" id="rContent"></textarea>				
+				<div id="rWrite">
+					<input type="hidden" name="dMno" id="dMno" value="${readProfile.DMno}">
+					<div>
+						<textarea rows="3" cols="70" name="rContent" id="rContent" style="width: 500px; height: 100px;"></textarea><input type="text" id="reviewScore">				
+					</div>
+					<div>
+						<button type="button" id="reviewWrite" class="btn btn-info">리뷰 작성</button>
+					</div>
 				</div>
-				<div>
-					<button type="button" id="reviewWrite" class="btn btn-info">리뷰 작성</button>
-				</div>
-				</c:if>
 			</div>
 		</div>
 		<div>

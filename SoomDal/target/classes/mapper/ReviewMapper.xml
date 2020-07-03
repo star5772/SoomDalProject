@@ -7,13 +7,13 @@
 		<selectKey keyColumn="rNo" order="BEFORE" resultType="int">
 			select review_seq.nextval from dual
 		</selectKey>
-		insert into review(r_no, r_date, r_content, r_score, r_sajin_cnt, r_writer, s_no,  j_accusation_cnt)
-		values(#{rNo}, sysdate, #{rContent}, #{rScore}, #{rSajinCnt, jdbcType=VARCHAR}, #{rWriter}, #{sNo},0 )
+		insert into review(r_no, r_date, r_content, r_score, r_writer, j_accusation_cnt)
+		values(#{rNo}, sysdate, #{rContent}, #{rScore}, #{rWriter},0 )
 	</insert>
 	
 	<!-- 읽기 -->
 	<select id="findAllReview" resultType="review">
-		select r_no rNo, r_date rDate, r_content rContent, r_score rScore, r_sajin rSajin, r_writer rWriter, s_no sNo, d_mno dMno, j_accsation_cnt jAccusationCnt 
+		select r_no rNo, r_date rDate, r_content rContent, r_score rScore, r_writer rWriter, d_mno dMno, j_accsation_cnt jAccusationCnt 
 		from review 
 		where d_mno=#{dMno} order by r_no
 	</select>
@@ -39,7 +39,7 @@
 	</select>
 	
 	<select id="findByReview" resultType="review">
-		select r_no rNo, r_date rDate, r_content rContent, r_score rScore, r_sajin rSajin, r_writer rWriter, s_no sNo, d_mno dMno , j_accusation_cnt jAccusationCnt
+		select r_no rNo, r_date rDate, r_content rContent, r_score rScore, r_writer rWriter, d_mno dMno , j_accusation_cnt jAccusationCnt
 		from review
 		where r_no=#{rNo} and rownum=1
 	</select>

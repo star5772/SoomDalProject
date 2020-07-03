@@ -15,6 +15,7 @@ import com.icia.dal.dao.DAO;
 import com.icia.dal.dao.DalinDao;
 import com.icia.dal.dao.JejaDao;
 import com.icia.dal.dao.LessonHistoryDao;
+import com.icia.dal.dao.ReviewAuthorityDao;
 import com.icia.dal.dto.JejaDto;
 import com.icia.dal.dto.JejaDto.DtoForJejaUpdate;
 import com.icia.dal.dto.LHDto;
@@ -22,6 +23,7 @@ import com.icia.dal.dto.page.PageToLessonHistory;
 import com.icia.dal.entity.Dalin;
 import com.icia.dal.entity.Jeja;
 import com.icia.dal.entity.LessonHistory;
+import com.icia.dal.entity.Review;
 import com.icia.dal.util.pagingutil.LessonHistoryPagingUtil;
 
 @Service
@@ -37,8 +39,10 @@ public class JejaService {
 	@Inject
 	private ModelMapper modelMapper;
 	@Inject
-	private LessonHistoryDao lhDao;
+	private LessonHistoryDao lhDao;	
 
+
+	
 	public void existsByEmail(String jEmail) {
 		String email = dao.existsByjEmail(jEmail);
 		// 나중에 예외처리 다시 해야함
@@ -132,4 +136,10 @@ public class JejaService {
 	public Jeja findById(String jEmail) {
 		return dao.findById(jEmail);
 	}
+	
+	
+	
+
+	
+	
 }
