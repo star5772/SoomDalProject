@@ -4,6 +4,7 @@ package com.icia.dal.controller;
 import java.security.Principal;
 
 import javax.inject.Inject;
+import javax.validation.constraints.*;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindException;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.icia.dal.Exception.*;
 import com.icia.dal.entity.Jeja;
 import com.icia.dal.service.JejaService;
 
@@ -67,6 +69,15 @@ public class JejaController {
 		return new ModelAndView("main").addObject("viewName","member/lessonHistory.jsp").addObject("LHlist", service.lessonListToJeja(pageno, jMno)).addObject("jMno",jMno);
 	}
 	
+	@GetMapping("/jeja/change_pwd")
+	public ModelAndView changePassword() {
+		return new ModelAndView("main").addObject("viewName","jeja/change_pwd.jsp");
+	}
 	
-
+	@PostMapping("/jeja/change_pwd")
+	public String changePassword(@RequestParam @NotNull String jPassword, @RequestParam String newPassword, Principal principal, RedirectAttributes ra) throws JejaNotFoundException {
+		service.changePwd(jPassword, newPassword, principal.getName());
+		ra.addFlashAttribute("msg","비밀번호를 변경했습니다");
+		return "redirect:/";
+	}
 }

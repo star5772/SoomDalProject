@@ -55,6 +55,7 @@
 	<update id="updateToDalin">
 		update dalin
 		<trim prefix="set" suffixOverrides=",">
+			<if test="dEmail!=null">d_email=#{dEmail},</if>
 			<if test="dName!=null">d_name=#{dName},</if>
 			<if test="dPassword!=null">d_password=#{dPassword},</if>
 			<if test="dTel!=null">d_tel=#{dTel},</if>
