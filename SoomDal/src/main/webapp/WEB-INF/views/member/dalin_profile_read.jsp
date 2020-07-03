@@ -258,7 +258,7 @@ hr{
 				<div id="rContent">
 					<p>${review.rContent}리뷰내용</p>
 				</div>
-				<c:if test="${reviewAuth.JEmail eq username }">
+				<c:if test="${reviewAuth.jEmail eq username }">
 				<div>
 					<textarea rows="3" cols="70" name="rContent" id="rContent"></textarea>				
 				</div>
