@@ -7,6 +7,50 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<style>
+body:before{
+  content:'';
+  height:100%;
+  display:inline-block;
+  vertical-align:middle;
+}
+button{
+  background:#FFC459;
+  color:#fff;
+  border:none;
+  position:relative;
+  height:60px;
+  font-size:1.6em;
+  padding:0 2em;
+  cursor:pointer;
+  transition:800ms ease all;
+  outline:none;
+}
+button:hover{
+  background:#fff;
+  color:#FFC459;
+}
+button:before,button:after{
+  content:'';
+  position:absolute;
+  top:0;
+  right:0;
+  height:2px;
+  width:0;
+  background: #FFC459;
+  transition:400ms ease all;
+}
+button:after{
+  right:inherit;
+  top:inherit;
+  left:0;
+  bottom:0;
+}
+button:hover:before,button:hover:after{
+  width:100%;
+  transition:800ms ease all;
+}
+</style>
 <sec:authorize access="hasAnyRole('ROLE_JEJA','ROLE_DALIN','ROLE_ADMIN')">
 	<script src="/dal/script/webS.js"></script>
 </sec:authorize>
@@ -57,7 +101,7 @@
         <div class="card h-100">
           <a href="/dal/member/field_sport/list" style="color:white;"><img id="show_sport" class="card-img-top" src="/image/sport.jpg"/></a>
           <div class="card-body">
-            <p class="card-text"style="font-size: xx-large; text-align: center; background-color: maroon; color:white; margin-top: 25px;"><a href="/dal/member/field_sport/list" style="color:white;">스포츠</a></p>
+            <p class="card-text"style="font-size: x-large; text-align: center; background-color: white; color:black; margin-top: 25px;"><button style="font-size: xx-large;" onclick="location.href='/dal/member/field_sport/list'" >Sport</button></p>
             
           </div>
         </div>
@@ -66,7 +110,7 @@
         <div class="card h-100">
           <a href="/dal/member/field_music/list"><img id="show_music"class="card-img-top" src="/image/music.jpg" alt=""></a>
           <div class="card-body">
-            <p class="card-text" style="font-size: xx-large; text-align: center; background-color: aqua; margin-top: 25px;"><a href="/dal/member/field_music/list" style="color:pink;">악기</a></p>
+            <p class="card-text" style="font-size: x-large; text-align: center; background-color: white; margin-top: 25px;"><button style="font-size: xx-large;" onclick="location.href='/dal/member/field_music/list'" >Instrument</button></p>
           </div>
         </div>
       </div>
@@ -74,7 +118,7 @@
         <div class="card h-100">
           <a href="/dal/member/field_art/list"><img id="show_art" class="card-img-top" src="/image/art.jpg" alt=""></a>
           <div class="card-body">
-            <p class="card-text" style="font-size: xx-large; text-align: center; background-color: pink; margin-top: 25px;"><a href="/dal/member/field_art/list" style="color:white;">미술</a></p>
+            <p class="card-text" style=" text-align: center; background-color: white; margin-top: 25px;"><button style="font-size: xx-large;" onclick="location.href='/dal/member/field_art/list'" >Art</button></p>
         </div>
       </div>
      </div>

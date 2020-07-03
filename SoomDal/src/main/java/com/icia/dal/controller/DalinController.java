@@ -103,5 +103,4 @@ public class DalinController {
 		return new ModelAndView("payment/usedCash").addObject("uc",paymentService.useCashList(pageno, principal.getName(), dMno)).addObject("dMno",dMno);
 	}
 	
-	
 }
