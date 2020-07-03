@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> 
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,6 +10,24 @@
 <sec:authorize access="hasAnyRole('ROLE_JEJA','ROLE_DALIN','ROLE_ADMIN')">
 	<script src="/dal/script/webS.js"></script>
 </sec:authorize>
+<script>
+$(function(){
+	$("#reviewWrite").on("click",function(){
+		var params = {
+				_csrf: "${_csrf.token}",
+				rContent: $("#rContent").val(),
+				jEmail: username
+			}
+		$.ajax({
+			url: ,
+			data: , 
+			method: ,
+			success: function
+		})
+	})
+})
+
+</script>
 <style>
 
 h2{
@@ -41,6 +60,7 @@ hr{
 }
 #rScore{
 	display: inline-block;
+	margin-left: 50px;
 }
 	color : #878787;
 #rDate{
@@ -106,6 +126,7 @@ hr{
 </style>
 </head>
 <body>
+<sec:authentication property="principal.username" var="username"/>
 	<div id="dalinRead">
 		<div id="dProfile">
 			<div style="border-radius: 50%; height: 200px; width: 200px; background-color: gray; ">
@@ -214,7 +235,7 @@ hr{
 					<h2>리뷰</h2><br>
 				</div>
 				<div>
-					<h2>별점평균</h2>
+					<h2>별점평균</h2><h3>${review.rScore}</h3>
 				</div>
 			</div>
 		</div>
@@ -225,18 +246,26 @@ hr{
 			<div>
 				<div id="review" >
 					<div id="rWriter">
-						<p>${review.rWriter}김희은</p>
+						<p>${review.rWriter}리뷰 작성자</p>
 					</div>
 					<div id="rScore">
-						<p>${review.rScore}별</p>
+						<p>${review.rScore}별점</p>
 					</div>
 					<div id="rDate">
-						<p>${review.rDate}2020.06.18</p>
+						<p>${review.rDate}작성시간</p>
 					</div>
 				</div>
 				<div id="rContent">
 					<p>${review.rContent}리뷰내용</p>
 				</div>
+				<c:if test="${reviewAuth.jEmail eq username }">
+				<div>
+					<textarea rows="3" cols="70" name="rContent" id="rContent"></textarea>				
+				</div>
+				<div>
+					<button type="button" id="reviewWrite" class="btn btn-info">리뷰 작성</button>
+				</div>
+				</c:if>
 			</div>
 		</div>
 		<div>

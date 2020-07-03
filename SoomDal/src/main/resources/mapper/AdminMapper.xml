@@ -51,12 +51,8 @@
 		where j_email=#{jEmail} and rownum=1
 	</update>
 
-	<!-- 환불(NowRefund) -->
-	<update id="updateToRefund">
-		update nowrefund 
-		set p_refund_is_ok=#{pRefundIsOk} 
-		where p_refund_code=#{pRefundCode} and rownum=1
-	</update>
+	
+	
 	
 	<select id="countToJeja" resultType="int">
 		select /*+ index_ffs(jeja jeja_pk_j_mno)*/count(*)
@@ -89,6 +85,7 @@
 			select * from
 				(select j.*,rownum as rnum from
 					(select /*+ index_desc(jeja jeja_pk_j_mno)*/j_mno jMno, j_email jEmail, j_name jName, j_accusation_cnt jAccusationCnt, j_joindate jJoinDate, enabled, j_is_block jIsBlock from jeja)j
+
 					where rownum<=#{endRowNum})
 				where rnum>=#{startRowNum}
 		]]>
@@ -133,7 +130,30 @@
 	<delete id="deleteToDetailField">
 		delete from detailfield where f_no=#{fNo} and detail_f_name=#{detailFName} and rownum=1
 	</delete>
-
+	
+	<!-- 환불(NowRefund) -->
+	<update id="updateToRefund">
+		update nowrefund 
+		set p_refund_is_ok=#{pRefundIsOk} 
+		where p_refund_code=#{pRefundCode} and rownum=1
+	</update>
+	
+	<!-- 환불 신청 페이징 -->
+	<select id="findAllNowRefundList" resultType="NowPayment">
+		<![CDATA[
+		select*from
+			(select r.*,rownum as rnum from
+				(select /*+ index_desc(nowpayment nowpayment_pk_p_code)*/ p_code pcode, p_date pDate, p_refund_date pRefundDate, p_refund_is_ok pRefundIsOk, d_email dEmail, p_money pMoney, p_request_refund pRequestRefund from nowpayment where p_request_refund!=0)r
+			where rownum<=#{endRowNum})
+		where rnum>=#{startRowNum}
+		]]>
+	</select>
+	
+	<select id="countToRefund" resultType="int">
+		select count(*)
+		from nowrefund
+	</select>
+	
 	
 </mapper>
 

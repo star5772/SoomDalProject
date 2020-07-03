@@ -60,7 +60,7 @@ ${enabled }
     		<a href="/dal/member/admin/review_manage" class="list-group-item" id="review">게시물 관리</a>
     		<a href="/dal/member/admin/jeja_manage" class="list-group-item" id="report">신고회원 관리</a>
     		<a href="/dal/member/admin/enabled_manage" class="list-group-item" id="enabled">블락회원 관리</a>
-    		<a href="#" class="list-group-item">환불 관리</a>
+    		<a href="/dal/member/admin/refund_manage" class="list-group-item">환불 관리</a>
   		</div>
 	</div>
 </div>

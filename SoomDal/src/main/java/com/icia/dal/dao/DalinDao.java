@@ -91,6 +91,4 @@ public class DalinDao {
 	public String findIdByName(String dName) {
 		return tpl.selectOne("dalinMapper.findIdByName",dName);
 	}
-
-	
 }

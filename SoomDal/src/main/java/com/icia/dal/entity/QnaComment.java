@@ -11,8 +11,8 @@ import lombok.experimental.*;
 @Builder
 @Accessors(chain=true)
 public class QnaComment {
-	private int cNo;
-	private int qNo;
+	private Integer cNo;
+	private Integer qNo;
 	private String cContent;
 	private LocalDateTime cWriteDate;
 	private String adEmail;

@@ -36,6 +36,7 @@ drop sequence reviewattachment_seq;
 DROP SEQUENCE MEMO_SEQ;
 
 
+
 create sequence JEJA_seq minvalue 0;
 select JEJA_seq.nextval from dual;
 create sequence RepQuestion_seq minvalue 0;
@@ -68,15 +69,14 @@ SELECT MEMO_SEQ.NEXTVAL FROM DUAL;
 
 /* 문의 게시판 */
 CREATE TABLE QnaBoard (
-   Q_NO NUMBER(8) NOT NULL, /* 문의 코드 */
+   Q_no VARCHAR2(8) NOT NULL, /* 문의 코드 */
    Q_TITLE NVARCHAR2(20), /* 제목 */
    Q_CONTENT NVARCHAR2(1000), /* 내용 */
    Q_WRITE_DATE DATE, /* 문의 날짜 */
-   Q_WRITER NVARCHAR2(20), /* 작성자  아이디 */
+   Q_WRITER NVARCHAR2(20), /* 작성자 */
    C_NO NUMBER(7), /* 댓글 번호 */
    Q_IS_SECRET CHAR(1), /* 비밀글여부 */
    Q_IS_NOTICE CHAR(1), /* 공지사항여부 */
-   Q_NAME NVARCHAR2(15), /* 작성자 이름 */
    constraint pk_qnaboard primary key(q_no)
 );
 
@@ -103,7 +103,13 @@ CREATE TABLE NowPayment (
 );
 
 
+
+
+/*분야*/
+
+
 /* 제자회원*/
+
 CREATE TABLE JEJA (
    J_MNO NUMBER(7) NOT NULL, /* 제자 회원 번호 */
    J_EMAIL VARCHAR2(50) NOT NULL, /* 회원 id(email) */
@@ -158,24 +164,27 @@ CREATE TABLE DetailField (
    constraint pk_detailfield primary key(f_no,detail_f_name)
 );
 
-/* 요청서 */
 
+
+
+/* 요청서 */
+drop table request;
 CREATE TABLE Request (
    R_NO NUMBER(6) NOT NULL, /* 요청서번호 */
    J_MNO NUMBER(7) NOT NULL, /* 제자 회원 번호 */
-   R_FIELD NVARCHAR2(20), /* 분야 */
-   R_SUBJECT NVARCHAR2(20), /* 종목 */
+   R_FIELD NVARCHAR2(10), /* 분야 */
+   R_SUBJECT NVARCHAR2(10), /* 종목 */
    R_LESSON_PURPOSE NVARCHAR2(20), /* 레슨목적 */
    R_YOUR_LEVEL NVARCHAR2(20), /* 본인의 수준 */
    R_ITEM_EXISTS NVARCHAR2(20), /* 장비의유무 */
    R_LESSON_TYPE NVARCHAR2(20), /* 레슨형태(그룹, 개인) */
-   R_WANT_DATE DATE, /* 원하는 날짜 */
+   R_WANT_DATE date, /* 원하는 날짜 */
    R_WANT_TIME NVARCHAR2(20), /* 원하는 수업시간 */
    R_AGE NVARCHAR2(3), /* 연령 */
    R_GENDER CHAR(1), /* 성별 */
    R_DALIN_IS_OK CHAR(1), /* 달인 수락 상태 */
    R_WANNABLE NVARCHAR2(100), /* 기타 문의 및 희망사항 */
-   R_WANT_AREA NVARCHAR2(20), /* 희망 지역 */
+   R_WANT_AREA NVARCHAR2(10), /* 희망 지역 */
    R_WRITE_DATE DATE, /* 작성 시간 */
    D_MNO NUMBER(6), /* 달인회원번호 */
    RB_ENABLED CHAR(1),
@@ -183,14 +192,6 @@ CREATE TABLE Request (
    constraint pk_request primary key(r_no,j_mno)
 );
 
-/*신고회원*/
-
-CREATE TABLE ReportedUser (
-   D_MNO NUMBER(6) NOT NULL, /* 회원 번호 */
-   J_MNO NUMBER(6) NOT NULL, /* 신고당한 회원 */
-   R_REPORT_REASON NVARCHAR2(100),
-   constraint pk_reporteduser primary key(d_mno,j_mno)
-);
 
 /*결제요청*/
 
@@ -217,10 +218,19 @@ CREATE TABLE NowRefund (
 
 CREATE TABLE ReportedBoard (
    RB_NO NUMBER(6) NOT NULL, /* 글번호 */
-   USERNAME VARCHAR2(50) NOT NULL, /* 회원아이디 */
+   USERNAME VARCHAR2(50) NOT NULL, /* 신고한 회원아이디 */
+   REASON NVARCHAR2(100),
    constraint pk_reportedboard primary key(rb_no,username)
 );
 
+/*신고회원*/
+
+CREATE TABLE ReportedUser (
+   D_MNO NUMBER(6) NOT NULL, /* 회원 번호 */
+   J_MNO NUMBER(6) NOT NULL, /* 신고당한 회원 */
+   REASON NVARCHAR2(100),
+   constraint pk_reporteduser primary key(d_mno,j_mno)
+);
 /*관리자*/
 
 CREATE TABLE Admin (
@@ -244,7 +254,7 @@ CREATE TABLE UseCash (
 
 CREATE TABLE QnaComment (
    C_NO NUMBER(7) NOT NULL, /* 댓글 번호 */
-   Q_NO NUMBER(8), /* 댓글 단 게시물 번호 */
+   C_CODE VARCHAR2(8), /* 문의 코드 */
    C_CONTENT NVARCHAR2(500), /* 내용 */
    C_WRITE_DATE DATE, /* 작성 시간 */
    AD_EMAIL VARCHAR2(50), /* 관리자이메일 */
@@ -284,6 +294,7 @@ CREATE TABLE Estimate (
    E_CASH NUMBER(5), /* 필요 캐시 */
    d_name nvarchar2(6), /* 달인 이름 */
    e_is_read char(1), /* 읽음 여부 */
+   e_write_time date,
    constraint pk_estimate primary key(e_no,d_mno)
 );
 
@@ -298,7 +309,7 @@ CREATE TABLE Memo (
    TITLE NVARCHAR2(100), /* 제목 */
    IS_READ CHAR(1), /* 읽음안읽음 - */
    DISABLE_BY_SENDER CHAR(1),
-   DISABLE_BY_RECEIVER CHAR(1),
+   disable_by_receiver CHAR(1),
    constraint pk_memo primary key(m_no)
 );
 
@@ -309,8 +320,10 @@ CREATE TABLE ReviewAuthority (
    D_MNO NUMBER(7), /* 달인 회원번호 */
    J_MNO NUMBER(7), /* 제자 회원번호 */
    A_IS_OK CHAR(1), /* 권한 여부 */
+   J_EMAIL varchar2(50),
    constraint pk_reviewauthority primary key(a_complete_code)
 );
+
 
 
 /*프로필 첨부파일*/
@@ -332,9 +345,7 @@ CREATE TABLE Review (
    R_DATE DATE, /* 작성날짜 */
    R_CONTENT NVARCHAR2(100), /* 작성 내용 */
    R_SCORE NUMBER(1), /* 별점 */
-   R_SAJIN_CNT NUMBER(1), /* 첨부사진 수 */
    R_WRITER NVARCHAR2(20), /* 작성자  */
-   S_NO NUMBER(6), /* 사진 번호 */
    d_mno number(7), /* 리뷰가 달린 달인 회원번호 */
    j_Accusation_cnt number(6), /* 리뷰 신고당한 횟수 */
    constraint pk_review primary key(r_no)
@@ -347,7 +358,6 @@ CREATE TABLE ReviewAttachment (
    S_FILE_NAME VARCHAR2(30), /* 시스템 파일이름 */
    constraint pk_reviewattachment primary key(s_no)
 );
-
 /* 권한 */
 
 CREATE TABLE Authorities (
@@ -365,3 +375,4 @@ create Table LESSONHISTORY (
 );
 
 select * from tab;
+

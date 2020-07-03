@@ -14,4 +14,5 @@ public class ReviewAuthority {
 	private Integer dMno;
 	private Integer jMno;
 	private Boolean aIsOk;
+	private String jEmail;
 }
