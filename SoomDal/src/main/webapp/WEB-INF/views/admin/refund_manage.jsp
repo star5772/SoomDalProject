@@ -81,7 +81,6 @@ ${refund }
 				<tr class="active">
 					<th>아이디</th>
 					<th>신청 날짜</th>
-					<th>가능기한</th>
 					<th>요청금액</th>
 					<th>여부</th>
 					<th>수락</th>
@@ -92,7 +91,6 @@ ${refund }
 					<tr>
 						<td>${r.DEmail}</td>
 						<td>${r.PReqRefundDate }</td>
-						<td>${r.PRefundDate }</td>
 						<td>${r.PMoney }</td>
 						<c:choose>
 							<c:when test="${r.PRefundIsOk ==true}">
@@ -103,7 +101,7 @@ ${refund }
 							</c:otherwise>
 						</c:choose>
 						<td>
-							<button>수 락</button>
+							<button class="btn btn-secondary" style="width: 50px;">수락</button>
 						</td>
 					</tr>
 					<input type="hidden" name="dEmail" id="dEmail" value="${r.DEmail}">

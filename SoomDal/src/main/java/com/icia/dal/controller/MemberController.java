@@ -6,6 +6,7 @@ import java.security.Principal;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.validation.constraints.*;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.lang.Nullable;
@@ -17,9 +18,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.*;
 
-import com.icia.dal.Exception.DalinNotFoundException;
-import com.icia.dal.Exception.JobFailException;
+import com.icia.dal.Exception.*;
 import com.icia.dal.entity.Review;
 import com.icia.dal.service.AdminService;
 import com.icia.dal.service.DalinService;
@@ -151,5 +152,29 @@ public class MemberController {
 	@GetMapping("/member/search")
 	public ModelAndView search(@RequestParam(defaultValue = "1") int pageno,@Nullable String searchType,@Nullable String keyword) {
 		return new ModelAndView("main").addObject("viewName","member/search.jsp").addObject("search",dalService.dalSearch(pageno,searchType,keyword));
+	}
+	
+	@GetMapping("/member/resetToDalinPwd")
+	public ModelAndView resetToDalinPwd() {
+		return new ModelAndView("main").addObject("viewName","member/resetToDalinPwd.jsp");
+	}
+	
+	@PostMapping("/member/resetToDalinPwd")
+	public String resetToDalinPwd(@RequestParam @NotNull String dPassword, @RequestParam @NotNull String newPassword, Principal principal, RedirectAttributes ra) throws DalinNotFoundException {
+		dalService.changePwd(dPassword, newPassword, principal.getName());
+		ra.addFlashAttribute("msg", "비밀번호를 변경했습니다");
+		return "redirect:/member/login";
+	}
+	
+	@GetMapping("/member/resetToJejaPwd")
+	public ModelAndView resetToJejaPwd() {
+		return new ModelAndView("main").addObject("viewName","member/resetToJejaPwd.jsp");
+	}
+	
+	@PostMapping("/member/resetToJejaPwd")
+	public String resetToJejaPwd(@RequestParam @NotNull String jPassword, @RequestParam @NotNull String newPassword, Principal principal, RedirectAttributes ra) throws JejaNotFoundException {
+		jejaService.changePwd(jPassword, newPassword, principal.getName());
+		ra.addFlashAttribute("msg","비밀번호를 변경했습니다");
+		return "redirect:/member/login";
 	}
 }
