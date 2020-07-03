@@ -32,8 +32,8 @@ public class RequestBoardDaoTest {
 	
 	@Test
 	public void insert() {
-		for(int i=0; i<86; i++) {
-			RequestBoard req = RequestBoard.builder().rbTitle(i+"번째 글").rbContent("냉무").rbWriter("spring").rbReadCnt(0).rbReportCnt(0).rbIsBlock(false).rbIsNotice(false).rNo(0).jMno(0).build();
+		for(int i=0; i<15; i++) {
+			RequestBoard req = RequestBoard.builder().rbTitle(i+"번째 글").rbContent("냉무").rbWriter(i+"spring").rbReadCnt(0).rbReportCnt(0).rbIsBlock(false).rbIsNotice(false).rNo(i).jMno(i).build();
 			requestDao.insert(req);
 		}
 	}

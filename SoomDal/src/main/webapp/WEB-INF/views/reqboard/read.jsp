@@ -17,12 +17,21 @@
 	display: inline-block;
 }
 </style>
-
+<script>
+function report_pop() {
+	var rbNo=${reqRead.rbNo};
+	window.open("report?rbNo="+rbNo,"report","width=500, height=500,left=500,top=200, resizable=no, scrollbars=no, status=no, location=no, directories=no;");
+}
+	$(function() {
+		$("#report").on("click",function() {
+			report_pop();
+		});
+	});
+</script>
 </head>
-
 <body>
-
-	<div id="report">
+${reqRead }
+	<div>
 		<h1 style="font-size: 30px; font-weight: bold; line-height: 1.5em;">요청서</h1>
 	</div>
 	<div>
@@ -41,12 +50,11 @@
 		<button id="list" style="text-align: center; font-size: 10px; font-weight: bold; color: white;" class="btn btn-warning">목록</button>
 	</div>
 	<div id="btn_area" style="display: inline-block;">
-		<button id="report" style="text-align: center; font-size: 10px; font-weight: bold; color: white;" class="btn btn-secondary">신고</button>
+		<button id="report" type="button" style="text-align: center; font-size: 10px; font-weight: bold; color: white;" class="btn btn-secondary">신고</button>
 	</div>
 	<div id="btn_area" style="display: inline-block; float: right">
 		<button id="estimate" style="font-size: 10px; font-weight: bold; color: white;" class="btn btn-warning">견적서 보내기</button>
 	</div>
-
 </body>
 
 </html>

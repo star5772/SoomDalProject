@@ -217,7 +217,8 @@ CREATE TABLE NowRefund (
 
 CREATE TABLE ReportedBoard (
    RB_NO NUMBER(6) NOT NULL, /* 글번호 */
-   USERNAME VARCHAR2(50) NOT NULL, /* 회원아이디 */
+   USERNAME VARCHAR2(50) NOT NULL, /* 신고한 회원아이디 */
+   R_REPORT_REASON NVARCHAR2(100),
    constraint pk_reportedboard primary key(rb_no,username)
 );
 
