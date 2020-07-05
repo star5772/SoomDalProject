@@ -154,17 +154,17 @@ public class MemberController {
 		return new ModelAndView("main").addObject("viewName","member/search.jsp").addObject("search",dalService.dalSearch(pageno,searchType,keyword));
 	}
 	
-	
-	  @GetMapping("/dal/member/resetToDalinPwd") 
+	  @GetMapping("/member/resetToDalinPwd") 
 	  public ModelAndView resetToDalinPwd() {
 		  return new ModelAndView("main").addObject("viewName","member/resetToDalinPwd.jsp");
 		  }
 	  
-	  @PostMapping("/dal/member/resetToDalinPwd") 
-	  public String resetToDalinPwd(@RequestParam @NotNull String dPassword, @RequestParam @NotNull String newPassword, Principal principal,RedirectAttributes ra) throws DalinNotFoundException {
-	  dalService.changePwd(dPassword, newPassword, principal.getName());
-	  ra.addFlashAttribute("msg", "비밀번호를 변경했습니다"); 
-	  return "redirect:/member/login";
+	  @PostMapping("/member/resetToDalinPwd") 
+	  public String resetToDalinPwd(@RequestParam @NotNull String dPassword, @RequestParam @NotNull String newPassword, String dEmail, RedirectAttributes ra, SecurityContextLogoutHandler handler, HttpServletRequest request, HttpServletResponse response, Authentication authentication ) throws DalinNotFoundException {
+		  dalService.changePwd(dPassword, newPassword, dEmail);
+		  ra.addFlashAttribute("msg","비밀번호를 변경했습니다");
+		  handler.logout(request, response, authentication);
+		  return "redirect:/";
 	  }
 	 
 	
@@ -174,9 +174,10 @@ public class MemberController {
 	}
 	
 	@PostMapping("/member/resetToJejaPwd")
-	public String resetToJejaPwd(@RequestParam @NotNull String jPassword, @RequestParam @NotNull String newPassword, Principal principal, RedirectAttributes ra) throws JejaNotFoundException {
-		jejaService.changePwd(jPassword, newPassword, principal.getName());
+	public String resetToJejaPwd(@RequestParam @NotNull String jPassword, @RequestParam @NotNull String newPassword, String jEmail, RedirectAttributes ra, SecurityContextLogoutHandler handler, HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws JejaNotFoundException {
+		jejaService.changePwd(jPassword, newPassword, jEmail);
 		ra.addFlashAttribute("msg","비밀번호를 변경했습니다");
+		handler.logout(request, response, authentication);
 		return "redirect:/member/login";
 	}
 }

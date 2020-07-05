@@ -129,24 +129,6 @@ function loadAttach5() {
 	return true;
 }
 
-$(function() {
-	var idx = 0;
-	$("#add").on("click", function(){
-		if(idx>3) {
-			alert("첨부파일은 5개 업로드 가능합니다");
-			return false;
-		}
-		var $input = $("<input>").attr("type","file").attr("class", "form-control-file attach")
-		.attr("name","attachments[" + idx + "]").attr("id","attach"+idx).attr("accept",".jpg,.jpeg,.png,.gif,.bmp");
-		idx++;
-		$input.appendTo($("#attachment_div"))
-	});
-	$("#update").on("click", function() {
-		alert("수정되었습니다");
-		});
-
-});
-
 $(document).ready(function(){
 	$("#dal_profile").on("click",function() {
 		$("#dProfileSajin").css("display","inline-block");
@@ -166,30 +148,31 @@ $(document).ready(function(){
 		formData.append("dDetailService",$("#dDetailService").val());
 		formData.append("dPaymentMethod",$("#dPaymentMethod").val());
 		formData.append("dMno",$("#dMno").val());
-		formData.append("inp",$("#inp").val());
 		formData.append("q1",$("#q1").val());
 		formData.append("q2",$("#q2").val());
 		formData.append("q3",$("#q3").val());
 		formData.append("q4",$("#q4").val());
 		formData.append("_csrf","${_csrf.token}");
-		//formData.append("_method","put");
-		if($("#sajin")[0].files[0]!=undefined){
-			formData.append("sajin", $("#sajin")[0].files[0]);
+		
+		if($("#dProfileSajin")[0].files[0]!=undefined) {
+			formData.append("dProfile",$("#dProfileSajin")[0].files[0]);
 		}
-		/*
 		if($("#attach0")[0].files[0]!=undefined){
-			formData.append("inp", $("#attach0")[0].files[0]);
+			formData.append("profileAttachments", $("#attach0")[0].files[0]);
 		}
 		if($("#attach1")[0].files[0]!=undefined){
-			formData.append("inp", $("#attach1")[0].files[0]);
+			formData.append("profileAttachments", $("#attach1")[0].files[0]);
 		}
 		if($("#attach2")[0].files[0]!=undefined){
-			formData.append("inp", $("#attach2")[0].files[0]);
+			formData.append("profileAttachments", $("#attach2")[0].files[0]);
 		}
 		if($("#attach3")[0].files[0]!=undefined){
-			formData.append("inp", $("#attach3")[0].files[0]);
+			formData.append("profileAttachments", $("#attach3")[0].files[0]);
 		}
-		*/
+		if($("#attach4")[0].files[0]!=undefined){
+			formData.append("profileAttachments", $("#attach4")[0].files[0]);
+		}
+		
 		$.ajax({
 			url:"/dal/dalin/profile_update",
 			data:formData,
@@ -197,7 +180,6 @@ $(document).ready(function(){
 			processData:false,
 			contentType:false
 		}).done(()=>{toastr.info("변경 성공");}).fail(()=>{toastr.info("변경 실패");})
-		//.ajax("/dal/dalin/profile_update?dEmail="+$("#dMno").val())
 	})
 })
 
@@ -409,11 +391,14 @@ body {
 					</div>
 				</div>
 				<div id="inp">
-					<input type="file" name="sajin" id="sajin" style="display: inline-block; width: 430px;" accept=".jpg,.jpeg,.png,.gif,.bmp" > 
 					<input type="hidden" name="_csrf" value="${_csrf.token}">
-					<button type="button" id="add">첨부파일 추가</button>
-					<div id="attachment_div"></div>
-
+					<div id="attachment_div">
+						<input type="file" class="form-control-file attach" name="profileAttachments[0]" id="attach0" accept=".jpg,.jpeg,.png,.gif,.bmp">
+						<input type="file" class="form-control-file attach" name="profileAttachments[1]" id="attach1" accept=".jpg,.jpeg,.png,.gif,.bmp">
+						<input type="file" class="form-control-file attach" name="profileAttachments[2]" id="attach2" accept=".jpg,.jpeg,.png,.gif,.bmp">
+						<input type="file" class="form-control-file attach" name="profileAttachments[3]" id="attach3" accept=".jpg,.jpeg,.png,.gif,.bmp">
+						<input type="file" class="form-control-file attach" name="profileAttachments[4]" id="attach4" accept=".jpg,.jpeg,.png,.gif,.bmp">
+					</div>
 				</div>
 			</div>
 			<div>

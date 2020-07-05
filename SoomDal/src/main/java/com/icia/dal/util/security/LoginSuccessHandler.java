@@ -50,7 +50,7 @@ public class LoginSuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
 			
 			if(memoDao.isNotReadMemoExist(Id)==true)
 				session.setAttribute("memoMsg", "새로운 쪽지가 있습니다");
-			rs.sendRedirect(request, response, "/dal/member/resetToJejaPwd");
+			rs.sendRedirect(request, response, "/member/resetToJejaPwd");
 		}else if(req != null)
 			rs.sendRedirect(request, response, req.getRedirectUrl());
 		else

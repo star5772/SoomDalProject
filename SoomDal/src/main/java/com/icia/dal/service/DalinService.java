@@ -103,7 +103,7 @@ public class DalinService {
 	}
 
 	
-	public void profileUpdate(DalinDto.DtoForProfileUpdateToDalin dto, MultipartFile sajin) throws IllegalStateException, IOException {
+	public void profileUpdate(DalinDto.DtoForProfileUpdateToDalin dto, MultipartFile dProfile) throws IllegalStateException, IOException {
 		
 	}
 
@@ -248,8 +248,9 @@ public class DalinService {
 			String newEncodedPassword = pwdEncoder.encode(newPassword);
 			dalDao.updateToDalin(Dalin.builder().dPassword(newEncodedPassword).dEmail(dEmail).build());
 		}
-		else
+		else 
 			throw new JobFailException();
+		 
 	}
 	
 	public DetailField fieldInfo(String detailFName) {
