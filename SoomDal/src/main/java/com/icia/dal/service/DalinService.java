@@ -226,7 +226,7 @@ public class DalinService {
 	
 
 
-	public void resetPassword(String dEmail, String dTel) throws DalinNotFoundException, MessagingException {
+	public void resetPassword(String dEmail, String dTel) throws MessagingException, DalinNotFoundException {
 		Dalin dalin = dalDao.findByDalin(dEmail);
 		if(dalin==null)
 			throw new DalinNotFoundException();
@@ -234,8 +234,8 @@ public class DalinService {
 			throw new DalinNotFoundException();
 		
 		String newPassword = RandomStringUtils.randomAlphanumeric(20);
-		String encodePwd = pwdEncoder.encode(newPassword);
-		dalDao.updateToDalin(Dalin.builder().dEmail(dEmail).dPassword(encodePwd).build());
+		/* String encodePwd = pwdEncoder.encode(newPassword); */
+		dalDao.updateToDalin(Dalin.builder().dEmail(dEmail).dPassword(pwdEncoder.encode(newPassword)).build());
 		StringBuffer text = new StringBuffer("<p>임시비밀번호를 발급했습니다</p>");
 		text.append("<p>임시 비밀번호:").append(newPassword).append("</p>");
 		text.append("<p>보안을 위해 로그인 후 바로 비밀번호를 변경하세요</p>");
@@ -243,8 +243,10 @@ public class DalinService {
 		mailUtil.sendMail(mail);
 	}
 
-	public void changePwd(@NotNull String dPassword, String newPassword, String dEmail) throws DalinNotFoundException {
+	public void changePwd(String dPassword, String newPassword, String dEmail) throws DalinNotFoundException {
+		System.out.println(dEmail+"-------------------------------------------------------");
 		Dalin dalin = dalDao.findByDalin(dEmail);
+		System.out.println(dalin+"---------------------------------------");
 		if(dalin==null)
 			throw new DalinNotFoundException();
 		String encodedPassword = dalin.getDPassword();
@@ -252,6 +254,8 @@ public class DalinService {
 			String newEncodedPassword = pwdEncoder.encode(newPassword);
 			dalDao.updateToDalin(Dalin.builder().dPassword(newEncodedPassword).dEmail(dEmail).build());
 		}
+		else
+			throw new JobFailException();
 	}
 	
 	public DetailField fieldInfo(String detailFName) {

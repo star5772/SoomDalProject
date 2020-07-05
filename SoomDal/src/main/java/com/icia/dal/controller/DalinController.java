@@ -6,6 +6,7 @@ import java.security.*;
 import javax.annotation.*;
 import javax.inject.*;
 import javax.mail.*;
+import javax.servlet.http.*;
 import javax.validation.*;
 import javax.validation.constraints.*;
 
@@ -125,5 +126,5 @@ public class DalinController {
 		return "redirect:/member/login";
 	}
 	
-
+	
 }

@@ -8,7 +8,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<form action="/member/resetToDalinPwd" method="post">
+	<form action="/dal/dal/member/resetToDalinPwd" method="post">
 		비밀번호:<input type="password" name="dPassword">
 		새비밀번호:<input type="password" name="newPassword">
 		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token }">

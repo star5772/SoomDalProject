@@ -28,6 +28,7 @@
 <style>
 #main .container-fluid{
 	overflow: auto;
+	min-height: 800px;
 }
 #footer {
 	clear: both;

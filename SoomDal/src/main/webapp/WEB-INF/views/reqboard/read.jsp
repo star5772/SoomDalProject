@@ -34,25 +34,26 @@ function report_pop() {
 		<h1 style="font-size: 30px; font-weight: bold; line-height: 1.5em;">요청서</h1>
 	</div>
 	<div>
+	<hr>
 		<div style="width: 100%">
-		<div class="tdw"><label style="background-color: #DDDDDD; font-size: medium; display: inline-block; ">제목</label><input type="text" name="rbTitle" style="font-size: small; width: 300px; " readonly="readonly"value="${reqRead.rbTitle }"></div>
-		<div class="tdw"><label style="background-color: #DDDDDD; font-size: medium; display: inline-block;">작성일</label><input type="text" name="rbDate" style="font-size: small; width: 150px; border: 1px solid black;" readonly="readonly"value="${reqRead.rbWriteDateStr }"></div>
-		<div class="tdw"><label style="background-color: #DDDDDD; font-size: medium; display: inline-block;">작성자</label><input type="text" name="rbWriter" style="font-size: small; width: 150px; border: 1px solid black;"readonly="readonly"value="${reqRead.rbWriter }"></div>
+		<div class="tdw"><label style="width:130px; text-align:center; background-color: #DDDDDD; font-size: 17px; display: inline-block; ">제목</label>&emsp;<input type="text" name="rbTitle" style="font-size:17px; marfont-size: 17px; width: 350px; border: none; " readonly="readonly"value="${reqRead.rbTitle }"></div>
+		<div class="tdw"><label style="width:100px; text-align:center;background-color: #DDDDDD; font-size: 17px; display: inline-block; margin-left: 60px;">작성일</label>&emsp;<input type="text" name="rbDate" style="font-size: 17px; width: 150px; border: none;text-align:center;" readonly="readonly"value="${reqRead.rbWriteDateStr }"></div>
+		<div class="tdw"><label style="width:100px; text-align:center;background-color: #DDDDDD; font-size: 17px; display: inline-block; margin-left: 15px;">작성자</label>&emsp;<input type="text" name="rbWriter" style="font-size: 17px; width: 150px;  border: none;text-align:center; width: 100px; "readonly="readonly"value="${reqRead.rbWriter }"></div>
 		</div>
+	<hr>
 	</div>
-	<textarea rows="23" cols="100" style="border: none;" readonly="readonly">${reqRead.rbContent }</textarea>
+	<textarea rows="20" cols="133" disabled="disabled" style="border: none; background-color:white; font-size: 17px; overflow: scroll;" readonly="readonly">${reqRead.rbContent }</textarea>
 	<div>
 		<hr>
 	</div>
-	
 	<div id="btn_area" style="display: inline-block;">
-		<button id="list" style="text-align: center; font-size: 10px; font-weight: bold; color: white;" class="btn btn-warning">목록</button>
+		<button id="list" onclick="location.href='list'" style="text-align: center; font-size: 17px; font-weight: bold; color: white; margin-top: 10px;border-radius: 4px;" class="btn btn-warning">목록으로</button>
 	</div>
 	<div id="btn_area" style="display: inline-block;">
-		<button id="report" type="button" style="text-align: center; font-size: 10px; font-weight: bold; color: white;" class="btn btn-secondary">신고</button>
+		<button id="report" type="button" style="text-align: center; font-size: 17px; font-weight: bold; color: white;  margin-top: 10px;border-radius: 4px;" class="btn btn-secondary">신고</button>
 	</div>
 	<div id="btn_area" style="display: inline-block; float: right">
-		<button id="estimate" style="font-size: 10px; font-weight: bold; color: white;" class="btn btn-warning">견적서 보내기</button>
+		<button id="estimate" style="font-size: 17px; font-weight: bold; color: white;  margin-top: 10px;border-radius: 4px;" class="btn btn-warning">견적서 보내기</button>
 	</div>
 </body>
 
