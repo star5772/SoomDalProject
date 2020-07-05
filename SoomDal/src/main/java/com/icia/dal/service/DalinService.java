@@ -103,7 +103,7 @@ public class DalinService {
 	}
 
 	
-	public void profileUpdate(DalinDto.DtoForProfileUpdateToDalin dto, MultipartFile sajin) throws IllegalStateException, IOException {
+	public void profileUpdate(DalinDto.DtoForProfileUpdateToDalin dto, MultipartFile dProfile) throws IllegalStateException, IOException {
 		
 	}
 

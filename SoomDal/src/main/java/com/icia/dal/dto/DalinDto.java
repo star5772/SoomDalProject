@@ -42,7 +42,11 @@ public class DalinDto {
 		private String dArea;
 		private String dDetailService;
 		private String dPaymentMethod;
-		private List<MultipartFile> ProfileAttachments;
+		private String q1;
+		private String q2;
+		private String q3;
+		private String q4;
+		private List<MultipartFile> profileAttachments;
 	}
 	@Data
 	public static class DtoForProfileToDalin{

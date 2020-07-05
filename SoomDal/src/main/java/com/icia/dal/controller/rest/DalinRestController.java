@@ -33,7 +33,7 @@ public class DalinRestController {
 		dalService.checkId(dEmail);
 		return ResponseEntity.ok(null);
 	}
-	
+	/*
 	// 달인 프로필 정보 변경
 	//@PreAuthorize("isAuthenticated()")
 	@PutMapping("/dalin/info_update")
@@ -46,7 +46,7 @@ public class DalinRestController {
 		}
 		return ResponseEntity.ok(null);
 	}
-	
+	*/
 	// 달인 내정보 변경
 	//@PreAuthorize("isAuthenticated()")
 	@PutMapping("/dalin/my_info_update")
