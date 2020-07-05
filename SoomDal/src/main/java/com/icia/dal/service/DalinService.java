@@ -237,14 +237,6 @@ public class DalinService {
 		}
 	}
 	
-	// 리뷰작성
-	public List<Review> writeReview(Review rv,String username) {
-		// 자바스크립트 공격방지
-		rv.setRWriter(username);
-		reviewDao.insertToReview(rv);
-		// 리뷰개수 증가
-		
-	}
 	
 	
 	
