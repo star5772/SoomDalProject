@@ -10,6 +10,21 @@
 <sec:authorize access="hasAnyRole('ROLE_JEJA','ROLE_DALIN','ROLE_ADMIN')">
 	<script src="/dal/script/webS.js"></script>
 </sec:authorize>
+<script>
+	$(function() {
+		var pageno = ${dalin.pageno};
+		if(pageno==0) 
+			pageno=1;
+		$("#search_btn").on("click", function(e) {
+			e.preventDefault();
+			var url = "${pageContext.request.contextPath}/member/field/list";
+			url = url + "?pageno=" + pageno;
+			url = url + "&searchType=" + $('#search').val();
+			url = url + "&keyword=" + $('#keyword').val();
+			location.href = url;
+		});
+	})
+</script>
 <style>
 	#dal_profile {
 		display: inline-block;
@@ -28,6 +43,14 @@
 		left: 50%;
 		margin: auto;
 	}
+	#search_div div {
+	display: inline-block;
+	margin-top: 30px;
+	}
+	a:link { color: black;}
+	a:visited { color: black;}
+	a:active { color: black;}
+	a:hover { text-decoration: none;}
 </style>
 </head>
 <body>
@@ -40,58 +63,64 @@
 	</div>
 </div>
 <div id="field_list">
-	<!-- 아래 c:forEach 로 list 개수만큼 div 반복 -->
-	<c:forEach items="${dalin.list }" var="list">
-		<div style="padding: 24px 0; clear: both;">
-			<div id="dal_profile">
-				${list.DProfile }
+	<div id="search_div">
+		<div style="padding-right: 2px;" class="form-group">
+			<select id="search" class="form-control" name="searchType" style="height: 30px;">
+				<option value="DNAME">달인</option>
+				<option value="DAREA">지역</option>
+			</select>
 			</div>
-			<div id="dal_content">
-				<h5><a href="/dal/member/dalin_profile?dMno=${list.DMno }">${list.DName }</a></h5>
-				<p>${list.DIntro }</p>
-				<div>별점</div>
-			</div>
-		</div>
-		<div id="search_div">
-				<div style="padding-right: 2px;" class="form-group">
-					<select id="search" class="form-control" name="searchType" style="height: 30px;">
-						<option value="DNAME">달인</option>
-						<option value="DAREA">지역</option>
-					</select>
-				</div>
 				<div style="padding-right: 2px" class="form-group">
-					<input type="text" id="keyword" name='keyword' class="form-control"
-						style="width: 240px; height: 30px;" placeholder="달인, 지역을  검색해보세요">
+					<input type="text" id="keyword" name='keyword' class="form-control" style="width: 240px; height: 30px;" placeholder="달인, 지역을  검색해보세요">
 				</div>
 				<div>
 					<button type="button" id="search_btn" class="btn btn-info" style="height: 28px; width: 40px; background-color: #999999; color: white; border: 0; outline: 0;">검색</button>
 				</div>
-				<div>
-					<button type="button" style="margin-left: 335px; background-color: white; color: #999999; width: 100px; height: 30px; border: 1px solid #999999; border-radius: 5px; font-size: 14px;"  data-toggle="modal" data-target="#myModal"><i class="fas fa-th-large"></i>  카테고리</button>
+	</div>
+	<!-- 아래 c:forEach 로 list 개수만큼 div 반복 -->
+			<c:forEach items="${dalin.list }" var="list">
+				<div style="padding: 24px 0;">
+					<div id="dal_profile"><img style="border-radius: 10px;" src="${list.DProfile }" width="100px" height="100px"></div>
+					<div id="dal_content">
+						<h5>
+							<a href="/dal/member/dalin_profile?dMno=${list.DMno }"><h5 style="font-weight: bold; font-size: 18px;">${list.DName }</h5></a>
+						</h5>
+						<p style="font-size: 14px;">${list.DIntro }</p>
+						<div>
+							<span>
+								<c:forEach begin="1" end="${list.avgScore }">
+									<img src="https://assets.cdn.soomgo.com/icons/icon-common-review-star-small-full.svg">
+								</c:forEach>
+								<c:forEach begin="${list.avgScore+1 }" end="5">
+									<img src="https://assets.cdn.soomgo.com/icons/icon-common-review-star-small-empty.svg">
+								</c:forEach>
+							</span>
+							<span style="font-size: 16px; font-weight: bold;">${list.avgScore }</span>
+						</div>
+					</div>
 				</div>
-			</div>
-		<hr>
-	</c:forEach>
+				<hr>
+			</c:forEach>
 	<div id="page_wrap">
 		<div id="inner">
 		<ul class="pagination">
 			<c:if test="${dalin.prev==true}">
-				<li><a href="/dal/field/list?pageno=${dalin.startPage-1}&detailFName=skateboard">이전</a></li>
+				<li><a href="/dal/member/field/list?pageno=${dalin.startPage-1}&detailFName=${detail.detailFName}">이전</a></li>
 			</c:if>
 			<c:forEach begin="${dalin.startPage}" end="${dalin.endPage}" var="i">
 				<c:choose>
 					<c:when test="${dalin.pageno eq i }">
 						<li class="active">
-							<a href="/dal/field/list?pageno=${i}&detailFName=skateboard">${i}</a>
+							<a href="/dal/member/field/list?pageno=${i}&detailFName=${detail.detailFName}">${i}</a>
 						</li>
 					</c:when>
 					<c:otherwise>
-						<li><a href="/dal/field/list?pageno=${i}">${i}</a></li>
+						<li><a href="/dal/member/field/list?pageno=${i}&detailFName=${detail.detailFName}">${i}</a></li>
 					</c:otherwise>
 				</c:choose>
 			</c:forEach>
 			<c:if test="${dalin.next==true}">
-				<li><a href="/dal/field/list?pageno=${dalin.endPage+1}">다음</a></li>
+				<li><a href="/dal/member/field/list?pageno=${dalin.endPage+1}&detailFName=${detail.detailFName}">다음</a></li>
 			</c:if>
 		</ul>
 		</div>

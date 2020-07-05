@@ -28,9 +28,6 @@ public class Dalin {
 	private String dArea;				// 달인 레슨지역
 	private Integer pAttachmentCnt;		// 프로필에들어가는 사진 개수
 	private Level dLevel;				// 달인 회원등급
-	private Integer rNo;				// 프로필에달린 리뷰번호
-	private Integer pAttachmentNo;		// 프로필사진 번호
-	private Integer dQNo;				// 달인 FAQ 질문번호
 	private String dPaymentMethod;		// 레슨 결제수단
 	private Integer rReviewCnt;			// 달인 리뷰개수
 	private Integer dLoginFailureCnt; 	//로그인 실패수

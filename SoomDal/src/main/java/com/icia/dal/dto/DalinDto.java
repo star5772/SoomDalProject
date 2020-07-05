@@ -37,18 +37,11 @@ public class DalinDto {
 	@Data
 	public static class DtoForProfileUpdateToDalin{
 		private Integer dMno;
-		private String dName;
-		private String dProfile;
 		private String dIntro;
 		private String dMainService;
 		private String dArea;
 		private String dDetailService;
 		private String dPaymentMethod;
-		private String pAttachmentNo;
-		private Integer rNo;
-		private Integer dQNo;
-		private List<RepQuestion> rep;
-		private List<Review> reviews;
 		private List<MultipartFile> ProfileAttachments;
 	}
 	@Data
@@ -61,9 +54,6 @@ public class DalinDto {
 		private String dArea;
 		private String dDetailService;
 		private String dPaymentMethod;
-		private String pAttachmentNo;
-		private Integer rNo;
-		private Integer dQNo;
 		private List<RepQuestion> rep;
 		private List<Review> reviews;
 		private List<ProfileAttachment> ProfileAttachments;

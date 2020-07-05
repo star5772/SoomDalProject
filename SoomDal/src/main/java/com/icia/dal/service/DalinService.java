@@ -104,38 +104,7 @@ public class DalinService {
 
 	
 	public void profileUpdate(DalinDto.DtoForProfileUpdateToDalin dto, MultipartFile sajin) throws IllegalStateException, IOException {
-		Dalin dalin = modelMapper.map(dto, Dalin.class);
-		if(dto.getProfileAttachments() != null)
-			dalin.setPAttachmentCnt(dto.getProfileAttachments().size());
-		else
-			dalin.setPAttachmentCnt(0);
-		dalDao.updateToDalinProfile(dalin);
 		
-		List<MultipartFile> attachments = dto.getProfileAttachments();
-		if(attachments != null) {
-			for(MultipartFile mf: attachments) {
-				ProfileAttachment pattachment = new ProfileAttachment();
-				String originalFName = mf.getOriginalFilename();
-				long time = System.nanoTime();
-				String saveFName = time + "-" + originalFName;
-				boolean isImage = mf.getContentType().toLowerCase().startsWith("image/");
-				pattachment.setDMno(dalin.getDMno()).setPIsOk(isImage).setPOriginalFileName(originalFName).setPSaveFileName(saveFName);
-				File file = new File("c:/project/attachment",saveFName);
-				FileCopyUtils.copy(mf.getBytes(), file);
-				profileAttachmentDao.insertToProfileAttachment(pattachment);
-			}
-		}
-			if(sajin!=null && !sajin.isEmpty()) {
-			if(sajin.getContentType().toLowerCase().startsWith("image/")==true) {
-				int lastIndexOfDot = sajin.getOriginalFilename().lastIndexOf('.');
-				String extension = sajin.getOriginalFilename().substring(lastIndexOfDot+1);
-				File file = new File(profileFolder, dalin.getDMno() + "." + extension);
-				sajin.transferTo(file);
-				dalin.setDProfile(profilePath + file.getName());
-			}
-		}
-		
-		dalDao.updateToDalinProfile(dalin);
 	}
 
 	public boolean update(DalinDto.DtoForUpdateToDalin dto, String dEmail) {
@@ -187,11 +156,10 @@ public class DalinService {
 		}
 		DalinDto.DtoForProfileToDalin dto = modelMapper.map(dalin, DalinDto.DtoForProfileToDalin.class);
 		if(dalin.getPAttachmentCnt()!=0) // 사진 수가 있으면 다 보여주라고
-			dto.setProfileAttachments(profileAttachmentDao.findAllByProfileAttachment(dto.getDMno()));
+			//dto.setProfileAttachments(profileAttachmentDao.findAllByProfileAttachment(dto.getDMno()));
 		if(dalin.getRReviewCnt()>0)
 			dto.setReviews(reviewDao.findAllReview(dto.getDMno()));
-		if(dalin.getDQNo()!=0)
-			dto.setRep(repDao.findAllToRequestion(dalDao.findByDalinToDMno(dMno).getDEmail()));
+		// 달인이 대표질문을 달았으면 추가 없으면 null 
 		return dto;
 	}
 
@@ -250,7 +218,7 @@ public class DalinService {
 	
 
 
-	public void resetPassword(String dEmail, String dTel) throws DalinNotFoundException, MessagingException {
+	public void resetPassword(String dEmail, String dTel) throws MessagingException, DalinNotFoundException {
 		Dalin dalin = dalDao.findByDalin(dEmail);
 		if(dalin==null)
 			throw new DalinNotFoundException();
@@ -258,8 +226,8 @@ public class DalinService {
 			throw new DalinNotFoundException();
 		
 		String newPassword = RandomStringUtils.randomAlphanumeric(20);
-		String encodePwd = pwdEncoder.encode(newPassword);
-		dalDao.updateToDalin(Dalin.builder().dEmail(dEmail).dPassword(encodePwd).build());
+		/* String encodePwd = pwdEncoder.encode(newPassword); */
+		dalDao.updateToDalin(Dalin.builder().dEmail(dEmail).dPassword(pwdEncoder.encode(newPassword)).build());
 		StringBuffer text = new StringBuffer("<p>임시비밀번호를 발급했습니다</p>");
 		text.append("<p>임시 비밀번호:").append(newPassword).append("</p>");
 		text.append("<p>보안을 위해 로그인 후 바로 비밀번호를 변경하세요</p>");
@@ -267,8 +235,10 @@ public class DalinService {
 		mailUtil.sendMail(mail);
 	}
 
-	public void changePwd(@NotNull String dPassword, String newPassword, String dEmail) throws DalinNotFoundException {
+	public void changePwd(String dPassword, String newPassword, String dEmail) throws DalinNotFoundException {
+		System.out.println(dEmail+"-------------------------------------------------------");
 		Dalin dalin = dalDao.findByDalin(dEmail);
+		System.out.println(dalin+"---------------------------------------");
 		if(dalin==null)
 			throw new DalinNotFoundException();
 		String encodedPassword = dalin.getDPassword();
@@ -276,6 +246,8 @@ public class DalinService {
 			String newEncodedPassword = pwdEncoder.encode(newPassword);
 			dalDao.updateToDalin(Dalin.builder().dPassword(newEncodedPassword).dEmail(dEmail).build());
 		}
+		else
+			throw new JobFailException();
 	}
 	
 	public DetailField fieldInfo(String detailFName) {

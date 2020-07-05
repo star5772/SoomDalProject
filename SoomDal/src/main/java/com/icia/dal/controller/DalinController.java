@@ -6,6 +6,7 @@ import java.security.*;
 import javax.annotation.*;
 import javax.inject.*;
 import javax.mail.*;
+import javax.servlet.http.*;
 import javax.validation.*;
 import javax.validation.constraints.*;
 
@@ -70,6 +71,8 @@ public class DalinController {
 	
 	@PostMapping("/dalin/profile_update")
 	public String dalinInFoUpdate(@Valid DalinDto.DtoForProfileToDalin dto, @Nullable MultipartFile sajins, RedirectAttributes ra, BindingResult bindingResult) throws BindException {
+		System.out.println(dto);
+		System.out.println("=======================================");
 		if(bindingResult.hasErrors()==true)
 			throw new BindException(bindingResult);
 		try {
@@ -123,5 +126,5 @@ public class DalinController {
 		return "redirect:/member/login";
 	}
 	
-
+	
 }

@@ -34,7 +34,7 @@ public class DalinDaoTest {
 	@Test
 	public void insertToDalinTest() {
 		for(int i=1; i<24;i++) {
-			Dalin dalin = Dalin.builder().fNo("3").dProfile("http://localhost:8081/profile/winter.jpg").dIntro("짧은 소개글").detailFName("drum").dEmail(i+"thg520@naver.com").dPassword("qwer!1234").dName(i+"winter")
+			Dalin dalin = Dalin.builder().fNo("2").dProfile("http://localhost:8081/profile/winter.jpg").dIntro("짧은 소개글").detailFName("sandArt").dEmail(i+"thg520@naver.com").dPassword("qwer!1234").dName(i+"winter")
 					.dTel("01011112222").dArea("미추홀").dLevel(Level.NORMAL).build();
 			dao.insertToDalin(dalin);
 		}
