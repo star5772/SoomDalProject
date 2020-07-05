@@ -53,7 +53,6 @@ $(document).ready(function(){
 		<hr>
 		<div>
 			<label style="width:130px;  text-align: center; background-color: #d3d3d3; display: inline-block; font-size: 17px;">비밀글설정</label>
-			<input type="radio" name="qIsSecret" value="0" style="width: 25px; "><span style="font-size: 17px; display: inline-block;" >공개글</span>
 			<input type="radio" name="qIsSecret" value="1" style="width: 25px; "><span style="font-size: 17px; display: inline-block;"  >비밀글</span>
 		</div>
 		<hr>

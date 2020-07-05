@@ -63,7 +63,7 @@ button:hover {
 		<div class="card">
   			<img class="card-img-top" src="#" alt="Card image cap">
   			<div class="card-body">
-  			<button onclick="location.href='/dal/member/field/list?detailFName=skateboard'" style="margin-left: 45px; font-weight: bold;" >스케이트보드 레슨</button>
+  			<button onclick="location.href='/dal/member/field/list?detailFName=skateboard=스케이트보드'" style="margin-left: 45px; font-weight: bold;" >스케이트보드 레슨</button>
   			</div>
 		</div>
 		<div class="card">
@@ -105,7 +105,7 @@ button:hover {
 		<div class="card">
   			<img class="card-img-top" src="#" alt="Card image cap">
   			<div class="card-body">
-  			<button onclick="location.href='/dal/member/field/list?detailFName=squash&name=스쿼시'" style="margin-left: 45px; font-weight: bold;" >스퀴시 레슨</button>
+  			<button onclick="location.href='/dal/member/field/list?detailFName=squash&name=스쿼시'" style="margin-left: 45px; font-weight: bold;" >스쿼시 레슨</button>
   			</div>
 		</div>
 		
