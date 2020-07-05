@@ -5,27 +5,30 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
-import javax.mail.*;
-import javax.validation.constraints.*;
+import javax.mail.MessagingException;
+import javax.validation.constraints.NotNull;
 
-import org.apache.commons.lang.*;
+import org.apache.commons.lang.RandomStringUtils;
 import org.modelmapper.ModelMapper;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.icia.dal.Exception.*;
+import com.icia.dal.Exception.JejaNotFoundException;
+import com.icia.dal.Exception.UserNotFoundException;
 import com.icia.dal.dao.DAO;
 import com.icia.dal.dao.DalinDao;
 import com.icia.dal.dao.JejaDao;
 import com.icia.dal.dao.LessonHistoryDao;
+import com.icia.dal.dao.RequestDao;
 import com.icia.dal.dto.JejaDto;
-import com.icia.dal.dto.*;
 import com.icia.dal.dto.JejaDto.DtoForJejaUpdate;
+import com.icia.dal.dto.LHDto;
+import com.icia.dal.dto.Mail;
 import com.icia.dal.dto.page.PageToLessonHistory;
 import com.icia.dal.entity.Dalin;
 import com.icia.dal.entity.Jeja;
 import com.icia.dal.entity.LessonHistory;
-import com.icia.dal.util.*;
+import com.icia.dal.util.MailUtil;
 import com.icia.dal.util.pagingutil.LessonHistoryPagingUtil;
 
 @Service
@@ -44,6 +47,8 @@ public class JejaService {
 	private LessonHistoryDao lhDao;	
 	@Inject
 	private MailUtil mailUtil;
+	@Inject
+	private RequestDao reqDao;
 	
 	public void existsByEmail(String jEmail) {
 		String email = dao.existsByjEmail(jEmail);
@@ -168,5 +173,9 @@ public class JejaService {
 		/*
 		 * else throw new JobFailException();
 		 */
+	}
+	
+	public Integer findLessonHistory(int dMno) {
+		return reqDao.findRequestByJmno(dMno);
 	}
 }

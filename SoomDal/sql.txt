@@ -128,7 +128,7 @@ CREATE TABLE JEJA (
 
 CREATE TABLE Dalin (
    D_MNO NUMBER(7) NOT NULL, /* 달인 회원 번호 */
-   DETAIL_F_NAME NVARCHAR2(10) NOT NULL,
+   DETAIL_F_NAME NVARCHAR2(20) NOT NULL,
    F_NO VARCHAR2(10) NOT NULL, /* 분야 코드 */
    D_EMAIL varchar2(50) NOT NULL, /* 회원 id(email) */
    D_PASSWORD VARCHAR2(60), /* 비밀번호 */
@@ -298,8 +298,8 @@ CREATE TABLE Estimate (
 
 CREATE TABLE Memo (
    M_NO NUMBER(6) NOT NULL, /* 쪽지번호 */
-   RECEIVER NVARCHAR2(20), /* 수신자 -  */
-   SENDER NVARCHAR2(20), /* 발신자 -  */
+   RECEIVER NVARCHAR2(50), /* 수신자 -  */
+   SENDER NVARCHAR2(50), /* 발신자 -  */
    WRITE_TIME DATE, /* 시간 - */
    CONTENT NVARCHAR2(500), /* 내용 */
    TITLE NVARCHAR2(100), /* 제목 */

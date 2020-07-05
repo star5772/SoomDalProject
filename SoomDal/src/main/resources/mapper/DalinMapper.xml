@@ -19,6 +19,14 @@
 		where d_mno=#{dMno} and rownum=1
 	</select>
 	
+	<!-- 달인 본인프로필 읽기 (이메일로 읽음 - nav에서 필요) -->
+	<select id="findByMyProfile" resultType="dalin">
+		select d_mno dMno,d_email dEmail, d_profile dProfile, d_name dName, d_main_service dMainService, d_intro dIntro, d_area dArea, d_detail_service dDetailService,f_no fNo,
+		d_payment_method dPaymentMethod, p_attachment_cnt pAttachmentCnt, r_review_cnt rReviewCnt,d_login_failure_cnt dLoginFailureCnt from dalin
+		where d_email=#{dEmail} and rownum=1
+	</select>
+	
+	
 	<select id="findIdByName" resultType="string">
 		select d_email dEmail from dalin where d_name=#{dName} and rownum=1
 	</select>

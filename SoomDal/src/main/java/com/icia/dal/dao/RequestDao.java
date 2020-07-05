@@ -57,4 +57,8 @@ public class RequestDao {
 		return tpl.update("requestMapper.setIsOk",rNo);
 	}
 	
+	public Integer findRequestByJmno(int dMno) {
+		return tpl.selectOne("requestMapper.findRequestByJmno",dMno);
+	}
+	
 }

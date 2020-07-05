@@ -58,4 +58,5 @@ public class LessonHistoryDao {
 	public int countOfLessonToDalin(int dMno) {
 		return tpl.selectOne("historyMapper.countOfLessonToDalin",dMno);
 	}
+	
 }

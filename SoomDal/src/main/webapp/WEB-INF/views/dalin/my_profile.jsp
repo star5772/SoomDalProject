@@ -10,31 +10,6 @@
 <sec:authorize access="hasAnyRole('ROLE_JEJA','ROLE_DALIN','ROLE_ADMIN')">
 	<script src="/dal/script/webS.js"></script>
 </sec:authorize>
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
-<script>
-$(function(){
-	$("#reviewWrite").on("click",function(){
-/* 		var params = {
-				_csrf: "${_csrf.token}",
-				rContent: $("#rContent").text(),
-				rWriter: "${username}",
-				rScore: $("#reviewScore").val(),
-				dMno: $("#dMno").val()
-			} */
-		var formData = $("#rvFrm").serialize();	
-		$.ajax({
-			url: "/dal/member/reviewWrite",
-			data: formData, 
-			method: "post",
-			success: function(){
-					alert("리뷰작성완료 !")
-					window.location.reload();
-			}
-		})
-	})
-})
-
-</script>
 <style>
 #rWrite{
 	font-size: 15px;
@@ -141,17 +116,6 @@ hr{
 			<div style="border-radius: 50%; height: 200px; width: 200px; background-color: gray; ">
 			<p id="dName">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${readProfile.DName}</p></div>
 		</div>
-		<sec:authorize access="hasRole('ROLE_JEJA')">
-			<c:choose>
-				<c:when test="${empty isLh == true}">
-					<div>
-						<div id="buttonDiv">
-							<button id="writeRequest" onclick="location.href='/dal/member/request/sendRequest?dMno=${readProfile.DMno}'">요청서작성</button>
-						</div>
-					</div>
-				</c:when>	
-			</c:choose>
-		</sec:authorize>
 		<div id="dName-bottom">
 			<div>
 				<hr>
@@ -275,22 +239,6 @@ hr{
 					<p>${rv.RContent}</p>
 				</div>
 				</c:forEach>
-				<div id="rWrite">
-					<c:choose>
-						<c:when test="${rvAuth == 'true'}">
-							<form id="rvFrm">
-							<input type="hidden" name="dMno" id="dMno" value="${readProfile.DMno}">
-							<input type="hidden" name="_csrf" value="${_csrf.token}">
-							<div>
-								<textarea rows="3" cols="70" name="rContent" id="rContent" style="width: 500px; height: 100px;"></textarea><input type="text" name="rScore" id="reviewScore">				
-							</div>
-							<div>
-								<button type="button" id="reviewWrite" class="btn btn-info">리뷰 작성</button>
-							</div>
-							</form>
-						</c:when>
-					</c:choose>
-				</div>
 			</div>
 		</div>
 		<div>

@@ -85,7 +85,7 @@ function openChild()
 				<li class="nav-item dropdown" style="width: 100px;">
 					<a class="nav-link dropdown-toggle" href="#" id="navbarDropdownPortfolio" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: black;">OOO고객님</a>
 					<div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownPortfolio">
-					<a class="dropdown-item" href="#"style="color:black; font-size:medium;">프로필 관리</a>
+					<a class="dropdown-item" href="/dal/dalin/my_profile?dEmail=${username}"style="color:black; font-size:medium;">프로필 관리</a>
 					<a class="dropdown-item" href="/dal/dalin/my_info"style="color:black; font-size:medium;">마이페이지</a>
 					<a class="dropdown-item" href="#"style="color:black; font-size:medium;" id="DalinLogout">로그아웃</a>
 					</div>

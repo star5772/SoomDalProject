@@ -69,6 +69,10 @@
 		where r_no=#{rNo} and rownum=1
 	</update>
 	
+	<select id="findRequestByJmno" resultType="int">
+		select j_mno jMno from request where d_mno=#{dMno} and r_dalin_is_ok=0 and rownum=1
+	</select>
+	
 </mapper>
 
 
