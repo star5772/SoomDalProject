@@ -154,17 +154,19 @@ public class MemberController {
 		return new ModelAndView("main").addObject("viewName","member/search.jsp").addObject("search",dalService.dalSearch(pageno,searchType,keyword));
 	}
 	
-	@GetMapping("/member/resetToDalinPwd")
-	public ModelAndView resetToDalinPwd() {
-		return new ModelAndView("main").addObject("viewName","member/resetToDalinPwd.jsp");
-	}
 	
-	@PostMapping("/member/resetToDalinPwd")
-	public String resetToDalinPwd(@RequestParam @NotNull String dPassword, @RequestParam @NotNull String newPassword, Principal principal, RedirectAttributes ra) throws DalinNotFoundException {
-		dalService.changePwd(dPassword, newPassword, principal.getName());
-		ra.addFlashAttribute("msg", "비밀번호를 변경했습니다");
-		return "redirect:/member/login";
-	}
+	  @GetMapping("/dal/member/resetToDalinPwd") 
+	  public ModelAndView resetToDalinPwd() {
+		  return new ModelAndView("main").addObject("viewName","member/resetToDalinPwd.jsp");
+		  }
+	  
+	  @PostMapping("/dal/member/resetToDalinPwd") 
+	  public String resetToDalinPwd(@RequestParam @NotNull String dPassword, @RequestParam @NotNull String newPassword, Principal principal,RedirectAttributes ra) throws DalinNotFoundException {
+	  dalService.changePwd(dPassword, newPassword, principal.getName());
+	  ra.addFlashAttribute("msg", "비밀번호를 변경했습니다"); 
+	  return "redirect:/member/login";
+	  }
+	 
 	
 	@GetMapping("/member/resetToJejaPwd")
 	public ModelAndView resetToJejaPwd() {
