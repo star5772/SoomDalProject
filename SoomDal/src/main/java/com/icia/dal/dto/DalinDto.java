@@ -56,6 +56,7 @@ public class DalinDto {
 		private String dPaymentMethod;
 		private List<RepQuestion> rep;
 		private List<Review> reviews;
+		private Double rScoreAverage;
 		private List<ProfileAttachment> ProfileAttachments;
 	}	
 	@Data

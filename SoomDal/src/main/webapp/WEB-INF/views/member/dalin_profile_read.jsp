@@ -10,6 +10,7 @@
 <sec:authorize access="hasAnyRole('ROLE_JEJA','ROLE_DALIN','ROLE_ADMIN')">
 	<script src="/dal/script/webS.js"></script>
 </sec:authorize>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 <script>
 $(function(){
 	$("#reviewWrite").on("click",function(){
@@ -25,11 +26,9 @@ $(function(){
 			url: "/dal/member/reviewWrite",
 			data: formData, 
 			method: "post",
-			success: function(result){
-				if(result==true)
-					alert("리뷰 작성완료");
-				else
-					alert("리뷰 작성권한이 없습니다");
+			success: function(){
+					swal("리뷰작성 완료","리뷰를 작성해주셔서 감사합니다","success");
+					window.location.reload();
 			}
 		})
 	})
@@ -245,7 +244,7 @@ hr{
 					<h2>리뷰</h2><br>
 				</div>
 				<div>
-					<h2>별점평균</h2><h3>${review.rScore}</h3>
+					<h2>별점평균</h2><h3>${readProfile.RScoreAverage}</h3>
 				</div>
 			</div>
 		</div>
@@ -254,31 +253,37 @@ hr{
 				<hr>
 			</div>
 			<div>
+			<c:forEach items="${readProfile.reviews}" var="rv">
 				<div id="review" >
 					<div id="rWriter">
-						<p>${review.rWriter}리뷰 작성자</p>
+						<p>${rv.RWriter}</p>
 					</div>
 					<div id="rScore">
-						<p>${review.rScore}별점</p>
+						<p>${rv.RScore}</p>
 					</div>
 					<div id="rDate">
-						<p>${review.rDate}작성시간</p>
+						<p>${rv.RDate}</p>
 					</div>
 				</div>
 				<div id="rContent">
-					<p>${review.rContent}리뷰내용</p>
+					<p>${rv.RContent}</p>
 				</div>
+				</c:forEach>
 				<div id="rWrite">
-					<form id="rvFrm">
-					<input type="hidden" name="dMno" id="dMno" value="${readProfile.DMno}">
-					<input type="hidden" name="_csrf" value="${_csrf.token}">
-					<div>
-						<textarea rows="3" cols="70" name="rContent" id="rContent" style="width: 500px; height: 100px;"></textarea><input type="text" name="rScore" id="reviewScore">				
-					</div>
-					<div>
-						<button type="button" id="reviewWrite" class="btn btn-info">리뷰 작성</button>
-					</div>
-					</form>
+					<c:choose>
+						<c:when test="${rvAuth == 'true'}">
+							<form id="rvFrm">
+							<input type="hidden" name="dMno" id="dMno" value="${readProfile.DMno}">
+							<input type="hidden" name="_csrf" value="${_csrf.token}">
+							<div>
+								<textarea rows="3" cols="70" name="rContent" id="rContent" style="width: 500px; height: 100px;"></textarea><input type="text" name="rScore" id="reviewScore">				
+							</div>
+							<div>
+								<button type="button" id="reviewWrite" class="btn btn-info">리뷰 작성</button>
+							</div>
+							</form>
+						</c:when>
+					</c:choose>
 				</div>
 			</div>
 		</div>

@@ -13,7 +13,7 @@
 	
 	<!-- 읽기 -->
 	<select id="findAllReview" resultType="review">
-		select r_no rNo, r_date rDate, r_content rContent, r_score rScore, r_writer rWriter, d_mno dMno, j_accsation_cnt jAccusationCnt 
+		select r_no rNo, r_date rDate, r_content rContent, r_score rScore, r_writer rWriter, d_mno dMno, j_accusation_cnt jAccusationCnt 
 		from review 
 		where d_mno=#{dMno} order by r_no
 	</select>

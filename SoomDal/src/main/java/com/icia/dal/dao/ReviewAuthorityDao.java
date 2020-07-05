@@ -26,5 +26,10 @@ public interface ReviewAuthorityDao {
 	
 	@Select("select j_mno jMno from reviewAuthority where a_complete_code=#{aCompleteCode} and j_email=#{jEmail} and rownum=1")
 	public int findCompleteCode(@Param("aCompleteCode")String aCompleteCode,@Param("jEmail")String jEmail);
+	
+	@Select("select count(*) from reviewAuthority where j_email=#{jEmail} and a_complete_code=#{aCompleteCode}")
+	public Boolean findByRvAuth(@Param("jEmail")String jEmail,@Param("aCompleteCode")String aCompleteCode);
+	
+	
 }
 

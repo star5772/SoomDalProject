@@ -16,4 +16,5 @@ public class LessonHistory {
 	private int dMno;
 	private int jMno;
 	private LocalDateTime lStartDate;
+	private boolean rIsOk;
 }

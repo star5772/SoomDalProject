@@ -16,6 +16,7 @@ import com.icia.dal.dao.ReviewDao;
 import com.icia.dal.entity.Dalin;
 import com.icia.dal.entity.Jeja;
 import com.icia.dal.entity.Review;
+import com.icia.dal.entity.ReviewAuthority;
 
 
 @Service
@@ -36,24 +37,36 @@ public class ReviewService {
 	
 	// 리뷰 작성
 	public List<Review> reviewAuthChkAndWrite(Review rv , String username) {
+		// 리뷰작성을위해 레슨내역에서 레슨완료코드를 불러옴
 		Jeja jeja = dao.findById(username);
 		String comCode = lhDao.findByCompleteCodeToLH(jeja.getJMno());
+		// 리뷰권한테이블에서 달인 번호를 찾아서 제자가 보유하고있는 레슨내역에서 달인번호를 찾아 있으면 리뷰 작성.
 		int auth = reviewAuthDao.findCompleteCode(comCode, username);
 		if(rv.getDMno()==auth) {
 			rv.setRWriter(username);
 			reviewDao.insertToReview(rv);
+			// 리뷰테이블에 리뷰 입력후 달인프로필의 reviewCnt 1증가 (리뷰 전체출력을 위한 작업)
 			Dalin dal = Dalin.builder().dMno(rv.getDMno()).rReviewCnt(1).build();
 			dalDao.updateToDalinProfile(dal);
+			// 리뷰작성 완료시 리뷰작성완료여부 레슨내역에 저장
+			lhDao.setReviewIsOk(comCode);
+			// 리뷰를 한번 작성했으니 재작성 불가능하도록 권한테이블에서 코드삭제.
+			reviewAuthDao.deleteByReviewAuthority(comCode);
 			return reviewDao.findAllReview(rv.getDMno());
 		}else {
 			return null;
 		}
 	}
 	
-	// 리뷰 읽기
+	public boolean reviewAuth(String username) {
+		Jeja jeja = dao.findById(username);
+		String code = lhDao.findByCompleteCodeToLH(jeja.getJMno());
+		if(code==null)
+			code = "aa";
+		return reviewAuthDao.findByRvAuth(username, code);
+	}
 	
-
-
+	
 	
 	// 리뷰 지우기
 	public List<Review> deleteToReview(int rNo, int dMno, String writer) throws JobFailException {
@@ -63,6 +76,4 @@ public class ReviewService {
 		reviewDao.deleteToReview(rNo);
 		return reviewDao.findAllReview(dMno);
 	}
-
-	// 리뷰 평균내기
 }

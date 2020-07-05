@@ -21,6 +21,7 @@ drop table reviewattachment cascade constraints;
 drop table reviewauthority cascade constraints;
 drop table usecash cascade constraints;
 DROP TABLE MEMO CASCADE CONSTRAINTS;
+drop table lessonhistory cascade constraints;
 
 drop sequence jeja_seq;
 drop sequence repquestion_seq;
@@ -34,6 +35,7 @@ drop sequence detailfield_seq;
 drop sequence review_seq;
 drop sequence reviewattachment_seq;
 DROP SEQUENCE MEMO_SEQ;
+drop sequence profileattachment_seq;
 
 
 create sequence JEJA_seq minvalue 0;
@@ -288,6 +290,7 @@ CREATE TABLE Estimate (
    E_CASH NUMBER(5), /* 필요 캐시 */
    d_name nvarchar2(6), /* 달인 이름 */
    e_is_read char(1), /* 읽음 여부 */
+   e_write_time date,
    constraint pk_estimate primary key(e_no,d_mno)
 );
 
@@ -313,6 +316,7 @@ CREATE TABLE ReviewAuthority (
    D_MNO NUMBER(7), /* 달인 회원번호 */
    J_MNO NUMBER(7), /* 제자 회원번호 */
    A_IS_OK CHAR(1), /* 권한 여부 */
+   j_email varchar2(70),
    constraint pk_reviewauthority primary key(a_complete_code)
 );
 
@@ -363,7 +367,7 @@ create Table LESSONHISTORY (
     D_MNO number(7),
     J_MNO number(7),
     L_START_DATE date,
+    r_is_ok char(1),
     constraint pk_LESSONHISTORY primary key(a_complete_code)
 );
 
-select * from tab;

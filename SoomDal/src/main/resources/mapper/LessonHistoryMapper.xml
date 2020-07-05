@@ -4,15 +4,15 @@
 
 
 	<insert id="insertToLessonHistory">
-		insert into LessonHistory(a_complete_code,d_mno,j_mno,l_start_date)
-		values(#{aCompleteCode},#{dMno},#{jMno},sysdate)
+		insert into LessonHistory(a_complete_code,d_mno,j_mno,l_start_date,r_is_ok)
+		values(#{aCompleteCode},#{dMno},#{jMno},sysdate,0)
 	</insert>
 	
 	<select id="findAllByLessonHistoryToJeja" resultType="lessonHistory">
 		<![CDATA[
 			select * from
 				(select l.*,rownum rnum from	
-					(select a_complete_code aCompleteCode,d_mno dMno,j_mno jMno,l_start_date lStartDate from LessonHistory where j_mno=#{jMno}) l
+					(select a_complete_code aCompleteCode,d_mno dMno,j_mno jMno,l_start_date lStartDate,r_is_ok rIsOk from LessonHistory where j_mno=#{jMno}) l
 				where rownum<=#{endRowNum})
 			where rnum>=#{startRowNum}
 		]]>			
@@ -44,6 +44,9 @@
 		select a_complete_code aCompleteCode from lessonhistory where j_mno = #{jMno}
 	</select>
 	
+	<update id="setReviewIsOk" >
+		update lessonhistory set r_is_ok = 1 where a_complete_code = #{aCompleteCode} and rownum=1
+	</update>
 	
 </mapper>
 

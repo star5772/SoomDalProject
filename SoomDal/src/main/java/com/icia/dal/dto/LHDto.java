@@ -17,7 +17,7 @@ public class LHDto {
 		private int dMno;
 		private int jMno;
 		private String lStartDate;
-		
+		private boolean rIsOk;
 		private String dProfile;
 		private String detailFName;
 		private String dName;

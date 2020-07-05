@@ -40,6 +40,10 @@ public class LessonHistoryDao {
 		return tpl.selectOne("historyMapper.findByCompleteCodeToLH",jMno);
 	}
 	
+	public int setReviewIsOk(String aCompleteCode) {
+		return tpl.update("historyMapper.setReviewIsOk",aCompleteCode);
+	}
+	
 	public int deleteToLessonHistory(String aCompleteCode) {
 		return tpl.delete("historyMapper.deleteToLessonHistory",aCompleteCode);
 	}

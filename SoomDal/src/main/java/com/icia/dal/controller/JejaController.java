@@ -4,8 +4,8 @@ package com.icia.dal.controller;
 import java.security.Principal;
 
 import javax.inject.Inject;
-import javax.mail.*;
-import javax.validation.constraints.*;
+import javax.mail.MessagingException;
+import javax.validation.constraints.NotNull;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindException;
@@ -16,14 +16,17 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.icia.dal.Exception.*;
+import com.icia.dal.Exception.JejaNotFoundException;
 import com.icia.dal.entity.Jeja;
 import com.icia.dal.service.JejaService;
+import com.icia.dal.service.ReviewService;
 
 @Controller
 public class JejaController {
 	@Inject
 	private JejaService service;
+	@Inject
+	private ReviewService rvService;
 	
 	@GetMapping("/jeja/my_info")
 	public ModelAndView jejaInfo(Principal principal) {
@@ -66,7 +69,7 @@ public class JejaController {
 		return new ModelAndView("main").addObject("viewName","jeja/estimate_list.jsp");
 	}
 	@GetMapping("/jeja/lessonList")
-	public ModelAndView listToLesson(@RequestParam(defaultValue = "1")int pageno,int jMno) {
+	public ModelAndView listToLesson(@RequestParam(defaultValue = "1")int pageno,int jMno,Principal principal) {
 		return new ModelAndView("main").addObject("viewName","member/lessonHistory.jsp").addObject("LHlist", service.lessonListToJeja(pageno, jMno)).addObject("jMno",jMno);
 	}
 	
