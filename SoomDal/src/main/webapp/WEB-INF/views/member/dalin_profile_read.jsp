@@ -13,16 +13,17 @@
 <script>
 $(function(){
 	$("#reviewWrite").on("click",function(){
-		var params = {
+/* 		var params = {
 				_csrf: "${_csrf.token}",
-				rContent: $("#rContent").val(),
+				rContent: $("#rContent").text(),
 				rWriter: "${username}",
 				rScore: $("#reviewScore").val(),
 				dMno: $("#dMno").val()
-			}
+			} */
+		var formData = $("#rvFrm").serialize();	
 		$.ajax({
 			url: "/dal/member/reviewWrite",
-			data: params, 
+			data: formData, 
 			method: "post",
 			success: function(result){
 				if(result==true)
@@ -268,13 +269,16 @@ hr{
 					<p>${review.rContent}리뷰내용</p>
 				</div>
 				<div id="rWrite">
+					<form id="rvFrm">
 					<input type="hidden" name="dMno" id="dMno" value="${readProfile.DMno}">
+					<input type="hidden" name="_csrf" value="${_csrf.token}">
 					<div>
-						<textarea rows="3" cols="70" name="rContent" id="rContent" style="width: 500px; height: 100px;"></textarea><input type="text" id="reviewScore">				
+						<textarea rows="3" cols="70" name="rContent" id="rContent" style="width: 500px; height: 100px;"></textarea><input type="text" name="rScore" id="reviewScore">				
 					</div>
 					<div>
 						<button type="button" id="reviewWrite" class="btn btn-info">리뷰 작성</button>
 					</div>
+					</form>
 				</div>
 			</div>
 		</div>

@@ -2,6 +2,7 @@ package com.icia.dal.controller;
 
 
 import java.security.Principal;
+import java.util.List;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
@@ -134,12 +135,10 @@ public class MemberController {
 		return new ModelAndView("main").addObject("viewName","member/dalin_profile_read.jsp").addObject("readProfile",dalService.readToDalinProfile(dMno));
 	}
 	
+	// 제자 리뷰작성
 	@PostMapping("/member/reviewWrite")
-	public ResponseEntity<Boolean> reviewWrite(Review rv,Principal principal) {
+	public ResponseEntity<List<Review>> reviewWrite(Review rv,Principal principal) {
 		String username = principal.getName();
-		System.out.println(rv);
-		if(reviewService.reviewAuthChkAndWrite(rv, username)==false)
-			throw new JobFailException();
 		return ResponseEntity.ok(reviewService.reviewAuthChkAndWrite(rv, username));
 	}
 	

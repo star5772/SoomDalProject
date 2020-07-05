@@ -238,15 +238,15 @@ public class DalinService {
 	}
 	
 	// 리뷰작성
-	public List<Review> writeReview(Review rv) {
+	public List<Review> writeReview(Review rv,String username) {
 		// 자바스크립트 공격방지
-		String reviewStr = rv.getRContent().replaceAll("(\r\n|\r|\n|\n\r)", "<br>"); 
-		rv.setRContent(reviewStr);
+		rv.setRWriter(username);
 		reviewDao.insertToReview(rv);
 		// 리뷰개수 증가
-		dalDao.updateToDalinProfile(Dalin.builder().dMno(rv.getDMno()).rReviewCnt(1).build());
-		return reviewDao.findAllReview(rv.getDMno());
+		
 	}
+	
+	
 	
 	public List<Review> deleteReview(Integer rNo,Integer dMno,String writer) {
 		Review rv = reviewDao.findByReview(rNo);
