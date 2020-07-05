@@ -133,14 +133,14 @@ public class MemberController {
 	@GetMapping("/member/dalin_profile")
 	public ModelAndView dalinProfileRead(int dMno,Principal principal) throws DalinNotFoundException {
 		String username = principal.getName();
-		return new ModelAndView("main").addObject("viewName","member/dalin_profile_read.jsp").addObject("readProfile",dalService.readToDalinProfile(dMno)).addObject("rvAuth",reviewService.reviewAuth(username));
+		return new ModelAndView("main").addObject("viewName","member/dalin_profile_read.jsp").addObject("readProfile",dalService.readToDalinProfile(dMno)).addObject("rvAuth",reviewService.reviewAuth(username,dMno));
 	}
 	
 	// 제자 리뷰작성
 	@PostMapping("/member/reviewWrite")
 	public ResponseEntity<List<Review>> reviewWrite(Review rv,Principal principal) {
 		String username = principal.getName();
-		return ResponseEntity.ok(reviewService.reviewAuthChkAndWrite(rv, username));
+		return ResponseEntity.ok(reviewService.reviewAuthChkAndWrite(rv, username,rv.getDMno()));
 	}
 	
 	@GetMapping("/member/select_detailField")

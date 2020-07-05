@@ -27,7 +27,7 @@ $(function(){
 			data: formData, 
 			method: "post",
 			success: function(){
-					swal("리뷰작성 완료","리뷰를 작성해주셔서 감사합니다","success");
+					alert("리뷰작성완료 !")
 					window.location.reload();
 			}
 		})
