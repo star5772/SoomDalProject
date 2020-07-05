@@ -53,7 +53,7 @@ public class DalinLoginSuccessHandler extends SimpleUrlAuthenticationSuccessHand
 			
 			if(memoDao.isNotReadMemoExist(Id)==true)
 				session.setAttribute("memoMsg", "새로운 쪽지가 있습니다");
-			rs.sendRedirect(request, response, "/dal/member/resetToDalinPwd");
+			rs.sendRedirect(request, response, "/member/resetToDalinPwd");
 		}else if(req != null)
 			rs.sendRedirect(request, response, req.getRedirectUrl());
 		else

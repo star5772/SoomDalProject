@@ -246,8 +246,9 @@ public class DalinService {
 			String newEncodedPassword = pwdEncoder.encode(newPassword);
 			dalDao.updateToDalin(Dalin.builder().dPassword(newEncodedPassword).dEmail(dEmail).build());
 		}
-		else
+		else 
 			throw new JobFailException();
+		 
 	}
 	
 	public DetailField fieldInfo(String detailFName) {

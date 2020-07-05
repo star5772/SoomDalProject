@@ -114,7 +114,7 @@ $(function() {
 						  	</div>
 					  	</div>
 						<label for="jejaPwd">제자회원 비밀번호</label>
-						<input type="password" name="jPassword" placeholder="비밀번호를 입력하세요" maxlength="10" class="form-control form-control-lg"><br>
+						<input type="password" name="jPassword" placeholder="비밀번호를 입력하세요" maxlength="50" class="form-control form-control-lg"><br>
 						<div style="height: 30px;">
 							<div class="alert alert-success alert-dismissible" id="jmsg" style="display:none;">
 						    	<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>

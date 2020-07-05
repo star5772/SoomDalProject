@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 <script>
 $(document).ready(function() {
-	$("#change_pwd").on("click",function() {
+	$("#change_pwd").on("click", function() {
 		$("#change_pwd_frm").submit();
 	})
 })
