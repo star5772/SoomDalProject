@@ -60,6 +60,7 @@ button:hover {
 <body>
 <h2 id="text">미술 서비스 </h2>
 <h3 id="text">미술 서비스에 오신걸 환영합니다 ! 하고싶은 Art를 배우세요 !</h3>
+<!-- name=필드 한글 이름 url 뒤에 추가 -->
 	<div class="service">
 		<div class="card">
   			<img class="card-img-top" src="/image/회화.jpg" alt="Card image cap">
