@@ -284,38 +284,40 @@ $(function() {
 	font-size: large; 
 }
 #step-three-sport {
-	position:absolute;
+	position:relative;
 	width: 800px;
-	height: 500px;
+	height: 900px;
 	margin: auto 0;
 	top:50%;
 	left: 50%;
 	margin-left: -450px;
-	margin-top: -250px;
-	font-size: large; 
-	
+	margin-top: 50px;
+	font-size: medium; 
+	overflow: hidden;	
 }
 #step-three-instruement {
-	position:absolute;
+	position:relative;
 	width: 800px;
-	height: 500px;
+	height: 900px;
 	margin: auto 0;
 	top:50%;
 	left: 50%;
 	margin-left: -450px;
-	margin-top: -250px;
-	font-size: large; 
+	margin-top: 50px;
+	font-size: medium; 
+	overflow: hidden;
 }
 #step-three-art {
-	position:absolute;
+	position:relative;
 	width: 800px;
-	height: 500px;
+	height: 900px;
 	margin: auto 0;
 	top:50%;
 	left: 50%;
 	margin-left: -450px;
-	margin-top: -250px;
+	margin-top: 50px;
 	font-size: medium; 
+	overflow: hidden;
 }
 #sample6_postcode {
 	margin-bottom: 5px;
@@ -413,7 +415,7 @@ $(function() {
 		<input type="text" name="dArea" id="dArea" placeholder="주소" class="addr" readonly="readonly"><br>
 		<input type="text" id="detail-address" placeholder="상세주소" class="addr">
 	</div>
-	<button id="complete-step-one" type="button" class="btn btn-warning" style="margin-left:320px;">다음</button>
+	<button id="complete-step-one" type="button" class="btn btn-warning" style="margin-left:320px;  border-radius: 4px;">다음</button>
 </div>	
 
 <div id="step-two" style="display: none;">

@@ -10,12 +10,14 @@
 </script>
 <style>
 #top {
-	height: 200px;
+	height: 150px;
+	padding-bottom: 50px;
 }
 #top h1 {
 	margin-top:150px;
 	height: 50px;
 	text-align: center;
+	
 }
 #left {
 	display: inline-block;
@@ -27,11 +29,11 @@
 	border-radius: 5px;
 }
 #left #dalinjoin {
-	padding-top: 100px;
+	padding-top: 30px;
 	padding-left: 85px;
 }
 #left h2 {
-	padding-top: 10px;
+	padding-top: 50px;
 	text-align: center;
 }
 #right {
@@ -44,11 +46,11 @@
 	float: right;
 }
 #right h2 {
-	padding-top: 10px;
+	padding-top: 50px;
 	text-align: center;
 }
 #right #jejajoin {
-	padding-top: 100px;
+	padding-top: 30px;
 	padding-left: 85px;
 }
 .btn {
@@ -60,24 +62,47 @@
 	padding-left: 460px;
 	font-size: small; 
 }
+button {
+  width: 140px;
+  height: 45px;
+  font-family: 'Roboto', sans-serif;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 2.5px;
+  font-weight: 500;
+  color: #000;
+  background-color: #fff;
+  border: none;
+  border-radius: 45px;
+  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease 0s;
+  cursor: pointer;
+  outline: none;
+  }
 
-
+button:hover {
+  background-color: #2EE59D;
+  box-shadow: 0px 15px 20px rgba(46, 229, 157, 0.4);
+  color: #fff;
+  transform: translateY(-7px);
+}
 </style>
 </head>
 <body>
 	<div id="top">
-		<h1>회원가입하기</h1>
+		<h1 style="font-weight: bold;">숨달에 오신 것을 환영합니다!</h1>
+		<h2 style="text-align: center; ">숨달 회원가입은 달인과 제자가 나뉘어져 있어요!</h2>
 	</div>
 	<div id="left">
-		<h2>도움을 주고싶어요</h2>
+		<h2 style="font-weight: bold;">도움을 주고싶어요!</h2>
 		<div id="dalinjoin">
-			<button type="button" class="btn btn-warning" onclick="location.href = '/dal/dalin/join'">달인으로 가입하기</button>
+			<button class="eff" style="width: 125px; font-size: 17px;"  type="button"  onclick="location.href = '/dal/dalin/join'">DALIN 가입</button>
 		</div>
 	</div>
 	<div id="right">
-		<h2>배우고 싶어요</h2>
+		<h2 style="font-weight: bold;">배우고 싶어요!</h2>
 		<div id="jejajoin">
-			<button type="button" class="btn btn-success" onclick="location.href = '/dal/jeja/join'">제자로 가입하기</button>
+			<button class="eff"  style="width: 125px; font-size: 17px;" type="button"  onclick="location.href = '/dal/jeja/join'">JEJA 가입</button>
 		</div>
 	</div>
 	

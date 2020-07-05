@@ -35,11 +35,19 @@
 		});
 	});
 </script>
+<style>
+	.btn {
+		font-weight: bold;
+	}
+	h4 {
+		font-weight: bold;
+	}
+</style>
 </head>
 <body>
-<div id="report_wrap">
+<div id="report_wrap" style="margin: 15px;">
 	<div id="report_title">
-		<h2>게시물 신고하기</h2>	
+		<h2 style="font-weight: bold; margin-bottom: 20px;">게시물 신고하기</h2>	
 	</div>
 	<div id="report_body">
 		<h4>신고 사유</h4>
@@ -59,14 +67,15 @@
   			<label><input value="기타" type="radio" name="optradio">기타</label>
 		</div>
 	</div>
-	<div id="report_content_wrap">
+	<div id="report_content_wrap" style="margin-top: 20px;">
 		<h4>상세 내용</h4>
 		<div class="form-group">
   			<textarea class="form-control" rows="5" id="comment" placeholder="내용을 입력해주세요 (선택)"></textarea>
 		</div>
 	</div>
-</div>
-	<button onclick="window.close()" class="btn btn-info">취소</button>
+	<button onclick="window.close()" class="btn btn-secondary" style="background-color: #8C8C8C; color: white;">취소</button>
 	<button id="report" class="btn btn-warning">신고</button>
+</div>
+
 </body>
 </html>
