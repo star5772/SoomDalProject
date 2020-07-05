@@ -21,8 +21,17 @@
 			$.ajax({
 				url:"/dal/member/reqboard/report",
 				method:"post",
-				data:params
-			}).done(()=>Swal.fire("의견 감사합니다!", "신고가 접수되었습니다", "success")).fail(()=>Swal.fire("실패!", "중복신고는 불가능합니다", "info"));
+				data:params,
+				success: function() {
+					Swal.fire({
+						icon:"success",
+						title:"의견 감사합니다!",
+						text:"신고가 접수되었습니다"
+					}).then(()=>window.close())
+				},error: function() {
+					Swal.fire("실패!", "중복신고는 불가능합니다", "info");
+				}
+			})
 		});
 	});
 </script>

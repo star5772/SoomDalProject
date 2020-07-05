@@ -21,17 +21,18 @@ $(document).ready(function(){
 </head>
 <body>
 	<div id="report">
-		<h1 style="font-size: 30px; font-weight: bold; line-height: 1.5em;">요청서</h1>
+		<h1 style="font-size: 30px; font-weight: bold; line-height: 1.5em; margin-top: 20px;">요청서</h1>
 	</div>
-</body>
+<br>
 	<form action="/dal/member/reqboard/write" method="post" id="writeForm">
-	<div>
-		<label for="rbTitle">제목</label><br>
-		<input type="text" id="rbTitle" name="rbTitle" style="font-size: 15px; font-weight: bold; width: 47%; height: 100%; border-radius: 5px;"><br><br><br>
+<div >
+	<div style="height: 45px;">
+		<hr>
+			<label for="rbTitle" style="background-color: #d3d3d3; display: inline-block; width: 130px; text-align: center; font-size: 17px;">제목</label>
+			<input type="text" id="rbTitle" name="rbTitle" placeholder="제목을 입력해주세요." style="color: rgb(94, 94, 94); width: 780px;font-size: 17px;" "><br><br><br>
 	</div>
-	<div>
-	<h3>요청내용</h3>
-	<textarea rows="23" cols="100" id="rbContent" name="rbContent" style="resize: none" name="content">
+	<hr>
+	<textarea rows="23" cols="100" id="rbContent" name="rbContent" style="resize: none;" name="content">
 	분야 :
 		
 	종목 :
@@ -55,8 +56,11 @@ $(document).ready(function(){
 	기타 문의 및 희망사항 :
 	</textarea>
 	</div>
+	<hr>
 	<input type="hidden" name="_csrf" value="${_csrf.token}">
-	<button type="button" id="write" class="btn btn-warning" style="text-align: center; font-size: 15px; font-weight: bold; color: white">작성</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-	<button type="button" id="list" class="btn btn-secondary" style="text-align: center; font-size: 15px; font-weight: bold; color: white">목록으로</button>
+	<button type="button" id="write" class="btn btn-warning" style="text-align: center; font-size: 15px; font-weight: bold; color: white; float: right;" >작성</button>
+	<button type="button" id="list" class="btn btn-secondary" style="text-align: center; font-size: 15px; font-weight: bold; color: white; float: left;">목록으로</button>
 	</form>
+</body>
+
 </html>

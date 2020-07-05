@@ -148,7 +148,7 @@ public class JejaService {
 		
 		String newPassword = RandomStringUtils.randomAlphanumeric(20);
 		String encodePwd = pwdEncoder.encode(newPassword);
-		Jeja.builder().jEmail(jEmail).jPassword(encodePwd).build();
+		dao.updateJeja(Jeja.builder().jEmail(jEmail).jPassword(encodePwd).build());
 		StringBuffer text = new StringBuffer("<p>임시비밀번호를 발급했습니다</p>");
 		text.append("<p>임시 비밀번호:").append(newPassword).append("</p>");
 		text.append("<p>보안을 위해 로그인 후 바로 비밀번호를 변경하세요</p>");

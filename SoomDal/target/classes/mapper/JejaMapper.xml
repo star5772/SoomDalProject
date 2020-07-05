@@ -7,8 +7,8 @@
 		<selectKey keyProperty="jMno" resultType="int" order="BEFORE">
 			select JEJA_seq.nextval from dual
 		</selectKey>
-		insert into jeja(J_MNO, J_EMAIL, J_PASSWORD, J_NAME, J_TEL,J_ACCUSATION_CNT,ENABLED,J_JOINDATE, J_LOGIN_FAILURE_CNT)
-		values(#{jMno},#{jEmail},#{jPassword},#{jName},#{jTel},0,1,sysdate,0)
+		insert into jeja(J_MNO, J_EMAIL, J_PASSWORD, J_NAME, J_TEL,J_ACCUSATION_CNT,ENABLED,J_JOINDATE, J_LOGIN_FAILURE_CNT, j_is_block)
+		values(#{jMno},#{jEmail},#{jPassword},#{jName},#{jTel},0,1,sysdate,0, 0)
 	</insert>
 	
 	<!-- 아이디 : 이름, 전화번호 -->
@@ -24,6 +24,7 @@
 	<update id="updateJeja">
 		update jeja
 		<trim suffixOverrides="," prefix="set">
+			<if test="jEmail!=null">j_email=#{jEmail},</if>
 			<if test="jPassword!=null">J_PASSWORD=#{jPassword},</if>
 			<if test="jName!=null">J_NAME=#{jName},</if>
 			<if test="jTel!=null">J_TEL=#{jTel},</if>

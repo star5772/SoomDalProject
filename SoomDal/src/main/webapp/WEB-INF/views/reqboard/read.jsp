@@ -35,7 +35,7 @@ function report_pop() {
 	</div>
 	<div>
 		<div style="width: 100%">
-		<div class="tdw"><label style="background-color: #DDDDDD; font-size: medium; display: inline-block;">제목</label><input type="text" name="rbTitle" style="font-size: small; width: 300px; border: 1px solid black;" readonly="readonly"value="${reqRead.rbTitle }"></div>
+		<div class="tdw"><label style="background-color: #DDDDDD; font-size: medium; display: inline-block; ">제목</label><input type="text" name="rbTitle" style="font-size: small; width: 300px; " readonly="readonly"value="${reqRead.rbTitle }"></div>
 		<div class="tdw"><label style="background-color: #DDDDDD; font-size: medium; display: inline-block;">작성일</label><input type="text" name="rbDate" style="font-size: small; width: 150px; border: 1px solid black;" readonly="readonly"value="${reqRead.rbWriteDateStr }"></div>
 		<div class="tdw"><label style="background-color: #DDDDDD; font-size: medium; display: inline-block;">작성자</label><input type="text" name="rbWriter" style="font-size: small; width: 150px; border: 1px solid black;"readonly="readonly"value="${reqRead.rbWriter }"></div>
 		</div>
