@@ -9,7 +9,9 @@ import lombok.experimental.*;
 @Builder
 @Accessors(chain=true)
 public class RepQuestion {
-	private int dQno;
 	private String dEmail;
-	private String dQcontent;
+	private String firstQ;
+	private String secoendQ;
+	private String ThirdQ;
+	private String FourthQ;
 }

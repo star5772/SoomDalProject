@@ -84,10 +84,12 @@ CREATE TABLE QnaBoard (
 /*대표질문*/
 
 CREATE TABLE RepQuestion (
-   D_Q_NO NUMBER(1) NOT NULL, /* 질문 번호 > 기본키 */
    D_EMAIL varchar2(50) NOT NULL, /* 회원 id(email) */
-   D_Q_CONTENT NVARCHAR2(300), /* 질문 내용 */
-   constraint pk_repquestion primary key(d_q_no)
+   FITST_Q NVARCHAR2(300),
+   SECOEND_Q NVARCHAR2(300),
+   THIRD_Q NVARCHAR2(300),
+   FOURTH_Q NVARCHAR2(300),
+   constraint pk_repquestion primary key(d_email)
 );
 
 /*결제현황*/
@@ -141,9 +143,7 @@ CREATE TABLE Dalin (
    D_PAYMENT_METHOD nvarchar2(20), /* 결제 수단 */
    P_ATTACHMENT_CNT NUMBER(1), /* 첨부파일 수 */
    D_LEVEL NVARCHAR2(10), /* 레벨 */
-   R_NO NUMBER(5), /* 리뷰 번호 */
    P_ATTACHMENT_NO NUMBER(3), /* 프로필 첨부 파일 번호 */
-   D_Q_NO NUMBER(1), /* 질문 번호 > 기본키 */
    D_login_failure_cnt number(1), /* 로그인 실패 횟수 */
    r_review_cnt number(7),
    constraint pk_dalin primary key(d_mno,f_no,d_email,detail_f_name)
@@ -159,10 +159,6 @@ CREATE TABLE DetailField (
    constraint pk_detailfield primary key(f_no,detail_f_name)
 );
 
-<<<<<<< HEAD
-=======
-
->>>>>>> branch 'master' of https://github.com/star5772/SoomDalProject
 /* 요청서 */
 
 CREATE TABLE Request (
@@ -324,12 +320,10 @@ CREATE TABLE ReviewAuthority (
 /*프로필 첨부파일*/
 
 CREATE TABLE ProfileAttachment (
-   P_ATTACHMENT_NO NUMBER(3) NOT NULL, /* 프로필 첨부 파일 번호 */
+   P_ATTACHMENT_NO NUMBER(7) NOT NULL, /* 프로필 첨부 파일 번호 */
    P_ORIGINAL_FILE_NAME NVARCHAR2(20), /* 원래파일이름 */
    P_SAVE_FILE_NAME NVARCHAR2(30), /* 저장용파일이름 */
-   p_attachment_cnt number(1), /* 프로필 사진 개수 */
-   P_IS_OK CHAR(1), /* 사진파일여부 */
-   d_mno number(7),
+   D_EMAIL varchar2(50),
    constraint pk_profileattachment primary key(p_attachment_no)
 );
 

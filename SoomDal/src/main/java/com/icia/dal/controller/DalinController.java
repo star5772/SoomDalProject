@@ -70,6 +70,8 @@ public class DalinController {
 	
 	@PostMapping("/dalin/profile_update")
 	public String dalinInFoUpdate(@Valid DalinDto.DtoForProfileToDalin dto, @Nullable MultipartFile sajins, RedirectAttributes ra, BindingResult bindingResult) throws BindException {
+		System.out.println(dto);
+		System.out.println("=======================================");
 		if(bindingResult.hasErrors()==true)
 			throw new BindException(bindingResult);
 		try {

@@ -2,35 +2,6 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="profileAttachmentMapper">
 	
-	<!-- 프로필사진 업로드 -->
-	<insert id="insertToProfileAttachment">
-			<selectKey keyColumn="pAttachmentNo" order="BEFORE" resultType="int">
-				select profileAttachment_seq.nextval from dual
-			</selectKey>
-		insert into profileAttachment(p_attachment_no, p_original_file_name, p_save_file_name, p_is_ok, p_attachment_cnt, d_mno)
-		values(#{pAttachmentNo}, #{pOriginalFileName}, #{pSaveFileName}, #{pIsOk}, #{pAttachmentCnt}, #{dMno})
-	</insert>
-	
-	<!-- 프로필 사진 삭제 -->
-	<delete id="deleteToProfileAttachment">
-		delete 
-		from profileAttachment
-		where p_attachment_no=#{pAttachmentNo} and rownum=1
-	</delete>
-	
-	<!-- 프로필 사진 읽어오기-->
-	<select id="findByProfileAttachment" resultType="profileAttachment">
-		select p_attachment_no pAttachmentNo, p_original_file_name pOriginalFileName, p_save_file_name pSaveFileName, p_is_ok pIsOk, p_attachment_cnt pAttachmentCnt, d_mno dMno
-		from profileAttachment
-		where p_attachment_no=#{pAttachmentNo} and rownum=1
-	</select>
-	
-	<!-- 프로필 사진 전체 읽어오기 -->
-	<select id="findAllByProfileAttachment" resultType="profileAttachment">
-		select p_attachment_no pAttachmentNo, p_original_file_name pOriginalFileName, p_save_file_name pSaveFileName, p_is_ok pIsOk, p_attachment_cnt pAttachmentCnt, d_mno dMno
-		from profileAttachment
-		where d_mno=#{dMno} 
-	</select>
 	
 	
 </mapper>

@@ -14,6 +14,7 @@
 
 function loadAttach() {
 	var file = $("#sajin")[0].files[0];
+	console.log(file);
 	var maxSize = 1024*1024; // 1MB
 	if(file.size>maxSize) {
 		Swal.fire({
@@ -33,6 +34,7 @@ function loadAttach() {
 }
 function loadAttach1() {
 	var file1 = $("#attach0")[0].files[0];
+	console.log(file1);
 	var maxSize = 1024*1024; // 1MB
 	if(file1.size>maxSize) {
 		Swal.fire({
@@ -107,13 +109,31 @@ function loadAttach4() {
 	reader.readAsDataURL(file4);
 	return true;
 }
-
+function loadAttach5() {
+	var file = $("#dProfileSajin")[0].files[0];
+	var maxSize = 1024*1024; // 1MB
+	if(file.size>maxSize) {
+		Swal.fire({
+			icon: 'error',
+		  	title: '크기 오류',
+			text: '파일크기는 1MB를 넘을 수 없습니다'
+		});
+		$("#attach3").val("");
+		return false;
+	}
+	var reader = new FileReader();
+	   reader.onload = function(e) {
+	      $("#show_profile").attr("src", e.target.result);
+	   }
+	reader.readAsDataURL(file);
+	return true;
+}
 
 $(function() {
 	var idx = 0;
 	$("#add").on("click", function(){
 		if(idx>3) {
-			alert("첨부파일은 5개 까지입니다");
+			alert("첨부파일은 5개 업로드 가능합니다");
 			return false;
 		}
 		var $input = $("<input>").attr("type","file").attr("class", "form-control-file attach")
@@ -128,6 +148,11 @@ $(function() {
 });
 
 $(document).ready(function(){
+	$("#dal_profile").on("click",function() {
+		$("#dProfileSajin").css("display","inline-block");
+	})
+	$("#dProfileSajin").on("change",loadAttach5);
+	
 	$("#sajin").on("change",loadAttach);
 	$("#inp").on("change","#attach0",loadAttach1);
 	$("#inp").on("change","#attach1",loadAttach2);
@@ -147,29 +172,32 @@ $(document).ready(function(){
 		formData.append("q3",$("#q3").val());
 		formData.append("q4",$("#q4").val());
 		formData.append("_csrf","${_csrf.token}");
-		formData.append("_method","put");
+		//formData.append("_method","put");
 		if($("#sajin")[0].files[0]!=undefined){
 			formData.append("sajin", $("#sajin")[0].files[0]);
 		}
-		else if($("#attach0")[0].files[0]!=undefined){
+		/*
+		if($("#attach0")[0].files[0]!=undefined){
 			formData.append("inp", $("#attach0")[0].files[0]);
 		}
-		else if($("#attach1")[0].files[0]!=undefined){
+		if($("#attach1")[0].files[0]!=undefined){
 			formData.append("inp", $("#attach1")[0].files[0]);
 		}
-		else if($("#attach2")[0].files[0]!=undefined){
+		if($("#attach2")[0].files[0]!=undefined){
 			formData.append("inp", $("#attach2")[0].files[0]);
 		}
-		else if($("#attach3")[0].files[0]!=undefined){
+		if($("#attach3")[0].files[0]!=undefined){
 			formData.append("inp", $("#attach3")[0].files[0]);
 		}
+		*/
 		$.ajax({
 			url:"/dal/dalin/profile_update",
 			data:formData,
-			method:"get",
+			method:"post",
 			processData:false,
 			contentType:false
-		}).done(()=>{toastr.info("변경 성공");}).fail(()=>{toastr.info("변경 실패");}).ajax("/dal/dalin/profile_update?dEmail="+$("#dMno").val()))
+		}).done(()=>{toastr.info("변경 성공");}).fail(()=>{toastr.info("변경 실패");})
+		//.ajax("/dal/dalin/profile_update?dEmail="+$("#dMno").val())
 	})
 })
 
@@ -280,6 +308,7 @@ body {
 </style>
 </head>
 <body>
+
 	${dalin }
 	<form id="profileReadFrm" action="dalin/info_update" method="get" enctype="multipart/form-data"></form>
 	<div id="dalinUpdate">
@@ -289,8 +318,8 @@ body {
 				<img id="show_profile" src="${dalin.DProfile }" style="border-radius: 50%; height: 200px; width: 200px;">
 			</div>
 			<div style="margin-left: 160px;">
-			<input type="file" name="sajin" id="sajin" style="display: none; width: 430px;" accept=".jpg,.jpeg,.png,.gif,.bmp">
-				<button type="button" style="border: 0px white; background-color: white;" id="dal_profile"><i class="fas fa-camera fa-2x"></i></button>
+			<input type="file" name="dProfile" id="dProfileSajin" style="display:none; width: 430px;" accept=".jpg,.jpeg,.png,.gif,.bmp">
+				<button type="button" style="border: 0px white; background-color: white;" id="dal_profile"><i class="fas fa-camera fa-2x"></i> 프로필 변경</button>
 			</div>
 		</div>
 		<input type="hidden" name="dMno" id="dMno" value="${dalin.DMno}">
@@ -307,8 +336,7 @@ body {
 					<br> <br>
 				</div>
 				<div>
-					<input type="text" id="dIntro" name="dIntro"
-						value="${dalin.DIntro}">
+					<input type="text" id="dIntro" name="dIntro" value="${dalin.DIntro}" placeholder="간단한 한줄 소개를 적어주세요!">
 				</div>
 			</div>
 		</div>
@@ -322,8 +350,7 @@ body {
 					<br> <br>
 				</div>
 				<div>
-					<input type="text" id="dMainService" name="dMainService"
-						value="${dalin.DMainService}">
+					<input type="text" id="dMainService" name="dMainService" value="${dalin.DMainService}" placeholder="자신의 대표서비스를 적어주세요!">
 				</div>
 			</div>
 		</div>
@@ -337,7 +364,7 @@ body {
 					<br> <br>
 				</div>
 				<div>
-					<input type="text" id="dArea" name="dArea" value="${dalin.DArea}">
+					<input type="text" id="dArea" name="dArea" value="${dalin.DArea}" placeholder="자신의 활동가능한 지역을 적어주세요!">
 				</div>
 			</div>
 		</div>
@@ -351,8 +378,7 @@ body {
 					<br> <br>
 				</div>
 				<div>
-					<input type="text" id="dDetailService" name="dDetailService"
-						value="${dalin.DDetailService}">
+					<input type="text" id="dDetailService" name="dDetailService" value="${dalin.DDetailService}" placeholder="제공할 서비스의 상세한 설명을 적어주세요!">
 				</div>
 			</div>
 		</div>
@@ -366,8 +392,7 @@ body {
 					<br> <br>
 				</div>
 				<div>
-					<input type="text" id="dPaymentMethod" name="dPaymentMethod"
-						value="${dalin.DPaymentMethod}">
+					<input type="text" id="dPaymentMethod" name="dPaymentMethod" value="${dalin.DPaymentMethod}" placeholder="사용가능한 결제수단을 적어주세요!">
 				</div>
 			</div>
 		</div>
@@ -380,12 +405,7 @@ body {
 					<h2>사진</h2>				
 					<div>
 						<ul id="attachment">
-						</ul>
-						<div style="display: inline-block; "><img id="show_attach1" name="show_attach1" height="200px" width="150px;" src="${dalin.PAttachmentNo }"></div>
-						<div style="display: inline-block; "><img id="show_attach2" name="show_attach2" height="200px" width="150px;" src="${dalin.PAttachmentNo }"></div>
-						<div style="display: inline-block; "><img id="show_attach3" name="show_attach3" height="200px" width="150px;" src="${dalin.PAttachmentNo }"></div>
-						<div style="display: inline-block; "><img id="show_attach4" name="show_attach4" height="200px" width="150px;" src="${dalin.PAttachmentNo }"></div>
-						<div style="display: inline-block; "><img id="show_attach5" name="show_attach5" height="200px" width="150px;" src="${dalin.PAttachmentNo }"></div>				
+						</ul>			
 					</div>
 				</div>
 				<div id="inp">
@@ -413,7 +433,7 @@ body {
 								</h4>
 							</div>
 							<div>
-								<input type="text" name="q1" id="q1" value="${dalin.rep[0].DQcontent}">
+								<input type="text" name="q1" id="q1" value="${dalin.rep[0].DQcontent}" placeholder="답변을 적어주세요!">
 							</div>
 						</div><br>
 						<div>
@@ -423,7 +443,7 @@ body {
 								</h4>
 							</div>
 							<div>
-								<input type="text" name="q2" id="q2" value="${dalin.rep[1].DQcontent}">
+								<input type="text" name="q2" id="q2" value="${dalin.rep[1].DQcontent}" placeholder="답변을 적어주세요!">
 							</div>
 						</div><br>
 						<div>
@@ -433,7 +453,7 @@ body {
 								</h4>
 							</div>
 							<div>
-								<input type="text" name="q3" id="q3" value="${dalin.rep[2].DQcontent}">
+								<input type="text" name="q3" id="q3" value="${dalin.rep[2].DQcontent}" placeholder="답변을 적어주세요!">
 							</div>
 						</div><br>
 						<div>
@@ -443,7 +463,7 @@ body {
 								</h4>
 							</div>
 							<div>
-								<input type="text" name="q4" id="q4" value="${dalin.rep[3].DQcontent}">
+								<input type="text" name="q4" id="q4" value="${dalin.rep[3].DQcontent}" placeholder="답변을 적어주세요!">
 							</div>
 						</div><br>
 					</div>

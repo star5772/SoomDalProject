@@ -63,55 +63,55 @@ button:hover {
 		<div class="card">
   			<img class="card-img-top" src="#" alt="Card image cap">
   			<div class="card-body">
-  			<button onclick="location.href='/dal/member/field/list?detailFName=piano'" style="margin-left: 45px; font-weight: bold;" >피아노 레슨</button>
+  			<button onclick="location.href='/dal/member/field/list?detailFName=piano&name=피아노'" style="margin-left: 45px; font-weight: bold;" >피아노 레슨</button>
   			</div>
 		</div>
 		<div class="card">
   			<img class="card-img-top" src="#" alt="Card image cap">
   			<div class="card-body">
-  			<button onclick="location.href='/dal/member/field/list?detailFName=elecguitar'" style="margin-left: 45px; font-weight: bold;" >일렉기타 레슨</button>
+  			<button onclick="location.href='/dal/member/field/list?detailFName=elecguitar&name=일렉기타'" style="margin-left: 45px; font-weight: bold;" >일렉기타 레슨</button>
   			</div>
 		</div>
 		<div class="card">
   			<img class="card-img-top" src="#" alt="Card image cap">
   			<div class="card-body">
-  			<button onclick="location.href='/dal/member/field/list?detailFName=drum'" style="margin-left: 45px; font-weight: bold;" >드럼 레슨</button>
+  			<button onclick="location.href='/dal/member/field/list?detailFName=drum&name=드럼'" style="margin-left: 45px; font-weight: bold;" >드럼 레슨</button>
   			</div>
 		</div>
 		<div class="card">
   			<img class="card-img-top" src="#" alt="Card image cap">
   			<div class="card-body">
-  			<button onclick="location.href='/dal/member/field/list?detailFName=baseguitar'" style="margin-left: 45px; font-weight: bold;" >베이스기타 레슨</button>
+  			<button onclick="location.href='/dal/member/field/list?detailFName=baseguitar&name=베이스기타'" style="margin-left: 45px; font-weight: bold;" >베이스기타 레슨</button>
   			</div>
 		</div>
 		<div class="card">
   			<img class="card-img-top" src="#" alt="Card image cap">
   			<div class="card-body">
-  			<button onclick="location.href='/dal/member/field/list?detailFName=violinn'" style="margin-left: 45px; font-weight: bold;" >바이올린 레슨</button>
+  			<button onclick="location.href='/dal/member/field/list?detailFName=violinn&name=바이올린'" style="margin-left: 45px; font-weight: bold;" >바이올린 레슨</button>
   			</div>
 		</div>
 		<div class="card">
   			<img class="card-img-top" src="#" alt="Card image cap">
   			<div class="card-body">
-  			<button onclick="location.href='/dal/member/field/list?detailFName=saxophone'" style="margin-left: 45px; font-weight: bold;" >색소폰 레슨</button>
+  			<button onclick="location.href='/dal/member/field/list?detailFName=saxophone&name=색소폰'" style="margin-left: 45px; font-weight: bold;" >색소폰 레슨</button>
   			</div>
 		</div>
 		<div class="card">
   			<img class="card-img-top" src="#" alt="Card image cap">
   			<div class="card-body">
-  			<button onclick="location.href='/dal/member/field/list?detailFName=trumpet'" style="margin-left: 45px; font-weight: bold;" >트럼펫 레슨</button>
+  			<button onclick="location.href='/dal/member/field/list?detailFName=trumpet&name=트럼펫'" style="margin-left: 45px; font-weight: bold;" >트럼펫 레슨</button>
   			</div>
 		</div>
 		<div class="card">
   			<img class="card-img-top" src="#" alt="Card image cap">
   			<div class="card-body">
-  			<button onclick="location.href='/dal/member/field/list?detailFName=flute'" style="margin-left: 45px; font-weight: bold;" >플루트 레슨</button>
+  			<button onclick="location.href='/dal/member/field/list?detailFName=flute&name=플루트'" style="margin-left: 45px; font-weight: bold;" >플루트 레슨</button>
   			</div>
 		</div>
 		<div class="card">
   			<img class="card-img-top" src="#" alt="Card image cap">
   			<div class="card-body">
-  			<button onclick="location.href='/dal/member/field/list?detailFName=cello'" style="margin-left: 45px; font-weight: bold;" >첼로 레슨</button>
+  			<button onclick="location.href='/dal/member/field/list?detailFName=cello&name=첼로'" style="margin-left: 45px; font-weight: bold;" >첼로 레슨</button>
   			</div>
 		</div>
 	</div>

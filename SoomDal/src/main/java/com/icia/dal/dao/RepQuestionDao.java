@@ -13,12 +13,5 @@ import com.icia.dal.entity.*;
 public class RepQuestionDao {
 	@Inject
 	private SqlSessionTemplate tpl;
-	
-	public List<RepQuestion> findAllToRequestion(String dEmail) {
-		return tpl.selectList("RepQuestionMapper.findAllToRequestion", dEmail);
-	}
-	
-	public int insertToRequestion(RepQuestion repQuestion) {
-		return tpl.insert("RepQuestionMapper.insertToRequestion", repQuestion);
-	}
+
 }
