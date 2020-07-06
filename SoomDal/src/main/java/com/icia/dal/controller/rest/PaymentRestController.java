@@ -14,18 +14,18 @@ import com.icia.dal.Exception.JobFailException;
 import com.icia.dal.Exception.UserNotFoundException;
 import com.icia.dal.entity.RequestPayment;
 import com.icia.dal.entity.Review;
-import com.icia.dal.service.DalinService;
-import com.icia.dal.service.JejaService;
 import com.icia.dal.service.PaymentService;
 import com.icia.dal.service.ReviewService;
+import com.icia.dal.service.rest.DalinRestService;
+import com.icia.dal.service.rest.JejaRestService;
 
 @RequestMapping("/member")
 @RestController
 public class PaymentRestController {
 	@Inject
-	private DalinService dalService;
+	private DalinRestService dalRestService;
 	@Inject
-	private JejaService jejaService;
+	private JejaRestService jejaRestService;
 	@Inject
 	private ReviewService reviewService;
 	@Inject
@@ -33,12 +33,12 @@ public class PaymentRestController {
 	
 	@PostMapping("/dalin/find_id")
 	public ResponseEntity<?> findId(String dName,String dTel) throws UserNotFoundException{
-		return ResponseEntity.ok(dalService.findId(dName,dTel));
+		return ResponseEntity.ok(dalRestService.findId(dName,dTel));
 	}
 	
 	@PostMapping("/jeja/find_id")
 	public ResponseEntity<?> findJejaId(String jName,String jTel) throws UserNotFoundException{
-		return ResponseEntity.ok(jejaService.findId(jName,jTel));
+		return ResponseEntity.ok(jejaRestService.findId(jName,jTel));
 	}
 	
 	// 제자 리뷰작성
