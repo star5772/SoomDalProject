@@ -32,7 +32,7 @@
 </script>
 </head>
 <body>
-<sec:authentication property="principal.username" var="username"/>
+<%-- <sec:authentication property="principal.username" var="username"/> --%>
 	<form action="/dal/member/resetToDalinPwd" method="post">
 		비밀번호:<input type="password" name="dPassword" id="dp">
 		새비밀번호:<input type="password" name="newPassword" id="np">

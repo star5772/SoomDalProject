@@ -20,7 +20,6 @@
 </head>
 <body>
 			<div id="login">	
-				<h3 style="text-align: center;">관리자 로그인</h3>
 				<form action="/dal/admin/loginpost" method="post">
 				<label for="password" style="font-size: 20px;">관리자 아이디</label>
 				<input type="text" name="username" placeholder="아이디(Email)을 입력해주세요" maxlength="50" class="form-control form-control-lg"><br>
@@ -28,7 +27,7 @@
 				<input type="password" name="password" placeholder="비밀번호를 입력하세요" maxlength="10" class="form-control form-control-lg"><br>
 				<!-- csrf 토큰을 되돌려야 한다 -->
 				<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
-				<button class="btn btn-warning">관리자 로그인</button><a style="margin-left: 325px;"class="btn btn-info" href="/dal/member/admin/join">관리자 계정 생성</a>
+				<button style="font-size:small; color: white;" class="btn btn-warning">로그인</button><a style="margin-left: 360px; font-size: small; color: white;"class="btn btn-warning" href="/dal/member/admin/join">관리자계정</a>
 				</form>
 			</div>
 </body>
