@@ -65,7 +65,7 @@ public class PaymentService {
 		return paymentDao.deleteToPayment(username);
 	}
 	
-	// 관리자 캐쉬충전내역 페이징
+	// 관리자 캐쉬충전내역 페이징	(미사용)
 	public PageToNowPayment reqPayment(int pageno) {
 		int countOfBoard = paymentDao.countToNowPayment();
 		PageToNowPayment page = PaymentPagingUtil.getPage(pageno, countOfBoard);

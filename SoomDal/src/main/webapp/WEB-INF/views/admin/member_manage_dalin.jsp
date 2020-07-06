@@ -36,19 +36,13 @@
 		margin-bottom: 1px;
 	}
 </style>
-<script>
-
-
-
-
-</script>
 </head>
 <body>
 
 	<div style="display: inline-block; width: 80px; position: absolute; left: 69.7%; top: 220px; border: 0; outline: 0;">
 		<select style="border-style: none;" onchange="location.href=this.value">
 			<option value="/dal/member/admin/member_manage">제자회원</option>
-			<option value="/dal/member/admin/member_manage_d" >달인회원</option>
+			<option value="/dal/member/admin/member_manage_d" selected="selected">달인회원</option>
 		</select>
 	</div>
 <div id="manage_wrap">
@@ -63,16 +57,17 @@
 	</div>
 </div>
 
-<div id="JejaTable_wrap" >
-	<div id="JejaManage_title" style="display: inline-block; position: absolute; left: 28%">
+	<div id="DalinTable_wrap" >
+	<div id="DalinManage_title" style="display: inline-block; position: absolute; left: 28%">
 		<h1>회원 관리</h1>
 	</div>
 		<table class="table table-hover" style="width: 700px; padding: 100px 0; float: left; text-align: center;">
 			<colgroup>
+				<col width="10%">
+				<col width="20%">
+				<col width="20%">
+				<col width="20%">
 				<col width="15%">
-				<col width="30%">
-				<col width="20%">
-				<col width="20%">
 				<col width="15%">
 			</colgroup>
 			<thead>
@@ -80,55 +75,68 @@
 				<th>이름</th>
 				<th>아이디</th>
 				<th>전화번호</th>
-				<th>신고당한 횟수</th>
-				<th>블락 여부</th>
+				<th>전문분야</th>
+				<th>회원 상태</th>
+				<th>회원 등급</th>
 			</tr>
 			</thead>
 			<tbody>
- 			 <c:forEach items="${jeja.list }" var="list">
+ 			 <c:forEach items="${dalin.list }" var="dal">
 				<tr>
-					<td>${list.JName}</td>
-					<td>${list.JEmail }</td>
-					<td>${list.JTel }</td>
-					<td>${list.JAccusationCnt }</td>
+					<td>${dal.DName}</td>
+					<td>${dal.DEmail }</td>
+					<td>${dal.DTel }</td>
+					<td>${dal.detailFName}</td>
 					<c:choose>
-						<c:when test="${list.JIsBlock == 'false'}">
+						<c:when test="${list.enabled == 'true'}">
 							<td>활성화</td>
 						</c:when>
 						<c:otherwise>
 							<td>비활성화</td>
 						</c:otherwise>
 					</c:choose>
+					<c:choose>
+						<c:when test="${dal.DLevelStr == 'NORMAL'}">
+							<td>일반 회원</td>
+						</c:when>
+						<c:when test="${dal.DLevelStr == 'SILVER'}">
+							<td style="color: silver;">실버 회원</td>
+						</c:when>
+						<c:when test="${dal.DLevelStr == 'GOLD'}">
+							<td style="color: yellow;">골드 회원</td>
+						</c:when>
+						<c:when test="${dal.DLevelStr == 'PLATINUM'}">
+							<td style="color: aqua;">플래티넘 회원</td>
+						</c:when>
+					</c:choose>
 				</tr>
 			</c:forEach> 
 			</tbody>
-		</table>
+		</table>	
 		
 			<div style="text-align: center; display: inline-block; margin-left: 35%">
 				<ul class="pagination">
-					<c:if test="${jeja.prev==true }">
-						<li><a href="/dal/member/admin/member_manage?pageno=${jeja.startPage-1 }">이전</a></li>
+					<c:if test="${dalin.prev==true }">
+						<li><a href="/dal/member/admin/member_manage_d?pagene=${dalin.startPage-1 }">이전</a></li>
 					</c:if>
-					<c:forEach begin="${jeja.startPage }" end="${jeja.endPage }" var="i">
+					<c:forEach begin="${dalin.startPage }" end="${dalin.endPage }" var="i">
 						<c:choose>
-							<c:when test="${jeja.pageno eq i }">
+							<c:when test="${dalin.pagene eq i }">
 								<li class="active">
-									<a href="/dal/member/admin/member_manage?pageno=${i }">${i }</a>
+									<a href="/dal/member/admin/member_manage_d?pagene=${i }">${i }</a>
 								</li>
 							</c:when>
 							<c:otherwise>
-								<li><a href="/dal/member/admin/member_manage?pageno=${i }">${i }</a>
+								<li><a href="/dal/member/admin/member_manage_d?pagene=${i }">${i }</a>
 							</c:otherwise>
 						</c:choose>
 					</c:forEach>
-					<c:if test="${jeja.next==true }">
-						<li><a href="/dal/member/admin/member_manage?pageno=${jeja.endPage+1 }">다음</a></li>
+					<c:if test="${dalin.next==true }">
+						<li><a href="/dal/member/admin/member_manage_d?pagene=${dalin.endPage+1 }">다음</a></li>
 					</c:if>
 				</ul>
 			</div>
-	</div>	
-	
-
+	</div>		
 
 
 </body>
