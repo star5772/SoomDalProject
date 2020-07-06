@@ -122,6 +122,7 @@ $(function(){
 				<th>충전시간</th>
 				<th>환불가능일</th>
 				<th>충전금액</th>
+				<th>환불여부</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -131,6 +132,14 @@ $(function(){
 				<td>${nplist.PDateStr}</td>
 				<td>${nplist.PRefundDate}</td>
 				<td>${nplist.PMoney}</td>
+				<c:choose>
+					<c:when test="${nplist.PRefundIsOk == 'false'}">
+						<td><button id="refund" type="button" class="btn btn-danger">청약철회</button></td>
+					</c:when>
+					<c:otherwise>
+						<td>환불 완료</td>
+					</c:otherwise>
+				</c:choose>
 			</tr>			
 		</c:forEach>			
 		</tbody>	
