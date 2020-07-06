@@ -1,6 +1,5 @@
 package com.icia.dal.dto;
 
-import java.time.LocalDateTime;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -19,7 +18,7 @@ public class RefundDto {
 		private String pCode; // 결제코드
 		private String dEmail; // 달인 아이디
 		private String pRefundIsOk; // 환불수락여부
-		private String pDate; // 결제날짜
+		private String pDateStr; // 결제날짜
 		private int pMoney; // 환불요청금액
 	}
 }

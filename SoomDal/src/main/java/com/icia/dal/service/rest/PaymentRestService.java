@@ -7,6 +7,7 @@ import javax.inject.*;
 import org.apache.commons.lang3.*;
 import org.springframework.stereotype.*;
 
+import com.icia.dal.Exception.JobFailException;
 import com.icia.dal.dao.*;
 import com.icia.dal.entity.*;
 
@@ -40,6 +41,23 @@ public class PaymentRestService {
 		// 결제내역 출력을위한 결제내역 입력.
 		paymentDao.insertToNowPayment(NowPayment.builder().dEmail(username).pCode(pCode).pDate(LocalDateTime.now()).pMoney(money).build());
 		return paymentDao.deleteToPayment(username);
+	}
+
+	public boolean requestRefund(String pCode,String username) {
+		Dalin dal = dalDao.findByDalin(username);
+		int cash = paymentDao.findByDalinCash(username);
+		int requestRefundCash = paymentDao.findByPmoneyToPcode(pCode);
+		if(cash<requestRefundCash) {
+			return false;
+		}else {
+			NowPayment np = NowPayment.builder().pCode(pCode).pRefundIsOk(true).pRequestRefund(true).build();
+			paymentDao.updatePaymentToDalin(np);
+			dalDao.minusCash(requestRefundCash, dal.getDMno());
+			String recode = RandomStringUtils.randomAlphanumeric(8);
+			NowRefund nr = NowRefund.builder().dEmail(username).pCode(pCode).pMoney(requestRefundCash).pRefundCode(recode).build();
+			paymentDao.insertToNowRefund(nr);
+			return true;
+		}
 	}
 	
 }

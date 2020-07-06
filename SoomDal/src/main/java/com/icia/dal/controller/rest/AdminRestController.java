@@ -33,4 +33,9 @@ public class AdminRestController {
 		adService.updateJenabled(jIsBlock, jEmail);
 		return ResponseEntity.ok(null);
 	}
+	
+	@PostMapping("/admin/confirmRefund")
+	public ResponseEntity<?> refundIsOk(String pCode) {
+		return ResponseEntity.ok(adService.confirmRefund(pCode));
+	}
 }

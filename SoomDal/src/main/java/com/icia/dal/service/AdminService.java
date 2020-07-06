@@ -146,11 +146,11 @@ public class AdminService {
 		for(NowRefund nowRefund:refundList) { 
 			RefundDto.DtoForListToRefund dto = modelMapper.map(nowRefund, RefundDto.DtoForListToRefund.class);
 			NowPayment np = npDao.findByNowpayment(dto.getDEmail());
+			System.out.println(np);
 			dto.setPReqRefundDate(nowRefund.getPReqRefundDate().format(DateTimeFormatter.ofPattern("yyyy년 MM월 dd일")));
 			String str = np.getPDate().format(DateTimeFormatter.ofPattern("yyyy년 MM월 dd일"));
-			dto.setPDate(str);
+			dto.setPDateStr(str);
 			dtoList.add(dto);
-			
 		}
 		refundPage.setList(dtoList);
 		return refundPage;

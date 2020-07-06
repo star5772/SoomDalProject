@@ -15,6 +15,23 @@
 	access="hasAnyRole('ROLE_JEJA','ROLE_DALIN','ROLE_ADMIN')">
 	<script src="/dal/script/webS.js"></script>
 </sec:authorize>
+<script>
+function refund() {
+		var param = {
+				_csrf : "${_csrf.token}",
+				pCode: $("#pCode").val()
+			}
+		$.ajax({
+			url: "/dal/member/admin/confirmRefund",
+			method: "post",
+			data: param,
+			success: function() {
+				alert("처리완료");
+				window.location.reload();
+			}
+		})
+}
+</script>
 <style>
 h1 {
 	font-weight: bolder;
@@ -88,6 +105,7 @@ ${refund }
 			</thead>
 			<tbody>
 				<c:forEach items="${refund.list }" var="r">
+					<input type="hidden" id="pCode" value="${r.PCode}">
 					<tr>
 						<td>${r.DEmail}</td>
 						<td>${r.PReqRefundDate }</td>
@@ -95,14 +113,15 @@ ${refund }
 						<c:choose>
 							<c:when test="${r.PRefundIsOk ==true}">
 								<td>환불</td>
+								<td>환불처리완료</td>
 							</c:when>
 							<c:otherwise>
 								<td>미환불</td>
+								<td>
+									<button onclick="refund()" type="button" class="btn btn-secondary" style="width: 50px;">수락</button>
+								</td>
 							</c:otherwise>
 						</c:choose>
-						<td>
-							<button class="btn btn-secondary" style="width: 50px;">수락</button>
-						</td>
 					</tr>
 					<input type="hidden" name="dEmail" id="dEmail" value="${r.DEmail}">
 				</c:forEach>

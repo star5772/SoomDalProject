@@ -25,6 +25,11 @@ public class PaymentController {
 				.addObject("nowPayment",paymentService.reqPaymentToDalin(pageno,username));
 	}
 	
+	@GetMapping("/payment/refund")
+	public ModelAndView refundPage(@RequestParam(defaultValue = "1")int pageno,Principal principal) {
+		return new ModelAndView("payment/refundPage").addObject("refund").addObject("nowRefund",paymentService.nowRefund(pageno,principal.getName()));
+	}
+	
 	
 	
 }

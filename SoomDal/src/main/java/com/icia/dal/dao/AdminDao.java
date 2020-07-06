@@ -146,11 +146,6 @@ public class AdminDao {
 		return tpl.delete("adminMapper.deleteToField",fNo);
 	}
 	
-	// 환불
-	public int insertToRefund(NowRefund nowRefund) {
-		return tpl.insert("adminMapper.insertToRefund", nowRefund);
-	}
-	
 	//public String findByPReqRefundDate() {
 		//return tpl.selectOne("adminMapper.findByPReqRefundDate");
 	//}

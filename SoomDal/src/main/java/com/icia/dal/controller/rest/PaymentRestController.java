@@ -37,4 +37,11 @@ public class PaymentRestController {
 		}
 		return ResponseEntity.ok(null);
 	}
+	
+	@PostMapping("/payment/refundReq")
+	public ResponseEntity<?> refundRequest(String pCode,Principal principal) {
+		System.out.println(pCode);
+		String username = principal.getName();
+		return ResponseEntity.ok(paymentService.requestRefund(pCode,username));
+	}
 }
