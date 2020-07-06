@@ -13,6 +13,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import com.icia.dal.dao.*;
 import com.icia.dal.entity.*;
 import com.icia.dal.service.PaymentService;
+import com.icia.dal.service.rest.*;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("file:src/main/webapp/WEB-INF/spring/**/*-context.xml")
@@ -32,7 +33,7 @@ public class TotalTest {
 	@Inject
 	private ReviewDao rDao;
 	@Inject
-	private PaymentService paymentService;
+	private PaymentRestService paymentService;
 	
 	//@Test
 	public void DalDaoTest() {

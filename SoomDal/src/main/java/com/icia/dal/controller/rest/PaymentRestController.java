@@ -16,8 +16,7 @@ import com.icia.dal.entity.RequestPayment;
 import com.icia.dal.entity.Review;
 import com.icia.dal.service.PaymentService;
 import com.icia.dal.service.ReviewService;
-import com.icia.dal.service.rest.DalinRestService;
-import com.icia.dal.service.rest.JejaRestService;
+import com.icia.dal.service.rest.*;
 
 @RequestMapping("/member")
 @RestController
@@ -27,9 +26,9 @@ public class PaymentRestController {
 	@Inject
 	private JejaRestService jejaRestService;
 	@Inject
-	private ReviewService reviewService;
+	private ReviewRestService reviewService;
 	@Inject
-	private PaymentService paymentService;
+	private PaymentRestService paymentService;
 	
 	@PostMapping("/dalin/find_id")
 	public ResponseEntity<?> findId(String dName,String dTel) throws UserNotFoundException{

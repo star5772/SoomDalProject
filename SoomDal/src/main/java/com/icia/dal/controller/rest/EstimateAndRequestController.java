@@ -8,12 +8,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.icia.dal.service.EstimateService;
+import com.icia.dal.service.rest.*;
 
 @RestController
 @RequestMapping("/member")
 public class EstimateAndRequestController {
 	@Inject
-	private EstimateService estimateService;
+	private EstimateRestService estimateService;
 	
 	// 제자->견적서 수락
 		@PostMapping("/estimate/readToEstimate")
