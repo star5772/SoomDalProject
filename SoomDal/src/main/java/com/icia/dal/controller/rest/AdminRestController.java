@@ -5,6 +5,8 @@ import java.io.IOException;
 import javax.inject.Inject;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.*;
+import org.springframework.security.access.prepost.*;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -12,6 +14,7 @@ import com.icia.dal.entity.Field;
 import com.icia.dal.service.AdminService;
 import com.icia.dal.service.rest.*;
 
+@Secured("ROLE_ADMIN")
 @RequestMapping("/member")
 @RestController
 public class AdminRestController {

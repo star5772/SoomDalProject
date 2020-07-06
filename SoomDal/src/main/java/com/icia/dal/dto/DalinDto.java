@@ -59,10 +59,10 @@ public class DalinDto {
 		private String dArea;
 		private String dDetailService;
 		private String dPaymentMethod;
-		private List<RepQuestion> rep;
+		private RepQuestion rep;
 		private List<Review> reviews;
 		private Double rScoreAverage;
-		private List<ProfileAttachment> ProfileAttachments;
+		private List<ProfileAttachment> profileAttachments;
 	}	
 	@Data
 	public static class DtoForMyInfo {

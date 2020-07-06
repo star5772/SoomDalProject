@@ -5,6 +5,7 @@ import java.security.*;
 import javax.inject.*;
 
 import org.springframework.lang.Nullable;
+import org.springframework.security.access.prepost.*;
 import org.springframework.stereotype.*;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.*;
@@ -23,7 +24,7 @@ public class QnaBoardController {
 		return new ModelAndView("main").addObject("viewName", "qnaBoard/list.jsp").addObject("qnaPage",qnaBoardService.list(pageno,qName));
 	}
 	
-	
+	@PreAuthorize("isAuthenticated()")
 	@GetMapping("/qnaBoard/read")
 	public ModelAndView read(int qNo, Principal principal) throws AccessExeption {
 		String username = principal.getName();
@@ -38,12 +39,13 @@ public class QnaBoardController {
 		}
 	}
 	
-	
+	@PreAuthorize("isAuthenticated()")
 	@GetMapping("/qnaBoard/write")
 	public ModelAndView wirte() {
 		return new ModelAndView("main").addObject("viewName","qnaBoard/write.jsp");
 	}
 	
+	@PreAuthorize("isAuthenticated()")
 	@PostMapping("/qnaBoard/write")
 	public String write(QnaBoard qnaBoard ,Principal principal) {
 		String username = principal.getName();
@@ -51,6 +53,8 @@ public class QnaBoardController {
 		return "redirect:/member/qnaBoard/read?qNo="+qno;
 				
 	}
+	
+	@PreAuthorize("isAuthenticated()")
 	@PostMapping("/qnaBoard/delete")
 	public String deleteToQnaBoard(int qNo) {
 		qnaBoardService.delete(qNo);

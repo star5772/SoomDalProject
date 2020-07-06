@@ -6,6 +6,8 @@ import javax.inject.Inject;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.*;
+import org.springframework.security.access.prepost.*;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -18,11 +20,13 @@ public class QnaRestCotroller {
 	@Inject
 	private QnaCommentRestService qnaCommentService;
 	
+	@Secured("ROLE_DALIN")
 	@PostMapping("/comment/write")
 	public ResponseEntity<Void> commentWrite(String cContent, Integer qNo) {
 		qnaCommentService.write(cContent, qNo);
 		return ResponseEntity.ok(null);
 	}
+	@Secured("ROLE_DALIN")
 	@DeleteMapping("/comment/delete")
 	public ResponseEntity<Void> commentDelete(Integer cNo,Integer qNo){
 		qnaCommentService.delete(cNo, qNo);
