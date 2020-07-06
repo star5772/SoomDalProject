@@ -71,19 +71,13 @@ public class DalinController {
 	
 	@PostMapping("/dalin/profile_update")
 	public String dalinInFoUpdate(@Valid DalinDto.DtoForProfileUpdateToDalin dto, @Nullable MultipartFile dProfile, RedirectAttributes ra, BindingResult bindingResult) throws BindException {
-		System.out.println(dto);
-		System.out.println("=======================================");
-		System.out.println(dProfile);
-		System.out.println(dto.getProfileAttachments());
-		/*
 		if(bindingResult.hasErrors()==true)
 			throw new BindException(bindingResult);
 		try {
-			dalService.profileSajin(dto, dProfile);
+			dalService.profileUpdate(dto, dProfile);
 		} catch (IllegalStateException | IOException e) {
 			e.printStackTrace();
 		}
-		*/
 		return "redirect:/";
 	}
 	@GetMapping("/dalin/my_info_update")

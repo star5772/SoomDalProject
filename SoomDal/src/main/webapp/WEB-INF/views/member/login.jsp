@@ -145,15 +145,8 @@ label {
 						  	</div>
 						  	<a class="findId" href="#" onclick="openChild()" style="float:left">제자 아이디 찾기</a>
 					  	</div>
-<<<<<<< HEAD
 						<label for="jejaPwd">제자회원 비밀번호</label>
 						<input type="password" name="jPassword" placeholder="비밀번호를 입력하세요" maxlength="50" class="form-control form-control-lg"><br>
-=======
-					  	</div>
-					  	<div style="margin-top: 20px;">
-						<label for="jejaPwd">비밀번호</label>
-						<input type="password" name="jPassword" placeholder="비밀번호를 입력하세요" maxlength="10" class="form-control form-control-lg"><br>
->>>>>>> branch 'master' of https://github.com/star5772/SoomDalProject
 						<div style="height: 30px;">
 							<div class="alert alert-success alert-dismissible" id="jmsg" style="display:none;">
 						    	<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
