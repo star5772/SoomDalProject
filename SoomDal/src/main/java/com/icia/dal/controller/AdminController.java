@@ -17,28 +17,28 @@ public class AdminController {
 	public ModelAndView adminLogin() {
 		return new ModelAndView("main").addObject("viewName","admin/adminLogin.jsp");
 	}
-	
+	// 회원관리
 	@GetMapping("/admin/member_manage")
 	public ModelAndView adminManage(@RequestParam(defaultValue = "1") int pageno) {
 		// 관리자 회원관리탭 - 제자 and 달인 리스트 정보 필요
-		return new ModelAndView("main").addObject("viewName","admin/member_manage.jsp");
+		return new ModelAndView("main").addObject("viewName","admin/member_manage.jsp").addObject("jeja",adminService.adminPageToJeja(pageno)).addObject("dalin",adminService.adminPageToDalin(pageno));
 	}
-	
+	// 블락회원관리
 	@GetMapping("/admin/enabled_manage")
 	public ModelAndView enabledManage(@RequestParam(defaultValue = "1") int pageno) {
 		return new ModelAndView("main").addObject("viewName","admin/enabled_manage.jsp").addObject("enabled",adminService.EnabledPage(pageno));
 	}
-	
+	// 신고회원관리
 	@GetMapping("/admin/jeja_manage")
 	public ModelAndView jejaManage(@RequestParam(defaultValue = "1") int pageno) {
-		return new ModelAndView("main").addObject("viewName","admin/jeja_manage.jsp").addObject("jeja",adminService.adminPage(pageno));
+		return new ModelAndView("main").addObject("viewName","admin/jeja_manage.jsp").addObject("jeja",adminService.reportedPage(pageno));
 	}
-	
+	// 신고게시물관리
 	@GetMapping("/admin/review_manage")
 	public ModelAndView reviewManage(@RequestParam(defaultValue = "1") int pageno) {
 		return new ModelAndView("main").addObject("viewName","admin/review_manage.jsp").addObject("review",adminService.ReviewPage(pageno));
 	}
-	
+	// 환불관리
 	@GetMapping("/admin/refund_manage")
 	public ModelAndView refundManage(@RequestParam(defaultValue = "1") int pageno) {
 		return new ModelAndView("main").addObject("viewName","admin/refund_manage.jsp").addObject("refund",adminService.RefundPage(pageno));

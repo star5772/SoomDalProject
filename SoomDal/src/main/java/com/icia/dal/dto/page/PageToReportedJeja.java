@@ -3,13 +3,13 @@ package com.icia.dal.dto.page;
 import java.util.*;
 
 import com.icia.dal.dto.AdminDto;
-import com.icia.dal.dto.AdminDto.JejaForList;
+import com.icia.dal.dto.AdminDto.ReportedReviewForList;
 
 import lombok.*;
 
 @Data
 @Builder
-public class AdminPage {
+public class PageToReportedJeja {
 	private int startRowNum;
 	private int endRowNum;
 	
@@ -19,5 +19,5 @@ public class AdminPage {
 	private boolean isNext;
 	private int startPage;
 	
-	List<AdminDto.JejaForList> list;
+	List<AdminDto.ReportedJejaForList> list;
 }

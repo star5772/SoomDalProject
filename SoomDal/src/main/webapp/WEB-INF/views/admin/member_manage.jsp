@@ -93,11 +93,20 @@ ${enabled }
 					<td>${list.JEmail }</td>
 					<td>${list.JTel }</td>
 					<td>${list.JAccusationCnt }</td>
-					<td>${list.JJoinDate }</td>
+					<c:choose>
+						<c:when test="${list.JIsBlock == 'false'}">
+							<td>활성화</td>
+						</c:when>
+						<c:otherwise>
+							<td>비활성화</td>
+						</c:otherwise>
+					</c:choose>
 				</tr>
 			</c:forEach> 
 			</tbody>
 		</table>
+		
+		${dalin}
 			<div style="text-align: center; display: inline-block; margin-left: 35%">
 				<ul class="pagination">
 					<c:if test="${jeja.prev==true }">
@@ -121,8 +130,56 @@ ${enabled }
 				</ul>
 			</div>
 	</div>	
-		
+	
 
+
+<%-- 	<div id="table_wrap" >
+	<div id="manage_title1" style="display: inline-block; position: absolute; left: 28%">
+		<h1>회원 관리</h1>
+	</div>
+		<table class="table table-hover" style="width: 700px; padding: 100px 0; float: left; text-align: center;">
+			<colgroup>
+				<col width="15%">
+				<col width="30%">
+				<col width="20%">
+				<col width="20%">
+				<col width="15%">
+			</colgroup>
+			<thead>
+			<tr class="active">
+				<th>이름</th>
+				<th>아이디</th>
+				<th>전화번호</th>
+				<th>전문분야</th>
+				<th>블락 여부</th>
+				<th>회원 등급</th>
+			</tr>
+			</thead>
+			<tbody>
+ 			 <c:forEach items="${dalin.list }" var="dal">
+				<tr>
+					<td>${dal.DName}</td>
+					<td>${dal.DEmail }</td>
+					<td>${dal.DTel }</td>
+					<td>${dal.DetailFName}</td>
+					<c:choose>
+						<c:when test="${list.enabled == 'true'}">
+							<td>활성화</td>
+						</c:when>
+						<c:otherwise>
+							<td>비활성화</td>
+						</c:otherwise>
+					</c:choose>
+					<c:choose>
+						<c:when test="${dal.DLevel}">
+							<td></td>
+						</c:when>
+					</c:choose>
+				</tr>
+			</c:forEach> 
+			</tbody>
+		</table>		
+	 --%>
 
 </body>
 </html>

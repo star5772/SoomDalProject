@@ -19,18 +19,23 @@ import com.icia.dal.dao.PaymentDao;
 import com.icia.dal.dto.AdminDto;
 import com.icia.dal.dto.EnabledPage;
 import com.icia.dal.dto.RefundDto;
-import com.icia.dal.dto.ReportedPage;
-import com.icia.dal.dto.page.AdminPage;
+import com.icia.dal.dto.page.PageToDalinAdmin;
+import com.icia.dal.dto.page.PageToJejaAdmin;
 import com.icia.dal.dto.page.PageToRefund;
+import com.icia.dal.dto.page.PageToReportedJeja;
+import com.icia.dal.dto.page.PageToReportedReview;
+import com.icia.dal.entity.Dalin;
 import com.icia.dal.entity.DetailField;
 import com.icia.dal.entity.Field;
 import com.icia.dal.entity.Jeja;
 import com.icia.dal.entity.NowPayment;
 import com.icia.dal.entity.NowRefund;
 import com.icia.dal.entity.Review;
-import com.icia.dal.util.EnabledPagingUtil;
-import com.icia.dal.util.pagingutil.AdminPagingUtil;
+import com.icia.dal.util.pagingutil.AdminToDalinPagingUtil;
+import com.icia.dal.util.pagingutil.AdminToJejaPagingUtil;
+import com.icia.dal.util.pagingutil.EnabledPagingUtil;
 import com.icia.dal.util.pagingutil.RefundPagingUtil;
+import com.icia.dal.util.pagingutil.ReportedJejaPagingUtil;
 import com.icia.dal.util.pagingutil.ReportedPagingUtil;
 
 @Service
@@ -48,9 +53,25 @@ public class AdminService {
 	@Inject
 	private PaymentDao npDao;
 
-	public AdminPage adminPage(int pageno) {
+	public PageToDalinAdmin adminPageToDalin(int pageno) {
+		int countOfBoard = adminDao.countToDalin();
+		PageToDalinAdmin adPage = AdminToDalinPagingUtil.getPage(pageno, countOfBoard);
+		int srn = adPage.getStartRowNum();
+		int ern = adPage.getEndRowNum();
+		List<Dalin> adminList = adminDao.findAllToDalin(srn, ern);
+		List<AdminDto.DalinForList> dtoList = new ArrayList<AdminDto.DalinForList>();
+		for(Dalin dal:adminList) {
+			AdminDto.DalinForList dto = modelMapper.map(dal,AdminDto.DalinForList.class);
+			dto.setDDateStr(dal.getDDate().format(DateTimeFormatter.ofPattern("yyyy년MM월dd일")));	
+			dtoList.add(dto);
+		}
+		adPage.setList(dtoList);
+		return adPage;
+	}
+	
+	public PageToJejaAdmin adminPageToJeja(int pageno) {
 		int countOfBoard = adminDao.countToJeja();
-		AdminPage adPage = AdminPagingUtil.getPage(pageno, countOfBoard);
+		PageToJejaAdmin adPage = AdminToJejaPagingUtil.getPage(pageno, countOfBoard);
 		int srn = adPage.getStartRowNum();
 		int ern = adPage.getEndRowNum();
 		List<Jeja> adminList = adminDao.findAllToJeja(srn, ern);
@@ -62,28 +83,27 @@ public class AdminService {
 		}
 		adPage.setList(dtoList);
 		return adPage;
-	}
+	}	
 	
-	public ReportedPage reportedPage(int pageno) {
+	public PageToReportedJeja reportedPage(int pageno) {
 		int countOfBoard = adminDao.countToReportedJeja();
-		ReportedPage repPage = ReportedPagingUtil.getPage(pageno, countOfBoard);
+		PageToReportedJeja repPage = ReportedJejaPagingUtil.getPage(pageno, countOfBoard);
 		int srn = repPage.getStartRowNum();
 		int ern = repPage.getEndRowNum();
-		int jac = repPage.getJAccusationCnt();
-		List<Jeja> jejaRpList = adminDao.findAllToRpList(srn, ern, jac);
-		List<AdminDto.ReportedReviewForList> dtoList = new ArrayList<AdminDto.ReportedReviewForList>();
+		List<Jeja> jejaRpList = adminDao.findAllToRpList(srn, ern);
+		List<AdminDto.ReportedJejaForList> dtoList = new ArrayList<AdminDto.ReportedJejaForList>();
 		for(Jeja jeja:jejaRpList) {
-			AdminDto.ReportedReviewForList dto = modelMapper.map(jeja,AdminDto.ReportedReviewForList.class);
-			dto.setRDate(jeja.getJJoinDate().format(DateTimeFormatter.ofPattern("yyyy년MM월dd일")));
+			AdminDto.ReportedJejaForList dto = modelMapper.map(jeja,AdminDto.ReportedJejaForList.class);
+			dto.setJJoinDateStr(jeja.getJJoinDate().format(DateTimeFormatter.ofPattern("yyyy년MM월dd일")));
 			dtoList.add(dto);
 		}
 		repPage.setList(dtoList);
 		return repPage;
 	}
 	
-	public ReportedPage ReviewPage(int pageno) {
+	public PageToReportedReview ReviewPage(int pageno) {
 		int countOfBoard = adminDao.countToReview();
-		ReportedPage repPage = ReportedPagingUtil.getPage(pageno, countOfBoard);
+		PageToReportedReview repPage = ReportedPagingUtil.getPage(pageno, countOfBoard);
 		int srn = repPage.getStartRowNum();
 		int ern = repPage.getEndRowNum();
 		List<Review> reviewList = adminDao.findAllToReview(srn, ern);

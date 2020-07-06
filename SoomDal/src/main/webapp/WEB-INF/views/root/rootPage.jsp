@@ -7,6 +7,16 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<sec:authorize access="hasAnyRole('ROLE_JEJA','ROLE_DALIN','ROLE_ADMIN')">
+	<script src="/dal/script/webS.js"></script>
+</sec:authorize>
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+<script>
+$(function(){
+	if("${memoMsg}"!=="")
+		toastr.info("새로운 메모가 있습니다");
+})
+</script>
 <style>
 body:before{
   content:'';

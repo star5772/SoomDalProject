@@ -22,6 +22,7 @@ import com.icia.dal.dao.JejaDao;
 import com.icia.dal.dao.MemoDao;
 import com.icia.dal.entity.Dalin;
 import com.icia.dal.entity.Jeja;
+import com.icia.dal.util.websocket.MessageWebSocketHandler;
 
 @Component("loginSuccessHandler")
 public class LoginSuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
@@ -42,14 +43,12 @@ public class LoginSuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
 		
 		String Id = authentication.getName();
 		String jejaPassword = request.getParameter("jPassword");
-		
+		HttpSession session = request.getSession();		
+		if(memoDao.isNotReadMemoExist(Id)==true)
+			session.setAttribute("memoMsg", "새로운 메모가 있습니다");
 		SavedRequest req = cache.getRequest(request, response);
 		if(jejaPassword.length() >= 20) {
-			HttpSession session = request.getSession();
 			session.setAttribute("msg", "임시비밀번호로 로그인 하셨습니다. 비밀번호를 변경해주세요.");
-			
-			if(memoDao.isNotReadMemoExist(Id)==true)
-				session.setAttribute("memoMsg", "새로운 쪽지가 있습니다");
 			rs.sendRedirect(request, response, "/member/resetToJejaPwd");
 		}else if(req != null)
 			rs.sendRedirect(request, response, req.getRedirectUrl());

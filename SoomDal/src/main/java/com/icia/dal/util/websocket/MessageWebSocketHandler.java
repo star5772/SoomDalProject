@@ -28,6 +28,10 @@ public class MessageWebSocketHandler extends TextWebSocketHandler {
 		WebScoketService.sendMsg(sender, receiver, msg);
 	}
 	
+	public void sendLoginMessage(String sender, String receiver, String msg) {
+		WebScoketService.sendLoginMsg(sender, receiver, msg);
+	}
+	
 	public void sendServerMessage(String sender, String msg) {
 		WebScoketService.sendMsgAll(sender, msg);
 	}	

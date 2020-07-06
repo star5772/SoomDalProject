@@ -173,7 +173,7 @@ ${readEstimate }
 					<input type="hidden" name="jIsOk" id="jIsOk" value="">
 				</c:when>
 				<c:otherwise>
-					<button class="btn btn-warning" style="width: 80px;" id="list">목록</button>
+					<button onclick="location.href='/dal/member/estimate/receiveEstimateList?jMno=${readEstimate.JMno}'" class="btn btn-warning" style="width: 80px;" id="list">목록</button>
 				</c:otherwise>
 			</c:choose>
 					

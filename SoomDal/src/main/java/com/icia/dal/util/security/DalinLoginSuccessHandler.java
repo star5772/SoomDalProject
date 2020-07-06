@@ -23,15 +23,16 @@ import com.icia.dal.dao.JejaDao;
 import com.icia.dal.dao.MemoDao;
 import com.icia.dal.entity.Dalin;
 import com.icia.dal.entity.Jeja;
+import com.icia.dal.util.websocket.MessageWebSocketHandler;
 
 @Component("DalinloginSuccessHandler")
 public class DalinLoginSuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
 	@Inject
 	private DalinDao dalDao;
 	@Inject
-	private JejaDao jejaDao;
-	@Inject
 	private MemoDao memoDao;
+	@Inject
+	private MessageWebSocketHandler handler;
 	
 	private RequestCache cache = new HttpSessionRequestCache();
 	
@@ -45,20 +46,16 @@ public class DalinLoginSuccessHandler extends SimpleUrlAuthenticationSuccessHand
 		
 		String Id = authentication.getName();
 		String dalinPassword = request.getParameter("dPassword");
-		
+		HttpSession session = request.getSession();
+		if(memoDao.isNotReadMemoExist(Id)==true)
+			session.setAttribute("memoMsg", "새로운 메모가 있습니다");
 		SavedRequest req = cache.getRequest(request, response);
 		if(dalinPassword.length() >= 20) {
-			HttpSession session = request.getSession();
 			session.setAttribute("msg", "임시비밀번호로 로그인 하셨습니다. 비밀번호를 변경해주세요.");
-			
-			if(memoDao.isNotReadMemoExist(Id)==true)
-				session.setAttribute("memoMsg", "새로운 쪽지가 있습니다");
 			rs.sendRedirect(request, response, "/member/resetToDalinPwd");
 		}else if(req != null)
 			rs.sendRedirect(request, response, req.getRedirectUrl());
 		else
 			rs.sendRedirect(request, response, "/");
-		
-		System.out.println("시큐리티" + SecurityContextHolder.getContext().hashCode());
 	}
 }
