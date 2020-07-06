@@ -73,7 +73,6 @@ public class EstimateAndRequestController {
 		estimateService.writeToEstimate(et,username); 
 		int no = dalService.readToMyInfo(username).getDMno();
 		return new ModelAndView("redirect:/member/estimate/sendEstimateList?dMno="+no);
-		 
 	}
 	
 	// 보낸 견적서 읽기
@@ -89,13 +88,7 @@ public class EstimateAndRequestController {
 		return new ModelAndView("main").addObject("viewName","estimate/readEstimate.jsp").addObject("readEstimate",estimateService.readToSendEstimate(eNo));
 	}
 	
-	// 제자->견적서 수락
-	@PostMapping("/estimate/readToEstimate")
-	public ResponseEntity<?> readToEstimateJeja(boolean jIsOk,int eNo,int dMno,int jMno) {
-		if(jIsOk==true)
-			estimateService.acceptToEstimate(eNo,dMno,jMno);
-		return ResponseEntity.ok(null);
-	}
+	
 	
 	
 	// 달인 -> 받은요청서목록

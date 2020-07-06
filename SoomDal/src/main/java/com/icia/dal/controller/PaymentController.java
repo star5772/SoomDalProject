@@ -28,20 +28,7 @@ public class PaymentController {
 		return new ModelAndView("main").addObject("viewName","payment/store.jsp").addObject("cash",paymentService.readToDalinCash(username))
 				.addObject("nowPayment",paymentService.reqPaymentToDalin(pageno,username));
 	}
-	@PostMapping("/payment/store")
-	public ResponseEntity<?> RequestPayment(RequestPayment rp,Principal principal) {
-		paymentService.insertCashToDalin(rp,principal.getName());
-		return ResponseEntity.ok(paymentService.insertCashToDalin(rp,principal.getName())); 
-	}
 	
-	@PostMapping("/payment/contrast")
-	public ResponseEntity<?> ContrastPcode(String AuthCode,Principal principal) throws JobFailException {
-		String username = principal.getName();
-		if(paymentService.reqCashMember(username)==null) {
-			throw new JobFailException();
-		}else {
-			paymentService.addCashToDalin(AuthCode,username);
-		}
-		return ResponseEntity.ok(null);
-	}
+	
+	
 }
