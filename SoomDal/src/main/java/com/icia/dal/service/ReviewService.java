@@ -36,10 +36,10 @@ public class ReviewService {
 
 	
 	// 리뷰 작성
-	public List<Review> reviewAuthChkAndWrite(Review rv , String username) {
+	public List<Review> reviewAuthChkAndWrite(Review rv , String username,int dMno) {
 		// 리뷰작성을위해 레슨내역에서 레슨완료코드를 불러옴
 		Jeja jeja = dao.findById(username);
-		String comCode = lhDao.findByCompleteCodeToLH(jeja.getJMno());
+		String comCode = lhDao.findByCompleteCodeToLH(jeja.getJMno(),dMno);
 		// 리뷰권한테이블에서 달인 번호를 찾아서 제자가 보유하고있는 레슨내역에서 달인번호를 찾아 있으면 리뷰 작성.
 		int auth = reviewAuthDao.findCompleteCode(comCode, username);
 		if(rv.getDMno()==auth) {
@@ -58,9 +58,9 @@ public class ReviewService {
 		}
 	}
 	
-	public boolean reviewAuth(String username) {
+	public boolean reviewAuth(String username,int dMno) {
 		Jeja jeja = dao.findById(username);
-		String code = lhDao.findByCompleteCodeToLH(jeja.getJMno());
+		String code = lhDao.findByCompleteCodeToLH(jeja.getJMno(),dMno);
 		if(code==null)
 			code = "aa";
 		return reviewAuthDao.findByRvAuth(username, code);

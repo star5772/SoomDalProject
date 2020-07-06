@@ -41,12 +41,13 @@
 	</select>
 
 	<select id="findByCompleteCodeToLH" resultType="string">
-		select a_complete_code aCompleteCode from lessonhistory where j_mno = #{jMno}
+		select a_complete_code aCompleteCode from lessonhistory where j_mno = #{jMno} and r_is_ok = 0 and d_mno = #{dMno} and rownum=1
 	</select>
 	
 	<update id="setReviewIsOk" >
 		update lessonhistory set r_is_ok = 1 where a_complete_code = #{aCompleteCode} and rownum=1
 	</update>
+	
 	
 </mapper>
 
