@@ -13,7 +13,7 @@ public class PageToDalinAdmin {
 	private int startRowNum;
 	private int endRowNum;
 	
-	private int pageno;
+	private int pagene;
 	private boolean isPrev;
 	private int endPage;
 	private boolean isNext;

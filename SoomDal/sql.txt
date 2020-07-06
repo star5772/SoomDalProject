@@ -135,7 +135,7 @@ CREATE TABLE Dalin (
    ENABLED CHAR(1), /* 회원 상태(enabled) */
    D_DATE DATE, /* 가입날짜 */
    D_CASH NUMBER(8), /* 보유캐쉬 */
-   D_PROFILE NVARCHAR2(50), /* 프사 */
+   D_PROFILE NVARCHAR2(100), /* 프사 */
    D_MAIN_SERVICE NVARCHAR2(30), /* 대표서비스 */
    D_INTRO NVARCHAR2(50), /* 한줄소개 */
    D_DETAIL_SERVICE NVARCHAR2(500), /* 서비스상세설명 */
@@ -318,6 +318,7 @@ CREATE TABLE ProfileAttachment (
    P_ORIGINAL_FILE_NAME NVARCHAR2(20), /* 원래파일이름 */
    P_SAVE_FILE_NAME NVARCHAR2(30), /* 저장용파일이름 */
    D_EMAIL varchar2(50),
+   num number(1),
    constraint pk_profileattachment primary key(p_attachment_no)
 );
 
@@ -361,4 +362,3 @@ create Table LESSONHISTORY (
     r_is_ok char(1),
     constraint pk_LESSONHISTORY primary key(a_complete_code)
 );
-
