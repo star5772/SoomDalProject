@@ -129,11 +129,8 @@ $(function() {
 		text-align: center;
 		line-height: 50%;
 		color: white;
-<<<<<<< HEAD
-=======
 		float: right;
 		margin-top: 20px;
->>>>>>> branch 'master' of https://github.com/star5772/SoomDalProject
 	}
 	#jTel1 {
 		display: inline-block;

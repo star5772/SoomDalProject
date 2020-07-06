@@ -12,6 +12,6 @@ public class RepQuestion {
 	private String dEmail;
 	private String firstQ;
 	private String secoendQ;
-	private String ThirdQ;
-	private String FourthQ;
+	private String thirdQ;
+	private String fourthQ;
 }

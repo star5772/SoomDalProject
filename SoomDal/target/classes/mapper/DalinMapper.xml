@@ -53,7 +53,7 @@
 	</update>
 	<!-- 내정보 읽기 (이름, 이메일, 비밀번호, 전화번호) -->
 	<select id="findByDalin" resultType="dalin">
-		select d_mno dMno, d_name dName, d_email dEmail, d_password dPassword, d_tel dTel,d_cash dCash ,f_no fNo,d_level dLevel,d_login_failure_cnt dLoginFailureCnt
+		select d_mno dMno, d_name dName, d_email dEmail, d_password dPassword, d_tel dTel,d_cash dCash ,f_no fNo,d_level dLevel,d_login_failure_cnt dLoginFailureCnt,p_attachment_cnt pAttachmentCnt
 		from dalin where d_email=#{dEmail} and rownum=1
 	</select>
 	<!-- 내정보 수정 -->

@@ -1,7 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="RepQuestionMapper">
-
+	<select id="findByDemail" resultType="RepQuestion">
+		select d_email dEmail, first_q firstQ, secoend_q secoendQ, third_q thirdQ, fourth_q fourthQ from RepQuestion where d_email=#{dEmail} and rownum=1
+	</select>
+	
+	<insert id="insert">
+		insert into RepQuestion(d_email, first_q, secoend_q, third_q, fourth_q) values(#{dEmail},#{firstQ},#{secoendQ},#{thirdQ},#{fourthQ})
+	</insert>
+	
+	<update id="update">
+		update RepQuestion set first_q=#{firstQ}, secoend_q=#{secoendQ}, third_q=#{thirdQ}, fourth_q=#{fourthQ} where d_email=#{dEmail} and rownum=1
+	</update>
 </mapper>
 
 
