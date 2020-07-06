@@ -5,6 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>estimate_write</title>
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
 <script>
 $(function(){
 	$("#send").on("click",function(){

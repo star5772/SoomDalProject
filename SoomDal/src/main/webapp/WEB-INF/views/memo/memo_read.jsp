@@ -5,6 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>memo_read</title>
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
 <style>
 h2 {
 	margin-top: 50px;
