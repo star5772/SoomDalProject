@@ -5,6 +5,8 @@ import java.security.*;
 import javax.inject.*;
 
 import org.springframework.http.*;
+import org.springframework.security.access.annotation.*;
+import org.springframework.security.access.prepost.*;
 import org.springframework.web.bind.annotation.*;
 
 import com.icia.dal.service.*;
@@ -16,6 +18,7 @@ public class RequestBoardRestController {
 	@Inject
 	private RequestBoardRestService reqService;
 	
+	@Secured("ROLE_DALIN")
 	@PostMapping("/reqboard/report")
 	public ResponseEntity<Void> reportBoard(int rbNo,Principal principal,String reason) {
 		reqService.report(rbNo,principal.getName(),reason);

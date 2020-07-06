@@ -4,6 +4,8 @@ import java.security.Principal;
 
 import javax.inject.Inject;
 
+import org.springframework.security.access.annotation.*;
+import org.springframework.security.access.prepost.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,6 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.icia.dal.service.PaymentService;
 
+@Secured("ROLE_DALIN")
 @Controller
 @RequestMapping("/member")
 public class PaymentController {

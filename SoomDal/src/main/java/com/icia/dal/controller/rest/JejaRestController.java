@@ -6,6 +6,8 @@ import java.util.List;
 import javax.inject.*;
 
 import org.springframework.http.*;
+import org.springframework.security.access.annotation.*;
+import org.springframework.security.access.prepost.*;
 import org.springframework.web.bind.annotation.*;
 
 import com.icia.dal.Exception.JobFailException;
@@ -13,6 +15,7 @@ import com.icia.dal.dto.*;
 import com.icia.dal.entity.Review;
 import com.icia.dal.service.rest.*;
 
+@Secured("ROLE_JEJA")
 @RestController
 public class JejaRestController {
 	@Inject
