@@ -5,6 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
 <script>
 
 </script>
@@ -96,13 +97,13 @@ button:hover {
 	<div id="left">
 		<h2 style="font-weight: bold;">도움을 주고싶어요!</h2>
 		<div id="dalinjoin">
-			<button class="eff" style="width: 125px; font-size: 17px;"  type="button"  onclick="location.href = '/dal/dalin/join'">DALIN 가입</button>
+			<button class="eff" style="width: 125px; font-size: 17px;"  type="button"  onclick="location.href = '/dal/dalin/join'">DALIN가입</button>
 		</div>
 	</div>
 	<div id="right">
 		<h2 style="font-weight: bold;">배우고 싶어요!</h2>
 		<div id="jejajoin">
-			<button class="eff"  style="width: 125px; font-size: 17px;" type="button"  onclick="location.href = '/dal/jeja/join'">JEJA 가입</button>
+			<button class="eff"  style="width: 125px; font-size: 17px;" type="button"  onclick="location.href = '/dal/jeja/join'">JEJA가입</button>
 		</div>
 	</div>
 	

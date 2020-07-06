@@ -1,6 +1,7 @@
 package com.icia.dal.util.pagingutil;
 
 import com.icia.dal.dto.*;
+import com.icia.dal.dto.page.PageToReportedReview;
 
 public class ReportedPagingUtil {
 	// 페이지당 글의 개수
@@ -9,7 +10,7 @@ public class ReportedPagingUtil {
 	private final static int COUNT_OF_BOARD_PER_BLOCK = 5;
 	
 	// 일반글 페이징, 히트글 페이징
-	public static ReportedPage getPage(int pageno, int countOfBoard) {
+	public static PageToReportedReview getPage(int pageno, int countOfBoard) {
 		// 페이지의 개수 계산
 		// 마지막 페이지가 페이지의 개수보다 클 수 없다
 		int countOfPage = countOfBoard/COUNT_OF_BOARD_PER_PAGE + 1;
@@ -40,6 +41,6 @@ public class ReportedPagingUtil {
 		boolean isPrev = blockNo>0? true : false;
 		boolean isNext = endPage != countOfPage? true: false; 
 				
-		return ReportedPage.builder().startPage(startPage).endPage(endPage).startRowNum(startRowNum).endRowNum(endRowNum).isPrev(isPrev).isNext(isNext).pageno(pageno).build();
+		return PageToReportedReview.builder().startPage(startPage).endPage(endPage).startRowNum(startRowNum).endRowNum(endRowNum).isPrev(isPrev).isNext(isNext).pageno(pageno).build();
 	}
 }

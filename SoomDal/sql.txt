@@ -1,4 +1,3 @@
-drop table admin cascade constraints;
 drop table authorities cascade constraints;
 drop table dalin cascade constraints;
 drop table detailfield cascade constraints;
@@ -20,7 +19,6 @@ drop table review cascade constraints;
 drop table reviewattachment cascade constraints;
 drop table reviewauthority cascade constraints;
 drop table usecash cascade constraints;
-DROP TABLE MEMO CASCADE CONSTRAINTS;
 drop table lessonhistory cascade constraints;
 
 drop sequence jeja_seq;
@@ -128,7 +126,7 @@ CREATE TABLE JEJA (
 
 CREATE TABLE Dalin (
    D_MNO NUMBER(7) NOT NULL, /* 달인 회원 번호 */
-   DETAIL_F_NAME NVARCHAR2(10) NOT NULL,
+   DETAIL_F_NAME NVARCHAR2(20) NOT NULL,
    F_NO VARCHAR2(10) NOT NULL, /* 분야 코드 */
    D_EMAIL varchar2(50) NOT NULL, /* 회원 id(email) */
    D_PASSWORD VARCHAR2(60), /* 비밀번호 */
@@ -227,14 +225,6 @@ CREATE TABLE ReportedBoard (
    constraint pk_reportedboard primary key(rb_no,username)
 );
 
-/*관리자*/
-
-CREATE TABLE Admin (
-   AD_EMAIL VARCHAR2(50) NOT NULL, /* 관리자이메일 */
-   AD_PASSWORD VARCHAR2(60), /* 관리자비밀번호 */
-   AD_ENABLED CHAR(1), /* 관리자 상태 */
-   constraint pk_admin primary key(ad_email)
-);
 
 /* 캐시 사용 내역 */
 
@@ -298,8 +288,8 @@ CREATE TABLE Estimate (
 
 CREATE TABLE Memo (
    M_NO NUMBER(6) NOT NULL, /* 쪽지번호 */
-   RECEIVER NVARCHAR2(20), /* 수신자 -  */
-   SENDER NVARCHAR2(20), /* 발신자 -  */
+   RECEIVER NVARCHAR2(50), /* 수신자 -  */
+   SENDER NVARCHAR2(50), /* 발신자 -  */
    WRITE_TIME DATE, /* 시간 - */
    CONTENT NVARCHAR2(500), /* 내용 */
    TITLE NVARCHAR2(100), /* 제목 */
@@ -363,6 +353,7 @@ CREATE TABLE Authorities (
    constraint pk_authorities primary key(username,authority)
 );
 
+/* 레슨내역 */
 create Table LESSONHISTORY (
     a_complete_code varchar2(8),
     D_MNO number(7),

@@ -39,6 +39,7 @@ public class MemberController {
 	@Inject
 	private AdminService adminService;
 	
+	
 	@GetMapping({"/","/root"})
 	public ModelAndView main() {
 		// main 페이지로 이동 
@@ -133,7 +134,7 @@ public class MemberController {
 	@GetMapping("/member/dalin_profile")
 	public ModelAndView dalinProfileRead(int dMno,Principal principal) throws DalinNotFoundException {
 		String username = principal.getName();
-		return new ModelAndView("main").addObject("viewName","member/dalin_profile_read.jsp").addObject("readProfile",dalService.readToDalinProfile(dMno)).addObject("rvAuth",reviewService.reviewAuth(username,dMno));
+		return new ModelAndView("main").addObject("viewName","member/dalin_profile_read.jsp").addObject("readProfile",dalService.readToDalinProfile(dMno)).addObject("rvAuth",reviewService.reviewAuth(username,dMno)).addObject("isLh",jejaService.findLessonHistory(dMno));
 	}
 	
 	// 제자 리뷰작성

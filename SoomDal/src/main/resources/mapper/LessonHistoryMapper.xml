@@ -48,6 +48,7 @@
 		update lessonhistory set r_is_ok = 1 where a_complete_code = #{aCompleteCode} and rownum=1
 	</update>
 	
+	
 </mapper>
 
 

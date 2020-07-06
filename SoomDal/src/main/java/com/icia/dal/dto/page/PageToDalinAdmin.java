@@ -1,15 +1,17 @@
-package com.icia.dal.dto;
+package com.icia.dal.dto.page;
 
 import java.util.*;
+
+import com.icia.dal.dto.AdminDto;
+import com.icia.dal.dto.AdminDto.JejaForList;
 
 import lombok.*;
 
 @Data
 @Builder
-public class ReportedPage {
+public class PageToDalinAdmin {
 	private int startRowNum;
 	private int endRowNum;
-	private int jAccusationCnt;
 	
 	private int pageno;
 	private boolean isPrev;
@@ -17,5 +19,5 @@ public class ReportedPage {
 	private boolean isNext;
 	private int startPage;
 	
-	List<AdminDto.ReportedReviewForList> list;
+	List<AdminDto.DalinForList> list;
 }

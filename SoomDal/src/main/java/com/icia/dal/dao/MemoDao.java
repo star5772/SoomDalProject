@@ -25,7 +25,7 @@ public class MemoDao {
 		map.put("startRowNum", startRowNum);
 		map.put("endRowNum", endRowNum);
 		map.put("receiver", receiver);
-		return tpl.selectList("memoMapper.findAllByReceiver", map);
+		return tpl.selectList("memoMapper.findAllByMemo", map);
 	}
 
 	public Memo findById(Integer mno) {

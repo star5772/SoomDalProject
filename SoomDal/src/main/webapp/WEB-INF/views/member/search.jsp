@@ -7,6 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
 <sec:authorize access="hasAnyRole('ROLE_JEJA','ROLE_DALIN','ROLE_ADMIN')">
 	<script src="/dal/script/webS.js"></script>
 </sec:authorize>
@@ -31,18 +32,21 @@
 }
 
 #search_wrap {
-	width: 800px;
+	width: 900px;
+	display: inline-block;
+	margin-right: 23px;
+	margin-left: 76px;
 }
 
 #page_wrap {
 	position: relative;
-	width: 1075px;
+	width: 900px;
 	height: 60px;
 }
 
 #inner {
 	position: absolute;
-	left: 40%;
+	left: 48%;
 	margin: auto;
 }
 
@@ -87,7 +91,7 @@
 					<button type="button" id="search_btn" class="btn btn-info" style="height: 28px; width: 40px; background-color: #999999; color: white; border: 0; outline: 0;">검색</button>
 				</div>
 				<div>
-					<button type="button" style="margin-left: 335px; background-color: white; color: #999999; width: 100px; height: 30px; border: 1px solid #999999; border-radius: 5px; font-size: 14px;"  data-toggle="modal" data-target="#myModal"><i class="fas fa-th-large"></i>  카테고리</button>
+					<button type="button" style="margin-left: 428px; background-color: white; color: #999999; width: 100px; height: 30px; border: 1px solid #999999; border-radius: 5px; font-size: 14px;"  data-toggle="modal" data-target="#myModal"><i class="fas fa-th-large"></i>  카테고리</button>
 				</div>
 			</div>
 		</div>

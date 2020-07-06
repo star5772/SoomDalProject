@@ -35,6 +35,19 @@ $(function() {
 			}
 		})
 	});
+	$("#AdminLogout").on("click",function(){
+		var param= {
+				_csrf: "${_csrf.token}"
+			}
+		$.ajax({
+			url:"/dal/dalin/logout",
+			method: "post",
+			data: param,
+			success: function(){
+				location.href = "/dal";
+			}
+		})
+	})
 });
 </script>
 <script>
@@ -73,10 +86,10 @@ function openChild()
         	
         	<sec:authorize access="hasRole('ROLE_JEJA')">
         		<sec:authentication property="principal.username" var="username"/>
-        		<li class="nav-item"><a class="nav-link" href="/dal/member/search"style="color:black; font-size:medium;"><i class="fas fa-search">&nbsp;달인 찾기</i></a></li>
-        		<li class="nav-item"><a class="nav-link" href="/dal/jeja/my_info"style="color:black; font-size:medium;">내 정보</a></li>
-        		<li class="nav-item"><a class="nav-link" href="/dal/member/memo/memo_receiveList?dEmail=${username }" style="color:black; font-size:medium;">쪽지함</a></li>
-        		<li class="nav-item"><a class="nav-link" href="#"style="color:black; font-size:medium;" id="JejaLogout">로그아웃</a></li>
+        		<li class="nav-item" style="width: 120px; text-align: center;"><a class="nav-link" href="/dal/member/search"style="color:black; font-size:medium;"><i class="fas fa-search">&nbsp;달인 찾기</i></a></li>
+        		<li class="nav-item" style="width: 100px; text-align: center;"><a class="nav-link" href="/dal/jeja/my_info"style="color:black; font-size:medium;">내 정보</a></li>
+        		<li class="nav-item" style="width: 100px; text-align: center;"><a class="nav-link" href="/dal/member/memo/memo_receiveList?dEmail=${username }" style="color:black; font-size:medium;">쪽지함</a></li>
+        		<li class="nav-item" style="width: 100px; text-align: center;"><a class="nav-link" href="#"style="color:black; font-size:medium;" id="JejaLogout">로그아웃</a></li>
         	</sec:authorize>
         	
         	<sec:authorize access="hasRole('ROLE_DALIN')">
@@ -85,7 +98,7 @@ function openChild()
 				<li class="nav-item dropdown" style="width: 100px;">
 					<a class="nav-link dropdown-toggle" href="#" id="navbarDropdownPortfolio" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: black;">OOO고객님</a>
 					<div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownPortfolio">
-					<a class="dropdown-item" href="#"style="color:black; font-size:medium;">프로필 관리</a>
+					<a class="dropdown-item" href="/dal/dalin/my_profile?dEmail=${username}"style="color:black; font-size:medium;">프로필 관리</a>
 					<a class="dropdown-item" href="/dal/dalin/my_info"style="color:black; font-size:medium;">마이페이지</a>
 					<a class="dropdown-item" href="#"style="color:black; font-size:medium;" id="DalinLogout">로그아웃</a>
 					</div>
@@ -94,14 +107,13 @@ function openChild()
         	
         	<sec:authorize access="hasRole('ROLE_ADMIN')">
 				<li class="nav-item dropdown">
-					<a class="nav-link dropdown-toggle" href="#" id="navbarDropdownPortfolio" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">관리자메뉴</a>
+					<a class="nav-link dropdown-toggle" href="#" id="navbarDropdownPortfolio" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="font-size:15px; color: black;">관리자메뉴</a>
 					<div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownPortfolio">
-					<a class="dropdown-item" href="#"style="color:black; font-size:medium;">제자 회원 관리</a>
-					<a class="dropdown-item" href="#"style="color:black; font-size:medium;">달인 회원 관리</a>
-					<a class="dropdown-item" href="#"style="color:black; font-size:medium;">신고 회원 관리</a>
-					<a class="dropdown-item" href="#"style="color:black; font-size:medium;">신고 게시물 관리</a>
-					<a class="dropdown-item" href="#"style="color:black; font-size:medium;">블락 회원 관리</a>
-					<a class="dropdown-item" href="#"style="color:black; font-size:medium;">로그아웃</a>
+					<a class="dropdown-item" href="/dal/member/admin/member_manage"style="color:black; font-size:medium;">회원 관리</a>
+					<a class="dropdown-item" href="/dal/member/admin/jeja_manage"style="color:black; font-size:medium;">신고 회원 관리</a>
+					<a class="dropdown-item" href="/dal/member"style="color:black; font-size:medium;">신고 게시물 관리</a>
+					<a class="dropdown-item" href="/dal/member/admin/enabled_manage"style="color:black; font-size:medium;">블락 회원 관리</a>
+					<a class="dropdown-item" href="#"style="color:black; font-size:medium;" id="AdminLogout">로그아웃</a>
 					</div>
 				</li>
         	</sec:authorize>

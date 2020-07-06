@@ -33,6 +33,10 @@ public class AdminDao {
 		return tpl.selectList("adminMapper.findAllToDalin", map);
 	}
 	
+	public int countToDalin() {
+		return tpl.selectOne("adminMapper.countToDalin");
+	}
+	
 	// 신고회원 목록 출력
 	public List<Map> findAllJejaReported(int startRowNum, int endRowNum){
 		Map<String,Object> map = new HashMap<String, Object>();
@@ -79,11 +83,10 @@ public class AdminDao {
 		return tpl.selectOne("adminMapper.countToReportedJeja");
 	}
 	
-	public List<Jeja> findAllToRpList(int startRowNum, int endRowNum, int jAccusationCnt) {
+	public List<Jeja> findAllToRpList(int startRowNum, int endRowNum) {
 		Map<String,Object> map = new HashMap<String, Object>();
 		map.put("startRowNum",startRowNum);
 		map.put("endRowNum",endRowNum);
-		map.put("jAccusation",jAccusationCnt);
 		return tpl.selectList("adminMapper.findAllToRpList", map);
 	}
 	

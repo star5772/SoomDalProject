@@ -366,7 +366,7 @@ public class DalinService {
 		return page;
 	}
 	
-	// 달인 프로필 읽기
+	// 제자가 달인 프로필 읽기
 	public DalinDto.DtoForProfileToDalin readToDalinProfile(int dMno) throws DalinNotFoundException{
 		Dalin dalin = dalDao.findByDalinProfile(dMno);
 		if(dalin==null) 
@@ -384,6 +384,24 @@ public class DalinService {
 		return dto;
 	}
 
+	// 달인 본인 프로필읽기
+	public DalinDto.DtoForProfileToDalin readToMyProfile(String dEmail) throws DalinNotFoundException{
+		Dalin dalin = dalDao.findByMyProfile(dEmail);
+		if(dalin==null) 
+		{
+			throw new DalinNotFoundException();
+		}
+		DalinDto.DtoForProfileToDalin dto = modelMapper.map(dalin, DalinDto.DtoForProfileToDalin.class);
+		//if(dalin.getPAttachmentCnt()!=0) // 사진 수가 있으면 다 보여주라고
+			//dto.setProfileAttachments(profileAttachmentDao.findAllByProfileAttachment(dto.getDMno()));
+		if(dalin.getRReviewCnt()>0) {
+			dto.setReviews(reviewDao.findAllReview(dto.getDMno()));
+			dto.setRScoreAverage(reviewDao.avgToReview(dto.getDMno()));
+		}
+		// 달인이 대표질문을 달았으면 추가 없으면 null 
+		return dto;
+	}
+	
 	public String findId(String dName, String dTel) throws UserNotFoundException {
 		if(dalDao.findJNameAndJTelByDalinId(dName, dTel)==null)
 			throw new UserNotFoundException();
