@@ -50,12 +50,7 @@ public class JejaService {
 	@Inject
 	private RequestDao reqDao;
 	
-	public void existsByEmail(String jEmail) {
-		String email = dao.existsByjEmail(jEmail);
-		// 나중에 예외처리 다시 해야함
-		if(email!=null)
-			throw new RuntimeException();
-	}
+	
 
 	public void join(Jeja jeja) {
 		String pwd = jeja.getJPassword();
@@ -85,33 +80,7 @@ public class JejaService {
 		return dto;
 	}
 
-	public Boolean update(DtoForJejaUpdate dto, String jEmail) {
-		Jeja jeja = dao.findById(jEmail);
-		// 후에 예외처리 해야함
-		if(jeja==null)
-			throw new RuntimeException();
-		System.out.println("==========");
-		System.out.println(dto);
-		if(dto.getNewName()!=null) {
-			jeja.setJName(dto.getNewName());
-			dao.updateJeja(jeja);
-			return true;
-		}
-		if(dto.getJPassword()!=null && dto.getNewPassword()!=null) {
-			// 후에 예외처리 다시
-			if(pwdEncoder.matches(dto.getJPassword(), jeja.getJPassword())==false)
-				throw new RuntimeException();
-			jeja.setJPassword(pwdEncoder.encode(dto.getNewPassword()));
-			dao.updateJeja(jeja);
-			return true;
-		}
-		if(dto.getNewTel()!=null) {
-			jeja.setJTel(dto.getNewTel());
-			dao.updateJeja(jeja);
-			return true;
-		}
-		return false;
-	}
+	
 	
 	public PageToLessonHistory lessonListToJeja(int pageno,int jMno) {
 		int countOfLesson = lhDao.countOfLessonToJeja(jMno);
@@ -134,11 +103,7 @@ public class JejaService {
 		return page;		
 	}
 	
-	public String findId(String jName, String jTel) throws UserNotFoundException {
-		if(dao.findJNameAndJTelByJejaId(jName, jTel)==null)
-			throw new UserNotFoundException();
-		return dao.findJNameAndJTelByJejaId(jName, jTel);		
-	}
+	
 	
 	public Jeja findById(String jEmail) {
 		return dao.findById(jEmail);

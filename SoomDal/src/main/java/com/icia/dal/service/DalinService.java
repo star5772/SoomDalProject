@@ -78,11 +78,7 @@ public class DalinService {
 		dalDao.insertToDalin(dalin);
 	}
 
-	public boolean checkId(String dEmail) throws MembernameExistException {
-		if(dalDao.existsById(dEmail)==true)
-			throw new MembernameExistException();
-		return true;
-	}
+	
 
 	public void delete(String dEmail) {
 		if(dalDao.findByDalin(dEmail)==null)
@@ -107,30 +103,7 @@ public class DalinService {
 		
 	}
 
-	public boolean update(DalinDto.DtoForUpdateToDalin dto, String dEmail) {
-		Dalin dalin = dalDao.findByDalin(dEmail);
-		System.out.println(dto);
-		if(dalin==null)
-			throw new RuntimeException();
-		if(dto.getDName()!=null) {
-			dalin.setDName(dto.getDName());
-			dalDao.updateToDalin(dalin);
-			return true;
-		}
-		if(dto.getDPassword()!=null && dto.getNewDPassword()!=null) {
-			if(pwdEncoder.matches(dto.getDPassword(), dalin.getDPassword())==false)
-				throw new RuntimeException();
-			dalin.setDPassword(pwdEncoder.encode(dto.getNewDPassword()));
-			dalDao.updateToDalin(dalin);
-			return true;
-		}
-		if(dto.getDTel()!=null) {
-			dalin.setDTel(dto.getDTel());
-			dalDao.updateToDalin(dalin);
-			return true;
-		}
-		return false;
-	}
+	
 
 	public PageToDalinField findDalinByDetailFName(int pageno,String detailFName) {
 		int countOfDalin = dalDao.countOfFieldDalin(detailFName);
@@ -183,11 +156,7 @@ public class DalinService {
 		return dto;
 	}
 	
-	public String findId(String dName, String dTel) throws UserNotFoundException {
-		if(dalDao.findJNameAndJTelByDalinId(dName, dTel)==null)
-			throw new UserNotFoundException();
-		return dalDao.findJNameAndJTelByDalinId(dName, dTel);
-	}
+	
 
 	public PageToSearch dalSearch(int pageno, String searchType, String keyword) {
 		int countOfSearch = dalDao.countOfSearch(searchType,keyword);

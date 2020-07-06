@@ -8,12 +8,13 @@ import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
 
 import com.icia.dal.service.*;
+import com.icia.dal.service.rest.*;
 
 @RestController
 @RequestMapping("/member")
 public class RequestBoardRestController {
 	@Inject
-	private RequestBoardService reqService;
+	private RequestBoardRestService reqService;
 	
 	@PostMapping("/reqboard/report")
 	public ResponseEntity<Void> reportBoard(int rbNo,Principal principal,String reason) {

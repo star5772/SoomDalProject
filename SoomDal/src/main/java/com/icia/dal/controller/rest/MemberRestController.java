@@ -10,14 +10,15 @@ import org.springframework.web.bind.annotation.RestController;
 import com.icia.dal.Exception.UserNotFoundException;
 import com.icia.dal.service.DalinService;
 import com.icia.dal.service.JejaService;
+import com.icia.dal.service.rest.*;
 
 @RequestMapping("/member")
 @RestController
 public class MemberRestController {
 	@Inject
-	private DalinService dalService;
+	private DalinRestService dalService;
 	@Inject
-	private JejaService jejaService;
+	private JejaRestService jejaService;
 	
 	@PostMapping("/dalin/find_id")
 	public ResponseEntity<?> findId(String dName,String dTel) throws UserNotFoundException{
