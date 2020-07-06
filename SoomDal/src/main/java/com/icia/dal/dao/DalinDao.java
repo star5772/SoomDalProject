@@ -23,6 +23,10 @@ public class DalinDao {
 		return tpl.selectOne("dalinMapper.findByDalinProfile", dMno);
 	}
 	
+	public Dalin findByMyProfile(String dEmail) {
+		return tpl.selectOne("dalinMapper.findByMyProfile", dEmail);
+	}
+	
 	public Dalin findByDalin(String dEmail) {
 		return tpl.selectOne("dalinMapper.findByDalin", dEmail);
 	}

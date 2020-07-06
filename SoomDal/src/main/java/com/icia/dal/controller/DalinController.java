@@ -124,5 +124,10 @@ public class DalinController {
 		return "redirect:/member/login";
 	}
 	
+	@GetMapping("/dalin/my_profile")
+	public ModelAndView dalinProfileRead(String dEmail,Principal principal) throws DalinNotFoundException {
+		return new ModelAndView("main").addObject("viewName","dalin/my_profile.jsp").addObject("readProfile",dalService.readToMyProfile(principal.getName()));
+	}
+	
 	
 }
