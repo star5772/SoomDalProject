@@ -21,12 +21,13 @@ import com.icia.dal.dto.*;
 import com.icia.dal.dto.DalinDto.*;
 import com.icia.dal.entity.*;
 import com.icia.dal.service.DalinService;
+import com.icia.dal.service.rest.*;
 
 @RestController
 public class DalinRestController {
 	
 	@Inject
-	private DalinService dalService;
+	private DalinRestService dalService;
 	
 	@GetMapping("/dalin/check_email")
 	public ResponseEntity<Void> ableEmail(String dEmail) throws MembernameExistException {

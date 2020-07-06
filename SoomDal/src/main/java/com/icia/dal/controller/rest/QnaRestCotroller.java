@@ -11,12 +11,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.icia.dal.service.QnaCommentService;
+import com.icia.dal.service.rest.*;
 
 @RestController
 public class QnaRestCotroller {
 	@Inject
-	private QnaCommentService qnaCommentService;
+	private QnaCommentRestService qnaCommentService;
 	
 	@PostMapping("/comment/write")
 	public ResponseEntity<Void> commentWrite(String cContent, Integer qNo) {

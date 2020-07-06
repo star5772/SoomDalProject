@@ -1,4 +1,4 @@
-package com.icia.dal.service;
+package com.icia.dal.service.rest;
 
 import javax.inject.Inject;
 
@@ -10,7 +10,7 @@ import com.icia.dal.dao.QnaCommentDao;
 import com.icia.dal.entity.QnaComment;
 
 @Service
-public class QnaCommentService {
+public class QnaCommentRestService {
 	@Inject
 	private QnaBoardDao qnaBoardDao;
 	@Inject

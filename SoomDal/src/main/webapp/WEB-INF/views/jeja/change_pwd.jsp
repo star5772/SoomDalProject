@@ -5,9 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<<<<<<< HEAD
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
-=======
 <style>
 #change_pwd_frm{
 	margin-top: 50px;
@@ -53,7 +51,6 @@ button{
 	font-size: small; 
 }
 </style>
->>>>>>> branch 'master' of https://github.com/star5772/SoomDalProject
 <script>
 $(document).ready(function() {
 	$("#change_pwd").on("click", function() {

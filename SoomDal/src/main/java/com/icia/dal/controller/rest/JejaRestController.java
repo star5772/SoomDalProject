@@ -10,13 +10,14 @@ import org.springframework.web.bind.annotation.*;
 import com.icia.dal.Exception.JobFailException;
 import com.icia.dal.dto.*;
 import com.icia.dal.service.*;
+import com.icia.dal.service.rest.*;
 
 @RestController
 public class JejaRestController {
 	@Inject
-	private JejaService jejaService;
+	private JejaRestService jejaService;
 	@Inject
-	private ReviewService reviewService;
+	private ReviewRestService reviewService;
 	
 	@GetMapping("/jeja/check_email")
 	public ResponseEntity<Void> ableEmail(String jEmail) {

@@ -68,12 +68,5 @@ public class ReviewService {
 	
 	
 	
-	// 리뷰 지우기
-	public List<Review> deleteToReview(int rNo, int dMno, String writer) throws JobFailException {
-		Review review = reviewDao.findByReview(rNo);
-		if(writer.equals(review.getRWriter())==false)
-			throw new JobFailException();
-		reviewDao.deleteToReview(rNo);
-		return reviewDao.findAllReview(dMno);
-	}
+	
 }

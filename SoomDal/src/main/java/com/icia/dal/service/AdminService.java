@@ -28,6 +28,7 @@ import com.icia.dal.entity.Dalin;
 import com.icia.dal.entity.DetailField;
 import com.icia.dal.entity.Field;
 import com.icia.dal.entity.Jeja;
+import com.icia.dal.entity.Level;
 import com.icia.dal.entity.NowPayment;
 import com.icia.dal.entity.NowRefund;
 import com.icia.dal.entity.Review;
@@ -49,19 +50,19 @@ public class AdminService {
 	@Value("${FieldPath}")
 	private String fieldPath;
 	@Inject
-	private JejaDao jejaDao;
-	@Inject
 	private PaymentDao npDao;
 
-	public PageToDalinAdmin adminPageToDalin(int pageno) {
+	public PageToDalinAdmin adminPageToDalin(int pagene) {
 		int countOfBoard = adminDao.countToDalin();
-		PageToDalinAdmin adPage = AdminToDalinPagingUtil.getPage(pageno, countOfBoard);
+		PageToDalinAdmin adPage = AdminToDalinPagingUtil.getPage(pagene, countOfBoard);
 		int srn = adPage.getStartRowNum();
 		int ern = adPage.getEndRowNum();
 		List<Dalin> adminList = adminDao.findAllToDalin(srn, ern);
 		List<AdminDto.DalinForList> dtoList = new ArrayList<AdminDto.DalinForList>();
 		for(Dalin dal:adminList) {
 			AdminDto.DalinForList dto = modelMapper.map(dal,AdminDto.DalinForList.class);
+			Level level = dal.getDLevel();
+			dto.setDLevelStr(level.name());
 			dto.setDDateStr(dal.getDDate().format(DateTimeFormatter.ofPattern("yyyy년MM월dd일")));	
 			dtoList.add(dto);
 		}
@@ -187,36 +188,7 @@ public class AdminService {
 		return fList;
 	}
 	
-	public int insertFieldSajin(Field fl,MultipartFile sajin) throws IllegalStateException, IOException {
-		adminDao.deleteToField(fl.getFNo());
-		System.out.println(sajin);
-		if(sajin != null && sajin.isEmpty()==false) {
-			System.out.println(sajin);
-			if(sajin.getContentType().toLowerCase().startsWith("image/")==true) {
-				int lastIndexOfDot = sajin.getOriginalFilename().lastIndexOf(".");
-				String extension = sajin.getOriginalFilename().substring(lastIndexOfDot+1);
-				File fieldSajin = new File(fieldFolder,fl.getFName() + "." + extension);
-				
-				sajin.transferTo(fieldSajin);
-				fl.setFSajin(fieldPath + fieldSajin.getName()); 
-			}else {
-				fl.setFSajin(fieldPath + "anony.jpg");
-			}
-		}else {
-			fl.setFSajin(fieldPath+ "anony.jpg");
-		}
-		return adminDao.insertToField(fl);
-	}
 	
-	public void updateJenabled(boolean jIsBlock, String jEmail) {
-		if(jIsBlock==true) {
-			Jeja jeja = Jeja.builder().jEmail(jEmail).jIsBlock(jIsBlock).enabled(false).build();
-			jejaDao.updateJeja(jeja);
-		} else {
-			Jeja jeja = Jeja.builder().jEmail(jEmail).jIsBlock(jIsBlock).enabled(true).build();
-			jejaDao.updateJeja(jeja);
-		}
-	}
 	
 	 
 }

@@ -19,7 +19,7 @@
 		<![CDATA[
 			select * from
 				(select d.*,rownum as rnum from
-					(select /*+ index_desc(dalin pk_dalin)*/ f_no fNo, d_email dEmail, d_name dName, d_tel dTel, enabled, d_date dDate, d_area dArea  from dalin)d
+					(select /*+ index_desc(dalin pk_dalin)*/detail_f_name detailFName, d_level dLevel, f_no fNo, d_email dEmail, d_name dName, d_tel dTel, enabled, d_date dDate, d_area dArea  from dalin)d
 					where rownum<=#{endRowNum})
 				where rnum>=#{startRowNum}
 		]]>
