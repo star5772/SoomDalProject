@@ -13,8 +13,7 @@
 <script>
 
 function loadAttach() {
-	var file = $("#sajin")[0].files[0];
-	console.log(file);
+	var file = $("#attach4")[0].files[0];
 	var maxSize = 1024*1024; // 1MB
 	if(file.size>maxSize) {
 		Swal.fire({
@@ -22,19 +21,18 @@ function loadAttach() {
 		  	title: '크기 오류',
 			text: '파일크기는 1MB를 넘을 수 없습니다'
 		});
-		$("#sajin").val("");
+		$("#attach4").val("");
 		return false;
 	}
 	var reader = new FileReader();
 	   reader.onload = function(e) {
-	      $("#show_attach1").attr("src", e.target.result);
+	      $("#show_attach5").attr("src", e.target.result);
 	   }
 	   reader.readAsDataURL(file);
 	   return true;
 }
 function loadAttach1() {
 	var file1 = $("#attach0")[0].files[0];
-	console.log(file1);
 	var maxSize = 1024*1024; // 1MB
 	if(file1.size>maxSize) {
 		Swal.fire({
@@ -47,7 +45,7 @@ function loadAttach1() {
 	}
 	var reader = new FileReader();
 	   reader.onload = function(e) {
-	      $("#show_attach2").attr("src", e.target.result);
+	      $("#show_attach1").attr("src", e.target.result);
 	   }
 	reader.readAsDataURL(file1);
 	return true;
@@ -66,7 +64,7 @@ function loadAttach2() {
 	}
 	var reader = new FileReader();
 	   reader.onload = function(e) {
-	      $("#show_attach3").attr("src", e.target.result);
+	      $("#show_attach2").attr("src", e.target.result);
 	   }
 	reader.readAsDataURL(file2);
 	return true;
@@ -85,7 +83,7 @@ function loadAttach3() {
 	}
 	var reader = new FileReader();
 	   reader.onload = function(e) {
-	      $("#show_attach4").attr("src", e.target.result);
+	      $("#show_attach3").attr("src", e.target.result);
 	   }
 	reader.readAsDataURL(file3);
 	return true;
@@ -104,7 +102,7 @@ function loadAttach4() {
 	}
 	var reader = new FileReader();
 	   reader.onload = function(e) {
-	      $("#show_attach5").attr("src", e.target.result);
+	      $("#show_attach4").attr("src", e.target.result);
 	   }
 	reader.readAsDataURL(file4);
 	return true;
@@ -118,7 +116,7 @@ function loadAttach5() {
 		  	title: '크기 오류',
 			text: '파일크기는 1MB를 넘을 수 없습니다'
 		});
-		$("#attach3").val("");
+		$("#dProfileSajin").val("");
 		return false;
 	}
 	var reader = new FileReader();
@@ -135,7 +133,7 @@ $(document).ready(function(){
 	})
 	$("#dProfileSajin").on("change",loadAttach5);
 	
-	$("#sajin").on("change",loadAttach);
+	$("#inp").on("change","#attach4",loadAttach);
 	$("#inp").on("change","#attach0",loadAttach1);
 	$("#inp").on("change","#attach1",loadAttach2);
 	$("#inp").on("change","#attach2",loadAttach3);
@@ -178,8 +176,17 @@ $(document).ready(function(){
 			data:formData,
 			method:"post",
 			processData:false,
-			contentType:false
-		}).done(()=>{toastr.info("변경 성공");}).fail(()=>{toastr.info("변경 실패");})
+			contentType:false,
+			success:function() {
+				Swal.fire({
+					icon:"success",
+					title:"성공!",
+					text:"변경이 완료되었습니다"
+				}).then(()=>location.href="/dal/dalin/my_profile")
+			},error:function() {
+				Swal.fire("실패!", "변경이 실패되었습니다", "info");
+			}
+		})
 	})
 })
 
@@ -390,6 +397,11 @@ body {
 				</div>
 				<div id="inp">
 					<input type="hidden" name="_csrf" value="${_csrf.token}">
+						<div style="display: inline-block; "><img id="show_attach1" name="show_attach1" height="200px" width="150px;" src="${dalin.profileAttachments[0].PSaveFileName }"></div>
+						<div style="display: inline-block; "><img id="show_attach2" name="show_attach2" height="200px" width="150px;" src="${dalin.profileAttachments[1].PSaveFileName }"></div>
+						<div style="display: inline-block; "><img id="show_attach3" name="show_attach3" height="200px" width="150px;" src="${dalin.profileAttachments[2].PSaveFileName }"></div>
+						<div style="display: inline-block; "><img id="show_attach4" name="show_attach4" height="200px" width="150px;" src="${dalin.profileAttachments[3].PSaveFileName }"></div>
+						<div style="display: inline-block; "><img id="show_attach5" name="show_attach5" height="200px" width="150px;" src="${dalin.profileAttachments[4].PSaveFileName }"></div>
 					<div id="attachment_div">
 						<input type="file" class="form-control-file attach" name="profileAttachments0" id="attach0" accept=".jpg,.jpeg,.png,.gif,.bmp">
 						<input type="file" class="form-control-file attach" name="profileAttachments1" id="attach1" accept=".jpg,.jpeg,.png,.gif,.bmp">
@@ -416,7 +428,7 @@ body {
 								</h4>
 							</div>
 							<div>
-								<input type="text" name="q1" id="q1" value="${dalin.rep[0].DQcontent}" placeholder="답변을 적어주세요!">
+								<input type="text" name="q1" id="q1" value="${dalin.rep.firstQ}" placeholder="답변을 적어주세요!">
 							</div>
 						</div><br>
 						<div>
@@ -426,7 +438,7 @@ body {
 								</h4>
 							</div>
 							<div>
-								<input type="text" name="q2" id="q2" value="${dalin.rep[1].DQcontent}" placeholder="답변을 적어주세요!">
+								<input type="text" name="q2" id="q2" value="${dalin.rep.secoendQ}" placeholder="답변을 적어주세요!">
 							</div>
 						</div><br>
 						<div>
@@ -436,7 +448,7 @@ body {
 								</h4>
 							</div>
 							<div>
-								<input type="text" name="q3" id="q3" value="${dalin.rep[2].DQcontent}" placeholder="답변을 적어주세요!">
+								<input type="text" name="q3" id="q3" value="${dalin.rep.thirdQ}" placeholder="답변을 적어주세요!">
 							</div>
 						</div><br>
 						<div>
@@ -446,7 +458,7 @@ body {
 								</h4>
 							</div>
 							<div>
-								<input type="text" name="q4" id="q4" value="${dalin.rep[3].DQcontent}" placeholder="답변을 적어주세요!">
+								<input type="text" name="q4" id="q4" value="${dalin.rep.fourthQ}" placeholder="답변을 적어주세요!">
 							</div>
 						</div><br>
 					</div>

@@ -378,8 +378,7 @@ $(function() {
 </head>
 <body>
 <form id="dalinJoinFrm" action="/dal/dalin/join" method="post">
-<div style="border: 1px solid #DDDDDD;width: 500px; height: 680px; margin-left: 290px; margin-top: 20px;">
-<div id="step-one">	
+<div id="step-one" >	
 	<div>
 		<label for="dEmail" style="font-size: medium;">아이디(이메일) 입력</label>
 		<input type="text" name="dEmail" id="dEmail" placeholder="사용하실 이메일을 입력해주세요" maxlength="50" class="form-control input">
@@ -419,7 +418,6 @@ $(function() {
 	</div>
 	<button id="complete-step-one" type="button" class="btn btn-warning" style="margin-left:320px; margin-top: 20px; border-radius: 4px;">다음</button>
 </div>	
-</div>
 
 <div id="step-two" style="display: none;">
 	<p style="text-align: center; margin-top: 40px; margin-bottom:-50px; font-weight: bold; font-size: x-large;">달인님의 전문 분야를 선택해주세요 !</p><br><br><br><br>

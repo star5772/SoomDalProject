@@ -10,6 +10,7 @@ import javax.validation.*;
 import org.apache.commons.compress.utils.*;
 import org.springframework.http.*;
 import org.springframework.lang.*;
+import org.springframework.security.access.annotation.*;
 import org.springframework.security.access.prepost.*;
 import org.springframework.validation.*;
 import org.springframework.web.bind.annotation.*;
@@ -23,6 +24,7 @@ import com.icia.dal.entity.*;
 import com.icia.dal.service.DalinService;
 import com.icia.dal.service.rest.*;
 
+@Secured("ROLE_DALIN")
 @RestController
 public class DalinRestController {
 	

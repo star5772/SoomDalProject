@@ -11,6 +11,8 @@ import javax.validation.constraints.*;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.lang.Nullable;
+import org.springframework.security.access.annotation.*;
+import org.springframework.security.access.prepost.*;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
@@ -31,9 +33,9 @@ import com.icia.dal.service.ReviewService;
 @Controller
 public class MemberController {
 	@Inject
-	private DalinService dalService;
-	@Inject
 	private JejaService jejaService;
+	@Inject
+	private DalinService dalService;
 	@Inject
 	private ReviewService reviewService;
 	@Inject
@@ -46,6 +48,7 @@ public class MemberController {
 		return new ModelAndView("main").addObject("viewName","root/rootPage.jsp");
 	}
 	
+	@PreAuthorize("isAnonymous()")
 	@GetMapping("/member/login")
 	public ModelAndView dalinlogin() {
 		// 로그인 페이지로 이동
@@ -56,33 +59,77 @@ public class MemberController {
 	 * @GetMapping("/jeja/login") public ModelAndView jejalogin() { // 로그인 페이지로 이동
 	 * return new ModelAndView("main").addObject("viewName","member/login.jsp"); }
 	 */
+<<<<<<< HEAD
 
 	
+=======
+	@Secured("ROLE_JEJA")
+	@GetMapping("/request_board/list")
+	public ModelAndView requestBoard() {
+		// 요청서 게시판으로 이동
+		// board/request.jsp에 뿌려줄 list 정보 필요(addObject("request",service.requestList()))
+		return new ModelAndView("main").addObject("viewName","board/request_board_list.jsp");
+	}
+	@PreAuthorize("isAuthenticated()")	
+	@GetMapping("/qna_board/list")
+	public ModelAndView qnaBoard() {
+		// 문의 게시판으로 이동
+		// jsp에 뿌려줄 list 정보 필요 
+		return new ModelAndView("main").addObject("viewName","board/qna_board_list.jsp");
+	}
+	@PreAuthorize("isAuthenticated()")
+	@GetMapping("/qna_board/read")
+	public ModelAndView qnaRead() {
+		// 문의 글 읽기
+		// jsp에 작성글 정보 필요 > service.qnaRead()
+		return new ModelAndView("main").addObject("viewName","board/qna_board_read.jsp");
+	}
+	@Secured("ROLE_JEJA")
+	@GetMapping("/qna_board/write")
+	public ModelAndView qnaWrite() {
+		// 문의 게시판 글작성 페이지로 이동
+		return new ModelAndView("main").addObject("viewName","board/qna_board_write.jsp");
+	}
+	/*
+	@PostMapping("/qna_board/write")
+	public String qnaWrite() {
+		// 문의 게시판 글작성 하기 >> 작성 후 자기가 쓴 글 읽기
+		// service.qnawrite();
+		return "redirect:/qna_board/read?bno="+"글 쓴 번호";
+	}
+	*/
+	@PreAuthorize("isAnonymous()")
+>>>>>>> branch 'master' of https://github.com/star5772/SoomDalProject
 	@GetMapping("/member/find_id")
 	public ModelAndView findId() {
 		// 아이디 찾기 페이지로 이동
 		return new ModelAndView("member/find_id.jsp");
 	}
-	
+	@PreAuthorize("isAnonymous()")
 	@GetMapping("/member/reset_pwd") 
 	public ModelAndView resetPwd(){
 		// 비번 찾기 페이지로 이동
 		return new ModelAndView("main").addObject("viewName","member/reset_pwd.jsp");
 	}
 	
+	@PreAuthorize("isAuthenticated()")
 	@GetMapping("/member/resign")
 	public ModelAndView resign() {
 		// 회원 탈퇴 페이지로 이동
 		return new ModelAndView("main").addObject("viewName","member/resign.jsp");
 	}
-
+	@PreAuthorize("isAnonymous()")
 	@GetMapping("/member/join_select")
 	public ModelAndView joinSelect() {
 		// 회원가입 버튼 선택 시 제자 or 달인 선택 페이지로 이동
 		return new ModelAndView("main").addObject("viewName","member/join_select.jsp");
 	}
+<<<<<<< HEAD
 
 	// 회원 탈퇴
+=======
+	@PreAuthorize("isAuthenticated()")
+>>>>>>> branch 'master' of https://github.com/star5772/SoomDalProject
 	@DeleteMapping("/member/resign")
 	public String resign(SecurityContextLogoutHandler handler, HttpServletRequest request, HttpServletResponse response, Authentication authentication) {
 		if(jejaService.findById(authentication.getName())!=null) {
@@ -98,6 +145,7 @@ public class MemberController {
 	   }
 	
 	// 달인 프로필 읽기
+	@Secured("ROLE_JEJA")
 	@GetMapping("/member/dalin_profile")
 	public ModelAndView dalinProfileRead(int dMno,Principal principal) throws DalinNotFoundException {
 		String username = principal.getName();
@@ -116,6 +164,7 @@ public class MemberController {
 	public ModelAndView search(@RequestParam(defaultValue = "1") int pageno,@Nullable String searchType,@Nullable String keyword) {
 		return new ModelAndView("main").addObject("viewName","member/search.jsp").addObject("search",dalService.dalSearch(pageno,searchType,keyword));
 	}
+<<<<<<< HEAD
 	
 	// 달인 비밀번호 변경
 	@GetMapping("/member/resetToDalinPwd") 
@@ -130,18 +179,11 @@ public class MemberController {
 		handler.logout(request, response, authentication);
 		return "redirect:/";
 	}
+=======
+
+>>>>>>> branch 'master' of https://github.com/star5772/SoomDalProject
 	 
+
 	
-	@GetMapping("/member/resetToJejaPwd")
-	public ModelAndView resetToJejaPwd() {
-		return new ModelAndView("main").addObject("viewName","member/resetToJejaPwd.jsp");
-	}
 	
-	@PostMapping("/member/resetToJejaPwd")
-	public String resetToJejaPwd(@RequestParam @NotNull String jPassword, @RequestParam @NotNull String newPassword, String jEmail, RedirectAttributes ra, SecurityContextLogoutHandler handler, HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws JejaNotFoundException {
-		jejaService.changePwd(jPassword, newPassword, jEmail);
-		ra.addFlashAttribute("msg","비밀번호를 변경했습니다");
-		handler.logout(request, response, authentication);
-		return "redirect:/member/login";
-	}
 }

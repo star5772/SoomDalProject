@@ -6,6 +6,8 @@ import java.util.List;
 import javax.inject.*;
 
 import org.springframework.http.*;
+import org.springframework.security.access.annotation.*;
+import org.springframework.security.access.prepost.*;
 import org.springframework.web.bind.annotation.*;
 
 import com.icia.dal.Exception.JobFailException;
@@ -13,6 +15,7 @@ import com.icia.dal.dto.*;
 import com.icia.dal.entity.Review;
 import com.icia.dal.service.rest.*;
 
+@Secured("ROLE_JEJA")
 @RestController
 public class JejaRestController {
 	@Inject
@@ -43,7 +46,7 @@ public class JejaRestController {
 	}
 	
 	// 제자 리뷰작성
-	@PostMapping("/reviewWrite")
+	@PostMapping("/member/reviewWrite")
 	public ResponseEntity<List<Review>> reviewWrite(Review rv,Principal principal) {
 		String username = principal.getName();
 		return ResponseEntity.ok(reviewService.reviewAuthChkAndWrite(rv, username,rv.getDMno()));

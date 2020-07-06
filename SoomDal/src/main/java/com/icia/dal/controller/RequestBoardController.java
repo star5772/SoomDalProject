@@ -5,6 +5,8 @@ import java.security.*;
 import javax.inject.*;
 
 import org.springframework.lang.*;
+import org.springframework.security.access.annotation.*;
+import org.springframework.security.access.prepost.*;
 import org.springframework.stereotype.*;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.*;
@@ -18,21 +20,21 @@ public class RequestBoardController {
 	@Inject
 	private RequestBoardService service;
 	
+	@PreAuthorize("isAuthenticated()")
 	@GetMapping("/reqboard/read")
 	public ModelAndView read(int rbNo, Principal principal) {
 		return new ModelAndView("main").addObject("viewName","reqboard/read.jsp").addObject("reqRead",service.read(rbNo, principal.getName()));
 	}
 	
+	@Secured("ROLE_JEJA")
 	@GetMapping("/reqboard/write")
 	public ModelAndView write() {
 		return new ModelAndView("main").addObject("viewName","reqboard/write.jsp");
 	}
 	
+	@Secured("ROLE_JEJA")
 	@PostMapping("/reqboard/write")
 	public String write(RequestBoardDto.DtoForWrite dto, String rbWriter, Principal principal) {
-		System.out.println(dto+"--------------------------------");
-		System.out.println(rbWriter+"--------------------------------------");
-		System.out.println(principal.getName()+"-------------------------------------------");
 		dto.setRbWriter(principal.getName());
 		return "redirect:/member/reqboard/read?rbNo=" + service.write(dto);
 	}
@@ -43,6 +45,7 @@ public class RequestBoardController {
 		return new ModelAndView("main").addObject("viewName", "reqboard/list.jsp").addObject("reqPage", service.list(pageno, rbWriter));
 	}
 	
+	@Secured("ROLE_JEJA")
 	@GetMapping("/reqboard/report")
 	public ModelAndView report(int rbNo) {
 		return new ModelAndView("reqboard/report").addObject("rbNo",rbNo);
