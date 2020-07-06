@@ -14,6 +14,10 @@
 	<update id="update">
 		update profileAttachment set p_original_file_name=#{pOriginalFileName},p_save_file_name=#{pSaveFileName} where d_email=#{dEmail} and num=#{num}
 	</update>
+	
+	<select id="findAllById" resultType="profileAttachment">
+		select p_original_file_name pOriginalFileName, p_save_file_name pSaveFileName from ProfileAttachment where d_email=#{dEmail}
+	</select>
 </mapper>
 
 

@@ -64,9 +64,9 @@ public class DalinController {
 	}
 	
 	@GetMapping("/dalin/profile_update")
-	public ModelAndView dalinInFoUpdate(Principal principal, DalinDto.DtoForProfileToDalin dto) throws DalinNotFoundException {
+	public ModelAndView dalinInFoUpdate(Principal principal) throws DalinNotFoundException {
 		Dalin dalin = dalService.findById(principal.getName());
-		return new ModelAndView("main").addObject("viewName","dalin/info_update.jsp").addObject("dalin",dalService.readToDalinProfile(dalin.getDMno()));
+		return new ModelAndView("main").addObject("viewName","dalin/info_update.jsp").addObject("dalin",dalService.readToMyProfile(principal.getName()));
 	}
 	
 	@PostMapping("/dalin/profile_update")
