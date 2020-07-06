@@ -20,11 +20,12 @@ public class MemberRestController {
 	@Inject
 	private JejaRestService jejaService;
 	
+	// 달인 아이디 찾기
 	@PostMapping("/dalin/find_id")
 	public ResponseEntity<?> findId(String dName,String dTel) throws UserNotFoundException{
 		return ResponseEntity.ok(dalService.findId(dName,dTel));
 	}
-	
+	// 제자 아이디 찾기
 	@PostMapping("/jeja/find_id")
 	public ResponseEntity<?> findJejaId(String jName,String jTel) throws UserNotFoundException{
 		return ResponseEntity.ok(jejaService.findId(jName,jTel));

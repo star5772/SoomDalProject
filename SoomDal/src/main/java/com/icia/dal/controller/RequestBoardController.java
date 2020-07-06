@@ -46,5 +46,5 @@ public class RequestBoardController {
 	@GetMapping("/reqboard/report")
 	public ModelAndView report(int rbNo) {
 		return new ModelAndView("reqboard/report").addObject("rbNo",rbNo);
-	}
+	}	
 }

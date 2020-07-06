@@ -29,6 +29,7 @@ public class DalinRestController {
 	@Inject
 	private DalinRestService dalService;
 	
+	// 달인 이메일 체크
 	@GetMapping("/dalin/check_email")
 	public ResponseEntity<Void> ableEmail(String dEmail) throws MembernameExistException {
 		dalService.checkId(dEmail);

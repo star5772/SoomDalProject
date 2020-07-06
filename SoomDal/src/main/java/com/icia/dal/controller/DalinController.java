@@ -63,6 +63,7 @@ public class DalinController {
 		return new ModelAndView("main").addObject("viewName","dalin/resign.jsp");
 	}
 	
+	// 달인 프로필 수정
 	@GetMapping("/dalin/profile_update")
 	public ModelAndView dalinInFoUpdate(Principal principal, DalinDto.DtoForProfileToDalin dto) throws DalinNotFoundException {
 		Dalin dalin = dalService.findById(principal.getName());
@@ -104,16 +105,17 @@ public class DalinController {
 	public ModelAndView msg() {
 		return new ModelAndView("main").addObject("viewName","system/msg.jsp");
 	}
+	// 달인 캐시 사용내역
 	@GetMapping("/dalin/usedCashList")
 	public ModelAndView useCashPage(@RequestParam(defaultValue = "1")int pageno,Principal principal,int dMno) {
 		return new ModelAndView("payment/usedCash").addObject("uc",paymentService.useCashList(pageno, principal.getName(), dMno)).addObject("dMno",dMno);
 	}
 	
+	// 패스워스 찾기
 	@GetMapping("/dalin/change_pwd")
 	public ModelAndView resetPassword() {
 		return new ModelAndView("main").addObject("viewName","dalin/change_pwd.jsp");
 	}
-	
 	@PostMapping("/dalin/change_pwd")
 	public String resetPassword(@RequestParam @NotNull String dEmail, @RequestParam @NotNull String dTel, RedirectAttributes ra) {
 		try {
@@ -125,6 +127,7 @@ public class DalinController {
 		return "redirect:/member/login";
 	}
 	
+	// 달인 마이프로필
 	@GetMapping("/dalin/my_profile")
 	public ModelAndView dalinProfileRead(String dEmail,Principal principal) throws DalinNotFoundException {
 		return new ModelAndView("main").addObject("viewName","dalin/my_profile.jsp").addObject("readProfile",dalService.readToMyProfile(principal.getName()));

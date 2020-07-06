@@ -42,6 +42,7 @@ public class JejaController {
 		return new ModelAndView("main").addObject("viewName","jeja/my_info_update.jsp").addObject("jejaRead",service.read(principal.getName()));
 	}
 	
+	// 제자 회원가입
 	@GetMapping("/jeja/join")
 	public ModelAndView jejaJoin() {
 		// 회원가입 구분 페이지에서 제자 누르면 이동하는 페이지
@@ -56,28 +57,18 @@ public class JejaController {
 		return "redirect:/member/system/msg";
 	}
 	
-	@GetMapping("/jeja/request_write")
-	public ModelAndView requestWrite() {
-		// 제자가 달인 프로필에서 요청서 작성 버튼 클릭 시 이동하는 페이지
-		return new ModelAndView("main").addObject("viewName","jeja/request_write.jsp");
-	}
-	
-	@GetMapping("/jeja/estimate_list")
-	public ModelAndView jejaEstimateList() {
-		// 제자가 견적서탭 클릭 시 견적서 리스트를 보는 페이지로 이동
-		// 해당 제자가 받은 요청 정보 필요
-		return new ModelAndView("main").addObject("viewName","jeja/estimate_list.jsp");
-	}
+	// 레슨 목록리스트
 	@GetMapping("/jeja/lessonList")
 	public ModelAndView listToLesson(@RequestParam(defaultValue = "1")int pageno,int jMno,Principal principal) {
 		return new ModelAndView("main").addObject("viewName","member/lessonHistory.jsp").addObject("LHlist", service.lessonListToJeja(pageno, jMno)).addObject("jMno",jMno);
 	}
 	
+	// 비번 찾기
 	@GetMapping("/jeja/change_pwd")
 	public ModelAndView resetPassword() {
 		return new ModelAndView("main").addObject("viewName","jeja/change_pwd.jsp");
 	}
-	
+	// 비번 찾기
 	@PostMapping("/jeja/change_pwd")
 	public String resetPassword(@RequestParam @NotNull String jEmail, @RequestParam @NotNull String jTel, RedirectAttributes ra) {
 		try {

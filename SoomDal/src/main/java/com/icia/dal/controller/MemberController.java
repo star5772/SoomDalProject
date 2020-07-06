@@ -58,44 +58,10 @@ public class MemberController {
 	 */
 
 	
-	@GetMapping("/request_board/list")
-	public ModelAndView requestBoard() {
-		// 요청서 게시판으로 이동
-		// board/request.jsp에 뿌려줄 list 정보 필요(addObject("request",service.requestList()))
-		return new ModelAndView("main").addObject("viewName","board/request_board_list.jsp");
-	}
-	
-	@GetMapping("/qna_board/list")
-	public ModelAndView qnaBoard() {
-		// 문의 게시판으로 이동
-		// jsp에 뿌려줄 list 정보 필요 
-		return new ModelAndView("main").addObject("viewName","board/qna_board_list.jsp");
-	}
-	
-	@GetMapping("/qna_board/read")
-	public ModelAndView qnaRead() {
-		// 문의 글 읽기
-		// jsp에 작성글 정보 필요 > service.qnaRead()
-		return new ModelAndView("main").addObject("viewName","board/qna_board_read.jsp");
-	}
-	
-	@GetMapping("/qna_board/write")
-	public ModelAndView qnaWrite() {
-		// 문의 게시판 글작성 페이지로 이동
-		return new ModelAndView("main").addObject("viewName","board/qna_board_write.jsp");
-	}
-	/*
-	@PostMapping("/qna_board/write")
-	public String qnaWrite() {
-		// 문의 게시판 글작성 하기 >> 작성 후 자기가 쓴 글 읽기
-		// service.qnawrite();
-		return "redirect:/qna_board/read?bno="+"글 쓴 번호";
-	}
-	*/
 	@GetMapping("/member/find_id")
 	public ModelAndView findId() {
 		// 아이디 찾기 페이지로 이동
-		return new ModelAndView("member/find_id");
+		return new ModelAndView("member/find_id.jsp");
 	}
 	
 	@GetMapping("/member/reset_pwd") 
@@ -116,6 +82,7 @@ public class MemberController {
 		return new ModelAndView("main").addObject("viewName","member/join_select.jsp");
 	}
 
+	// 회원 탈퇴
 	@DeleteMapping("/member/resign")
 	public String resign(SecurityContextLogoutHandler handler, HttpServletRequest request, HttpServletResponse response, Authentication authentication) {
 		if(jejaService.findById(authentication.getName())!=null) {
@@ -138,7 +105,7 @@ public class MemberController {
 	}
 	
 	
-	
+	// 세부분야 선택
 	@GetMapping("/member/select_detailField")
 	public ModelAndView detailFieldSelect(String fNo) {
 		return new ModelAndView("main").addObject("viewName","member/detail_field_select.jsp").addObject("detailField",adminService.detailFnameList(fNo));
@@ -150,18 +117,19 @@ public class MemberController {
 		return new ModelAndView("main").addObject("viewName","member/search.jsp").addObject("search",dalService.dalSearch(pageno,searchType,keyword));
 	}
 	
-	  @GetMapping("/member/resetToDalinPwd") 
-	  public ModelAndView resetToDalinPwd() {
-		  return new ModelAndView("main").addObject("viewName","member/resetToDalinPwd.jsp");
-		  }
+	// 달인 비밀번호 변경
+	@GetMapping("/member/resetToDalinPwd") 
+	public ModelAndView resetToDalinPwd() {
+		return new ModelAndView("main").addObject("viewName","member/resetToDalinPwd.jsp");
+	}
 	  
-	  @PostMapping("/member/resetToDalinPwd") 
-	  public String resetToDalinPwd(@RequestParam @NotNull String dPassword, @RequestParam @NotNull String newPassword, String dEmail, RedirectAttributes ra, SecurityContextLogoutHandler handler, HttpServletRequest request, HttpServletResponse response, Authentication authentication ) throws DalinNotFoundException {
-		  dalService.changePwd(dPassword, newPassword, dEmail);
-		  ra.addFlashAttribute("msg","비밀번호를 변경했습니다");
-		  handler.logout(request, response, authentication);
-		  return "redirect:/";
-	  }
+	@PostMapping("/member/resetToDalinPwd") 
+	public String resetToDalinPwd(@RequestParam @NotNull String dPassword, @RequestParam @NotNull String newPassword, String dEmail, RedirectAttributes ra, SecurityContextLogoutHandler handler, HttpServletRequest request, HttpServletResponse response, Authentication authentication ) throws DalinNotFoundException {
+		dalService.changePwd(dPassword, newPassword, dEmail);
+		ra.addFlashAttribute("msg","비밀번호를 변경했습니다");
+		handler.logout(request, response, authentication);
+		return "redirect:/";
+	}
 	 
 	
 	@GetMapping("/member/resetToJejaPwd")

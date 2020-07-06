@@ -20,18 +20,21 @@ public class JejaRestController {
 	@Inject
 	private ReviewRestService reviewService;
 	
+	// 제자 이메일 체크
 	@GetMapping("/jeja/check_email")
 	public ResponseEntity<Void> ableEmail(String jEmail) {
 		jejaService.existsByEmail(jEmail);
 		return ResponseEntity.ok(null);
 	}
 	
+	// 내정보 수정
 	@PutMapping("/jeja/info_update")
 	public ResponseEntity<Void> updateInfo(JejaDto.DtoForJejaUpdate dto,Principal principal) {
 		jejaService.update(dto,principal.getName());
 		return ResponseEntity.ok(null);
 	}
 	
+	// 리뷰 삭제
 	@DeleteMapping("/jeja/review_delete")
 	public ResponseEntity<?> deleteToReview(int rNo,int dMno, Principal principal) throws JobFailException{
 		String writer = principal.getName();

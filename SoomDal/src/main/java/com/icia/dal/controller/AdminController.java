@@ -17,13 +17,13 @@ public class AdminController {
 	public ModelAndView adminLogin() {
 		return new ModelAndView("main").addObject("viewName","admin/adminLogin.jsp");
 	}
-	// 회원관리
+	// 제자 회원관리
 	@GetMapping("/admin/member_manage")
 	public ModelAndView adminManage(@RequestParam(defaultValue = "1") int pageno) {
 		// 관리자 회원관리탭 - 제자 and 달인 리스트 정보 필요
 		return new ModelAndView("main").addObject("viewName","admin/member_manage.jsp").addObject("jeja",adminService.adminPageToJeja(pageno));
 	}
-	
+	// 달인 회원관리
 	@GetMapping("/admin/member_manage_d")
 	public ModelAndView adminManageToDalin(@RequestParam(defaultValue = "1")int pagene) {
 		return new ModelAndView("main").addObject("viewName","admin/member_manage_dalin.jsp").addObject("dalin",adminService.adminPageToDalin(pagene));
