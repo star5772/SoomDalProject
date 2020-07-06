@@ -43,7 +43,7 @@ public class JejaRestController {
 	}
 	
 	// 제자 리뷰작성
-	@PostMapping("/reviewWrite")
+	@PostMapping("/member/reviewWrite")
 	public ResponseEntity<List<Review>> reviewWrite(Review rv,Principal principal) {
 		String username = principal.getName();
 		return ResponseEntity.ok(reviewService.reviewAuthChkAndWrite(rv, username,rv.getDMno()));
