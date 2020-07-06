@@ -125,9 +125,9 @@ $(function() {
 		height: 30px;
 		font-size: medium;
 		font-weight: bold;
-		font-style:oblique;
 		text-align: center;
 		line-height: 50%;
+		color: white;
 	}
 	#jTel1 {
 		display: inline-block;
