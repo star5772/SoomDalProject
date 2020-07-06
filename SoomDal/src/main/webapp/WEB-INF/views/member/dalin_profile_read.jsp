@@ -8,13 +8,8 @@
 <head>
 <meta charset="UTF-8">
 <title>DalinRead</title>
-<<<<<<< HEAD
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
 <sec:authorize access="hasAnyRole('ROLE_JEJA','ROLE_DALIN','ROLE_ADMIN')">
-=======
-<sec:authorize
-	access="hasAnyRole('ROLE_JEJA','ROLE_DALIN','ROLE_ADMIN')">
->>>>>>> branch 'master' of https://github.com/star5772/SoomDalProject
 	<script src="/dal/script/webS.js"></script>
 </sec:authorize>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
