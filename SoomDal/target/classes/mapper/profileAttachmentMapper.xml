@@ -1,9 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="profileAttachmentMapper">
+	<select id="findByIdAndNum" resultType="profileAttachment">
+		select p_attachment_no pAttachmentNo, p_original_file_name pOriginalFileName, p_save_file_name pSaveFileName, d_email dEmail, num from ProfileAttachment where d_email=#{dEmail} and num=#{num}
+	</select>
 	
-	
-	
+	<insert id="insert">
+		<selectKey keyProperty="pAttachmentNo" resultType="int" order="BEFORE">
+			select profileattachment_seq.nextval from dual
+		</selectKey>
+		insert into profileAttachment(p_attachment_no, p_original_file_name, p_save_file_name, d_email, num) values(#{pAttachmentNo},#{pOriginalFileName},#{pSaveFileName},#{dEmail},#{num})
+	</insert>
+	<update id="update">
+		update profileAttachment set p_original_file_name=#{pOriginalFileName},p_save_file_name=#{pSaveFileName} where d_email=#{dEmail} and num=#{num}
+	</update>
 </mapper>
 
 

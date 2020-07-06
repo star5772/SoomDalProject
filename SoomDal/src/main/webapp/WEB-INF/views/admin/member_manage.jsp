@@ -11,6 +11,20 @@
 <sec:authorize access="hasAnyRole('ROLE_JEJA','ROLE_DALIN','ROLE_ADMIN')">
 	<script src="/dal/script/webS.js"></script>
 </sec:authorize>
+<script>
+$(function(){
+		$("#select").on("change",function(){
+			if($("#select").val()=="d"){
+				$("#JejaTable_wrap").css("display","none");
+				$("#DalinTable_wrap").removeAttr("style");
+			}else if($("#select").val()=="j"){
+				$("#DalinTable_wrap").css("display","none");
+				$("#JejaTable_wrap").removeAttr("style");
+			}
+		})
+})
+</script>
+
 <style>
 	h1 {
 		font-weight: bolder;
@@ -44,13 +58,11 @@
 </script>
 </head>
 <body>
-${enabled }
 
-	
 	<div style="display: inline-block; width: 80px; position: absolute; left: 69.7%; top: 220px; border: 0; outline: 0;">
-		<select style="border-style: none;">
-			<option>제자회원</option>
-			<option>달인회원</option>
+		<select style="border-style: none;" id="select">
+			<option value="j">제자회원</option>
+			<option value="d">달인회원</option>
 		</select>
 	</div>
 <div id="manage_wrap">
@@ -65,8 +77,8 @@ ${enabled }
 	</div>
 </div>
 
-	<div id="table_wrap" >
-	<div id="manage_title1" style="display: inline-block; position: absolute; left: 28%">
+<div id="JejaTable_wrap" >
+	<div id="JejaManage_title" style="display: inline-block; position: absolute; left: 28%">
 		<h1>회원 관리</h1>
 	</div>
 		<table class="table table-hover" style="width: 700px; padding: 100px 0; float: left; text-align: center;">
@@ -106,7 +118,6 @@ ${enabled }
 			</tbody>
 		</table>
 		
-		${dalin}
 			<div style="text-align: center; display: inline-block; margin-left: 35%">
 				<ul class="pagination">
 					<c:if test="${jeja.prev==true }">
@@ -133,16 +144,17 @@ ${enabled }
 	
 
 
-<%-- 	<div id="table_wrap" >
-	<div id="manage_title1" style="display: inline-block; position: absolute; left: 28%">
+	<div id="DalinTable_wrap" style="display: none;" >
+	<div id="DalinManage_title" style="display: inline-block; position: absolute; left: 28%">
 		<h1>회원 관리</h1>
 	</div>
 		<table class="table table-hover" style="width: 700px; padding: 100px 0; float: left; text-align: center;">
 			<colgroup>
+				<col width="10%">
+				<col width="20%">
+				<col width="20%">
+				<col width="20%">
 				<col width="15%">
-				<col width="30%">
-				<col width="20%">
-				<col width="20%">
 				<col width="15%">
 			</colgroup>
 			<thead>
@@ -151,7 +163,7 @@ ${enabled }
 				<th>아이디</th>
 				<th>전화번호</th>
 				<th>전문분야</th>
-				<th>블락 여부</th>
+				<th>회원 상태</th>
 				<th>회원 등급</th>
 			</tr>
 			</thead>
@@ -161,7 +173,7 @@ ${enabled }
 					<td>${dal.DName}</td>
 					<td>${dal.DEmail }</td>
 					<td>${dal.DTel }</td>
-					<td>${dal.DetailFName}</td>
+					<td>${dal.detailFName}</td>
 					<c:choose>
 						<c:when test="${list.enabled == 'true'}">
 							<td>활성화</td>
@@ -171,15 +183,48 @@ ${enabled }
 						</c:otherwise>
 					</c:choose>
 					<c:choose>
-						<c:when test="${dal.DLevel}">
-							<td></td>
+						<c:when test="${dal.DLevelStr == 'NORMAL'}">
+							<td>일반 회원</td>
+						</c:when>
+						<c:when test="${dal.DLevelStr == 'SILVER'}">
+							<td style="color: silver;">실버 회원</td>
+						</c:when>
+						<c:when test="${dal.DLevelStr == 'GOLD'}">
+							<td style="color: yellow;">골드 회원</td>
+						</c:when>
+						<c:when test="${dal.DLevelStr == 'PLATINUM'}">
+							<td style="color: aqua;">플래티넘 회원</td>
 						</c:when>
 					</c:choose>
 				</tr>
 			</c:forEach> 
 			</tbody>
-		</table>		
-	 --%>
+		</table>	
+		
+			<div style="text-align: center; display: inline-block; margin-left: 35%">
+				<ul class="pagination">
+					<c:if test="${dalin.prev==true }">
+						<li><a href="/dal/member/admin/member_manage?pagene=${dalin.startPage-1 }">이전</a></li>
+					</c:if>
+					<c:forEach begin="${dalin.startPage }" end="${dalin.endPage }" var="i">
+						<c:choose>
+							<c:when test="${dalin.pagene eq i }">
+								<li class="active">
+									<a href="/dal/member/admin/member_manage?pagene=${i }">${i }</a>
+								</li>
+							</c:when>
+							<c:otherwise>
+								<li><a href="/dal/member/admin/member_manage?pagene=${i }">${i }</a>
+							</c:otherwise>
+						</c:choose>
+					</c:forEach>
+					<c:if test="${dalin.next==true }">
+						<li><a href="/dal/member/admin/member_manage?pagene=${dalin.endPage+1 }">다음</a></li>
+					</c:if>
+				</ul>
+			</div>
+	</div>		
+
 
 </body>
 </html>

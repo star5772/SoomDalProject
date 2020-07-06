@@ -19,9 +19,9 @@ public class AdminController {
 	}
 	// 회원관리
 	@GetMapping("/admin/member_manage")
-	public ModelAndView adminManage(@RequestParam(defaultValue = "1") int pageno) {
+	public ModelAndView adminManage(@RequestParam(defaultValue = "1") int pageno,@RequestParam(defaultValue = "1")int pagene) {
 		// 관리자 회원관리탭 - 제자 and 달인 리스트 정보 필요
-		return new ModelAndView("main").addObject("viewName","admin/member_manage.jsp").addObject("jeja",adminService.adminPageToJeja(pageno)).addObject("dalin",adminService.adminPageToDalin(pageno));
+		return new ModelAndView("main").addObject("viewName","admin/member_manage.jsp").addObject("jeja",adminService.adminPageToJeja(pageno)).addObject("dalin",adminService.adminPageToDalin(pagene));
 	}
 	// 블락회원관리
 	@GetMapping("/admin/enabled_manage")

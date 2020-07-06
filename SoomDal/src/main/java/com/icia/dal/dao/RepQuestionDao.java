@@ -14,4 +14,16 @@ public class RepQuestionDao {
 	@Inject
 	private SqlSessionTemplate tpl;
 
+	public RepQuestion findByDemail(String dEmail) {
+		return tpl.selectOne("RepQuestionMapper.findByDemail",dEmail);
+	}
+
+	public int update(RepQuestion repQ) {
+		return tpl.update("RepQuestionMapper.update",repQ);
+	}
+
+	public int insert(RepQuestion repQ) {
+		return tpl.insert("RepQuestionMapper.insert",repQ);
+	}
+
 }

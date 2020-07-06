@@ -28,6 +28,7 @@ import com.icia.dal.entity.Dalin;
 import com.icia.dal.entity.DetailField;
 import com.icia.dal.entity.Field;
 import com.icia.dal.entity.Jeja;
+import com.icia.dal.entity.Level;
 import com.icia.dal.entity.NowPayment;
 import com.icia.dal.entity.NowRefund;
 import com.icia.dal.entity.Review;
@@ -51,15 +52,17 @@ public class AdminService {
 	@Inject
 	private PaymentDao npDao;
 
-	public PageToDalinAdmin adminPageToDalin(int pageno) {
+	public PageToDalinAdmin adminPageToDalin(int pagene) {
 		int countOfBoard = adminDao.countToDalin();
-		PageToDalinAdmin adPage = AdminToDalinPagingUtil.getPage(pageno, countOfBoard);
+		PageToDalinAdmin adPage = AdminToDalinPagingUtil.getPage(pagene, countOfBoard);
 		int srn = adPage.getStartRowNum();
 		int ern = adPage.getEndRowNum();
 		List<Dalin> adminList = adminDao.findAllToDalin(srn, ern);
 		List<AdminDto.DalinForList> dtoList = new ArrayList<AdminDto.DalinForList>();
 		for(Dalin dal:adminList) {
 			AdminDto.DalinForList dto = modelMapper.map(dal,AdminDto.DalinForList.class);
+			Level level = dal.getDLevel();
+			dto.setDLevelStr(level.name());
 			dto.setDDateStr(dal.getDDate().format(DateTimeFormatter.ofPattern("yyyy년MM월dd일")));	
 			dtoList.add(dto);
 		}

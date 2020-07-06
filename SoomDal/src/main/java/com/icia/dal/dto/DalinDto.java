@@ -12,6 +12,7 @@ import com.icia.dal.entity.RepQuestion;
 import com.icia.dal.entity.Review;
 
 import lombok.Data;
+import lombok.experimental.*;
 
 public class DalinDto {
 	private DalinDto() { }
@@ -35,6 +36,7 @@ public class DalinDto {
 	}
 	
 	@Data
+	@Accessors(chain=true)
 	public static class DtoForProfileUpdateToDalin{
 		private Integer dMno;
 		private String dIntro;
@@ -46,7 +48,6 @@ public class DalinDto {
 		private String q2;
 		private String q3;
 		private String q4;
-		private List<MultipartFile> profileAttachments;
 	}
 	@Data
 	public static class DtoForProfileToDalin{

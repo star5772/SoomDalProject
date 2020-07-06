@@ -35,7 +35,7 @@ public class AdminDto {
 		private String dName;
 		private String dTel;
 		private String dDateStr;
-		private Level dLevel;
+		private String dLevelStr;
 		private boolean enabled;
 	}
 

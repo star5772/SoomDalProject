@@ -99,8 +99,227 @@ public class DalinService {
 	}
 
 	
-	public void profileUpdate(DalinDto.DtoForProfileUpdateToDalin dto, MultipartFile dProfile) throws IllegalStateException, IOException {
-		
+	public void profileUpdate(DalinDto.DtoForProfileUpdateToDalin dto, MultipartFile dProfile, MultipartFile profileAttachment0, MultipartFile profileAttachment1, MultipartFile profileAttachment2, MultipartFile profileAttachment3 ,MultipartFile profileAttachment4, String dEmail) throws IllegalStateException, IOException, DalinNotFoundException {
+		Dalin dalin = dalDao.findByDalin(dEmail);
+		if(dalin==null)
+			throw new DalinNotFoundException();
+		Dalin updateDalin = Dalin.builder().dMno(dto.getDMno()).dIntro(dto.getDIntro()).dMainService(dto.getDMainService()).dArea(dto.getDArea()).dDetailService(dto.getDDetailService()).dPaymentMethod(dto.getDPaymentMethod()).build();
+		RepQuestion repQ = RepQuestion.builder().dEmail(dEmail).firstQ(dto.getQ1()).secoendQ(dto.getQ2()).thirdQ(dto.getQ3()).fourthQ(dto.getQ4()).build();
+		// repQ // dto와 repQ 값이 달라지지 않았어도 무조건 업데이트
+		if(repDao.findByDemail(dEmail)!=null) {
+			repDao.update(repQ);
+		} else {
+			repDao.insert(repQ);
+		}
+		// dProfile
+		if(dProfile!=null && dProfile.isEmpty()==false && dalin.getDProfile()!=null) {
+			// 처음으로 프로필 등록이면 바로 update, 처음이 아니면 profileFolder 내부에 이전 프로필 삭제하고 다시 등록
+			String ext = dalin.getDProfile().substring(dalin.getDProfile().lastIndexOf(".") + 1);
+			File deleteFile = new File(profileFolder+"/"+dEmail+"."+ext);
+			if(deleteFile.exists()) {
+				deleteFile.delete();
+			}
+			int lastIndexOfDot =  dProfile.getOriginalFilename().lastIndexOf('.');
+			String extension = dProfile.getOriginalFilename().substring(lastIndexOfDot+1);
+			File profile = new File(profileFolder, dalin.getDEmail() + "." + extension);
+			dProfile.transferTo(profile);
+			updateDalin.setDProfile(profilePath + profile.getName());
+		} else if(dProfile!=null && dProfile.isEmpty()==false && dalin.getDProfile()==null) {
+			int lastIndexOfDot =  dProfile.getOriginalFilename().lastIndexOf('.');
+			String extension = dProfile.getOriginalFilename().substring(lastIndexOfDot+1);
+			File profile = new File(profileFolder, dalin.getDEmail() + "." + extension);
+			dProfile.transferTo(profile);
+			updateDalin.setDProfile(profilePath + profile.getName());
+		}
+		// Attachment
+		// 처음으로 프로필을 수정했을 때 첨부파일을 첨부하면
+		if(dalin.getPAttachmentCnt()==0) {
+			int cnt = 0;
+			System.out.println("===================secoend");
+			if(profileAttachment0!=null) {
+				System.out.println("===================third");
+				ProfileAttachment pfam = new ProfileAttachment();
+				String originalFileName = profileAttachment0.getOriginalFilename();
+				long time = System.nanoTime();
+				String saveFileName = time + "-" + originalFileName;
+				pfam.setDEmail(dEmail).setPOriginalFileName(originalFileName).setPSaveFileName(saveFileName).setNum(1);
+				File file = new File(profileFolder, saveFileName);
+				profileAttachment0.transferTo(file);
+				profileAttachmentDao.insert(pfam);
+				cnt++;
+			}
+			if(profileAttachment1!=null) {
+				ProfileAttachment pfam = new ProfileAttachment();
+				String originalFileName = profileAttachment1.getOriginalFilename();
+				long time = System.nanoTime();
+				String saveFileName = time + "-" + originalFileName;
+				pfam.setDEmail(dEmail).setPOriginalFileName(originalFileName).setPSaveFileName(saveFileName).setNum(2);
+				File file = new File(profileFolder, saveFileName);
+				profileAttachment1.transferTo(file);
+				profileAttachmentDao.insert(pfam);
+				cnt++;
+			}
+			if(profileAttachment2!=null) {
+				ProfileAttachment pfam = new ProfileAttachment();
+				String originalFileName = profileAttachment2.getOriginalFilename();
+				long time = System.nanoTime();
+				String saveFileName = time + "-" + originalFileName;
+				pfam.setDEmail(dEmail).setPOriginalFileName(originalFileName).setPSaveFileName(saveFileName).setNum(3);
+				File file = new File(profileFolder, saveFileName);
+				profileAttachment2.transferTo(file);
+				profileAttachmentDao.insert(pfam);
+				cnt++;
+			}
+			if(profileAttachment3!=null) {
+				ProfileAttachment pfam = new ProfileAttachment();
+				String originalFileName = profileAttachment3.getOriginalFilename();
+				long time = System.nanoTime();
+				String saveFileName = time + "-" + originalFileName;
+				pfam.setDEmail(dEmail).setPOriginalFileName(originalFileName).setPSaveFileName(saveFileName).setNum(4);
+				File file = new File(profileFolder, saveFileName);
+				profileAttachment3.transferTo(file);
+				profileAttachmentDao.insert(pfam);
+				cnt++;
+			}
+			if(profileAttachment4!=null) {
+				ProfileAttachment pfam = new ProfileAttachment();
+				String originalFileName = profileAttachment4.getOriginalFilename();
+				long time = System.nanoTime();
+				String saveFileName = time + "-" + originalFileName;
+				pfam.setDEmail(dEmail).setPOriginalFileName(originalFileName).setPSaveFileName(saveFileName).setNum(5);
+				File file = new File(profileFolder, saveFileName);
+				profileAttachment4.transferTo(file);
+				profileAttachmentDao.insert(pfam);
+				cnt++;
+			}
+			System.out.println("===================first");
+			updateDalin.setPAttachmentCnt(cnt);
+			
+		} else if(dalin.getPAttachmentCnt()!=0) {
+			// 내가 올린 파일이 attachDao.findbyId에 존재하면 업데이트(동시에 이전 파일 삭제) 아니면 insert
+			if(profileAttachment0!=null && profileAttachmentDao.findByIdAndNum(dEmail,1)!=null) {
+				String ext = profileAttachmentDao.findByIdAndNum(dEmail,1).getPSaveFileName().substring(profileAttachmentDao.findByIdAndNum(dEmail,1).getPSaveFileName().lastIndexOf(".") + 1);
+				File deleteFile = new File(profileFolder+"/"+profileAttachmentDao.findByIdAndNum(dEmail,1).getPSaveFileName()+"."+ext);
+				deleteFile.delete();
+				
+				ProfileAttachment pfam = new ProfileAttachment();
+				String originalFileName = profileAttachment0.getOriginalFilename();
+				long time = System.nanoTime();
+				String saveFileName = time + "-" + originalFileName;
+				pfam.setDEmail(dEmail).setPOriginalFileName(originalFileName).setPSaveFileName(saveFileName).setDEmail(dEmail).setNum(1);
+				File file = new File(profileFolder, saveFileName);
+				profileAttachment0.transferTo(file);
+				profileAttachmentDao.update(pfam);
+			} else if(profileAttachment0!=null && profileAttachmentDao.findByIdAndNum(dEmail,1)==null) {
+				ProfileAttachment pfam = new ProfileAttachment();
+				String originalFileName = profileAttachment0.getOriginalFilename();
+				long time = System.nanoTime();
+				String saveFileName = time + "-" + originalFileName;
+				pfam.setDEmail(dEmail).setPOriginalFileName(originalFileName).setPSaveFileName(saveFileName).setNum(1);
+				File file = new File(profileFolder, saveFileName);
+				profileAttachment0.transferTo(file);
+				profileAttachmentDao.insert(pfam);
+			}
+			
+			if(profileAttachment1!=null && profileAttachmentDao.findByIdAndNum(dEmail,2)!=null) {
+				String ext = profileAttachmentDao.findByIdAndNum(dEmail,2).getPSaveFileName().substring(profileAttachmentDao.findByIdAndNum(dEmail,2).getPSaveFileName().lastIndexOf(".") + 1);
+				File deleteFile = new File(profileFolder+"/"+profileAttachmentDao.findByIdAndNum(dEmail,2).getPSaveFileName()+"."+ext);
+				deleteFile.delete();
+				
+				ProfileAttachment pfam = new ProfileAttachment();
+				String originalFileName = profileAttachment1.getOriginalFilename();
+				long time = System.nanoTime();
+				String saveFileName = time + "-" + originalFileName;
+				pfam.setDEmail(dEmail).setPOriginalFileName(originalFileName).setPSaveFileName(saveFileName).setDEmail(dEmail).setNum(2);
+				File file = new File(profileFolder, saveFileName);
+				profileAttachment1.transferTo(file);
+				profileAttachmentDao.update(pfam);
+			} else if(profileAttachment1!=null && profileAttachmentDao.findByIdAndNum(dEmail,2)==null) {
+				ProfileAttachment pfam = new ProfileAttachment();
+				String originalFileName = profileAttachment1.getOriginalFilename();
+				long time = System.nanoTime();
+				String saveFileName = time + "-" + originalFileName;
+				pfam.setDEmail(dEmail).setPOriginalFileName(originalFileName).setPSaveFileName(saveFileName).setNum(2);
+				File file = new File(profileFolder, saveFileName);
+				profileAttachment1.transferTo(file);
+				profileAttachmentDao.insert(pfam);
+			}
+			
+			if(profileAttachment2!=null && profileAttachmentDao.findByIdAndNum(dEmail,3)!=null) {
+				String ext = profileAttachmentDao.findByIdAndNum(dEmail,3).getPSaveFileName().substring(profileAttachmentDao.findByIdAndNum(dEmail,3).getPSaveFileName().lastIndexOf(".") + 1);
+				File deleteFile = new File(profileFolder+"/"+profileAttachmentDao.findByIdAndNum(dEmail,3).getPSaveFileName()+"."+ext);
+				deleteFile.delete();
+				
+				ProfileAttachment pfam = new ProfileAttachment();
+				String originalFileName = profileAttachment2.getOriginalFilename();
+				long time = System.nanoTime();
+				String saveFileName = time + "-" + originalFileName;
+				pfam.setDEmail(dEmail).setPOriginalFileName(originalFileName).setPSaveFileName(saveFileName).setDEmail(dEmail).setNum(3);
+				File file = new File(profileFolder, saveFileName);
+				profileAttachment2.transferTo(file);
+				profileAttachmentDao.update(pfam);
+			} else if(profileAttachment2!=null && profileAttachmentDao.findByIdAndNum(dEmail,3)==null) {
+				ProfileAttachment pfam = new ProfileAttachment();
+				String originalFileName = profileAttachment2.getOriginalFilename();
+				long time = System.nanoTime();
+				String saveFileName = time + "-" + originalFileName;
+				pfam.setDEmail(dEmail).setPOriginalFileName(originalFileName).setPSaveFileName(saveFileName).setNum(3);
+				File file = new File(profileFolder, saveFileName);
+				profileAttachment2.transferTo(file);
+				profileAttachmentDao.insert(pfam);
+			}
+			
+			if(profileAttachment3!=null && profileAttachmentDao.findByIdAndNum(dEmail,4)!=null) {
+				String ext = profileAttachmentDao.findByIdAndNum(dEmail,4).getPSaveFileName().substring(profileAttachmentDao.findByIdAndNum(dEmail,4).getPSaveFileName().lastIndexOf(".") + 1);
+				File deleteFile = new File(profileFolder+"/"+profileAttachmentDao.findByIdAndNum(dEmail,4).getPSaveFileName()+"."+ext);
+				deleteFile.delete();
+				
+				ProfileAttachment pfam = new ProfileAttachment();
+				String originalFileName = profileAttachment3.getOriginalFilename();
+				long time = System.nanoTime();
+				String saveFileName = time + "-" + originalFileName;
+				pfam.setDEmail(dEmail).setPOriginalFileName(originalFileName).setPSaveFileName(saveFileName).setDEmail(dEmail).setNum(4);
+				File file = new File(profileFolder, saveFileName);
+				profileAttachment3.transferTo(file);
+				profileAttachmentDao.update(pfam);
+			} else if(profileAttachment3!=null && profileAttachmentDao.findByIdAndNum(dEmail,4)==null) {
+				ProfileAttachment pfam = new ProfileAttachment();
+				String originalFileName = profileAttachment3.getOriginalFilename();
+				long time = System.nanoTime();
+				String saveFileName = time + "-" + originalFileName;
+				pfam.setDEmail(dEmail).setPOriginalFileName(originalFileName).setPSaveFileName(saveFileName).setNum(4);
+				File file = new File(profileFolder, saveFileName);
+				profileAttachment3.transferTo(file);
+				profileAttachmentDao.insert(pfam);
+			}
+			
+			if(profileAttachment4!=null && profileAttachmentDao.findByIdAndNum(dEmail,5)!=null) {
+				String ext = profileAttachmentDao.findByIdAndNum(dEmail,5).getPSaveFileName().substring(profileAttachmentDao.findByIdAndNum(dEmail,5).getPSaveFileName().lastIndexOf(".") + 1);
+				File deleteFile = new File(profileFolder+"/"+profileAttachmentDao.findByIdAndNum(dEmail,5).getPSaveFileName()+"."+ext);
+				deleteFile.delete();
+				
+				ProfileAttachment pfam = new ProfileAttachment();
+				String originalFileName = profileAttachment4.getOriginalFilename();
+				long time = System.nanoTime();
+				String saveFileName = time + "-" + originalFileName;
+				pfam.setDEmail(dEmail).setPOriginalFileName(originalFileName).setPSaveFileName(saveFileName).setDEmail(dEmail).setNum(5);
+				File file = new File(profileFolder, saveFileName);
+				profileAttachment4.transferTo(file);
+				profileAttachmentDao.update(pfam);
+			} else if(profileAttachment4!=null && profileAttachmentDao.findByIdAndNum(dEmail,5)==null) {
+				ProfileAttachment pfam = new ProfileAttachment();
+				String originalFileName = profileAttachment4.getOriginalFilename();
+				long time = System.nanoTime();
+				String saveFileName = time + "-" + originalFileName;
+				pfam.setDEmail(dEmail).setPOriginalFileName(originalFileName).setPSaveFileName(saveFileName).setNum(5);
+				File file = new File(profileFolder, saveFileName);
+				profileAttachment4.transferTo(file);
+				profileAttachmentDao.insert(pfam);
+			}
+			
+		}
+		// dto
+		dalDao.updateToDalinProfile(updateDalin);
 	}
 
 	
