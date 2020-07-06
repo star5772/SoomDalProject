@@ -1,6 +1,7 @@
 package com.icia.dal.controller.rest;
 
 import java.security.*;
+import java.util.List;
 
 import javax.inject.*;
 
@@ -9,14 +10,15 @@ import org.springframework.web.bind.annotation.*;
 
 import com.icia.dal.Exception.JobFailException;
 import com.icia.dal.dto.*;
-import com.icia.dal.service.*;
+import com.icia.dal.entity.Review;
+import com.icia.dal.service.rest.*;
 
 @RestController
 public class JejaRestController {
 	@Inject
-	private JejaService jejaService;
+	private JejaRestService jejaService;
 	@Inject
-	private ReviewService reviewService;
+	private ReviewRestService reviewService;
 	
 	@GetMapping("/jeja/check_email")
 	public ResponseEntity<Void> ableEmail(String jEmail) {
@@ -35,5 +37,12 @@ public class JejaRestController {
 		String writer = principal.getName();
 		reviewService.deleteToReview(rNo,dMno,writer);
 		return ResponseEntity.ok(null);
+	}
+	
+	// 제자 리뷰작성
+	@PostMapping("/reviewWrite")
+	public ResponseEntity<List<Review>> reviewWrite(Review rv,Principal principal) {
+		String username = principal.getName();
+		return ResponseEntity.ok(reviewService.reviewAuthChkAndWrite(rv, username,rv.getDMno()));
 	}
 }

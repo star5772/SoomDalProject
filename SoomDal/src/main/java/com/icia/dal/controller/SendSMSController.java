@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.icia.dal.entity.RequestPayment;
 import com.icia.dal.service.PaymentService;
+import com.icia.dal.service.rest.*;
 import com.icia.dal.util.sms.Coolsms;
 
 @RequestMapping("/member")
@@ -19,7 +20,7 @@ import com.icia.dal.util.sms.Coolsms;
 public class SendSMSController {
 
 	@Autowired
-	private PaymentService paymentService;
+	private PaymentRestService paymentService;
 	
 	@PostMapping("/sendSMS")
 	public ResponseEntity<Void> sendSMS(String dTel,Principal principal) {

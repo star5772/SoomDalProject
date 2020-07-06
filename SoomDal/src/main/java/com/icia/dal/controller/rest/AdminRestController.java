@@ -10,12 +10,13 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.icia.dal.entity.Field;
 import com.icia.dal.service.AdminService;
+import com.icia.dal.service.rest.*;
 
 @RequestMapping("/member")
 @RestController
 public class AdminRestController {
 	@Inject
-	private AdminService adService;
+	private AdminRestService adService;
 	
 	@PostMapping("/admin/insertField")
 	public ResponseEntity<Void> insertFieldSajin(String fNo,String fName,MultipartFile sajin) throws IllegalStateException, IOException {
