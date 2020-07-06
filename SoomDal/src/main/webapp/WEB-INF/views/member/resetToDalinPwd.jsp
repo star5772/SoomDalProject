@@ -54,6 +54,7 @@ button{
 </style>
 </head>
 <body>
+<<<<<<< HEAD
 <sec:authentication property="principal.username" var="username"/> 
 <h1 style="text-align: center; font-weight: bold; margin-top: 70px;">새로운 비밀번호를 입력해 주세요!</h1>
 	<form action="/dal/member/resetToDalinPwd" method="post" id="newPwd">
@@ -63,6 +64,12 @@ button{
 	<div id="one">
 		새비밀번호&nbsp;<input type="password" name="newPassword" id="np">
 	</div>
+=======
+<%-- <sec:authentication property="principal.username" var="username"/> --%>
+	<form action="/dal/member/resetToDalinPwd" method="post">
+		비밀번호:<input type="password" name="dPassword" id="dp">
+		새비밀번호:<input type="password" name="newPassword" id="np">
+>>>>>>> branch 'master' of https://github.com/star5772/SoomDalProject
 		<input type="hidden" id="dEmail" name="dEmail" value="${username }">
 		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token }">
 		<br>

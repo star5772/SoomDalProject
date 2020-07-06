@@ -28,5 +28,9 @@ public class ProfileAttachmentDao {
 	public int update(ProfileAttachment pfam) {
 		return tpl.update("profileAttachmentMapper.update",pfam);
 	}
+
+	public List<ProfileAttachment> findAllById(String dEmail) {
+		return tpl.selectList("profileAttachmentMapper.findAllById",dEmail);
+	}
 	
 }

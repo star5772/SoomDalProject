@@ -5,6 +5,8 @@ import java.security.Principal;
 import javax.inject.Inject;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.*;
+import org.springframework.security.access.prepost.*;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -13,6 +15,7 @@ import com.icia.dal.Exception.JobFailException;
 import com.icia.dal.entity.RequestPayment;
 import com.icia.dal.service.rest.*;
 
+@Secured("ROLE_DALIN")
 @RequestMapping("/member")
 @RestController
 public class PaymentRestController {
@@ -20,7 +23,6 @@ public class PaymentRestController {
 	private PaymentRestService paymentService;
 	
 
-	
 	@PostMapping("/payment/store")
 	public ResponseEntity<?> RequestPayment(RequestPayment rp,Principal principal) {
 		paymentService.insertCashToDalin(rp,principal.getName());
