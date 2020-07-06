@@ -158,19 +158,19 @@ $(document).ready(function(){
 			formData.append("dProfile",$("#dProfileSajin")[0].files[0]);
 		}
 		if($("#attach0")[0].files[0]!=undefined){
-			formData.append("profileAttachments", $("#attach0")[0].files[0]);
+			formData.append("profileAttachment0", $("#attach0")[0].files[0]);
 		}
 		if($("#attach1")[0].files[0]!=undefined){
-			formData.append("profileAttachments", $("#attach1")[0].files[0]);
+			formData.append("profileAttachment1", $("#attach1")[0].files[0]);
 		}
 		if($("#attach2")[0].files[0]!=undefined){
-			formData.append("profileAttachments", $("#attach2")[0].files[0]);
+			formData.append("profileAttachment2", $("#attach2")[0].files[0]);
 		}
 		if($("#attach3")[0].files[0]!=undefined){
-			formData.append("profileAttachments", $("#attach3")[0].files[0]);
+			formData.append("profileAttachment3", $("#attach3")[0].files[0]);
 		}
 		if($("#attach4")[0].files[0]!=undefined){
-			formData.append("profileAttachments", $("#attach4")[0].files[0]);
+			formData.append("profileAttachment4", $("#attach4")[0].files[0]);
 		}
 		
 		$.ajax({
@@ -393,11 +393,11 @@ body {
 				<div id="inp">
 					<input type="hidden" name="_csrf" value="${_csrf.token}">
 					<div id="attachment_div">
-						<input type="file" class="form-control-file attach" name="profileAttachments[0]" id="attach0" accept=".jpg,.jpeg,.png,.gif,.bmp">
-						<input type="file" class="form-control-file attach" name="profileAttachments[1]" id="attach1" accept=".jpg,.jpeg,.png,.gif,.bmp">
-						<input type="file" class="form-control-file attach" name="profileAttachments[2]" id="attach2" accept=".jpg,.jpeg,.png,.gif,.bmp">
-						<input type="file" class="form-control-file attach" name="profileAttachments[3]" id="attach3" accept=".jpg,.jpeg,.png,.gif,.bmp">
-						<input type="file" class="form-control-file attach" name="profileAttachments[4]" id="attach4" accept=".jpg,.jpeg,.png,.gif,.bmp">
+						<input type="file" class="form-control-file attach" name="profileAttachments0" id="attach0" accept=".jpg,.jpeg,.png,.gif,.bmp">
+						<input type="file" class="form-control-file attach" name="profileAttachments1" id="attach1" accept=".jpg,.jpeg,.png,.gif,.bmp">
+						<input type="file" class="form-control-file attach" name="profileAttachments2" id="attach2" accept=".jpg,.jpeg,.png,.gif,.bmp">
+						<input type="file" class="form-control-file attach" name="profileAttachments3" id="attach3" accept=".jpg,.jpeg,.png,.gif,.bmp">
+						<input type="file" class="form-control-file attach" name="profileAttachments4" id="attach4" accept=".jpg,.jpeg,.png,.gif,.bmp">
 					</div>
 				</div>
 			</div>

@@ -70,11 +70,12 @@ public class DalinController {
 	}
 	
 	@PostMapping("/dalin/profile_update")
-	public String dalinInFoUpdate(@Valid DalinDto.DtoForProfileUpdateToDalin dto, @Nullable MultipartFile dProfile, RedirectAttributes ra, BindingResult bindingResult) throws BindException {
+	public String dalinInFoUpdate(@Valid DalinDto.DtoForProfileUpdateToDalin dto, @Nullable MultipartFile dProfile, @Nullable MultipartFile profileAttachment0,@Nullable MultipartFile profileAttachment1,@Nullable MultipartFile profileAttachment2,@Nullable MultipartFile profileAttachment3,@Nullable MultipartFile profileAttachment4,Principal principal, RedirectAttributes ra, BindingResult bindingResult) throws BindException, DalinNotFoundException {
+		String dEmail = principal.getName();
 		if(bindingResult.hasErrors()==true)
 			throw new BindException(bindingResult);
 		try {
-			dalService.profileUpdate(dto, dProfile);
+			dalService.profileUpdate(dto, dProfile, profileAttachment0, profileAttachment1, profileAttachment2,profileAttachment3,profileAttachment4, dEmail);
 		} catch (IllegalStateException | IOException e) {
 			e.printStackTrace();
 		}
