@@ -110,8 +110,8 @@ $(function() {
 		margin: auto 0;
 		top:50%;
 		left: 50%;
-		margin-left: -250px;
-		margin-top: -250px;
+		margin-left: -220px;
+		margin-top: -200px;
 		font-size: large;
 		padding: 24px;
 	}
@@ -122,13 +122,18 @@ $(function() {
 		margin-bottom: 10px;
 	}
 	.btn {
-		width: 85px;
+		width: 80px;
 		height: 30px;
 		font-size: medium;
 		font-weight: bold;
-		font-style:oblique;
 		text-align: center;
 		line-height: 50%;
+		color: white;
+<<<<<<< HEAD
+=======
+		float: right;
+		margin-top: 20px;
+>>>>>>> branch 'master' of https://github.com/star5772/SoomDalProject
 	}
 	#jTel1 {
 		display: inline-block;
@@ -148,6 +153,7 @@ $(function() {
 		height: 40px;
 		font-size: large; 
 	}
+
 </style>
 </head>
 <body>
@@ -192,7 +198,7 @@ $(function() {
 			</div>
 		</div>
 		<div>
-			<button class="btn btn-warning" type="button" id="join">회원 가입</button>
+			<button class="btn btn-warning" type="button" id="join" >회원가입</button>
 		</div>
 	</form>
 </div>

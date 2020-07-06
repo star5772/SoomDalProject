@@ -1,4 +1,3 @@
-drop table admin cascade constraints;
 drop table authorities cascade constraints;
 drop table dalin cascade constraints;
 drop table detailfield cascade constraints;
@@ -20,7 +19,6 @@ drop table review cascade constraints;
 drop table reviewattachment cascade constraints;
 drop table reviewauthority cascade constraints;
 drop table usecash cascade constraints;
-DROP TABLE MEMO CASCADE CONSTRAINTS;
 drop table lessonhistory cascade constraints;
 
 drop sequence jeja_seq;
@@ -227,14 +225,6 @@ CREATE TABLE ReportedBoard (
    constraint pk_reportedboard primary key(rb_no,username)
 );
 
-/*관리자*/
-
-CREATE TABLE Admin (
-   AD_EMAIL VARCHAR2(50) NOT NULL, /* 관리자이메일 */
-   AD_PASSWORD VARCHAR2(60), /* 관리자비밀번호 */
-   AD_ENABLED CHAR(1), /* 관리자 상태 */
-   constraint pk_admin primary key(ad_email)
-);
 
 /* 캐시 사용 내역 */
 
@@ -362,6 +352,7 @@ CREATE TABLE Authorities (
    constraint pk_authorities primary key(username,authority)
 );
 
+/* 레슨내역 */
 create Table LESSONHISTORY (
     a_complete_code varchar2(8),
     D_MNO number(7),

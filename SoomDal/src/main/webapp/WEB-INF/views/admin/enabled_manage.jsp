@@ -94,7 +94,7 @@ $(document).ready(function() {
 				<tbody>
 				<c:forEach items="${enabled.list }" var="e">
 					<tr>	
-						<td>${e.JName}</td>
+						<td>${e.JEmail}</td>
 						<td>${e.JJoinDate }</td>
 						<c:choose>
 						<c:when test="${e.enabled == true}">

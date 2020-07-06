@@ -58,11 +58,22 @@ public class WSUserService {
 	
 	// 메시지 보내기 1: 보내는 사람, 받는 사람
 	public void sendMsg(String sender, String receiver, String msg) {
-		System.out.println("보내는 사람 : " + receiver);
-		System.out.println("받는 사람: " + sender);
+		System.out.println("보내는 사람 : " + sender);
+		System.out.println("받는 사람: " + receiver);
 		for(WSUser user:list) {
 			System.out.println("리스트에 저장된 유저 : " + user);
 			if(user.getUsername().equals(jejaDao.findIdByName(receiver)) || user.getUsername().equals(dalDao.findIdByName(receiver))) {
+				user.sendMessage(sender+"의 메시지:" + msg);
+			}
+		}
+	}
+	
+	public void sendLoginMsg(String sender, String receiver, String msg) {
+		System.out.println("보내는 사람 : " + sender);
+		System.out.println("받는 사람: " + receiver);
+		for(WSUser user:list) {
+			System.out.println("리스트에 저장된 유저 : " + user);
+			if(user.getUsername().equals(receiver)) {
 				user.sendMessage(sender+"의 메시지:" + msg);
 			}
 		}

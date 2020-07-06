@@ -235,8 +235,8 @@ $(function() {
 	margin: auto 0;
 	top:50%;
 	left: 50%;
-	margin-left: -250px;
-	margin-top: -250px;
+	margin-left: -200px;
+	margin-top: -200px;
 	font-size: large; 
 }
 #step-one .input {
@@ -291,7 +291,7 @@ $(function() {
 	margin: auto 0;
 	top:50%;
 	left: 50%;
-	margin-left: -450px;
+	margin-left: -400px;
 	margin-top: 50px;
 	font-size: medium; 
 	overflow: hidden;	
@@ -303,7 +303,7 @@ $(function() {
 	margin: auto 0;
 	top:50%;
 	left: 50%;
-	margin-left: -450px;
+	margin-left: -400px;
 	margin-top: 50px;
 	font-size: medium; 
 	overflow: hidden;
@@ -315,7 +315,7 @@ $(function() {
 	margin: auto 0;
 	top:50%;
 	left: 50%;
-	margin-left: -450px;
+	margin-left: -400px;
 	margin-top: 50px;
 	font-size: medium; 
 	overflow: hidden;
@@ -378,7 +378,8 @@ $(function() {
 </head>
 <body>
 <form id="dalinJoinFrm" action="/dal/dalin/join" method="post">
-<div id="step-one" >	
+<div style="border: 1px solid #DDDDDD;width: 500px; height: 680px; margin-left: 290px; margin-top: 20px;">
+<div id="step-one">	
 	<div>
 		<label for="dEmail" style="font-size: medium;">아이디(이메일) 입력</label>
 		<input type="text" name="dEmail" id="dEmail" placeholder="사용하실 이메일을 입력해주세요" maxlength="50" class="form-control input">
@@ -416,12 +417,13 @@ $(function() {
 		<input type="text" name="dArea" id="dArea" placeholder="주소" class="addr" readonly="readonly"><br>
 		<input type="text" id="detail-address" placeholder="상세주소" class="addr">
 	</div>
-	<button id="complete-step-one" type="button" class="btn btn-warning" style="margin-left:320px;  border-radius: 4px;">다음</button>
+	<button id="complete-step-one" type="button" class="btn btn-warning" style="margin-left:320px; margin-top: 20px; border-radius: 4px;">다음</button>
 </div>	
+</div>
 
 <div id="step-two" style="display: none;">
-	<p style="text-align: center;">달인님의 전문 분야를 선택해주세요</p><br><br><br><br>
-	<div id="main-service-sport" class="divService">
+	<p style="text-align: center; margin-top: 40px; margin-bottom:-50px; font-weight: bold; font-size: x-large;">달인님의 전문 분야를 선택해주세요 !</p><br><br><br><br>
+	<div id="main-service-sport" class="divService" >
 		<label style="display: inline; margin-left: 72px;" >스포츠</label><br>
 		<a href="#" id="main-sport"><img src="/image/sport.jpg" id="sport"style="width:200px; height: 200px"></a><br>
 		<input type="radio" name="radio1" id="sport1"  class="border" value="sport" style="margin-left: 100px;">
@@ -437,7 +439,7 @@ $(function() {
 		<a href="#" id="main-art"><img src="/image/art.jpg" id="art"style="width:200px; height: 200px" ></a><br>
 		<input type="radio" name="radio1" id="art1"class="border"value="art" style="margin-left: 100px;">
 	</div>
-	<div style="height: 100px; width: 630px; margin-top: 100px;">
+	<div style="height: 100px; width: 630px; margin-top: 50px;">
 		<button id="back-to-step-one" type="button" class="btn btn-warning btn-one" style="margin-left: 50px;">이전</button>
 		<button id="complete-step-two" type="button" class="btn btn-warning btn-one" style="float: right; ">다음</button>
 	</div>

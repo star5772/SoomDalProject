@@ -8,7 +8,7 @@
 		<![CDATA[
 			select * from
 				(select j.*,rownum as rnum from
-					(select /*+ index_desc(jeja jeja_pk_j_mno)*/j_mno jMno, j_email jEmail, j_name jName, j_accusation_cnt jAccusationCnt, j_joindate jJoinDate from jeja)j
+					(select /*+ index_desc(jeja pk_jeja)*/j_mno jMno, j_email jEmail, j_name jName, j_accusation_cnt jAccusationCnt, j_joindate jJoinDate from jeja)j
 					where rownum<=#{endRowNum})
 				where rnum>=#{startRowNum}
 		]]>
@@ -19,7 +19,7 @@
 		<![CDATA[
 			select * from
 				(select d.*,rownum as rnum from
-					(select /*+ index_desc(dalin dalin_pk_d_mno)*/ f_no fNo, d_email dEmail, d_name dName, d_tel dTel, enabled, d_date dDate, d_area dArea  from dalin)d
+					(select /*+ index_desc(dalin pk_dalin)*/ f_no fNo, d_email dEmail, d_name dName, d_tel dTel, enabled, d_date dDate, d_area dArea  from dalin)d
 					where rownum<=#{endRowNum})
 				where rnum>=#{startRowNum}
 		]]>
@@ -30,7 +30,7 @@
 		<![CDATA[
 			select * from
 				(select r.*,rownum as rnum from
-					(select /*+index_desc(review review_pk_r_no)*/r_no rNm, r_date rDate, r_writer rWriter from review where j_accusation_cnt!=0)r
+					(select /*+index_desc(review pk_review)*/r_no rNm, r_date rDate, r_writer rWriter from review where j_accusation_cnt!=0)r
 					where rownum<=#{endRowNum})
 				where rnum>=#{startRowNum} 
 		]]>
@@ -46,16 +46,19 @@
 		where j_email=#{jEmail} and rownum=1
 	</update>
 
-	
+	<select id="countToDalin" resultType="int">
+		select /*+ index_ffs(dalin pk_dalin)*/count(*)
+		from dalin
+	</select>
 	
 	
 	<select id="countToJeja" resultType="int">
-		select /*+ index_ffs(jeja jeja_pk_j_mno)*/count(*)
+		select /*+ index_ffs(jeja pk_jeja)*/count(*)
 		from jeja
 	</select>
 	
 	<select id="countToReportedJeja" resultType="int">
-		select /*+ index_ffs(jeja jeja_pk_j_mno)*/count(*) 
+		select /*+ index_ffs(jeja pk_jeja)*/count(*) 
 		from jeja where j_accusation_cnt!=0 
 	</select>
 	
@@ -64,14 +67,14 @@
 		<![CDATA[
 			select * from
 				(select j.*,rownum as rnum from
-					(select /*+ index_desc(jeja jeja_pk_j_mno)*/j_mno jMno, j_email jEmail, j_name jName, j_accusation_cnt jAccusationCnt, j_joindate jJoinDate from jeja where j_accusation_cnt!=0)j
+					(select /*+ index_desc(jeja pk_jeja)*/j_mno jMno, j_email jEmail, j_name jName, j_accusation_cnt jAccusationCnt, j_joindate jJoinDate from jeja where j_accusation_cnt!=0)j
 					where rownum<=#{endRowNum})
 				where rnum>=#{startRowNum}
 		]]>
 	</select>	
 	
 	<select id="countToReview" resultType="int">
-		select /*+ index_ffs(review review_pk_r_no)*/count(*)
+		select /*+ index_ffs(review pk_review)*/count(*)
 		from review 
 	</select>
 	
@@ -79,7 +82,7 @@
 		<![CDATA[
 			select * from
 				(select j.*,rownum as rnum from
-					(select /*+ index_desc(jeja jeja_pk_j_mno)*/j_mno jMno, j_email jEmail, j_name jName, j_accusation_cnt jAccusationCnt, j_joindate jJoinDate, enabled, j_is_block jIsBlock from jeja)j
+					(select /*+ index_desc(jeja pk_jeja)*/j_mno jMno, j_email jEmail, j_name jName, j_accusation_cnt jAccusationCnt, j_joindate jJoinDate, enabled, j_is_block jIsBlock from jeja where enabled = 0)j
 
 					where rownum<=#{endRowNum})
 				where rnum>=#{startRowNum}
@@ -87,7 +90,7 @@
 	</select>
 	
 	<select id="countToJejaEnabled" resultType="int">
-		select /*+ index_ffs(jeja jeja_pk_j_mno)*/count(*)
+		select /*+ index_ffs(jeja pk_jeja)*/count(*)
 		from jeja
 	</select>
 	
@@ -138,7 +141,7 @@
 		<![CDATA[
 		select*from
 			(select r.*,rownum as rnum from
-				(select /*+ index_desc(nowRefund nowRefund_pk_p_code)*/ p_refund_code pRefundCode, p_code pCode, p_req_refund_date pReqRefundDate, p_refund_is_ok pRefundIsOk, p_money pMoney, d_email dEmail from nowrefund)r
+				(select /*+ index_desc(nowRefund pk_nowrefund)*/ p_refund_code pRefundCode, p_code pCode, p_req_refund_date pReqRefundDate, p_refund_is_ok pRefundIsOk, p_money pMoney, d_email dEmail from nowrefund)r
 			where rownum<=#{endRowNum})
 		where rnum>=#{startRowNum}
 		]]>

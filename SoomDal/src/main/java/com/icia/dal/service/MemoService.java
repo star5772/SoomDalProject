@@ -44,6 +44,7 @@ public class MemoService {
 		dto.setWriteTimeStr(str);
 		Memo memoo = memoDao.findByMemo(memo.getMno());
 		dto.setMno(memoo.getMno());
+		memoDao.setRead(mno);
 		return dto;
 	}
 
