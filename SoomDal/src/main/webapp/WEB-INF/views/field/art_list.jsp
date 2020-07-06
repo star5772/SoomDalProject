@@ -47,10 +47,15 @@ button {
   transition: all 0.3s ease 0s;
   cursor: pointer;
   outline: none;
+  
+  }
+button:click{
+  outline: 0px;
+  border: 0px;
   }
 button:hover {
   background-color: #FFC459;
-  box-shadow: 0px 15px 20px rgba(46, 229, 157, 0.4);
+  box-shadow: 0px 15px 20px rgba(255, 196, 89, 0.4);
   color: #fff;
   transform: translateY(-7px);
 }

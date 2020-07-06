@@ -60,6 +60,9 @@ button:hover:before,button:hover:after{
   width:100%;
   transition:800ms ease all;
 }
+.row{
+	margin-top: 30px;
+}
 </style>
 <sec:authorize access="hasAnyRole('ROLE_JEJA','ROLE_DALIN','ROLE_ADMIN')">
 	<script src="/dal/script/webS.js"></script>
@@ -105,7 +108,6 @@ button:hover:before,button:hover:after{
       </a>
     </div>
 
-    <h2>분야</h2>
     <div class="row">
       <div class="col-lg-4 col-sm-6 portfolio-item">
         <div class="card h-100">
