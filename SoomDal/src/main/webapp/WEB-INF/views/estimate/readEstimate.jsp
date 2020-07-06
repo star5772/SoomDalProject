@@ -112,7 +112,6 @@ hr{
 </style>
 </head>
 <body>
-${readEstimate }
 	<sec:authorize access="hasRole('ROLE_JEJA')">
 	<div>
 		<h2>받은 견적서</h2>

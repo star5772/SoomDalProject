@@ -92,7 +92,6 @@ hr {
 </style>
 </head>
 <body>
-${readRequest }
 	<sec:authorize access="hasRole('ROLE_DALIN')">
 		<h2>상세 요청서</h2>
 		<div id="readRequestRead"

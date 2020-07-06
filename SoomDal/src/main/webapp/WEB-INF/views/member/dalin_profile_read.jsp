@@ -155,9 +155,16 @@ hr {
 	<sec:authentication property="principal.username" var="username" />
 	<div id="dalinRead">
 		<div id="dProfile">
-			<div
-				style="border-radius: 50%; height: 200px; width: 200px; background-color: gray;">
-				<p id="dName">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${readProfile.DName}</p>
+			<p id="dName">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${readProfile.DName}</p>
+			<div>
+				<c:choose>
+					<c:when test="${readProfile.DProfile ne null }">
+						<img src="${readProfile.DProfile }" style="border-radius: 50%; height: 200px; width: 200px;">
+					</c:when>
+					<c:otherwise>
+					</c:otherwise>
+				</c:choose>
+				
 			</div>
 		</div>
 		<sec:authorize access="hasRole('ROLE_JEJA')">
@@ -243,7 +250,7 @@ hr {
 					<br>
 				</div>
 				<div>
-					<p>${readProfile.DPaymentMethod}결제수단</p>
+					<p>${readProfile.DPaymentMethod}</p>
 				</div>
 			</div>
 		</div>
@@ -259,16 +266,19 @@ hr {
 				</div>
 				<div>
 					<div id="dAttachment1">
-						<p>${profileAttachment.dAttachmentNo}사진1</p>
+						<img src="${readProfile.profileAttachments[0].PSaveFileName }">
 					</div>
 					<div id="dAttachment2">
-						<p>${profileAttachment.dAttachmentNo}사진2</p>
+						<img src="${readProfile.profileAttachments[1].PSaveFileName }">
 					</div>
 					<div id="dAttachment3">
-						<p>${profileAttachment.dAttachmentNo}사진3</p>
+						<img src="${readProfile.profileAttachments[2].PSaveFileName }">
 					</div>
 					<div id="dAttachment4">
-						<p>${profileAttachment.dAttachmentNo}사진4</p>
+						<img src="${readProfile.profileAttachments[3].PSaveFileName }">
+					</div>
+					<div id="dAttachment5">
+						<img src="${readProfile.profileAttachments[4].PSaveFileName }">
 					</div>
 				</div>
 			</div>
@@ -361,7 +371,7 @@ hr {
 							<h4>Q. 서비스가 시작되기 전 어떤 절차로 진행하나요?</h4>
 						</div>
 						<div>
-							<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${reqQuestion.dQContent}답변</p>
+							<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${readProfile.rep.firstQ}</p>
 							<br>
 						</div>
 					</div>
@@ -370,7 +380,7 @@ hr {
 							<h4>Q. 서비스가 시작되기 전 어떤 절차로 진행하나요?</h4>
 						</div>
 						<div>
-							<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${reqQuestion.dQContent}답변</p>
+							<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${readProfile.rep.secoendQ}</p>
 							<br>
 						</div>
 					</div>
@@ -379,7 +389,7 @@ hr {
 							<h4>Q. 서비스가 시작되기 전 어떤 절차로 진행하나요?</h4>
 						</div>
 						<div>
-							<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${reqQuestion.dQContent}답변</p>
+							<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${readProfile.rep.thirdQ}</p>
 							<br>
 						</div>
 					</div>
@@ -388,7 +398,7 @@ hr {
 							<h4>Q. 서비스가 시작되기 전 어떤 절차로 진행하나요?</h4>
 						</div>
 						<div>
-							<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${reqQuestion.dQContent}답변</p>
+							<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${readProfile.rep.fourthQ}</p>
 							<br>
 						</div>
 					</div>

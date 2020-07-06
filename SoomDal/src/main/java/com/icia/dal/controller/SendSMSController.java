@@ -6,12 +6,12 @@ import java.util.HashMap;
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.icia.dal.entity.RequestPayment;
-import com.icia.dal.service.PaymentService;
 import com.icia.dal.service.rest.*;
 import com.icia.dal.util.sms.Coolsms;
 
@@ -22,6 +22,7 @@ public class SendSMSController {
 	@Autowired
 	private PaymentRestService paymentService;
 	
+	@PreAuthorize("isAuthenticated()")
 	@PostMapping("/sendSMS")
 	public ResponseEntity<Void> sendSMS(String dTel,Principal principal) {
 		
@@ -31,11 +32,7 @@ public class SendSMSController {
 		String api_secret = "ENSCSTBK5GJ1GRHWDOYRDS8XNNUYFJHQ";
 		Coolsms coolsms = new Coolsms(api_key, api_secret); // 메시지보내기 객체 생성
 		String key = reqPayment.getPCode(); // 인증키 생성
-		System.out.println(key);
 		
-		/*
-		 * Parameters 관련정보 : http://www.coolsms.co.kr/SDK_Java_API_Reference_ko#toc-0
-		 */
 		
 		HashMap<String, String> set = new HashMap<String, String>();
 		set.put("to", dTel); // 수신번호

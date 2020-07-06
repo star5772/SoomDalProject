@@ -135,14 +135,12 @@ public class DalinService {
 		// 처음으로 프로필을 수정했을 때 첨부파일을 첨부하면
 		if(dalin.getPAttachmentCnt()==0) {
 			int cnt = 0;
-			System.out.println("===================secoend");
 			if(profileAttachment0!=null) {
-				System.out.println("===================third");
 				ProfileAttachment pfam = new ProfileAttachment();
 				String originalFileName = profileAttachment0.getOriginalFilename();
 				long time = System.nanoTime();
 				String saveFileName = time + "-" + originalFileName;
-				pfam.setDEmail(dEmail).setPOriginalFileName(originalFileName).setPSaveFileName(saveFileName).setNum(1);
+				pfam.setDEmail(dEmail).setPOriginalFileName(originalFileName).setPSaveFileName(profilePath+saveFileName).setNum(1);
 				File file = new File(profileFolder, saveFileName);
 				profileAttachment0.transferTo(file);
 				profileAttachmentDao.insert(pfam);
@@ -153,7 +151,7 @@ public class DalinService {
 				String originalFileName = profileAttachment1.getOriginalFilename();
 				long time = System.nanoTime();
 				String saveFileName = time + "-" + originalFileName;
-				pfam.setDEmail(dEmail).setPOriginalFileName(originalFileName).setPSaveFileName(saveFileName).setNum(2);
+				pfam.setDEmail(dEmail).setPOriginalFileName(originalFileName).setPSaveFileName(profilePath+saveFileName).setNum(2);
 				File file = new File(profileFolder, saveFileName);
 				profileAttachment1.transferTo(file);
 				profileAttachmentDao.insert(pfam);
@@ -164,7 +162,7 @@ public class DalinService {
 				String originalFileName = profileAttachment2.getOriginalFilename();
 				long time = System.nanoTime();
 				String saveFileName = time + "-" + originalFileName;
-				pfam.setDEmail(dEmail).setPOriginalFileName(originalFileName).setPSaveFileName(saveFileName).setNum(3);
+				pfam.setDEmail(dEmail).setPOriginalFileName(originalFileName).setPSaveFileName(profilePath+saveFileName).setNum(3);
 				File file = new File(profileFolder, saveFileName);
 				profileAttachment2.transferTo(file);
 				profileAttachmentDao.insert(pfam);
@@ -175,7 +173,7 @@ public class DalinService {
 				String originalFileName = profileAttachment3.getOriginalFilename();
 				long time = System.nanoTime();
 				String saveFileName = time + "-" + originalFileName;
-				pfam.setDEmail(dEmail).setPOriginalFileName(originalFileName).setPSaveFileName(saveFileName).setNum(4);
+				pfam.setDEmail(dEmail).setPOriginalFileName(originalFileName).setPSaveFileName(profilePath+saveFileName).setNum(4);
 				File file = new File(profileFolder, saveFileName);
 				profileAttachment3.transferTo(file);
 				profileAttachmentDao.insert(pfam);
@@ -186,13 +184,12 @@ public class DalinService {
 				String originalFileName = profileAttachment4.getOriginalFilename();
 				long time = System.nanoTime();
 				String saveFileName = time + "-" + originalFileName;
-				pfam.setDEmail(dEmail).setPOriginalFileName(originalFileName).setPSaveFileName(saveFileName).setNum(5);
+				pfam.setDEmail(dEmail).setPOriginalFileName(originalFileName).setPSaveFileName(profilePath+saveFileName).setNum(5);
 				File file = new File(profileFolder, saveFileName);
 				profileAttachment4.transferTo(file);
 				profileAttachmentDao.insert(pfam);
 				cnt++;
 			}
-			System.out.println("===================first");
 			updateDalin.setPAttachmentCnt(cnt);
 			
 		} else if(dalin.getPAttachmentCnt()!=0) {
@@ -206,7 +203,7 @@ public class DalinService {
 				String originalFileName = profileAttachment0.getOriginalFilename();
 				long time = System.nanoTime();
 				String saveFileName = time + "-" + originalFileName;
-				pfam.setDEmail(dEmail).setPOriginalFileName(originalFileName).setPSaveFileName(saveFileName).setDEmail(dEmail).setNum(1);
+				pfam.setDEmail(dEmail).setPOriginalFileName(originalFileName).setPSaveFileName(profilePath+saveFileName).setDEmail(dEmail).setNum(1);
 				File file = new File(profileFolder, saveFileName);
 				profileAttachment0.transferTo(file);
 				profileAttachmentDao.update(pfam);
@@ -215,7 +212,7 @@ public class DalinService {
 				String originalFileName = profileAttachment0.getOriginalFilename();
 				long time = System.nanoTime();
 				String saveFileName = time + "-" + originalFileName;
-				pfam.setDEmail(dEmail).setPOriginalFileName(originalFileName).setPSaveFileName(saveFileName).setNum(1);
+				pfam.setDEmail(dEmail).setPOriginalFileName(originalFileName).setPSaveFileName(profilePath+saveFileName).setNum(1);
 				File file = new File(profileFolder, saveFileName);
 				profileAttachment0.transferTo(file);
 				profileAttachmentDao.insert(pfam);
@@ -230,7 +227,7 @@ public class DalinService {
 				String originalFileName = profileAttachment1.getOriginalFilename();
 				long time = System.nanoTime();
 				String saveFileName = time + "-" + originalFileName;
-				pfam.setDEmail(dEmail).setPOriginalFileName(originalFileName).setPSaveFileName(saveFileName).setDEmail(dEmail).setNum(2);
+				pfam.setDEmail(dEmail).setPOriginalFileName(originalFileName).setPSaveFileName(profilePath+saveFileName).setDEmail(dEmail).setNum(2);
 				File file = new File(profileFolder, saveFileName);
 				profileAttachment1.transferTo(file);
 				profileAttachmentDao.update(pfam);
@@ -239,7 +236,7 @@ public class DalinService {
 				String originalFileName = profileAttachment1.getOriginalFilename();
 				long time = System.nanoTime();
 				String saveFileName = time + "-" + originalFileName;
-				pfam.setDEmail(dEmail).setPOriginalFileName(originalFileName).setPSaveFileName(saveFileName).setNum(2);
+				pfam.setDEmail(dEmail).setPOriginalFileName(originalFileName).setPSaveFileName(profilePath+saveFileName).setNum(2);
 				File file = new File(profileFolder, saveFileName);
 				profileAttachment1.transferTo(file);
 				profileAttachmentDao.insert(pfam);
@@ -254,7 +251,7 @@ public class DalinService {
 				String originalFileName = profileAttachment2.getOriginalFilename();
 				long time = System.nanoTime();
 				String saveFileName = time + "-" + originalFileName;
-				pfam.setDEmail(dEmail).setPOriginalFileName(originalFileName).setPSaveFileName(saveFileName).setDEmail(dEmail).setNum(3);
+				pfam.setDEmail(dEmail).setPOriginalFileName(originalFileName).setPSaveFileName(profilePath+saveFileName).setDEmail(dEmail).setNum(3);
 				File file = new File(profileFolder, saveFileName);
 				profileAttachment2.transferTo(file);
 				profileAttachmentDao.update(pfam);
@@ -263,7 +260,7 @@ public class DalinService {
 				String originalFileName = profileAttachment2.getOriginalFilename();
 				long time = System.nanoTime();
 				String saveFileName = time + "-" + originalFileName;
-				pfam.setDEmail(dEmail).setPOriginalFileName(originalFileName).setPSaveFileName(saveFileName).setNum(3);
+				pfam.setDEmail(dEmail).setPOriginalFileName(originalFileName).setPSaveFileName(profilePath+saveFileName).setNum(3);
 				File file = new File(profileFolder, saveFileName);
 				profileAttachment2.transferTo(file);
 				profileAttachmentDao.insert(pfam);
@@ -278,7 +275,7 @@ public class DalinService {
 				String originalFileName = profileAttachment3.getOriginalFilename();
 				long time = System.nanoTime();
 				String saveFileName = time + "-" + originalFileName;
-				pfam.setDEmail(dEmail).setPOriginalFileName(originalFileName).setPSaveFileName(saveFileName).setDEmail(dEmail).setNum(4);
+				pfam.setDEmail(dEmail).setPOriginalFileName(originalFileName).setPSaveFileName(profilePath+saveFileName).setDEmail(dEmail).setNum(4);
 				File file = new File(profileFolder, saveFileName);
 				profileAttachment3.transferTo(file);
 				profileAttachmentDao.update(pfam);
@@ -287,7 +284,7 @@ public class DalinService {
 				String originalFileName = profileAttachment3.getOriginalFilename();
 				long time = System.nanoTime();
 				String saveFileName = time + "-" + originalFileName;
-				pfam.setDEmail(dEmail).setPOriginalFileName(originalFileName).setPSaveFileName(saveFileName).setNum(4);
+				pfam.setDEmail(dEmail).setPOriginalFileName(originalFileName).setPSaveFileName(profilePath+saveFileName).setNum(4);
 				File file = new File(profileFolder, saveFileName);
 				profileAttachment3.transferTo(file);
 				profileAttachmentDao.insert(pfam);
@@ -302,7 +299,7 @@ public class DalinService {
 				String originalFileName = profileAttachment4.getOriginalFilename();
 				long time = System.nanoTime();
 				String saveFileName = time + "-" + originalFileName;
-				pfam.setDEmail(dEmail).setPOriginalFileName(originalFileName).setPSaveFileName(saveFileName).setDEmail(dEmail).setNum(5);
+				pfam.setDEmail(dEmail).setPOriginalFileName(originalFileName).setPSaveFileName(profilePath+saveFileName).setDEmail(dEmail).setNum(5);
 				File file = new File(profileFolder, saveFileName);
 				profileAttachment4.transferTo(file);
 				profileAttachmentDao.update(pfam);
@@ -311,7 +308,7 @@ public class DalinService {
 				String originalFileName = profileAttachment4.getOriginalFilename();
 				long time = System.nanoTime();
 				String saveFileName = time + "-" + originalFileName;
-				pfam.setDEmail(dEmail).setPOriginalFileName(originalFileName).setPSaveFileName(saveFileName).setNum(5);
+				pfam.setDEmail(dEmail).setPOriginalFileName(originalFileName).setPSaveFileName(profilePath+saveFileName).setNum(5);
 				File file = new File(profileFolder, saveFileName);
 				profileAttachment4.transferTo(file);
 				profileAttachmentDao.insert(pfam);
@@ -342,18 +339,21 @@ public class DalinService {
 	// 제자가 달인 프로필 읽기
 	public DalinDto.DtoForProfileToDalin readToDalinProfile(int dMno) throws DalinNotFoundException{
 		Dalin dalin = dalDao.findByDalinProfile(dMno);
+		String dEmail = dalin.getDEmail();
 		if(dalin==null) 
 		{
 			throw new DalinNotFoundException();
 		}
 		DalinDto.DtoForProfileToDalin dto = modelMapper.map(dalin, DalinDto.DtoForProfileToDalin.class);
-		//if(dalin.getPAttachmentCnt()!=0) // 사진 수가 있으면 다 보여주라고
-			//dto.setProfileAttachments(profileAttachmentDao.findAllByProfileAttachment(dto.getDMno()));
+		if(dalin.getPAttachmentCnt()!=0) // 사진 수가 있으면 다 보여주라고
+			dto.setProfileAttachments(profileAttachmentDao.findAllById(dEmail));
 		if(dalin.getRReviewCnt()>0) {
 			dto.setReviews(reviewDao.findAllReview(dto.getDMno()));
 			dto.setRScoreAverage(reviewDao.avgToReview(dto.getDMno()));
 		}
-		// 달인이 대표질문을 달았으면 추가 없으면 null 
+		// 달인이 대표질문을 달았으면 추가 없으면 null
+		if(repDao.findByDemail(dEmail)!=null)
+			dto.setRep(repDao.findByDemail(dEmail));
 		return dto;
 	}
 
@@ -365,13 +365,15 @@ public class DalinService {
 			throw new DalinNotFoundException();
 		}
 		DalinDto.DtoForProfileToDalin dto = modelMapper.map(dalin, DalinDto.DtoForProfileToDalin.class);
-		//if(dalin.getPAttachmentCnt()!=0) // 사진 수가 있으면 다 보여주라고
-			//dto.setProfileAttachments(profileAttachmentDao.findAllByProfileAttachment(dto.getDMno()));
+		if(dalin.getPAttachmentCnt()!=0) // 사진 수가 있으면 다 보여주라고
+			dto.setProfileAttachments(profileAttachmentDao.findAllById(dEmail));
 		if(dalin.getRReviewCnt()>0) {
 			dto.setReviews(reviewDao.findAllReview(dto.getDMno()));
 			dto.setRScoreAverage(reviewDao.avgToReview(dto.getDMno()));
 		}
-		// 달인이 대표질문을 달았으면 추가 없으면 null 
+		// 달인이 대표질문을 달았으면 추가 없으면 null
+		if(repDao.findByDemail(dEmail)!=null)
+			dto.setRep(repDao.findByDemail(dEmail));
 		return dto;
 	}
 	
