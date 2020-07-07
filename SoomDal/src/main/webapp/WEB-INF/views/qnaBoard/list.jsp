@@ -78,6 +78,8 @@ height: 30px; margin-left: 20px; width: 1024px;  text-align: center;
 }
 	.table {
 		text-align: center;
+		border-bottom: 1px solid #d3d3d3;
+		border-top: 1px solid #d3d3d3;
 	}
 	#page_wrap {
       position: relative;
@@ -86,7 +88,7 @@ height: 30px; margin-left: 20px; width: 1024px;  text-align: center;
    }
    #inner {
       position: absolute;
-      left: 40%;
+      left: 48%;
       top: 50%;
       margin: auto;
    }
@@ -234,6 +236,7 @@ height: 30px; margin-left: 20px; width: 1024px;  text-align: center;
 	</div>	
 	
 	<br>
+	<div style="margin-bottom: 20px;">
 <div style="width: 150px;   display: inline-block; text-align: center;">
 	<input checked="checked" type="radio" class="radio" id="AQNA" name="radio" style="display:none; margin-bottom: 20px; " ><label for="AQNA">Q&A게시판</label>
 </div>
@@ -255,6 +258,7 @@ height: 30px; margin-left: 20px; width: 1024px;  text-align: center;
       <input type="search" id="search" placeholder=" 작성자 검색" style="  border-bottom: solid 1px black; " />
       <button type="button" id="sah" style="border: none; background-color: white; margin-left: 5px; margin-top: 4px;"><i class="fa fa-search fa-lg"></i></button>
   </div>
+</div>
 </div>
 
 <div id="QNAboard">
@@ -322,13 +326,14 @@ height: 30px; margin-left: 20px; width: 1024px;  text-align: center;
 				</c:if>
 			</ul>
 			</div>
-		</div>
-		<div class="form-group" style="float: right; margin-right: 100px; ">
-			<a class="btn btn-info" href="/dal/member/qnaBoard/write" style="font-size: 14px; width: 73px;">글쓰기</a>
+			<div class="form-group" style="float: right; margin-right: 50px; ">
+			<a class="btn btn-warning" href="/dal/member/qnaBoard/write" style="font-size: 14px; width: 73px; color: white;">글쓰기</a>
 		</div>
 		<div class="form-group" style="float: left; margin-left: 10px;">
 			<a class="btn btn-info" href="/dal/member/qnaBoard/list" style="font-size: 14px;">전체목록</a>
 		</div>
+		</div>
+		
 </div>
 <div id="FAQboard" style="display:none;">
    <div style="margin-top: 30px;">

@@ -15,6 +15,8 @@ public class DalinRestService {
 	@Inject
 	private DalinDao dalDao;
 	@Inject
+	private JejaDao jejaDao;
+	@Inject
 	private PasswordEncoder pwdEncoder;
 	
 	public boolean checkId(String dEmail) throws MembernameExistException {
@@ -52,5 +54,21 @@ public class DalinRestService {
 		if(dalDao.findJNameAndJTelByDalinId(dName, dTel)==null)
 			throw new UserNotFoundException();
 		return dalDao.findJNameAndJTelByDalinId(dName, dTel);
+	}
+
+	public void report(String jEmail, String dEmail, String reason) throws JejaNotFoundException {
+		// 신고하려는 제자 없으면 예외
+		if(jejaDao.findById(jEmail)==null)
+			throw new JejaNotFoundException();
+		// 정보 찾기
+		int dMno = dalDao.findByDalin(dEmail).getDMno();
+		int jMno = jejaDao.findById(jEmail).getJMno();
+		// 중복으로 신고하면 예외
+		if(dalDao.findReportDalin(dMno,jMno)==true)
+			throw new JobFailException();
+		// 신고테이블 추가
+		dalDao.reportJeja(dMno,jMno,reason);
+		// 신고 횟수 증가
+		jejaDao.updateJeja(Jeja.builder().jAccusationCnt(1).jEmail(jEmail).build());
 	}
 }
