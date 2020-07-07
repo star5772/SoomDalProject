@@ -50,7 +50,8 @@ public class MemoService {
 
 	@Scheduled(cron="0 0 4 1/1 * ?")
 	public void delete() {
-		memoDao.delete();
+		System.out.println("메모삭제");
+		//memoDao.delete();
 	}	
 	
 	// 쪽지목록 페이징
@@ -73,6 +74,7 @@ public class MemoService {
 		return page;
 		
 	}
+	
 
 
 
