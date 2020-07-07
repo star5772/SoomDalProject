@@ -163,4 +163,9 @@ public class DalinController {
 		handler.logout(request, response, authentication);
 		return "redirect:/";
 	  }
+	
+	@GetMapping("/dalin/report")
+	public ModelAndView reportJeja(String jEmail) {
+		return new ModelAndView("dalin/report").addObject("jEmail",jEmail);
+	}
 }
