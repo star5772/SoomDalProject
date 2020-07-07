@@ -27,7 +27,6 @@ public class QnaBoardController {
 	@PreAuthorize("isAuthenticated()")
 	@GetMapping("/qnaBoard/read")
 	public ModelAndView read(int qNo, Principal principal) throws AccessExeption {
-		String username = principal.getName();
 		// 글을 찾아와서 그글이 비밀글이면
 		if(qnaBoardService.read(qNo).isSecret()==true) {
 			if(qnaBoardService.read(qNo).getWriter().equals(principal.getName())==true)

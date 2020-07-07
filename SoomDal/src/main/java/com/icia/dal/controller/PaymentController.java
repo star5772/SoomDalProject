@@ -5,7 +5,6 @@ import java.security.Principal;
 import javax.inject.Inject;
 
 import org.springframework.security.access.annotation.*;
-import org.springframework.security.access.prepost.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,6 +25,11 @@ public class PaymentController {
 		String username = principal.getName();
 		return new ModelAndView("main").addObject("viewName","payment/store.jsp").addObject("cash",paymentService.readToDalinCash(username))
 				.addObject("nowPayment",paymentService.reqPaymentToDalin(pageno,username));
+	}
+	
+	@GetMapping("/payment/refund")
+	public ModelAndView refundPage(@RequestParam(defaultValue = "1")int pageno,Principal principal) {
+		return new ModelAndView("payment/refundPage").addObject("refund").addObject("nowRefund",paymentService.nowRefund(pageno,principal.getName()));
 	}
 	
 	

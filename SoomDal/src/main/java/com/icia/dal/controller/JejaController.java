@@ -24,14 +24,11 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.icia.dal.Exception.JejaNotFoundException;
 import com.icia.dal.entity.Jeja;
 import com.icia.dal.service.JejaService;
-import com.icia.dal.service.ReviewService;
 
 @Controller
 public class JejaController {
 	@Inject
 	private JejaService service;
-	@Inject
-	private ReviewService rvService;
 	
 	@Secured("ROLE_JEJA")
 	@GetMapping("/jeja/my_info")
@@ -49,6 +46,7 @@ public class JejaController {
 		return new ModelAndView("main").addObject("viewName","jeja/my_info_update.jsp").addObject("jejaRead",service.read(principal.getName()));
 	}
 	
+	// 제자 회원가입
 	@PreAuthorize("isAnonymous()")
 	@GetMapping("/jeja/join")
 	public ModelAndView jejaJoin() {
@@ -65,6 +63,7 @@ public class JejaController {
 		return "redirect:/member/system/msg";
 	}
 	
+	// 레슨 목록리스트
 	@Secured("ROLE_JEJA")
 	@GetMapping("/jeja/request_write")
 	public ModelAndView requestWrite() {
@@ -86,11 +85,13 @@ public class JejaController {
 		return new ModelAndView("main").addObject("viewName","member/lessonHistory.jsp").addObject("LHlist", service.lessonListToJeja(pageno, jMno)).addObject("jMno",jMno);
 	}
 	
+	// 비번 찾기
 	@Secured("ROLE_JEJA")
 	@GetMapping("/jeja/change_pwd")
 	public ModelAndView resetPassword() {
 		return new ModelAndView("main").addObject("viewName","jeja/change_pwd.jsp");
 	}
+	// 비번 찾기
 	
 	@Secured("ROLE_JEJA")
 	@PostMapping("/jeja/change_pwd")

@@ -21,12 +21,15 @@ public class MemoController {
 	@Inject
 	private MemoService memoService;
 	
+	// 받은메모 리스트
 	@PreAuthorize("isAuthenticated()")
 	@GetMapping("/memo/memo_receiveList")
 	public ModelAndView MemoList(@RequestParam(defaultValue = "1")int pageno, Principal principal) {
 		String username = principal.getName();
 		return new ModelAndView("main").addObject("viewName","memo/memo_list.jsp").addObject("memoList",memoService.listToMemo(pageno, username));
 	}
+	
+	// 메모 읽기
 	@PreAuthorize("isAuthenticated()")
 	@GetMapping("/memo/memo_read")
 	public ModelAndView MemoRead(int mno) throws MemoNotFoundException {
