@@ -143,12 +143,8 @@ function ajaxCheckId() {
 
 
 $(function(){
-	$("#dEmail").on("blur", function() {
-		var result = checkUsername();
-		if(result==true)
-			ajaxCheckId();
-	});
-
+	$("#dEmail").on("blur",checkUsername);
+	$("#dEmail").on("blur",ajaxCheckId); 
 	$("#dName").on("blur", checkIrum);
 	$("#dPassword").on("blur", checkPassword);
 	$("#dPassword2").on("blur", checkPassword2);

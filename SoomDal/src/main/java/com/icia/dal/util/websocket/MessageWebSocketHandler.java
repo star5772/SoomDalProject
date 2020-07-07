@@ -24,9 +24,17 @@ public class MessageWebSocketHandler extends TextWebSocketHandler {
 	}
 	
 	// 클라에서 메시지를 보냈을 때 : handleTextMessage() 
-	public void sendMessage(String sender, String receiver, String msg) {
-		WebScoketService.sendMsg(sender, receiver, msg);
+	public void sendDalinMessage(String sender, String receiver, String msg) {
+		WebScoketService.sendDalinMsg(sender, receiver, msg);
 	}
+	public void sendJejaMessage(String sender, String receiver, String msg) {
+		WebScoketService.sendJejaMsg(sender, receiver, msg);
+	}
+	
+	public void sendMessage(String sender, String receiver, String msg) {
+		WebScoketService.sendJejaMsg(sender, receiver, msg);
+	}
+
 	
 	public void sendLoginMessage(String sender, String receiver, String msg) {
 		WebScoketService.sendLoginMsg(sender, receiver, msg);

@@ -124,13 +124,13 @@ public class DalinController {
 	}
 	
 	// 패스워스 찾기
-	@Secured("ROLE_DALIN")
+	@PreAuthorize("isAnonymous()")
 	@GetMapping("/dalin/change_pwd")
 	public ModelAndView resetPassword() {
 		return new ModelAndView("main").addObject("viewName","dalin/change_pwd.jsp");
 	}
 	
-	@Secured("ROLE_DALIN")
+	@PreAuthorize("isAnonymous()")
 	@PostMapping("/dalin/change_pwd")
 	public String resetPassword(@RequestParam @NotNull String dEmail, @RequestParam @NotNull String dTel, RedirectAttributes ra) {
 		try {

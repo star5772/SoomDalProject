@@ -13,7 +13,16 @@ import lombok.experimental.*;
 public class RequestBoard {
 	private Integer rbNo; 
 	private String rbTitle; 
-	private String rbContent;
+	private String fieldOrHobby;
+	private String lessonPurpose;
+	private String myLevel;
+	private String tools;
+	private String lesson;
+	private String lessonTime;
+	private String age;
+	private String gender;
+	private String zone;
+	private String etc;
 	private LocalDateTime rbWriteDate;
 	private String rbWriter;
 	private Integer rbReadCnt;

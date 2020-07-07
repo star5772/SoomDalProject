@@ -79,6 +79,8 @@ public class JejaController {
 		return new ModelAndView("main").addObject("viewName","jeja/estimate_list.jsp");
 	}
 	
+	
+	// 제자 마이페이지 -> 레슨내역 화면 출력
 	@Secured("ROLE_JEJA")
 	@GetMapping("/jeja/lessonList")
 	public ModelAndView listToLesson(@RequestParam(defaultValue = "1")int pageno,int jMno,Principal principal) {
@@ -86,14 +88,13 @@ public class JejaController {
 	}
 	
 	// 비번 찾기
-	@Secured("ROLE_JEJA")
+	@PreAuthorize("isAnonymous()")
 	@GetMapping("/jeja/change_pwd")
 	public ModelAndView resetPassword() {
 		return new ModelAndView("main").addObject("viewName","jeja/change_pwd.jsp");
 	}
 	// 비번 찾기
-	
-	@Secured("ROLE_JEJA")
+	@PreAuthorize("isAnonymous()")
 	@PostMapping("/jeja/change_pwd")
 	public String resetPassword(@RequestParam @NotNull String jEmail, @RequestParam @NotNull String jTel, RedirectAttributes ra) {
 		try {

@@ -3,6 +3,12 @@
 <mapper namespace="adminMapper">
 	
 	
+	<insert id="insertAdmin">
+		insert into admin(username,password,enabled)
+		values(#{username},#{password},1)
+	</insert>
+	
+	
 	<!-- 제자회원 목록출력(jeja) : 이름, 아이디, 전화번호, 신고당한횟수, 정지여부 -->
 	<select id="findAllToJeja" resultType="jeja">
 		<![CDATA[

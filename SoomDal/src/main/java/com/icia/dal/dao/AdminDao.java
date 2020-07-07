@@ -14,6 +14,12 @@ public class AdminDao {
 	@Inject
 	private SqlSessionTemplate tpl;
 	
+	// 관리자 계정등록
+	public int insertAdmin(Admin ad) {
+		return tpl.insert("adminMapper.insertAdmin",ad);
+	}
+	
+	
 	// 제자회원 목록 출력
 	public List<Jeja> findAllToJeja(int startRowNum, int endRowNum) {
 		Map<String,Object> map = new HashMap<String, Object>();
