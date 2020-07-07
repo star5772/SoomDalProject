@@ -19,7 +19,30 @@
 	}
 </style>
 <script>
-	
+$(function() {
+	$("#report").on("click",function() {
+		var radioVal = $('input[name="optradio"]:checked').val();
+		params={
+			_csrf:"${_csrf.token}",
+			jEmail:${jEmail},
+			reason:radioVal
+		}
+		$.ajax({
+			url:"/dal/member/reqboard/report",
+			method:"post",
+			data:params,
+			success: function() {
+				Swal.fire({
+					icon:"success",
+					title:"의견 감사합니다!",
+					text:"신고가 접수되었습니다"
+				}).then(()=>window.close())
+			},error: function() {
+				Swal.fire("실패!", "중복신고는 불가능합니다", "info");
+			}
+		})
+	});
+});
 </script>
 </head>
 <body>
