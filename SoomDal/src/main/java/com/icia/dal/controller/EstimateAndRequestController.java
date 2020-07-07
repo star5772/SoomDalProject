@@ -88,7 +88,7 @@ public class EstimateAndRequestController {
 	}
 	
 	// 받은 견적서 읽기
-	@Secured("ROL_JEJA")
+	@Secured("ROLE_JEJA")
 	@GetMapping("/estimate/readToReceiveEstimate")
 	public ModelAndView readToReceiveEstimate(@RequestParam@NotNull Integer eNo) throws ReadFailException {
 		System.out.println("eNo : "+eNo);

@@ -45,7 +45,7 @@ public class RequestBoardController {
 		return new ModelAndView("main").addObject("viewName", "reqboard/list.jsp").addObject("reqPage", service.list(pageno, rbWriter));
 	}
 	
-	@Secured("ROLE_JEJA")
+	@PreAuthorize("isAuthenticated()")
 	@GetMapping("/reqboard/report")
 	public ModelAndView report(int rbNo) {
 		return new ModelAndView("reqboard/report").addObject("rbNo",rbNo);
