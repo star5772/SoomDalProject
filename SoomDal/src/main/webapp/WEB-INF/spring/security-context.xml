@@ -69,7 +69,7 @@
 			default-target-url="/"
 		/>
 		<sec:logout
-			logout-url="/member/logout"
+			logout-url="/admin/logout"
 			logout-success-url="/"
 		/>
 	</sec:http>

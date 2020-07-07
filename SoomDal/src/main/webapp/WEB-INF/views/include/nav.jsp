@@ -40,7 +40,7 @@ $(function() {
 				_csrf: "${_csrf.token}"
 			}
 		$.ajax({
-			url:"/dal/dalin/logout",
+			url:"/dal/admin/logout",
 			method: "post",
 			data: param,
 			success: function(){
