@@ -17,10 +17,10 @@ drop table request cascade constraints;
 drop table requestboard cascade constraints;
 drop table requestpayment cascade constraints;
 drop table review cascade constraints;
-drop table reviewattachment cascade constraints;
 drop table reviewauthority cascade constraints;
 drop table usecash cascade constraints;
 drop table lessonhistory cascade constraints;
+drop table admin cascade constraints;
 
 drop sequence jeja_seq;
 drop sequence repquestion_seq;
@@ -66,6 +66,13 @@ select reviewattachment_seq.nextval from dual;
 CREATE SEQUENCE MEMO_SEQ MINVALUE 0;
 SELECT MEMO_SEQ.NEXTVAL FROM DUAL;
 
+/* 관리자 계정 */
+CREATE TABLE ADMIN(
+	USERNAME VARCHAR2(10) NOT NULL,
+	PASSWORD VARCHAR2(60),
+	ENABLED CHAR(1)
+	CONSTRAINT PK_ADMIN PRIMARY KEY(USERNAME)
+)
 
 /* 문의 게시판 */
 CREATE TABLE QnaBoard (
@@ -337,14 +344,7 @@ CREATE TABLE Review (
    j_Accusation_cnt number(6), /* 리뷰 신고당한 횟수 */
    constraint pk_review primary key(r_no)
 );
-/*리뷰 첨부파일*/
 
-CREATE TABLE ReviewAttachment (
-   S_NO NUMBER(6) NOT NULL, /* 사진 번호 */
-   S_ORIGINAL_FILE_NAME NVARCHAR2(20), /* 원래 파일이름 */
-   S_FILE_NAME VARCHAR2(30), /* 시스템 파일이름 */
-   constraint pk_reviewattachment primary key(s_no)
-);
 
 /* 권한 */
 

@@ -17,7 +17,7 @@
 	</context-param>
 	<context-param>
 		<param-name>profilePath</param-name>
-		<param-value>http://localhost:8081/profile/</param-value>
+		<param-value>http://192.168.0.131:8081/profile/</param-value>
 	</context-param>
 	<context-param>
 		<param-name>FieldFolder</param-name>
@@ -25,7 +25,7 @@
 	</context-param>
 	<context-param>
 		<param-name>FieldPath</param-name>
-		<param-value>http://localhost:8081/field/</param-value>
+		<param-value>http://192.168.0.131:8081/field/</param-value>
 	</context-param>	
 	<!-- 어떤 이벤트에 반응하는 객체 : ActionListener.... -->
 	<listener>

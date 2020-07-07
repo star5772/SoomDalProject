@@ -1,15 +1,17 @@
 package com.icia.dal.controller;
 
-import javax.inject.*;
+import javax.inject.Inject;
 
-import org.springframework.security.access.annotation.*;
-import org.springframework.security.access.prepost.*;
+import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.icia.dal.service.*;
-@RequestMapping("/member")
+import com.icia.dal.entity.Admin;
+import com.icia.dal.service.AdminService;
 @Controller
 public class AdminController {
 	@Inject
@@ -19,6 +21,18 @@ public class AdminController {
 	@GetMapping("/admin/login")
 	public ModelAndView adminLogin() {
 		return new ModelAndView("main").addObject("viewName","admin/adminLogin.jsp");
+	}
+	
+	@PreAuthorize("isAnonymous()")
+	@GetMapping("/admin/join")
+	public ModelAndView adminJoin() {
+		return new ModelAndView("main").addObject("viewName","admin/adminJoin.jsp");
+	}
+	@PreAuthorize("isAnonymous()")
+	@PostMapping("/admin/join")
+	public String adminJoin(Admin ad,String adCode) {
+		adminService.joinAdmin(ad, adCode);
+		return "redirect:/admin/login";
 	}
 	// 회원관리
 	@Secured("ROLE_ADMIN")

@@ -6,15 +6,15 @@
 		<selectKey keyProperty="rbNo" resultType="int" order="BEFORE">
 			select RequestBoard_seq.nextval from dual
 		</selectKey>
-		insert into RequestBoard(RB_NO, RB_TITLE, RB_CONTENT, RB_WRITE_DATE, RB_WRITER, RB_READ_CNT, RB_REPORT_CNT, RB_IS_BLOCK, RB_IS_NOTICE, R_NO, J_MNO)
-		values(#{rbNo}, #{rbTitle}, #{rbContent}, sysdate, #{rbWriter}, 0, 0, 0, 0, #{rNo}, #{jMno})
+		insert into RequestBoard(RB_NO, RB_TITLE, field_or_hobby,lesson_purpose,my_level,tools,lesson,lesson_time,age,gender,zone,etc, RB_WRITE_DATE, RB_WRITER, RB_READ_CNT, RB_REPORT_CNT, RB_IS_BLOCK, RB_IS_NOTICE, R_NO, J_MNO)
+		values(#{rbNo}, #{rbTitle}, #{fieldOrHobby},#{lessonPurpose},#{myLevel},
+		#{tools},#{lesson},#{lessonTime},#{age},#{gender},#{zone},#{etc}, sysdate, #{rbWriter}, 0, 0, 0, 0, request_seq.nextval, #{jMno})
 	</insert>
 	<!-- 요청서게시판 수정 -->
 	<update id="RequestBoardUpdate">
 		update RequestBoard
 		<trim suffixOverrides="," prefix="SET">
 			<if test="rbTitle!=null">RB_TITLE=#{rbTitle},</if>
-			<if test="rbContent!=null">RB_CONTENT=#{rbContent},</if>
 			<if test="rbReadCnt!=null">RB_READ_CNT=RB_READ_CNT +1,</if>
 			<if test="rbReportCnt!=null">RB_REPORT_CNT=RB_REPORT_CNT +1,</if>
 			<if test="rbIsReport!=null">RB_IS_REPORT=#{rbIsReport}</if>
@@ -23,7 +23,7 @@
 	</update>
 	
 	<select id="findByRequestBoard" resultType="RequestBoard">
-		select RB_NO rbNo, RB_TITLE rbTitle, RB_CONTENT rbContent, RB_WRITE_DATE rbWriteDate, RB_WRITER rbWriter, RB_READ_CNT rbReadCnt, RB_REPORT_CNT rbReportCnt, RB_IS_REPORT rbIsReport, RB_IS_BLOCK rbIsBlock, RB_IS_NOTICE rbIsNotice, R_NO rNo, J_MNO jMno 
+		select RB_NO rbNo, RB_TITLE rbTitle, field_or_hobby fieldOrHobby,lesson_purpose lessonPurpose,my_level myLevel,tools,lesson,lesson_time lessonTime,age,gender,zone,etc, RB_WRITE_DATE rbWriteDate, RB_WRITER rbWriter, RB_READ_CNT rbReadCnt, RB_REPORT_CNT rbReportCnt, RB_IS_REPORT rbIsReport, RB_IS_BLOCK rbIsBlock, RB_IS_NOTICE rbIsNotice, R_NO rNo, J_MNO jMno 
 		from RequestBoard 
 		where RB_NO=#{rbNo} 
 	</select>

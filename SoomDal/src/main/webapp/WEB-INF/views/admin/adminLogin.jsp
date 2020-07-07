@@ -27,7 +27,7 @@
 				<input type="password" name="password" placeholder="비밀번호를 입력하세요" maxlength="10" class="form-control form-control-lg"><br>
 				<!-- csrf 토큰을 되돌려야 한다 -->
 				<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
-				<button style="font-size:small; color: white;" class="btn btn-warning">로그인</button><a style="margin-left: 360px; font-size: small; color: white;"class="btn btn-warning" href="/dal/member/admin/join">관리자계정</a>
+				<button style="font-size:small; color: white;" class="btn btn-warning">로그인</button><a style="margin-left: 360px; font-size: small; color: white;"class="btn btn-warning" href="/dal/admin/join">관리자등록</a>
 				</form>
 			</div>
 </body>

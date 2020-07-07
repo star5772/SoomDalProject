@@ -10,11 +10,13 @@ import javax.inject.Inject;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.icia.dal.Exception.JobFailException;
 import com.icia.dal.dao.AdminDao;
-import com.icia.dal.dao.JejaDao;
+import com.icia.dal.dao.DAO;
 import com.icia.dal.dao.PaymentDao;
 import com.icia.dal.dto.AdminDto;
 import com.icia.dal.dto.EnabledPage;
@@ -24,6 +26,7 @@ import com.icia.dal.dto.page.PageToJejaAdmin;
 import com.icia.dal.dto.page.PageToRefund;
 import com.icia.dal.dto.page.PageToReportedJeja;
 import com.icia.dal.dto.page.PageToReportedReview;
+import com.icia.dal.entity.Admin;
 import com.icia.dal.entity.Dalin;
 import com.icia.dal.entity.DetailField;
 import com.icia.dal.entity.Field;
@@ -51,7 +54,22 @@ public class AdminService {
 	private String fieldPath;
 	@Inject
 	private PaymentDao npDao;
+	@Inject
+	private PasswordEncoder pwdEncoder;
+	@Inject
+	private DAO authDao;
 
+	
+	public int joinAdmin(Admin ad,String adCode) {
+		if(adCode.equals("cktofhdl")==false)
+			throw new JobFailException();
+		String pwd = ad.getPassword();
+		String encoded = pwdEncoder.encode(pwd);
+		ad.setPassword(encoded);
+		authDao.insertAuthority(ad.getUsername(), "ROLE_ADMIN");
+		return adminDao.insertAdmin(ad);
+	}
+	
 	public PageToDalinAdmin adminPageToDalin(int pagene) {
 		int countOfBoard = adminDao.countToDalin();
 		PageToDalinAdmin adPage = AdminToDalinPagingUtil.getPage(pagene, countOfBoard);

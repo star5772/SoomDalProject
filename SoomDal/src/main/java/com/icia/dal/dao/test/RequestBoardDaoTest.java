@@ -30,25 +30,7 @@ public class RequestBoardDaoTest {
 	}
 	
 	
-	@Test
-	public void insert() {
-		for(int i=0; i<15; i++) {
-			RequestBoard req = RequestBoard.builder().rbTitle(i+"번째 글").rbContent("냉무").rbWriter(i+"spring").rbReadCnt(0).rbReportCnt(0).rbIsBlock(false).rbIsNotice(false).rNo(i).jMno(i).build();
-			requestDao.insert(req);
-		}
-	}
-	
-	//@Test
-	public void findAllByRbno() {
-		System.out.println(requestDao.findAllByRbno(1));
-	}
-	
-	//@Test
-	public void update() {
-		RequestBoard req = RequestBoard.builder().rbNo(1).rbTitle("sadf").rbContent("sdf").rbReadCnt(0).rbReportCnt(0).build();
-		assertThat(requestDao.RequestBoardUpdate(req), is(1));
-	}
-	
+
 	//@Test
 	public void delete() {
 		assertThat(requestDao.delete(1), is(1));

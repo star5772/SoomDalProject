@@ -47,49 +47,48 @@ $(document).ready(function(){
 			<input type="text" id="rbTitle" name="rbTitle" placeholder="제목을 입력해주세요." style="color: rgb(94, 94, 94); width: 920px;font-size: 17px;" ><br><br><br>
 	</div>
 	<hr>
-	<!-- <textarea rows="23" cols="130" id="rbContent" name="rbContent"  name="content" style="font-size: 17px;"> -->
 	<!-- 출력.... -->
 	<a style="font-size: 17px;">종목 :</a>
 	<select name="fieldOrHobby"  style="width: 150px; height: 30px; font-size: 17px;">
      <option value="">선택</option>
      <optgroup label="스포츠">
-        <option value="스케이트 보드">스케이트 보드</option>
-        <option value="클라이밍">클라이밍</option>
-        <option value="골프">골프</option>
-        <option value="볼링">볼링</option>
-        <option value="탁구">탁구</option>
-        <option value="당구">당구</option>
-        <option value="필라테스">필라테스</option>
-        <option value="스쿼시">스쿼시</option>
-        <option value="호신술">호신술</option>
+        <option value="skateboard">스케이트 보드</option>
+        <option value="climming">클라이밍</option>
+        <option value="golf">골프</option>
+        <option value="bowling">볼링</option>
+        <option value="tabletennis">탁구</option>
+        <option value="billiards">당구</option>
+        <option value="pilates">필라테스</option>
+        <option value="squash">스쿼시</option>
+        <option value="defense">호신술</option>
      </optgroup>
      <optgroup label="악기">
-        <option value="일렉기타">일렉기타</option>
-        <option value="피아노">피아노</option>
-        <option value="드럼">드럼</option>
-        <option value="베이스">베이스</option>
-        <option value="바이올린">바이올린</option>
-        <option value="색소폰">색소폰</option>
-        <option value="트럼펫">트럼펫</option>
-        <option value="플룻">플룻</option>
-        <option value="첼로">첼로</option>
+        <option value="elecguitar">일렉기타</option>
+        <option value="piano">피아노</option>
+        <option value="drum">드럼</option>
+        <option value="baseguitar">베이스</option>
+        <option value="violinn">바이올린</option>
+        <option value="saxophone">색소폰</option>
+        <option value="trumpet">트럼펫</option>
+        <option value="flute">플룻</option>
+        <option value="cello">첼로</option>
      </optgroup>
        <optgroup label="미술">
-        <option value="회화레슨">회화레슨</option>
-        <option value="만화,웹툰,애니 레슨">만화,웹툰,애니 레슨</option>
-        <option value="아동미술레슨">아동미술 레슨</option>
-        <option value="샌드아트레슨">샌드아트 레슨</option>
-        <option value="팝아트 레슨">팝아트 레슨</option>
-        <option value="가구,목공예 레슨">가구,목공예 레슨</option>
-        <option value="도예 레슨">도예 레슨</option>
-        <option value="소묘 레슨">소묘 레슨</option>
-        <option value="켈리그라피 레슨">켈리그라피 레슨</option>
+        <option value="painting">회화레슨</option>
+        <option value="toonart">만화,웹툰,애니 레슨</option>
+        <option value="childart">아동미술 레슨</option>
+        <option value="sandart">샌드아트 레슨</option>
+        <option value="popart">팝아트 레슨</option>
+        <option value="woodworking">가구,목공예 레슨</option>
+        <option value="pottery">도예 레슨</option>
+        <option value="drawing">소묘 레슨</option>
+        <option value="kelligrapy">켈리그라피 레슨</option>
      </optgroup>
 </select>
 	<br>
 	<br>
 	<a style="font-size: 17px;">레슨목적 :</a>	
-	<select name="lesson" style="width: 100px; height: 30px; font-size: 17px;"> 
+	<select name="lessonPurpose" style="width: 100px; height: 30px; font-size: 17px;"> 
     	<option value="">선택</option>
     	<option value="취미생활">취미생활</option>
     	<option value="자기계발">자기계발</option>
@@ -101,7 +100,7 @@ $(document).ready(function(){
 	<br>
 	<br>
 	<a style="font-size: 17px;">작성자 수준 : </a>
-	<select name="Level" style="width: 150px; height: 30px; font-size: 17px;"> 
+	<select name="myLevel" style="width: 150px; height: 30px; font-size: 17px;"> 
     	<option value="">선택</option>
     	<option value="난생처음">난생처음</option>
     	<option value="1~2번 해봤다">1~2번 해봤다</option>
@@ -180,7 +179,7 @@ $(document).ready(function(){
 	<a style="font-size: 17px;">기타 문의 및 희망사항 </a>
 	<br>
 	<br>
-	<textarea rows="8" cols="100" style="font-size: 17px;" ></textarea>
+	<textarea name="etc"rows="8" cols="100" style="font-size: 17px;" ></textarea>
 	</div>
 	<hr>
 	<input type="hidden" name="_csrf" value="${_csrf.token}">

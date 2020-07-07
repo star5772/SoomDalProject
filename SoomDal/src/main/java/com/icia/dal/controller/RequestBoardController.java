@@ -34,7 +34,8 @@ public class RequestBoardController {
 	
 	@Secured("ROLE_JEJA")
 	@PostMapping("/reqboard/write")
-	public String write(RequestBoardDto.DtoForWrite dto, String rbWriter, Principal principal) {
+	public String write(RequestBoardDto.DtoForWrite dto, Principal principal) {
+		System.out.println(dto);
 		dto.setRbWriter(principal.getName());
 		return "redirect:/member/reqboard/read?rbNo=" + service.write(dto);
 	}
