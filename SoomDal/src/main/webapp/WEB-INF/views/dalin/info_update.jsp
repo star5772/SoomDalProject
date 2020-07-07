@@ -189,7 +189,11 @@ $(document).ready(function(){
 		})
 	})
 })
-
+$(function(){
+    $("#dal_profile").click(function(){
+        $("#dal_profile").hide();
+    });
+});
 
 </script>
 <style>
@@ -304,9 +308,9 @@ body {
 			<div>
 				<img id="show_profile" src="${dalin.DProfile }" style="border-radius: 50%; height: 200px; width: 200px;">
 			</div>
-			<div style="margin-left: 160px;">
-			<input type="file" name="dProfile" id="dProfileSajin" style="display:none; width: 430px;" accept=".jpg,.jpeg,.png,.gif,.bmp">
-				<button type="button" style="border: 0px white; background-color: white;" id="dal_profile"><i class="fas fa-camera fa-2x"></i> 프로필 변경</button>
+			<div style="margin-left: 10px; margin-top: 10px;">
+			<input type="file" name="dProfile" id="dProfileSajin" style="display:none; width: 200px;" accept=".jpg,.jpeg,.png,.gif,.bmp">
+				<button type="button" style="border: 0px white; background-color: white;" id="dal_profile"><i class="fas fa-camera fa-2x"></i></button>
 			</div>
 		</div>
 		<input type="hidden" name="dMno" id="dMno" value="${dalin.DMno}">
@@ -320,7 +324,7 @@ body {
 			<div>
 				<div>
 					<h2>한줄소개</h2>
-					<br> <br>
+					<br> 
 				</div>
 				<div>
 					<input type="text" id="dIntro" name="dIntro" value="${dalin.DIntro}" placeholder="간단한 한줄 소개를 적어주세요!">
@@ -334,7 +338,7 @@ body {
 			<div>
 				<div>
 					<h2>대표서비스</h2>
-					<br> <br>
+					<br> 
 				</div>
 				<div>
 					<input type="text" id="dMainService" name="dMainService" value="${dalin.DMainService}" placeholder="자신의 대표서비스를 적어주세요!">
@@ -348,7 +352,7 @@ body {
 			<div>
 				<div>
 					<h2>활동지역</h2>
-					<br> <br>
+					<br> 
 				</div>
 				<div>
 					<input type="text" id="dArea" name="dArea" value="${dalin.DArea}" placeholder="자신의 활동가능한 지역을 적어주세요!">
@@ -362,7 +366,7 @@ body {
 			<div>
 				<div>
 					<h2>서비스 상세설명</h2>
-					<br> <br>
+					<br> 
 				</div>
 				<div>
 					<input type="text" id="dDetailService" name="dDetailService" value="${dalin.DDetailService}" placeholder="제공할 서비스의 상세한 설명을 적어주세요!">
@@ -376,7 +380,7 @@ body {
 			<div>
 				<div>
 					<h2>결제수단</h2>
-					<br> <br>
+					<br> 
 				</div>
 				<div>
 					<input type="text" id="dPaymentMethod" name="dPaymentMethod" value="${dalin.DPaymentMethod}" placeholder="사용가능한 결제수단을 적어주세요!">
@@ -403,11 +407,11 @@ body {
 						<div style="display: inline-block; "><img id="show_attach4" name="show_attach4" height="200px" width="150px;" src="${dalin.profileAttachments[3].PSaveFileName }"></div>
 						<div style="display: inline-block; "><img id="show_attach5" name="show_attach5" height="200px" width="150px;" src="${dalin.profileAttachments[4].PSaveFileName }"></div>
 					<div id="attachment_div">
-						<input type="file" class="form-control-file attach" name="profileAttachments0" id="attach0" accept=".jpg,.jpeg,.png,.gif,.bmp">
-						<input type="file" class="form-control-file attach" name="profileAttachments1" id="attach1" accept=".jpg,.jpeg,.png,.gif,.bmp">
-						<input type="file" class="form-control-file attach" name="profileAttachments2" id="attach2" accept=".jpg,.jpeg,.png,.gif,.bmp">
-						<input type="file" class="form-control-file attach" name="profileAttachments3" id="attach3" accept=".jpg,.jpeg,.png,.gif,.bmp">
-						<input type="file" class="form-control-file attach" name="profileAttachments4" id="attach4" accept=".jpg,.jpeg,.png,.gif,.bmp">
+						<div style="display: inline-block; "><input type="file" class="form-control-file attach" name="profileAttachments0" id="attach0" accept=".jpg,.jpeg,.png,.gif,.bmp"></div>
+						<div style="display: inline-block; "><input type="file" class="form-control-file attach" name="profileAttachments1" id="attach1" accept=".jpg,.jpeg,.png,.gif,.bmp"></div>
+						<div style="display: inline-block; "><input type="file" class="form-control-file attach" name="profileAttachments2" id="attach2" accept=".jpg,.jpeg,.png,.gif,.bmp"></div>
+						<div style="display: inline-block; "><input type="file" class="form-control-file attach" name="profileAttachments3" id="attach3" accept=".jpg,.jpeg,.png,.gif,.bmp"></div>
+						<div style="display: inline-block; "><input type="file" class="form-control-file attach" name="profileAttachments4" id="attach4" accept=".jpg,.jpeg,.png,.gif,.bmp"></div>
 					</div>
 				</div>
 			</div>
@@ -418,7 +422,7 @@ body {
 				<div>
 					<div>
 						<h2>질문&amp;답변</h2>
-						<br> <br>
+						<br>
 					</div>
 					<div>
 						<div>

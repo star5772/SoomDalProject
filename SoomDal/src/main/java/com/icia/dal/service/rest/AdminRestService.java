@@ -32,9 +32,7 @@ public class AdminRestService {
 
 	public int insertFieldSajin(Field fl,MultipartFile sajin) throws IllegalStateException, IOException {
 		adminDao.deleteToField(fl.getFNo());
-		System.out.println(sajin);
 		if(sajin != null && sajin.isEmpty()==false) {
-			System.out.println(sajin);
 			if(sajin.getContentType().toLowerCase().startsWith("image/")==true) {
 				int lastIndexOfDot = sajin.getOriginalFilename().lastIndexOf(".");
 				String extension = sajin.getOriginalFilename().substring(lastIndexOfDot+1);

@@ -59,9 +59,7 @@ public class QnaBoardService {
 		
 		QnaComment qnaComment = qnaCommentDao.findByCno(qNo);
 		QnaCommentDto.DtoForCommentRead commentDto = null;
-		System.out.println(qnaComment);
 		if(qnaComment!=null) {
-			System.out.println("123");
 			commentDto = modelMapper.map(qnaComment,QnaCommentDto.DtoForCommentRead.class);
 			String str1 = qnaComment.getCWriteDate().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
 			commentDto.setCWriteDateStr(str1);

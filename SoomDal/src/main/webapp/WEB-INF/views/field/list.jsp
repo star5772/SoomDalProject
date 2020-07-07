@@ -105,24 +105,42 @@
 	<div id="page_wrap">
 		<div id="inner">
 		<ul class="pagination">
-			<c:if test="${dalin.prev==true}">
-				<li><a href="/dal/member/field/list?pageno=${dalin.startPage-1}&detailFName=${detail.detailFName}">이전</a></li>
-			</c:if>
+			<c:choose>
+				<c:when test="${dalin.prev==true && search.keyword eq null}">
+					<li><a href="/dal/member/field/list?pageno=${dalin.startPage-1}&detailFName=${detail.detailFName}">이전</a></li>
+				</c:when>
+				<c:when test="${dalin.prev==true && search.keyword ne null}">
+					<li><a href="/dal/member/field/list?pageno=${dalin.startPage-1}&detailFName=${detail.detailFName}&searchType=${dalin.searchType}&keyword=${dalin.keyword}">이전</a></li>
+				</c:when>
+			</c:choose>
 			<c:forEach begin="${dalin.startPage}" end="${dalin.endPage}" var="i">
 				<c:choose>
-					<c:when test="${dalin.pageno eq i }">
+					<c:when test="${dalin.pageno eq i && search.keyword eq null}">
 						<li class="active">
 							<a href="/dal/member/field/list?pageno=${i}&detailFName=${detail.detailFName}">${i}</a>
 						</li>
 					</c:when>
-					<c:otherwise>
+					<c:when test="${dalin.pageno eq i && search.keyword ne null}">
+						<li class="active">
+							<a href="/dal/member/field/list?pageno=${i}&detailFName=${detail.detailFName}&searchType=${dalin.searchType}&keyword=${dalin.keyword}">${i}</a>
+						</li>
+					</c:when>
+					<c:when test="${dalin.pageno ne i && search.keyword eq null}">
 						<li><a href="/dal/member/field/list?pageno=${i}&detailFName=${detail.detailFName}">${i}</a></li>
-					</c:otherwise>
+					</c:when>
+					<c:when test="${dalin.pageno ne i && search.keyword ne null}">
+						<li><a href="/dal/member/field/list?pageno=${i}&detailFName=${detail.detailFName}&searchType=${dalin.searchType}&keyword=${dalin.keyword}">${i}</a></li>
+					</c:when>
 				</c:choose>
 			</c:forEach>
-			<c:if test="${dalin.next==true}">
-				<li><a href="/dal/member/field/list?pageno=${dalin.endPage+1}&detailFName=${detail.detailFName}">다음</a></li>
-			</c:if>
+			<c:choose>
+				<c:when test="${dalin.next==true && search.keyword eq null}">
+					<li><a href="/dal/member/field/list?pageno=${dalin.endPage+1}&detailFName=${detail.detailFName}">다음</a></li>
+				</c:when>
+				<c:when test="${dalin.next==true && search.keyword ne null}">
+					<li><a href="/dal/member/field/list?pageno=${dalin.endPage+1}&detailFName=${detail.detailFName}&searchType=${dalin.searchType}&keyword=${dalin.keyword}">다음</a></li>
+				</c:when>
+			</c:choose>
 		</ul>
 		</div>
 	</div>

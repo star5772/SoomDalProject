@@ -42,10 +42,7 @@
 	</update>
 	
 	<update id="disableByReceiver">
-		update memo set disable_by_receiver=1 where m_no in
-		 <foreach collection="list" item="item" index="index" separator="," open="(" close=")">
-		 	#{item}
-		 </foreach>
+		update memo set disable_by_receiver=1 where m_no=#{mno} 
 	</update>
 	
 	<delete id="delete">

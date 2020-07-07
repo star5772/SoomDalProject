@@ -70,11 +70,8 @@ public class DalinService {
 		// 가입지역 "지역구"만 저장
 		String addr = dalin.getDArea();
 		int gu = addr.indexOf("구");
-		System.out.println(addr + "---------------------------------------------------------");
 		String area = addr.substring(0, gu+1);
 		dalin.setDArea(area);
-		System.out.println(area);
-		System.out.println(dalin);
 		dalDao.insertToDalin(dalin);
 	}
 
@@ -321,18 +318,20 @@ public class DalinService {
 
 	
 
-	public PageToDalinField findDalinByDetailFName(int pageno,String detailFName) {
-		int countOfDalin = dalDao.countOfFieldDalin(detailFName);
+	public PageToDalinField findDalinByDetailFName(int pageno,String detailFName,String searchType,String keyword) {
+		int countOfDalin = dalDao.countOfFieldDalin(detailFName,searchType,keyword);
 		PageToDalinField page = FieldPagingUtil.getPage(pageno, countOfDalin);
 		int srn = page.getStartRowNum();
 		int ern = page.getEndRowNum();
-		List<Dalin> dalinList = dalDao.findDalinByDetailFName(srn,ern,detailFName);
+		List<Dalin> dalinList = dalDao.findDalinByDetailFName(srn,ern,detailFName,searchType,keyword);
 		List<DalinDto.DtoForFieldList> dtoList = new ArrayList<>();
 		for(Dalin d:dalinList) {
 			DalinDto.DtoForFieldList dto = modelMapper.map(d,DalinDto.DtoForFieldList.class);
 			dtoList.add(dto);
 		}
 		page.setList(dtoList);
+		page.setKeyword(keyword);
+		page.setSearchType(searchType);
 		return page;
 	}
 	
@@ -340,8 +339,7 @@ public class DalinService {
 	public DalinDto.DtoForProfileToDalin readToDalinProfile(int dMno) throws DalinNotFoundException{
 		Dalin dalin = dalDao.findByDalinProfile(dMno);
 		String dEmail = dalin.getDEmail();
-		if(dalin==null) 
-		{
+		if(dalin==null || dEmail==null) {
 			throw new DalinNotFoundException();
 		}
 		DalinDto.DtoForProfileToDalin dto = modelMapper.map(dalin, DalinDto.DtoForProfileToDalin.class);
@@ -360,8 +358,7 @@ public class DalinService {
 	// 달인 본인 프로필읽기
 	public DalinDto.DtoForProfileToDalin readToMyProfile(String dEmail) throws DalinNotFoundException{
 		Dalin dalin = dalDao.findByMyProfile(dEmail);
-		if(dalin==null) 
-		{
+		if(dalin==null) {
 			throw new DalinNotFoundException();
 		}
 		DalinDto.DtoForProfileToDalin dto = modelMapper.map(dalin, DalinDto.DtoForProfileToDalin.class);

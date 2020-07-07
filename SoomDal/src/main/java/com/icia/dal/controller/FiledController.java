@@ -2,6 +2,7 @@ package com.icia.dal.controller;
 
 import javax.inject.*;
 
+import org.springframework.lang.*;
 import org.springframework.stereotype.*;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.*;
@@ -30,10 +31,10 @@ public class FiledController {
 	}
 
 	@GetMapping("/field/list")
-	public ModelAndView fieldList(@RequestParam(defaultValue="1") int pageno, String detailFName, String name) {
+	public ModelAndView fieldList(@RequestParam(defaultValue="1") int pageno, String detailFName, String name, @Nullable String searchType,@Nullable String keyword) {
 		// 세부분야 선택 후 세부분야 페이지로 이동
 		// 세부분야의 정보, 세부분야 달인 리스트 필요
-		return new ModelAndView("main").addObject("detail",dalService.fieldInfo(detailFName)).addObject("viewName","field/list.jsp").addObject("name",name).addObject("dalin",dalService.findDalinByDetailFName(pageno,detailFName));
+		return new ModelAndView("main").addObject("detail",dalService.fieldInfo(detailFName)).addObject("viewName","field/list.jsp").addObject("name",name).addObject("dalin",dalService.findDalinByDetailFName(pageno,detailFName,searchType,keyword));
 	}
 	
 }

@@ -29,8 +29,6 @@ public class JejaRestService {
 		// 후에 예외처리 해야함
 		if(jeja==null)
 			throw new RuntimeException();
-		System.out.println("==========");
-		System.out.println(dto);
 		if(dto.getNewName()!=null) {
 			jeja.setJName(dto.getNewName());
 			dao.updateJeja(jeja);

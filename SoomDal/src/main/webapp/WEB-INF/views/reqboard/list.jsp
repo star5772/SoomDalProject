@@ -13,13 +13,16 @@
 </sec:authorize>
 <style>
 	th {
-		font-size: 16px;
+		font-size: 17px;
+
 	}
 	td {
-		font-size: 12px;
+		font-size: 15px;
 	}
 	.table {
 		text-align: center;
+		border-bottom: 1px solid #d3d3d3;
+		border-top: 1px solid #d3d3d3;
 	}
 	#page_wrap {
       position: relative;
@@ -28,15 +31,18 @@
    }
    #inner {
       position: absolute;
-      left: 40%;
+      left: 48%;
       top: 50%;
       margin: auto;
    }
 </style>
 </head>
 <body>
+	<div style="font-size: 30px; font-weight: bold; margin-top: 20px;">요청서 게시판</div>
+	<div style="font-size: 19px;">원하는 달인을 찾아보세요!</div>
+	<br><br>
 	<div>
-		<table class="table table-hover">
+		<table class="table table-hover" style="font-size: 75%;">
 			<colgroup>
 				<col width="10%">
 				<col width="40%">
@@ -89,9 +95,10 @@
 			</c:if>
 		</ul>
 		</div>
+		<div class="form-group">
+		<a class="btn btn-warning" href="/dal/member/reqboard/write" style="color: white; font-weight: bold; font-size: 13px; float: right;">글쓰기</a>
 	</div>
-	<div class="form-group">
-		<a class="btn btn-info" href="/dal/member/reqboard/write">글쓰기</a>
 	</div>
+	
 </body>
 </html>

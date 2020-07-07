@@ -52,37 +52,37 @@ $(document).ready(function(){
 	<select name="fieldOrHobby"  style="width: 150px; height: 30px; font-size: 17px;">
      <option value="">선택</option>
      <optgroup label="스포츠">
-        <option value="skateboard">스케이트 보드</option>
-        <option value="climming">클라이밍</option>
-        <option value="golf">골프</option>
-        <option value="bowling">볼링</option>
-        <option value="tabletennis">탁구</option>
-        <option value="billiards">당구</option>
-        <option value="pilates">필라테스</option>
-        <option value="squash">스쿼시</option>
-        <option value="defense">호신술</option>
+        <option value="스케이트 보드">스케이트 보드</option>
+        <option value="클라이밍">클라이밍</option>
+        <option value="골프">골프</option>
+        <option value="볼링">볼링</option>
+        <option value="탁구">탁구</option>
+        <option value="당구">당구</option>
+        <option value="필라테스">필라테스</option>
+        <option value="스쿼시">스쿼시</option>
+        <option value="호신술">호신술</option>
      </optgroup>
      <optgroup label="악기">
-        <option value="elecguitar">일렉기타</option>
-        <option value="piano">피아노</option>
-        <option value="drum">드럼</option>
-        <option value="baseguitar">베이스</option>
-        <option value="violinn">바이올린</option>
-        <option value="saxophone">색소폰</option>
-        <option value="trumpet">트럼펫</option>
-        <option value="flute">플룻</option>
-        <option value="cello">첼로</option>
+        <option value="일렉기타">일렉기타</option>
+        <option value="피아노">피아노</option>
+        <option value="드럼">드럼</option>
+        <option value="베이스">베이스</option>
+        <option value="바이올린">바이올린</option>
+        <option value="색소폰">색소폰</option>
+        <option value="트럼펫">트럼펫</option>
+        <option value="플롯">플룻</option>
+        <option value="첼로">첼로</option>
      </optgroup>
        <optgroup label="미술">
-        <option value="painting">회화레슨</option>
-        <option value="toonart">만화,웹툰,애니 레슨</option>
-        <option value="childart">아동미술 레슨</option>
-        <option value="sandart">샌드아트 레슨</option>
-        <option value="popart">팝아트 레슨</option>
-        <option value="woodworking">가구,목공예 레슨</option>
-        <option value="pottery">도예 레슨</option>
-        <option value="drawing">소묘 레슨</option>
-        <option value="kelligrapy">켈리그라피 레슨</option>
+        <option value="회화">회화</option>
+        <option value="만화,웹툰,애니">만화,웹툰,애니</option>
+        <option value="아동미술">아동미술</option>
+        <option value="샌드아트">샌드아트</option>
+        <option value="팝아트">팝아트</option>
+        <option value="가구,목공예">가구,목공예</option>
+        <option value="도예">도예</option>
+        <option value="소묘">소묘</option>
+        <option value="켈리그라피">켈리그라피</option>
      </optgroup>
 </select>
 	<br>

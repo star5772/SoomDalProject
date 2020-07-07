@@ -10,11 +10,9 @@ import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.BindException;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-import com.icia.dal.Exception.MembernameExistException;
+import com.icia.dal.Exception.*;
 import com.icia.dal.dto.DalinDto;
 import com.icia.dal.service.rest.DalinRestService;
 
@@ -39,8 +37,13 @@ public class DalinRestController {
 		System.out.println(dto.getDTel());
 		if(results.hasErrors())
 			throw  new BindException(results);
-		System.out.println("2===========");
 		dalService.update(dto, principal.getName());
+		return ResponseEntity.ok(null);
+	}
+	@Secured("ROLE_DALIN")
+	@PostMapping("/dalin/report")
+	public ResponseEntity<Void> jejaReport(String jEmail, Principal principal, String reason) throws JejaNotFoundException {
+		dalService.report(jEmail,principal.getName(),reason);
 		return ResponseEntity.ok(null);
 	}
 }

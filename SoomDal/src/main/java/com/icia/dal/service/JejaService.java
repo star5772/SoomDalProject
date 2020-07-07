@@ -13,8 +13,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.icia.dal.Exception.JejaNotFoundException;
-import com.icia.dal.Exception.UserNotFoundException;
+import com.icia.dal.Exception.*;
 import com.icia.dal.dao.DAO;
 import com.icia.dal.dao.DalinDao;
 import com.icia.dal.dao.JejaDao;
@@ -73,10 +72,8 @@ public class JejaService {
 	
 	public JejaDto.DtoForJejaRead read(String jEmail) {
 		Jeja jeja = dao.findById(jEmail);
-		System.out.println();
 		JejaDto.DtoForJejaRead dto = modelMapper.map(jeja,JejaDto.DtoForJejaRead.class);
 		dto.setEmail(jeja.getJEmail()).setName(jeja.getJName()).setTel(jeja.getJTel()).setJMno(jeja.getJMno());
-		System.out.println("------Dto---------"+dto);
 		return dto;
 	}
 
@@ -105,7 +102,10 @@ public class JejaService {
 	
 	
 	
-	public Jeja findById(String jEmail) {
+	public Jeja findById(String jEmail) throws JejaNotFoundException {
+		if(jEmail==null) {
+			throw new JejaNotFoundException();
+		}
 		return dao.findById(jEmail);
 	}
 	
@@ -135,9 +135,9 @@ public class JejaService {
 			String newEncodedPassword = pwdEncoder.encode(newPassword);
 			dao.updateJeja(Jeja.builder().jPassword(newEncodedPassword).jEmail(jEmail).build());
 		}
-		/*
-		 * else throw new JobFailException();
-		 */
+		 else 
+			 throw new JobFailException();
+		 
 	}
 	
 	public Integer findLessonHistory(int dMno) {

@@ -132,7 +132,7 @@ public class MemberController {
 	// 회원 탈퇴
 	@PreAuthorize("isAuthenticated()")
 	@DeleteMapping("/member/resign")
-	public String resign(SecurityContextLogoutHandler handler, HttpServletRequest request, HttpServletResponse response, Authentication authentication) {
+	public String resign(SecurityContextLogoutHandler handler, HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws JejaNotFoundException {
 		if(jejaService.findById(authentication.getName())!=null) {
 			jejaService.delete(authentication.getName());
 		    handler.logout(request, response, authentication);

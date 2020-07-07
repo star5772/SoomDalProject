@@ -224,7 +224,6 @@ hr {
 				<div>
 					<h2>한줄소개</h2>
 					<br>
-					<br>
 				</div>
 				<div>
 					<p>${readProfile.DIntro}</p>
@@ -238,7 +237,6 @@ hr {
 			<div>
 				<div>
 					<h2>대표서비스</h2>
-					<br>
 					<br>
 				</div>
 				<div>
@@ -254,7 +252,6 @@ hr {
 				<div>
 					<h2>활동지역</h2>
 					<br>
-					<br>
 				</div>
 				<div>
 					<p>${readProfile.DArea}</p>
@@ -269,7 +266,6 @@ hr {
 				<div>
 					<h2>서비스 상세설명</h2>
 					<br>
-					<br>
 				</div>
 				<div>
 					<p>${readProfile.DDetailService}</p>
@@ -283,7 +279,6 @@ hr {
 			<div>
 				<div>
 					<h2>결제수단</h2>
-					<br>
 					<br>
 				</div>
 				<div>
@@ -413,7 +408,6 @@ hr {
 			<div>
 				<div>
 					<h2>질문&amp;답변</h2>
-					<br>
 					<br>
 				</div>
 				<div>

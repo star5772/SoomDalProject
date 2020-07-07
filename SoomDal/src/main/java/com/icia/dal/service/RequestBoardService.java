@@ -8,6 +8,7 @@ import javax.inject.*;
 
 import org.modelmapper.*;
 import org.springframework.stereotype.*;
+import org.springframework.web.bind.annotation.*;
 
 import com.icia.dal.Exception.*;
 import com.icia.dal.dao.*;
@@ -38,9 +39,12 @@ public class RequestBoardService {
 		return dto;
 	}
 	
-	public int write(RequestBoardDto.DtoForWrite dto) {
+	public int write(RequestBoardDto.DtoForWrite dto) throws JejaNotFoundException {
 		RequestBoard reqBoard = modelMapper.map(dto, RequestBoard.class);
 		Jeja jeja = jejaDao.findById(dto.getRbWriter());
+		if(jeja==null) {
+			throw new JejaNotFoundException();
+		}
 		reqBoard.setJMno(jeja.getJMno());
 		reqBoard.setRbWriteDate(LocalDateTime.now());
 		reqDao.insert(reqBoard);
