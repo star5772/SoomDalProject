@@ -321,18 +321,20 @@ public class DalinService {
 
 	
 
-	public PageToDalinField findDalinByDetailFName(int pageno,String detailFName) {
-		int countOfDalin = dalDao.countOfFieldDalin(detailFName);
+	public PageToDalinField findDalinByDetailFName(int pageno,String detailFName,String searchType,String keyword) {
+		int countOfDalin = dalDao.countOfFieldDalin(detailFName,searchType,keyword);
 		PageToDalinField page = FieldPagingUtil.getPage(pageno, countOfDalin);
 		int srn = page.getStartRowNum();
 		int ern = page.getEndRowNum();
-		List<Dalin> dalinList = dalDao.findDalinByDetailFName(srn,ern,detailFName);
+		List<Dalin> dalinList = dalDao.findDalinByDetailFName(srn,ern,detailFName,searchType,keyword);
 		List<DalinDto.DtoForFieldList> dtoList = new ArrayList<>();
 		for(Dalin d:dalinList) {
 			DalinDto.DtoForFieldList dto = modelMapper.map(d,DalinDto.DtoForFieldList.class);
 			dtoList.add(dto);
 		}
 		page.setList(dtoList);
+		page.setKeyword(keyword);
+		page.setSearchType(searchType);
 		return page;
 	}
 	

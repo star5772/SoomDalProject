@@ -110,10 +110,12 @@ hr{
 
 </style>
 <script>
-	function report_pop() {
-		var jEmail=$(this).data("writer");
-		window.open("report?jEmail="+jEmail,"report","width=500, height=500,left=500,top=200, resizable=no, scrollbars=no, status=no, location=no, directories=no;");
-	}
+	$(function() {
+		$(".report").click(function() {
+			jEmail=$(this).data("writer");
+			window.open("report?jEmail="+jEmail,"report","width=500, height=500,left=500,top=200, resizable=no, scrollbars=no, status=no, location=no, directories=no;");
+		})
+	})
 </script>
 </head>
 <body>
@@ -250,7 +252,7 @@ hr{
 						<p>${rv.RDate}</p>
 					</div>
 					<div>
-						<button class="btn btn-warning" data-writer="${rv.RWriter }" onclick="report_pop()"></button>
+						<button class="btn btn-warning report" data-writer="${rv.RWriter }" >신고</button>
 					</div>
 				</div>
 				<div id="rContent">
