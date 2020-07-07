@@ -50,7 +50,7 @@ public class RequestService {
 		rq.setRSubject(dal.getDetailFName());
 		rqDao.insertToRequest(rq);
 		memoDao.insert(Memo.builder().receiver(dalin.getDEmail()).title(jeja.getJName() + "님으로부터 요청서가 도착했습니다").content(rq.getRWriteDate() + "에 견적서가 도착했습니다. 견적서를 확인해주세요").sender(jeja.getJEmail()).build());
-		handler.sendMessage(jeja.getJName(), dalin.getDName(), jeja.getJName() + "님으로부터 요청서가 도착하였습니다");
+		handler.sendJejaMessage(jeja.getJName(), dalin.getDName(), jeja.getJName() + "님으로부터 요청서가 도착하였습니다");
 	}
 	
 	// 보낸요청서출력 (제자)

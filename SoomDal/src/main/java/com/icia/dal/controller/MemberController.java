@@ -53,7 +53,7 @@ public class MemberController {
 	}
 	
 
-	@Secured("ROLE_JEJA")
+	
 	@GetMapping("/request_board/list")
 	public ModelAndView requestBoard() {
 		// 요청서 게시판으로 이동
@@ -84,7 +84,7 @@ public class MemberController {
 	@GetMapping("/member/find_id")
 	public ModelAndView findId() {
 		// 아이디 찾기 페이지로 이동
-		return new ModelAndView("member/find_id.jsp");
+		return new ModelAndView("member/find_id");
 	}
 	@PreAuthorize("isAnonymous()")
 	@GetMapping("/member/reset_pwd") 

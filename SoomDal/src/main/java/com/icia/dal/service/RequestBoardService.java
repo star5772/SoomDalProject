@@ -23,13 +23,16 @@ public class RequestBoardService {
 	private RequestBoardDao reqDao;
 	@Inject
 	private ModelMapper modelMapper;
+	@Inject
+	private JejaDao jejaDao;
 	
 	public RequestBoardDto.DtoForRead read(int rbNo, String rbWriter) {
-		System.out.println(rbNo);
 		RequestBoard reqBoard = reqDao.findByRequestBoard(rbNo);
 		RequestBoardDto.DtoForRead dto = modelMapper.map(reqBoard, RequestBoardDto.DtoForRead.class);
 		if(rbWriter!=null && rbWriter.equals(dto.getRbWriter())==false)
 			reqDao.RequestBoardUpdate(RequestBoard.builder().rbNo(rbNo).rbReadCnt(0).build());
+		Jeja jeja = jejaDao.findById(dto.getRbWriter());
+		dto.setJName(jeja.getJName());
 		String str = reqBoard.getRbWriteDate().format(DateTimeFormatter.ofPattern("yyyy년MM월dd일"));
 		dto.setRbWriteDateStr(str);
 		return dto;
@@ -37,6 +40,8 @@ public class RequestBoardService {
 	
 	public int write(RequestBoardDto.DtoForWrite dto) {
 		RequestBoard reqBoard = modelMapper.map(dto, RequestBoard.class);
+		Jeja jeja = jejaDao.findById(dto.getRbWriter());
+		reqBoard.setJMno(jeja.getJMno());
 		reqBoard.setRbWriteDate(LocalDateTime.now());
 		reqDao.insert(reqBoard);
 		return reqBoard.getRbNo();

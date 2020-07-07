@@ -23,11 +23,13 @@ function report_pop() {
 	var rbNo=${reqRead.rbNo};
 	window.open("report?rbNo="+rbNo,"report","width=500, height=500,left=500,top=200, resizable=no, scrollbars=no, status=no, location=no, directories=no;");
 }
-	$(function() {
-		$("#report").on("click",function() {
-			report_pop();
-		});
+$(function() {
+	$("#report").on("click",function() {
+		report_pop();
 	});
+});
+
+	
 </script>
 </head>
 <body>
@@ -39,11 +41,24 @@ function report_pop() {
 		<div style="width: 100%">
 		<div class="tdw"><label style="width:130px; text-align:center; background-color: #DDDDDD; font-size: 17px; display: inline-block; ">제목</label>&emsp;<input type="text" name="rbTitle" style="font-size:17px; marfont-size: 17px; width: 350px; border: none; " readonly="readonly"value="${reqRead.rbTitle }"></div>
 		<div class="tdw"><label style="width:100px; text-align:center;background-color: #DDDDDD; font-size: 17px; display: inline-block; margin-left: 60px;">작성일</label>&emsp;<input type="text" name="rbDate" style="font-size: 17px; width: 150px; border: none;text-align:center;" readonly="readonly"value="${reqRead.rbWriteDateStr }"></div>
-		<div class="tdw"><label style="width:100px; text-align:center;background-color: #DDDDDD; font-size: 17px; display: inline-block; margin-left: 15px;">작성자</label>&emsp;<input type="text" name="rbWriter" style="font-size: 17px; width: 150px;  border: none;text-align:center; width: 100px; "readonly="readonly"value="${reqRead.rbWriter }"></div>
+		<div class="tdw"><label style="width:100px; text-align:center;background-color: #DDDDDD; font-size: 17px; display: inline-block; margin-left: 15px;">작성자</label>&emsp;<input type="text" name="rbWriter" style="font-size: 17px; width: 150px;  border: none;text-align:center; width: 100px; "readonly="readonly"value="${reqRead.JName }"></div>
 		</div>
 	<hr>
 	</div>
-	<textarea rows="20" cols="133" disabled="disabled" style="border: none; background-color:white; font-size: 17px; overflow: scroll;" readonly="readonly">${reqRead.rbContent }</textarea>
+	<input type="hidden" id="rNo" value="${reqRead.RNo}">
+	<input type="hidden" id="jMno" value="${reqRead.JMno}">
+	<div style="font-size: 20px;">
+		<p>${reqRead.fieldOrHobby}</p>
+		<p>${reqRead.lessonPurpose}</p>
+		<p>${reqRead.myLevel}</p>
+		<p>${reqRead.tools}</p>
+		<p>${reqRead.lesson}</p>
+		<p>${reqRead.lessonTime}</p>
+		<p>${reqRead.age}</p>
+		<p>${reqRead.gender}</p>
+		<p>${reqRead.zone}</p>
+		<textarea rows="15"  style="resize: none;" readonly="readonly">${reqRead.etc}</textarea>
+	</div>
 	<div>
 		<hr>
 	</div>
@@ -53,9 +68,11 @@ function report_pop() {
 	<div id="btn_area" style="display: inline-block;">
 		<button id="report" type="button" style="text-align: center; font-size: 17px; font-weight: bold; color: white;  margin-top: 10px;border-radius: 4px;" class="btn btn-secondary">신고</button>
 	</div>
+	<sec:authorize access="hasRole('ROLE_DALIN')">
 	<div id="btn_area" style="display: inline-block; float: right">
-		<button id="estimate" style="font-size: 17px; font-weight: bold; color: white;  margin-top: 10px;border-radius: 4px;" class="btn btn-warning">견적서 보내기</button>
+		<button id="estimate" onclick="location.href='/dal/member/estimate/sendEstimate?rNo=${reqRead.RNo}'" style="font-size: 17px; font-weight: bold; color: white;  margin-top: 10px;border-radius: 4px;" class="btn btn-warning">견적서 보내기</button>
 	</div>
+	</sec:authorize>
 </body>
 
 </html>

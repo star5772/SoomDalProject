@@ -10,19 +10,18 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.icia.dal.service.rest.*;
-
+@Secured("ROLE_ADMIN")
 @RestController
 public class QnaRestCotroller {
 	@Inject
 	private QnaCommentRestService qnaCommentService;
 	
-	@Secured("ROLE_DALIN")
+
 	@PostMapping("/comment/write")
 	public ResponseEntity<Void> commentWrite(String cContent, Integer qNo) {
 		qnaCommentService.write(cContent, qNo);
 		return ResponseEntity.ok(null);
 	}
-	@Secured("ROLE_DALIN")
 	@DeleteMapping("/comment/delete")
 	public ResponseEntity<Void> commentDelete(Integer cNo,Integer qNo){
 		qnaCommentService.delete(cNo, qNo);

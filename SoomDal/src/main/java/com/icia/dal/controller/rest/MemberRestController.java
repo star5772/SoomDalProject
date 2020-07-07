@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.icia.dal.Exception.UserNotFoundException;
 import com.icia.dal.service.rest.*;
-
+@PreAuthorize("isAnonymous()")
 @RequestMapping("/member")
 @RestController
 public class MemberRestController {
@@ -20,13 +20,12 @@ public class MemberRestController {
 	private JejaRestService jejaService;
 	
 	// 달인 아이디 찾기
-	@PreAuthorize("isAnonymous()")
+	
 	@PostMapping("/dalin/find_id")
 	public ResponseEntity<?> findId(String dName,String dTel) throws UserNotFoundException{
 		return ResponseEntity.ok(dalService.findId(dName,dTel));
 	}
 	// 제자 아이디 찾기
-	@PreAuthorize("isAnonymous()")
 	@PostMapping("/jeja/find_id")
 	public ResponseEntity<?> findJejaId(String jName,String jTel) throws UserNotFoundException{
 		return ResponseEntity.ok(jejaService.findId(jName,jTel));

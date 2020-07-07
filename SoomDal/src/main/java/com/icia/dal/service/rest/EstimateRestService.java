@@ -61,6 +61,6 @@ public class EstimateRestService {
 			// 캐시사용내역 추가
 			UseCash uc = UseCash.builder().caEstimateCash(et.getECash()).dMno(et.getDMno()).eNo(et.getENo()).build();
 			ucDao.insertToUseCash(uc);
-			handler.sendMessage(jeja.getJName(),dal.getDName(),jeja.getJName() + "님이 견적서를 수락하였습니다");
+			handler.sendJejaMessage(jeja.getJName(),dal.getDName(),jeja.getJName() + "님이 견적서를 수락하였습니다");
 		}
 }
