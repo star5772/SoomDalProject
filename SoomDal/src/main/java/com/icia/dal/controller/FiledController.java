@@ -35,4 +35,5 @@ public class FiledController {
 		// 세부분야의 정보, 세부분야 달인 리스트 필요
 		return new ModelAndView("main").addObject("detail",dalService.fieldInfo(detailFName)).addObject("viewName","field/list.jsp").addObject("name",name).addObject("dalin",dalService.findDalinByDetailFName(pageno,detailFName));
 	}
+	
 }

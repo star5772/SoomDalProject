@@ -12,7 +12,19 @@
 	<script src="/dal/script/webS.js"></script>
 </sec:authorize>
 <script>
+var openWin;
 
+function openChild()
+{
+    // window.name = "부모창 이름"; 
+    window.name = "main";
+    // window.open("open할 window", "자식창 이름", "팝업창 옵션");
+    openWin = window.open("/dal/member/payment/refund",
+            "refundPage", "width=700, height=700, resizable = no, scrollbars = no");    
+}
+
+</script>
+<script>
 $(function(){
 	$("#RequestPayment").on("click",function(){
 		var formData = $("#paymentFrm").serialize();
@@ -64,19 +76,23 @@ $(function(){
 	})
 	$("#refund").on("click",function(){
 		var params = {
-				_csrf: "${_csrf.token}"
+				_csrf: "${_csrf.token}",
+				pCode: $("#pCode").val()				
 			}
 		$.ajax({
-			url: ,
+			url: "/dal/member/payment/refundReq",
 			method: "post" ,
 			data: params,
-			success: function() {
-				
+			success: function(result) {
+				if(result==true){
+					Swal.fire("접수되었습니다","빠른시간안에 처리해드리겠습니다","success");
+					window.location.reload();
+				}	
+				else 
+					Swal.fire("환불접수 실패","보유캐쉬가 부족합니다","info");
 			}
-
 		})
 	})
-	
 })	
 </script>
 
@@ -127,6 +143,9 @@ $(function(){
 		</div>
 		</form>
 	</div>
+	<div>
+		<button onclick="openChild()" style="margin-left: 700px;">환불 내역</button>
+	</div>
  	<div style="margin-left:235px; margin-top: 30px;">
 		<table class="table table-hover" style="width:550px;height: 150px; font-size: medium;">
 		<thead>
@@ -145,18 +164,20 @@ $(function(){
 				<td>${nplist.PDateStr}</td>
 				<td>${nplist.PRefundDate}</td>
 				<td>${nplist.PMoney}</td>
+				<input type="hidden" id="pCode" value="${nplist.PCode}">
 				<c:choose>
 					<c:when test="${nplist.PRefundIsOk == 'false'}">
 						<td><button id="refund" type="button" class="btn btn-danger">청약철회</button></td>
 					</c:when>
 					<c:otherwise>
-						<td>환불 완료</td>
+						<td>환불접수 완료</td>
 					</c:otherwise>
 				</c:choose>
 			</tr>			
 		</c:forEach>			
 		</tbody>	
 		</table>
+	</div>	
 	<div style="text-align:center;">
 		<ul class="pagination">
 			<c:if test="${nowPayment.prev==true}">
@@ -179,8 +200,6 @@ $(function(){
 				<li><a href="/dal/member/payment/store?pageno=${nowPayment.endPage+1}">다음</a></li>
 			</c:if>
 		</ul>
-	</div>
-		
 	</div>
 </div>
 

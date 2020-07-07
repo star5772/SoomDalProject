@@ -6,10 +6,8 @@ import javax.inject.*;
 
 import org.springframework.http.*;
 import org.springframework.security.access.annotation.*;
-import org.springframework.security.access.prepost.*;
 import org.springframework.web.bind.annotation.*;
 
-import com.icia.dal.service.*;
 import com.icia.dal.service.rest.*;
 
 @RestController

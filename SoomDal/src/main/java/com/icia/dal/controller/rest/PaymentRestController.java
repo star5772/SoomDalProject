@@ -6,7 +6,6 @@ import javax.inject.Inject;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.*;
-import org.springframework.security.access.prepost.*;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -38,5 +37,12 @@ public class PaymentRestController {
 			paymentService.addCashToDalin(AuthCode,username);
 		}
 		return ResponseEntity.ok(null);
+	}
+	
+	@PostMapping("/payment/refundReq")
+	public ResponseEntity<?> refundRequest(String pCode,Principal principal) {
+		System.out.println(pCode);
+		String username = principal.getName();
+		return ResponseEntity.ok(paymentService.requestRefund(pCode,username));
 	}
 }

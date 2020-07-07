@@ -8,28 +8,16 @@
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
 <sec:authorize access="isAuthenticated()">
 	<script>
-		console.log("222222222222");
 		var isLogin = true;
 		var loginId = "${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal.username}"
 	</script>
 </sec:authorize>
 <sec:authorize access="isAnonymous()">
 	<script>
-		console.log("111111111111111");
 		var isLogin = false;
 		var loginId = undefined;
 	</script>
 </sec:authorize>
-<script>
-/* 	$(function() {
-		console.log("4444444");
-		$("#btn").on("click",function() {
-			console.log($("#dp").val());
-			console.log($("#np").val());
-			console.log($("#dEmail").val()+"mail");
-		});
-	}); */
-</script>
 <style>
 #newPwd{
 	margin-top: 50px;
