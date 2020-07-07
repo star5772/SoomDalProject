@@ -58,8 +58,8 @@ button:hover {
 </style>
 </head>
 <body>
-<h2 id="text">음악 서비스 </h2>
-<h3 id="text">음악 서비스에 오신걸 환영합니다 ! 하고싶은 Instrument를 배우세요 !</h3>
+<h2 id="text">악기 서비스 </h2>
+<h3 id="text">악기 서비스에 오신걸 환영합니다 ! 하고싶은 Instrument를 배우세요 !</h3>
 	<div class="service">
 		<div class="card">
   			<img class="card-img-top" src="#" alt="Card image cap">

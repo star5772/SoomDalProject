@@ -24,11 +24,8 @@ import org.springframework.web.servlet.mvc.support.*;
 
 import com.icia.dal.Exception.*;
 import com.icia.dal.dto.*;
-import com.icia.dal.dto.DalinDto.*;
-import com.icia.dal.entity.*;
 import com.icia.dal.service.*;
 
-import oracle.jdbc.proxy.annotation.*;
 
 @Controller
 public class DalinController {
@@ -71,11 +68,12 @@ public class DalinController {
 		return new ModelAndView("main").addObject("viewName","dalin/resign.jsp");
 	}
 	
+	// 달인 프로필 수정
 	@Secured("ROLE_DALIN")
 	@GetMapping("/dalin/profile_update")
-	public ModelAndView dalinInFoUpdate(Principal principal, DalinDto.DtoForProfileToDalin dto) throws DalinNotFoundException {
-		Dalin dalin = dalService.findById(principal.getName());
-		return new ModelAndView("main").addObject("viewName","dalin/info_update.jsp").addObject("dalin",dalService.readToDalinProfile(dalin.getDMno()));
+	public ModelAndView dalinInFoUpdate(Principal principal) throws DalinNotFoundException {
+		//Dalin dalin = dalService.findById(principal.getName());
+		return new ModelAndView("main").addObject("viewName","dalin/info_update.jsp").addObject("dalin",dalService.readToMyProfile(principal.getName()));
 	}
 	
 	@Secured("ROLE_DALIN")
@@ -117,6 +115,7 @@ public class DalinController {
 	public ModelAndView msg() {
 		return new ModelAndView("main").addObject("viewName","system/msg.jsp");
 	}
+	// 달인 캐시 사용내역
 	
 	@Secured("ROLE_DALIN")
 	@GetMapping("/dalin/usedCashList")
@@ -124,6 +123,7 @@ public class DalinController {
 		return new ModelAndView("payment/usedCash").addObject("uc",paymentService.useCashList(pageno, principal.getName(), dMno)).addObject("dMno",dMno);
 	}
 	
+	// 패스워스 찾기
 	@Secured("ROLE_DALIN")
 	@GetMapping("/dalin/change_pwd")
 	public ModelAndView resetPassword() {
@@ -142,6 +142,7 @@ public class DalinController {
 		return "redirect:/member/login";
 	}
 	
+	// 달인 마이프로필
 	@Secured("ROLE_DALIN")
 	@GetMapping("/dalin/my_profile")
 	public ModelAndView dalinProfileRead(String dEmail,Principal principal) throws DalinNotFoundException {

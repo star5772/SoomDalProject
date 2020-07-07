@@ -1,27 +1,17 @@
 package com.icia.dal.controller.rest;
 
-import java.io.*;
 import java.security.*;
-import java.util.*;
 
 import javax.inject.Inject;
 import javax.validation.*;
 
-import org.apache.commons.compress.utils.*;
 import org.springframework.http.*;
-import org.springframework.lang.*;
 import org.springframework.security.access.annotation.*;
-import org.springframework.security.access.prepost.*;
 import org.springframework.validation.*;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.*;
 
 import com.icia.dal.Exception.MembernameExistException;
-import com.icia.dal.dao.*;
 import com.icia.dal.dto.*;
-import com.icia.dal.dto.DalinDto.*;
-import com.icia.dal.entity.*;
-import com.icia.dal.service.DalinService;
 import com.icia.dal.service.rest.*;
 
 @Secured("ROLE_DALIN")
@@ -31,6 +21,7 @@ public class DalinRestController {
 	@Inject
 	private DalinRestService dalService;
 	
+	// 달인 이메일 체크
 	@GetMapping("/dalin/check_email")
 	public ResponseEntity<Void> ableEmail(String dEmail) throws MembernameExistException {
 		dalService.checkId(dEmail);

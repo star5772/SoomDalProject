@@ -9,6 +9,7 @@ drop table nowpayment cascade constraints;
 drop table nowrefund cascade constraints;
 drop table profileattachment cascade constraints;
 drop table qnaboard cascade constraints;
+drop table qnacomment cascade constraints;
 drop table reportedboard cascade constraints;
 drop table reproteduser cascade constraints;
 drop table repquestion  cascade constraints;
@@ -16,7 +17,6 @@ drop table request cascade constraints;
 drop table requestboard cascade constraints;
 drop table requestpayment cascade constraints;
 drop table review cascade constraints;
-drop table reviewattachment cascade constraints;
 drop table reviewauthority cascade constraints;
 drop table usecash cascade constraints;
 drop table lessonhistory cascade constraints;
@@ -85,7 +85,7 @@ CREATE TABLE QnaBoard (
 
 CREATE TABLE RepQuestion (
    D_EMAIL varchar2(50) NOT NULL, /* 회원 id(email) */
-   FITST_Q NVARCHAR2(300),
+   FIRST_Q NVARCHAR2(300),
    SECOEND_Q NVARCHAR2(300),
    THIRD_Q NVARCHAR2(300),
    FOURTH_Q NVARCHAR2(300),
@@ -126,7 +126,7 @@ CREATE TABLE JEJA (
 
 CREATE TABLE Dalin (
    D_MNO NUMBER(7) NOT NULL, /* 달인 회원 번호 */
-   DETAIL_F_NAME NVARCHAR2(20) NOT NULL, ?
+   DETAIL_F_NAME NVARCHAR2(20) NOT NULL, 
    F_NO VARCHAR2(10) NOT NULL, /* 분야 코드 */
    D_EMAIL varchar2(50) NOT NULL, /* 회원 id(email) */
    D_PASSWORD VARCHAR2(60), /* 비밀번호 */
@@ -189,7 +189,7 @@ CREATE TABLE Request (
 CREATE TABLE ReportedUser (
    D_MNO NUMBER(6) NOT NULL, /* 회원 번호 */
    J_MNO NUMBER(6) NOT NULL, /* 신고당한 회원 */
-   R_REPORT_REASON NVARCHAR2(100),
+   REASON NVARCHAR2(100),
    constraint pk_reporteduser primary key(d_mno,j_mno)
 );
 
@@ -222,6 +222,7 @@ CREATE TABLE NowRefund (
 CREATE TABLE ReportedBoard (
    RB_NO NUMBER(6) NOT NULL, /* 글번호 */
    USERNAME VARCHAR2(50) NOT NULL, /* 회원아이디 */
+   reason nvarchar2(100),
    constraint pk_reportedboard primary key(rb_no,username)
 );
 
@@ -315,8 +316,8 @@ CREATE TABLE ReviewAuthority (
 
 CREATE TABLE ProfileAttachment (
    P_ATTACHMENT_NO NUMBER(7) NOT NULL, /* 프로필 첨부 파일 번호 */
-   P_ORIGINAL_FILE_NAME NVARCHAR2(20), /* 원래파일이름 */
-   P_SAVE_FILE_NAME NVARCHAR2(30), /* 저장용파일이름 */
+   P_ORIGINAL_FILE_NAME NVARCHAR2(150), /* 원래파일이름 */
+   P_SAVE_FILE_NAME NVARCHAR2(150), /* 저장용파일이름 */
    D_EMAIL varchar2(50),
    constraint pk_profileattachment primary key(p_attachment_no)
 );
@@ -335,14 +336,7 @@ CREATE TABLE Review (
    j_Accusation_cnt number(6), /* 리뷰 신고당한 횟수 */
    constraint pk_review primary key(r_no)
 );
-/*리뷰 첨부파일*/
 
-CREATE TABLE ReviewAttachment (
-   S_NO NUMBER(6) NOT NULL, /* 사진 번호 */
-   S_ORIGINAL_FILE_NAME NVARCHAR2(20), /* 원래 파일이름 */
-   S_FILE_NAME VARCHAR2(30), /* 시스템 파일이름 */
-   constraint pk_reviewattachment primary key(s_no)
-);
 
 /* 권한 */
 

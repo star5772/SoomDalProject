@@ -1,12 +1,9 @@
 package com.icia.dal.dao;
 
-import java.time.LocalDateTime;
 import java.util.*;
 
 import javax.inject.*;
 
-import org.mybatis.spring.*;
-import org.springframework.stereotype.*;
 
 import com.icia.dal.entity.*;
 import org.mybatis.spring.SqlSessionTemplate;
@@ -144,11 +141,6 @@ public class AdminDao {
 	// 대분야 삭제
 	public int deleteToField(String fNo) {
 		return tpl.delete("adminMapper.deleteToField",fNo);
-	}
-	
-	// 환불
-	public int insertToRefund(NowRefund nowRefund) {
-		return tpl.insert("adminMapper.insertToRefund", nowRefund);
 	}
 	
 	//public String findByPReqRefundDate() {

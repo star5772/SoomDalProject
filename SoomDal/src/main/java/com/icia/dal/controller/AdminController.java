@@ -27,6 +27,7 @@ public class AdminController {
 		// 관리자 회원관리탭 - 제자 and 달인 리스트 정보 필요
 		return new ModelAndView("main").addObject("viewName","admin/member_manage.jsp").addObject("jeja",adminService.adminPageToJeja(pageno));
 	}
+	// 달인 회원관리
 	@Secured("ROLE_ADMIN")
 	@GetMapping("/admin/member_manage_d")
 	public ModelAndView adminManageToDalin(@RequestParam(defaultValue = "1")int pagene) {

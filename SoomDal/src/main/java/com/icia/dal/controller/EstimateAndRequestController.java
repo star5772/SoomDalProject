@@ -8,7 +8,6 @@ import javax.inject.Inject;
 import javax.validation.constraints.NotNull;
 
 import org.springframework.security.access.annotation.*;
-import org.springframework.security.access.prepost.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindException;
 import org.springframework.validation.BindingResult;
@@ -89,7 +88,7 @@ public class EstimateAndRequestController {
 	}
 	
 	// 받은 견적서 읽기
-	@Secured("ROL_JEJA")
+	@Secured("ROLE_JEJA")
 	@GetMapping("/estimate/readToReceiveEstimate")
 	public ModelAndView readToReceiveEstimate(@RequestParam@NotNull Integer eNo) throws ReadFailException {
 		System.out.println("eNo : "+eNo);

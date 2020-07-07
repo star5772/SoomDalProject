@@ -7,7 +7,7 @@
 			select RequestBoard_seq.nextval from dual
 		</selectKey>
 		insert into RequestBoard(RB_NO, RB_TITLE, RB_CONTENT, RB_WRITE_DATE, RB_WRITER, RB_READ_CNT, RB_REPORT_CNT, RB_IS_BLOCK, RB_IS_NOTICE, R_NO, J_MNO)
-		values(#{rbNo}, #{rbTitle}, #{rbContent}, sysdate, #{rbWriter}, 0, 0, 0, 0, 0, 0)
+		values(#{rbNo}, #{rbTitle}, #{rbContent}, sysdate, #{rbWriter}, 0, 0, 0, 0, #{rNo}, #{jMno})
 	</insert>
 	<!-- 요청서게시판 수정 -->
 	<update id="RequestBoardUpdate">

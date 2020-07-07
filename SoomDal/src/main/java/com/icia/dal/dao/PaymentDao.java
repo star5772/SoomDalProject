@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 
 import com.icia.dal.entity.Dalin;
 import com.icia.dal.entity.NowPayment;
+import com.icia.dal.entity.NowRefund;
 import com.icia.dal.entity.RequestPayment;
 
 @Repository
@@ -90,5 +91,33 @@ public class PaymentDao {
 	
 	public NowPayment findByNowpayment(String dEmail) {
 		return tpl.selectOne("paymentMapper.findByNowpayment",dEmail);
+	}
+	
+	public NowPayment findByNowpaymentToPcode(String pCode) {
+		return tpl.selectOne("paymentMapper.findByNowpaymentToPCode",pCode);
+	}
+	
+	public int findByPmoneyToPcode(String pCode) {
+		return tpl.selectOne("paymentMapper.findByPmoneyToPcode",pCode);
+	}
+	
+	public int insertToNowRefund(NowRefund nr) {
+		return tpl.insert("paymentMapper.insertToNowRefund",nr);
+	}
+
+	public int updateToNowRefund(NowRefund nr) {
+		return tpl.update("paymentMapper.updateToNowRefund",nr);
+	}
+
+	public int countToRefund(String dEmail) {
+		return tpl.selectOne("paymentMapper.countToRefund",dEmail);
+	}
+
+	public List<NowRefund> findAllNowRefundListToDalin(int startRowNum, int endRowNum, String dEmail) {
+		Map<String,Object>map = new HashMap<String, Object>();
+		map.put("startRowNum", startRowNum);
+		map.put("endRowNum", endRowNum);
+		map.put("dEmail",dEmail);
+		return tpl.selectList("paymentMapper.findAllNowRefundListToDalin",map);
 	}
 }

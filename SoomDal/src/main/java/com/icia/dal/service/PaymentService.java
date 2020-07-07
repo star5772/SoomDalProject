@@ -12,12 +12,16 @@ import org.springframework.stereotype.Service;
 import com.icia.dal.dao.PaymentDao;
 import com.icia.dal.dao.UseCashDao;
 import com.icia.dal.dto.NowPaymentDto;
+import com.icia.dal.dto.RefundDto;
 import com.icia.dal.dto.UseCashDto;
 import com.icia.dal.dto.page.PageToNowPayment;
+import com.icia.dal.dto.page.PageToRefund;
 import com.icia.dal.dto.page.PageToUseCash;
 import com.icia.dal.entity.NowPayment;
+import com.icia.dal.entity.NowRefund;
 import com.icia.dal.entity.UseCash;
 import com.icia.dal.util.pagingutil.PaymentPagingUtil;
+import com.icia.dal.util.pagingutil.RefundPagingUtil;
 import com.icia.dal.util.pagingutil.UseCashPagingUtil;
 
 @Service
@@ -89,5 +93,24 @@ public class PaymentService {
 		}
 		page.setList(list);
 		return page;
+	}
+
+	public PageToRefund nowRefund(int pageno,String username) {
+		int countOfBoard = paymentDao.countToRefund(username);
+		PageToRefund refundPage = RefundPagingUtil.getPage(pageno, countOfBoard);
+		int srn = refundPage.getStartRowNum();
+		int ern = refundPage.getEndRowNum();
+		List<NowRefund> refundList = paymentDao.findAllNowRefundListToDalin(srn, ern,username);
+		List<RefundDto.DtoForListToRefund> dtoList = new ArrayList<RefundDto.DtoForListToRefund>();
+		for(NowRefund nowRefund:refundList) { 
+			RefundDto.DtoForListToRefund dto = modelMapper.map(nowRefund, RefundDto.DtoForListToRefund.class);
+			NowPayment np = paymentDao.findByNowpayment(dto.getDEmail());
+			dto.setPReqRefundDate(nowRefund.getPReqRefundDate().format(DateTimeFormatter.ofPattern("yyyy년 MM월 dd일")));
+			String str = np.getPDate().format(DateTimeFormatter.ofPattern("yyyy년 MM월 dd일"));
+			dto.setPDateStr(str);
+			dtoList.add(dto);
+		}
+		refundPage.setList(dtoList);
+		return refundPage;
 	}
 }
