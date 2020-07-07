@@ -24,7 +24,7 @@ public interface ReviewAuthorityDao {
 	@Select("select a_complete_code aCompleteCode,d_mno dMno, j_mno jMno, a_is_ok aIsOk, j_email jEmail from reviewAuthority where d_mno =#{dMno}")
 	public List<ReviewAuthority> findAllByReviewAuth(int dMno);
 	
-	@Select("select j_mno jMno from reviewAuthority where a_complete_code=#{aCompleteCode} and j_email=#{jEmail} and rownum=1")
+	@Select("select d_mno dMno from reviewAuthority where a_complete_code=#{aCompleteCode} and j_email=#{jEmail} and rownum=1")
 	public int findCompleteCode(@Param("aCompleteCode")String aCompleteCode,@Param("jEmail")String jEmail);
 	
 	@Select("select count(*) from reviewAuthority where j_email=#{jEmail} and a_complete_code=#{aCompleteCode}")

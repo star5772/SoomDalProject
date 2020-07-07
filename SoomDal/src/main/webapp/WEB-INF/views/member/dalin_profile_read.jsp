@@ -14,15 +14,52 @@
 </sec:authorize>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 <script>
+$(function() {
+	$("#1star").on("click",function(){
+		$("#star1").attr("src","https://assets.cdn.soomgo.com/icons/icon-common-review-star-small-full.svg");
+		$("#star2").attr("src","https://assets.cdn.soomgo.com/icons/icon-common-review-star-small-empty.svg");
+		$("#star3").attr("src","https://assets.cdn.soomgo.com/icons/icon-common-review-star-small-empty.svg");
+		$("#star4").attr("src","https://assets.cdn.soomgo.com/icons/icon-common-review-star-small-empty.svg");
+		$("#star5").attr("src","https://assets.cdn.soomgo.com/icons/icon-common-review-star-small-empty.svg");
+		$("#rScore").val(1);
+	})
+	$("#2star").on("click",function(){
+		$("#star1").attr("src","https://assets.cdn.soomgo.com/icons/icon-common-review-star-small-full.svg");
+		$("#star2").attr("src","https://assets.cdn.soomgo.com/icons/icon-common-review-star-small-full.svg");
+		$("#star3").attr("src","https://assets.cdn.soomgo.com/icons/icon-common-review-star-small-empty.svg");
+		$("#star4").attr("src","https://assets.cdn.soomgo.com/icons/icon-common-review-star-small-empty.svg");
+		$("#star5").attr("src","https://assets.cdn.soomgo.com/icons/icon-common-review-star-small-empty.svg");
+		$("#rScore").val(2);
+	})
+	$("#3star").on("click",function(){
+		$("#star1").attr("src","https://assets.cdn.soomgo.com/icons/icon-common-review-star-small-full.svg");
+		$("#star2").attr("src","https://assets.cdn.soomgo.com/icons/icon-common-review-star-small-full.svg");
+		$("#star3").attr("src","https://assets.cdn.soomgo.com/icons/icon-common-review-star-small-full.svg");
+		$("#star4").attr("src","https://assets.cdn.soomgo.com/icons/icon-common-review-star-small-empty.svg");
+		$("#star5").attr("src","https://assets.cdn.soomgo.com/icons/icon-common-review-star-small-empty.svg");
+		$("#rScore").val(3);
+	})
+	$("#4star").on("click",function(){
+		$("#star1").attr("src","https://assets.cdn.soomgo.com/icons/icon-common-review-star-small-full.svg");
+		$("#star2").attr("src","https://assets.cdn.soomgo.com/icons/icon-common-review-star-small-full.svg");
+		$("#star3").attr("src","https://assets.cdn.soomgo.com/icons/icon-common-review-star-small-full.svg");
+		$("#star4").attr("src","https://assets.cdn.soomgo.com/icons/icon-common-review-star-small-full.svg");
+		$("#star5").attr("src","https://assets.cdn.soomgo.com/icons/icon-common-review-star-small-empty.svg");
+		$("#rScore").val(4);
+	})
+	$("#5star").on("click",function(){
+		$("#star1").attr("src","https://assets.cdn.soomgo.com/icons/icon-common-review-star-small-full.svg");
+		$("#star2").attr("src","https://assets.cdn.soomgo.com/icons/icon-common-review-star-small-full.svg");
+		$("#star3").attr("src","https://assets.cdn.soomgo.com/icons/icon-common-review-star-small-full.svg");
+		$("#star4").attr("src","https://assets.cdn.soomgo.com/icons/icon-common-review-star-small-full.svg");
+		$("#star5").attr("src","https://assets.cdn.soomgo.com/icons/icon-common-review-star-small-full.svg");
+		$("#rScore").val(5);
+	})
+})
+
+
 	$(function() {
 		$("#reviewWrite").on("click", function() {
-			/* 		var params = {
-			 _csrf: "${_csrf.token}",
-			 rContent: $("#rContent").text(),
-			 rWriter: "${username}",
-			 rScore: $("#reviewScore").val(),
-			 dMno: $("#dMno").val()
-			 } */
 			var formData = $("#rvFrm").serialize();
 			$.ajax({
 				url : "/dal/member/reviewWrite",
@@ -33,51 +70,6 @@
 					window.location.reload();
 				}
 			})
-		})
-		$("#starOne").on("click",function(){
-			$("#oneStar").removeAttr("src");
-			$("#oneStar").attr("src","https://assets.cdn.soomgo.com/icons/icon-common-review-star-small-full.svg");
-			$("#reviewScore").val(1);
-		})
-		$("#starTwo").on("click",function(){
-			$("#oneStar").removeAttr("src");
-			$("#twoStar").removeAttr("src");
-			$("#oneStar").attr("src","https://assets.cdn.soomgo.com/icons/icon-common-review-star-small-full.svg");
-			$("#twoStar").attr("src","https://assets.cdn.soomgo.com/icons/icon-common-review-star-small-full.svg");
-			$("#reviewScore").val(2);
-		})
-		$("#starThree").on("click",function(){
-			$("#oneStar").removeAttr("src");
-			$("#twoStar").removeAttr("src");
-			$("#threeStar").removeAttr("src");
-			$("#oneStar").attr("src","https://assets.cdn.soomgo.com/icons/icon-common-review-star-small-full.svg");
-			$("#twoStar").attr("src","https://assets.cdn.soomgo.com/icons/icon-common-review-star-small-full.svg");
-			$("#threeStar").attr("src","https://assets.cdn.soomgo.com/icons/icon-common-review-star-small-full.svg");
-			$("#reviewScore").val(3);
-		})
-		$("#starFour").on("click",function(){
-			$("#oneStar").removeAttr("src");
-			$("#twoStar").removeAttr("src");
-			$("#threeStar").removeAttr("src");
-			$("#fourStar").removeAttr("src");
-			$("#oneStar").attr("src","https://assets.cdn.soomgo.com/icons/icon-common-review-star-small-full.svg");
-			$("#twoStar").attr("src","https://assets.cdn.soomgo.com/icons/icon-common-review-star-small-full.svg");
-			$("#threeStar").attr("src","https://assets.cdn.soomgo.com/icons/icon-common-review-star-small-full.svg");
-			$("#fourStar").attr("src","https://assets.cdn.soomgo.com/icons/icon-common-review-star-small-full.svg");
-			$("#reviewScore").val(4);
-		})
-		$("#starFive").on("click",function(){
-			$("#oneStar").removeAttr("src");
-			$("#twoStar").removeAttr("src");
-			$("#threeStar").removeAttr("src");
-			$("#fourStar").removeAttr("src");
-			$("#fiveStar").removeAttr("src");
-			$("#oneStar").attr("src","https://assets.cdn.soomgo.com/icons/icon-common-review-star-small-full.svg");
-			$("#twoStar").attr("src","https://assets.cdn.soomgo.com/icons/icon-common-review-star-small-full.svg");
-			$("#threeStar").attr("src","https://assets.cdn.soomgo.com/icons/icon-common-review-star-small-full.svg");
-			$("#fourStar").attr("src","https://assets.cdn.soomgo.com/icons/icon-common-review-star-small-full.svg");
-			$("#fiveStar").attr("src","https://assets.cdn.soomgo.com/icons/icon-common-review-star-small-full.svg");
-			$("#reviewScore").val(5);
 		})
 	})
 </script>
@@ -355,22 +347,38 @@ hr {
 				<hr style="margin-bottom: 30px; margin-top: 30px;">
 			</div>
 			<div>
-				<c:forEach items="${readProfile.reviews}" var="rv">
-					<div id="review">
-						<div id="rWriter">
-							<p>${rv.RWriter}</p>
+			<c:choose>
+				<c:when test="${empty readProfile.reviews =='false'}">
+					<c:forEach items="${readProfile.reviews}" var="rv">
+						<div id="review">
+							<div id="rWriter">
+								<p>${rv.RWriter}</p>
+							</div>
+							<div id="rScore">
+								<span>
+									<c:forEach begin="1" end="${rv.RScore}">
+										<img src="https://assets.cdn.soomgo.com/icons/icon-common-review-star-small-full.svg">
+									</c:forEach>
+									<c:forEach begin="${rv.RScore+1}" end="5">
+										<img src="https://assets.cdn.soomgo.com/icons/icon-common-review-star-small-empty.svg">
+									</c:forEach>
+								</span>
+							</div>
+							<div id="rDate">
+								<p>${rv.RDate}</p>
+							</div>
 						</div>
-						<div id="rScore">
-							<p>${rv.RScore}</p>
+						<div id="rContent">
+							<p>${rv.RContent}</p>
 						</div>
-						<div id="rDate">
-							<p>${rv.RDate}</p>
-						</div>
+					</c:forEach>
+				</c:when>
+				<c:otherwise>
+					<div style="margin-bottom: 50px; margin-top: 20px;">
+						<p style="font-size: 16px;">작성된 리뷰가 없습니다.</p>
 					</div>
-					<div id="rContent">
-						<p>${rv.RContent}</p>
-					</div>
-				</c:forEach>
+				</c:otherwise>
+			</c:choose>	
 				<div id="rWrite">
 					<c:choose>
 						<c:when test="${rvAuth == 'true'}">
@@ -379,14 +387,13 @@ hr {
 									value="${readProfile.DMno}"> <input type="hidden"
 									name="_csrf" value="${_csrf.token}">
 								<div>
-									<input type="hidden" name="rScore" id="reviewScore" value="">
-									<a id="starOne"><img src="https://assets.cdn.soomgo.com/icons/icon-common-review-star-small-empty.svg" id="oneStar"></a>
-									<a id="starTwo"><img src="https://assets.cdn.soomgo.com/icons/icon-common-review-star-small-empty.svg" id="twoStar"></a>
-									<a id="starThree"><img src="https://assets.cdn.soomgo.com/icons/icon-common-review-star-small-empty.svg" id="threeStar"></a>
-									<a id="starFour"><img src="https://assets.cdn.soomgo.com/icons/icon-common-review-star-small-empty.svg"id="fourStar"></a>
-									<a id="starFive"><img src="https://assets.cdn.soomgo.com/icons/icon-common-review-star-small-empty.svg" id="fiveStar"></a>
-									<textarea rows="3" cols="70" name="rContent" id="rContent"
-										style="width: 800px; resize: none; height: 100px; margin-top: 5px;"
+									<input type="hidden" name="rScore" id="rScore"value="">
+									<a id="1star"><img src="https://assets.cdn.soomgo.com/icons/icon-common-review-star-small-empty.svg" id="star1"></a>
+									<a id="2star"><img src="https://assets.cdn.soomgo.com/icons/icon-common-review-star-small-empty.svg" id="star2"></a>
+									<a id="3star"><img src="https://assets.cdn.soomgo.com/icons/icon-common-review-star-small-empty.svg" id="star3"></a>
+									<a id="4star"><img src="https://assets.cdn.soomgo.com/icons/icon-common-review-star-small-empty.svg" id="star4"></a>
+									<a id="5star"><img src="https://assets.cdn.soomgo.com/icons/icon-common-review-star-small-empty.svg" id="star5"></a>
+									<textarea rows="3" cols="70" name="rContent" id="rContent" style="width: 800px; resize: none; height: 100px; margin-top: 5px;"
 										placeholder=" 내용을 입력해주세요."></textarea>
 								</div>
 								<div>
@@ -395,11 +402,6 @@ hr {
 								</div>
 							</form>
 						</c:when>
-						<c:otherwise>
-							<div style="margin-bottom: 50px; margin-top: 20px;">
-								<p style="font-size: 16px;">작성된 리뷰가 없습니다.</p>
-							</div>
-						</c:otherwise>
 					</c:choose>
 				</div>
 			</div>

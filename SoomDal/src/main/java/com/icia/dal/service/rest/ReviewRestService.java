@@ -35,10 +35,14 @@ public class ReviewRestService {
 	// 리뷰 작성
 	public List<Review> reviewAuthChkAndWrite(Review rv , String username,int dMno) {
 		// 리뷰작성을위해 레슨내역에서 레슨완료코드를 불러옴
+		System.out.println("서비스-=-----------------------------" + rv);
+		System.out.println("서비스-=-----------------------------" + dMno);
 		Jeja jeja = dao.findById(username);
 		String comCode = lhDao.findByCompleteCodeToLH(jeja.getJMno(),dMno);
+		System.out.println("서비스++++++++++++++++++++++++++++++++++" + comCode);
 		// 리뷰권한테이블에서 달인 번호를 찾아서 제자가 보유하고있는 레슨내역에서 달인번호를 찾아 있으면 리뷰 작성.
 		int auth = reviewAuthDao.findCompleteCode(comCode, username);
+		System.out.println("서비스==========================================" +auth);
 		if(rv.getDMno()==auth) {
 			rv.setRWriter(username);
 			reviewDao.insertToReview(rv);

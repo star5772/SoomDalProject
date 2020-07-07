@@ -52,6 +52,7 @@ public class JejaRestController {
 	@Secured("ROLE_JEJA")
 	@PostMapping("/member/reviewWrite")
 	public ResponseEntity<List<Review>> reviewWrite(Review rv,Principal principal) {
+		System.out.println(rv);
 		String username = principal.getName();
 		return ResponseEntity.ok(reviewService.reviewAuthChkAndWrite(rv, username,rv.getDMno()));
 	}
