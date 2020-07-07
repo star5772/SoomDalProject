@@ -44,8 +44,7 @@ public class PaymentService {
 		int srn = page.getStartRowNum();
 		int ern = page.getEndRowNum();
 		List<NowPayment> npList = null;
-		npList = paymentDao.findByNowPaymentToAdmin(srn, ern);
-		
+		npList = paymentDao.findByNowPaymentToAdmin(srn, ern);		
 		List<NowPaymentDto.DtoForListToNowPayment> list = new ArrayList<>();
 		for(NowPayment np:npList) {
 			NowPaymentDto.DtoForListToNowPayment dto = modelMapper.map(np, NowPaymentDto.DtoForListToNowPayment.class);
@@ -64,8 +63,7 @@ public class PaymentService {
 		int srn = page.getStartRowNum();
 		int ern = page.getEndRowNum();
 		List<NowPayment> npList = null;
-		npList = paymentDao.findByNowPaymentToDalin(srn, ern,username);
-		
+		npList = paymentDao.findByNowPaymentToDalin(srn, ern, username);	
 		List<NowPaymentDto.DtoForListToNowPayment> list = new ArrayList<>();
 		for(NowPayment np:npList) {
 			NowPaymentDto.DtoForListToNowPayment dto = modelMapper.map(np, NowPaymentDto.DtoForListToNowPayment.class);

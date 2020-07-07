@@ -11,6 +11,7 @@ import org.springframework.stereotype.*;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.*;
 
+import com.icia.dal.Exception.*;
 import com.icia.dal.dto.*;
 import com.icia.dal.service.*;
 
@@ -34,8 +35,7 @@ public class RequestBoardController {
 	
 	@Secured("ROLE_JEJA")
 	@PostMapping("/reqboard/write")
-	public String write(RequestBoardDto.DtoForWrite dto, Principal principal) {
-		System.out.println(dto);
+	public String write(RequestBoardDto.DtoForWrite dto, Principal principal) throws JejaNotFoundException {
 		dto.setRbWriter(principal.getName());
 		return "redirect:/member/reqboard/read?rbNo=" + service.write(dto);
 	}

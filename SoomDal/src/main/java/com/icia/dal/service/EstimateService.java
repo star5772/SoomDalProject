@@ -94,9 +94,7 @@ public class EstimateService {
 	
 	// 견적서 읽기
 	public EstimateDto.DtoForRead readToSendEstimate(@NotNull Integer eNo) throws ReadFailException {
-		System.out.println("eno::::============"+eNo);
 		Estimate et = estimateDao.findByEstimate(eNo);	//여기
-		System.out.println("eno:::::::========================="+eNo);
 		Dalin dalin = dalDao.findByDalinToDMno(et.getDMno());
 		Jeja jeja = jejaDao.findByJejaToJMno(et.getJMno());
 		if(et==null)

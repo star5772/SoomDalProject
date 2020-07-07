@@ -10,7 +10,7 @@ import javax.validation.constraints.NotNull;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
-import com.icia.dal.Exception.ReadFailException;
+import com.icia.dal.Exception.*;
 import com.icia.dal.dao.DalinDao;
 import com.icia.dal.dao.JejaDao;
 import com.icia.dal.dao.MemoDao;
@@ -41,10 +41,13 @@ public class RequestService {
 	private MemoDao memoDao;
 	
 	// 요청서작성
-	public void writeToRequest(Request rq,String username) {
+	public void writeToRequest(Request rq,String username) throws DalinNotFoundException {
 		Jeja jeja = jejaDao.findById(username);
 		Dalin dalin = dalDao.findByDalinProfile(rq.getDMno());
 		Dalin dal = dalDao.findByDalinToDMno(rq.getDMno());
+		if(dal==null || dalin==null) {
+			throw new DalinNotFoundException();
+		}
 		rq.setJMno(jeja.getJMno());
 		rq.setRField(dalin.getFNo());
 		rq.setRSubject(dal.getDetailFName());

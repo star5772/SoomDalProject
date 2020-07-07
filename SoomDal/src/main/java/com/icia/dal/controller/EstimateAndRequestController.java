@@ -19,9 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.icia.dal.Exception.DalinNotFoundException;
-import com.icia.dal.Exception.ReadFailException;
-import com.icia.dal.Exception.UserNotFoundException;
+import com.icia.dal.Exception.*;
 import com.icia.dal.entity.Estimate;
 import com.icia.dal.entity.Request;
 import com.icia.dal.service.DalinService;
@@ -122,7 +120,7 @@ public class EstimateAndRequestController {
 	// 요청서 보내기
 	@Secured("ROLE_JEJA")
 	@PostMapping("/request/writeRequest")
-	public String sendRequest(Request rq,Principal principal) {
+	public String sendRequest(Request rq,Principal principal) throws DalinNotFoundException, JejaNotFoundException {
 		System.out.println(rq);
 		String username = principal.getName();
 		int no = jejaService.findById(username).getJMno();
