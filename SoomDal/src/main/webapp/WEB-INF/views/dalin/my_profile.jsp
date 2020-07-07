@@ -106,14 +106,25 @@ hr{
 }
 #buttonDiv {
 	margin-left: 650px;
+	background-color: orange;
+	color : white;
 }
-
+#b{
+	color : white;
+	margin-top: 10px;
+	outline: 0;
+	border: 0;
+	border-radius: 4px;
+	font-size: 12px;
+}
 </style>
 <script>
-	function report_pop() {
-		var jEmail=$(this).data("writer");
-		window.open("report?jEmail="+jEmail,"report","width=500, height=500,left=500,top=200, resizable=no, scrollbars=no, status=no, location=no, directories=no;");
-	}
+	$(function() {
+		$(".report").click(function() {
+			jEmail=$(this).data("writer");
+			window.open("report?jEmail="+jEmail,"report","width=500, height=500,left=500,top=200, resizable=no, scrollbars=no, status=no, location=no, directories=no;");
+		})
+	})
 </script>
 </head>
 <body>
@@ -126,7 +137,7 @@ hr{
 			</div>
 		</div>
 		<div>
-			<button type="button" class="btn btn-info" onclick="location.href='/dal/dalin/profile_update'">수&nbsp;정</button>
+			<button type="button" class="btn btn-info" onclick="location.href='/dal/dalin/profile_update'" id="b" >수&nbsp;정</button>
 		</div>
 		<div id="dName-bottom">
 			<div>
@@ -134,7 +145,7 @@ hr{
 			</div>
 			<div>
 				<div>
-					<h2>한줄소개</h2><br><br>
+					<h2>한줄소개</h2><br>
 				</div>
 				<div>
 					<p>${readProfile.DIntro}</p>
@@ -147,7 +158,7 @@ hr{
 			</div>
 			<div>
 				<div>
-					<h2>대표서비스</h2><br><br>
+					<h2>대표서비스</h2><br>
 				</div>
 				<div>
 					<p>${readProfile.DMainService}</p>
@@ -160,7 +171,7 @@ hr{
 			</div>
 			<div>
 				<div>
-					<h2>활동지역</h2><br><br>
+					<h2>활동지역</h2><br>
 				</div>
 				<div>
 					<p>${readProfile.DArea}</p>
@@ -173,7 +184,7 @@ hr{
 			</div>
 			<div>
 				<div>
-					<h2>서비스 상세설명</h2><br><br>
+					<h2>서비스 상세설명</h2><br>
 				</div>
 				<div>
 					<p>${readProfile.DDetailService}</p>
@@ -186,7 +197,7 @@ hr{
 			</div>
 			<div>
 				<div>
-					<h2>결제수단</h2><br><br>
+					<h2>결제수단</h2><br>
 				</div>
 				<div>
 					<p>${readProfile.DPaymentMethod}</p>
@@ -199,7 +210,7 @@ hr{
 			</div>
 			<div>
 				<div>
-					<h2>사진</h2><br><br>
+					<h2>사진</h2><br>
 				</div>
 				<div >
 					<div id="dAttachment1">
@@ -250,7 +261,7 @@ hr{
 						<p>${rv.RDate}</p>
 					</div>
 					<div>
-						<button class="btn btn-warning" data-writer="${rv.RWriter }" onclick="report_pop()"></button>
+						<button class="btn btn-warning report" data-writer="${rv.RWriter }" >신고</button>
 					</div>
 				</div>
 				<div id="rContent">
@@ -265,7 +276,7 @@ hr{
 			</div>
 			<div>
 				<div>
-					<h2>질문&amp;답변</h2><br><br>
+					<h2>질문&amp;답변</h2><br>
 				</div>
 				<div>
 					<div>
