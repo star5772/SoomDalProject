@@ -23,12 +23,12 @@ $(function() {
 	$("#report").on("click",function() {
 		var radioVal = $('input[name="optradio"]:checked').val();
 		params={
+			jEmail:"${jEmail}",
 			_csrf:"${_csrf.token}",
-			jEmail:${jEmail},
 			reason:radioVal
 		}
 		$.ajax({
-			url:"/dal/member/reqboard/report",
+			url:"/dal/dalin/report",
 			method:"post",
 			data:params,
 			success: function() {

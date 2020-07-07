@@ -53,15 +53,21 @@ public class DalinDao {
 		return tpl.update("dalinMapper.minusCash",map);
 	}
 
-	public int countOfFieldDalin(String detailFName) {
-		return tpl.selectOne("dalinMapper.countOfFieldDalin",detailFName);
+	public int countOfFieldDalin(String detailFName,String searchType,String keyword) {
+		Map<String,String> map = new HashMap<String, String>();
+		map.put("detailFName", detailFName);
+		map.put("searchType", searchType);
+		map.put("keyword", keyword);
+		return tpl.selectOne("dalinMapper.countOfFieldDalin",map);
 	}
 
-	public List<Dalin> findDalinByDetailFName(int startRowNum, int endRowNum, String detailFName) {
+	public List<Dalin> findDalinByDetailFName(int startRowNum, int endRowNum, String detailFName,String searchType,String keyword) {
 		Map<String,Object> map = new HashMap<String, Object>();
 		map.put("startRowNum", startRowNum);
 		map.put("endRowNum", endRowNum);
 		map.put("detailFName", detailFName);
+		map.put("searchType", searchType);
+		map.put("keyword", keyword);
 		return tpl.selectList("dalinMapper.findDalinByDetailFName",map);
 	}
 	
@@ -94,6 +100,21 @@ public class DalinDao {
 	
 	public String findIdByName(String dName) {
 		return tpl.selectOne("dalinMapper.findIdByName",dName);
+	}
+
+	public int reportJeja(int dMno, int jMno, String reason) {
+		Map<String,Object> map = new HashMap<String, Object>();
+		map.put("dMno", dMno);
+		map.put("jMno", jMno);
+		map.put("reason", reason);
+		return tpl.insert("dalinMapper.reportJeja",map);
+	}
+
+	public boolean findReportDalin(int dMno, int jMno) {
+		Map<String,Object> map = new HashMap<String, Object>();
+		map.put("dMno", dMno);
+		map.put("jMno", jMno);
+		return tpl.selectOne("dalinMapper.findReportDalin",map);
 	}
 	
 

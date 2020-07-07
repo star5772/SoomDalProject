@@ -43,8 +43,8 @@ public class MemoDao {
 		return tpl.update("memoMapper.disableBySender", list);
 	}
 
-	public int disableByReceiver(List<Integer> list) {
-		return tpl.update("memoMapper.disableByReceiver", list);
+	public int disableByReceiver(int mno) {
+		return tpl.update("memoMapper.disableByReceiver", mno);
 	}
 
 	public int delete() {

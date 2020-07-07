@@ -11,6 +11,22 @@
 <sec:authorize access="hasAnyRole('ROLE_JEJA','ROLE_DALIN','ROLE_ADMIN')">
 	<script src="/dal/script/webS.js"></script>
 </sec:authorize>
+<script>
+	$(function(){
+		$("#memoDelete").on("click",function(){
+		
+			var params = {
+					_csrf : "${_csrf.token}",
+					mno : $("#mno").val()
+			}
+			$.ajax({
+				url : "/dal/member/memo/disable_by_receiver",
+				method : "post",
+				data : params,
+			}).done(()=>{location.reload();}).fail((xhr)=>{console.log(xhr)})
+		});
+	})
+</script>
 <style>
 h2 {
 	margin-top: 50px;
@@ -54,6 +70,7 @@ button {
 		<div>
 			<c:forEach items="${memoList.list}" var="memolist">
 				<div>
+					<input type="hidden" id="mno" value="${memolist.mno }">
 					<div style="display: inline-block;">
 						<img style="border-radius: 50%; width: 70px; height: 70px;">
 					</div>
@@ -66,7 +83,7 @@ button {
 							<p style="font-size: 11px; font-weight: 200; margin-left: 0px; padding-right: 140px;">${memolist.writeTimeStr }</p>
 						</div>
 					</div>
-					<button>삭&nbsp;제</button>
+					<button id="memoDelete">삭&nbsp;제</button>
 
 				</div>
 				<hr>
