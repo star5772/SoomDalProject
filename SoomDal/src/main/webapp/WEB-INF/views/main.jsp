@@ -43,7 +43,7 @@
   </header>
   
   <!-- Navigation -->
-  <nav class="navbar fixed-top navbar-expand-md navbar-dark bg-light fixed-top" style="height: 100px;">
+  <nav class="navbar fixed-top navbar-expand-md fixed-top" style="height: 80px;  border-bottom: 2px solid #ffc459; background-color: white;">
 	<jsp:include page="include/nav.jsp"/>
   </nav>
   
