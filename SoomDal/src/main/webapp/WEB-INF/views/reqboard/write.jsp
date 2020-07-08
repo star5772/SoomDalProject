@@ -39,7 +39,7 @@ $(document).ready(function(){
 		<h1 style="font-size: 30px; font-weight: bold; line-height: 1.5em; margin-top: 20px;">요청서</h1>
 	</div>
 <br>
-	<form action="/dal/member/reqboard/write" method="post" id="writeForm">
+	<form action="/dal/jeja/reqboard/write" method="post" id="writeForm">
 <div >
 	<div style="height: 45px;">
 		<hr>

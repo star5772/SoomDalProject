@@ -1,8 +1,6 @@
 package com.icia.dal.entity;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -29,6 +27,8 @@ public class Request {
 	private Boolean rDalinIsOk;
 	private String rWannable;
 	private String rWantArea;
+	private Boolean disableByJeja;
+	private Boolean disableByDalin;
 	private LocalDateTime rWriteDate;
 	private Integer dMno;
 	private Boolean rbEnabled;				// 달인이 요청서 수락전이면 삭제가능

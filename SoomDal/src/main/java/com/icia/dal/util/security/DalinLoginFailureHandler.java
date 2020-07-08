@@ -42,7 +42,6 @@ public class DalinLoginFailureHandler extends SimpleUrlAuthenticationFailureHand
 			if(dalin==null) {
 				session.setAttribute("didmsg", "아이디를 찾을 수 없습니다");
 			}else {
-				System.out.println(dalin);
 				int loginFailureCnt = dalin.getDLoginFailureCnt()+1;
 				if(loginFailureCnt<5) {
 					dalDao.updateToDalin(Dalin.builder().dEmail(DalinId).dLoginFailureCnt(1).build());

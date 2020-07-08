@@ -109,7 +109,7 @@
 					</c:choose>
 					<div id="dal_content">
 						<h5>
-							<a href="/dal/member/dalin_profile?dMno=${list.DMno }"><h5 style="font-weight: bold; font-size: 18px;">${list.DName }</h5></a>
+							<a href="/dal/jeja/dalin_profile?dMno=${list.DMno }"><h5 style="font-weight: bold; font-size: 18px;">${list.DName }</h5></a>
 						</h5>
 						<p style="font-size: 14px;">${list.DIntro }</p>
 						<div>

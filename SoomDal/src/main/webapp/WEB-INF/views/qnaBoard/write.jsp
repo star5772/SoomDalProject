@@ -43,7 +43,7 @@ $(document).ready(function(){
 		<div
 			style="font-size: 43px; font-weight: bold; color: rgb(243, 156, 18);">Q&A</div>
 		<div style="font-size: 19px; margin-bottom: 10px; font-weight: bold; margin-top: 20px;">궁금한것 무엇이든! 물어보세요!</div>
-	<form action="/dal/member/qnaBoard/write" method="post" id="writeForm">
+	<form action="/dal/dalin/qnaBoard/write" method="post" id="writeForm">
 		<div style="height: 45px; border-bottom: 1px solid #d3d3d3; border-top: 1px solid #d3d3d3; line-height: 45px;">
 			<label style="background-color: #d3d3d3; display: inline-block; height: 43px; margin: 0px; width: 130px; text-align: center; font-size: 17px;">제 목</label>
 			<input type="text" placeholder=" 제목을 입력해주세요." style="color: rgb(94, 94, 94); height: 43px; width: 827px;font-size: 17px;" name="qTitle" id="qTitle">

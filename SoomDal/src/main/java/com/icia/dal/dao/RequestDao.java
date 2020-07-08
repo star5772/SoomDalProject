@@ -61,4 +61,18 @@ public class RequestDao {
 		return tpl.selectOne("requestMapper.findRequestByJmno",dMno);
 	}
 	
+	public int setDisableByJeja(int rNo,int jMno) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("rNo", rNo);
+		map.put("jMno", jMno);
+		return tpl.update("requestMapper.setDisableByJeja",map);
+	}
+	
+	public int setDisableByDalin(int rNo,int dMno) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("rNo", rNo);
+		map.put("dMno", dMno);
+		return tpl.update("requestMapper.setDisableByDalin",map);
+	}
+
 }

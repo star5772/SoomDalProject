@@ -65,4 +65,18 @@ public class EstimateDao {
 	public int setRead(int eNo) {
 		return tpl.selectOne("estimateMapper.setRead",eNo);
 	}
+	
+	public int setDisableByJeja(int eNo,int jMno) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("eNo", eNo);
+		map.put("jMno", jMno);
+		return tpl.update("estimateMapper.setDisableByJeja",map);
+	}
+	
+	public int setDisableByDalin(int eNo,int dMno) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("eNo", eNo);
+		map.put("dMno", dMno);
+		return tpl.update("estimateMapper.setDisableByDalin",map);
+	}
 }

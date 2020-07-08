@@ -158,7 +158,7 @@ p {
 			<h1 style="text-align: center; margin-top: 50px; font-weight: bold; font-size: 50px;">요청서</h1>
 	</div>
 	<div id="totalDiv">
-	<form id="reqFrm" action="/dal/member/request/writeRequest"  method="post">
+	<form id="reqFrm" action="/dal/jeja/request/writeRequest"  method="post">
 		<div id="step-one"  style="" class="request">
 		<input type="hidden" name="dMno" value="${dMno}">
 		<input type="hidden" name="_csrf" value="${_csrf.token}">

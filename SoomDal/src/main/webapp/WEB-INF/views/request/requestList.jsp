@@ -12,6 +12,35 @@
 <sec:authorize access="hasAnyRole('ROLE_JEJA','ROLE_DALIN','ROLE_ADMIN')">
 	<script src="/dal/script/webS.js"></script>
 </sec:authorize>
+<script>
+$(function() {
+	$("#deleteToDalin").on("click", function() {
+		var formData = $("#deleteToDalinFrm").serialize();
+		$.ajax({
+			url: "/dal/jeja/request/disableByDalin",
+			method: "post",
+			data: formData,
+			success: function() {
+					alert("삭제 완료");
+					window.location.reload();
+				}
+		})
+	})
+
+	$("#deleteToJeja").on("click", function() {
+		var formData = $("#deleteToJejaFrm").serialize();
+		$.ajax({
+			url: "/dal/jeja/request/disableByJeja",
+			method: "post",
+			data: formData,
+			success: function() {
+					alert("삭제 완료");
+					window.location.reload();
+				}
+		})
+	})		
+})
+</script>
 <style>
 .card {
 	display: inline-block;
@@ -38,7 +67,7 @@ h5{
 }
 .card-body{
 	padding-bottom: 5px;
-	padding-top: 76px;
+	padding-top: 45px;
 }
 hr{
 	padding-top: 5px;
@@ -84,6 +113,12 @@ a {
 		<div class="card">
 			<div class="card-top">
 				<br>
+				<form id="deleteToDalinFrm">
+					<input type="hidden" name="dMno" value="${dMno}">
+					<input type="hidden" name="rNo" value="${request.RNo}">
+					<input type="hidden" name="_csrf" value="${_csrf.token }">
+					<a href="#"id="deleteToDalin"><span style="float: right; display: inline-block; font-size: 15px; color: gray;">X</span></a><br>
+				</form>
 				<div><h5>${request.RSubject }</h5></div>
 				<div><p>${request.RWriteDateStr }</p></div>
 			</div>
@@ -92,7 +127,7 @@ a {
 			</div>	
 			<div class="card-bottom" id="button">
 				<div><hr></div>
-				<button onclick="location.href='/dal/member/request/readToRequestForReceive?rNo=${request.RNo}'" class="btn btn-warning">요청서 보기</button>
+				<button onclick="location.href='/dal/jeja/request/readToRequestForReceive?rNo=${request.RNo}'" class="btn btn-warning">요청서 보기</button>
 			</div>
 		</div>
 	</c:forEach>
@@ -101,22 +136,22 @@ a {
 		<div id="inner">
 		<ul class="pagination">
 			<c:if test="${receiveRequest.prev==true}">
-				<li><a style="color: black;" href="/dal/member/request/receiveRequest?pageno=${receiveRequest.startPage-1}&dMno=${dMno}">이전</a></li>
+				<li><a style="color: black;" href="/dal/jeja/request/receiveRequest?pageno=${receiveRequest.startPage-1}&dMno=${dMno}">이전</a></li>
 			</c:if>
 			<c:forEach begin="${receiveRequest.startPage}" end="${receiveRequest.endPage}" var="i">
 				<c:choose>
 					<c:when test="${receiveRequest.pageno eq i }">
 						<li>
-							<a style="background-color: orange; color: white;" href="/dal/member/request/receiveRequest?pageno=${i}&dMno=${dMno}">${i}</a>
+							<a style="background-color: orange; color: white;" href="/dal/jeja/request/receiveRequest?pageno=${i}&dMno=${dMno}">${i}</a>
 						</li>
 					</c:when>
 					<c:otherwise>
-						<li><a style="color: black;" href="/dal/member/request/receiveRequest?pageno=${i}&dMno=${dMno}">${i}</a></li>
+						<li><a style="color: black;" href="/dal/jeja/request/receiveRequest?pageno=${i}&dMno=${dMno}">${i}</a></li>
 					</c:otherwise>
 				</c:choose>
 			</c:forEach>
 			<c:if test="${receiveRequest.next==true}">
-				<li><a style="color: black;" href="/dal/member/request/receiveRequest?pageno=${receiveRequest.endPage+1}&dMno=${dMno}">다음</a></li>
+				<li><a style="color: black;" href="/dal/jeja/request/receiveRequest?pageno=${receiveRequest.endPage+1}&dMno=${dMno}">다음</a></li>
 			</c:if>
 		</ul>
 		</div>
@@ -133,7 +168,13 @@ a {
 		<div class="card">
 			<div class="card-top">
 				<br>
-				<div><h5>${request.RSubject }</h5></div>
+				<form id="deleteToJejaFrm">
+					<input type="hidden" name="jMno" value="${jMno}">
+					<input type="hidden" name="rNo" value="${request.RNo}">
+					<input type="hidden" name="_csrf" value="${_csrf.token }">				
+				<a href="#" id="deleteToJeja"><span style="float: right; display: inline-block; font-size: 15px; color: gray;">X</span></a><br>
+				</form>
+				<div style="width: 240px;"><h5 style="display: inline-block;">${request.RSubject }</h5></div><br>
 				<div><p>${request.RWriteDateStr }</p></div>
 			</div>
 			<div class="card-body">
@@ -141,7 +182,7 @@ a {
 			</div>	
 			<div class="card-bottom" id="button">
 				<div><hr></div>
-				<button onclick="location.href='/dal/member/request/readToRequestForSend?rNo=${request.RNo}'" class="btn btn-warning">요청서 보기</button>
+				<button onclick="location.href='/dal/jeja/request/readToRequestForSend?rNo=${request.RNo}'" class="btn btn-warning">요청서 보기</button>
 			</div>
 		</div>
 	</c:forEach>
@@ -150,22 +191,22 @@ a {
 		<div id="inner">
 		<ul class="pagination">
 			<c:if test="${sendRequest.prev==true}">
-				<li><a style="color: black;" href="/dal/member/request/sendRequest?pageno=${sendRequest.startPage-1}&jMno=${jMno}">이전</a></li>
+				<li><a style="color: black;" href="/dal/jeja/request/sendRequest?pageno=${sendRequest.startPage-1}&jMno=${jMno}">이전</a></li>
 			</c:if>
 			<c:forEach begin="${sendRequest.startPage}" end="${sendRequest.endPage}" var="i">
 				<c:choose>
 					<c:when test="${sendRequest.pageno eq i }">
 						<li>
-							<a style="background-color: orange; color: white;" href="/dal/member/request/sendRequest?pageno=${i}&jMno=${jMno}">${i}</a>
+							<a style="background-color: orange; color: white;" href="/dal/jeja/request/sendRequest?pageno=${i}&jMno=${jMno}">${i}</a>
 						</li>
 					</c:when>
 					<c:otherwise>
-						<li><a style="color: black;" href="/dal/member/request/sendRequest?pageno=${i}&jMno=${jMno}">${i}</a></li>
+						<li><a style="color: black;" href="/dal/jeja/request/sendRequest?pageno=${i}&jMno=${jMno}">${i}</a></li>
 					</c:otherwise>
 				</c:choose>
 			</c:forEach>
 			<c:if test="${sendRequest.next==true}">
-				<li><a style="color: black;" href="/dal/member/request/sendRequest?pageno=${sendRequest.endPage+1}&jMno=${jMno}">다음</a></li>
+				<li><a style="color: black;" href="/dal/jeja/request/sendRequest?pageno=${sendRequest.endPage+1}&jMno=${jMno}">다음</a></li>
 			</c:if>
 		</ul>
 		</div>

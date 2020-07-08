@@ -50,7 +50,7 @@ public class JejaRestController {
 	
 	// 제자 리뷰작성
 	@Secured("ROLE_JEJA")
-	@PostMapping("/member/reviewWrite")
+	@PostMapping("/jeja/reviewWrite")
 	public ResponseEntity<List<Review>> reviewWrite(Review rv,Principal principal) {
 		System.out.println(rv);
 		String username = principal.getName();

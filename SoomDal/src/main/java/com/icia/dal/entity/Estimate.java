@@ -22,6 +22,8 @@ public class Estimate {
 	private String eContent;
 	private String eTelType;
 	private Boolean jIsOk;
+	private Boolean disableByJeja;
+	private Boolean disableByDalin;
 	private Integer eCash;
 	private LocalDateTime eWriteTime;
 	private Boolean eIsRead;

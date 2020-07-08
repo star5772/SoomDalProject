@@ -20,7 +20,7 @@
 				reason:radioVal
 			}
 			$.ajax({
-				url:"/dal/member/reqboard/report",
+				url:"/dal/jeja/reqboard/report",
 				method:"post",
 				data:params,
 				success: function() {

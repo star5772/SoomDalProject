@@ -55,7 +55,7 @@ $(function(){
 	})
 	$("#sah").on("click",function() {
 		var qName = $("#search").val();
-		location.href="/dal/member/qnaBoard/list?qName="+qName;
+		location.href="/dal/dalin/qnaBoard/list?qName="+qName;
 	});
 })
 </script>
@@ -290,10 +290,10 @@ height: 30px; margin-left: 20px; width: 1024px;  text-align: center;
 							<td class="subject">비밀글 입니다 <i class="fas fa-lock"></i></td>
 						</c:when>
 						<c:when test="${username eq admin }">
-							<td class="subject" ><a href="/dal/member/qnaBoard/read?qNo=${q.QNo}">${q.QTitle}</a></td>
+							<td class="subject" ><a href="/dal/dalin/qnaBoard/read?qNo=${q.QNo}">${q.QTitle}</a></td>
 						</c:when>
 						<c:otherwise>
-							<td class="subject" ><a href="/dal/member/qnaBoard/read?qNo=${q.QNo}">${q.QTitle}</a></td>
+							<td class="subject" ><a href="/dal/dalin/qnaBoard/read?qNo=${q.QNo}">${q.QTitle}</a></td>
 						</c:otherwise>
 					</c:choose>
 					<td class="writer">${q.QName}</td>
@@ -307,30 +307,30 @@ height: 30px; margin-left: 20px; width: 1024px;  text-align: center;
 			<div id="inner">
 			<ul class="pagination">
 				<c:if test="${qnaPage.prev==true }">
-					<li><a href="/dal/member/qnaBoard/list?pageno=${qnaPage.startPage-1}">이전</a></li>
+					<li><a href="/dal/dalin/qnaBoard/list?pageno=${qnaPage.startPage-1}">이전</a></li>
 				</c:if>
 				<c:forEach begin="${qnaPage.startPage}" end="${qnaPage.endPage}" var="i">
 					<c:choose>
 						<c:when test="${qnaPage.pageno eq i}">
 							<li class="active">
-								<a href="/dal/member/qnaBoard/list?pageno=${i}">${i}</a>
+								<a href="/dal/dalin/qnaBoard/list?pageno=${i}">${i}</a>
 							</li>
 						</c:when>
 						<c:otherwise>
-							<li><a href="/dal/member/qnaBoard/list?pageno=${i}">${i}</a></li>
+							<li><a href="/dal/dalin/qnaBoard/list?pageno=${i}">${i}</a></li>
 						</c:otherwise>
 					</c:choose>
 				</c:forEach>
 				<c:if test="${qnaPage.next==true }">
-					<li><a href="/dal/member/qnaBoard/list?pageno=${qnaPage.endPage+1}">다음</a></li>
+					<li><a href="/dal/dalin/qnaBoard/list?pageno=${qnaPage.endPage+1}">다음</a></li>
 				</c:if>
 			</ul>
 			</div>
 			<div class="form-group" style="float: right; margin-right: 50px; ">
-			<a class="btn btn-warning" href="/dal/member/qnaBoard/write" style="font-size: 14px; width: 73px; color: white;">글쓰기</a>
+			<a class="btn btn-warning" href="/dal/dalin/qnaBoard/write" style="font-size: 14px; width: 73px; color: white;">글쓰기</a>
 		</div>
 		<div class="form-group" style="float: left; margin-left: 10px;">
-			<a class="btn btn-info" href="/dal/member/qnaBoard/list" style="font-size: 14px;">전체목록</a>
+			<a class="btn btn-info" href="/dal/dalin/qnaBoard/list" style="font-size: 14px;">전체목록</a>
 		</div>
 		</div>
 		

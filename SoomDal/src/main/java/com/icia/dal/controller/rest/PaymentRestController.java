@@ -15,7 +15,7 @@ import com.icia.dal.entity.RequestPayment;
 import com.icia.dal.service.rest.*;
 
 @Secured("ROLE_DALIN")
-@RequestMapping("/member")
+@RequestMapping("/dalin")
 @RestController
 public class PaymentRestController {
 	@Inject

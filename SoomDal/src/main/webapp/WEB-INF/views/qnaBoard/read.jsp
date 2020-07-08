@@ -77,7 +77,7 @@ width: 80px; height: 35px;  background-color: #ffc968; color: white; font-size: 
 </script>
 </head>
 <body>
-<form action="/dal/member/qnaBoard/delete" method="post">
+<form action="/dal/dalin/qnaBoard/delete" method="post">
 	<div id="center" >
 		<div style="font-size: 43px; font-weight: bold; color: rgb(243, 156, 18); margin-bottom: 20px;">Q&A</div>
 		<div style="font-size: 19px;">궁금한것 무엇이든! 물어보세요!</div><br>

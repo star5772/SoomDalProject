@@ -15,7 +15,7 @@ import com.icia.dal.service.PaymentService;
 
 @Secured("ROLE_DALIN")
 @Controller
-@RequestMapping("/member")
+@RequestMapping("/dalin")
 public class PaymentController {
 	@Inject
 	private PaymentService paymentService;
