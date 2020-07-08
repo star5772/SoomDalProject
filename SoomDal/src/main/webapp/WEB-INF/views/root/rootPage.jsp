@@ -61,7 +61,8 @@ button:hover:before,button:hover:after{
   transition:800ms ease all;
 }
 .row{
-	margin-top: 30px;
+	margin-top: 50px;
+	margin-bottom: 20px;
 }
 </style>
 <sec:authorize access="hasAnyRole('ROLE_JEJA','ROLE_DALIN','ROLE_ADMIN')">
@@ -101,12 +102,12 @@ button:hover:before,button:hover:after{
         <span class="sr-only">Next</span>
       </a>
     </div>
-
+	<hr>
     <div class="row">
       <div class="col-lg-4 col-sm-6 portfolio-item">
         <div class="card h-100">
           <div class="card-body">
-            <p class="card-text"style="font-size: x-large; text-align: center; background-color: white; color:black; margin-top: 25px;"><button style="font-size: xx-large;" onclick="location.href='/dal/member/field_sport/list'" >Sport</button></p>
+            <p class="card-text"style="font-size: x-large; text-align: center; background-color: white; color:black; margin-top: 12px;"><button style="font-size: xx-large;" onclick="location.href='/dal/member/field_sport/list'" >Sport</button></p>
             
           </div>
         </div>
@@ -114,14 +115,14 @@ button:hover:before,button:hover:after{
       <div class="col-lg-4 col-sm-6 portfolio-item">
         <div class="card h-100">
           <div class="card-body">
-            <p class="card-text" style="font-size: x-large; text-align: center; background-color: white; margin-top: 25px;"><button style="font-size: xx-large;" onclick="location.href='/dal/member/field_music/list'" >Instrument</button></p>
+            <p class="card-text" style="font-size: x-large; text-align: center; background-color: white; margin-top: 12px;"><button style="font-size: xx-large;" onclick="location.href='/dal/member/field_music/list'" >Instrument</button></p>
           </div>
         </div>
       </div>
       <div class="col-lg-4 col-sm-6 portfolio-item">
         <div class="card h-100">
           <div class="card-body">
-            <p class="card-text" style=" text-align: center; background-color: white; margin-top: 25px;"><button style="font-size: xx-large;" onclick="location.href='/dal/member/field_art/list'" >Art</button></p>
+            <p class="card-text" style=" text-align: center; background-color: white; margin-top: 12px; margin-bottom: 13px;"><button style="font-size: xx-large;" onclick="location.href='/dal/member/field_art/list'" >Art</button></p>
         </div>
       </div>
      </div>

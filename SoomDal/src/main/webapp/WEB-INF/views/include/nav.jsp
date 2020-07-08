@@ -85,18 +85,18 @@ function openChild()
         	
         	<sec:authorize access="hasRole('ROLE_JEJA')">
         		<sec:authentication property="principal.username" var="username"/>
-        		<li class="nav-item" style="width: 120px; text-align: center;"><a class="nav-link" href="/dal/member/search"style="color:black; font-size:medium;"><i class="fas fa-search">&nbsp;달인 찾기</i></a></li>
-        		<li class="nav-item"><a class="nav-link" href="/dal/jeja/reqboard/list"style="color:black; font-size:medium;">요청서게시판</a></li>
-        		<li class="nav-item" style="width: 100px; text-align: center;"><a class="nav-link" href="/dal/jeja/my_info"style="color:black; font-size:medium;">내 정보</a></li>
-        		<li class="nav-item" style="width: 100px; text-align: center;"><a class="nav-link" href="/dal/member/memo/memo_receiveList?dEmail=${username }" style="color:black; font-size:medium;">쪽지함</a></li>
-        		<li class="nav-item" style="width: 100px; text-align: center;"><a class="nav-link" href="#"style="color:black; font-size:medium;" id="JejaLogout">로그아웃</a></li>
+        		<li class="nav-item" style="width: 102px; text-align: center;"><a class="nav-link" href="/dal/member/search"style="color:black; font-size:medium;"><i class="fas fa-search">&nbsp;달인 찾기</i></a></li>
+        		<li class="nav-item" style="width: 110px; "><a class="nav-link" href="/dal/jeja/reqboard/list"style="color:black; font-size:medium; font-weight: normal;">요청서게시판</a></li>
+        		<li class="nav-item" style="width: 65px; text-align: center;"><a class="nav-link" href="/dal/jeja/my_info"style="color:black; font-size:medium; font-weight: normal;">내 정보</a></li>
+        		<li class="nav-item" style="width: 58px; text-align: center;"><a class="nav-link" href="/dal/member/memo/memo_receiveList?dEmail=${username }" style="font-weight: normal;color:black; font-size:medium;">쪽지함</a></li>
+        		<li class="nav-item" style="width: 75px; text-align: center;"><a class="nav-link" href="#"style="color:black; font-size:medium; font-weight: normal;" id="JejaLogout">로그아웃</a></li>
         	</sec:authorize>
         	
         	<sec:authorize access="hasRole('ROLE_DALIN')">
         		<sec:authentication property="principal.username" var="username"/>
-        		<li class="nav-item" style="width: 100px;"><a class="nav-link" href="/dal/member/memo/memo_receiveList?dEmail=${username }"style="color:black; font-size:medium;">쪽지함</a></li>
+        		<li class="nav-item" style="width: 58px;"><a class="nav-link" href="/dal/member/memo/memo_receiveList?dEmail=${username }"style="color:black; font-size:medium; font-weight: normal;">쪽지함</a></li>
 				<li class="nav-item dropdown" style="width: 100px;">
-					<a class="nav-link dropdown-toggle" href="#" id="navbarDropdownPortfolio" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: black;">달인 회원</a>
+					<a class="nav-link dropdown-toggle" href="#" id="navbarDropdownPortfolio" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: black;font-size:medium; font-weight: normal;">달인 회원</a>
 					<div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownPortfolio">
 					<a class="dropdown-item" href="/dal/dalin/my_profile?dEmail=${username}"style="color:black; font-size:medium;">프로필 관리</a>
 					<a class="dropdown-item" href="/dal/dalin/my_info"style="color:black; font-size:medium;">마이페이지</a>

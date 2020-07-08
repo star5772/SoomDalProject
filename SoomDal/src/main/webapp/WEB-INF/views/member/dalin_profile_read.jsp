@@ -149,7 +149,7 @@ hr {
 }
 
 #buttonDiv #writeRequest {
-	margin-left: -380px;
+	margin-left: 50px;
 	display: inline-block;
 	background-color: gray;
 	color: white;
@@ -192,7 +192,7 @@ hr {
 	<sec:authentication property="principal.username" var="username" />
 	<div id="dalinRead">
 		<div id="dProfile">
-			<p id="dName">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${readProfile.DName}</p>
+			<p id="dName" style="margin-left: 380px; ">${readProfile.DName}</p>
 			<div>
 				<c:choose>
 					<c:when test="${readProfile.DProfile ne null }">
