@@ -60,7 +60,7 @@ public class EstimateAndRequestRestController {
 		}
 		
 		@Secured("ROLE_DALIN")
-		@PostMapping("/jeja/request/no")
+		@PostMapping("/dalin/estimate/no")
 		public ResponseEntity<?> refuseEstimate(int eNo,int dMno,Principal principal) {
 			return ResponseEntity.ok(estimateService.refuseEstimate(eNo,dMno,principal.getName()));		
 		}	
