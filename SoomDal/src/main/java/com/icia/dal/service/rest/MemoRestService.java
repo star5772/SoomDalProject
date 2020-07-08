@@ -17,6 +17,7 @@ public class MemoRestService {
 
 	@Transactional
 	public void disableByReceiver(int mno) {
+		memoDao.setRead(mno);
 		memoDao.disableByReceiver(mno);
 	}
 }

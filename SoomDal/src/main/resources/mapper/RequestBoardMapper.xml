@@ -16,7 +16,8 @@
 		<trim suffixOverrides="," prefix="SET">
 			<if test="rbTitle!=null">RB_TITLE=#{rbTitle},</if>
 			<if test="rbReadCnt!=null">RB_READ_CNT=RB_READ_CNT +1,</if>
-			<if test="rbReportCnt!=null">RB_REPORT_CNT=RB_REPORT_CNT +1,</if>
+			<if test="rbReportCnt == 1">RB_REPORT_CNT=RB_REPORT_CNT +1,</if>
+			<if test="rbReportCnt == 2">RB_REPORT_CNT=0,</if>
 			<if test="rbIsReport!=null">RB_IS_REPORT=#{rbIsReport}</if>
 		</trim>
 		where RB_NO=#{rbNo} and rownum=1

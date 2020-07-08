@@ -3,7 +3,6 @@ package com.icia.dal.dto.page;
 import java.util.*;
 
 import com.icia.dal.dto.AdminDto;
-import com.icia.dal.dto.AdminDto.ReportedReviewForList;
 
 import lombok.*;
 
@@ -19,5 +18,5 @@ public class PageToReportedReview {
 	private boolean isNext;
 	private int startPage;
 	
-	List<AdminDto.ReportedReviewForList> list;
+	List<AdminDto.ReportedBoardForList> list;
 }

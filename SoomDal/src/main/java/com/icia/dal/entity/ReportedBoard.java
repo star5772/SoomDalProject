@@ -11,4 +11,5 @@ import lombok.experimental.*;
 public class ReportedBoard {
 	private int rbNo;
 	private String username;
+	private String reason;
 }

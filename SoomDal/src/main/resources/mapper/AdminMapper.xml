@@ -32,11 +32,11 @@
 	</select>
 	
 	<!-- 신고게시물(ReportedBoard) 목록  : 불러오는거 (이네이블드가 false만 읽는거)-->
-	<select id="findAllToReview" resultType="Review">
+	<select id="findAllToReportedBoard" resultType="RequestBoard">
 		<![CDATA[
 			select * from
 				(select r.*,rownum as rnum from
-					(select /*+index_desc(review pk_review)*/r_no rNm, r_date rDate, r_writer rWriter from review where j_accusation_cnt!=0)r
+					(select /*+index_desc(requestboard pk_requestboard)*/j_mno jMno ,rb_no rbNo, rb_title rbTitle, rb_write_date rbWriteDate, rb_writer rbWriter, rb_is_block rbIsBlock from requestboard where rb_report_cnt != 0)r
 					where rownum<=#{endRowNum})
 				where rnum>=#{startRowNum} 
 		]]>
@@ -71,14 +71,14 @@
 			select * from
 				(select j.*,rownum as rnum from
 					(select /*+ index_desc(jeja pk_jeja)*/j_mno jMno, j_email jEmail, j_name jName, j_accusation_cnt jAccusationCnt, j_joindate jJoinDate from jeja where j_accusation_cnt!=0)j
-					where rownum<=#{endRowNum})
-				where rnum>=#{startRowNum}
+				where rownum<=#{endRowNum})
+			where rnum>=#{startRowNum}
 		]]>
 	</select>	
 	
 	<select id="countToReview" resultType="int">
-		select /*+ index_ffs(review pk_review)*/count(*)
-		from review 
+		select /*+ index_ffs(requestboard pk_requestboard)*/count(*)
+		from requestboard where rb_report_cnt != 0 
 	</select>
 	
 	<select id="findAllEnabledToJeja" resultType="jeja">
@@ -86,8 +86,7 @@
 			select * from
 				(select j.*,rownum as rnum from
 					(select /*+ index_desc(jeja pk_jeja)*/j_mno jMno, j_email jEmail, j_name jName, j_accusation_cnt jAccusationCnt, j_joindate jJoinDate, enabled, j_is_block jIsBlock from jeja where enabled = 0)j
-
-					where rownum<=#{endRowNum})
+				where rownum<=#{endRowNum})
 				where rnum>=#{startRowNum}
 		]]>
 	</select>
@@ -160,7 +159,13 @@
 		values(#{pRefundCode}, #{pCode}, sysdate, #{pRefundIsOk}, #{pMoney}, #{dEmail})
 	</insert>
 	
+	<select id="readRpBoard" resultType="rpboard">
+		select rb_no rbNo,username,reason from reportedboard where rb_no = #{rbNo} and rownum=1
+	</select>
 
+	<delete id="deleteRpBoard">
+		delete from reportedboard where rb_no = #{rbNo} and rownum=1
+	</delete>
 </mapper>
 
 

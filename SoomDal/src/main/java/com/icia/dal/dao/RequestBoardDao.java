@@ -17,6 +17,9 @@ public interface RequestBoardDao {
 	
 	public int RequestBoardUpdate(RequestBoard requestBoard);
 	
+	@Update("update requestboard set rb_is_block = 1 where rb_no = #{rbNo} and rownum=1")
+	public int setIsBlock(int rbNo);
+	
 	public RequestBoard findByRequestBoard(int rbNo);
 	
 	public int RequestBoardToCount(String rbWriter);

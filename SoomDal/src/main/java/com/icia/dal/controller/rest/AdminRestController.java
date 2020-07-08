@@ -41,4 +41,10 @@ public class AdminRestController {
 	public ResponseEntity<?> refundIsOk(String pCode) {
 		return ResponseEntity.ok(adService.confirmRefund(pCode));
 	}
+	
+	@PostMapping("/admin/reportedBoard")
+	public ResponseEntity<?> reportedBoard(int rbNo,int jMno,boolean isBlock) {
+		adService.reportBoard(rbNo,jMno,isBlock);
+		return ResponseEntity.ok(null);
+	}
 }

@@ -1,6 +1,5 @@
 package com.icia.dal.util.pagingutil;
 
-import com.icia.dal.dto.*;
 import com.icia.dal.dto.page.PageToReportedReview;
 
 public class ReviewPagingUtil {

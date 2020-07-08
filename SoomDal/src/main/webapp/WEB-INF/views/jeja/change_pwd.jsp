@@ -83,7 +83,7 @@ $(document).ready(function() {
 			<span class="helper-text" id="jTel_msg"></span>
 		</div>
 		<input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }">
-		<button type="button" class="btn btn-success" id="change_pwd">번호찾기</button>
+		<button type="button" class="btn btn-success" id="change_pwd">비밀번호찾기</button>
 	</div>
 	</form>
 </body>

@@ -11,6 +11,27 @@
 <sec:authorize access="hasAnyRole('ROLE_JEJA','ROLE_DALIN','ROLE_ADMIN')">
 	<script src="/dal/script/webS.js"></script>
 </sec:authorize>
+<script>
+$(function(){
+	$("#isBlock").on("change",function(){
+		var params = {
+				_csrf: "${_csrf.token}",
+				rbNo: $("#rbNo").val(),
+				jMno: $("#jMno").val(),
+				isBlock : $("#isBlock").val()
+			}
+		$.ajax({
+			url: "/dal/member/admin/reportedBoard",
+			data: params,
+			method: "post",
+			success: function() {
+				alert("처리완료");
+				window.location.reload();
+			}
+		})
+	})
+})
+</script>
 <style>
 	h1 {
 		font-weight: bolder;
@@ -59,26 +80,37 @@
 			</div>
 			<table class="table table-hover" style="width: 700px; padding: 100px 0; float: left; text-align: center;">
 			<colgroup>
-					<col width="20%">
-					<col width="30%">
-					<col width="20%">
+					<col width="25%">
+					<col width="25%">
 					<col width="15%">
 					<col width="15%">
+					<col width="20%">
 				</colgroup>
 				<thead>
 				<tr class="active">
 					<th>아이디</th>
 					<th>신고게시물</th>
-					<th>신고당한 횟수</th>
+					<th>글 작성 시간</th>
+					<th>상태</th>
+					<th>신고 사유</th>
 				</tr>
 				</thead>
 				<tbody>
 				<c:forEach items="${review.list }" var="v">
+				<input type="hidden" id="rbNo" value="${v.rbNo}">
+				<input type="hidden" id="jMno" value="${v.JMno}">
 					<tr>
-						<td>${v.RDate }</td>
-						<td>${v.RWriter }</td>
-						<td>${v.RScore }</td>
-						<td>${v.RContent }</td>
+						<td>${v.JEmail }</td>
+						<td>${v.rbTitle }</td>
+						<td>${v.rbWriteDateStr}</td>
+						<td>
+							<select id="isBlock">
+								<option>선택하셈</option>
+								<option value="1">정지</option>
+								<option value="0">취소</option>
+							</select>
+						</td>
+						<td>${v.reason}</td>
 					</tr>
 				</c:forEach>
 				</tbody>

@@ -20,6 +20,7 @@
 		<typeAlias type="com.icia.dal.entity.Memo" alias="memo"/>
 		<typeAlias type="com.icia.dal.entity.RepQuestion" alias="RepQuestion"/>
 		<typeAlias type="com.icia.dal.entity.NowRefund" alias="nowrefund"/>
+		<typeAlias type="com.icia.dal.entity.ReportedBoard" alias="rpboard"/>
 	</typeAliases>
 	<typeHandlers>
 		<typeHandler handler="com.icia.dal.util.typehandler.LocalDateTimeTypeHandler"/>

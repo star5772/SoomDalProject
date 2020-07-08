@@ -13,10 +13,11 @@ import org.springframework.web.multipart.MultipartFile;
 import com.icia.dal.dao.AdminDao;
 import com.icia.dal.dao.JejaDao;
 import com.icia.dal.dao.PaymentDao;
+import com.icia.dal.dao.RequestBoardDao;
 import com.icia.dal.entity.Field;
 import com.icia.dal.entity.Jeja;
-import com.icia.dal.entity.NowPayment;
 import com.icia.dal.entity.NowRefund;
+import com.icia.dal.entity.RequestBoard;
 
 @Service
 public class AdminRestService {
@@ -30,6 +31,9 @@ public class AdminRestService {
 	private JejaDao jejaDao;
 	@Inject
 	private PaymentDao npDao;
+	@Inject
+	private RequestBoardDao rqBoardDao;
+	
 	@Transactional
 	public int insertFieldSajin(Field fl,MultipartFile sajin) throws IllegalStateException, IOException {
 		adminDao.deleteToField(fl.getFNo());
@@ -64,6 +68,21 @@ public class AdminRestService {
 		NowRefund nr = NowRefund.builder().pCode(pCode).pRefundIsOk(true).build();
 		npDao.updateToNowRefund(nr);
 		return true;
+	}
+	
+	public void reportBoard(int rbNo, int jMno, boolean isBlock) {
+		if(isBlock==true) {
+			Jeja jeja = Jeja.builder().jEmail(jejaDao.findByJejaToJMno(jMno).getJEmail()).jMno(jMno).enabled(false).jIsBlock(true).build();
+			jejaDao.updateJeja(jeja);
+			RequestBoard rqBoard = RequestBoard.builder().rbNo(rbNo).rbReportCnt(2).build();
+			rqBoardDao.RequestBoardUpdate(rqBoard);
+			rqBoardDao.setIsBlock(rbNo);
+			adminDao.deleteRpBoard(rbNo);
+		}else {
+			adminDao.deleteRpBoard(rbNo);
+			RequestBoard rqBoard = RequestBoard.builder().rbNo(rbNo).rbReportCnt(2).build();
+			rqBoardDao.RequestBoardUpdate(rqBoard);
+		}
 	}
 	
 	

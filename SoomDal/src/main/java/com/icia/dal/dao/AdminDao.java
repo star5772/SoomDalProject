@@ -67,11 +67,11 @@ public class AdminDao {
 	}
 	
 	// 신고게시물 목록 출력
-	public List<Review> findAllToReview(int startRowNum, int endRowNum) {
+	public List<RequestBoard> findAllToReportedBoard(int startRowNum, int endRowNum) {
 		Map<String,Object> map = new HashMap<String, Object>();
 		map.put("startRowNum",startRowNum);
 		map.put("endRowNum",endRowNum);
-		return tpl.selectList("adminMapper.findAllToReview", map);
+		return tpl.selectList("adminMapper.findAllToReportedBoard", map);
 	}
 	
 	public int countToRefund() {
@@ -149,6 +149,13 @@ public class AdminDao {
 		return tpl.delete("adminMapper.deleteToField",fNo);
 	}
 	
+	public ReportedBoard readRpBoard(int rbNo) {
+		return tpl.selectOne("adminMapper.readRpBoard",rbNo);
+	}
+	
+	public int deleteRpBoard(int rbNo) {
+		return tpl.delete("adminMapper.deleteRpBoard",rbNo);
+	}
 	//public String findByPReqRefundDate() {
 		//return tpl.selectOne("adminMapper.findByPReqRefundDate");
 	//}

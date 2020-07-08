@@ -18,6 +18,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.icia.dal.Exception.JobFailException;
 import com.icia.dal.dao.AdminDao;
 import com.icia.dal.dao.DAO;
+import com.icia.dal.dao.JejaDao;
 import com.icia.dal.dao.PaymentDao;
 import com.icia.dal.dto.AdminDto;
 import com.icia.dal.dto.EnabledPage;
@@ -30,12 +31,12 @@ import com.icia.dal.dto.page.PageToReportedReview;
 import com.icia.dal.entity.Admin;
 import com.icia.dal.entity.Dalin;
 import com.icia.dal.entity.DetailField;
-import com.icia.dal.entity.Field;
 import com.icia.dal.entity.Jeja;
 import com.icia.dal.entity.Level;
 import com.icia.dal.entity.NowPayment;
 import com.icia.dal.entity.NowRefund;
-import com.icia.dal.entity.Review;
+import com.icia.dal.entity.ReportedBoard;
+import com.icia.dal.entity.RequestBoard;
 import com.icia.dal.util.pagingutil.AdminToDalinPagingUtil;
 import com.icia.dal.util.pagingutil.AdminToJejaPagingUtil;
 import com.icia.dal.util.pagingutil.EnabledPagingUtil;
@@ -59,6 +60,8 @@ public class AdminService {
 	private PasswordEncoder pwdEncoder;
 	@Inject
 	private DAO authDao;
+	@Inject
+	private JejaDao jejaDao;
 
 	@Transactional
 	public int joinAdmin(Admin ad,String adCode) {
@@ -126,11 +129,15 @@ public class AdminService {
 		PageToReportedReview repPage = ReportedPagingUtil.getPage(pageno, countOfBoard);
 		int srn = repPage.getStartRowNum();
 		int ern = repPage.getEndRowNum();
-		List<Review> reviewList = adminDao.findAllToReview(srn, ern);
-		List<AdminDto.ReportedReviewForList> dtoList = new ArrayList<AdminDto.ReportedReviewForList>();
-		for(Review review:reviewList) {
-			AdminDto.ReportedReviewForList dto = modelMapper.map(review,AdminDto.ReportedReviewForList.class);
-			dto.setRDate(review.getRDate().format(DateTimeFormatter.ofPattern("yyyy년MM월dd일")));
+		List<RequestBoard> rpboardList = adminDao.findAllToReportedBoard(srn, ern);
+		List<AdminDto.ReportedBoardForList> dtoList = new ArrayList<AdminDto.ReportedBoardForList>();
+		for(RequestBoard rqboard:rpboardList) {
+			AdminDto.ReportedBoardForList dto = modelMapper.map(rqboard,AdminDto.ReportedBoardForList.class);
+			Jeja jeja = jejaDao.findByJejaToJMno(rqboard.getJMno());
+			ReportedBoard rbboard = adminDao.readRpBoard(rqboard.getRbNo());
+			dto.setReason(rbboard.getReason());
+			dto.setJEmail(jeja.getJEmail());
+			dto.setRbWriteDateStr(rqboard.getRbWriteDate().format(DateTimeFormatter.ofPattern("yyyy년MM월dd일")));
 			dtoList.add(dto);
 		}
 		repPage.setList(dtoList);

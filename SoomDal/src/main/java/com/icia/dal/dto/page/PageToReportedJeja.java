@@ -3,7 +3,6 @@ package com.icia.dal.dto.page;
 import java.util.*;
 
 import com.icia.dal.dto.AdminDto;
-import com.icia.dal.dto.AdminDto.ReportedReviewForList;
 
 import lombok.*;
 

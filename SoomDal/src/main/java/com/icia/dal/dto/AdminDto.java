@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 
 public class AdminDto {
 	
+
 	@Data
 	@AllArgsConstructor
 	@NoArgsConstructor
@@ -59,11 +60,15 @@ public class AdminDto {
 	@AllArgsConstructor
 	@NoArgsConstructor
 	@Builder
-	public static class ReportedReviewForList {
-		private String rDate;
-		private String rWriter;
-		private int rScore;
-		private String rContent;
+	public static class ReportedBoardForList {
+		private int rbNo;
+		private String rbTitle;
+		private String rbWriteDateStr;
+		private String rbWriter;
+		private boolean rbIsBlock;
+		private int jMno;
+		private String jEmail;
+		private String reason;
 	}
 	
 	@Data
