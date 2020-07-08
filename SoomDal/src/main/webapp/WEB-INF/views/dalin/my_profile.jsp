@@ -323,6 +323,7 @@ hr{
 						<div id="rContent">
 							<p>${rv.RContent}</p>
 						</div>
+						<button class="btn btn-warning report" data-writer="${rv.RWriter }">신고</button>
 					</c:forEach>
 				</c:when>
 				<c:otherwise>
