@@ -249,25 +249,38 @@ hr{
 				<hr>
 			</div>
 			<div>
-			<c:forEach items="${readProfile.reviews}" var="rv">
-				<div id="review" >
-					<div id="rWriter">
-						<p>${rv.RWriter}</p>
+			<c:choose>
+				<c:when test="${empty readProfile.reviews =='false'}">
+					<c:forEach items="${readProfile.reviews}" var="rv">
+						<div id="review">
+							<div id="rWriter">
+								<p>${rv.RWriter}</p>
+							</div>
+							<div id="rScore">
+								<span>
+									<c:forEach begin="1" end="${rv.RScore}">
+										<img src="https://assets.cdn.soomgo.com/icons/icon-common-review-star-small-full.svg">
+									</c:forEach>
+									<c:forEach begin="${rv.RScore+1}" end="5">
+										<img src="https://assets.cdn.soomgo.com/icons/icon-common-review-star-small-empty.svg">
+									</c:forEach>
+								</span>
+							</div>
+							<div id="rDate">
+								<p>${rv.RDate}</p>
+							</div>
+						</div>
+						<div id="rContent">
+							<p>${rv.RContent}</p>
+						</div>
+					</c:forEach>
+				</c:when>
+				<c:otherwise>
+					<div style="margin-bottom: 50px; margin-top: 20px;">
+						<p style="font-size: 16px;">작성된 리뷰가 없습니다.</p>
 					</div>
-					<div id="rScore">
-						<p>${rv.RScore}</p>
-					</div>
-					<div id="rDate">
-						<p>${rv.RDate}</p>
-					</div>
-					<div>
-						<button class="btn btn-warning report" data-writer="${rv.RWriter }" >신고</button>
-					</div>
-				</div>
-				<div id="rContent">
-					<p>${rv.RContent}</p>
-				</div>
-				</c:forEach>
+				</c:otherwise>
+			</c:choose>				
 			</div>
 		</div>
 		<div>
