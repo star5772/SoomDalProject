@@ -20,6 +20,8 @@
 			e.preventDefault();
 			var url = "${pageContext.request.contextPath}/member/field/list";
 			url = url + "?pageno=" + pageno;
+			url = url + "&name=" + "${name}";
+			url = url + "&detailFName=" + "${detail.detailFName}";
 			url = url + "&searchType=" + $('#search').val();
 			url = url + "&keyword=" + $('#keyword').val();
 			location.href = url;

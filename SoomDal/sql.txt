@@ -340,7 +340,7 @@ CREATE TABLE Review (
    R_SAJIN_CNT NUMBER(1), /* 첨부사진 수 */
    R_WRITER NVARCHAR2(20), /* 작성자  */
    S_NO NUMBER(6), /* 사진 번호 */
-   d_mno number(7), /* 리뷰가 달린 달인 회원번호 */
+   d_mno numbe(7), /* 리뷰가 달린 달인 회원번호 */ 
    j_Accusation_cnt number(6), /* 리뷰 신고당한 횟수 */
    constraint pk_review primary key(r_no)
 );
