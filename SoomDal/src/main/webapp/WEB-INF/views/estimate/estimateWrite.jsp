@@ -104,7 +104,7 @@ hr{
 </head>
 <body>
 <div>
-<form action="/dal/member/estimate/sendEstimate" method="post" id="sendFrm">
+<form action="/dal/dalin/estimate/sendEstimate" method="post" id="sendFrm">
 	<h2>견적서 작성</h2>
 	<div style="border: 2px solid #F6F6F6; width: 700px; padding-left: 45px; margin-left: 200px;">
 		<input type="hidden" name="rNo" value="${rNo}">
@@ -144,7 +144,7 @@ hr{
 		</div>
 		</div>
 		<div id="btn">
-			<button id="back" onclick="location.href='/dal/member/request/readToRequestForReceive?rNo=${rNo}'" >뒤로가기</button>
+			<button id="back" onclick="location.href='/dal/jeja/request/readToRequestForReceive?rNo=${rNo}'" >뒤로가기</button>
 			&nbsp;&nbsp;
 			<button id="send" type="button">보내기</button>
 		</div>

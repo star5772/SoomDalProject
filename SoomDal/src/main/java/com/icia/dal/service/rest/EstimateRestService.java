@@ -65,4 +65,12 @@ public class EstimateRestService {
 			ucDao.insertToUseCash(uc);
 			handler.sendJejaMessage(jeja.getJName(),dal.getDName(),jeja.getJName() + "님이 견적서를 수락하였습니다");
 		}
+
+		public int setDisableByJejaToEstimate(int eNo, int jMno) {
+			return estimateDao.setDisableByJeja(eNo,jMno);
+		}
+
+		public int setDisableByDalinToEstimate(int eNo, int dMno) {
+			return estimateDao.setDisableByDalin(eNo,dMno);
+		}
 }

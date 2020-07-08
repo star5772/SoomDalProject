@@ -27,8 +27,6 @@ import com.icia.dal.entity.Jeja;
 public class LoginFailureHandler extends SimpleUrlAuthenticationFailureHandler {
 	
 	@Inject
-	private DalinDao dalDao;
-	@Inject
 	private JejaDao jejaDao;
 	
 	private RedirectStrategy rs = new DefaultRedirectStrategy();
@@ -43,7 +41,7 @@ public class LoginFailureHandler extends SimpleUrlAuthenticationFailureHandler {
 			Jeja jeja = jejaDao.findById(JejaId);
 			if(jeja==null) {
 				session.setAttribute("jidmsg", "아이디를 찾을 수 없습니다");
-			}
+			}else {
 				int loginFailureCnt = jeja.getJLoginFailureCnt()+1;
 				if(loginFailureCnt<5) {
 					jejaDao.updateJeja(Jeja.builder().jEmail(JejaId).jLoginFailureCnt(1).build());
@@ -54,9 +52,10 @@ public class LoginFailureHandler extends SimpleUrlAuthenticationFailureHandler {
 				}else if(jeja.getJIsBlock()==true){
 					session.setAttribute("jmsg", "정책위반으로 인해 정지된 계정입니다 관리자에게 문의해주세요");
 				}
-			
+			}
+		}else if(exception instanceof DisabledException) {
 			session.setAttribute("dmsg", "정지된 계정입니다. 관리자에게 문의하세요");
-		}
+		}	
 		rs.sendRedirect(request, response, "/member/login");
 	}
 }

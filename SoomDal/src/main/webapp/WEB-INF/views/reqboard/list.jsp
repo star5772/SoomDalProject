@@ -63,7 +63,7 @@
 			<c:forEach items="${reqPage.list}" var="RequestBoard">
 				<tr>
 					<td>${RequestBoard.rbNo }</td>
-					<td><a href="/dal/member/reqboard/read?rbNo=${RequestBoard.rbNo}">${RequestBoard.rbTitle}</a></td>
+					<td><a href="/dal/jeja/reqboard/read?rbNo=${RequestBoard.rbNo}">${RequestBoard.rbTitle}</a></td>
 					<td>${RequestBoard.rbWriter}</td>
 					<td>${RequestBoard.rbWriteDateStr}</td>
 					<td>${RequestBoard.rbReadCnt}</td>
@@ -76,27 +76,27 @@
 		<div id="inner">
 		<ul class="pagination">
 			<c:if test="${reqPage.prev==true }">
-				<li><a href="/dal/member/reqboard/list?pageno=${reqPage.startPage-1}">이전</a></li>
+				<li><a href="/dal/jeja/reqboard/list?pageno=${reqPage.startPage-1}">이전</a></li>
 			</c:if>
 			<c:forEach begin="${reqPage.startPage}" end="${reqPage.endPage}" var="i">
 				<c:choose>
 					<c:when test="${reqPage.pageno eq i}">
 						<li class="active">
-							<a href="/dal/member/reqboard/list?pageno=${i}">${i}</a>
+							<a href="/dal/jeja/reqboard/list?pageno=${i}">${i}</a>
 						</li>
 					</c:when>
 					<c:otherwise>
-						<li><a href="/dal/member/reqboard/list?pageno=${i}">${i}</a></li>
+						<li><a href="/dal/jeja/reqboard/list?pageno=${i}">${i}</a></li>
 					</c:otherwise>
 				</c:choose>
 			</c:forEach>
 			<c:if test="${reqPage.next==true }">
-				<li><a href="/dal/member/reqboard/list?pageno=${reqPage.endPage+1}">다음</a></li>
+				<li><a href="/dal/jeja/reqboard/list?pageno=${reqPage.endPage+1}">다음</a></li>
 			</c:if>
 		</ul>
 		</div>
 		<div class="form-group">
-		<a class="btn btn-warning" href="/dal/member/reqboard/write" style="color: white; font-weight: bold; font-size: 13px; float: right;">글쓰기</a>
+		<a class="btn btn-warning" href="/dal/jeja/reqboard/write" style="color: white; font-weight: bold; font-size: 13px; float: right;">글쓰기</a>
 	</div>
 	</div>
 	

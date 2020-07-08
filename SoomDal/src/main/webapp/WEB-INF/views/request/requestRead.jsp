@@ -215,13 +215,13 @@ hr {
 				<button id="no" class="btn btn-secondary" style="width: 50px;">거절</button>
 				&nbsp;&nbsp;
 				<button class="btn btn-warning" style="width: 50px;" id="ok"
-					onclick="location.href='/dal/member/estimate/sendEstimate?rNo=${readRequest.RNo}'">수락</button>
+					onclick="location.href='/dal/dalin/estimate/sendEstimate?rNo=${readRequest.RNo}'">수락</button>
 				<input type="hidden" name="rDalinIsOk" id="dalinIsOk" value="">
 			</div>
 			</c:when>
 			<c:otherwise>
 				<button class="btn btn-secondary" style="width: 50px; margin-left: 530px; margin-top: 50px;"
-				onclick="location.href='/dal/member/request/receiveRequest?dMno=${readRequest.DMno}'">목록</button>
+				onclick="location.href='/dal/jeja/request/receiveRequest?dMno=${readRequest.DMno}'">목록</button>
 			</c:otherwise>
 		</c:choose>
 	</sec:authorize>
@@ -358,7 +358,7 @@ hr {
 		</div>
 		<div id="btn">
 			<button class="btn btn-secondary" style="width: 50px;"
-				onclick="location.href='/dal/member/request/sendRequestList?jMno=${readRequest.JMno}'">목
+				onclick="location.href='/dal/jeja/request/sendRequestList?jMno=${readRequest.JMno}'">목
 				록</button>
 		</div>
 	</sec:authorize>

@@ -44,7 +44,7 @@ button{
 <body>
 <sec:authentication property="principal.username" var="username"/>
 <h1 style="text-align: center; font-weight: bold; margin-top: 70px;">새로운 비밀번호를 입력해 주세요!</h1>
-	<form action="/dal/member/resetToJejaPwd" method="post" id="newPwd">
+	<form action="/dal/jeja/resetToJejaPwd" method="post" id="newPwd">
 	<div id="one">
 		비밀번호&nbsp;<input type="password" name="jPassword" id="dp">
 	</div>
