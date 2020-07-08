@@ -11,6 +11,7 @@ import javax.validation.constraints.NotNull;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.icia.dal.Exception.ReadFailException;
 import com.icia.dal.dao.DalinDao;
@@ -55,6 +56,7 @@ public class EstimateService {
 	
 	
 	// 견적서작성
+	@Transactional
 	public void writeToEstimate(Estimate et, String username) {
 		Dalin dalin = dalDao.findByDalin(username);
 		requestDao.setIsOk(et.getRNo());

@@ -419,18 +419,18 @@ $(function() {
 	<p style="text-align: center; margin-top: 40px; margin-bottom:-50px; font-weight: bold; font-size: x-large;">달인님의 전문 분야를 선택해주세요 !</p><br><br><br><br>
 	<div id="main-service-sport" class="divService" >
 		<label style="display: inline; margin-left: 72px;" >스포츠</label><br>
-		<a href="#" id="main-sport"><img src="/image/sport.jpg" id="sport"style="width:200px; height: 200px"></a><br>
+		<a href="#" id="main-sport"><img src="/dal/image/sport.jpg" id="sport"style="width:200px; height: 200px"></a><br>
 		<input type="radio" name="radio1" id="sport1"  class="border" value="sport" style="margin-left: 100px;">
 		<input type="hidden" name="fNo" id="fNo"value="">
 	</div>
 	<div id="main-service-instrument"class="divService">
 		<label style="display: inline;margin-left: 80px;">악기</label><br>
-		<a href="#" id="main-instrument"><img src="/image/music.jpg" id="instrument"style="width:200px; height: 200px" ></a><br>
+		<a href="#" id="main-instrument"><img src="/dal/image/music.jpg" id="instrument"style="width:200px; height: 200px" ></a><br>
 		<input type="radio" name="radio1" id="instrument1"class="border" value="instrument"style="margin-left: 100px;">
 	</div>
 	<div id="main-service-art"class="divService">
 		<label style="display: inline;margin-left: 80px;">미술</label><br>
-		<a href="#" id="main-art"><img src="/image/art.jpg" id="art"style="width:200px; height: 200px" ></a><br>
+		<a href="#" id="main-art"><img src="/dal/image/art.jpg" id="art"style="width:200px; height: 200px" ></a><br>
 		<input type="radio" name="radio1" id="art1"class="border"value="art" style="margin-left: 100px;">
 	</div>
 	<div style="height: 100px; width: 630px; margin-top: 50px;">

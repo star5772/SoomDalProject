@@ -44,11 +44,11 @@
 <div id="manage_wrap">
 	<div id="menu_wrap" style="width: 200px; display: inline-block; text-align: center; padding: 150px 20px; float: left;">
 		<div class="list-group" style="border:#CFCFCF;">
-    		<a href="/dal/member/admin/member_manage" class="list-group-item" id="user">회원 관리</a>
-    		<a href="/dal/member/admin/review_manage" class="list-group-item" id="review">게시물 관리</a>
-    		<a href="/dal/member/admin/jeja_manage" class="list-group-item" id="report">신고회원 관리</a>
-    		<a href="/dal/member/admin/enabled_manage" class="list-group-item" id="enabled">블락회원 관리</a>
-    		<a href="/dal/member/admin/refund_manage" class="list-group-item">환불 관리</a>
+    		<a href="/dal/admin/member_manage" class="list-group-item" id="user">회원 관리</a>
+    		<a href="/dal/admin/review_manage" class="list-group-item" id="review">게시물 관리</a>
+    		<a href="/dal/admin/jeja_manage" class="list-group-item" id="report">신고회원 관리</a>
+    		<a href="/dal/admin/enabled_manage" class="list-group-item" id="enabled">블락회원 관리</a>
+    		<a href="/dal/admin/refund_manage" class="list-group-item">환불 관리</a>
   		</div>
 	</div>
 </div>
@@ -76,7 +76,7 @@
 				<tbody>
 		 		<c:forEach items="${jeja.list}" var="j">
 					<tr>
-						<td>${j.JJoinDate}</td>
+						<td>${j.JJoinDateStr}</td>
 						<td>${j.JEmail }</td>
 						<td>${j.JName }</td>
 						<td>${j.JAccusationCnt }</td>
@@ -93,16 +93,16 @@
 						<c:choose>
 							<c:when test="${jeja.pageno eq i }">
 								<li class="active">
-									<a href="/dal/member/admin/jeja_manage?pageno=${i }">${i }</a>
+									<a href="/dal/admin/jeja_manage?pageno=${i }">${i }</a>
 								</li>
 							</c:when>
 							<c:otherwise>
-								<li><a href="/dal/member/admin/jeja_manage?pageno=${i }">${i }</a>
+								<li><a href="/dal/admin/jeja_manage?pageno=${i }">${i }</a>
 							</c:otherwise>
 						</c:choose>
 					</c:forEach>
 					<c:if test="${jeja.next==true }">
-						<li><a href="/dal/member/admin/jeja_manage?pageno=${jeja.endPage+1 }">다음</a></li>
+						<li><a href="/dal/admin/jeja_manage?pageno=${jeja.endPage+1 }">다음</a></li>
 					</c:if>
 				</ul>
 			</div>

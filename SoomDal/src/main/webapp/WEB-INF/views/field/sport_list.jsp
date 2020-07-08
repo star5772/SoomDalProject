@@ -62,56 +62,56 @@ button:hover {
 	<h3 id="text">스포츠 서비스에 오신걸 환영합니다 ! 하고싶은 Sport를 배우세요 !</h3>
 	<div class="service">
 		<div class="card">
-  			<img class="card-img-top" src="#" alt="Card image cap">
+  			<img class="card-img-top" src="/dal/image/스케이트보드.jpg" alt="Card image cap">
   			<div class="card-body">
   			<button onclick="location.href='/dal/member/field/list?detailFName=skateboard&name=스케이트보드'" style="margin-left: 45px; font-weight: bold;" >스케이트보드 레슨</button>
   			</div>
 		</div>
 		<div class="card">
-  			<img class="card-img-top" src="#" alt="Card image cap">
+  			<img class="card-img-top" src="/dal/image/클라이밍.png" alt="Card image cap">
   			<div class="card-body">
   			<button onclick="location.href='/dal/member/field/list?detailFName=climming&name=클라이밍'" style="margin-left: 45px; font-weight: bold;" >클라이밍 레슨</button>
   			</div>
 		</div>
 		<div class="card">
-  			<img class="card-img-top" src="#" alt="Card image cap">
+  			<img class="card-img-top" src="/dal/image/골프.jpg" alt="Card image cap">
   			<div class="card-body">
   			<button onclick="location.href='/dal/member/field/list?detailFName=golf&name=골프'" style="margin-left: 45px; font-weight: bold;" >골프 레슨</button>
   			</div>
 		</div>
 		<div class="card">
-  			<img class="card-img-top" src="#" alt="Card image cap">
+  			<img class="card-img-top" src="/dal/image/볼링.jpg" alt="Card image cap">
  			<div class="card-body">
  			<button onclick="location.href='/dal/member/field/list?detailFName=bowling&name=볼링'" style="margin-left: 45px; font-weight: bold;" >볼링 레슨</button>
   			</div>
 		</div>
 		<div class="card">
-  			<img class="card-img-top" src="#" alt="Card image cap">
+  			<img class="card-img-top" src="/dal/image/탁구.jpg" alt="Card image cap">
   			<div class="card-body">
   			<button onclick="location.href='/dal/member/field/list?detailFName=tabletennis&name=탁구'" style="margin-left: 45px; font-weight: bold;" >탁구 레슨</button>
   			</div>
 		</div>
 		<div class="card">
-  			<img class="card-img-top" src="#" alt="Card image cap">
+  			<img class="card-img-top" src="/dal/image/당구.jpg" alt="Card image cap">
   			<div class="card-body">
   			<button onclick="location.href='/dal/member/field/list?detailFName=billiards&name=당구'" style="margin-left: 45px; font-weight: bold;" >당구 레슨</button>
   			</div>
 		</div>
 		<div class="card">
-  			<img class="card-img-top" src="#" alt="Card image cap">
+  			<img class="card-img-top" src="/dal/image/필라테스.jpg" alt="Card image cap">
   			<div class="card-body">
   			<button onclick="location.href='/dal/member/field/list?detailFName=pilates&name=필라테스'" style="margin-left: 45px; font-weight: bold;" >필라테스 레슨</button>
   			</div>
 		</div>
 		<div class="card">
-  			<img class="card-img-top" src="#" alt="Card image cap">
+  			<img class="card-img-top" src="/dal/image/스쿼시.jpg" alt="Card image cap">
   			<div class="card-body">
   			<button onclick="location.href='/dal/member/field/list?detailFName=squash&name=스쿼시'" style="margin-left: 45px; font-weight: bold;" >스쿼시 레슨</button>
   			</div>
 		</div>
 		
 		<div class="card">
-  			<img class="card-img-top" src="#" alt="Card image cap">
+  			<img class="card-img-top" src="/dal/image/호신술.jpg" alt="Card image cap">
   			<div class="card-body">
   			<button onclick="location.href='/dal/member/field/list?detailFName=defense&name=호신술'" style="margin-left: 45px; font-weight: bold;" >호신술 레슨</button>
   			</div>

@@ -12,6 +12,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.icia.dal.Exception.JobFailException;
@@ -59,10 +60,10 @@ public class AdminService {
 	@Inject
 	private DAO authDao;
 
-	
+	@Transactional
 	public int joinAdmin(Admin ad,String adCode) {
 		if(adCode.equals("cktofhdl")==false)
-			throw new JobFailException();
+			throw new JobFailException("관리자코드가 올바르지 않습니다");
 		String pwd = ad.getPassword();
 		String encoded = pwdEncoder.encode(pwd);
 		ad.setPassword(encoded);
@@ -182,6 +183,7 @@ public class AdminService {
 		return dfList;
 	}
 	
+	@Transactional
 	public int insertDetailFieldSajin(DetailField df,MultipartFile sajin) throws IllegalStateException, IOException {
 
 		if(sajin != null && sajin.isEmpty()==false) {
@@ -199,11 +201,6 @@ public class AdminService {
 			df.setDetailFSajin(fieldPath+ "anony.jpg");
 		}
 		return adminDao.insertToDetailFName(df);
-	}
-	
-	public List<Field> fieldList() {
-		List<Field> fList = adminDao.findAllField();
-		return fList;
 	}
 	
 	

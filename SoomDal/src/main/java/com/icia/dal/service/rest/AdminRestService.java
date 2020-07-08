@@ -7,6 +7,7 @@ import javax.inject.Inject;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.icia.dal.dao.AdminDao;
@@ -29,7 +30,7 @@ public class AdminRestService {
 	private JejaDao jejaDao;
 	@Inject
 	private PaymentDao npDao;
-
+	@Transactional
 	public int insertFieldSajin(Field fl,MultipartFile sajin) throws IllegalStateException, IOException {
 		adminDao.deleteToField(fl.getFNo());
 		if(sajin != null && sajin.isEmpty()==false) {
@@ -48,7 +49,7 @@ public class AdminRestService {
 		}
 		return adminDao.insertToField(fl);
 	}
-	
+	@Transactional
 	public void updateJenabled(boolean jIsBlock, String jEmail) {
 		if(jIsBlock==true) {
 			Jeja jeja = Jeja.builder().jEmail(jEmail).jIsBlock(jIsBlock).enabled(false).build();
@@ -58,7 +59,7 @@ public class AdminRestService {
 			jejaDao.updateJeja(jeja);
 		}
 	}
-
+	@Transactional
 	public boolean confirmRefund(String pCode) {
 		NowRefund nr = NowRefund.builder().pCode(pCode).pRefundIsOk(true).build();
 		npDao.updateToNowRefund(nr);

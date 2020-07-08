@@ -32,7 +32,7 @@ public class PaymentRestController {
 	public ResponseEntity<?> ContrastPcode(String AuthCode,Principal principal) throws JobFailException {
 		String username = principal.getName();
 		if(paymentService.reqCashMember(username)==null) {
-			throw new JobFailException();
+			throw new JobFailException("해당하는 정보가 없습니다");
 		}else {
 			paymentService.addCashToDalin(AuthCode,username);
 		}

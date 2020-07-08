@@ -4,6 +4,7 @@ import javax.inject.*;
 
 import org.springframework.security.crypto.password.*;
 import org.springframework.stereotype.*;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.icia.dal.Exception.*;
 import com.icia.dal.dao.*;
@@ -24,7 +25,7 @@ public class DalinRestService {
 			throw new MembernameExistException();
 		return true;
 	}
-	
+	@Transactional
 	public boolean update(DalinDto.DtoForUpdateToDalin dto, String dEmail) {
 		Dalin dalin = dalDao.findByDalin(dEmail);
 		System.out.println(dto);
@@ -55,7 +56,7 @@ public class DalinRestService {
 			throw new UserNotFoundException();
 		return dalDao.findJNameAndJTelByDalinId(dName, dTel);
 	}
-
+	@Transactional
 	public void report(String jEmail, String dEmail, String reason) throws JejaNotFoundException {
 		// 신고하려는 제자 없으면 예외
 		if(jejaDao.findById(jEmail)==null)
@@ -65,7 +66,7 @@ public class DalinRestService {
 		int jMno = jejaDao.findById(jEmail).getJMno();
 		// 중복으로 신고하면 예외
 		if(dalDao.findReportDalin(dMno,jMno)==true)
-			throw new JobFailException();
+			throw new JobFailException("같은사람을 여러번 신고 할 수없습니다");
 		// 신고테이블 추가
 		dalDao.reportJeja(dMno,jMno,reason);
 		// 신고 횟수 증가

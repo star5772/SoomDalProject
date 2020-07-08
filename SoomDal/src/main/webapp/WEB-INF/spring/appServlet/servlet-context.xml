@@ -40,23 +40,35 @@
 	<!-- 트랙잭션 처리를 위한 어노테이션 활성화 -->
 	<tx:annotation-driven proxy-target-class="true" transaction-manager="txManager"/>
 	
+	<!--(로그인 했을때 하면 안되는거 막는거)Interceptor설정  발동하는거 경로-->
+	
+	<beans:bean id="authenticationInterceptor" class="com.icia.dal.util.interceptor.AuthenticationInterceptor"></beans:bean>
+	<interceptors>
+		<interceptor>
+			<mapping path="/admin/login"/>
+			<mapping path="/admin/join"/>
+			<mapping path="/dalin/join"/>
+			<mapping path="/dalin/field_list"/>
+			<mapping path="/dalin/change_pwd"/>
+			<mapping path="/jeja/join"/>
+			<mapping path="/jeja/change_pwd"/>
+			<mapping path="/member/login"/>
+			<mapping path="/member/find_id"/>
+			<mapping path="/member/reset_pwd"/>
+			<mapping path="/member/join_select"/>
+			<mapping path="/dalin/check_email"/>
+			<mapping path="/jeja/check_email"/>
+			<mapping path="/dalin/find_id"/>
+			<mapping path="/jeja/find_id"/>
+			<beans:ref bean="authenticationInterceptor"/>
+		</interceptor>
+	</interceptors>
+	
+	
 	<!-- 웹소켓 핸들러 설정 -->
 	<websocket:handlers>
     	<websocket:mapping path="/member/socket" handler="messageWebSocketHandler" />
    </websocket:handlers>
-	
-	<!--(로그인 했을때 하면 안되는거 막는거)Interceptor설정  발동하는거 경로-->
-	
-	<!-- <beans:bean id="authenticationInterceptor" class="com.icia.dal.util.interceptor.AuthenticationInterceptor"></beans:bean>
-	<interceptors>
-		<interceptor>
-			<mapping path="/user/login"/>
-			<mapping path="/user/find_pwd"/>
-			<mapping path="/user/find_id"/>
-			<beans:ref bean="authenticationInterceptor"/>
-		</interceptor>
-	</interceptors> -->
-	
 	
 	
 </beans:beans>

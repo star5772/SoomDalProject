@@ -9,7 +9,7 @@
 </head>
 <body>
 	<div>
-		<img src="/image/MainLogo.png">
+		<img src="/dal/image/MainLogo.png">
 		<h1>회원가입을 환영합니다</h1>
 	</div>
 </body>

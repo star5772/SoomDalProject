@@ -47,18 +47,18 @@
 
 	<div style="display: inline-block; width: 80px; position: absolute; left: 69.7%; top: 220px; border: 0; outline: 0;">
 		<select style="border-style: none;" onchange="location.href=this.value">
-			<option value="/dal/member/admin/member_manage">제자회원</option>
-			<option value="/dal/member/admin/member_manage_d" >달인회원</option>
+			<option value="/dal/admin/member_manage">제자회원</option>
+			<option value="/dal/admin/member_manage_d" >달인회원</option>
 		</select>
 	</div>
 <div id="manage_wrap">
 	<div id="menu_wrap" style="width: 200px; display: inline-block; text-align: center; padding: 150px 20px; float: left;">
 		<div class="list-group" style="border:#CFCFCF;">
-    		<a href="/dal/member/admin/member_manage" class="list-group-item" id="user">회원 관리</a>
-    		<a href="/dal/member/admin/review_manage" class="list-group-item" id="review">게시물 관리</a>
-    		<a href="/dal/member/admin/jeja_manage" class="list-group-item" id="report">신고회원 관리</a>
-    		<a href="/dal/member/admin/enabled_manage" class="list-group-item" id="enabled">블락회원 관리</a>
-    		<a href="/dal/member/admin/refund_manage" class="list-group-item">환불 관리</a>
+    		<a href="/dal/admin/member_manage" class="list-group-item" id="user">회원 관리</a>
+    		<a href="/dal/admin/review_manage" class="list-group-item" id="review">게시물 관리</a>
+    		<a href="/dal/admin/jeja_manage" class="list-group-item" id="report">신고회원 관리</a>
+    		<a href="/dal/admin/enabled_manage" class="list-group-item" id="enabled">블락회원 관리</a>
+    		<a href="/dal/admin/refund_manage" class="list-group-item">환불 관리</a>
   		</div>
 	</div>
 </div>
@@ -107,22 +107,22 @@
 			<div style="text-align: center; display: inline-block; margin-left: 35%">
 				<ul class="pagination">
 					<c:if test="${jeja.prev==true }">
-						<li><a href="/dal/member/admin/member_manage?pageno=${jeja.startPage-1 }">이전</a></li>
+						<li><a href="/dal/admin/member_manage?pageno=${jeja.startPage-1 }">이전</a></li>
 					</c:if>
 					<c:forEach begin="${jeja.startPage }" end="${jeja.endPage }" var="i">
 						<c:choose>
 							<c:when test="${jeja.pageno eq i }">
 								<li class="active">
-									<a href="/dal/member/admin/member_manage?pageno=${i }">${i }</a>
+									<a href="/dal/admin/member_manage?pageno=${i }">${i }</a>
 								</li>
 							</c:when>
 							<c:otherwise>
-								<li><a href="/dal/member/admin/member_manage?pageno=${i }">${i }</a>
+								<li><a href="/dal/admin/member_manage?pageno=${i }">${i }</a>
 							</c:otherwise>
 						</c:choose>
 					</c:forEach>
 					<c:if test="${jeja.next==true }">
-						<li><a href="/dal/member/admin/member_manage?pageno=${jeja.endPage+1 }">다음</a></li>
+						<li><a href="/dal/admin/member_manage?pageno=${jeja.endPage+1 }">다음</a></li>
 					</c:if>
 				</ul>
 			</div>

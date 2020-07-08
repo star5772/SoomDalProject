@@ -111,6 +111,7 @@ public class DalinController {
 		return new ModelAndView("main").addObject("viewName","dalin/field_select.jsp");
 	}
 	
+	
 	@GetMapping("/member/system/msg")
 	public ModelAndView msg() {
 		return new ModelAndView("main").addObject("viewName","system/msg.jsp");

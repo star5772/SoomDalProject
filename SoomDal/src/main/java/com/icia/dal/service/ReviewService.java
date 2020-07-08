@@ -22,10 +22,6 @@ import com.icia.dal.entity.ReviewAuthority;
 @Service
 public class ReviewService {
 	@Inject
-	private ReviewDao reviewDao;
-	@Inject
-	private ModelMapper modelMapper;
-	@Inject
 	private LessonHistoryDao lhDao;
 	@Inject
 	private ReviewAuthorityDao reviewAuthDao;

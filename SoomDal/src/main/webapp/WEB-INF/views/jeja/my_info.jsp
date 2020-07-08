@@ -72,7 +72,7 @@
       <div id="my_info_profile" style="height: 100px;">
                <a href="/dal/jeja/my_info_update" style="text-decoration:none">
          	<div id="profile">
-         		<img src="/image/jeja.jpg" class="img-thumbnail" style="width: 70px; height: 70px;">
+         		<img src="/dal/image/제자프로필.jpg" class="img-thumbnail" style="width: 70px; height: 70px;">
          	</div>
          	<div id="user_info" style="display:inline-block; width: 530px; color: black;">
             	<div id="user_name">

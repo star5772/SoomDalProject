@@ -18,6 +18,7 @@ import org.springframework.beans.factory.annotation.*;
 import org.springframework.security.crypto.password.*;
 import org.springframework.stereotype.*;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.multipart.*;
 
@@ -55,6 +56,7 @@ public class DalinService {
 	@Inject
 	private DetailFieldDao detailFieldDao;
 
+	@Transactional
 	public void join(DtoForJoinToDalin dto) {
 		Dalin dalin = modelMapper.map(dto, Dalin.class);
 		// 레벨 초기설정값 = 노말
@@ -76,7 +78,7 @@ public class DalinService {
 	}
 
 	
-
+	@Transactional
 	public void delete(String dEmail) {
 		if(dalDao.findByDalin(dEmail)==null)
 			throw new RuntimeException();
@@ -95,7 +97,7 @@ public class DalinService {
 		return dto;
 	}
 
-	
+	@Transactional
 	public void profileUpdate(DalinDto.DtoForProfileUpdateToDalin dto, MultipartFile dProfile, MultipartFile profileAttachment0, MultipartFile profileAttachment1, MultipartFile profileAttachment2, MultipartFile profileAttachment3 ,MultipartFile profileAttachment4, String dEmail) throws IllegalStateException, IOException, DalinNotFoundException {
 		Dalin dalin = dalDao.findByDalin(dEmail);
 		if(dalin==null)
@@ -397,15 +399,14 @@ public class DalinService {
 		return dalDao.findByDalin(dEmail);
 	}
 	
+	@Transactional
 	public void profileSajin(DalinDto.DtoForProfileToDalin dto, MultipartFile sajins) throws IllegalStateException, IOException {
 		Dalin dalin = modelMapper.map(dto, Dalin.class);
-		
 		if(sajins!=null && sajins.isEmpty()==false) {
 			if(sajins.getContentType().toLowerCase().startsWith("image/")==true) {
 				int lastIndexOfDot = sajins.getOriginalFilename().lastIndexOf('.');
 				String extension = sajins.getOriginalFilename().substring(lastIndexOfDot+1);
 				File profile = new File(profileFolder, dalin.getDEmail() + "." + extension);
-				
 				sajins.transferTo(profile);
 				dalin.setDProfile(profilePath + profile.getName());
 			}
@@ -414,26 +415,24 @@ public class DalinService {
 	
 	
 	
-	
+	@Transactional
 	public List<Review> deleteReview(Integer rNo,Integer dMno,String writer) {
 		Review rv = reviewDao.findByReview(rNo);
 		if(writer.equals(rv.getRWriter())==false)
-			throw new JobFailException();
+			throw new JobFailException("작성자만 삭제 할 수 있습니다");
 		reviewDao.deleteToReview(rNo);
 		return reviewDao.findAllReview(dMno);
 	}
 	
 
-
+	@Transactional
 	public void resetPassword(String dEmail, String dTel) throws MessagingException, DalinNotFoundException {
 		Dalin dalin = dalDao.findByDalin(dEmail);
 		if(dalin==null)
 			throw new DalinNotFoundException();
 		if(dalin.getDEmail().equals(dEmail)==false)
 			throw new DalinNotFoundException();
-		
 		String newPassword = RandomStringUtils.randomAlphanumeric(20);
-		/* String encodePwd = pwdEncoder.encode(newPassword); */
 		dalDao.updateToDalin(Dalin.builder().dEmail(dEmail).dPassword(pwdEncoder.encode(newPassword)).build());
 		StringBuffer text = new StringBuffer("<p>임시비밀번호를 발급했습니다</p>");
 		text.append("<p>임시 비밀번호:").append(newPassword).append("</p>");
@@ -441,11 +440,9 @@ public class DalinService {
 		Mail mail = Mail.builder().sender("webmaster@icia.com").receiver(dEmail).title("임시비밀번호 발급 안내").content(text.toString()).build();
 		mailUtil.sendMail(mail);
 	}
-
+	@Transactional
 	public void changePwd(String dPassword, String newPassword, String dEmail) throws DalinNotFoundException {
-		System.out.println(dEmail+"-------------------------------------------------------");
 		Dalin dalin = dalDao.findByDalin(dEmail);
-		System.out.println(dalin+"---------------------------------------");
 		if(dalin==null)
 			throw new DalinNotFoundException();
 		String encodedPassword = dalin.getDPassword();
@@ -454,7 +451,7 @@ public class DalinService {
 			dalDao.updateToDalin(Dalin.builder().dPassword(newEncodedPassword).dEmail(dEmail).build());
 		}
 		else 
-			throw new JobFailException();
+			throw new JobFailException("비밀번호가 일치하지 않습니다");
 		 
 	}
 	

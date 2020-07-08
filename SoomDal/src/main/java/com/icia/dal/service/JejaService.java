@@ -12,6 +12,7 @@ import org.apache.commons.lang.RandomStringUtils;
 import org.modelmapper.ModelMapper;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.icia.dal.Exception.*;
 import com.icia.dal.dao.DAO;
@@ -50,7 +51,7 @@ public class JejaService {
 	private RequestDao reqDao;
 	
 	
-
+	@Transactional
 	public void join(Jeja jeja) {
 		String pwd = jeja.getJPassword();
 		String encodedPwd = pwdEncoder.encode(pwd);
@@ -60,7 +61,7 @@ public class JejaService {
 			throw new RuntimeException();
 		authDao.insertAuthority(jeja.getJEmail(), "ROLE_JEJA");
 	}
-	
+	@Transactional
 	public void delete(String jEmail) {
 		// 제자 회원탈퇴
 		Jeja jeja = dao.findById(jEmail);
@@ -108,7 +109,7 @@ public class JejaService {
 		}
 		return dao.findById(jEmail);
 	}
-	
+	@Transactional
 	public void resetPassword(String jEmail, String jTel) throws JejaNotFoundException, MessagingException {
 		Jeja jeja = dao.findById(jEmail);
 		if(jeja==null)
@@ -117,7 +118,6 @@ public class JejaService {
 			throw new JejaNotFoundException();
 		
 		String newPassword = RandomStringUtils.randomAlphanumeric(20);
-		/* String encodePwd = pwdEncoder.encode(newPassword); */
 		dao.updateJeja(Jeja.builder().jEmail(jEmail).jPassword(pwdEncoder.encode(newPassword)).build());
 		StringBuffer text = new StringBuffer("<p>임시비밀번호를 발급했습니다</p>");
 		text.append("<p>임시 비밀번호:").append(newPassword).append("</p>");
@@ -125,7 +125,7 @@ public class JejaService {
 		Mail mail = Mail.builder().sender("webmaster@icia.com").receiver(jEmail).title("임시비밀번호 발급 안내").content(text.toString()).build();
 		mailUtil.sendMail(mail);
 	}
-	
+	@Transactional
 	public void changePwd(@NotNull String jPassword, String newPassword, String jEmail) throws JejaNotFoundException {
 		Jeja jeja = dao.findById(jEmail);
 		if(jeja==null)
@@ -136,7 +136,7 @@ public class JejaService {
 			dao.updateJeja(Jeja.builder().jPassword(newEncodedPassword).jEmail(jEmail).build());
 		}
 		 else 
-			 throw new JobFailException();
+			 throw new JobFailException("비밀번호가 일치하지 않습니다");
 		 
 	}
 	

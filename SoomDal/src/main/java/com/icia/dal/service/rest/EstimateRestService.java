@@ -4,6 +4,7 @@ import javax.inject.*;
 
 import org.apache.commons.lang3.*;
 import org.springframework.stereotype.*;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.icia.dal.dao.*;
 import com.icia.dal.entity.*;
@@ -26,7 +27,8 @@ public class EstimateRestService {
 	@Inject
 	private MessageWebSocketHandler handler;
 	
-	// 제자회원이 견적서 수락시 동작
+		// 제자회원이 견적서 수락시 동작
+		@Transactional
 		public void acceptToEstimate(int eNo,int dMno,int jMno) {
 			Jeja jeja = jejaDao.findByJejaToJMno(jMno);
 			// 견적서에 수락여부 "수락함" 으로 변경
