@@ -20,12 +20,8 @@
 			e.preventDefault();
 			var url = "${pageContext.request.contextPath}/member/field/list";
 			url = url + "?pageno=" + pageno;
-<<<<<<< HEAD
-			url = url + "&detailFName" + ${detail.detailFName};
-=======
 			url = url + "&name=" + "${name}";
 			url = url + "&detailFName=" + "${detail.detailFName}";
->>>>>>> branch 'master' of https://github.com/star5772/SoomDalProject
 			url = url + "&searchType=" + $('#search').val();
 			url = url + "&keyword=" + $('#keyword').val();
 			location.href = url;
@@ -98,7 +94,7 @@
 					</c:choose>
 					<div id="dal_content">
 						<h5>
-							<a href="/dal/member/dalin_profile?dMno=${list.DMno }"><h5 style="font-weight: bold; font-size: 18px;">${list.DName }</h5></a>
+							<a href="/dal/jeja/dalin_profile?dMno=${list.DMno }"><h5 style="font-weight: bold; font-size: 18px;">${list.DName }</h5></a>
 						</h5>
 						<p style="font-size: 14px;">${list.DIntro }</p>
 						<div>
