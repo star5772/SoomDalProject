@@ -20,15 +20,17 @@
 				reason:radioVal
 			}
 			$.ajax({
-				url:"/dal/jeja/reqboard/report",
+				url:"/dal/member/reqboard/report",
 				method:"post",
 				data:params,
 				success: function() {
+					console.log("===");
 					Swal.fire({
 						icon:"success",
 						title:"의견 감사합니다!",
 						text:"신고가 접수되었습니다"
-					}).then(()=>window.close())
+					})
+					//.then(()=>window.close())
 				},error: function() {
 					Swal.fire("실패!", "중복신고는 불가능합니다", "info");
 				}

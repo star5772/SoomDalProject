@@ -304,7 +304,7 @@ body {
 	<form id="profileReadFrm" action="dalin/info_update" method="get" enctype="multipart/form-data"></form>
 	<div id="dalinUpdate">
 		<div id="dProfile">
-				<p id="dName">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${dalin.DName}</p>
+				<p id="dName" style="margin-left: 380px;">${dalin.DName}</p>
 			<div>
 				<img id="show_profile" src="${dalin.DProfile }" style="border-radius: 50%; height: 200px; width: 200px;">
 			</div>

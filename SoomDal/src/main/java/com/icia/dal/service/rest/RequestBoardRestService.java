@@ -19,8 +19,10 @@ public class RequestBoardRestService {
 		if(reqDao.findByRequestBoard(rbNo)==null)
 			throw new JobFailException("해당 글이 없습니다");
 		// 중복으로 신고하면 예외처리
-		if(reqDao.findReportUser(rbNo,username)==true)
-			throw new JobFailException("같은사람을 여러 번 신고할 수 없습니다");
+		if(reqDao.findReportUser(rbNo,username)==true) {
+			System.out.println("=========중복");
+			throw new RuntimeException();
+		}
 		// 신고 테이블에 추가
 		reqDao.insertReport(rbNo,username,reason);
 		// 신고 회수 증가 and 신고 여부 true 업데이트
