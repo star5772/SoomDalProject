@@ -53,7 +53,7 @@ button{
 	</div>
 	</form>
 <sec:authentication property="principal.username" var="username"/>
-	<form action="/dal/member/resetToDalinPwd" method="post">
+	<form action="/dal/dalin/resetToDalinPwd" method="post">
 		비밀번호:<input type="password" name="dPassword" id="dp">
 		새비밀번호:<input type="password" name="newPassword" id="np">
 		<input type="hidden" id="dEmail" name="dEmail" value="${username }">

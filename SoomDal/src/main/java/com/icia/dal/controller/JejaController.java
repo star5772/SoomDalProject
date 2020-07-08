@@ -107,13 +107,13 @@ public class JejaController {
 	}
 	
 	@Secured("ROLE_JEJA")
-	@GetMapping("/member/resetToJejaPwd")
+	@GetMapping("/jeja/resetToJejaPwd")
 	public ModelAndView resetToJejaPwd() {
 		return new ModelAndView("main").addObject("viewName","member/resetToJejaPwd.jsp");
 	}
 	
 	@Secured("ROLE_JEJA")
-	@PostMapping("/member/resetToJejaPwd")
+	@PostMapping("/jeja/resetToJejaPwd")
 	public String resetToJejaPwd(@RequestParam @NotNull String jPassword, @RequestParam @NotNull String newPassword, String jEmail, RedirectAttributes ra, SecurityContextLogoutHandler handler, HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws JejaNotFoundException {
 		service.changePwd(jPassword, newPassword, jEmail);
 		ra.addFlashAttribute("msg","비밀번호를 변경했습니다");

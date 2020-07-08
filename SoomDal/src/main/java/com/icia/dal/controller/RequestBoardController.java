@@ -16,7 +16,7 @@ import com.icia.dal.dto.*;
 import com.icia.dal.service.*;
 
 @Controller
-@RequestMapping("/member")
+@RequestMapping("/jeja")
 public class RequestBoardController {
 	@Inject
 	private RequestBoardService service;

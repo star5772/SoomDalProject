@@ -28,7 +28,7 @@ import com.icia.dal.service.JejaService;
 import com.icia.dal.service.RequestService;
 import com.icia.dal.util.editor.DatePropertyEditor;
 
-@RequestMapping("/member")
+
 @Controller
 public class EstimateAndRequestController {
 	@Inject
@@ -47,49 +47,48 @@ public class EstimateAndRequestController {
 	
 	// 받은 견적서 목록
 	@Secured("ROLE_JEJA")
-	@GetMapping("/estimate/receiveEstimateList")
+	@GetMapping("/dalin/estimate/receiveEstimateList")
 	public ModelAndView receiveEstimateList(@RequestParam(defaultValue = "1")int pageno, int jMno) {
 		return new ModelAndView("main").addObject("viewName","estimate/estimateList.jsp").addObject("receiveEstimate",estimateService.receiveEstimateList(pageno,jMno)).addObject("jMno",jMno);
 	}
 	
 	// 보낸 견적서 목록
 	@Secured("ROLE_DALIN")
-	@GetMapping("/estimate/sendEstimateList")
+	@GetMapping("/dalin/estimate/sendEstimateList")
 	public ModelAndView sendEstimateList(@RequestParam(defaultValue = "1") int pageno,int dMno) {
 		return new ModelAndView("main").addObject("viewName","estimate/estimateList.jsp").addObject("sendEstimate",estimateService.sendEstimateList(pageno,dMno)).addObject("dMno",dMno);
 	}
 	
 	// 견적서 보내기 화면출력
 	@Secured("ROLE_DALIN")
-	@GetMapping("/estimate/sendEstimate")
+	@GetMapping("/dalin/estimate/sendEstimate")
 	public ModelAndView sendEstimate(@RequestParam@NotNull int rNo) {
 		return new ModelAndView("main").addObject("viewName","estimate/estimateWrite.jsp").addObject("rNo",rNo);
 	}
 	
 	// 견적서 보내기
 	@Secured("ROLE_DALIN")
-	@PostMapping("/estimate/sendEstimate")
+	@PostMapping("/dalin/estimate/sendEstimate")
 	public ModelAndView sendEstimate(Estimate et,BindingResult br,Principal principal) throws BindException, UserNotFoundException {
 		if(br.hasErrors())
 			throw new BindException(br);
 		String username = principal.getName();
 		estimateService.writeToEstimate(et,username); 
 		int no = dalService.readToMyInfo(username).getDMno();
-		return new ModelAndView("redirect:/member/estimate/sendEstimateList?dMno="+no);
+		return new ModelAndView("redirect:/dalin/estimate/sendEstimateList?dMno="+no);
 	}
 	
 	// 보낸 견적서 읽기
 	@Secured("ROLE_DALIN")
-	@GetMapping("/estimate/readToSendEstimate")
+	@GetMapping("/dalin/estimate/readToSendEstimate")
 	public ModelAndView readToSendEstimate(@RequestParam@NotNull Integer eNo) throws ReadFailException {
 		return new ModelAndView("main").addObject("viewName","estimate/readEstimate.jsp").addObject("readEstimate",estimateService.readToSendEstimate(eNo));
 	}
 	
 	// 받은 견적서 읽기
 	@Secured("ROLE_JEJA")
-	@GetMapping("/estimate/readToReceiveEstimate")
+	@GetMapping("/dalin/estimate/readToReceiveEstimate")
 	public ModelAndView readToReceiveEstimate(@RequestParam@NotNull Integer eNo) throws ReadFailException {
-		System.out.println("eNo : "+eNo);
 		return new ModelAndView("main").addObject("viewName","estimate/readEstimate.jsp").addObject("readEstimate",estimateService.readToSendEstimate(eNo));
 	}
 	
@@ -98,44 +97,44 @@ public class EstimateAndRequestController {
 	
 	// 달인 -> 받은요청서목록
 	@Secured("ROLE_DALIN")
-	@GetMapping("/request/receiveRequest")
+	@GetMapping("/jeja/request/receiveRequest")
 	public ModelAndView receiveRequestList(@RequestParam(defaultValue = "1")int pageno,int dMno) {
 		return new ModelAndView("main").addObject("viewName","request/requestList.jsp").addObject("receiveRequest",requestService.receiveRequestList(pageno, dMno)).addObject("dMno",dMno);
 	}
 	
 	// 제자 -> 보낸요청서목록 
 	@Secured("ROLE_JEJA")
-	@GetMapping("/request/sendRequestList")
+	@GetMapping("/jeja/request/sendRequestList")
 	public ModelAndView sendRequestList(@RequestParam(defaultValue = "1")int pageno,int jMno) {
-		return new ModelAndView("main").addObject("viewName","request/requestList.jsp").addObject("sendRequest",requestService.sendRequestList(pageno,jMno));
+		return new ModelAndView("main").addObject("viewName","request/requestList.jsp").addObject("sendRequest",requestService.sendRequestList(pageno,jMno)).addObject("jMno",jMno);
 	}
 	
 	// 달인프로필 -> 제자읽기 -> 요청서 작성화면 출력
 	@Secured("ROLE_JEJA")
-	@GetMapping("/request/sendRequest")
+	@GetMapping("/jeja/request/sendRequest")
 	public ModelAndView sendRequest(int dMno) throws DalinNotFoundException {
 		return new ModelAndView("main").addObject("viewName","request/sendRequest.jsp").addObject("dMno",dMno);
 	}
 	
 	// 요청서 보내기
 	@Secured("ROLE_JEJA")
-	@PostMapping("/request/writeRequest")
+	@PostMapping("/jeja/request/writeRequest")
 	public String sendRequest(Request rq,Principal principal) throws DalinNotFoundException, JejaNotFoundException {
 		System.out.println(rq);
 		String username = principal.getName();
 		int no = jejaService.findById(username).getJMno();
 		requestService.writeToRequest(rq,username);
-		return "redirect:/member/request/sendRequestList?jMno="+ no;
+		return "redirect:/jeja/request/sendRequestList?jMno="+ no;
 	}
 	// 제자 -> 보낸 요청서읽기
 	@Secured("ROLE_JEJA")
-	@GetMapping("/request/readToRequestForSend")
+	@GetMapping("/jeja/request/readToRequestForSend")
 	public ModelAndView readToRequestForJeja(@RequestParam@NotNull Integer rNo) throws ReadFailException {
 		return new ModelAndView("main").addObject("viewName","request/requestRead.jsp").addObject("readRequest",requestService.readRequest(rNo));
 	}
 	// 달인 -> 받은 요청서읽기
 	@Secured("ROLE_DALIN")
-	@GetMapping("/request/readToRequestForReceive")
+	@GetMapping("/jeja/request/readToRequestForReceive")
 	public ModelAndView readToRequestForDalin(@RequestParam@NotNull Integer rNo) throws ReadFailException {
 		return new ModelAndView("main").addObject("viewName","request/requestRead.jsp").addObject("readRequest",requestService.readRequest(rNo));
 	}

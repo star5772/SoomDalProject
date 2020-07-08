@@ -78,7 +78,7 @@ function openChild()
         <ul class="navbar-nav ml-auto">
         	<sec:authorize access="isAnonymous()">
         		<li class="nav-item"><a class="nav-link" href="/dal/member/search"style="color:black; font-size:medium;"><i class="fas fa-search">&nbsp;달인 찾기</i></a></li>
-        		<li class="nav-item"><a class="nav-link" href="/dal/member/reqboard/list"style="color:black; font-size:medium;">요청서게시판</a></li>
+        		<li class="nav-item"><a class="nav-link" href="/dal/jeja/reqboard/list"style="color:black; font-size:medium;">요청서게시판</a></li>
 	          	<li class="nav-item"><a class="nav-link" href="/dal/member/join_select"style="color:black; font-size:medium;">회원가입</a></li>
 	          	<li class="nav-item"><a class="nav-link" href="/dal/member/login"style="color:black; font-size: medium;">로그인</a></li>        	
         	</sec:authorize>
@@ -86,6 +86,7 @@ function openChild()
         	<sec:authorize access="hasRole('ROLE_JEJA')">
         		<sec:authentication property="principal.username" var="username"/>
         		<li class="nav-item" style="width: 120px; text-align: center;"><a class="nav-link" href="/dal/member/search"style="color:black; font-size:medium;"><i class="fas fa-search">&nbsp;달인 찾기</i></a></li>
+        		<li class="nav-item"><a class="nav-link" href="/dal/jeja/reqboard/list"style="color:black; font-size:medium;">요청서게시판</a></li>
         		<li class="nav-item" style="width: 100px; text-align: center;"><a class="nav-link" href="/dal/jeja/my_info"style="color:black; font-size:medium;">내 정보</a></li>
         		<li class="nav-item" style="width: 100px; text-align: center;"><a class="nav-link" href="/dal/member/memo/memo_receiveList?dEmail=${username }" style="color:black; font-size:medium;">쪽지함</a></li>
         		<li class="nav-item" style="width: 100px; text-align: center;"><a class="nav-link" href="#"style="color:black; font-size:medium;" id="JejaLogout">로그아웃</a></li>

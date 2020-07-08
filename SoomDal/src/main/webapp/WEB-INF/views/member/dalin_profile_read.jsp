@@ -206,16 +206,10 @@ hr {
 			</div>
 		</div>
 		<sec:authorize access="hasRole('ROLE_JEJA')">
-			<c:choose>
-				<c:when test="${empty isLh == true}">
-					<div>
 						<div id="buttonDiv">
 							<button id="writeRequest"
-								onclick="location.href='/dal/member/request/sendRequest?dMno=${readProfile.DMno}'">요청서작성</button>
+								onclick="location.href='/dal/jeja/request/sendRequest?dMno=${readProfile.DMno}'">요청서작성</button>
 						</div>
-					</div>
-				</c:when>
-			</c:choose>
 		</sec:authorize>
 		<div id="dName-bottom">
 			<div>

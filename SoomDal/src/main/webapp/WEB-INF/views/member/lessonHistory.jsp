@@ -28,10 +28,10 @@
 					<p style="font-size:medium; margin-left:30px; display: inline-block;">${list.detailFName} 레슨</p>
 					<c:choose>
 						<c:when test="${list.RIsOk == 'false'}">
-							<a class="btn btn-info" style="width:80px;height: 30px; text-align: center; margin-left: 230px;" href="/dal/member/dalin_profile?dMno=${list.DMno}">리뷰 작성</a>
+							<a class="btn btn-info" style="width:80px;height: 30px; text-align: center; margin-left: 230px;" href="/dal/jeja/dalin_profile?dMno=${list.DMno}">리뷰 작성</a>
 						</c:when>
 						<c:otherwise>
-							<button class="btn btn-info" disabled="disabled" style="width:80px;height: 30px; text-align: center; margin-left: 230px;" href="/dal/member/dalin_profile?dMno=${list.DMno}">리뷰 작성 완료</button>
+							<button class="btn btn-info" disabled="disabled" style="width:80px;height: 30px; text-align: center; margin-left: 230px;">리뷰 작성 완료</button>
 						</c:otherwise>
 					</c:choose>
 				</div>

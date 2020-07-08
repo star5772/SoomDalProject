@@ -27,7 +27,7 @@ $(document).ready(function(){
 		}
 		$.ajax({
 			data : params,
-			url : "/dal/member/estimate/readToEstimate",
+			url : "/dal/dalin/estimate/readToEstimate",
 			method : "post",
 			success : function(){
 				$("#ok").css("display","none");
@@ -173,7 +173,7 @@ hr{
 					<input type="hidden" name="jIsOk" id="jIsOk" value="">
 				</c:when>
 				<c:otherwise>
-					<button onclick="location.href='/dal/member/estimate/receiveEstimateList?jMno=${readEstimate.JMno}'" class="btn btn-warning" style="width: 80px;" id="list">목록</button>
+					<button onclick="location.href='/dal/dalin/estimate/receiveEstimateList?jMno=${readEstimate.JMno}'" class="btn btn-warning" style="width: 80px;" id="list">목록</button>
 				</c:otherwise>
 			</c:choose>
 					
@@ -236,7 +236,7 @@ hr{
 		</div>
 		</div>
 			<div id="btn">
-				<button class="btn btn-secondary" style="width: 50px; text-align: center; onclick="location.href='/dal/member/estimate/sendEstimateList?dMno=${readEstimate.DMno}'">목 록</button>
+				<button class="btn btn-secondary" style="width: 50px; text-align: center; onclick="location.href='/dal/dalin/estimate/sendEstimateList?dMno=${readEstimate.DMno}'">목 록</button>
 			</div>
 	</div>
 	</sec:authorize>

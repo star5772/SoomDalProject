@@ -82,7 +82,7 @@
 	
 	<select id="countOfFieldDalin" resultType="int">
 		select count(*) from dalin where DETAIL_F_NAME=#{detailFName}
-		<trim prefixOverrides="AND|OR">
+		<trim prefix="and" prefixOverrides="AND|OR">
 			<if test="keyword != null and keyword != '' ">
 				<if test="searchType=='DNAME'">
 					AND D_NAME LIKE '%' || #{keyword} || '%'
@@ -98,7 +98,7 @@
 			select * from
 				(select f.*, rownum r from
 					(select /*+ index_desc(dalin pk_dalin) */ d_mno dMno, d_profile dProfile, d_name dName, d_intro dIntro from dalin where DETAIL_F_NAME=#{detailFName}
-					<trim prefixOverrides="AND|OR">
+					<trim prefix="and" prefixOverrides="AND|OR">
 							<if test="searchType=='DNAME' and keyword != null and keyword != '' ">
 								AND D_NAME like '%' || #{keyword} || '%'
 							</if>
@@ -106,8 +106,8 @@
 								AND D_AREA like '%' || #{keyword} || '%'
 							</if>
 					</trim>) f
-				where rownum&lt;#{endRowNum})
-			where r&gt;#{startRowNum}
+				where rownum&lt;=#{endRowNum})
+			where r&gt;=#{startRowNum}
 	</select>
 	
 	<select id="findJNameAndJTelByDalinId" resultType="string">

@@ -19,7 +19,7 @@ function openChild()
     // window.name = "부모창 이름"; 
     window.name = "main";
     // window.open("open할 window", "자식창 이름", "팝업창 옵션");
-    openWin = window.open("/dal/member/payment/refund",
+    openWin = window.open("/dal/dalin/payment/refund",
             "refundPage", "width=700, height=700, resizable = no, scrollbars = no");    
 }
 
@@ -29,7 +29,7 @@ $(function(){
 	$("#RequestPayment").on("click",function(){
 		var formData = $("#paymentFrm").serialize();
 		$.ajax({
-			url: "/dal/member/payment/store",
+			url: "/dal/dalin/payment/store",
 			method: "post" , 
 			data: formData,
 			success: function(){
@@ -65,7 +65,7 @@ $(function(){
 				_csrf: "${_csrf.token}"
 			}
 		$.ajax({
-			url: "/dal/member/payment/contrast",
+			url: "/dal/dalin/payment/contrast",
 			method: "post",
 			data: params,
 			success: function() {
@@ -80,7 +80,7 @@ $(function(){
 				pCode: $("#pCode").val()				
 			}
 		$.ajax({
-			url: "/dal/member/payment/refundReq",
+			url: "/dal/dalin/payment/refundReq",
 			method: "post" ,
 			data: params,
 			success: function(result) {
@@ -181,23 +181,23 @@ $(function(){
 	<div style="text-align:center;">
 		<ul class="pagination">
 			<c:if test="${nowPayment.prev==true}">
-				<li><a href="/dal/member/payment/store?pageno=${nowPayment.startPage-1}">이전</a></li>
+				<li><a href="/dal/dalin/payment/store?pageno=${nowPayment.startPage-1}">이전</a></li>
 			</c:if>
 			<c:forEach begin="${nowPayment.startPage}" end="${nowPayment.endPage}" var="i">
 				<c:choose>
 					<c:when test="${nowPayment.pageno eq i }">
 						<li class="active">
-							<a href="/dal/member/payment/store?pageno=${i}">${i}</a>
+							<a href="/dal/dalin/payment/store?pageno=${i}">${i}</a>
 						</li>
 					</c:when>
 					<c:otherwise>
-						<li><a href="/dal/member/payment/store?pageno=${i}">${i}</a></li>
+						<li><a href="/dal/dalin/payment/store?pageno=${i}">${i}</a></li>
 					</c:otherwise>
 				</c:choose>
 				
 			</c:forEach>
 			<c:if test="${nowPayment.next==true}">
-				<li><a href="/dal/member/payment/store?pageno=${nowPayment.endPage+1}">다음</a></li>
+				<li><a href="/dal/dalin/payment/store?pageno=${nowPayment.endPage+1}">다음</a></li>
 			</c:if>
 		</ul>
 	</div>
