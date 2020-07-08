@@ -66,7 +66,7 @@ public class DalinRestService {
 		int jMno = jejaDao.findById(jEmail).getJMno();
 		// 중복으로 신고하면 예외
 		if(dalDao.findReportDalin(dMno,jMno)==true)
-			throw new JobFailException("같은사람을 여러번 신고 할 수없습니다");
+			throw new RuntimeException();
 		// 신고테이블 추가
 		dalDao.reportJeja(dMno,jMno,reason);
 		// 신고 횟수 증가
