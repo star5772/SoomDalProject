@@ -41,16 +41,19 @@ $(function() {
 	});
 	$("#deleteToReq").on("click",function() {
 		var params = {
-				rbNo = $("#rbNo").val(),
-				_csrf = "${_csrf.token}"
+				rbNo : $("#rbNo").val(),
+				_csrf : "${_csrf.token}"
 			}
 		$.ajax({
 			url: "/dal/member/reqboard/delete",
 			method: "post",
 			data: params,
-			success: function() {
-				alert("삭제 완료");
-				location.href = "/dal/member/reqboard/list"
+			success: function(result) {
+				if(result==true) {
+					alert("삭제 완료");
+					location.href = "/dal/jeja/reqboard/list"
+				}else
+					alert("삭제실패 : 글삭제는 본인만 가능합니다");
 			}
 		})
 	})

@@ -72,6 +72,7 @@ public class EstimateAndRequestController {
 	public ModelAndView sendEstimate(Estimate et,BindingResult br,Principal principal) throws BindException, UserNotFoundException {
 		if(br.hasErrors())
 			throw new BindException(br);
+		System.out.println(et + "============================");
 		String username = principal.getName();
 		estimateService.writeToEstimate(et,username); 
 		int no = dalService.readToMyInfo(username).getDMno();

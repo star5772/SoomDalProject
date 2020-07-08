@@ -27,9 +27,8 @@ public class RequestBoardRestController {
 	
 	@PreAuthorize("isAuthenticated()")
 	@PostMapping("/reqboard/delete")
-	public ResponseEntity<Void> deletereqBoard(int rbNo,Principal principal) {
+	public ResponseEntity<Boolean> deletereqBoard(int rbNo,Principal principal) {
 		String username = principal.getName();
-		reqService.deleteToReqBoard(rbNo,username);
-		return ResponseEntity.ok(null);
+		return ResponseEntity.ok(reqService.deleteToReqBoard(rbNo,username));
 	}
 }

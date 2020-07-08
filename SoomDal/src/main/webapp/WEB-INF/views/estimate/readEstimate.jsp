@@ -48,7 +48,7 @@ $(document).ready(function(){
 			method: "post",
 			success: function() {
 				alert("거절되었습니다");
-				location.href = "/dal/dalin/estimate/receiveEstimateList";
+				location.href = "/dal/dalin/estimate/receiveEstimateList?jMno=${readEstimate.JMno}";
 			}
 		})
 	})

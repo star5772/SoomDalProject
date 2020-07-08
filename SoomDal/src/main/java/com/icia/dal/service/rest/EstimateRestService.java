@@ -75,9 +75,9 @@ public class EstimateRestService {
 		}
 
 		public int refuseEstimate(int eNo, int dMno, String name) {
-			Jeja jeja = jejaDao.findByJejaToJMno(dMno);
-			Dalin dal = dalDao.findByDalin(name);
+			Jeja jeja = jejaDao.findById(name);
+			Dalin dal = dalDao.findByDalinToDMno(dMno);
 			handler.sendJejaMessage(jeja.getJName(),dal.getDName(), "요청서가 거절되었습니다");
-			return estimateDao.setDisableByDalin(eNo, dMno);
+			return estimateDao.setDisableByJeja(eNo, jeja.getJMno());
 		}
 }

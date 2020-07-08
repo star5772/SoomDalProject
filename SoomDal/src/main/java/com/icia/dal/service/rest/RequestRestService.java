@@ -34,6 +34,6 @@ public class RequestRestService {
 		Jeja jeja = jejaDao.findByJejaToJMno(jMno);
 		Dalin dal = dalDao.findByDalin(username);
 		handler.sendJejaMessage(dal.getDName(),jeja.getJName(), "요청서가 거절되었습니다");
-		return requestDao.setDisableByJeja(rNo, jMno);
+		return requestDao.setDisableByDalin(rNo, dal.getDMno());
 	}
 }

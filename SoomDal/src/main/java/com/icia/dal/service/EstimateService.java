@@ -56,14 +56,14 @@ public class EstimateService {
 	public void writeToEstimate(Estimate et, String username) {
 		Dalin dalin = dalDao.findByDalin(username);
 		requestDao.setIsOk(et.getRNo());
-		RequestBoard rb = rbDao.findByRequestBoard(et.getRNo());
+		Request request = requestDao.findByRequest(et.getRNo());
 		et.setDEmail(username);
 		et.setDMno(dalin.getDMno());
 		et.setFNo(dalin.getFNo());
-		et.setJMno(rb.getJMno());
+		et.setJMno(request.getJMno());
 		estimateDao.insertToEstimate(et);
 		Jeja jeja = jejaDao.findByJejaToJMno(et.getJMno());
-		Memo memo = Memo.builder().receiver(jeja.getJEmail()).title(dalin.getDName() + "님으로부터 견적서가 도착했습니다").content(LocalDateTime.now().format(DateTimeFormatter.ofPattern("MM월dd일 hh시mm분")) + "에 견적서가 도착했습니다. 견적서를 확인해주세요").sender(et.getDEmail()).build();
+		Memo memo = Memo.builder().receiver(jeja.getJEmail()).title(dalin.getDName() + "님으로부터 견적서가 도착했습니다").content(LocalDateTime.now().format(DateTimeFormatter.ofPattern("MM월dd일 HH시mm분")) + "에 견적서가 도착했습니다. 견적서를 확인해주세요").sender(et.getDEmail()).build();
 		memoDao.insert(memo);
 		handler.sendDalinMessage(dalin.getDName(), jeja.getJName(),dalin.getDName() + "님으로부터 견적서가 도착하였습니다");
 	}

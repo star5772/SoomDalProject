@@ -27,7 +27,7 @@ $(document).ready(function(){
 			method: "post",
 			success: function() {
 				alert("거절되었습니다");
-				location.href = "/dal/jeja/request/receiveRequest";
+				location.href = "/dal/jeja/request/receiveRequest?dMno=${readRequest.DMno}";
 			}
 		})
 	})
