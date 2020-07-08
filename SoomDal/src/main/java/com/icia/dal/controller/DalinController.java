@@ -111,6 +111,7 @@ public class DalinController {
 		return new ModelAndView("main").addObject("viewName","dalin/field_select.jsp");
 	}
 	
+	
 	@GetMapping("/member/system/msg")
 	public ModelAndView msg() {
 		return new ModelAndView("main").addObject("viewName","system/msg.jsp");
@@ -150,13 +151,13 @@ public class DalinController {
 	}
 	
 	@Secured("ROLE_DALIN")
-	@GetMapping("/member/resetToDalinPwd") 
+	@GetMapping("/dalin/resetToDalinPwd") 
 	public ModelAndView resetToDalinPwd() {
 		return new ModelAndView("main").addObject("viewName","member/resetToDalinPwd.jsp");
 		}
 	
 	@Secured("ROLE_DALIN")
-	@PostMapping("/member/resetToDalinPwd") 
+	@PostMapping("/dalin/resetToDalinPwd") 
 	public String resetToDalinPwd(@RequestParam @NotNull String dPassword, @RequestParam @NotNull String newPassword, String dEmail, RedirectAttributes ra, SecurityContextLogoutHandler handler, HttpServletRequest request, HttpServletResponse response, Authentication authentication ) throws DalinNotFoundException {
 		dalService.changePwd(dPassword, newPassword, dEmail);
 		ra.addFlashAttribute("msg","비밀번호를 변경했습니다");

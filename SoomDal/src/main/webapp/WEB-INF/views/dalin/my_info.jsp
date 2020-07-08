@@ -152,11 +152,11 @@ hr {
          <span><h3>레슨 관리</h3></span>
          <ul class="nav flex-column">
             <li class="nav-item">
-               <a class="nav-link active" href="/dal/member/request/receiveRequest?dMno=${myInfo.DMno }"><img src="https://assets.cdn.soomgo.com/icons/icon-mypage-quote-template.svg" style="padding: 5px;"><span class="menu_span">요청서</span><img src="https://assets.cdn.soomgo.com/icons/icon-mypage-list-arrow.svg"></a>
+               <a class="nav-link active" href="/dal/jeja/request/receiveRequest?dMno=${myInfo.DMno }"><img src="https://assets.cdn.soomgo.com/icons/icon-mypage-quote-template.svg" style="padding: 5px;"><span class="menu_span">요청서</span><img src="https://assets.cdn.soomgo.com/icons/icon-mypage-list-arrow.svg"></a>
                <hr>
             </li>
             <li class="nav-item">
-               <a class="nav-link" href="/dal/member/estimate/sendEstimateList?dMno=${myInfo.DMno}"><img src="https://assets.cdn.soomgo.com/icons/icon-mypage-quote-template.svg" style="padding: 5px;"><span class="menu_span">견적서</span><img src="https://assets.cdn.soomgo.com/icons/icon-mypage-list-arrow.svg"></a>
+               <a class="nav-link" href="/dal/dalin/estimate/sendEstimateList?dMno=${myInfo.DMno}"><img src="https://assets.cdn.soomgo.com/icons/icon-mypage-quote-template.svg" style="padding: 5px;"><span class="menu_span">견적서</span><img src="https://assets.cdn.soomgo.com/icons/icon-mypage-list-arrow.svg"></a>
                <hr>
             </li>
             <li class="nav-item">

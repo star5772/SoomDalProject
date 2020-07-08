@@ -6,6 +6,7 @@ import javax.inject.*;
 
 import org.apache.commons.lang3.*;
 import org.springframework.stereotype.*;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.icia.dal.Exception.JobFailException;
 import com.icia.dal.dao.*;
@@ -18,6 +19,7 @@ public class PaymentRestService {
 	@Inject
 	private PaymentDao paymentDao;
 	
+	@Transactional
 	public int insertCashToDalin(RequestPayment rp,String username) {
 		// 랜덤한 코드 8자리 생성후 결제코드로 입력
 		String code = RandomStringUtils.randomAlphanumeric(6);
@@ -34,7 +36,7 @@ public class PaymentRestService {
 	public RequestPayment reqCashMember(String username) {
 		return paymentDao.findByPayment(username);
 	}
-	
+	@Transactional
 	public int addCashToDalin(String pCode,String username) {
 		int money = paymentDao.findToCash(pCode);
 		paymentDao.addCashToDalin(Dalin.builder().dEmail(username).dCash(money).build());
@@ -42,7 +44,7 @@ public class PaymentRestService {
 		paymentDao.insertToNowPayment(NowPayment.builder().dEmail(username).pCode(pCode).pDate(LocalDateTime.now()).pMoney(money).build());
 		return paymentDao.deleteToPayment(username);
 	}
-
+	@Transactional
 	public boolean requestRefund(String pCode,String username) {
 		Dalin dal = dalDao.findByDalin(username);
 		int cash = paymentDao.findByDalinCash(username);

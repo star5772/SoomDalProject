@@ -1,10 +1,11 @@
 package com.icia.dal.service.rest;
 
-import java.util.List;
+
 
 import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.icia.dal.dao.MemoDao;
 
@@ -14,7 +15,7 @@ public class MemoRestService {
 	private MemoDao memoDao;
 	
 
-	
+	@Transactional
 	public void disableByReceiver(int mno) {
 		memoDao.disableByReceiver(mno);
 	}

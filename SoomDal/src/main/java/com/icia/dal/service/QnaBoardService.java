@@ -8,6 +8,7 @@ import javax.inject.Inject;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.icia.dal.dao.DalinDao;
 import com.icia.dal.dao.JejaDao;
@@ -33,6 +34,7 @@ public class QnaBoardService {
 	@Inject
 	private QnaCommentDao qnaCommentDao;
 	
+	@Transactional
 	public int write(QnaBoard qnaBoard,String username) {
 		qnaBoard.setQWriter(username);
 		
@@ -46,7 +48,7 @@ public class QnaBoardService {
 		qnaBoardDao.insertToQnaBoard(qnaBoard);
 		return qnaBoard.getQNo();
 	}
-	
+	@Transactional
 	public int delete(int qNo) {
 		return qnaBoardDao.deleteToQnaBoard(qNo);
 	}

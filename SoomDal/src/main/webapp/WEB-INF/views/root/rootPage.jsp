@@ -79,22 +79,16 @@ button:hover:before,button:hover:after{
         <!-- Slide One - Set the background image for this slide in the line below -->
         <div class="carousel-item active" style="background-image: url('/dal/image/slideTwo.jpg')">
           <div class="carousel-caption d-none d-md-block">
-            <h3>First Slide</h3>
-            <p>This is a description for the first slide.</p>
           </div>
         </div>
         <!-- Slide Two - Set the background image for this slide in the line below -->
         <div class="carousel-item" style="background-image: url('/dal/image/secondSlide.png')">
           <div class="carousel-caption d-none d-md-block">
-            <h3>Second Slide</h3>
-            <p>This is a description for the second slide.</p>
           </div>
         </div>
         <!-- Slide Three - Set the background image for this slide in the line below -->
-        <div class="carousel-item" style="background-image: url('http://placehold.it/1900x1080')">
+        <div class="carousel-item" style="background-image: url('/dal/image/thirdslide.jpg')">
           <div class="carousel-caption d-none d-md-block">
-            <h3>Third Slide</h3>
-            <p>This is a description for the third slide.</p>
           </div>
         </div>
       </div>
@@ -111,7 +105,6 @@ button:hover:before,button:hover:after{
     <div class="row">
       <div class="col-lg-4 col-sm-6 portfolio-item">
         <div class="card h-100">
-          <a href="/dal/member/field_sport/list" style="color:white;"><img id="show_sport" class="card-img-top" src="/image/sport.jpg"/></a>
           <div class="card-body">
             <p class="card-text"style="font-size: x-large; text-align: center; background-color: white; color:black; margin-top: 25px;"><button style="font-size: xx-large;" onclick="location.href='/dal/member/field_sport/list'" >Sport</button></p>
             
@@ -120,7 +113,6 @@ button:hover:before,button:hover:after{
       </div>
       <div class="col-lg-4 col-sm-6 portfolio-item">
         <div class="card h-100">
-          <a href="/dal/member/field_music/list"><img id="show_music"class="card-img-top" src="/image/music.jpg" alt=""></a>
           <div class="card-body">
             <p class="card-text" style="font-size: x-large; text-align: center; background-color: white; margin-top: 25px;"><button style="font-size: xx-large;" onclick="location.href='/dal/member/field_music/list'" >Instrument</button></p>
           </div>
@@ -128,7 +120,6 @@ button:hover:before,button:hover:after{
       </div>
       <div class="col-lg-4 col-sm-6 portfolio-item">
         <div class="card h-100">
-          <a href="/dal/member/field_art/list"><img id="show_art" class="card-img-top" src="/image/art.jpg" alt=""></a>
           <div class="card-body">
             <p class="card-text" style=" text-align: center; background-color: white; margin-top: 25px;"><button style="font-size: xx-large;" onclick="location.href='/dal/member/field_art/list'" >Art</button></p>
         </div>

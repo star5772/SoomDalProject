@@ -25,7 +25,7 @@ public class DalRestControllerAdvice {
 	
 	@ExceptionHandler(EstimateNotFoundException.class)
 	public ResponseEntity<String> EstimateExceptionHandler() {
-		return ResponseEntity.status(HttpStatus.CONFLICT).body("존재하는 견적서가 없습니다");
+		return ResponseEntity.status(HttpStatus.CONFLICT).body("견적서가 없습니다");
 	}
 	
 	@ExceptionHandler(JobFailException.class)
@@ -35,7 +35,7 @@ public class DalRestControllerAdvice {
 	
 	@ExceptionHandler(MemoNotFoundException.class)
 	public ResponseEntity<String> MemoNotFoundExceptionHandler() {
-		return ResponseEntity.status(HttpStatus.CONFLICT).body("존재하는 쪽지가 없습니다");
+		return ResponseEntity.status(HttpStatus.CONFLICT).body("쪽지가 없습니다");
 	}
 	
 	@ExceptionHandler(UserNotFoundException.class)

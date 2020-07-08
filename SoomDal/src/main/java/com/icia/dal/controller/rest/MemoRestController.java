@@ -8,6 +8,7 @@ import javax.inject.Inject;
 import javax.validation.constraints.NotNull;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -27,6 +28,7 @@ public class MemoRestController {
 
 	
 	// 받는 사람측에서 메모 삭제
+	@PreAuthorize("isAuthenticated()")
 	@PostMapping("/memo/disable_by_receiver")
 	public ResponseEntity<String> memoDelete(@RequestParam @NotNull int mno, Principal principal) throws JsonParseException, JsonMappingException, IOException{
 		memoRestService.disableByReceiver(mno);

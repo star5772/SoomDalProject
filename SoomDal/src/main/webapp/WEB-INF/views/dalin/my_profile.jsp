@@ -132,9 +132,18 @@ hr{
 	<div id="dalinRead">
 		<div id="dProfile">
 			<p id="dName">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${readProfile.DName}</p>
-			<div>
-				<img id="show_profile" src="${readProfile.DProfile }" style="border-radius: 50%; height: 200px; width: 200px;">
-			</div>
+			<c:choose>
+				<c:when test="${empty readProfile.DProfile== 'false' }">
+					<div>
+						<img id="show_profile" src="${readProfile.DProfile }" style="border-radius: 50%; height: 200px; width: 200px;">
+					</div>
+				</c:when>
+				<c:otherwise>
+					<div>
+						<img id="show_profile" src="/dal/image/anony.jpg" style="border-radius: 50%; height: 200px; width: 200px;">
+					</div>
+				</c:otherwise>
+			</c:choose>
 		</div>
 		<div>
 			<button type="button" class="btn btn-info" onclick="location.href='/dal/dalin/profile_update'" id="b" >수&nbsp;정</button>
@@ -213,21 +222,62 @@ hr{
 					<h2>사진</h2><br>
 				</div>
 				<div >
-					<div id="dAttachment1">
-						<img src="${readProfile.profileAttachments[0].PSaveFileName }">
-					</div>
-					<div id="dAttachment2">
-						<img src="${readProfile.profileAttachments[1].PSaveFileName }">
-					</div>
-					<div id="dAttachment3">
-						<img src="${readProfile.profileAttachments[2].PSaveFileName }">
-					</div>
-					<div id="dAttachment4">
-						<img src="${readProfile.profileAttachments[3].PSaveFileName }">
-					</div>
-					<div id="dAttachment5">
-						<img src="${readProfile.profileAttachments[4].PSaveFileName }">
-					</div>
+				<c:choose>
+					<c:when test="${empty readProfile.profileAttachments[0].PSaveFileName == 'false'}">
+						<div id="dAttachment1">
+							<img src="${readProfile.profileAttachments[0].PSaveFileName }">
+						</div>
+					</c:when>
+					<c:otherwise>
+						<div id="dAttachment1">
+						</div>
+					</c:otherwise>
+				</c:choose>
+				<c:choose>
+					<c:when test="${empty readProfile.profileAttachments[1].PSaveFileName == 'false'}">
+						<div id="dAttachment2">
+							<img src="${readProfile.profileAttachments[1].PSaveFileName }">
+						</div>
+					</c:when>
+					<c:otherwise>
+						<div id="dAttachment2">
+						</div>
+					</c:otherwise>
+				</c:choose>
+				<c:choose>
+					<c:when test="${empty readProfile.profileAttachments[2].PSaveFileName == 'false'}">
+						<div id="dAttachment3">
+							<img src="${readProfile.profileAttachments[2].PSaveFileName }">
+						</div>
+					</c:when>
+					<c:otherwise>
+						<div id="dAttachment3">
+						</div>
+					</c:otherwise>
+				</c:choose>
+				<c:choose>
+					<c:when test="${empty readProfile.profileAttachments[3].PSaveFileName == 'false'}">
+						<div id="dAttachment4">
+							<img src="${readProfile.profileAttachments[3].PSaveFileName }">
+						</div>
+					</c:when>
+					<c:otherwise>
+						<div id="dAttachment4">
+						</div>
+					</c:otherwise>
+				</c:choose>
+				<c:choose>
+					<c:when test="${empty readProfile.profileAttachments[4].PSaveFileName == 'false'}">
+						<div id="dAttachment5">
+							<img src="${readProfile.profileAttachments[4].PSaveFileName }">
+						</div>
+					</c:when>
+					<c:otherwise>
+						<div id="dAttachment5">
+						</div>
+					</c:otherwise>
+				</c:choose>
+				
 				</div>
 			</div>
 		</div>
@@ -249,25 +299,38 @@ hr{
 				<hr>
 			</div>
 			<div>
-			<c:forEach items="${readProfile.reviews}" var="rv">
-				<div id="review" >
-					<div id="rWriter">
-						<p>${rv.RWriter}</p>
+			<c:choose>
+				<c:when test="${empty readProfile.reviews =='false'}">
+					<c:forEach items="${readProfile.reviews}" var="rv">
+						<div id="review">
+							<div id="rWriter">
+								<p>${rv.RWriter}</p>
+							</div>
+							<div id="rScore">
+								<span>
+									<c:forEach begin="1" end="${rv.RScore}">
+										<img src="https://assets.cdn.soomgo.com/icons/icon-common-review-star-small-full.svg">
+									</c:forEach>
+									<c:forEach begin="${rv.RScore+1}" end="5">
+										<img src="https://assets.cdn.soomgo.com/icons/icon-common-review-star-small-empty.svg">
+									</c:forEach>
+								</span>
+							</div>
+							<div id="rDate">
+								<p>${rv.RDate}</p>
+							</div>
+						</div>
+						<div id="rContent">
+							<p>${rv.RContent}</p>
+						</div>
+					</c:forEach>
+				</c:when>
+				<c:otherwise>
+					<div style="margin-bottom: 50px; margin-top: 20px;">
+						<p style="font-size: 16px;">작성된 리뷰가 없습니다.</p>
 					</div>
-					<div id="rScore">
-						<p>${rv.RScore}</p>
-					</div>
-					<div id="rDate">
-						<p>${rv.RDate}</p>
-					</div>
-					<div>
-						<button class="btn btn-warning report" data-writer="${rv.RWriter }" >신고</button>
-					</div>
-				</div>
-				<div id="rContent">
-					<p>${rv.RContent}</p>
-				</div>
-				</c:forEach>
+				</c:otherwise>
+			</c:choose>				
 			</div>
 		</div>
 		<div>

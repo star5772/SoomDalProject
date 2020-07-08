@@ -77,7 +77,7 @@ $(function() {
 	</div>
 	<sec:authorize access="hasRole('ROLE_DALIN')">
 	<div id="btn_area" style="display: inline-block; float: right">
-		<button id="estimate" onclick="location.href='/dal/member/estimate/sendEstimate?rNo=${reqRead.RNo}'" style="font-size: 17px; font-weight: bold; color: white;  margin-top: 10px;border-radius: 4px;" class="btn btn-warning">견적서 보내기</button>
+		<button id="estimate" onclick="location.href='/dal/dalin/estimate/sendEstimate?rNo=${reqRead.RNo}'" style="font-size: 17px; font-weight: bold; color: white;  margin-top: 10px;border-radius: 4px;" class="btn btn-warning">견적서 보내기</button>
 	</div>
 	</sec:authorize>
 	</div>

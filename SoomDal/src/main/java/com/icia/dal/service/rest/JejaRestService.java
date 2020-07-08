@@ -4,6 +4,7 @@ import javax.inject.*;
 
 import org.springframework.security.crypto.password.*;
 import org.springframework.stereotype.*;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.icia.dal.Exception.*;
 import com.icia.dal.dao.*;
@@ -23,7 +24,7 @@ public class JejaRestService {
 		if(email!=null)
 			throw new RuntimeException();
 	}
-	
+	@Transactional
 	public Boolean update(DtoForJejaUpdate dto, String jEmail) {
 		Jeja jeja = dao.findById(jEmail);
 		// 후에 예외처리 해야함

@@ -10,6 +10,7 @@ import javax.validation.constraints.NotNull;
 import org.modelmapper.ModelMapper;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.icia.dal.Exception.MemoNotFoundException;
 import com.icia.dal.dao.MemoDao;
@@ -47,11 +48,10 @@ public class MemoService {
 		memoDao.setRead(mno);
 		return dto;
 	}
-
+	@Transactional
 	@Scheduled(cron="0 0 4 1/1 * ?")
 	public void delete() {
-		System.out.println("메모삭제");
-		//memoDao.delete();
+		memoDao.delete();
 	}	
 	
 	// 쪽지목록 페이징

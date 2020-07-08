@@ -99,10 +99,17 @@
 			<!-- 아래 c:forEach 로 list 개수만큼 div 반복 -->
 			<c:forEach items="${search.list }" var="list">
 				<div style="padding: 24px 0;">
-					<div id="dal_profile"><img style="border-radius: 10px;" src="${list.DProfile }" width="100px" height="100px"></div>
+					<c:choose>
+						<c:when test="${empty list.DProfile == 'false' }">
+							<div id="dal_profile"><img style="border-radius: 10px;" src="${list.DProfile }" width="100px" height="100px"></div>
+						</c:when>
+						<c:otherwise>
+							<div id="dal_profile"><img style="border-radius: 10px;" src="/dal/image/anony.jpg" width="100px" height="100px"></div>
+						</c:otherwise>
+					</c:choose>
 					<div id="dal_content">
 						<h5>
-							<a href="/dal/member/dalin_profile?dMno=${list.DMno }"><h5 style="font-weight: bold; font-size: 18px;">${list.DName }</h5></a>
+							<a href="/dal/jeja/dalin_profile?dMno=${list.DMno }"><h5 style="font-weight: bold; font-size: 18px;">${list.DName }</h5></a>
 						</h5>
 						<p style="font-size: 14px;">${list.DIntro }</p>
 						<div>

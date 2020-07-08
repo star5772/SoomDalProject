@@ -8,6 +8,7 @@ import javax.inject.*;
 
 import org.modelmapper.*;
 import org.springframework.stereotype.*;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import com.icia.dal.Exception.*;
@@ -38,7 +39,7 @@ public class RequestBoardService {
 		dto.setRbWriteDateStr(str);
 		return dto;
 	}
-	
+	@Transactional
 	public int write(RequestBoardDto.DtoForWrite dto) throws JejaNotFoundException {
 		RequestBoard reqBoard = modelMapper.map(dto, RequestBoard.class);
 		Jeja jeja = jejaDao.findById(dto.getRbWriter());

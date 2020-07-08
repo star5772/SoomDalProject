@@ -10,12 +10,12 @@ public class DalControllerAdvice {
 	@ExceptionHandler(UserNotFoundException.class)
 	public String UserNotFoundExceptionHandler(RedirectAttributes ra) {
 		ra.addFlashAttribute("msg","사용자를 찾을 수 없습니다");
-		return "redirect:/system/msg";
+		return "redirect:/member/system/msg";
 	}
 	
 	@ExceptionHandler(JobFailException.class)
 	public String JobFailExceptionHandler(JobFailException e, RedirectAttributes ra) {
 		ra.addFlashAttribute("msg",e.getMessage());
-		return "redirect:/system/msg";
+		return "redirect:/member/system/msg";
 	}
 }
