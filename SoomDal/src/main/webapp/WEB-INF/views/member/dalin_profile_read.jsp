@@ -62,13 +62,29 @@ $(function() {
 		$("#reviewWrite").on("click", function() {
 			var formData = $("#rvFrm").serialize();
 			$.ajax({
-				url : "/dal/member/reviewWrite",
+				url : "/dal/jeja/reviewWrite",
 				data : formData,
 				method : "post",
 				success : function() {
 					alert("리뷰작성완료 !")
 					window.location.reload();
 				}
+			})
+		})
+		$("#deleteReview").on("click",function(){
+			var params = {
+					rNo : $("#rNo").val(),
+					dMno: $("#dMno").val(),
+					_csrf : "${_csrf.token}"
+				}
+			$.ajax({
+				url : "/dal/jeja/review_delete" ,
+				data: params,
+				method: "post",
+				success: function() {
+					alert("삭제완료")
+					window.location.reload();
+				}		
 			})
 		})
 	})
@@ -384,6 +400,8 @@ hr {
 							<div id="rWriter">
 								<p>${rv.RWriter}</p>
 							</div>
+							<input type="hidden" id="rNo" value="${rv.RNo}">
+							<input type="hidden" id="dMno" value="${rv.DMno}">
 							<div id="rScore">
 								<span>
 									<c:forEach begin="1" end="${rv.RScore}">
@@ -393,6 +411,7 @@ hr {
 										<img src="https://assets.cdn.soomgo.com/icons/icon-common-review-star-small-empty.svg">
 									</c:forEach>
 								</span>
+								<button type="button" id="deleteReview">리뷰삭제</button>
 							</div>
 							<div id="rDate">
 								<p>${rv.RDate}</p>

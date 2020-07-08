@@ -8,7 +8,6 @@ import java.util.List;
 import javax.inject.Inject;
 import javax.validation.constraints.NotNull;
 
-import org.apache.commons.lang3.RandomStringUtils;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -17,22 +16,17 @@ import com.icia.dal.Exception.ReadFailException;
 import com.icia.dal.dao.DalinDao;
 import com.icia.dal.dao.EstimateDao;
 import com.icia.dal.dao.JejaDao;
-import com.icia.dal.dao.LessonHistoryDao;
 import com.icia.dal.dao.MemoDao;
+import com.icia.dal.dao.RequestBoardDao;
 import com.icia.dal.dao.RequestDao;
-import com.icia.dal.dao.ReviewAuthorityDao;
-import com.icia.dal.dao.UseCashDao;
 import com.icia.dal.dto.EstimateDto;
 import com.icia.dal.dto.page.PageToEstimate;
 import com.icia.dal.entity.Dalin;
 import com.icia.dal.entity.Estimate;
 import com.icia.dal.entity.Jeja;
-import com.icia.dal.entity.LessonHistory;
-import com.icia.dal.entity.Level;
 import com.icia.dal.entity.Memo;
 import com.icia.dal.entity.Request;
-import com.icia.dal.entity.ReviewAuthority;
-import com.icia.dal.entity.UseCash;
+import com.icia.dal.entity.RequestBoard;
 import com.icia.dal.util.pagingutil.EstimatePagingUtil;
 import com.icia.dal.util.websocket.MessageWebSocketHandler;
 
@@ -53,6 +47,8 @@ public class EstimateService {
 	private RequestDao requestDao;
 	@Inject
 	private MemoDao memoDao;
+	@Inject
+	private RequestBoardDao rbDao;
 	
 	
 	// 견적서작성
@@ -60,14 +56,14 @@ public class EstimateService {
 	public void writeToEstimate(Estimate et, String username) {
 		Dalin dalin = dalDao.findByDalin(username);
 		requestDao.setIsOk(et.getRNo());
-		Request rq = requestDao.findByRequest(et.getRNo());
+		RequestBoard rb = rbDao.findByRequestBoard(et.getRNo());
 		et.setDEmail(username);
 		et.setDMno(dalin.getDMno());
 		et.setFNo(dalin.getFNo());
-		et.setJMno(rq.getJMno());
+		et.setJMno(rb.getJMno());
 		estimateDao.insertToEstimate(et);
 		Jeja jeja = jejaDao.findByJejaToJMno(et.getJMno());
-		Memo memo = Memo.builder().receiver(jeja.getJEmail()).title(dalin.getDName() + "님으로부터 견적서가 도착했습니다").content(LocalDateTime.now() + "에 견적서가 도착했습니다. 견적서를 확인해주세요").sender(et.getDEmail()).build();
+		Memo memo = Memo.builder().receiver(jeja.getJEmail()).title(dalin.getDName() + "님으로부터 견적서가 도착했습니다").content(LocalDateTime.now().format(DateTimeFormatter.ofPattern("MM월dd일 hh시mm분")) + "에 견적서가 도착했습니다. 견적서를 확인해주세요").sender(et.getDEmail()).build();
 		memoDao.insert(memo);
 		handler.sendDalinMessage(dalin.getDName(), jeja.getJName(),dalin.getDName() + "님으로부터 견적서가 도착하였습니다");
 	}

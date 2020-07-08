@@ -60,6 +60,7 @@ button:hover {
 <body>
 	<h2 id="text">스포츠 서비스 </h2>
 	<h3 id="text">스포츠 서비스에 오신걸 환영합니다 ! 하고싶은 Sport를 배우세요 !</h3>
+<sec:authorize access="hasAnyRole('ROLE_JEJA','ROLE_ADMIN')">	
 	<div class="service">
 		<div class="card">
   			<img class="card-img-top" src="/dal/image/스케이트보드.jpg" alt="Card image cap">
@@ -117,5 +118,6 @@ button:hover {
   			</div>
 		</div>
 	</div>
+</sec:authorize>	
 </body>
 </html>

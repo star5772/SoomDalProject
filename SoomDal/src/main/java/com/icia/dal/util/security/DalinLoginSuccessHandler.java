@@ -52,7 +52,7 @@ public class DalinLoginSuccessHandler extends SimpleUrlAuthenticationSuccessHand
 		SavedRequest req = cache.getRequest(request, response);
 		if(dalinPassword.length() >= 20) {
 			session.setAttribute("msg", "임시비밀번호로 로그인 하셨습니다. 비밀번호를 변경해주세요.");
-			rs.sendRedirect(request, response, "/member/resetToDalinPwd");
+			rs.sendRedirect(request, response, "/dalin/resetToDalinPwd");
 		}else if(req != null)
 			rs.sendRedirect(request, response, req.getRedirectUrl());
 		else

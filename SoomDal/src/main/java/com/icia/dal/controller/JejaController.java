@@ -81,7 +81,7 @@ public class JejaController {
 	
 	
 	// 제자 마이페이지 -> 레슨내역 화면 출력
-	@Secured("ROLE_JEJA")
+	@PreAuthorize("isAuthenticated()")
 	@GetMapping("/jeja/lessonList")
 	public ModelAndView listToLesson(@RequestParam(defaultValue = "1")int pageno,int jMno,Principal principal) {
 		return new ModelAndView("main").addObject("viewName","member/lessonHistory.jsp").addObject("LHlist", service.lessonListToJeja(pageno, jMno)).addObject("jMno",jMno);

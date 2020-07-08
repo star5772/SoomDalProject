@@ -36,6 +36,22 @@ $(document).ready(function(){
 			}		
 		})
 	})
+		$("#no").on("click",function(){
+		var param = {
+				_csrf : "${_csrf.token}",
+				dMno: $("#dMno").val(),
+				eNo : $("#eNo").val()
+			}
+		$.ajax({
+			url:"/dal/dalin/estimate/no",
+			data: param,
+			method: "post",
+			success: function() {
+				alert("거절되었습니다");
+				location.href = "/dal/dalin/estimate/receiveEstimateList";
+			}
+		})
+	})
 });
 $(document).ready(function(){
 	$("#ok").on("click",function(){

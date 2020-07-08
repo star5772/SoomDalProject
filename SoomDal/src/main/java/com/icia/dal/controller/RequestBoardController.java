@@ -37,7 +37,7 @@ public class RequestBoardController {
 	@PostMapping("/reqboard/write")
 	public String write(RequestBoardDto.DtoForWrite dto, Principal principal) throws JejaNotFoundException {
 		dto.setRbWriter(principal.getName());
-		return "redirect:/member/reqboard/read?rbNo=" + service.write(dto);
+		return "redirect:/jeja/reqboard/read?rbNo=" + service.write(dto);
 	}
 	
 	

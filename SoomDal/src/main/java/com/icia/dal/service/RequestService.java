@@ -1,5 +1,6 @@
 package com.icia.dal.service;
 
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
@@ -54,7 +55,7 @@ public class RequestService {
 		rq.setRField(dalin.getFNo());
 		rq.setRSubject(dal.getDetailFName());
 		rqDao.insertToRequest(rq);
-		memoDao.insert(Memo.builder().receiver(dalin.getDEmail()).title(jeja.getJName() + "님으로부터 요청서가 도착했습니다").content(rq.getRWriteDate() + "에 견적서가 도착했습니다. 견적서를 확인해주세요").sender(jeja.getJEmail()).build());
+		memoDao.insert(Memo.builder().receiver(dalin.getDEmail()).title(jeja.getJName() + "님으로부터 요청서가 도착했습니다").content(LocalDateTime.now().format(DateTimeFormatter.ofPattern("MM월dd일 hh시mm분")) + "에 견적서가 도착했습니다. 견적서를 확인해주세요").sender(jeja.getJEmail()).build());
 		handler.sendJejaMessage(jeja.getJName(), dalin.getDName(), jeja.getJName() + "님으로부터 요청서가 도착하였습니다");
 	}
 	

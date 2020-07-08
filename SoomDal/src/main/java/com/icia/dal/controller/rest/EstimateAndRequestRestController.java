@@ -1,14 +1,16 @@
 package com.icia.dal.controller.rest;
 
+import java.security.Principal;
+
 import javax.inject.Inject;
 
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.annotation.*;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.icia.dal.service.rest.*;
+import com.icia.dal.service.rest.EstimateRestService;
+import com.icia.dal.service.rest.RequestRestService;
 
 
 @RestController
@@ -51,6 +53,15 @@ public class EstimateAndRequestRestController {
 			return ResponseEntity.ok(estimateService.setDisableByJejaToEstimate(eNo,jMno));
 		}
 		
+		@Secured("ROLE_DALIN")
+		@PostMapping("/jeja/request/no")
+		public ResponseEntity<?> refuseRequest(int rNo,int jMno,Principal principal) {
+			return ResponseEntity.ok(requestService.refuseRequest(rNo,jMno,principal.getName()));		
+		}
 		
-	
+		@Secured("ROLE_DALIN")
+		@PostMapping("/jeja/request/no")
+		public ResponseEntity<?> refuseEstimate(int eNo,int dMno,Principal principal) {
+			return ResponseEntity.ok(estimateService.refuseEstimate(eNo,dMno,principal.getName()));		
+		}	
 }

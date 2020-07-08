@@ -15,17 +15,21 @@
 </sec:authorize>
 <script>
 $(document).ready(function(){
-	$("#ok").on("click",function(){
-		$("#dalinIsOk").val(1);
-		var isOk = $("#dalinIsOk").val();
-
-		var params={
+	$("#no").on("click",function(){
+		var param = {
 				_csrf : "${_csrf.token}",
-				rDalinIsOk : $("#dalinIsOk").val(),
-				
+				jMno: $("#jMno").val(),
+				rNo : $("#rNo").val()
 			}
-
-		
+		$.ajax({
+			url:"/dal/jeja/request/no",
+			data: param,
+			method: "post",
+			success: function() {
+				alert("거절되었습니다");
+				location.href = "/dal/jeja/request/receiveRequest";
+			}
+		})
 	})
 })
 </script>
@@ -100,6 +104,8 @@ hr {
 				<div id="imgdiv">
 					<img src="/image/jeja.jpg" style="width: 80px; height: 80px;">
 				</div>
+				<input type="hidden" id="rNo" value="${readRequest.RNo}">
+				<input type="hidden" id="jMno" value="${readRequest.JMno}">
 				<div id="profile">
 					<span style="font-weight: bold; font-size: 15px;">${readRequest.JName }제자</span><br>
 					<span style="font-size: 13px;">${readRequest.JEmail }</span>

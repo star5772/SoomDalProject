@@ -73,4 +73,11 @@ public class EstimateRestService {
 		public int setDisableByDalinToEstimate(int eNo, int dMno) {
 			return estimateDao.setDisableByDalin(eNo,dMno);
 		}
+
+		public int refuseEstimate(int eNo, int dMno, String name) {
+			Jeja jeja = jejaDao.findByJejaToJMno(dMno);
+			Dalin dal = dalDao.findByDalin(name);
+			handler.sendJejaMessage(jeja.getJName(),dal.getDName(), "요청서가 거절되었습니다");
+			return estimateDao.setDisableByDalin(eNo, dMno);
+		}
 }

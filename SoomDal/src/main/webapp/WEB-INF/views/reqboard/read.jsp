@@ -39,6 +39,21 @@ $(function() {
 	$("#report").on("click",function() {
 		report_pop();
 	});
+	$("#deleteToReq").on("click",function() {
+		var params = {
+				rbNo = $("#rbNo").val(),
+				_csrf = "${_csrf.token}"
+			}
+		$.ajax({
+			url: "/dal/member/reqboard/delete",
+			method: "post",
+			data: params,
+			success: function() {
+				alert("삭제 완료");
+				location.href = "/dal/member/reqboard/list"
+			}
+		})
+	})
 });
 
 	
@@ -53,6 +68,7 @@ $(function() {
 		<div class="tdw"><label style="width:100px; text-align:center;background-color: #DDDDDD; font-size: 17px; display: inline-block; margin-left: 60px; height: 38px;">작성일</label>&emsp;<input type="text" name="rbDate" style="font-size: 17px; width: 150px; border: none;text-align:center;" readonly="readonly"value="${reqRead.rbWriteDateStr }"></div>
 		<div class="tdw"><label style="width:100px; text-align:center;background-color: #DDDDDD; font-size: 17px; display: inline-block; margin-left: 15px; height: 38px;">작성자</label>&emsp;<input type="text" name="rbWriter" style="font-size: 17px; width: 150px;  border: none;text-align:center; width: 100px; "readonly="readonly"value="${reqRead.JName }"></div>
 	</div><br>
+	<input type="hidden" id="rbNo" value="${reqRead.rbNo }">
 	<input type="hidden" id="rNo" value="${reqRead.RNo}">
 	<input type="hidden" id="jMno" value="${reqRead.JMno}">
 	<div style="font-size: 20px;">
@@ -74,6 +90,9 @@ $(function() {
 	</div>
 	<div id="btn_area" style="display: inline-block;">
 		<button id="report" type="button" style="text-align: center; font-size: 17px; font-weight: bold; color: white;  margin-top: 10px;border-radius: 4px; margin-left: 5px;" class="btn btn-secondary">신고</button>
+	</div>
+	<div>
+		<button id="deleteToReq" type="button">삭제</button>
 	</div>
 	<sec:authorize access="hasRole('ROLE_DALIN')">
 	<div id="btn_area" style="display: inline-block; float: right">

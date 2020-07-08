@@ -20,6 +20,7 @@
 			e.preventDefault();
 			var url = "${pageContext.request.contextPath}/member/field/list";
 			url = url + "?pageno=" + pageno;
+			url = url + "&detailFName" + ${detail.detailFName};
 			url = url + "&searchType=" + $('#search').val();
 			url = url + "&keyword=" + $('#keyword').val();
 			location.href = url;
@@ -55,6 +56,7 @@
 </style>
 </head>
 <body>
+<sec:authorize access="hasAnyRole('ROLE_JEJA','ROLE_ADMIN')">
 <div id="title_image" style="height: 300px; padding: 3.75rem; background-image: url('${detail.detailFSajin}'); background-size: cover; position: ">
 	<div id="title_wrap">
 		<h1 style="padding: 20px 0px; font-weight: bold; font-size: 40px; color: white;">${name }</h1>
@@ -63,7 +65,6 @@
 		</div>
 	</div>
 </div>
-${dalin }
 <div id="field_list">
 	<div id="search_div">
 		<div style="padding-right: 2px;" class="form-group">
@@ -153,5 +154,6 @@ ${dalin }
 		</div>
 	</div>
 </div>
+</sec:authorize>
 </body>
 </html>

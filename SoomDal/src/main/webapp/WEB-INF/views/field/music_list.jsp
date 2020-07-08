@@ -60,6 +60,7 @@ button:hover {
 <body>
 <h2 id="text">악기 서비스 </h2>
 <h3 id="text">악기 서비스에 오신걸 환영합니다 ! 하고싶은 Instrument를 배우세요 !</h3>
+<sec:authorize access="hasAnyRole('ROLE_JEJA','ROLE_ADMIN')">
 	<div class="service">
 		<div class="card">
   			<img class="card-img-top" src="/dal/image/피아노.jpg" alt="Card image cap">
@@ -116,5 +117,6 @@ button:hover {
   			</div>
 		</div>
 	</div>
+</sec:authorize>	
 </body>
 </html>

@@ -139,7 +139,7 @@ hr {
          <span><h3>숨달 캐시</h3></span>
          <ul class="nav flex-column">
             <li class="nav-item">
-               <a class="nav-link active" href="/dal/member/payment/store"><img src="https://assets.cdn.soomgo.com/icons/icon-mypage-store.svg" style="padding: 5px;"><span id="str" class="menu_span">스토어</span><div class="store"><span>${myInfo.DCash} 캐시</span></div><img src="https://assets.cdn.soomgo.com/icons/icon-mypage-list-arrow.svg"></a>
+               <a class="nav-link active" href="/dal/dalin/payment/store"><img src="https://assets.cdn.soomgo.com/icons/icon-mypage-store.svg" style="padding: 5px;"><span id="str" class="menu_span">스토어</span><div class="store"><span>${myInfo.DCash} 캐시</span></div><img src="https://assets.cdn.soomgo.com/icons/icon-mypage-list-arrow.svg"></a>
                <hr>
             </li>
             <li class="nav-item">
@@ -173,11 +173,11 @@ hr {
                <hr>
             </li>
             <li class="nav-item">
-               <a class="nav-link" href="#"><img src="https://assets.cdn.soomgo.com/icons/icon-mypage-soomgo-info.svg" style="padding: 5px;"><span class="menu_span">공지사항</span><img src="https://assets.cdn.soomgo.com/icons/icon-mypage-list-arrow.svg"></a>
+               <a class="nav-link" href="/dal/jeja/reqboard/list"><img src="https://assets.cdn.soomgo.com/icons/icon-mypage-soomgo-info.svg" style="padding: 5px;"><span class="menu_span">요청서 게시판</span><img src="https://assets.cdn.soomgo.com/icons/icon-mypage-list-arrow.svg"></a>
                <hr>
             </li>
             <li class="nav-item">
-               <a class="nav-link" href="/dal/member/qnaBoard/list"><img src="https://assets.cdn.soomgo.com/icons/icon-mypage-soomgo-notice.svg" style="padding: 5px;"><span class="menu_span">달인 가이드</span><img src="https://assets.cdn.soomgo.com/icons/icon-mypage-list-arrow.svg"></a>
+               <a class="nav-link" href="/dal/dalin/qnaBoard/list"><img src="https://assets.cdn.soomgo.com/icons/icon-mypage-soomgo-notice.svg" style="padding: 5px;"><span class="menu_span">달인 가이드</span><img src="https://assets.cdn.soomgo.com/icons/icon-mypage-list-arrow.svg"></a>
             </li>
          </ul>
       </div>

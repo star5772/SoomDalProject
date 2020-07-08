@@ -49,7 +49,7 @@ $(document).ready(function(){
 		<button id="delete" style="text-align: center; font-size: 15px; font-weight: bold; color: white;" class="btn btn-warning">계정삭제</button>
 	</div>
 	<div id="btn_area" style="display: inline-block;">
-		<button id="cancel" class="btn btn-secondary" style="text-align: center; font-size: 15px; font-weight: bold; border-radius: 4px; font-size: 14px; color:white;">취소</button>
+		<button id="cancel" class="btn btn-secondary" onclick="location.href='/dal'" style="text-align: center; font-size: 15px; font-weight: bold; border-radius: 4px; font-size: 14px; color:white;">취소</button>
 	</div>
 	<form action="/dal/member/resign">
 		<input type="hidden" name="_csrf" value="${_csrf.token }">

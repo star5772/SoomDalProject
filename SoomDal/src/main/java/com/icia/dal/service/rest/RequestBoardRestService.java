@@ -26,4 +26,11 @@ public class RequestBoardRestService {
 		// 신고 회수 증가 and 신고 여부 true 업데이트
 		reqDao.RequestBoardUpdate(RequestBoard.builder().rbNo(rbNo).rbReportCnt(1).rbIsReport(true).build());
 	}
+	
+	public void deleteToReqBoard(int rbNo, String username) {
+		RequestBoard req = reqDao.findByRequestBoard(rbNo);
+		if(req.getRbWriter().equals(username)==false)
+			throw new JobFailException("작성자만 삭제 가능합니다");
+		reqDao.delete(rbNo);
+	}
 }
