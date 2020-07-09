@@ -87,6 +87,7 @@ public class JejaController {
 		return new ModelAndView("main").addObject("viewName","member/lessonHistory.jsp").addObject("LHlist", service.lessonListToJeja(pageno, jMno)).addObject("jMno",jMno);
 	}
 	
+	
 	// 비번 찾기
 	@PreAuthorize("isAnonymous()")
 	@GetMapping("/jeja/change_pwd")

@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.google.inject.internal.Nullable;
 import com.icia.dal.Exception.*;
 import com.icia.dal.entity.Estimate;
 import com.icia.dal.entity.Request;
@@ -99,14 +100,14 @@ public class EstimateAndRequestController {
 	// 달인 -> 받은요청서목록
 	@Secured("ROLE_DALIN")
 	@GetMapping("/jeja/request/receiveRequest")
-	public ModelAndView receiveRequestList(@RequestParam(defaultValue = "1")int pageno,int dMno) {
+	public ModelAndView receiveRequestList(@RequestParam(defaultValue = "1")int pageno,@Nullable int dMno) {
 		return new ModelAndView("main").addObject("viewName","request/requestList.jsp").addObject("receiveRequest",requestService.receiveRequestList(pageno, dMno)).addObject("dMno",dMno);
 	}
 	
 	// 제자 -> 보낸요청서목록 
 	@Secured("ROLE_JEJA")
 	@GetMapping("/jeja/request/sendRequestList")
-	public ModelAndView sendRequestList(@RequestParam(defaultValue = "1")int pageno,int jMno) {
+	public ModelAndView sendRequestList(@RequestParam(defaultValue = "1")int pageno,@Nullable int jMno) {
 		return new ModelAndView("main").addObject("viewName","request/requestList.jsp").addObject("sendRequest",requestService.sendRequestList(pageno,jMno)).addObject("jMno",jMno);
 	}
 	

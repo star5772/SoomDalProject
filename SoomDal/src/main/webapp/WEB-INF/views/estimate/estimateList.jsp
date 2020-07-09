@@ -13,12 +13,17 @@
 </sec:authorize>
 <script>
 $(function() {
-	$("#deleteToDalin").on("click", function() {
-		var formData = $("#deleteToDalinE").serialize();
+	$(".deleteToDalin").on("click", function() {
+		var e = $(this).data("dal");
+		var params = {
+				dMno:${dMno},
+				eNo:e,
+				_csrf:"${_csrf.token}"
+			}
 		$.ajax({
 			url: "/dal/dalin/estimate/disableByDalin",
 			method: "post",
-			data: formData,
+			data: params,
 			success: function() {
 					alert("삭제 완료");
 					window.location.reload();
@@ -26,12 +31,17 @@ $(function() {
 		})
 	})
 
-	$("#deleteToJeja").on("click", function() {
-		var formData = $("#deleteToJejaE").serialize();
+	$(".deleteToJeja").on("click", function() {
+		var e = $(this).data("jeja");
+		var params = {
+				jMno:${jMno},
+				eNo:e,
+				_csrf:"${_csrf.token}"
+			}
 		$.ajax({
 			url: "/dal/dalin/estimate/disableByJeja",
 			method: "post",
-			data: formData,
+			data: params,
 			success: function() {
 					alert("삭제 완료");
 					window.location.reload();
@@ -118,12 +128,7 @@ a {
 		<div class="card">
 			<div class="card-top">
 				<br>
-				<form id="deleteToJejaE">
-					<input type="hidden" name="jMno" value="${jMno}">
-					<input type="hidden" name="eNo" value="${estimate.ENo}">
-					<input type="hidden" name="_csrf" value="${_csrf.token }">	
-				<a href="#" id="deleteToJeja"><span style="float: right; display: inline-block; font-size: 15px; color: gray;">X</span></a><br>
-				</form>
+				<a href="#" class="deleteToJeja" data-jeja="${estimate.ENo }"><span style="float: right; display: inline-block; font-size: 15px; color: gray;">X</span></a><br>
 				 <div><h5>${estimate.RSubject }</h5></div>
 				<div><p>${estimate.EWriteTimeStr }</p></div>
 			</div>
@@ -181,12 +186,7 @@ a {
 		<div class="card">
 			<div class="card-top">
 				<br>
-				<form id="deleteToDalinE">
-					<input type="hidden" name="dMno" value="${dMno}">
-					<input type="hidden" name="eNo" value="${estimatee.ENo}">
-					<input type="hidden" name="_csrf" value="${_csrf.token }">
-				<a href="#" id="deleteToDalin"><span style="float: right; display: inline-block; font-size: 15px; color: gray;">X</span></a><br>
-				</form>		
+				<a href="#" class="deleteToDalin" data-dal="${estimatee.ENo }"><span style="float: right; display: inline-block; font-size: 15px; color: gray;">X</span></a><br>
 				<div><h5>${estimatee.RSubject }</h5></div>
 				<div><p>${estimatee.EWriteTimeStr }</p></div>
 			</div>
