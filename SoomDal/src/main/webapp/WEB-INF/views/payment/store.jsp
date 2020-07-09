@@ -70,7 +70,7 @@ $(function(){
 			data: params,
 			success: function() {
 				alert("충전이 완료되었습니다")
-				location.href = "/dal/member/payment/store"
+				location.href = "/dal/dalin/payment/store"
 			}
 		})
 	})
