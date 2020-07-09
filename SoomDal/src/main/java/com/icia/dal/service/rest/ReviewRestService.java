@@ -30,7 +30,7 @@ public class ReviewRestService {
 	public List<Review> deleteToReview(int rNo, int dMno, String writer) throws JobFailException {
 		Review review = reviewDao.findByReview(rNo);
 		if(writer.equals(review.getRWriter())==false)
-			throw new JobFailException("작성자 본인만 삭제할 수 있습니다");
+			throw new RuntimeException();
 		reviewDao.deleteToReview(rNo);
 		return reviewDao.findAllReview(dMno);
 	}
