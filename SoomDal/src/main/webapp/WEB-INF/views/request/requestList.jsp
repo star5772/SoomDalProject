@@ -13,6 +13,23 @@
 	<script src="/dal/script/webS.js"></script>
 </sec:authorize>
 <script>
+function clicka() {
+	var param = {
+			jMno: $(this).data("jMno"),
+			rNo: $(this).data("rNo"),
+			_csrf: "${_csrf.token}"
+		}
+	$.ajax({
+		url: "/dal/jeja/request/disableByJeja",
+		data: param,
+		method: "post",
+		success: function() {
+			alert("삭제 완료");
+			window.location.reload();
+		}
+	})
+}
+
 $(function() {
 	$("#deleteToDalin").on("click", function() {
 		var formData = $("#deleteToDalinFrm").serialize();
@@ -38,7 +55,44 @@ $(function() {
 					window.location.reload();
 				}
 		})
-	})		
+	})
+
+	$(".deleteByDal").click(function() {
+		r = $(this).data("dal");
+
+		var param = {
+				dMno: "${dMno}",
+				rNo: r,
+				_csrf: "${_csrf.token}"
+			}
+		$.ajax({
+			url: "/dal/jeja/request/disableByDalin",
+			data: param,
+			method: "post",
+			success: function() {
+				alert("삭제 완료");
+				window.location.reload();
+			}
+		})
+	})
+	$(".deleteByJeja").click(function() {
+		r = $(this).data("jeja");
+		var param = {
+				jMno: "${jMno}",
+				rNo: r,
+				_csrf: "${_csrf.token}"
+			}
+		$.ajax({
+			url: "/dal/jeja/request/disableByJeja",
+			data: param,
+			method: "post",
+			success: function() {
+				alert("삭제 완료");
+				window.location.reload();
+			}
+		})
+	})
+				
 })
 </script>
 <style>
@@ -110,15 +164,10 @@ a {
 			<h2>받은 요청서</h2>
 		</div>
 	<c:forEach items="${receiveRequest.list }" var="request">
-		<div class="card">
+		<div class="card" id="aa">
 			<div class="card-top">
 				<br>
-				<form id="deleteToDalinFrm">
-					<input type="hidden" name="dMno" value="${dMno}">
-					<input type="hidden" name="rNo" value="${request.RNo}">
-					<input type="hidden" name="_csrf" value="${_csrf.token }">
-					<a href="#"id="deleteToDalin"><span style="float: right; display: inline-block; font-size: 15px; color: gray;">X</span></a><br>
-				</form>
+					<a href="#" class="deleteByDal" data-dal="${request.RNo }"><span style="float: right; display: inline-block; font-size: 15px; color: gray;">X</span></a><br>
 				<div><h5>${request.RSubject }</h5></div>
 				<div><p>${request.RWriteDateStr }</p></div>
 			</div>
@@ -168,12 +217,10 @@ a {
 		<div class="card">
 			<div class="card-top">
 				<br>
-				<form id="deleteToJejaFrm">
-					<input type="hidden" name="jMno" value="${jMno}">
-					<input type="hidden" name="rNo" value="${request.RNo}">
-					<input type="hidden" name="_csrf" value="${_csrf.token }">				
-				<a href="#" id="deleteToJeja"><span style="float: right; display: inline-block; font-size: 15px; color: gray;">X</span></a><br>
-				</form>
+					<input type="hidden" data-jMno="${jMno }" >
+					<input type="hidden" data-rNo="${request.RNo}" >
+					<input type="hidden" name="_csrf" value="${_csrf.token }">			
+				<a href="#" data-jeja="${request.RNo }" class="deleteByJeja"><span style="float: right; display: inline-block; font-size: 15px; color: gray;">X</span></a><br>
 				<div style="width: 240px;"><h5 style="display: inline-block;">${request.RSubject }</h5></div><br>
 				<div><p>${request.RWriteDateStr }</p></div>
 			</div>
@@ -188,25 +235,26 @@ a {
 	</c:forEach>
 	</div>
 	<div id="page_wrap" style="text-align:center;">
+
 		<div id="inner">
 		<ul class="pagination">
 			<c:if test="${sendRequest.prev==true}">
-				<li><a style="color: black;" href="/dal/jeja/request/sendRequest?pageno=${sendRequest.startPage-1}&jMno=${jMno}">이전</a></li>
+				<li><a style="color: black;" href="/dal/jeja/request/sendRequestList?pageno=${sendRequest.startPage-1}&jMno=${jMno}">이전</a></li>
 			</c:if>
 			<c:forEach begin="${sendRequest.startPage}" end="${sendRequest.endPage}" var="i">
 				<c:choose>
 					<c:when test="${sendRequest.pageno eq i }">
 						<li>
-							<a style="background-color: orange; color: white;" href="/dal/jeja/request/sendRequest?pageno=${i}&jMno=${jMno}">${i}</a>
+							<a style="background-color: orange; color: white;" href="/dal/jeja/request/sendRequestList?pageno=${i}&jMno=${jMno}">${i}</a>
 						</li>
 					</c:when>
 					<c:otherwise>
-						<li><a style="color: black;" href="/dal/jeja/request/sendRequest?pageno=${i}&jMno=${jMno}">${i}</a></li>
+						<li><a style="color: black;" href="/dal/jeja/request/sendRequestList?pageno=${i}&jMno=${jMno}">${i}</a></li>
 					</c:otherwise>
 				</c:choose>
 			</c:forEach>
 			<c:if test="${sendRequest.next==true}">
-				<li><a style="color: black;" href="/dal/jeja/request/sendRequest?pageno=${sendRequest.endPage+1}&jMno=${jMno}">다음</a></li>
+				<li><a style="color: black;" href="/dal/jeja/request/sendRequestList?pageno=${sendRequest.endPage+1}&jMno=${jMno}">다음</a></li>
 			</c:if>
 		</ul>
 		</div>

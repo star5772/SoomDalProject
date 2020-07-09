@@ -48,7 +48,7 @@ public class QnaBoardController {
 	public String write(QnaBoard qnaBoard ,Principal principal) {
 		String username = principal.getName();
 		int qno = qnaBoardService.write(qnaBoard,username);
-		return "redirect:/member/qnaBoard/read?qNo="+qno;
+		return "redirect:/dalin/qnaBoard/read?qNo="+qno;
 				
 	}
 	
@@ -56,6 +56,6 @@ public class QnaBoardController {
 	@PostMapping("/dalin/qnaBoard/delete")
 	public String deleteToQnaBoard(int qNo) {
 		qnaBoardService.delete(qNo);
-		return "redirect:/member/qnaBoard/list";
+		return "redirect:/dalin/qnaBoard/list";
 	}
 }
