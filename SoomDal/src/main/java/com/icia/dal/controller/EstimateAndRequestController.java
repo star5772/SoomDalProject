@@ -50,14 +50,14 @@ public class EstimateAndRequestController {
 	@Secured("ROLE_JEJA")
 	@GetMapping("/dalin/estimate/receiveEstimateList")
 	public ModelAndView receiveEstimateList(@RequestParam(defaultValue = "1")int pageno, int jMno) {
-		return new ModelAndView("main").addObject("viewName","estimate/estimateList.jsp").addObject("receiveEstimate",estimateService.receiveEstimateList(pageno,jMno)).addObject("jMno",jMno);
+		return new ModelAndView("main").addObject("viewName","estimate/estimateListToJeja.jsp").addObject("receiveEstimate",estimateService.receiveEstimateList(pageno,jMno)).addObject("jMno",jMno);
 	}
 	
 	// 보낸 견적서 목록
 	@Secured("ROLE_DALIN")
 	@GetMapping("/dalin/estimate/sendEstimateList")
 	public ModelAndView sendEstimateList(@RequestParam(defaultValue = "1") int pageno,int dMno) {
-		return new ModelAndView("main").addObject("viewName","estimate/estimateList.jsp").addObject("sendEstimate",estimateService.sendEstimateList(pageno,dMno)).addObject("dMno",dMno);
+		return new ModelAndView("main").addObject("viewName","estimate/estimateListToDalin.jsp").addObject("sendEstimate",estimateService.sendEstimateList(pageno,dMno)).addObject("dMno",dMno);
 	}
 	
 	// 견적서 보내기 화면출력

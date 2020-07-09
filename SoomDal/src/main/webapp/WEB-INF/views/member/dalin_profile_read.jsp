@@ -21,7 +21,7 @@ $(function() {
 		$("#star3").attr("src","https://assets.cdn.soomgo.com/icons/icon-common-review-star-small-empty.svg");
 		$("#star4").attr("src","https://assets.cdn.soomgo.com/icons/icon-common-review-star-small-empty.svg");
 		$("#star5").attr("src","https://assets.cdn.soomgo.com/icons/icon-common-review-star-small-empty.svg");
-		$("#rScore").val(1);
+		$("#rScore2").val(1);
 	})
 	$("#2star").on("click",function(){
 		$("#star1").attr("src","https://assets.cdn.soomgo.com/icons/icon-common-review-star-small-full.svg");
@@ -29,7 +29,7 @@ $(function() {
 		$("#star3").attr("src","https://assets.cdn.soomgo.com/icons/icon-common-review-star-small-empty.svg");
 		$("#star4").attr("src","https://assets.cdn.soomgo.com/icons/icon-common-review-star-small-empty.svg");
 		$("#star5").attr("src","https://assets.cdn.soomgo.com/icons/icon-common-review-star-small-empty.svg");
-		$("#rScore").val(2);
+		$("#rScore2").val(2);
 	})
 	$("#3star").on("click",function(){
 		$("#star1").attr("src","https://assets.cdn.soomgo.com/icons/icon-common-review-star-small-full.svg");
@@ -37,7 +37,7 @@ $(function() {
 		$("#star3").attr("src","https://assets.cdn.soomgo.com/icons/icon-common-review-star-small-full.svg");
 		$("#star4").attr("src","https://assets.cdn.soomgo.com/icons/icon-common-review-star-small-empty.svg");
 		$("#star5").attr("src","https://assets.cdn.soomgo.com/icons/icon-common-review-star-small-empty.svg");
-		$("#rScore").val(3);
+		$("#rScore2").val(3);
 	})
 	$("#4star").on("click",function(){
 		$("#star1").attr("src","https://assets.cdn.soomgo.com/icons/icon-common-review-star-small-full.svg");
@@ -45,7 +45,7 @@ $(function() {
 		$("#star3").attr("src","https://assets.cdn.soomgo.com/icons/icon-common-review-star-small-full.svg");
 		$("#star4").attr("src","https://assets.cdn.soomgo.com/icons/icon-common-review-star-small-full.svg");
 		$("#star5").attr("src","https://assets.cdn.soomgo.com/icons/icon-common-review-star-small-empty.svg");
-		$("#rScore").val(4);
+		$("#rScore2").val(4);
 	})
 	$("#5star").on("click",function(){
 		$("#star1").attr("src","https://assets.cdn.soomgo.com/icons/icon-common-review-star-small-full.svg");
@@ -53,7 +53,7 @@ $(function() {
 		$("#star3").attr("src","https://assets.cdn.soomgo.com/icons/icon-common-review-star-small-full.svg");
 		$("#star4").attr("src","https://assets.cdn.soomgo.com/icons/icon-common-review-star-small-full.svg");
 		$("#star5").attr("src","https://assets.cdn.soomgo.com/icons/icon-common-review-star-small-full.svg");
-		$("#rScore").val(5);
+		$("#rScore2").val(5);
 	})
 })
 
@@ -61,12 +61,13 @@ $(function() {
 	$(function() {
 		$("#reviewWrite").on("click", function() {
 			var formData = $("#rvFrm").serialize();
+			console.log(formData);
 			$.ajax({
 				url : "/dal/jeja/reviewWrite",
 				data : formData,
 				method : "post",
 				success : function() {
-					alert("리뷰작성완료 !")
+					alert("리뷰작성완료 !");
 					window.location.reload();
 				}
 			})
@@ -75,7 +76,8 @@ $(function() {
 			var params = {
 					rNo : $("#rNo").val(),
 					dMno: $("#dMno").val(),
-					_csrf : "${_csrf.token}"
+					_csrf : "${_csrf.token}",
+					_method : "delete"
 				}
 			$.ajax({
 				url : "/dal/jeja/review_delete" ,
@@ -411,7 +413,11 @@ hr {
 										<img src="https://assets.cdn.soomgo.com/icons/icon-common-review-star-small-empty.svg">
 									</c:forEach>
 								</span>
-								<button type="button" id="deleteReview">리뷰삭제</button>
+							<c:choose>	
+								<c:when test="${rv.RWriter == username}">
+									<button type="button" id="deleteReview">리뷰삭제</button>
+								</c:when>
+							</c:choose>	
 							</div>
 							<div id="rDate">
 								<p>${rv.RDate}</p>
@@ -436,7 +442,7 @@ hr {
 									value="${readProfile.DMno}"> <input type="hidden"
 									name="_csrf" value="${_csrf.token}">
 								<div>
-									<input type="hidden" name="rScore" id="rScore"value="">
+									<input type="hidden" name="rScore" id="rScore2" value="">
 									<a id="1star"><img src="https://assets.cdn.soomgo.com/icons/icon-common-review-star-small-empty.svg" id="star1"></a>
 									<a id="2star"><img src="https://assets.cdn.soomgo.com/icons/icon-common-review-star-small-empty.svg" id="star2"></a>
 									<a id="3star"><img src="https://assets.cdn.soomgo.com/icons/icon-common-review-star-small-empty.svg" id="star3"></a>
