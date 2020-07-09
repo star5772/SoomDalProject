@@ -16,21 +16,25 @@
 	<script src="/dal/script/webS.js"></script>
 </sec:authorize>
 <script>
-function refund() {
-		var param = {
-				_csrf : "${_csrf.token}",
-				pCode: $("#pCode").val()
-			}
+$(function() {
+	$(".refundAccess").click(function() {
+		var code = $(this).data("code");
+		
+		var params = {
+				pCode:code,
+				_csrf:"${_csrf.token}"
+		}
 		$.ajax({
 			url: "/dal/member/admin/confirmRefund",
 			method: "post",
-			data: param,
+			data: params,
 			success: function() {
 				alert("처리완료");
 				window.location.reload();
 			}
 		})
-}
+	});
+});
 </script>
 <style>
 h1 {
@@ -101,7 +105,6 @@ td {
 			</thead>
 			<tbody>
 				<c:forEach items="${refund.list }" var="r">
-					<input type="hidden" id="pCode" value="${r.PCode}">
 					<tr>
 						<td>${r.DEmail}</td>
 						<td>${r.PReqRefundDate }</td>
@@ -114,7 +117,7 @@ td {
 							<c:otherwise>
 								<td>미환불</td>
 								<td>
-									<button onclick="refund()" type="button" class="btn btn-secondary" style="width: 50px;">수락</button>
+									<button type="button" data-code="${r.PCode }" class="btn btn-secondary refundAccess" style="width: 50px;">수락</button>
 								</td>
 							</c:otherwise>
 						</c:choose>

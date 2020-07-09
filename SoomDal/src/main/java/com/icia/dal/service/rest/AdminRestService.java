@@ -66,6 +66,7 @@ public class AdminRestService {
 	@Transactional
 	public boolean confirmRefund(String pCode) {
 		NowRefund nr = NowRefund.builder().pCode(pCode).pRefundIsOk(true).build();
+		System.out.println(nr+"-------------------------------------------");
 		npDao.updateToNowRefund(nr);
 		return true;
 	}
