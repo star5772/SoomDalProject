@@ -14,7 +14,7 @@
 		<![CDATA[
 			select * from
 				(select j.*,rownum as rnum from
-					(select /*+ index_desc(jeja pk_jeja)*/j_mno jMno, j_email jEmail, j_name jName, j_accusation_cnt jAccusationCnt, j_joindate jJoinDate from jeja)j
+					(select /*+ index_desc(jeja pk_jeja)*/j_mno jMno, j_email jEmail, j_name jName, j_tel jTel, j_accusation_cnt jAccusationCnt, j_joindate jJoinDate from jeja)j
 					where rownum<=#{endRowNum})
 				where rnum>=#{startRowNum}
 		]]>
