@@ -17,12 +17,12 @@ public class QnaRestCotroller {
 	private QnaCommentRestService qnaCommentService;
 	
 
-	@PostMapping("/comment/write")
+	@PostMapping("/admin/comment/write")
 	public ResponseEntity<Void> commentWrite(String cContent, Integer qNo) {
 		qnaCommentService.write(cContent, qNo);
 		return ResponseEntity.ok(null);
 	}
-	@DeleteMapping("/comment/delete")
+	@DeleteMapping("/admin/comment/delete")
 	public ResponseEntity<Void> commentDelete(Integer cNo,Integer qNo){
 		qnaCommentService.delete(cNo, qNo);
 		return ResponseEntity.ok(null);
