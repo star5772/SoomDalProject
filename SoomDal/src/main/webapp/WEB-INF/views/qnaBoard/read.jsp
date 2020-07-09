@@ -53,7 +53,7 @@ width: 80px; height: 35px;  background-color: #ffc968; color: white; font-size: 
 				qNo:${read.QNo}
 			}
 			$.ajax({
-				url:"/dal/comment/write",
+				url:"/dal/admin/comment/write",
 				method:"post",
 				data:params
 			}).done(()=>location.reload()).fail(()=>Swal.fire("실패!","fail","warning"))
@@ -67,7 +67,7 @@ width: 80px; height: 35px;  background-color: #ffc968; color: white; font-size: 
 				cNo:"${read.comment.CNo}"
 			}
 			$.ajax({
-				url:"/dal/comment/delete",
+				url:"/dal/admin/comment/delete",
 				method:"post",
 				data:params
 			}).done(()=>location.reload()).fail(()=>Swal.fire("실패!","fail","warning"))
