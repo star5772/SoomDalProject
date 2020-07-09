@@ -57,10 +57,14 @@ public class EstimateService {
 		Dalin dalin = dalDao.findByDalin(username);
 		requestDao.setIsOk(et.getRNo());
 		Request request = requestDao.findByRequest(et.getRNo());
+		RequestBoard reqboard = rbDao.findByRequestBoardToRNO(et.getRNo());
+		if(request==null) 
+			et.setJMno(reqboard.getJMno());
+		else
+			et.setJMno(request.getJMno());
 		et.setDEmail(username);
 		et.setDMno(dalin.getDMno());
 		et.setFNo(dalin.getFNo());
-		et.setJMno(request.getJMno());
 		estimateDao.insertToEstimate(et);
 		Jeja jeja = jejaDao.findByJejaToJMno(et.getJMno());
 		Memo memo = Memo.builder().receiver(jeja.getJEmail()).title(dalin.getDName() + "님으로부터 견적서가 도착했습니다").content(LocalDateTime.now().format(DateTimeFormatter.ofPattern("MM월dd일 HH시mm분")) + "에 견적서가 도착했습니다. 견적서를 확인해주세요").sender(et.getDEmail()).build();
@@ -80,9 +84,13 @@ public class EstimateService {
 			EstimateDto.DtoForList dto = modelMapper.map(et,EstimateDto.DtoForList.class);
 			String str = et.getEWriteTime().format(DateTimeFormatter.ofPattern("yyyy년 MM월 dd일"));
 			Request request = requestDao.findByRequest(et.getRNo());
+			RequestBoard reqboard = rbDao.findByRequestBoardToRNO(et.getRNo());
 			Jeja jeja = jejaDao.findByJejaToJMno(et.getJMno());
+			if(request==null)
+				dto.setRSubject(reqboard.getFieldOrHobby());
+			else
+				dto.setRSubject(request.getRSubject());
 			dto.setJName(jeja.getJName());
-			dto.setRSubject(request.getRSubject());
 			dto.setEWriteTimeStr(str);
 			dtoList.add(dto);
 		}
@@ -100,9 +108,13 @@ public class EstimateService {
 		EstimateDto.DtoForRead dto = modelMapper.map(et,EstimateDto.DtoForRead.class);
 		String str = et.getEWriteTime().format(DateTimeFormatter.ofPattern("yyyy년 MM월 dd일"));
 		Request request = requestDao.findByRequest(et.getRNo());
+		RequestBoard reqboard = rbDao.findByRequestBoardToRNO(et.getRNo());
+		if(request==null)
+			dto.setRSubject(reqboard.getFieldOrHobby());
+		else
+			dto.setRSubject(request.getRSubject());
 		dto.setDName(dalin.getDName());
 		dto.setJName(jeja.getJName());
-		dto.setRSubject(request.getRSubject());
 		dto.setEWriteTimeStr(str);
 		dto.setDName(dalDao.findByDalinToDMno(et.getDMno()).getDName());
 		
@@ -123,8 +135,12 @@ public class EstimateService {
 			String str = et.getEWriteTime().format(DateTimeFormatter.ofPattern("yyyy년 MM월 dd일"));
 			Request request = requestDao.findByRequest(et.getRNo());
 			Dalin dalin = dalDao.findByDalinToDMno(et.getDMno());
+			RequestBoard reqboard = rbDao.findByRequestBoardToRNO(et.getRNo());
+			if(request==null)
+				dto.setRSubject(reqboard.getFieldOrHobby());
+			else
+				dto.setRSubject(request.getRSubject());
 			dto.setDName(dalin.getDName());
-			dto.setRSubject(request.getRSubject());
 			dto.setEWriteTimeStr(str);
 			dto.setDName(dalDao.findByDalinToDMno(et.getDMno()).getDName());
 			

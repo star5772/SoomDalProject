@@ -23,7 +23,7 @@
 		<![CDATA[
 			select * from
 				(select e.*,rownum rnum from
-					(select e_no eNo, d_mno dMno, f_no fNo, j_mno jMno, r_no rNo, d_email dEmail, e_money eMoney, e_content eContent, e_tel_type eTelType, j_is_ok jIsOk, e_cash eCash, e_write_time eWriteTime,e_is_read eIsRead from estimate where d_mno=#{dMno} and disable_by_dalin = 0) e
+					(select /* +index_desc(estimate estimate_pk) */e_no eNo, d_mno dMno, f_no fNo, j_mno jMno, r_no rNo, d_email dEmail, e_money eMoney, e_content eContent, e_tel_type eTelType, j_is_ok jIsOk, e_cash eCash, e_write_time eWriteTime,e_is_read eIsRead from estimate where d_mno=#{dMno} and disable_by_dalin = 0) e
 				where rownum<=#{endRowNum})
 			where rnum>=#{startRowNum}
 		]]>			
@@ -50,7 +50,7 @@
 		<![CDATA[
 			select * from
 				(select e.*,rownum rnum from
-					(select e_no eNo, d_mno dMno, f_no fNo, j_mno jMno, r_no rNo, d_email dEmail, e_money eMoney, e_content eContent, e_tel_type eTelType, j_is_ok jIsOk, e_cash eCash, e_write_time eWriteTime,e_is_read eIsRead from estimate where j_mno=#{jMno} and disable_by_jeja = 0 ) e
+					(select /* +index_desc(estimate estimate_pk) */ e_no eNo, d_mno dMno, f_no fNo, j_mno jMno, r_no rNo, d_email dEmail, e_money eMoney, e_content eContent, e_tel_type eTelType, j_is_ok jIsOk, e_cash eCash, e_write_time eWriteTime,e_is_read eIsRead from estimate where j_mno=#{jMno} and disable_by_jeja = 0 ) e
 				where rownum<=#{endRowNum})
 			where rnum>=#{startRowNum}
 		]]>			

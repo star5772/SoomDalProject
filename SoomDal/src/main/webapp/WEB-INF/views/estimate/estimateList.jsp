@@ -30,11 +30,11 @@ $(function() {
 				}
 		})
 	})
-
 	$(".deleteToJeja").on("click", function() {
 		var e = $(this).data("jeja");
+		var j = $(this).data("jMno")
 		var params = {
-				jMno:${jMno},
+				jMno: j,
 				eNo:e,
 				_csrf:"${_csrf.token}"
 			}
@@ -128,9 +128,11 @@ a {
 		<div class="card">
 			<div class="card-top">
 				<br>
+			
 				<a href="#" class="deleteToJeja" data-jeja="${estimate.ENo }"><span style="float: right; display: inline-block; font-size: 15px; color: gray;">X</span></a><br>
 				 <div><h5>${estimate.RSubject }</h5></div>
 				<div><p>${estimate.EWriteTimeStr }</p></div>
+					
 			</div>
 			<div class="card-body">
 				<div>${estimate.DName } 달인</div>			
@@ -186,7 +188,7 @@ a {
 		<div class="card">
 			<div class="card-top">
 				<br>
-				<a href="#" class="deleteToDalin" data-dal="${estimatee.ENo }"><span style="float: right; display: inline-block; font-size: 15px; color: gray;">X</span></a><br>
+				<a href="#" class="deleteToDalin" data-dal="${estimatee.ENo }" data-jMno="${estimatee.JMno }"><span style="float: right; display: inline-block; font-size: 15px; color: gray;">X</span></a><br>
 				<div><h5>${estimatee.RSubject }</h5></div>
 				<div><p>${estimatee.EWriteTimeStr }</p></div>
 			</div>

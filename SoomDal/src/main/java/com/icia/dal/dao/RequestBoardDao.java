@@ -24,6 +24,8 @@ public interface RequestBoardDao {
 	
 	public int RequestBoardToCount(String rbWriter);
 	
+	public RequestBoard findByRequestBoardToRNO(int rNo);
+	
 	public List<RequestBoard> findAllByRequestBoard(@Param("startRowNum") int startRowNum, @Param("endRowNum") int endRowNum);
 	
 	public List<RequestBoard> findAllByRbWriter(@Param("startRowNum") int startRowNum, @Param("endRowNum") int endRowNum, @Param("rbWriter") String rbWriter);
