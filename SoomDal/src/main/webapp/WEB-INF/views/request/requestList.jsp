@@ -225,7 +225,7 @@ a {
 				<div><p>${request.RWriteDateStr }</p></div>
 			</div>
 			<div class="card-body">
-				<div>${request.JName } 제자</div>			
+				<div>${request.DName } 달인</div>			
 			</div>	
 			<div class="card-bottom" id="button">
 				<div><hr></div>
