@@ -63,15 +63,17 @@
 	</div>
 		<table class="table table-hover" style="width: 700px; padding: 100px 0; float: left; text-align: center;">
 			<colgroup>
-				<col width="10%">
-				<col width="20%">
-				<col width="20%">
-				<col width="20%">
-				<col width="15%">
-				<col width="15%">
+				<col width="14%">
+				<col width="14%">
+				<col width="14%">
+				<col width="14%">
+				<col width="14%">
+				<col width="14%">
+				<col width="16%">
 			</colgroup>
 			<thead>
 			<tr class="active">
+				<th>회원 번호</th>
 				<th>이름</th>
 				<th>아이디</th>
 				<th>전화번호</th>
@@ -83,6 +85,7 @@
 			<tbody>
  			 <c:forEach items="${dalin.list }" var="dal">
 				<tr>
+					<td>${dal.DMno }</td>
 					<td>${dal.DName}</td>
 					<td>${dal.DEmail }</td>
 					<td>${dal.DTel }</td>

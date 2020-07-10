@@ -77,28 +77,22 @@
 			</colgroup>
 			<thead>
 			<tr class="active">
+				<th>회원 번호</th>
 				<th>이름</th>
 				<th>아이디</th>
 				<th>전화번호</th>
-				<th>신고당한 횟수</th>
 				<th>블락 여부</th>
 			</tr>
 			</thead>
 			<tbody>
  			 <c:forEach items="${jeja.list }" var="list">
 				<tr>
+					<td>${list.JMno }</td>
 					<td>${list.JName}</td>
 					<td>${list.JEmail }</td>
 					<td>${list.JTel }</td>
 					<td>${list.JAccusationCnt }</td>
-					<c:choose>
-						<c:when test="${list.JIsBlock == 'false'}">
-							<td>활성화</td>
-						</c:when>
-						<c:otherwise>
-							<td>비활성화</td>
-						</c:otherwise>
-					</c:choose>
+				
 				</tr>
 			</c:forEach> 
 			</tbody>
