@@ -63,23 +63,6 @@ public class JejaController {
 		return "redirect:/member/system/msg";
 	}
 	
-	// 레슨 목록리스트
-	@Secured("ROLE_JEJA")
-	@GetMapping("/jeja/request_write")
-	public ModelAndView requestWrite() {
-		// 제자가 달인 프로필에서 요청서 작성 버튼 클릭 시 이동하는 페이지
-		return new ModelAndView("main").addObject("viewName","jeja/request_write.jsp");
-	}
-	
-	@Secured("ROLE_JEJA")
-	@GetMapping("/jeja/estimate_list")
-	public ModelAndView jejaEstimateList() {
-		// 제자가 견적서탭 클릭 시 견적서 리스트를 보는 페이지로 이동
-		// 해당 제자가 받은 요청 정보 필요
-		return new ModelAndView("main").addObject("viewName","jeja/estimate_list.jsp");
-	}
-	
-	
 	// 제자 마이페이지 -> 레슨내역 화면 출력
 	@PreAuthorize("isAuthenticated()")
 	@GetMapping("/jeja/lessonList")
@@ -97,14 +80,14 @@ public class JejaController {
 	// 비번 찾기
 	@PreAuthorize("isAnonymous()")
 	@PostMapping("/jeja/change_pwd")
-	public String resetPassword(@RequestParam @NotNull String jEmail, @RequestParam @NotNull String jTel, RedirectAttributes ra) {
-		try {
-			service.resetPassword(jEmail, jTel);
-		} catch (JejaNotFoundException | MessagingException e) {
-			e.printStackTrace();
+	public String resetPassword(@RequestParam @NotNull String jEmail, @RequestParam @NotNull String jTel, RedirectAttributes ra) throws JejaNotFoundException, MessagingException {
+		if(service.resetPassword(jEmail, jTel)==true) {
+			ra.addFlashAttribute("msg","가입하신 이메일로 임시비밀번호를 보냈습니다");
+			return "redirect:/member/login";
+		}else {
+			ra.addFlashAttribute("msg","입력하신 정보와 일치하는 계정이 존재하지않습니다");
+			return "redirect:/member/login";
 		}
-		ra.addFlashAttribute("msg","가입하신 이메일로 임시비밀번호를 보냈습니다");
-		return "redirect:/member/login";
 	}
 	
 	@Secured("ROLE_JEJA")

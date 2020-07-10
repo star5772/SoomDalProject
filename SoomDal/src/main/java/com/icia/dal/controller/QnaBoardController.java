@@ -28,7 +28,7 @@ public class QnaBoardController {
 	public ModelAndView read(int qNo, Principal principal) throws AccessExeption {
 		// 글을 찾아와서 그글이 비밀글이면
 		if(qnaBoardService.read(qNo).isSecret()==true) {
-			if(qnaBoardService.read(qNo).getWriter().equals(principal.getName())==true)
+			if(qnaBoardService.read(qNo).getWriter().equals(principal.getName())==true || principal.getName().equals("admin2")==true)
 				return new ModelAndView("main").addObject("viewName", "qnaBoard/read.jsp").addObject("read", qnaBoardService.read(qNo));
 			else
 				throw new AccessExeption();

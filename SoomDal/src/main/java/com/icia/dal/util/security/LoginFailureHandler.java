@@ -40,21 +40,21 @@ public class LoginFailureHandler extends SimpleUrlAuthenticationFailureHandler {
 		if(exception instanceof BadCredentialsException) {
 			Jeja jeja = jejaDao.findById(JejaId);
 			if(jeja==null) {
-				session.setAttribute("jidmsg", "아이디를 찾을 수 없습니다");
+				session.setAttribute("msg", "아이디를 찾을 수 없습니다");
 			}else {
 				int loginFailureCnt = jeja.getJLoginFailureCnt()+1;
 				if(loginFailureCnt<5) {
 					jejaDao.updateJeja(Jeja.builder().jEmail(JejaId).jLoginFailureCnt(1).build());
 					session.setAttribute("msg", loginFailureCnt + "회 로그인에 실패했습니다");
 				} else if(loginFailureCnt==5) {
-					jejaDao.updateJeja(Jeja.builder().jEmail(JejaId).jLoginFailureCnt(1).build());
-					session.setAttribute("jmsg", "로그인에 5회 실패해 계정이 블록되었습니다");
+					jejaDao.updateJeja(Jeja.builder().jEmail(JejaId).jLoginFailureCnt(1).enabled(false).build());
+					session.setAttribute("msg", "로그인에 5회 실패해 계정이 블록되었습니다");
 				}else if(jeja.getJIsBlock()==true){
-					session.setAttribute("jmsg", "정책위반으로 인해 정지된 계정입니다 관리자에게 문의해주세요");
+					session.setAttribute("msg", "정책위반으로 인해 정지된 계정입니다 관리자에게 문의해주세요");
 				}
 			}
 		}else if(exception instanceof DisabledException) {
-			session.setAttribute("dmsg", "정지된 계정입니다. 관리자에게 문의하세요");
+			session.setAttribute("msg", "정지된 계정입니다. 관리자에게 문의하세요");
 		}	
 		rs.sendRedirect(request, response, "/member/login");
 	}

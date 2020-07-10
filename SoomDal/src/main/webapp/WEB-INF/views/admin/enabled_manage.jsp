@@ -108,7 +108,7 @@ $(document).ready(function() {
 							<c:when test="${e.JIsBlock == true }">
 								<td>
 								<select name="jIsBlock" id="jIsBlock" >
-									<option value="1" selected="selected">정지</option>
+									<option value="1" selected="selected" disabled="disabled">정지</option>
 									<option value="0">활성화</option>
 								</select>
 								</td>
@@ -116,8 +116,9 @@ $(document).ready(function() {
 							<c:otherwise>
 								<td>
 								<select name="jIsBlock" id="jIsBlock">
+									<option>선택하세요</option>
 									<option value="1" >정지</option>
-									<option value="0" selected="selected">활성화</option>
+									<option value="0" selected="selected" disabled="disabled">활성화</option>
 								</select>
 								</td>
 							</c:otherwise>
