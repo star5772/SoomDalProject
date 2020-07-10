@@ -52,34 +52,6 @@ public class MemberController {
 		return new ModelAndView("main").addObject("viewName","member/login.jsp");
 	}
 	
-
-	
-	@GetMapping("/request_board/list")
-	public ModelAndView requestBoard() {
-		// 요청서 게시판으로 이동
-		// board/request.jsp에 뿌려줄 list 정보 필요(addObject("request",service.requestList()))
-		return new ModelAndView("main").addObject("viewName","board/request_board_list.jsp");
-	}
-	@PreAuthorize("isAuthenticated()")	
-	@GetMapping("/member/qna_board/list")
-	public ModelAndView qnaBoard() {
-		// 문의 게시판으로 이동
-		// jsp에 뿌려줄 list 정보 필요 
-		return new ModelAndView("main").addObject("viewName","board/qna_board_list.jsp");
-	}
-	@PreAuthorize("isAuthenticated()")
-	@GetMapping("/member/qna_board/read")
-	public ModelAndView qnaRead() {
-		// 문의 글 읽기
-		// jsp에 작성글 정보 필요 > service.qnaRead()
-		return new ModelAndView("main").addObject("viewName","board/qna_board_read.jsp");
-	}
-	@Secured("ROLE_JEJA")
-	@GetMapping("/member/qna_board/write")
-	public ModelAndView qnaWrite() {
-		// 문의 게시판 글작성 페이지로 이동
-		return new ModelAndView("main").addObject("viewName","board/qna_board_write.jsp");
-	}
 	@PreAuthorize("isAnonymous()")
 	@GetMapping("/member/find_id")
 	public ModelAndView findId() {

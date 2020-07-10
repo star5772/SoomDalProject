@@ -21,13 +21,13 @@ public class PaymentRestController {
 	@Inject
 	private PaymentRestService paymentService;
 	
-
+	// 결제하기
 	@PostMapping("/payment/store")
 	public ResponseEntity<?> RequestPayment(RequestPayment rp,Principal principal) {
 		paymentService.insertCashToDalin(rp,principal.getName());
 		return ResponseEntity.ok(paymentService.insertCashToDalin(rp,principal.getName())); 
 	}
-	
+	// 인증번호
 	@PostMapping("/payment/contrast")
 	public ResponseEntity<?> ContrastPcode(String AuthCode,Principal principal) throws JobFailException {
 		String username = principal.getName();
@@ -38,7 +38,7 @@ public class PaymentRestController {
 		}
 		return ResponseEntity.ok(null);
 	}
-	
+	// 환불요청
 	@PostMapping("/payment/refundReq")
 	public ResponseEntity<?> refundRequest(String pCode,Principal principal) {
 		System.out.println(pCode);
