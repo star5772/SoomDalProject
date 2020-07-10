@@ -71,6 +71,7 @@ public class RequestService {
 			RequestDto.DtoForList dto = modelMapper.map(rq,RequestDto.DtoForList.class);
 			String str = rq.getRWriteDate().format(DateTimeFormatter.ofPattern("yyyy년 MM월 dd일 HH시 mm분"));
 			dto.setRWriteDateStr(str);
+			dto.setDName(dalDao.findByDalinToDMno(rq.getDMno()).getDName());
 			dtoList.add(dto);
 		}
 		page.setList(dtoList);

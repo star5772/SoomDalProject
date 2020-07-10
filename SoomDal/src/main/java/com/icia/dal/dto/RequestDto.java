@@ -22,6 +22,7 @@ public class RequestDto {
 		private int dMno;
 		private Boolean rbEnabled;
 		private String jName;
+		private String dName;
 	}
 	
 	@Data

@@ -249,18 +249,7 @@ hr {
 		<h2>상세 요청서</h2>
 		<div id="readRequestRead"
 			style="border: 2px solid #F6F6F6; width: 700px; padding-left: 45px; margin-left: 200px;">
-			<div id="modu" style="padding: 30px 30px 30px 30px; margin: 0 auto;">
-				<div id="imgdiv">
-					<img src="/image/jeja.jpg" style="width: 80px; height: 80px;">
-				</div>
-				<div id="profile">
-					<span style="font-weight: bold; font-size: 15px;">${readRequest.JName }제자</span><br>
-					<span style="font-size: 13px;">${readRequest.JEmail }</span>
-				</div>
-				<div id="date">
-					<span>${readRequest.RWriteDateStr }</span>
-				</div>
-				<hr>
+			<div id="modu" style="padding: 45px 30px 30px 30px; margin: 0 auto;">
 				<div id="rreadRequest">
 					<div>
 						<div class="readRequest">
