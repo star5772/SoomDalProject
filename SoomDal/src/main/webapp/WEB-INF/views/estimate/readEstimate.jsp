@@ -252,7 +252,7 @@ hr{
 		</div>
 		</div>
 			<div id="btn">
-				<button class="btn btn-secondary" style="width: 50px; text-align: center; onclick="location.href='/dal/dalin/estimate/sendEstimateList?dMno=${readEstimate.DMno}'">목 록</button>
+				<button class="btn btn-secondary" style="width: 50px; text-align: center;" onclick="location.href='/dal/dalin/estimate/sendEstimateList?dMno=${readEstimate.DMno}'">목 록</button>
 			</div>
 	</div>
 	</sec:authorize>
