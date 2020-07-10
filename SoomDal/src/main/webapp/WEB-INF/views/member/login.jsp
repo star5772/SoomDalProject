@@ -6,6 +6,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 <script>
 var openWin;
 
@@ -18,27 +19,10 @@ function openChild()
             "FindDalinId", "width=700, height=700, resizable = no, scrollbars = no");    
 }
 $(function() {
-	var jidmsg = "${jidmsg}";
-	var didmsg = "${didmsg}";
-	var jmsg = "${jmsg}";
-	var dmsg = "${dmsg}";
-	if(jidmsg != "") {
-		$("#jidalert").text(jidmsg);
-		$("#jidmsg").show();
-	}
-	if(jmsg!="") {
-		$("#jalert").text(jmsg);
-		$("#jmsg").show();
-	}
-	if(didmsg != "") {
-		$("#didalert").text(didmsg);
-		$("#didmsg").show();
-	}
-	if(dmsg!="") {
-		$("#dalert").text(dmsg);
-		$("#dmsg").show();
-	}
-	
+	var msg = "${msg}"
+		if(msg!="") {
+			Swal.fire("관리자메시지",msg, "error");
+		}	
 });	
 </script>	
 <style>
@@ -106,14 +90,9 @@ label {
 					<div>
 						<label for="dalinId">아이디</label>
 						<input type="text" name="dEmail" placeholder="아이디(Email)을 입력해주세요" maxlength="50" class="form-control form-control-lg"><br>
-						<div style="height: 30px;">
-							<div class="alert alert-success alert-dismissible" id="didmsg" style="display:none; height: 30px;">
-						    	<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-						    	<strong>서버 메시지 </strong><span id="didalert"></span>
-						  	</div>
-						  	<a class="findId" href="#" onclick="openChild()" style="float:left">달인 아이디 찾기</a>
+						                       <a class="findId" href="#" onclick="openChild()" style="float:left">달인 아이디 찾기</a>
 					  	</div>
-					  	</div>
+					  	
 					  	<div style="margin-top: 20px;">		
 						<label for="dalinPwd">비밀번호</label>
 						<input type="password" name="dPassword" placeholder="비밀번호를 입력하세요" maxlength="20" class="form-control form-control-lg"><br>
@@ -139,13 +118,7 @@ label {
 					<div>
 						<label for="jejaId">아이디</label>
 						<input type="text" name="jEmail" placeholder="아이디(Email)을 입력해주세요" maxlength="50" class="form-control form-control-lg"><br>
-						<div style="height: 30px;">
-							<div class="alert alert-success alert-dismissible" id="jidmsg" style="display:none; height: 30px;">
-						    	<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-						    	<strong>서버 메시지 </strong><span id="jidalert"></span>
-						  	</div>
-						  	<a class="findId" href="#" onclick="openChild()" style="float:left">제자 아이디 찾기</a>
-					  	</div>
+						                       <a class="findId" href="#" onclick="openChild()" style="float:left">제자 아이디 찾기</a>
 					  	</div>
 					  	<div style="margin-top: 20px;">
 						<label for="jejaPwd">비밀번호</label>

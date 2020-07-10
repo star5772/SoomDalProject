@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 import javax.mail.MessagingException;
+import javax.mail.Session;
 import javax.validation.constraints.NotNull;
 
 import org.apache.commons.lang.RandomStringUtils;
@@ -110,20 +111,26 @@ public class JejaService {
 		return dao.findById(jEmail);
 	}
 	@Transactional
-	public void resetPassword(String jEmail, String jTel) throws JejaNotFoundException, MessagingException {
+	public boolean resetPassword(String jEmail, String jTel) throws JejaNotFoundException, MessagingException {
 		Jeja jeja = dao.findById(jEmail);
 		if(jeja==null)
 			throw new JejaNotFoundException();
-		if(jeja.getJEmail().equals(jEmail)==false)
+		if(jeja.getJEmail().equals(jEmail)==false || jeja.getJTel().equals(jTel)==false)
 			throw new JejaNotFoundException();
-		
-		String newPassword = RandomStringUtils.randomAlphanumeric(20);
-		dao.updateJeja(Jeja.builder().jEmail(jEmail).jPassword(pwdEncoder.encode(newPassword)).build());
-		StringBuffer text = new StringBuffer("<p>임시비밀번호를 발급했습니다</p>");
-		text.append("<p>임시 비밀번호:").append(newPassword).append("</p>");
-		text.append("<p>보안을 위해 로그인 후 바로 비밀번호를 변경하세요</p>");
-		Mail mail = Mail.builder().sender("webmaster@icia.com").receiver(jEmail).title("임시비밀번호 발급 안내").content(text.toString()).build();
-		mailUtil.sendMail(mail);
+		else {
+			String newPassword = RandomStringUtils.randomAlphanumeric(20);
+			if(jeja.getJIsBlock()==false) {
+				dao.updateJeja(Jeja.builder().jEmail(jEmail).jPassword(pwdEncoder.encode(newPassword)).enabled(true).build());
+				StringBuffer text = new StringBuffer("<p>임시비밀번호를 발급했습니다</p>");
+				text.append("<p>임시 비밀번호:").append(newPassword).append("</p>");
+				text.append("<p>보안을 위해 로그인 후 바로 비밀번호를 변경하세요</p>");
+				Mail mail = Mail.builder().sender("webmaster@icia.com").receiver(jEmail).title("임시비밀번호 발급 안내").content(text.toString()).build();
+				mailUtil.sendMail(mail);
+				return true;
+			}else {
+				throw new JobFailException("정책위반으로 정지된 계정입니다");
+			}
+		}
 	}
 	@Transactional
 	public void changePwd(@NotNull String jPassword, String newPassword, String jEmail) throws JejaNotFoundException {

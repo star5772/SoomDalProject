@@ -40,19 +40,19 @@ public class DalinLoginFailureHandler extends SimpleUrlAuthenticationFailureHand
 		if(exception instanceof BadCredentialsException) {
 			Dalin dalin = dalDao.findByDalin(DalinId);
 			if(dalin==null) {
-				session.setAttribute("didmsg", "아이디를 찾을 수 없습니다");
+				session.setAttribute("msg", "아이디를 찾을 수 없습니다");
 			}else {
 				int loginFailureCnt = dalin.getDLoginFailureCnt()+1;
 				if(loginFailureCnt<5) {
 					dalDao.updateToDalin(Dalin.builder().dEmail(DalinId).dLoginFailureCnt(1).build());
-					session.setAttribute("dmsg", loginFailureCnt + "회 로그인에 실패했습니다");
+					session.setAttribute("msg", loginFailureCnt + "회 로그인에 실패했습니다");
 				} else {
 					dalDao.updateToDalin(Dalin.builder().dEmail(DalinId).dLoginFailureCnt(1).enabled(false).build());
-					session.setAttribute("dmsg", "로그인에 5회 실패해 계정이 블록되었습니다");
+					session.setAttribute("msg", "로그인에 5회 실패해 계정이 블록되었습니다 비밀번호 찾기를통해 임시비밀번호를 찾아주세요");
 				}				
 			}
 		} else if(exception instanceof DisabledException) {
-			session.setAttribute("dmsg", "정지된 계정입니다. 관리자에게 문의하세요");
+			session.setAttribute("msg", "정지된 계정입니다. 관리자에게 문의하세요");
 		}
 		rs.sendRedirect(request, response, "/member/login");
 	}

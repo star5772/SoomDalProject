@@ -286,14 +286,18 @@ height: 30px; margin-left: 20px; width: 1024px;  text-align: center;
 				<tr>
 					<td class="num">${q.QNo}</td>
 					<c:choose>
-						<c:when test="${q.QIsSecret eq true && q.QWriter ne username}">
-							<td class="subject">비밀글 입니다 <i class="fas fa-lock"></i></td>
+					
+						<c:when test="${q.QIsSecret == 'false'}">
+							<td class="subject"><a href="/dal/dalin/qnaBoard/read?qNo=${q.QNo}">${q.QTitle}</a></td>
 						</c:when>
-						<c:when test="${username eq admin }">
+						<c:when test="${ q.QIsSecret == 'true' && q.QWriter eq username}">
+							<td class="subject" ><a href="/dal/dalin/qnaBoard/read?qNo=${q.QNo}">${q.QTitle}</a></td>
+						</c:when>
+						<c:when test="${ q.QIsSecret == 'true' && username eq 'admin2'}">
 							<td class="subject" ><a href="/dal/dalin/qnaBoard/read?qNo=${q.QNo}">${q.QTitle}</a></td>
 						</c:when>
 						<c:otherwise>
-							<td class="subject" ><a href="/dal/dalin/qnaBoard/read?qNo=${q.QNo}">${q.QTitle}</a></td>
+							<td class="subject" >비밀글 입니다 <i class="fas fa-lock"></i></td>
 						</c:otherwise>
 					</c:choose>
 					<td class="writer">${q.QName}</td>

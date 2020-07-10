@@ -426,20 +426,24 @@ public class DalinService {
 	
 
 	@Transactional
-	public void resetPassword(String dEmail, String dTel) throws MessagingException, DalinNotFoundException {
+	public boolean resetPassword(String dEmail, String dTel) throws MessagingException, DalinNotFoundException {
 		Dalin dalin = dalDao.findByDalin(dEmail);
-		if(dalin==null)
+		if(dalin==null )
 			throw new DalinNotFoundException();
-		if(dalin.getDEmail().equals(dEmail)==false)
+		if(dalin.getDEmail().equals(dEmail)==false || dalin.getDTel().equals(dTel)==false)
 			throw new DalinNotFoundException();
-		String newPassword = RandomStringUtils.randomAlphanumeric(20);
-		dalDao.updateToDalin(Dalin.builder().dEmail(dEmail).dPassword(pwdEncoder.encode(newPassword)).build());
-		StringBuffer text = new StringBuffer("<p>임시비밀번호를 발급했습니다</p>");
-		text.append("<p>임시 비밀번호:").append(newPassword).append("</p>");
-		text.append("<p>보안을 위해 로그인 후 바로 비밀번호를 변경하세요</p>");
-		Mail mail = Mail.builder().sender("webmaster@icia.com").receiver(dEmail).title("임시비밀번호 발급 안내").content(text.toString()).build();
-		mailUtil.sendMail(mail);
+		else {
+			String newPassword = RandomStringUtils.randomAlphanumeric(20);
+			dalDao.updateToDalin(Dalin.builder().dEmail(dEmail).dPassword(pwdEncoder.encode(newPassword)).enabled(true).build());
+			StringBuffer text = new StringBuffer("<p>임시비밀번호를 발급했습니다</p>");
+			text.append("<p>임시 비밀번호:").append(newPassword).append("</p>");
+			text.append("<p>보안을 위해 로그인 후 바로 비밀번호를 변경하세요</p>");
+			Mail mail = Mail.builder().sender("webmaster@icia.com").receiver(dEmail).title("임시비밀번호 발급 안내").content(text.toString()).build();
+			mailUtil.sendMail(mail);
+			return true;
+		}
 	}
+	
 	@Transactional
 	public void changePwd(String dPassword, String newPassword, String dEmail) throws DalinNotFoundException {
 		Dalin dalin = dalDao.findByDalin(dEmail);

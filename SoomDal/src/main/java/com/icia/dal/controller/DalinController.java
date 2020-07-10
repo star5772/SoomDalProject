@@ -55,7 +55,6 @@ public class DalinController {
 	public String dalinJoin(DalinDto.DtoForJoinToDalin dto,BindingResult br, RedirectAttributes ra) throws BindException {
 		if(br.hasErrors()==true)
 			throw new BindException(br);
-		System.out.println(dto);
 		dalService.join(dto);
 		ra.addFlashAttribute("msg","회원가입을 축하합니다");
 		return "redirect:/member/system/msg";
@@ -133,14 +132,14 @@ public class DalinController {
 	
 	@PreAuthorize("isAnonymous()")
 	@PostMapping("/dalin/change_pwd")
-	public String resetPassword(@RequestParam @NotNull String dEmail, @RequestParam @NotNull String dTel, RedirectAttributes ra) {
-		try {
-			dalService.resetPassword(dEmail, dTel);
-		} catch (DalinNotFoundException | MessagingException e) {
-			e.printStackTrace();
-		}
-		ra.addFlashAttribute("msg", "가입하신 이메일로 임시비밀번호를 보냈습니다");
-		return "redirect:/member/login";
+	public String resetPassword(@RequestParam @NotNull String dEmail, @RequestParam @NotNull String dTel, RedirectAttributes ra) throws MessagingException, DalinNotFoundException {
+			if(dalService.resetPassword(dEmail, dTel)==true) {
+				ra.addFlashAttribute("msg", "가입하신 이메일로 임시비밀번호를 보냈습니다");
+				return "redirect:/member/login";
+			}else {
+				ra.addFlashAttribute("msg","입력하신 정보와 일치하는 계정이 없습니다");
+				return "redirect:/member/login";
+			}
 	}
 	
 	// 달인 마이프로필
