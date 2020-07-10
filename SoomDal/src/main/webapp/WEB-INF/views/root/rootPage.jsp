@@ -77,21 +77,18 @@ button:hover:before,button:hover:after{
         <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
       </ol>
       <div class="carousel-inner" role="listbox">
-        <!-- Slide One - Set the background image for this slide in the line below -->
         <div class="carousel-item active" style="background-image: url('/dal/image/slideTwo.jpg')">
           <div class="carousel-caption d-none d-md-block">
           </div>
         </div>
-        <!-- Slide Two - Set the background image for this slide in the line below -->
         <div class="carousel-item" style="background-image: url('/dal/image/secondSlide.png')">
           <div class="carousel-caption d-none d-md-block">
           </div>
         </div>
-        <!-- Slide Three - Set the background image for this slide in the line below -->
-        <div class="carousel-item" style="background-image: url('/dal/image/thirdslide.jpg')">
+        <a href="/dal/dalin/qnaBoard/list"><div class="carousel-item" style="background-image: url('/dal/image/thirdslide.jpg')">
           <div class="carousel-caption d-none d-md-block">
           </div>
-        </div>
+        </div></a>
       </div>
       <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
