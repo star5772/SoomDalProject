@@ -97,14 +97,14 @@ public class JejaController {
 	// 비번 찾기
 	@PreAuthorize("isAnonymous()")
 	@PostMapping("/jeja/change_pwd")
-	public String resetPassword(@RequestParam @NotNull String jEmail, @RequestParam @NotNull String jTel, RedirectAttributes ra) {
-		try {
-			service.resetPassword(jEmail, jTel);
-		} catch (JejaNotFoundException | MessagingException e) {
-			e.printStackTrace();
+	public String resetPassword(@RequestParam @NotNull String jEmail, @RequestParam @NotNull String jTel, RedirectAttributes ra) throws JejaNotFoundException, MessagingException {
+		if(service.resetPassword(jEmail, jTel)==true) {
+			ra.addFlashAttribute("msg","가입하신 이메일로 임시비밀번호를 보냈습니다");
+			return "redirect:/member/login";
+		}else {
+			ra.addFlashAttribute("msg","입력하신 정보와 일치하는 계정이 존재하지않습니다");
+			return "redirect:/member/login";
 		}
-		ra.addFlashAttribute("msg","가입하신 이메일로 임시비밀번호를 보냈습니다");
-		return "redirect:/member/login";
 	}
 	
 	@Secured("ROLE_JEJA")
