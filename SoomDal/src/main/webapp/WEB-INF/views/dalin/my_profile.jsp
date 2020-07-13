@@ -117,6 +117,10 @@ hr{
 	border-radius: 4px;
 	font-size: 12px;
 }
+.attach {
+	width: 150px;
+	height: 200px;
+}
 </style>
 <script>
 	$(function() {
@@ -224,56 +228,56 @@ hr{
 				<div >
 				<c:choose>
 					<c:when test="${empty readProfile.profileAttachments[0].PSaveFileName == 'false'}">
-						<div id="dAttachment1">
-							<img src="${readProfile.profileAttachments[0].PSaveFileName }">
+						<div id="dAttachment1" class="attach">
+							<img src="${readProfile.profileAttachments[0].PSaveFileName }"class="attach">
 						</div>
 					</c:when>
 					<c:otherwise>
-						<div id="dAttachment1">
+						<div id="dAttachment1" class="attach">
 						</div>
 					</c:otherwise>
 				</c:choose>
 				<c:choose>
 					<c:when test="${empty readProfile.profileAttachments[1].PSaveFileName == 'false'}">
-						<div id="dAttachment2">
-							<img src="${readProfile.profileAttachments[1].PSaveFileName }">
+						<div id="dAttachment2" class="attach">
+							<img src="${readProfile.profileAttachments[1].PSaveFileName }" class="attach">
 						</div>
 					</c:when>
 					<c:otherwise>
-						<div id="dAttachment2">
+						<div id="dAttachment2" class="attach">
 						</div>
 					</c:otherwise>
 				</c:choose>
 				<c:choose>
 					<c:when test="${empty readProfile.profileAttachments[2].PSaveFileName == 'false'}">
-						<div id="dAttachment3">
-							<img src="${readProfile.profileAttachments[2].PSaveFileName }">
+						<div id="dAttachment3" class="attach">
+							<img src="${readProfile.profileAttachments[2].PSaveFileName }"class="attach">
 						</div>
 					</c:when>
 					<c:otherwise>
-						<div id="dAttachment3">
+						<div id="dAttachment3" class="attach">
 						</div>
 					</c:otherwise>
 				</c:choose>
 				<c:choose>
 					<c:when test="${empty readProfile.profileAttachments[3].PSaveFileName == 'false'}">
-						<div id="dAttachment4">
-							<img src="${readProfile.profileAttachments[3].PSaveFileName }">
+						<div id="dAttachment4" class="attach">
+							<img src="${readProfile.profileAttachments[3].PSaveFileName }"class="attach">
 						</div>
 					</c:when>
 					<c:otherwise>
-						<div id="dAttachment4">
+						<div id="dAttachment4" class="attach">
 						</div>
 					</c:otherwise>
 				</c:choose>
 				<c:choose>
 					<c:when test="${empty readProfile.profileAttachments[4].PSaveFileName == 'false'}">
-						<div id="dAttachment5">
-							<img src="${readProfile.profileAttachments[4].PSaveFileName }">
+						<div id="dAttachment5" class="attach">
+							<img src="${readProfile.profileAttachments[4].PSaveFileName }"class="attach">
 						</div>
 					</c:when>
 					<c:otherwise>
-						<div id="dAttachment5">
+						<div id="dAttachment5" class="attach">
 						</div>
 					</c:otherwise>
 				</c:choose>
