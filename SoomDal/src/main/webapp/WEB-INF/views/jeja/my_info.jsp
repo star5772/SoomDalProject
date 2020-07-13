@@ -111,10 +111,6 @@
                <hr>
             </li>
             <li class="nav-item">
-               <a class="nav-link" href="#"><img src="https://assets.cdn.soomgo.com/icons/icon-mypage-soomgo-info.svg" style="padding: 5px;"><span class="menu_span">공지사항</span><img src="https://assets.cdn.soomgo.com/icons/icon-mypage-list-arrow.svg"></a>
-               <hr>
-            </li>
-            <li class="nav-item">
                <a class="nav-link" href="/dal/dalin/qnaBoard/list"><img src="https://assets.cdn.soomgo.com/icons/icon-mypage-soomgo-notice.svg" style="padding: 5px;"><span class="menu_span">제자 가이드</span><img src="https://assets.cdn.soomgo.com/icons/icon-mypage-list-arrow.svg"></a>
             </li>
          </ul>

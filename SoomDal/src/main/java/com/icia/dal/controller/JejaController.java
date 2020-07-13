@@ -63,23 +63,6 @@ public class JejaController {
 		return "redirect:/member/system/msg";
 	}
 	
-	// 레슨 목록리스트
-	@Secured("ROLE_JEJA")
-	@GetMapping("/jeja/request_write")
-	public ModelAndView requestWrite() {
-		// 제자가 달인 프로필에서 요청서 작성 버튼 클릭 시 이동하는 페이지
-		return new ModelAndView("main").addObject("viewName","jeja/request_write.jsp");
-	}
-	
-	@Secured("ROLE_JEJA")
-	@GetMapping("/jeja/estimate_list")
-	public ModelAndView jejaEstimateList() {
-		// 제자가 견적서탭 클릭 시 견적서 리스트를 보는 페이지로 이동
-		// 해당 제자가 받은 요청 정보 필요
-		return new ModelAndView("main").addObject("viewName","jeja/estimate_list.jsp");
-	}
-	
-	
 	// 제자 마이페이지 -> 레슨내역 화면 출력
 	@PreAuthorize("isAuthenticated()")
 	@GetMapping("/jeja/lessonList")
