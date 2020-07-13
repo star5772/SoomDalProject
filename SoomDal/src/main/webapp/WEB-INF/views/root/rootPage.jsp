@@ -85,7 +85,7 @@ button:hover:before,button:hover:after{
           <div class="carousel-caption d-none d-md-block">
           </div>
         </div>
-        <a href="/dal/dalin/qnaBoard/list"><div class="carousel-item" style="background-image: url('/dal/image/thirdslide.jpg')">
+        <a href="/dal/jeja/reqboard/list"><div class="carousel-item" style="background-image: url('/dal/image/thirdslide.jpg')">
           <div class="carousel-caption d-none d-md-block">
           </div>
         </div></a>

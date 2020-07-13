@@ -1,23 +1,25 @@
 package com.icia.dal.service;
 
-import java.time.*;
-import java.time.format.*;
-import java.util.*;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.List;
 
-import javax.inject.*;
+import javax.inject.Inject;
 
-import org.modelmapper.*;
-import org.springframework.stereotype.*;
+import org.modelmapper.ModelMapper;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.*;
 
-import com.icia.dal.Exception.*;
-import com.icia.dal.dao.*;
-import com.icia.dal.dto.*;
+import com.icia.dal.Exception.JejaNotFoundException;
+import com.icia.dal.dao.JejaDao;
+import com.icia.dal.dao.RequestBoardDao;
+import com.icia.dal.dto.RequestBoardDto;
 import com.icia.dal.dto.page.PageToRequestBoard;
-import com.icia.dal.entity.*;
-import com.icia.dal.util.*;
+import com.icia.dal.entity.Jeja;
+import com.icia.dal.entity.RequestBoard;
 import com.icia.dal.util.pagingutil.RequestBoardPagingUtil;
+
 
 @Service
 public class RequestBoardService {
@@ -46,6 +48,8 @@ public class RequestBoardService {
 		if(jeja==null) {
 			throw new JejaNotFoundException();
 		}
+		if(dto.getRbTitle().length()==0)
+			reqBoard.setRbTitle(reqBoard.getRbWriter() + "님의 요청서");
 		reqBoard.setJMno(jeja.getJMno());
 		reqBoard.setRbWriteDate(LocalDateTime.now());
 		reqDao.insert(reqBoard);

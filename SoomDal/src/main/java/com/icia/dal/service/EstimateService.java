@@ -83,13 +83,15 @@ public class EstimateService {
 		for(Estimate et:etList) {
 			EstimateDto.DtoForList dto = modelMapper.map(et,EstimateDto.DtoForList.class);
 			String str = et.getEWriteTime().format(DateTimeFormatter.ofPattern("yyyy년 MM월 dd일"));
+			
 			Request request = requestDao.findByRequest(et.getRNo());
 			RequestBoard reqboard = rbDao.findByRequestBoardToRNO(et.getRNo());
 			Jeja jeja = jejaDao.findByJejaToJMno(et.getJMno());
 			if(request==null)
 				dto.setRSubject(reqboard.getFieldOrHobby());
-			else
+			else if(request != null) {
 				dto.setRSubject(request.getRSubject());
+			}
 			dto.setJName(jeja.getJName());
 			dto.setEWriteTimeStr(str);
 			dtoList.add(dto);
