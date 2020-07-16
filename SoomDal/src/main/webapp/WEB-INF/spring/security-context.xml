@@ -6,15 +6,14 @@
 		http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd">
 	
 	<!--  HTTP를 위한 자동 설정 활성화 -->
-	<sec:http pattern="/*" auto-config="true">
-	<sec:csrf disabled="true"/>
-	</sec:http>
 	<sec:http pattern="/member/**" auto-config="true">
 	<sec:csrf disabled="true"/>
 	</sec:http>
-	<sec:http pattern="/dal/**" auto-config="true">
-	<sec:csrf disabled="true"/>
+
+	<sec:http pattern="/*" auto-config="true">
+	
 	</sec:http>
+	
 	<sec:http 
 	pattern="/dalin/**" 
 	authentication-manager-ref="dalinAuth"
@@ -26,12 +25,12 @@
 			password-parameter="dPassword"
 			login-page="/member/login"
 			login-processing-url="/dalin/loginpost"
-			authentication-success-handler-ref="loginSuccessHandler"
-			authentication-failure-handler-ref="loginFailureHandler"
+			authentication-success-handler-ref="DalinloginSuccessHandler"
+			authentication-failure-handler-ref="DalinloginFailureHandler"
 			default-target-url="/"
 		/>
 		<sec:logout
-			logout-url="/member/logout"
+			logout-url="/dalin/logout"
 			logout-success-url="/"
 		/>
 	</sec:http>
@@ -51,15 +50,14 @@
 			default-target-url="/"
 		/>
 		<sec:logout
-			logout-url="/member/logout"
+			logout-url="/jeja/logout"
 			logout-success-url="/"
 		/>
 	</sec:http>
 	<bean id="encoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder" />
 	
-	
 	<sec:http 
-	pattern="/adimin/**"
+	pattern="/admin/**"
 	authentication-manager-ref="adminAuth"
 	auto-config="true">
 		<sec:csrf disabled="true"/>
@@ -68,15 +66,15 @@
 			password-parameter="password"
 			login-page="/admin/login"
 			login-processing-url="/admin/loginpost"
-			authentication-success-handler-ref="loginSuccessHandler"
-			authentication-failure-handler-ref="loginFailureHandler"
 			default-target-url="/"
 		/>
 		<sec:logout
-			logout-url="/member/logout"
+			logout-url="/admin/logout"
 			logout-success-url="/"
 		/>
 	</sec:http>
+	
+	
 	
 	<sec:authentication-manager id="jejaAuth">
 		<sec:authentication-provider>
@@ -102,9 +100,11 @@
 	
 	<sec:authentication-manager id="adminAuth">
 		<sec:authentication-provider>
-			<sec:user-service>
-				<sec:user name="admin" password="1234" authorities="ROLE_ADMIN"/>
-			</sec:user-service>
+			<sec:jdbc-user-service 
+				data-source-ref="dataSource"
+				users-by-username-query="select username,password,enabled from admin where username=? and rownum=1"
+				authorities-by-username-query="select username, authority from authorities where username=?"
+			/>
 			<sec:password-encoder ref="encoder"/>
 		</sec:authentication-provider>
 	</sec:authentication-manager>

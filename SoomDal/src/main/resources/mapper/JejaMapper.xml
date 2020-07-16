@@ -7,8 +7,8 @@
 		<selectKey keyProperty="jMno" resultType="int" order="BEFORE">
 			select JEJA_seq.nextval from dual
 		</selectKey>
-		insert into jeja(J_MNO, J_EMAIL, J_PASSWORD, J_NAME, J_TEL,J_ACCUSATION_CNT,ENABLED,J_JOINDATE)
-		values(#{jMno},#{jEmail},#{jPassword},#{jName},#{jTel},0,1,sysdate)
+		insert into jeja(J_MNO, J_EMAIL, J_PASSWORD, J_NAME, J_TEL,J_ACCUSATION_CNT,ENABLED,J_JOINDATE, J_LOGIN_FAILURE_CNT, j_is_block)
+		values(#{jMno},#{jEmail},#{jPassword},#{jName},#{jTel},0,1,sysdate,0, 0)
 	</insert>
 	
 	<!-- 아이디 : 이름, 전화번호 -->
@@ -16,14 +16,23 @@
 		select J_EMAIL from jeja where J_NAME=#{jName} and J_TEL=#{jTel} and rownum=1	
 	</select>
 	
+	<select id="findIdByName" resultType="string">
+		select j_email jEmail from jeja where j_name=#{jName} and rownum=1
+	</select>
+	
 	<!-- 제자 업데이트 비밀번호, 이름, 전화번호 수정가능 -->
 	<update id="updateJeja">
 		update jeja
 		<trim suffixOverrides="," prefix="set">
+			<if test="jEmail!=null">j_email=#{jEmail},</if>
 			<if test="jPassword!=null">J_PASSWORD=#{jPassword},</if>
 			<if test="jName!=null">J_NAME=#{jName},</if>
 			<if test="jTel!=null">J_TEL=#{jTel},</if>
-			<if test="enabled!=null">enabled=#{enabled}</if>
+			<if test="enabled!=null">enabled=#{enabled},</if>
+			<if test="jAccusationCnt!=null">j_accusation_cnt = j_accusation_cnt+1,</if>
+			<if test="jLoginFailureCnt == 1">j_login_failure_cnt = j_login_failure_cnt +1 , </if>
+			<if test="jLoginFailureCnt == 2">j_login_failure_cnt = 0 , </if>
+			<if test="jIsBlock!=null">j_is_block=#{jIsBlock},</if>
 		</trim>
 		where J_EMAIL=#{jEmail} and rownum=1
 	</update>
@@ -40,6 +49,12 @@
 	
 	<!-- jEmail로 제자 찾기 -->
 	<select id="findById" resultType="jeja">
-		select J_EMAIL jEmail,J_PASSWORD jPassword,J_NAME jName,J_TEL jTel,ENABLED from jeja where J_EMAIL=#{jEmail} and rownum=1
+		select J_EMAIL jEmail,J_PASSWORD jPassword,J_NAME jName,J_TEL jTel, j_mno jMno, ENABLED, j_login_failure_cnt jLoginFailureCnt, j_is_block jIsBlock from jeja where J_EMAIL=#{jEmail} and rownum=1
 	</select>
+	
+	<!-- jMno로 제자찾기 (견적서,요청서 필요) -->
+	<select id="findByJejaToJMno" resultType="jeja">
+		select  J_EMAIL jEmail,J_PASSWORD jPassword,J_NAME jName,J_TEL jTel,ENABLED from jeja where J_MNO=#{jMno} and rownum=1
+	</select>
+	
 </mapper>

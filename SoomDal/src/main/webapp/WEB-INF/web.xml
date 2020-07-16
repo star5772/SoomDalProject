@@ -10,7 +10,23 @@
 			/WEB-INF/spring/security-context.xml
 		</param-value>
 	</context-param>
-	
+	<!-- 사진 폴더 경로 -->
+	<context-param>
+		<param-name>profileFolder</param-name>
+		<param-value>C:/project/profile</param-value>
+	</context-param>
+	<context-param>
+		<param-name>profilePath</param-name>
+		<param-value>http://localhost:8081/profile/</param-value>
+	</context-param>
+	<context-param>
+		<param-name>FieldFolder</param-name>
+		<param-value>C:/project/field</param-value>
+	</context-param>
+	<context-param>
+		<param-name>FieldPath</param-name>
+		<param-value>http://localhost:8081/field/</param-value>
+	</context-param>	
 	<!-- 어떤 이벤트에 반응하는 객체 : ActionListener.... -->
 	<listener>
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
@@ -63,6 +79,15 @@
 		<filter-name>springSecurityFilterChain</filter-name>
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
+	
+	<filter>
+		<filter-name>msgFilter</filter-name>
+		<filter-class>com.icia.dal.util.MessageFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>msgFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>	
 
 	<servlet>
 		<servlet-name>appServlet</servlet-name>

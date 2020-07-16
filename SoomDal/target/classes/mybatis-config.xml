@@ -8,6 +8,19 @@
 		<typeAlias type="com.icia.dal.entity.QnaComment" alias="QnaComment"/>
 		<typeAlias type="com.icia.dal.entity.RequestBoard" alias="RequestBoard"/>
 		<typeAlias type="com.icia.dal.entity.RequestPayment" alias="RequestPayment"/>
+		<typeAlias type="com.icia.dal.entity.NowPayment" alias="NowPayment"/>
+		<typeAlias type="com.icia.dal.entity.Review" alias="review"/>
+		<typeAlias type="com.icia.dal.entity.ProfileAttachment" alias="profileAttachment"/>
+		<typeAlias type="com.icia.dal.entity.Estimate" alias="estimate"/>
+		<typeAlias type="com.icia.dal.entity.LessonHistory" alias="lessonhistory"/>
+		<typeAlias type="com.icia.dal.entity.UseCash" alias="usecash"/>
+		<typeAlias type="com.icia.dal.entity.Request" alias="request"/>
+		<typeAlias type="com.icia.dal.entity.DetailField" alias="detailField"/>
+		<typeAlias type="com.icia.dal.entity.Field" alias="field"/>
+		<typeAlias type="com.icia.dal.entity.Memo" alias="memo"/>
+		<typeAlias type="com.icia.dal.entity.RepQuestion" alias="RepQuestion"/>
+		<typeAlias type="com.icia.dal.entity.NowRefund" alias="nowrefund"/>
+		<typeAlias type="com.icia.dal.entity.ReportedBoard" alias="rpboard"/>
 	</typeAliases>
 	<typeHandlers>
 		<typeHandler handler="com.icia.dal.util.typehandler.LocalDateTimeTypeHandler"/>

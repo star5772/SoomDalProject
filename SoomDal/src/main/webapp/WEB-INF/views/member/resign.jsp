@@ -1,22 +1,27 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>    
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+<sec:authorize access="hasAnyRole('ROLE_JEJA','ROLE_DALIN','ROLE_ADMIN')">
+	<script src="/dal/script/webS.js"></script>
+</sec:authorize>
 <script>
 $(document).ready(function(){
 	$("#delete").on("click",function(){
 		var params = {
 			_method:"delete",
-			_csrf:"${_csrf.token}"
+			_csrf:"${_csrf.token}",
 		}
 		$.ajax({
 			url: "/dal/member/resign",
 			method:"post",
 			data:params
-		}).done((result)=>{$("#delete").text(result);}).fail((result)=>{console.log(result);})
+		}).done(()=>alert("삭제완료")).done(()=>{location.href="/dal"}).fail(()=>{console.log("fail");})
 	})
 })
 </script>
@@ -31,8 +36,9 @@ $(document).ready(function(){
 	<div>
 		<h3 style="font-size: 18px; font-weight: bold; top:500%;">정말로 계정을 삭제하고 싶으세요?</h3><br><br>
 	</div>
-	<p>- 보배를 능히 품으며 그들의 이상은 아름답고 소담스러운 열매를 맺어 우리 인생을 풍부하게 하는 것이다 보라 청춘을 ! </p><br>
-	<p>- 그의 몸이 얼마나 튼튼하며 그들의 피부가 얼마나 생생하며 그들의 눈에 무엇이 타오르고 있는가? 우리 눈이</p><br>
+	<p>- 계정을 삭제하면 모든 개인정보가 삭제되며, 구매하신 캐시는 소멸되며 환불되지 않아요.</p><br>
+	<p>- 숨달로부터 너무 많은 알림을 받는 것이 문제라면, 알람 설정에서 변경하실 수 있어요.
+숨달은 당신이 떠나는 것을 원하지 않아요. 만약 우리가 도와줄 수 있는 일이 있다면 star5772@naver.com으로 메일을 보내거나, 010-7321-5773으로 전화주세요.</p><br>
 	<div>
 		<strong style="font-size: 16px;">계정 삭제 이유</strong><br>
 	</div>
@@ -43,7 +49,10 @@ $(document).ready(function(){
 		<button id="delete" style="text-align: center; font-size: 15px; font-weight: bold; color: white;" class="btn btn-warning">계정삭제</button>
 	</div>
 	<div id="btn_area" style="display: inline-block;">
-		<button id="cancel" class="btn btn-secondary" style="text-align: center; font-size: 15px; font-weight: bold; border-radius: 4px; font-size: 14px; color:white;">취소</button>
+		<button id="cancel" class="btn btn-secondary" onclick="location.href='/dal'" style="text-align: center; font-size: 15px; font-weight: bold; border-radius: 4px; font-size: 14px; color:white;">취소</button>
 	</div>
+	<form action="/dal/member/resign">
+		<input type="hidden" name="_csrf" value="${_csrf.token }">
+	</form>
 </body>
 </html>

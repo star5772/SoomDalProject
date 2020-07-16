@@ -5,7 +5,9 @@
 	xmlns:context="http://www.springframework.org/schema/context"
 	xmlns:security="http://www.springframework.org/schema/security"
 	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:websocket="http://www.springframework.org/schema/websocket"
 	xsi:schemaLocation="http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-4.2.xsd
+		http://www.springframework.org/schema/websocket http://www.springframework.org/schema/websocket/spring-websocket-4.3.xsd
 		http://www.springframework.org/schema/mvc https://www.springframework.org/schema/mvc/spring-mvc.xsd
 		http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd
@@ -40,16 +42,33 @@
 	
 	<!--(로그인 했을때 하면 안되는거 막는거)Interceptor설정  발동하는거 경로-->
 	
-	<!-- <beans:bean id="authenticationInterceptor" class="com.icia.dal.util.interceptor.AuthenticationInterceptor"></beans:bean>
+	<beans:bean id="authenticationInterceptor" class="com.icia.dal.util.interceptor.AuthenticationInterceptor"></beans:bean>
 	<interceptors>
 		<interceptor>
-			<mapping path="/user/login"/>
-			<mapping path="/user/find_pwd"/>
-			<mapping path="/user/find_id"/>
+			<mapping path="/admin/login"/>
+			<mapping path="/admin/join"/>
+			<mapping path="/dalin/join"/>
+			<mapping path="/dalin/field_list"/>
+			<mapping path="/dalin/change_pwd"/>
+			<mapping path="/jeja/join"/>
+			<mapping path="/jeja/change_pwd"/>
+			<mapping path="/member/login"/>
+			<mapping path="/member/find_id"/>
+			<mapping path="/member/reset_pwd"/>
+			<mapping path="/member/join_select"/>
+			<mapping path="/dalin/check_email"/>
+			<mapping path="/jeja/check_email"/>
+			<mapping path="/dalin/find_id"/>
+			<mapping path="/jeja/find_id"/>
 			<beans:ref bean="authenticationInterceptor"/>
 		</interceptor>
-	</interceptors> -->
+	</interceptors>
 	
+	
+	<!-- 웹소켓 핸들러 설정 -->
+	<websocket:handlers>
+    	<websocket:mapping path="/member/socket" handler="messageWebSocketHandler" />
+   </websocket:handlers>
 	
 	
 </beans:beans>

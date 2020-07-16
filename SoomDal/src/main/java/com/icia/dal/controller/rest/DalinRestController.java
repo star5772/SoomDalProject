@@ -1,58 +1,49 @@
 package com.icia.dal.controller.rest;
 
-import java.io.*;
-import java.security.*;
+import java.security.Principal;
 
 import javax.inject.Inject;
-import javax.validation.*;
+import javax.validation.Valid;
 
 import org.springframework.http.ResponseEntity;
-import org.springframework.lang.*;
-import org.springframework.security.access.prepost.*;
-import org.springframework.validation.*;
+import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.validation.BindException;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.*;
 
-import com.icia.dal.Exception.MembernameExistException;
-import com.icia.dal.dto.*;
-import com.icia.dal.service.DalinService;
+import com.icia.dal.Exception.*;
+import com.icia.dal.dto.DalinDto;
+import com.icia.dal.service.rest.DalinRestService;
 
 @RestController
 public class DalinRestController {
 	
 	@Inject
-	private DalinService dalService;
+	private DalinRestService dalService;
 	
+	// 달인 이메일 체크
+	@PreAuthorize("isAnonymous()")
 	@GetMapping("/dalin/check_email")
-	public ResponseEntity<Void> ableEmail(String dEmail) throws MembernameExistException {
-		dalService.checkId(dEmail);
-		return ResponseEntity.ok(null);
+	public ResponseEntity<Boolean> ableEmail(String dEmail) throws MembernameExistException {
+		return ResponseEntity.ok(dalService.checkId(dEmail));
 	}
-	
-	// 달인 프로필 정보 변경
-	//@PreAuthorize("isAuthenticated()")
-	@PutMapping("/dalin/info_update")
-	public ResponseEntity<Void> profileUpdate(DalinDto.DtoForUpdateToDalinProfile dto, 
-			@RequestParam("sajin") @Nullable MultipartFile sajin, Principal principal) {
-		dto.setDName(principal.getName());
-		try {
-			dalService.profileUpdate(dto, sajin);
-		} catch (IllegalStateException | IOException e) {
-			e.printStackTrace();
-		}
-		return ResponseEntity.ok(null);
-	}
-	
+
 	// 달인 내정보 변경
-	//@PreAuthorize("isAuthenticated()")
+	@Secured("ROLE_DALIN")
 	@PutMapping("/dalin/my_info_update")
 	public ResponseEntity<Void> update(@Valid DalinDto.DtoForUpdateToDalin dto, BindingResult results
 			, Principal principal) throws BindException {
+		System.out.println(dto.getDTel());
 		if(results.hasErrors())
 			throw  new BindException(results);
-		dalService.update(dto);
-		dto.setDName(principal.getName());
+		dalService.update(dto, principal.getName());
 		return ResponseEntity.ok(null);
 	}
-	
+	@Secured("ROLE_DALIN")
+	@PostMapping("/dalin/report")
+	public ResponseEntity<Void> jejaReport(String jEmail, Principal principal, String reason) throws JejaNotFoundException {
+		dalService.report(jEmail,principal.getName(),reason);
+		return ResponseEntity.ok(null);
+	}
 }

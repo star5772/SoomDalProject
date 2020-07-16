@@ -19,14 +19,3 @@ header, nav, aside, footer, section {
 	width: 1105px;
 	margin: 0 auto;
 }
-
-
-
-section {
-	min-height: 800px;
-	overflow: scroll;
-}
-
-#section {
-	
-}

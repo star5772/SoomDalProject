@@ -5,9 +5,14 @@ import java.util.List;
 
 import javax.validation.constraints.Pattern;
 
+import org.springframework.web.multipart.MultipartFile;
+
+import com.icia.dal.entity.ProfileAttachment;
+import com.icia.dal.entity.RepQuestion;
 import com.icia.dal.entity.Review;
 
 import lombok.Data;
+import lombok.experimental.*;
 
 public class DalinDto {
 	private DalinDto() { }
@@ -24,12 +29,26 @@ public class DalinDto {
 		private String dName;
 		@Pattern(regexp="^[0,9]{8,11}$", message="전화번호는 숫자 8~11자입니다")
 		private String dTel;
+		private String detailFName;
 		private Boolean enabled;
 		private LocalDateTime dDate;
 		private String dArea;
-		private String dMainService;
 	}
 	
+	@Data
+	@Accessors(chain=true)
+	public static class DtoForProfileUpdateToDalin{
+		private Integer dMno;
+		private String dIntro;
+		private String dMainService;
+		private String dArea;
+		private String dDetailService;
+		private String dPaymentMethod;
+		private String q1;
+		private String q2;
+		private String q3;
+		private String q4;
+	}
 	@Data
 	public static class DtoForProfileToDalin{
 		private Integer dMno;
@@ -40,26 +59,23 @@ public class DalinDto {
 		private String dArea;
 		private String dDetailService;
 		private String dPaymentMethod;
-		private String dAttachmentNo;
-		private Integer rNo;
-		private Integer dQNo;
-		private List<ReviewDto.DtoForDalinProfileReviewToread> review;
+		private RepQuestion rep;
+		private List<Review> reviews;
+		private Double rScoreAverage;
+		private List<ProfileAttachment> profileAttachments;
+	}	
+	@Data
+	public static class DtoForMyInfo {
+		private int dMno;
+		private String dName;
+		private	String dEmail;
+		private String dProfile;
+		private String dTel;
+		private int dCash;
+		private String dLevelStr;
 	}
 	
-	@Data
-	public static class DtoForUpdateToDalinProfile {
-		private Integer dMno;
-		private String dProfile;
-		private String dName;
-		private String dArea;
-		private String dIntro;
-		private String dDetailService;
-		private String dPaymentMethod;
-		private Integer pAttachmentCnt;
-		private Integer rNo;
-		private Integer pAttachmentNo;
-		private Integer dQNo;
-	}
+
 	
 	@Data
 	public static class DtoForUpdateToDalin {
@@ -70,8 +86,27 @@ public class DalinDto {
 		private String dPassword;
 		@Pattern(regexp="(?=.*[!@#$%^&*])^[A-Za-z0-9!@#$%^&*]{8,10}$", message="비밀번호는 특수문자를 포함하는 영숫자 8~10자입니다")
 		private String newDPassword;
-		@Pattern(regexp="^[0,9]{8,11}$", message="전화번호는 숫자 8~11자입니다")
+		@Pattern(regexp="^[0-9]{8,11}$", message="전화번호는 숫자 8~11자입니다")
 		private String dTel;
 		private Integer dCash;
+		private String dEmail;
 	}
+	
+	@Data
+	public static class DtoForFieldList {
+		private String dMno;
+		private String dProfile;
+		private String dName;
+		private String dIntro;
+		private Double avgScore;
+	}
+	
+	@Data
+	public static class DtoForFieldInfo {
+		private String fNo;
+		private String detailFName;
+		private String detailSajin;
+		private Double avgScore;
+	}
+	
 }

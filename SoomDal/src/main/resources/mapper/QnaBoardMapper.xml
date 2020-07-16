@@ -2,15 +2,59 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.icia.dal.dao.QnaBoardDao">
 
-	<insert id="insert">
+	<insert id="insertToQnaBoard">
 		<selectKey keyProperty="qNo" resultType="int"
 			order="BEFORE">
 			select qnaboard_seq.nextval from dual
 		</selectKey>
-		insert into QnaBoard values(#{qNo}, #{qTitle}, #{qContent}, sysdate,
-		#{qWriter}, #{cNo}, 0,0)
+		insert into QnaBoard(Q_NO, Q_TITLE, Q_CONTENT, Q_WRITER,Q_WRITE_DATE, Q_IS_SECRET, Q_IS_NOTICE, Q_NAME) values(#{qNo}, #{qTitle}, #{qContent}, #{qWriter},
+		sysdate, #{qIsSecret},0,#{qName})
 	</insert>
-
+	
+	<select id="count" resultType="int">
+		select count(*) from qnaBoard
+	</select>
+	
+	<select id="countByName" resultType="int">
+		select count(*) from qnaBoard where q_name=#{qName}
+	</select>
+	
+	<delete id="deleteToQnaBoard">
+		delete from QnaBoard where Q_NO=#{qNo} and rownum=1
+	</delete>
+	
+	<select id="findByQnaBoard" resultType="QnaBoard">
+		select Q_NO qNo, Q_TITLE qTitle, Q_CONTENT qContent, Q_WRITER qWriter, Q_WRITE_DATE qWriteDate, C_NO cNo, Q_IS_SECRET qIsSecret, Q_IS_NOTICE qIsNotice, Q_NAME qName from QnaBoard where Q_NO=#{qNo} and rownum=1
+	</select>
+	
+	<select id="findAllByQnaBoard" resultType="QnaBoard">
+ 	<![CDATA[
+ 		select * from
+ 			(select rownum as rnum, b.* from
+				(select /*+ index_desc(qnaboard pk_qnaboard) */ Q_NO qNo, Q_TITLE qTitle, Q_WRITER qWriter, Q_WRITE_DATE qWriteDate, Q_IS_SECRET qIsSecret, Q_NAME qName  from qnaboard) b
+			where rownum<=#{endRowNum})
+		where rnum>=#{startRowNum}
+	]]> 
+	</select>
+	
+	<select id="findAllByWriter" resultType="QnaBoard">
+	 	<![CDATA[
+	 		select * from
+	 			(select rownum as rnum, b.* from
+					(select /*+ index_desc(qnaboard pk_qnaboard) */ Q_NO qNo, Q_TITLE qTitle, Q_WRITER qWriter, Q_WRITE_DATE qWriteDate, Q_IS_SECRET qIsSecret, Q_NAME qName from qnaboard where q_name=#{qName}) b
+				where rownum<=#{endRowNum})
+			where rnum>=#{startRowNum}
+		]]> 		
+	</select>
+	
+	<update id="update">
+		update qnaBoard
+		<trim prefix="set" suffixOverrides=",">
+			<if test="cNo!=0">c_no=#{cNo},</if>
+			<if test="cNo==0">c_no=null</if>
+		</trim>
+		where q_no=#{qNo}
+	</update>
 </mapper>
 
 

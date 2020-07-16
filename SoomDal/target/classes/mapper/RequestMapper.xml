@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="requestMapper">
+
+	<insert id="insertToRequest">
+		<selectKey keyProperty="rNo" order="BEFORE" resultType="int">
+			select request_seq.nextval from dual
+		</selectKey>
+		insert into request(r_no,j_mno,r_field,r_subject,r_lesson_purpose,
+		r_your_level,r_item_exists,r_lesson_type,r_want_date,r_want_time,r_age,
+		r_gender,r_dalin_is_ok,r_wannable,r_want_area,r_write_date,disable_by_dalin,disable_by_jeja,
+		d_mno,rb_enabled,r_is_read)
+		values(#{rNo},#{jMno},#{rField},#{rSubject},#{rLessonPurpose},
+		#{rYourLevel},#{rItemExists},#{rLessonType},#{rWantDate},#{rWantTime},
+		#{rAge},#{rGender},0,#{rWannable,jdbcType=NVARCHAR},#{rWantArea},sysdate,0,0,#{dMno},1,0)
+	</insert>
+
+	<select id="findByRequest" resultType="request">
+		select r_no rNo, j_mno jMno, r_field rField, r_subject rSubject, r_lesson_purpose rLessonPurpose, r_your_level rYourLevel, r_item_exists rItemExists, r_lesson_type rLessonType, r_want_date rWantDate, r_want_time rWantTime, r_age rAge, r_gender rGender, r_dalin_is_ok rDalinIsOk, r_wannable rWannable, r_want_area rWantArea, r_write_date rWriteDate, d_mno dMno, rb_enabled rbEnabled,r_is_read rIsRead,disable_by_dalin disableByDalin,disable_by_jeja disableByJeja from request where r_no=#{rNo} and rownum=1
+	</select>
+	
+	<!-- 제자가 작성한 요청서 목록 -->
+	<select id="findAllByRequestToJeja" resultType="request">
+		<![CDATA[
+			select * from
+				(select r.* ,rownum rnum from
+					(select /*+ index_desc(request pk_request)*/ r_no rNo, j_mno jMno, r_field rField, r_subject rSubject, r_lesson_purpose rlessonPurpose, R_YOUR_LEVEL rYourLevel, R_ITEM_EXISTS rItemExists, r_lesson_type rLessonType, r_want_time rWantTime, r_age rAge, r_gender rGender, r_dalin_is_ok rDalinIsOk, r_wannable rWannable, r_want_area rWantArea, r_write_date rWriteDate, d_mno dMno, rb_enabled rbEnabled from request where j_mno = #{jMno} and disable_by_jeja = 0) r
+				where rownum<=#{endRowNum})
+			where rnum>=#{startRowNum}
+		]]>
+	</select>
+	
+	<!-- 달인이 받은 요청서 목록 -->
+	<select id="findAllByRequestToDalin" resultType="request">
+		<![CDATA[
+			select * from
+				(select r.* ,rownum rnum from
+					(select /*+ index_desc(request pk_request)*/ r_no rNo,j_mno jMno, r_subject rSubject, r_field rField, r_dalin_is_ok rDalinIsOk, r_want_area rWantArea, r_write_date rWriteDate, d_mno dMno, rb_enabled rbEnabled,r_is_read rIsRead from request where d_mno = #{dMno} and disable_by_dalin = 0) r
+				where rownum<=#{endRowNum})
+			where rnum>=#{startRowNum}
+		]]> 
+	</select>
+
+	<delete id="deleteToRequest">
+		delete from request where r_no=#{rNo} and rownum=1
+	</delete>
+
+	<select id="countToRequest" resultType="int">
+		select count(*) from
+		request where j_mno = #{jMno} and disable_by_jeja = 0 
+	</select>
+
+	<select id="countToRequestForDalin" resultType="int">
+		select count(*)
+		from request where d_mno = #{dMno} and disable_by_dalin = 0
+	</select>
+	
+	<select id="isNotReadRequest" resultType="boolean">
+		select count(*) from request where e_is_read = and d_Mno = #{dMno} and rownum=1
+	</select>
+	
+	<update id="setRead">
+		update request set r_is_read = 1 where r_no = #{rNo} and rownum=1
+	</update>
+	
+	<update id="setIsOk">
+		update request 
+		set r_dalin_is_ok=1 
+		where r_no=#{rNo} and rownum=1
+	</update>
+	
+	<select id="findRequestByJmno" resultType="int">
+		select j_mno jMno from request where d_mno=#{dMno} and r_dalin_is_ok=0 and rownum=1
+	</select>
+	
+	<update id="setDisableByJeja">
+		update request set disable_by_jeja = 1 where j_mno = #{jMno} and r_no=#{rNo}
+	</update>
+	
+	<update id="setDisableByDalin">
+		update request set disable_by_dalin = 1 where d_mno = #{dMno} and r_no=#{rNo}
+	</update>
+	
+	
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+

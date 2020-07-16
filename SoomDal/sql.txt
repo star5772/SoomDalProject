@@ -1,4 +1,3 @@
-drop table admin cascade constraints;
 drop table authorities cascade constraints;
 drop table dalin cascade constraints;
 drop table detailfield cascade constraints;
@@ -10,16 +9,18 @@ drop table nowpayment cascade constraints;
 drop table nowrefund cascade constraints;
 drop table profileattachment cascade constraints;
 drop table qnaboard cascade constraints;
+drop table qnacomment cascade constraints;
 drop table reportedboard cascade constraints;
-drop table reproteduser cascade constraints;
+drop table reporteduser cascade constraints;
 drop table repquestion  cascade constraints;
 drop table request cascade constraints;
 drop table requestboard cascade constraints;
 drop table requestpayment cascade constraints;
 drop table review cascade constraints;
-drop table reviewattachment cascade constraints;
 drop table reviewauthority cascade constraints;
 drop table usecash cascade constraints;
+drop table lessonhistory cascade constraints;
+drop table admin cascade constraints;
 
 drop sequence jeja_seq;
 drop sequence repquestion_seq;
@@ -32,8 +33,9 @@ drop sequence memo_seq;
 drop sequence detailfield_seq;
 drop sequence review_seq;
 drop sequence reviewattachment_seq;
+DROP SEQUENCE MEMO_SEQ;
+drop sequence profileattachment_seq;
 
-select * from tab;
 
 create sequence JEJA_seq minvalue 0;
 select JEJA_seq.nextval from dual;
@@ -45,6 +47,8 @@ create sequence request_seq minvalue 0;
 select request_seq.nextval from dual;
 create sequence qnacomment_seq minvalue 0;
 select qnacomment_seq.nextval from dual;
+create sequence qnaboard_seq minvalue 0;
+select qnaboard_seq.nextval from dual;
 create sequence requestboard_seq minvalue 0;
 select requestboard_seq.nextval from dual;
 create sequence estimate_seq minvalue 0;
@@ -59,98 +63,58 @@ create sequence review_seq minvalue 0;
 select review_seq.nextval from dual;
 create sequence reviewattachment_seq minvalue 0;
 select reviewattachment_seq.nextval from dual;
+CREATE SEQUENCE MEMO_SEQ MINVALUE 0;
+SELECT MEMO_SEQ.NEXTVAL FROM DUAL;
 
+/* 관리자 계정 */
+CREATE TABLE ADMIN(
+	USERNAME VARCHAR2(10) NOT NULL,
+	PASSWORD VARCHAR2(60),
+	ENABLED CHAR(1),
+	CONSTRAINT PK_ADMIN PRIMARY KEY(USERNAME)
+);
 
 /* 문의 게시판 */
 CREATE TABLE QnaBoard (
-   Q_CODE VARCHAR2(8) NOT NULL, /* 문의 코드 */
+   Q_NO NUMBER(8) NOT NULL, /* 문의 코드 */
    Q_TITLE NVARCHAR2(20), /* 제목 */
    Q_CONTENT NVARCHAR2(1000), /* 내용 */
    Q_WRITE_DATE DATE, /* 문의 날짜 */
-   Q_WRITER NVARCHAR2(20), /* 작성자 */
+   Q_WRITER NVARCHAR2(20), /* 작성자  아이디 */
    C_NO NUMBER(7), /* 댓글 번호 */
    Q_IS_SECRET CHAR(1), /* 비밀글여부 */
-   Q_IS_NOTICE CHAR(1) /* 공지사항여부 */
+   Q_IS_NOTICE CHAR(1), /* 공지사항여부 */
+   Q_NAME NVARCHAR2(15), /* 작성자 이름 */
+   constraint pk_qnaboard primary key(q_no)
 );
 
-ALTER TABLE QnaBoard
-   ADD
-      CONSTRAINT PK_QnaBoard
-      PRIMARY KEY (
-         Q_CODE
-      );
-
-ALTER TABLE QnaBoard
-   ADD
-      CONSTRAINT FK_QnaComment_TO_QnaBoard
-      FOREIGN KEY (
-         C_NO
-      )
-      REFERENCES QnaComment (
-         C_NO
-      );
 
 /*대표질문*/
 
 CREATE TABLE RepQuestion (
-   D_Q_NO NUMBER(1) NOT NULL, /* 질문 번호 > 기본키 */
    D_EMAIL varchar2(50) NOT NULL, /* 회원 id(email) */
-   D_Q_CONTENT NVARCHAR2(300) /* 질문 내용 */
+   FIRST_Q NVARCHAR2(300),
+   SECOEND_Q NVARCHAR2(300),
+   THIRD_Q NVARCHAR2(300),
+   FOURTH_Q NVARCHAR2(300),
+   constraint pk_repquestion primary key(d_email)
 );
-
-ALTER TABLE RepQuestion
-   ADD
-      CONSTRAINT PK_RepQuestion
-      PRIMARY KEY (
-         D_Q_NO,
-         COL
-      );
 
 /*결제현황*/
 
 CREATE TABLE NowPayment (
-   P_CODE VARCHAR(8) NOT NULL, /* 결제 코드 */
+   P_CODE VARCHAR2(8) NOT NULL, /* 결제 코드 */
    P_DATE DATE, /* 결제 날짜 */
-   P_REFUND_DATE DATE, /* 환불 가능일 */
-   P_REFUND_IS_OK CHAR(1) /* 환불상태 */
+   P_REFUND_DATE number(1), /* 환불 가능일 */
+   P_REFUND_IS_OK CHAR(1), /* 환불상태 */
+   d_email varchar2(50),
+   p_money number(7),
+   p_request_refund char(1), /* 환불 요청 여부 */ 
+   constraint pk_nowpayment primary key(p_code)
 );
 
-ALTER TABLE NowPayment
-   ADD
-      CONSTRAINT PK_NowPayment
-      PRIMARY KEY (
-         P_CODE
-      );
-
-ALTER TABLE NowPayment
-   ADD
-      CONSTRAINT FK_RequestPayment_TO_NowPayment
-      FOREIGN KEY (
-         P_CODE
-      )
-      REFERENCES RequestPayment (
-         P_CODE
-      );
-
-
-
-/*분야*/
-
-CREATE TABLE FIELD (
-   F_NO VARCHAR2(10) NOT NULL, /* 분야 코드 */
-   F_NAME NVARCHAR2(10), /* 분야 이름 */
-   F_SAJIN VARCHAR2(50) /* 분야 사진 */
-);
-
-ALTER TABLE FIELD
-   ADD
-      CONSTRAINT PK_FIELD
-      PRIMARY KEY (
-         F_NO
-      );
 
 /* 제자회원*/
-
 CREATE TABLE JEJA (
    J_MNO NUMBER(7) NOT NULL, /* 제자 회원 번호 */
    J_EMAIL VARCHAR2(50) NOT NULL, /* 회원 id(email) */
@@ -159,21 +123,19 @@ CREATE TABLE JEJA (
    J_TEL VARCHAR2(11), /* 회원 전화번호 */
    J_ACCUSATION_CNT NUMBER(5), /* 신고 수 */
    ENABLED CHAR(1), /* 회원  상태(enabled) */
-   J_JOINDATE DATE /* 가입 날짜 */
+   J_JOINDATE DATE, /* 가입 날짜 */
+   j_login_failure_cnt number(1), /* 로그인 실패횟수 */
+   j_is_block char(1), /* 계정 블락 여부 */
+   disable_by_jeja char(1),
+   constraint pk_jeja primary key(j_mno)
 );
-
-ALTER TABLE JEJA
-   ADD
-      CONSTRAINT PK_JEJA
-      PRIMARY KEY (
-         J_MNO
-      );
 
 
 /* 달인 회원 */
 
 CREATE TABLE Dalin (
    D_MNO NUMBER(7) NOT NULL, /* 달인 회원 번호 */
+   DETAIL_F_NAME NVARCHAR2(20) NOT NULL, 
    F_NO VARCHAR2(10) NOT NULL, /* 분야 코드 */
    D_EMAIL varchar2(50) NOT NULL, /* 회원 id(email) */
    D_PASSWORD VARCHAR2(60), /* 비밀번호 */
@@ -190,214 +152,90 @@ CREATE TABLE Dalin (
    D_PAYMENT_METHOD nvarchar2(20), /* 결제 수단 */
    P_ATTACHMENT_CNT NUMBER(1), /* 첨부파일 수 */
    D_LEVEL NVARCHAR2(10), /* 레벨 */
-   R_NO NUMBER(5), /* 리뷰 번호 */
    P_ATTACHMENT_NO NUMBER(3), /* 프로필 첨부 파일 번호 */
-   D_Q_NO NUMBER(1) /* 질문 번호 > 기본키 */
+   D_login_failure_cnt number(1), /* 로그인 실패 횟수 */
+   r_review_cnt number(7),
+   disable_by_dalin char(1),
+   constraint pk_dalin primary key(d_mno,f_no,d_email,detail_f_name)
 );
 
-ALTER TABLE Dalin
-   ADD
-      CONSTRAINT PK_Dalin
-      PRIMARY KEY (
-         D_MNO,
-         F_NO,
-         D_EMAIL
-      );
 
-ALTER TABLE Dalin
-   ADD
-      CONSTRAINT FK_DetailField_TO_Dalin
-      FOREIGN KEY (
-         F_NO
-      )
-      REFERENCES DetailField (
-         F_NO
-      );
+/*세부분야*/
 
-ALTER TABLE Dalin
-   ADD
-      CONSTRAINT FK_Review_TO_Dalin
-      FOREIGN KEY (
-         R_NO
-      )
-      REFERENCES Review (
-         R_NO
-      );
-
-ALTER TABLE Dalin
-   ADD
-      CONSTRAINT FK_ProfileAttachment_TO_Dalin
-      FOREIGN KEY (
-         P_ATTACHMENT_NO
-      )
-      REFERENCES ProfileAttachment (
-         P_ATTACHMENT_NO
-      );
-
-ALTER TABLE Dalin
-   ADD
-      CONSTRAINT FK_RepQuestion_TO_Dalin
-      FOREIGN KEY (
-         D_Q_NO,
-         D_EMAIL
-      )
-      REFERENCES RepQuestion (
-         D_Q_NO,
-         COL
-      );
-
-
+CREATE TABLE DetailField (
+   F_NO VARCHAR2(10) NOT NULL, /* 분야 코드 */
+   DETAIL_F_NAME NVARCHAR2(20), /* 세부 분야 이름 */
+   DETAIL_F_SAJIN NVARCHAR2(150), /* 세부 분야 사진 */
+   constraint pk_detailfield primary key(f_no,detail_f_name)
+);
 
 /* 요청서 */
 
 CREATE TABLE Request (
    R_NO NUMBER(6) NOT NULL, /* 요청서번호 */
    J_MNO NUMBER(7) NOT NULL, /* 제자 회원 번호 */
-   R_FIELD NVARCHAR2(10), /* 분야 */
-   R_SUBJECT NVARCHAR2(10), /* 종목 */
+   R_FIELD NVARCHAR2(20), /* 분야 */
+   R_SUBJECT NVARCHAR2(20), /* 종목 */
    R_LESSON_PURPOSE NVARCHAR2(20), /* 레슨목적 */
-   R_YOUR_LEVEL NVARCHAR2(5), /* 본인의 수준 */
-   R_ITEM_EXISTS NVARCHAR2(10), /* 장비의유무 */
-   R_LESSON_TYPE NVARCHAR2(10), /* 레슨형태(그룹, 개인) */
+   R_YOUR_LEVEL NVARCHAR2(20), /* 본인의 수준 */
+   R_ITEM_EXISTS NVARCHAR2(20), /* 장비의유무 */
+   R_LESSON_TYPE NVARCHAR2(20), /* 레슨형태(그룹, 개인) */
    R_WANT_DATE DATE, /* 원하는 날짜 */
-   R_WANT_TIME NVARCHAR2(10), /* 원하는 수업시간 */
+   R_WANT_TIME NVARCHAR2(20), /* 원하는 수업시간 */
    R_AGE NVARCHAR2(3), /* 연령 */
    R_GENDER CHAR(1), /* 성별 */
-   R_DALIN_ISOK CHAR(1), /* 달인 수락 상태 */
+   R_DALIN_IS_OK CHAR(1), /* 달인 수락 상태 */
    R_WANNABLE NVARCHAR2(100), /* 기타 문의 및 희망사항 */
-   R_WANT_AREA NVARCHAR2(10), /* 희망 지역 */
+   R_WANT_AREA NVARCHAR2(20), /* 희망 지역 */
    R_WRITE_DATE DATE, /* 작성 시간 */
    D_MNO NUMBER(6), /* 달인회원번호 */
-   RB_ENABLED CHAR(1)
+   RB_ENABLED CHAR(1),
+   R_IS_READ char(1), /* 읽음여부 */
+   constraint pk_request primary key(r_no,j_mno)
 );
-
-ALTER TABLE Request
-   ADD
-      CONSTRAINT PK_Request
-      PRIMARY KEY (
-         R_NO,
-         J_MNO
-      );
-
-ALTER TABLE Request
-   ADD
-      CONSTRAINT FK_JEJA_TO_Request
-      FOREIGN KEY (
-         J_MNO
-      )
-      REFERENCES JEJA (
-         J_MNO
-      );
-
-
-
 
 /*신고회원*/
 
 CREATE TABLE ReportedUser (
    D_MNO NUMBER(6) NOT NULL, /* 회원 번호 */
    J_MNO NUMBER(6) NOT NULL, /* 신고당한 회원 */
-   R_REPORT_REASON NVARCHAR2(100)
+   REASON NVARCHAR2(100),
+   constraint pk_reporteduser primary key(d_mno,j_mno)
 );
-
-
-ALTER TABLE ReportedUser
-   ADD
-      CONSTRAINT PK_ReportedUser
-      PRIMARY KEY (
-         D_MNO,
-         J_MNO
-      );
 
 /*결제요청*/
 
 CREATE TABLE RequestPayment (
-   P_CODE VARCHAR(8) NOT NULL, /* 결제 코드 */
+   P_CODE VARCHAR2(8) NOT NULL, /* 결제 코드 */
    P_MONEY NUMBER(8), /* 결제 금액 */
    D_MNO NUMBER(7), /* 달인 회원 번호 */
    F_NO VARCHAR2(10), /* 분야 코드 */
-   D_EMAIL varchar2(50) /* 회원 id(email) */
+   D_EMAIL varchar2(50), /* 회원 id(email) */
+   constraint pk_requestpayment primary key(p_code)
 );
-
-ALTER TABLE RequestPayment
-   ADD
-      CONSTRAINT PK_RequestPayment
-      PRIMARY KEY (
-         P_CODE
-      );
-
-ALTER TABLE RequestPayment
-   ADD
-      CONSTRAINT FK_Dalin_TO_RequestPayment
-      FOREIGN KEY (
-         D_MNO,
-         F_NO,
-         D_EMAIL
-      )
-      REFERENCES Dalin (
-         D_MNO,
-         F_NO,
-         D_EMAIL
-      );
-
 
 /*환불현황*/
 
 CREATE TABLE NowRefund (
    P_REFUND_CODE VARCHAR2(8) NOT NULL, /* 환불코드 */
-   P_CODE VARCHAR(8) NOT NULL, /* 결제 코드 */
+   P_CODE VARCHAR2(8) NOT NULL, /* 결제 코드 */
    P_REQ_REFUND_DATE DATE, /* 환불 신청 날짜 */
-   P_REFUND_IS_OK CHAR(1) /* 수락 여부 */
+   P_REFUND_IS_OK CHAR(1), /* 수락 여부 */
+   p_request_money NUMBER(8), /*환불 요청금액*/
+   d_email varchar2(50),
+   p_money number(7),
+   constraint pk_nowrefund primary key(p_refund_code,p_code)
 );
-
-ALTER TABLE NowRefund
-   ADD
-      CONSTRAINT PK_NowRefund
-      PRIMARY KEY (
-         P_REFUND_CODE,
-         P_CODE
-      );
-
-ALTER TABLE NowRefund
-   ADD
-      CONSTRAINT FK_NowPayment_TO_NowRefund
-      FOREIGN KEY (
-         P_CODE
-      )
-      REFERENCES NowPayment (
-         P_CODE
-      );
-
 
 /*신고게시물*/
 
 CREATE TABLE ReportedBoard (
    RB_NO NUMBER(6) NOT NULL, /* 글번호 */
-   USERNAME VARCHAR2(50) NOT NULL /* 회원아이디 */
+   USERNAME VARCHAR2(50) NOT NULL, /* 회원아이디 */
+   reason nvarchar2(100),
+   constraint pk_reportedboard primary key(rb_no,username)
 );
 
-ALTER TABLE ReportedBoard
-   ADD
-      CONSTRAINT PK_ReportedBoard
-      PRIMARY KEY (
-         RB_NO,
-         USERNAME
-      );
-
-/*관리자*/
-
-CREATE TABLE Admin (
-   AD_EMAIL VARCHAR2(50) NOT NULL, /* 관리자이메일 */
-   AD_PASSWORD VARCHAR2(60), /* 관리자비밀번호 */
-   AD_ENABLED CHAR(1) /* 관리자 상태 */
-);
-
-ALTER TABLE Admin
-   ADD
-      CONSTRAINT PK_Admin
-      PRIMARY KEY (
-         AD_EMAIL
-      );
 
 /* 캐시 사용 내역 */
 
@@ -405,45 +243,20 @@ CREATE TABLE UseCash (
    E_NO NUMBER(7) NOT NULL, /* 견적서 번호 */
    D_MNO NUMBER(7) NOT NULL, /* 달인회원번호 */
    CA_ESTIMATE_CASH NUMBER(5), /* 견적서 작성 대금 */
-   CA_USE_DATE DATE /* 사용 날짜 */
+   CA_USE_DATE DATE, /* 사용 날짜 */
+   constraint pk_usecash primary key(e_no,d_mno)
 );
-
-ALTER TABLE UseCash
-   ADD
-      CONSTRAINT PK_UseCash
-      PRIMARY KEY (
-         E_NO,
-         D_MNO
-      );
 
 /*문의 답글*/
 
 CREATE TABLE QnaComment (
    C_NO NUMBER(7) NOT NULL, /* 댓글 번호 */
-   C_CODE VARCHAR2(8), /* 문의 코드 */
+   Q_NO NUMBER(8), /* 댓글 단 게시물 번호 */
    C_CONTENT NVARCHAR2(500), /* 내용 */
    C_WRITE_DATE DATE, /* 작성 시간 */
-   AD_EMAIL VARCHAR2(50) /* 관리자이메일 */
+   AD_EMAIL VARCHAR2(50), /* 관리자이메일 */
+   constraint pk_qnacomment primary key(c_no)
 );
-
-ALTER TABLE QnaComment
-   ADD
-      CONSTRAINT PK_QnaComment
-      PRIMARY KEY (
-         C_NO
-      );
-
-ALTER TABLE QnaComment
-   ADD
-      CONSTRAINT FK_Admin_TO_QnaComment
-      FOREIGN KEY (
-         AD_EMAIL
-      )
-      REFERENCES Admin (
-         AD_EMAIL
-      );
-
-
 
 /*요청서게시판*/
 
@@ -459,28 +272,19 @@ CREATE TABLE RequestBoard (
    RB_IS_BLOCK CHAR(1), /* 블락여부 - */
    RB_IS_NOTICE CHAR(1), /* 공지사항여부 */
    R_NO NUMBER(6), /* 요청서번호 */
-   J_MNO NUMBER(7) /* 제자 회원 번호 */
+   J_MNO NUMBER(7), /* 제자 회원 번호 */
+   field_or_hobby nvarchar2(30),
+   lesson_purpose nvarchar2(30),
+   my_level nvarchar2(30),
+   tools nvarchar2(30),
+   lesson nvarchar2(30),
+   lesson_time nvarchar2(30),
+   age nvarchar2(30),
+   gender nvarchar2(30),
+   zone nvarchar2(30),
+   etc nvarchar2(30),
+   constraint pk_requestboard primary key(rb_no)
 );
-
-ALTER TABLE RequestBoard
-   ADD
-      CONSTRAINT PK_RequestBoard
-      PRIMARY KEY (
-         RB_NO
-      );
-
-ALTER TABLE RequestBoard
-   ADD
-      CONSTRAINT FK_Request_TO_RequestBoard
-      FOREIGN KEY (
-         R_NO,
-         J_MNO
-      )
-      REFERENCES Request (
-         R_NO,
-         J_MNO
-      );
-
 /* 견적서 */
 
 CREATE TABLE Estimate (
@@ -488,73 +292,33 @@ CREATE TABLE Estimate (
    D_MNO NUMBER(7) NOT NULL, /* 달인 회원 번호 */
    F_NO VARCHAR2(10) NOT NULL, /* 분야 코드 */
    J_MNO NUMBER(7) NOT NULL, /* 제자 회원 번호 */
-   R_NUMBER NUMBER(6) NOT NULL, /* 요청서번호 */
+   R_NO NUMBER(6) NOT NULL, /* 요청서번호 */
    D_EMAIL varchar2(50) NOT NULL, /* 회원 id(email) */
    E_MONEY NUMBER(8), /* 견적금액 */
    E_CONTENT NVARCHAR2(500), /* 견적내용 */
    E_TEL_TYPE NVARCHAR2(20), /* 연락수단 */
-   J_ISOK CHAR(1), /* 수락 여부 */
-   E_CASH NUMBER(5) /* 필요 캐시 */
+   J_IS_OK CHAR(1), /* 수락 여부 */
+   E_CASH NUMBER(5), /* 필요 캐시 */
+   d_name nvarchar2(6), /* 달인 이름 */
+   e_is_read char(1), /* 읽음 여부 */
+   e_write_time date,
+   constraint pk_estimate primary key(e_no,d_mno)
 );
-
-ALTER TABLE Estimate
-   ADD
-      CONSTRAINT PK_Estimate
-      PRIMARY KEY (
-         E_NO,
-         D_MNO,
-         F_NO,
-         J_MNO,
-         R_NUMBER,
-         D_EMAIL
-      );
-
-ALTER TABLE Estimate
-   ADD
-      CONSTRAINT FK_Dalin_TO_Estimate
-      FOREIGN KEY (
-         D_MNO,
-         F_NO,
-         D_EMAIL
-      )
-      REFERENCES Dalin (
-         D_MNO,
-         F_NO,
-         D_EMAIL
-      );
-
-ALTER TABLE Estimate
-   ADD
-      CONSTRAINT FK_Request_TO_Estimate
-      FOREIGN KEY (
-         R_NUMBER,
-         J_MNO
-      )
-      REFERENCES Request (
-         R_NO,
-         J_MNO
-      );
 
 /*메모*/
 
 CREATE TABLE Memo (
    M_NO NUMBER(6) NOT NULL, /* 쪽지번호 */
-   M_RECIVER NVARCHAR2(20), /* 수신자 -  */
-   M_SENDER NVARCHAR2(20), /* 발신자 -  */
-   M_WRITE_TIME DATE, /* 시간 - */
-   M_CONTENT NVARCHAR2(500), /* 내용 */
-   M_TITLE NVARCHAR2(100), /* 제목 */
-   M_IS_READ CHAR(1) /* 읽음안읽음 - */
+   RECEIVER NVARCHAR2(50), /* 수신자 -  */
+   SENDER NVARCHAR2(50), /* 발신자 -  */
+   WRITE_TIME DATE, /* 시간 - */
+   CONTENT NVARCHAR2(500), /* 내용 */
+   TITLE NVARCHAR2(100), /* 제목 */
+   IS_READ CHAR(1), /* 읽음안읽음 - */
+   DISABLE_BY_SENDER CHAR(1),
+   DISABLE_BY_RECEIVER CHAR(1),
+   constraint pk_memo primary key(m_no)
 );
-
-
-ALTER TABLE Memo
-   ADD
-      CONSTRAINT PK_Memo
-      PRIMARY KEY (
-         M_NO
-      );
-
 
 /*리뷰 권한*/
 
@@ -562,56 +326,21 @@ CREATE TABLE ReviewAuthority (
    A_COMPLETE_CODE VARCHAR2(8) NOT NULL, /* 계약완료코드 */
    D_MNO NUMBER(7), /* 달인 회원번호 */
    J_MNO NUMBER(7), /* 제자 회원번호 */
-   A_IS_OK CHAR(1) /* 권한 여부 */
+   A_IS_OK CHAR(1), /* 권한 여부 */
+   j_email varchar2(70),
+   constraint pk_reviewauthority primary key(a_complete_code)
 );
 
-ALTER TABLE ReviewAuthority
-   ADD
-      CONSTRAINT PK_ReviewAuthority
-      PRIMARY KEY (
-         A_COMPLETE_CODE
-      );
-
-/*세부분야*/
-
-CREATE TABLE DetailField (
-   F_NO VARCHAR2(10) NOT NULL, /* 분야 코드 */
-   DETAIL_F_NAME NVARCHAR2(10), /* 세부 분야 이름 */
-   DETAIL_F_SAJIN NVARCHAR2(50) /* 세부 분야 사진 */
-);
-
-ALTER TABLE DetailField
-   ADD
-      CONSTRAINT PK_DetailField
-      PRIMARY KEY (
-         F_NO
-      );
-
-ALTER TABLE DetailField
-   ADD
-      CONSTRAINT FK_FIELD_TO_DetailField
-      FOREIGN KEY (
-         F_NO
-      )
-      REFERENCES FIELD (
-         F_NO
-      );
 
 /*프로필 첨부파일*/
 
 CREATE TABLE ProfileAttachment (
-   P_ATTACHMENT_NO NUMBER(3) NOT NULL, /* 프로필 첨부 파일 번호 */
-   P_ORIGINAL_FILE_NAME NVARCHAR2(20), /* 원래파일이름 */
-   P_SAVE_FILE_NAME NVARCHAR2(30), /* 저장용파일이름 */
-   P_IS_OK CHAR(1) /* 사진파일여부 */
+   P_ATTACHMENT_NO NUMBER(7) NOT NULL, /* 프로필 첨부 파일 번호 */
+   P_ORIGINAL_FILE_NAME NVARCHAR2(150), /* 원래파일이름 */
+   P_SAVE_FILE_NAME NVARCHAR2(150), /* 저장용파일이름 */
+   D_EMAIL varchar2(50),
+   constraint pk_profileattachment primary key(p_attachment_no)
 );
-
-ALTER TABLE ProfileAttachment
-   ADD
-      CONSTRAINT PK_ProfileAttachment
-      PRIMARY KEY (
-         P_ATTACHMENT_NO
-      );
 
 /* 리뷰&평점 */
 
@@ -623,54 +352,62 @@ CREATE TABLE Review (
    R_SAJIN_CNT NUMBER(1), /* 첨부사진 수 */
    R_WRITER NVARCHAR2(20), /* 작성자  */
    S_NO NUMBER(6), /* 사진 번호 */
-   D_MNO NUMBER(6) /*달인 회원번호*/
+   d_mno number(7), /* 리뷰가 달린 달인 회원번호 */ 
+   j_Accusation_cnt number(6), /* 리뷰 신고당한 횟수 */
+   constraint pk_review primary key(r_no)
 );
 
-ALTER TABLE Review
-   ADD
-      CONSTRAINT PK_Review
-      PRIMARY KEY (
-         R_NO
-      );
-
-ALTER TABLE Review
-   ADD
-      CONSTRAINT FK_ReviewAttachment_TO_Review
-      FOREIGN KEY (
-         S_NO
-      )
-      REFERENCES ReviewAttachment (
-         S_NO
-      );
-
-/*리뷰 첨부파일*/
-
-CREATE TABLE ReviewAttachment (
-   S_NO NUMBER(6) NOT NULL, /* 사진 번호 */
-   S_ORIGINAL_FILE_NAME NVARCHAR2(20), /* 원래 파일이름 */
-   S_FILE_NAME VARCHAR2(30) /* 시스템 파일이름 */
-);
-
-ALTER TABLE ReviewAttachment
-   ADD
-      CONSTRAINT PK_ReviewAttachment
-      PRIMARY KEY (
-         S_NO
-      );
-
+select * from tab;
+purge recyclebin;
 /* 권한 */
 
 CREATE TABLE Authorities (
    USERNAME VARCHAR2(50) NOT NULL, /* 회원 id */
-   AUTHORITY VARCHAR2(20) NOT NULL /* 권한 */
+   AUTHORITY VARCHAR2(20) NOT NULL, /* 권한 */
+   constraint pk_authorities primary key(username,authority)
 );
 
-ALTER TABLE Authorities
-   ADD
-      CONSTRAINT PK_Authorities
-      PRIMARY KEY (
-         USERNAME,
-         AUTHORITY
-      );
-
+/* 레슨내역 */
+create Table LESSONHISTORY (
+    a_complete_code varchar2(8),
+    D_MNO number(7),
+    J_MNO number(7),
+    L_START_DATE date,
+    r_is_ok char(1),
+    constraint pk_LESSONHISTORY primary key(a_complete_code)
+);
 select * from tab;
+
+insert into DetailField values('1','skateboard','https://dmmj3ljielax6.cloudfront.net/upload/service-bg/service_bf616b66-84c1-444d-ac52-c179addc36b6.jpg');
+insert into DetailField values('1','climming','https://dmmj3ljielax6.cloudfront.net/upload/service-bg/service_87.jpg');
+insert into DetailField values('1','golf','https://dmmj3ljielax6.cloudfront.net/upload/service-bg/service_9aa6aa35-cac0-4875-a7d1-71186f84c6ea.png');
+insert into DetailField values('1','bowling','https://dmmj3ljielax6.cloudfront.net/upload/service-bg/service_94.jpg');
+insert into DetailField values('1','tabletennis','https://dmmj3ljielax6.cloudfront.net/upload/service-bg/service_102.jpg');
+insert into DetailField values('1','billiards','https://dmmj3ljielax6.cloudfront.net/upload/service-bg/service_73.jpg');
+insert into DetailField values('1','pilates','https://dmmj3ljielax6.cloudfront.net/upload/service-bg/service_e77ca02d-e067-44ea-9fa8-708bbe7c07a4.png');
+insert into DetailField values('1','squash','https://dmmj3ljielax6.cloudfront.net/upload/service-bg/service_34ec57f8-ea25-4e3a-9e8d-999a4d272f55.jpg');
+insert into DetailField values('1','defense','https://dmmj3ljielax6.cloudfront.net/upload/service-bg/service_fbb01fdb-1413-4c4b-ad89-38280c81828f.png');
+
+insert into DetailField values('2','painting','https://dmmj3ljielax6.cloudfront.net/upload/service-bg/service_428.jpg');
+insert into DetailField values('2','toonart','https://dmmj3ljielax6.cloudfront.net/upload/service-bg/service_429.jpg');
+insert into DetailField values('2','childart','https://dmmj3ljielax6.cloudfront.net/upload/service-bg/service_a51eeb4c-11d0-49ee-b38f-7fcbe0247566.png');
+insert into DetailField values('2','sandart','https://dmmj3ljielax6.cloudfront.net/upload/service-bg/service_b45a509e-1e55-43a5-9c4f-3dc955901166.jpg');
+insert into DetailField values('2','popart','https://dmmj3ljielax6.cloudfront.net/upload/service-bg/service_114.jpg');
+insert into DetailField values('2','woodworking','https://dmmj3ljielax6.cloudfront.net/upload/service-bg/service_4316cada-1e64-4b46-8aa7-af2484135f08.jpg');
+insert into DetailField values('2','pottery','https://dmmj3ljielax6.cloudfront.net/upload/service-bg/service_15aea63f-1e61-484b-9ddf-833c913e3c8e.jpg');
+insert into DetailField values('2','drawing','https://dmmj3ljielax6.cloudfront.net/upload/service-bg/service_24f021e2-9bdc-4515-bed2-5e2ee75fb29a.jpg');
+insert into DetailField values('2','kelligrapy','https://dmmj3ljielax6.cloudfront.net/upload/service-bg/service_143.jpg');
+
+insert into DetailField values('3','piano','https://dmmj3ljielax6.cloudfront.net/upload/service-bg/service_32.jpg');
+insert into DetailField values('3','elecguitar','https://dmmj3ljielax6.cloudfront.net/upload/service-bg/service_9bca8256-7a7f-458d-8fff-434212fc8b63.png');
+insert into DetailField values('3','drum','https://dmmj3ljielax6.cloudfront.net/upload/service-bg/service_10.jpg');
+insert into DetailField values('3','baseguitar','https://dmmj3ljielax6.cloudfront.net/upload/service-bg/service_35c3ac0e-f808-40d9-b255-ae3dd0c03b43.png');
+insert into DetailField values('3','violinn','https://dmmj3ljielax6.cloudfront.net/upload/service-bg/service_05afc1b7-a06d-4f4d-b698-56188ff6ca0b.png');
+insert into DetailField values('3','saxophone','https://dmmj3ljielax6.cloudfront.net/upload/service-bg/service_20.jpg');
+insert into DetailField values('3','trumpet','https://dmmj3ljielax6.cloudfront.net/upload/service-bg/service_a6049b4e-6244-4877-9260-d8c60027ebca.jpg');
+insert into DetailField values('3','flute','https://dmmj3ljielax6.cloudfront.net/upload/service-bg/service_c5b066ee-9189-46b0-953f-fe13f7bcdc23.jpg');
+insert into DetailField values('3','cello','https://dmmj3ljielax6.cloudfront.net/upload/service-bg/service_b44f080a-6de1-42b9-9636-fc940e413b51.jpg');
+commit;
+
+select * from dalin;
+select * from requestboard;

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="historyMapper">
+
+
+	<insert id="insertToLessonHistory">
+		insert into LessonHistory(a_complete_code,d_mno,j_mno,l_start_date,r_is_ok)
+		values(#{aCompleteCode},#{dMno},#{jMno},sysdate,0)
+	</insert>
+	
+	<select id="findAllByLessonHistoryToJeja" resultType="lessonHistory">
+		<![CDATA[
+			select * from
+				(select l.*,rownum rnum from	
+					(select a_complete_code aCompleteCode,d_mno dMno,j_mno jMno,l_start_date lStartDate,r_is_ok rIsOk from LessonHistory where j_mno=#{jMno}) l
+				where rownum<=#{endRowNum})
+			where rnum>=#{startRowNum}
+		]]>			
+	</select>
+
+	<select id="findAllByLessonHistoryToDalin" resultType="lessonHistory">
+		<![CDATA[
+			select * from
+				(select l.*,rownum rnum from	
+					(select a_complete_code aCompleteCode,d_mno dMno,j_mno jMno,l_start_date lStartDate from LessonHistory where d_mno=#{dMno}) l
+				where rownum<=#{endRowNum})
+			where rnum>=#{startRowNum}
+		]]>			
+	</select>	
+	
+	<delete id="deleteToLessonHistory">
+		delete from lessonhistory where a_complete_code=#{aCompleteCode} and rownum=1
+	</delete>
+	
+	<select id="countOfLessonToJeja" resultType="int">
+		select count(*) from lessonhistory where j_mno=#{jMno}
+	</select>
+
+	<select id="countOfLessonToDalin" resultType="int">
+		select count(*) from lessonhistory where d_mno=#{dMno}
+	</select>
+
+	<select id="findByCompleteCodeToLH" resultType="string">
+		select a_complete_code aCompleteCode from lessonhistory where j_mno = #{jMno} and r_is_ok = 0 and d_mno = #{dMno} and rownum=1
+	</select>
+	
+	<update id="setReviewIsOk" >
+		update lessonhistory set r_is_ok = 1 where a_complete_code = #{aCompleteCode} and rownum=1
+	</update>
+	
+	
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+

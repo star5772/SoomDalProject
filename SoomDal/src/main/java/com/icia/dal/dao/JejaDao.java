@@ -39,4 +39,14 @@ public class JejaDao {
 		return tpl.selectOne("jejaMapper.findById",jEmail);
 	}
 	
+	public Jeja findByJejaToJMno(int jMno) {
+		return tpl.selectOne("jejaMapper.findByJejaToJMno",jMno);
+	}
+	
+	public String findIdByName(String jName) {
+		return tpl.selectOne("jejaMapper.findIdByName",jName);
+	}
+	
+
+	
 }

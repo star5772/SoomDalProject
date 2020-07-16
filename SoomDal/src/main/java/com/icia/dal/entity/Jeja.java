@@ -17,5 +17,7 @@ public class Jeja {
 	private Integer jAccusationCnt; // 신고수
 	private Boolean enabled; // 회원 상태
 	private LocalDateTime jJoinDate; // 가입 날짜
+	private Integer jLoginFailureCnt; // 로그인실패수
+	private Boolean jIsBlock;	// 블락여부
 	
 }

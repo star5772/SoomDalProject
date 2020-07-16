@@ -8,17 +8,21 @@
 	</insert>
 	
 	<delete id="deleteToPayment">
-		delete from requestpayment where d_email = #{dEmail} and rownum=1
+		delete from requestpayment where d_email = #{dEmail}
 	</delete>
 	
 	<select id="findByPayment" resultType="RequestPayment">
 		select p_code pCode,p_money pMoney,d_mno dMno,f_no fNo,d_email dEmail
 		from requestpayment
-		where dEmail=#{dEmail} and rownum=1		
+		where d_Email=#{dEmail} and rownum=1		
 	</select>
 
 	<select id="findPaymentCode" resultType="string">
 		select p_code from requestpayment where d_email=#{dEmail} and rownum=1
+	</select>
+	
+	<select id="countToRefund" resultType="int">
+		select count(*) from nowrefund where d_email=#{dEmail}
 	</select>
 	
 	<select id="findAllByPayment" resultType="RequestPayment">
@@ -38,6 +42,99 @@
 	<select id="findToCash" resultType="int">
 		select p_money from requestPayment where p_code=#{pCode} and rownum=1
 	</select>
+	
+	<update id="addCashToDalin">
+		update dalin set d_cash=d_cash + #{dCash} where d_email=#{dEmail} and rownum=1
+	</update>
+	
+	<select id="findByDalinCash" resultType="int">
+		select d_cash dCash from dalin where d_email = #{dEmail} and rownum=1
+	</select>
+	
+	<!--                 여기부터  결제내역 페이지                                                  -->
+	<select id="countToNowPayment" resultType="int">
+		select count(*) from  nowpayment
+	</select>
+	
+	
+	<insert id="insertNowPayment">
+		insert into nowpayment(p_code,p_date,p_refund_date,p_refund_is_ok,d_email,p_money,p_request_refund)
+		values(#{pCode},sysdate,7,0,#{dEmail},#{pMoney},0)
+	</insert>
+	
+	<select id="findByNowPaymentToAdmin" resultType="NowPayment">
+		<![CDATA[
+			select * from		
+				(select n.*, rownum rnum from	
+					(select p_request_refund pRequestPayment,p_code pCode, p_date pDate, p_refund_date pRefundDate,p_refund_is_ok pRefundIsOk,d_email dEmail,p_money pMoney from nowpayment) n
+				where rownum <=#{endRowNum})	
+			where rnum >=#{startRowNum}
+		]]>			
+	</select>
+	
+	<select id="findByNowPaymentToDalin" resultType="NowPayment">
+		<![CDATA[
+			select * from		
+				(select n.*, rownum rnum from	
+					(select p_request_refund pRequestPayment,p_code pCode, p_date pDate, p_refund_date pRefundDate,p_refund_is_ok pRefundIsOk,d_email dEmail,p_money pMoney from nowpayment where d_email=#{dEmail}) n
+				where rownum <=#{endRowNum})	
+			where rnum >=#{startRowNum}
+		]]>	
+	</select>
+	
+	<update id="updatePaymentToDalin">
+		update nowpayment
+		<trim prefix="SET" suffixOverrides=",">
+			<if test="pRefundDate != null">p_refund_date = p_refund_date -1,</if>
+			<if test="pRefundIsOk != null">p_refund_is_ok = #{pRefundIsOk},</if>
+			<if test="pRequestRefund != null">p_request_refund = #{pRequestRefund},</if>
+		</trim>
+		where p_code = #{pCode} and rownum=1
+	</update>
+	
+	<delete id="deleteToNowPayment">
+		delete from nowpayment where p_Code=#{pCode} and rownum=1
+	</delete>
+	
+	<select id="findByNowpayment" resultType="NowPayment">
+		select p_code pCode, p_date pDate, p_refund_date pRefundDate, p_refund_is_ok pRefundIsOk, d_email dEmail, p_money pMoney, p_request_refund pRequestRefund
+		from nowpayment
+		where d_email=#{dEmail} and rownum=1
+	</select>	
+	
+	<select id="findByPmoneyToPcode" resultType="int">
+		select p_money pMoney from nowpayment where p_code = #{pCode} and rownum=1
+	</select>
+	
+	
+	<!-- 환불 페이즈 -->
+	<insert id="insertToNowRefund">
+		insert into nowrefund(p_refund_code,p_code,p_req_refund_date,p_refund_is_ok,p_money,d_email)
+		values(#{pRefundCode},#{pCode},sysdate,0,#{pMoney},#{dEmail})
+	</insert>
+	
+	<select id="findByNowpaymentToPCode" resultType="NowPayment">
+		select p_code pCode, p_date pDate, p_refund_date pRefundDate, p_refund_is_ok pRefundIsOk, d_email dEmail, p_money pMoney, p_request_refund pRequestRefund
+		from nowpayment
+		where p_code=#{pCode} and rownum=1
+	</select>
+	
+	<update id="updateToNowRefund">
+		update nowRefund set p_refund_is_ok = #{pRefundIsOk} 
+		where p_code=#{pCode} and rownum=1
+	</update>
+	
+	<select id="findAllNowRefundListToDalin" resultType="nowrefund">
+		<![CDATA[
+			select * from
+				(select r.* , rownum rnum from
+					(select p_refund_code pRefundCode,p_code pCode,p_req_refund_date pReqRefundDate,p_refund_is_ok pRefundIsOk,p_money pMoney,d_email dEmail from nowrefund where d_email=#{dEmail}) r
+				where rownum<=#{endRowNum})
+			where rnum>=#{startRowNum}
+		]]>				
+	</select>
+	
+	
 </mapper>
 
 

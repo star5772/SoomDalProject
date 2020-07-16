@@ -22,16 +22,16 @@ public class QnaCommentDaoTest {
 	private QnaCommentDao qnacDao;
 	
 	//@Test
-	public void insert() {
-		QnaComment qna = QnaComment.builder().cNo(1).cCode("asdasd").cContent("내용").adEmail("aa@aaa.com").build();
-		assertThat(qnacDao.insert(qna), is(1));
-	}
-	
+//	public void insert() {
+//		QnaComment qna = QnaComment.builder().cNo(1).cCode("asdasd").cContent("내용").adEmail("aa@aaa.com").build();
+//		assertThat(qnacDao.insert(qna), is(1));
+//	}
+//	
 	//@Test
-	public void findAllByCno() {
-		System.out.println(qnacDao.findAllByCno(1));
-	}
-	
+//	public void findAllByCno() {
+//		System.out.println(qnacDao.findAllByCno(1));
+//	}
+//	
 	//@Test
 	public void delete() {
 		assertThat(qnacDao.delete(1), is(1));

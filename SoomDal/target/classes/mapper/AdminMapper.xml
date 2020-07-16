@@ -1,31 +1,45 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="adminMapper">
-
+	
+	
+	<insert id="insertAdmin">
+		insert into admin(username,password,enabled)
+		values(#{username},#{password},1)
+	</insert>
+	
+	
 	<!-- 제자회원 목록출력(jeja) : 이름, 아이디, 전화번호, 신고당한횟수, 정지여부 -->
 	<select id="findAllToJeja" resultType="jeja">
-		select j_mno jMno, j_email jEmail, j_name jName, j_tel jTel, j_accusation jAccusation, enabled
-		from jeja
+		<![CDATA[
+			select * from
+				(select j.*,rownum as rnum from
+					(select /*+ index_desc(jeja pk_jeja)*/j_mno jMno, j_email jEmail, j_name jName, j_tel jTel, j_accusation_cnt jAccusationCnt, j_joindate jJoinDate from jeja)j
+					where rownum<=#{endRowNum})
+				where rnum>=#{startRowNum}
+		]]>
 	</select>
 	
 	<!-- 달인회원 목록 출력(dalin): 이름, 아이디, 전화번호, 분야, 활동지역, 정지여부  -->
 	<select id="findAllToDalin" resultType="dalin">
-		select  d_mno dMno, d_email dEmail, d_tel dTel, f_no fNo, d_area aArea, enabled
-		from dalin
+		<![CDATA[
+			select * from
+				(select d.*,rownum as rnum from
+					(select /*+ index_desc(dalin pk_dalin)*/detail_f_name detailFName, d_level dLevel, f_no fNo, d_email dEmail, d_name dName, d_tel dTel, enabled, d_date dDate, d_area dArea  from dalin)d
+					where rownum<=#{endRowNum})
+				where rnum>=#{startRowNum}
+		]]>
 	</select>
 	
 	<!-- 신고게시물(ReportedBoard) 목록  : 불러오는거 (이네이블드가 false만 읽는거)-->
 	<select id="findAllToReportedBoard" resultType="RequestBoard">
-		select rb_No rbNo, rb_title rbTitle, rb_writer rbWriter, rb_report_cnt rbReportCnt, j_mno jMno
-		from requestBoard
-		where rb_enabled=0 
-	</select>
-	
-	<!-- 신고회원 (제자) 목록 출력(아이디, 신고당한 횟수, 신고사유로 정렬) -->
-	<select id="findAllJejaReported" resultType="map">
-		select j.j_mno jMno, j.j_email jEmail, r.j_accusation jAccusation,
-		from jeja j, reportedUser r
-		where j.j_mno=#{jMno} and r.j_mno=#{jMno}
+		<![CDATA[
+			select * from
+				(select r.*,rownum as rnum from
+					(select /*+index_desc(requestboard pk_requestboard)*/j_mno jMno ,rb_no rbNo, rb_title rbTitle, rb_write_date rbWriteDate, rb_writer rbWriter, rb_is_block rbIsBlock from requestboard where rb_report_cnt != 0)r
+					where rownum<=#{endRowNum})
+				where rnum>=#{startRowNum} 
+		]]>
 	</select>
 	
 	<!-- 회원 정지 -->	
@@ -35,6 +49,88 @@
 		where j_email=#{jEmail} and rownum=1
 	</update>
 
+	<select id="countToDalin" resultType="int">
+		select /*+ index_ffs(dalin pk_dalin)*/count(*)
+		from dalin
+	</select>
+	
+	
+	<select id="countToJeja" resultType="int">
+		select /*+ index_ffs(jeja pk_jeja)*/count(*)
+		from jeja
+	</select>
+	
+	<select id="countToReportedJeja" resultType="int">
+		select /*+ index_ffs(jeja pk_jeja)*/count(*) 
+		from jeja where j_accusation_cnt!=0 
+	</select>
+	
+	<!-- 신고횟수있는 제자목록 페이징 -->
+	<select id="findAllToRpList" resultType="jeja">
+		<![CDATA[
+			select * from
+				(select j.*,rownum as rnum from
+					(select /*+ index_desc(jeja pk_jeja)*/j_mno jMno, j_email jEmail, j_name jName, j_accusation_cnt jAccusationCnt, j_joindate jJoinDate from jeja where j_accusation_cnt!=0)j
+				where rownum<=#{endRowNum})
+			where rnum>=#{startRowNum}
+		]]>
+	</select>	
+	
+	<select id="countToReview" resultType="int">
+		select /*+ index_ffs(requestboard pk_requestboard)*/count(*)
+		from requestboard where rb_report_cnt != 0 
+	</select>
+	
+	<select id="findAllEnabledToJeja" resultType="jeja">
+		<![CDATA[
+			select * from
+				(select j.*,rownum as rnum from
+					(select /*+ index_desc(jeja pk_jeja)*/j_mno jMno, j_email jEmail, j_name jName, j_accusation_cnt jAccusationCnt, j_joindate jJoinDate, enabled, j_is_block jIsBlock from jeja where enabled = 0)j
+				where rownum<=#{endRowNum})
+				where rnum>=#{startRowNum}
+		]]>
+	</select>
+	
+	<select id="countToJejaEnabled" resultType="int">
+		select /*+ index_ffs(jeja pk_jeja)*/count(*)
+		from jeja
+	</select>
+	
+	<!-- 세부분야 & 분야 페이즈 -->
+	<select id="findAllDetailField" resultType="detailField">
+		select f_no fNo,detail_f_name detailFName, detail_f_sajin detailFSajin from detailfield where f_no = #{fNo}
+	</select>
+
+	<select id="findByDetailField" resultType="detailField">
+		select f_no fNo,detail_f_name detailFName, detail_f_sajin detailFSajin from detailfield where f_no = #{fNo} and detail_f_name = #{detailFName}
+	</select>
+	
+	<insert id="insertToDetailFName">
+		insert into DetailField(f_no,detail_f_name,detail_f_sajin)
+		VALUES(#{fNo},#{detailFName},#{detailFSajin})
+	</insert>
+	
+	<insert id="insertToField">
+		insert into field(f_no,f_name,f_sajin)
+		VALUES(#{fNo},#{fName},#{fSajin})
+	</insert>
+	
+	<select id="findAllField" resultType="field">
+		select f_no fNo,f_name fName,f_sajin fSajin from field
+	</select>
+	
+	<select id="findByField" resultType="field">
+		select f_no fNo,f_name fName,f_sajin fSajin from field where f_no=#{fNo}
+	</select>
+	
+	<delete id="deleteToField">
+		delete from field where f_no=#{fNo} and rownum=1
+	</delete>
+	
+	<delete id="deleteToDetailField">
+		delete from detailfield where f_no=#{fNo} and detail_f_name=#{detailFName} and rownum=1
+	</delete>
+	
 	<!-- 환불(NowRefund) -->
 	<update id="updateToRefund">
 		update nowrefund 
@@ -42,10 +138,34 @@
 		where p_refund_code=#{pRefundCode} and rownum=1
 	</update>
 	
-
+	<!-- 환불 신청 페이징 -->
+	<select id="findAllNowRefundList" resultType="nowrefund">
+		<![CDATA[
+		select*from
+			(select r.*,rownum as rnum from
+				(select /*+ index_desc(nowRefund pk_nowrefund)*/ p_refund_code pRefundCode, p_code pCode, p_req_refund_date pReqRefundDate, p_refund_is_ok pRefundIsOk, p_money pMoney, d_email dEmail from nowrefund)r
+			where rownum<=#{endRowNum})
+		where rnum>=#{startRowNum}
+		]]>
+	</select>
 	
-
+	<select id="countToRefund" resultType="int">
+		select count(*)
+		from nowrefund
+	</select>
 	
+	<insert id="insertToRefund">
+		insert into nowrefund(p_refund_code, p_code, p_req_refund_date, p_refund_is_ok, p_money, d_email)
+		values(#{pRefundCode}, #{pCode}, sysdate, #{pRefundIsOk}, #{pMoney}, #{dEmail})
+	</insert>
+	
+	<select id="readRpBoard" resultType="rpboard">
+		select rb_no rbNo,username,reason from reportedboard where rb_no = #{rbNo} and rownum=1
+	</select>
+
+	<delete id="deleteRpBoard">
+		delete from reportedboard where rb_no = #{rbNo} and rownum=1
+	</delete>
 </mapper>
 
 
