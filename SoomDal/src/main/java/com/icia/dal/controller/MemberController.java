@@ -113,19 +113,23 @@ public class MemberController {
 	// 회원 탈퇴
 	@PreAuthorize("isAuthenticated()")
 	@DeleteMapping("/member/resign")
-	public String resign(SecurityContextLogoutHandler handler, HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws JejaNotFoundException {
+	public String resign(SecurityContextLogoutHandler handler, HttpServletRequest request, HttpServletResponse response,
+															Authentication authentication) throws JejaNotFoundException {
+		// 현재 로그인한 유저의 정보(ID)를 제자 테이블에서 찾아서 존재한다면
 		if(jejaService.findById(authentication.getName())!=null) {
+		// 유저 정보를 모두 삭제하고 로그아웃 시킨후 root 페이지로 리턴	
 			jejaService.delete(authentication.getName());
 		    handler.logout(request, response, authentication);
 		    return "redirect:/";
+		// 현재 로그인한 유저의 정보(ID)를 제자테이블에서 찾지 못하고 달인테이블에 존재한다면    
 		} else if(dalService.findById(authentication.getName())!=null) {
+		// 유저 정보를 모두 삭제하고 로그아웃 시킨후 root 페이지로 리턴	
 			dalService.delete(authentication.getName());
 		    handler.logout(request, response, authentication);
 		    return "redirect:/";
+		// 제자/달인 어느테이블에서도 찾지 못했다면 회원탈퇴 페이지로 다시 이동    
 		} else
 			return "redirect:/dal/member/resign";
 	   }
-
-	
 	
 }

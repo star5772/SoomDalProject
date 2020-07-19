@@ -63,8 +63,9 @@ public class EstimateAndRequestController {
 	// 견적서 보내기 화면출력
 	@Secured("ROLE_DALIN")
 	@GetMapping("/dalin/estimate/sendEstimate")
-	public ModelAndView sendEstimate(@RequestParam@NotNull int rNo) {
-		return new ModelAndView("main").addObject("viewName","estimate/estimateWrite.jsp").addObject("rNo",rNo);
+	public ModelAndView sendEstimate(@RequestParam@NotNull int rNo,Principal principal) {
+		String dEmail = principal.getName();
+		return new ModelAndView("main").addObject("viewName","estimate/estimateWrite.jsp").addObject("rNo",rNo).addObject("dProfile",estimateService.readToDalinProfile(dEmail));
 	}
 	
 	// 견적서 보내기

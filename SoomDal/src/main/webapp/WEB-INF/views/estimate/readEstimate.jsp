@@ -135,7 +135,7 @@ hr{
 		<div class='readEstimate' style="padding: 30px 30px 30px 30px; margin: 0 auto;">
 			<div id="pppprofile"> 
 				<div id="imgdiv">
-					<img src="/image/dalin.jpg" style='width: 80px; height: 80px;'>
+					<img src="${readEstimate.DProfile}" style='width: 80px; height: 80px;'>
 				</div>
 				<input type="hidden" name="jMno" id="jMno" value="${readEstimate.JMno }">
 				<input type="hidden" name="eNo"  id="eNo" value="${readEstimate.ENo }">

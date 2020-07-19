@@ -111,7 +111,7 @@ hr{
 		<div class='readEstimate' style="padding: 30px 30px 30px 30px; margin: 0 auto;">
 			<div id="pppprofile"> 
 				<div id="imgdiv">
-					<img src="/image/dalin.jpg" style='width: 80px; height: 80px;'>
+					<img src="${dProfile}" style='width: 80px; height: 80px;'>
 				</div>
 			</div>
 			<hr>

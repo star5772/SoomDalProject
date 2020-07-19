@@ -27,24 +27,34 @@ public class DalinRestService {
 	}
 	@Transactional
 	public boolean update(DalinDto.DtoForUpdateToDalin dto, String dEmail) {
+		// 로그인 한 아이디로 달인 정보를 찾음
 		Dalin dalin = dalDao.findByDalin(dEmail);
-		System.out.println(dto);
+		// 찾은 달인의 정보가 null 이라면 RuntimeException 발생
 		if(dalin==null)
 			throw new RuntimeException();
+		// 변경할 이름을 입력받았다면 달인 정보의 이름을 입력받은 값으로 변경후 업데이트
 		if(dto.getDName()!=null) {
 			dalin.setDName(dto.getDName());
 			dalDao.updateToDalin(dalin);
 			return true;
 		}
+		// 현재비밀번호와 변경할 비밀번호 모두 입력받았다면
 		if(dto.getDPassword()!=null && dto.getNewDPassword()!=null) {
+		// PasswordEncoder객체를 이용해 현재비밀번호와 해싱된 비밀번호를 비교	
 			if(pwdEncoder.matches(dto.getDPassword(), dalin.getDPassword())==false)
+		// 일치하지 않으면 RuntimeException 발생		
 				throw new RuntimeException();
+		// 일치하면 변경할 비밀번호를 해싱후 달인정보에 저장된 비밀번호로 변경	
 			dalin.setDPassword(pwdEncoder.encode(dto.getNewDPassword()));
+		// 변경한 값 업데이트	
 			dalDao.updateToDalin(dalin);
 			return true;
 		}
+		// 변경할 연락처를 입력받았다면
 		if(dto.getDTel()!=null) {
+		// 입력받은 연락처로 달인정보 변경	
 			dalin.setDTel(dto.getDTel());
+		// 변경한값 업데이트	
 			dalDao.updateToDalin(dalin);
 			return true;
 		}

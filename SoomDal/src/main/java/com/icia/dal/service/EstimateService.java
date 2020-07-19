@@ -51,6 +51,11 @@ public class EstimateService {
 	private RequestBoardDao rbDao;
 	
 	
+	public String readToDalinProfile(String dEmail) {
+		Dalin dal = dalDao.findByDalin(dEmail);
+		return dal.getDProfile();
+	}
+	
 	// 견적서작성
 	@Transactional
 	public void writeToEstimate(Estimate et, String username) {
@@ -117,6 +122,7 @@ public class EstimateService {
 			dto.setRSubject(request.getRSubject());
 		dto.setDName(dalin.getDName());
 		dto.setJName(jeja.getJName());
+		dto.setDProfile(dalin.getDProfile());
 		dto.setEWriteTimeStr(str);
 		dto.setDName(dalDao.findByDalinToDMno(et.getDMno()).getDName());
 		

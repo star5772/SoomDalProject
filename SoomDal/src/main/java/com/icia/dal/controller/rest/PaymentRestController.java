@@ -24,9 +24,12 @@ public class PaymentRestController {
 	// 결제하기
 	@PostMapping("/payment/store")
 	public ResponseEntity<?> RequestPayment(RequestPayment rp,Principal principal) {
+		// 결제 신청한 정보등을 입력받아 서비스로 전송
 		paymentService.insertCashToDalin(rp,principal.getName());
 		return ResponseEntity.ok(paymentService.insertCashToDalin(rp,principal.getName())); 
 	}
+	
+	
 	// 인증번호
 	@PostMapping("/payment/contrast")
 	public ResponseEntity<?> ContrastPcode(String AuthCode,Principal principal) throws JobFailException {

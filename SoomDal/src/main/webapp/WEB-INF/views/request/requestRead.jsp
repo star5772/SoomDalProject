@@ -102,7 +102,7 @@ hr {
 			style="border: 2px solid #F6F6F6; width: 700px; padding-left: 45px; margin-left: 200px;">
 			<div id="modu" style="padding: 30px 30px 30px 30px; margin: 0 auto;">
 				<div id="imgdiv">
-					<img src="/image/jeja.jpg" style="width: 80px; height: 80px;">
+					<img src="/dal/image/anony.jpg" style="width: 80px; height: 80px;">
 				</div>
 				<input type="hidden" id="rNo" value="${readRequest.RNo}">
 				<input type="hidden" id="jMno" value="${readRequest.JMno}">

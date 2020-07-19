@@ -34,12 +34,15 @@ public class DalinRestController {
 	@PutMapping("/dalin/my_info_update")
 	public ResponseEntity<Void> update(@Valid DalinDto.DtoForUpdateToDalin dto, BindingResult results
 			, Principal principal) throws BindException {
-		System.out.println(dto.getDTel());
+		// @Valid 어노테이션을 사용해 정규식패턴과 일치하지 않으면 BindException 발생
 		if(results.hasErrors())
 			throw  new BindException(results);
+		// 정규식 패턴과 일치한다면 service.update로 사용자가 변경하려고 입력한 값과 로그인한 아이디 전달
 		dalService.update(dto, principal.getName());
 		return ResponseEntity.ok(null);
 	}
+	
+	
 	@Secured("ROLE_DALIN")
 	@PostMapping("/dalin/report")
 	public ResponseEntity<Void> jejaReport(String jEmail, Principal principal, String reason) throws JejaNotFoundException {

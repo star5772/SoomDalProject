@@ -47,4 +47,10 @@ public class AdminRestController {
 		adService.reportBoard(rbNo,jMno,isBlock);
 		return ResponseEntity.ok(null);
 	}
+	
+	@PostMapping("/admin/AccusationMem")
+	public ResponseEntity<?> AccusationMember(String jIsBlock,int jMno) {
+		adService.accusationMember(jIsBlock,jMno);
+		return ResponseEntity.ok(null);
+	}
 }

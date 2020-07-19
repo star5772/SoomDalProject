@@ -80,7 +80,8 @@ public class JejaController {
 	// 비번 찾기
 	@PreAuthorize("isAnonymous()")
 	@PostMapping("/jeja/change_pwd")
-	public String resetPassword(@RequestParam @NotNull String jEmail, @RequestParam @NotNull String jTel, RedirectAttributes ra) throws JejaNotFoundException, MessagingException {
+	public String resetPassword(@RequestParam @NotNull String jEmail, @RequestParam @NotNull String jTel, RedirectAttributes ra)
+																				throws JejaNotFoundException, MessagingException {
 		if(service.resetPassword(jEmail, jTel)==true) {
 			ra.addFlashAttribute("msg","가입하신 이메일로 임시비밀번호를 보냈습니다");
 			return "redirect:/member/login";

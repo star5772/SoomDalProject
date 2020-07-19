@@ -18,6 +18,7 @@ import com.icia.dal.entity.Field;
 import com.icia.dal.entity.Jeja;
 import com.icia.dal.entity.NowRefund;
 import com.icia.dal.entity.RequestBoard;
+import com.icia.dal.util.websocket.MessageWebSocketHandler;
 
 @Service
 public class AdminRestService {
@@ -33,6 +34,8 @@ public class AdminRestService {
 	private PaymentDao npDao;
 	@Inject
 	private RequestBoardDao rqBoardDao;
+	@Inject
+	private MessageWebSocketHandler handler;
 	
 	@Transactional
 	public int insertFieldSajin(Field fl,MultipartFile sajin) throws IllegalStateException, IOException {
@@ -84,6 +87,16 @@ public class AdminRestService {
 			RequestBoard rqBoard = RequestBoard.builder().rbNo(rbNo).rbReportCnt(2).build();
 			rqBoardDao.RequestBoardUpdate(rqBoard);
 		}
+	}
+	public void accusationMember(String jIsBlock,int jMno) {
+		if(jIsBlock.equals("block")==true) {
+			Jeja jeja = jejaDao.findByJejaToJMno(jMno);
+			jejaDao.updateJeja(Jeja.builder().jEmail(jeja.getJEmail()).enabled(false).jIsBlock(true).jAccusationCnt(0).build());
+		}else if(jIsBlock.equals("warn")==true) {
+			Jeja jeja = jejaDao.findByJejaToJMno(jMno);
+			handler.sendMessage("admin", jeja.getJEmail(), "회원님은 부적절한 리뷰 혹은 요청서 작성으로 인해 경고 처리 되었습니다");
+		}
+		
 	}
 	
 	

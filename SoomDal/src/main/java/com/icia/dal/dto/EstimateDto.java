@@ -35,6 +35,7 @@ public class EstimateDto {
 		private int rNo;
 		private int eMoney;
 		private String dEmail;
+		private String dProfile;
 		private String eContent;
 		private String eTelType;
 		private Boolean jIsOk;

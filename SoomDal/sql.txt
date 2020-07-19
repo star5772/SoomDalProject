@@ -144,7 +144,7 @@ CREATE TABLE Dalin (
    ENABLED CHAR(1), /* 회원 상태(enabled) */
    D_DATE DATE, /* 가입날짜 */
    D_CASH NUMBER(8), /* 보유캐쉬 */
-   D_PROFILE NVARCHAR2(50), /* 프사 */
+   D_PROFILE NVARCHAR2(150), /* 프사 */
    D_MAIN_SERVICE NVARCHAR2(30), /* 대표서비스 */
    D_INTRO NVARCHAR2(50), /* 한줄소개 */
    D_DETAIL_SERVICE NVARCHAR2(500), /* 서비스상세설명 */

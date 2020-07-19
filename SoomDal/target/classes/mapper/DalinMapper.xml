@@ -12,6 +12,8 @@
 		values(#{dMno}, #{fNo}, #{dEmail},#{detailFName}, #{dPassword}, #{dName}, #{dTel}, 1, sysdate, 0, #{dProfile, jdbcType=VARCHAR}, #{dMainService, jdbcType=VARCHAR},
 		#{dIntro, jdbcType=VARCHAR}, #{dDetailService, jdbcType=VARCHAR}, #{dArea}, 0, #{dLevel}, #{dPaymentMethod, jdbcType=VARCHAR},0,0)
 	</insert>
+	
+	
 	<!-- 달인 프로필 읽기(프로필 사진, 이름, 대표서비스, 한줄 소개, 활동 지역, 달인 서비스 상세 설명, 결제 수단, 첨부 파일, 리뷰, 평점 -->
 	<select id="findByDalinProfile" resultType="dalin">
 		select d_mno dMno,d_email dEmail, d_profile dProfile, d_name dName, d_main_service dMainService, d_intro dIntro, d_area dArea, d_detail_service dDetailService,f_no fNo,
@@ -51,11 +53,17 @@
 	<update id="minusCash">
 		update dalin set d_cash=d_cash - #{dCash} where d_mno=#{dMno} and rownum=1
 	</update>
+	
+	
 	<!-- 내정보 읽기 (이름, 이메일, 비밀번호, 전화번호) -->
 	<select id="findByDalin" resultType="dalin">
-		select d_profile dProfile,d_mno dMno, d_name dName, d_email dEmail, d_password dPassword, d_tel dTel,d_cash dCash ,f_no fNo,d_level dLevel,d_login_failure_cnt dLoginFailureCnt,p_attachment_cnt pAttachmentCnt
-		from dalin where d_email=#{dEmail} and rownum=1
+		select d_profile dProfile,d_mno dMno, d_name dName, d_email dEmail, d_password dPassword, d_tel dTel,d_profile dProfile
+			,d_cash dCash ,f_no fNo,d_level dLevel,d_login_failure_cnt dLoginFailureCnt,p_attachment_cnt pAttachmentCnt
+		from dalin 
+		where d_email=#{dEmail} and rownum=1
 	</select>
+	
+	
 	<!-- 내정보 수정 -->
 	<update id="updateToDalin">
 		update dalin
@@ -71,6 +79,8 @@
 		</trim>
 		where d_email=#{dEmail} and rownum=1
 	</update>
+	
+	
 	<!-- 회원탈퇴 -->
 	<delete id="deleteToDalin">
 		delete from dalin where d_email=#{dEmail} and rownum=1
@@ -116,7 +126,7 @@
 	
 	<!-- dMno로 달인 찾기(견적서, 요청서 필요) -->
 	<select id="findByDalinToDMno" resultType="dalin">
-		select d_mno dMno, f_no fNo, detail_f_name detailFName, d_email dEmail, d_password dPassword, d_name dName, d_tel dTel
+		select d_mno dMno, f_no fNo, detail_f_name detailFName, d_email dEmail, d_password dPassword, d_name dName, d_tel dTel,d_profile dProfile
 		from dalin
 		where d_mno=#{dMno} and rownum=1
 	</select>

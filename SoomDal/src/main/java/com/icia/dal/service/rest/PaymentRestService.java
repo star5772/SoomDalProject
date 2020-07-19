@@ -24,7 +24,9 @@ public class PaymentRestService {
 		// 랜덤한 코드 8자리 생성후 결제코드로 입력
 		String code = RandomStringUtils.randomAlphanumeric(6);
 		rp.setPCode(code);
+		// 로그인한 아이디로 달인 정보를 찾음
 		Dalin dalin = dalDao.findByDalin(username);
+		// 찾은 달인정보의 달인번호,분야,연락처,아이디를 결제신청 테이블에 저장
 		rp.setDMno(dalin.getDMno());
 		rp.setFNo(dalin.getFNo());
 		rp.setDTel(dalin.getDTel());

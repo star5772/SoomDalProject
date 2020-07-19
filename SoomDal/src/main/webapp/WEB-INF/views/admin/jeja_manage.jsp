@@ -37,7 +37,25 @@
 	}
 </style>
 <script>
-
+$(function(){
+	$("#jIsBlock").on("change",function(){
+		var params = {
+				jMno: $("#jMno").val(),
+				jIsBlock : $("#jIsBlock").val(),
+				_csrf: "${_csrf.token}"
+			}
+		console.log(params)
+		$.ajax({
+			url : "/dal/member/admin/AccusationMem",
+			method : "post",
+			data: params,
+			success: function() {
+				alert("변경되었습니다");
+				window.location.reload();
+			}
+		})
+	})
+})
 </script>
 </head>
 <body>
@@ -52,6 +70,7 @@
   		</div>
 	</div>
 </div>
+
 
 <div id="table_report_wrap" >
 			<div id="manage_title2" style="display: inline-block; position: absolute; left: 28%">
@@ -71,20 +90,29 @@
 					<th>작성자</th>
 					<th>회원이름</th>
 					<th>신고횟수</th>
+					<th>상태 변경</th>
 				</tr>
 				</thead>
 				<tbody>
 		 		<c:forEach items="${jeja.list}" var="j">
 					<tr>
+						<input type="hidden" id="jMno" value="${j.JMno}">
 						<td>${j.JJoinDateStr}</td>
 						<td>${j.JEmail }</td>
 						<td>${j.JName }</td>
 						<td>${j.JAccusationCnt }</td>
+						<td>
+							<select id="jIsBlock">
+								<option selected="selected">선택하세요</option>
+								<option value="warn">경고</option>
+								<option value="block">정지</option>
+							</select>
+						</td>
 					</tr>
 				</c:forEach>
 				</tbody>
 			</table>
-			<div style="text-align: center; display: inline-block; margin-left: 35%; display: none;">
+			<div style="text-align: center; display: inline-block; margin-left: 35%;">
 				<ul class="pagination">
 					<c:if test="${jeja.prev==true }">
 						<li><a href="/dal/admin/jeja_manage?pageno=${jeja.startPage-1 }">이전</a></li>

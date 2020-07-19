@@ -39,9 +39,11 @@ public class DalinController {
 	@GetMapping("/dalin/my_info")
 	public ModelAndView myInFo(Principal principal) throws UserNotFoundException {
 		// 달인 마이페이지
-		System.out.println(SecurityContextHolder.getContext().hashCode());
+		// Principal객체에서 ID를 꺼내 username에 담음
 		String username = principal.getName();
-		return new ModelAndView("main").addObject("viewName","dalin/my_info.jsp").addObject("myInfo",dalService.readToMyInfo(username));
+		// 로그인한 정보를 username으로 읽어와 화면 출력
+		return new ModelAndView("main").addObject("viewName","dalin/my_info.jsp")
+				.addObject("myInfo",dalService.readToMyInfo(username));
 	}
 	
 	@PreAuthorize("isAnonymous()")
@@ -50,11 +52,14 @@ public class DalinController {
 		// 달인 회원가입
 		return new ModelAndView("main").addObject("viewName","dalin/dalinJoin.jsp");
 	}
+	
 	@PreAuthorize("isAnonymous()")
 	@PostMapping("/dalin/join")
-	public String dalinJoin(DalinDto.DtoForJoinToDalin dto,BindingResult br, RedirectAttributes ra) throws BindException {
+	public String dalinJoin(@Valid DalinDto.DtoForJoinToDalin dto,BindingResult br, RedirectAttributes ra) throws BindException {
+		// @Valid 어노테이션을 사용해 입력받은 값의 정규식 패턴과 일치하지 않으면 BindException 발생
 		if(br.hasErrors()==true)
 			throw new BindException(br);
+		// 정규식 패턴을 통과하면 join메소드로 값 전달후 RedirectAttribute를 사용해서 메세지 저장후 메세지를 출력할 화면으로 리턴
 		dalService.join(dto);
 		ra.addFlashAttribute("msg","회원가입을 축하합니다");
 		return "redirect:/member/system/msg";
@@ -77,12 +82,17 @@ public class DalinController {
 	
 	@Secured("ROLE_DALIN")
 	@PostMapping("/dalin/profile_update")
-	public String dalinInFoUpdate(@Valid DalinDto.DtoForProfileUpdateToDalin dto, @Nullable MultipartFile dProfile, @Nullable MultipartFile profileAttachment0,@Nullable MultipartFile profileAttachment1,@Nullable MultipartFile profileAttachment2,@Nullable MultipartFile profileAttachment3,@Nullable MultipartFile profileAttachment4,Principal principal, RedirectAttributes ra, BindingResult bindingResult) throws BindException, DalinNotFoundException {
+	public String dalinInFoUpdate(@Valid DalinDto.DtoForProfileUpdateToDalin dto, @Nullable MultipartFile dProfile,
+			@Nullable MultipartFile profileAttachment0,@Nullable MultipartFile profileAttachment1,
+			@Nullable MultipartFile profileAttachment2,@Nullable MultipartFile profileAttachment3,
+			@Nullable MultipartFile profileAttachment4,Principal principal, RedirectAttributes ra, 
+			BindingResult bindingResult) throws BindException, DalinNotFoundException {
 		String dEmail = principal.getName();
 		if(bindingResult.hasErrors()==true)
 			throw new BindException(bindingResult);
 		try {
-			dalService.profileUpdate(dto, dProfile, profileAttachment0, profileAttachment1, profileAttachment2,profileAttachment3,profileAttachment4, dEmail);
+			dalService.profileUpdate(dto, dProfile, profileAttachment0, profileAttachment1, profileAttachment2
+					,profileAttachment3,profileAttachment4, dEmail);
 		} catch (IllegalStateException | IOException e) {
 			e.printStackTrace();
 		}
@@ -146,7 +156,8 @@ public class DalinController {
 	@Secured("ROLE_DALIN")
 	@GetMapping("/dalin/my_profile")
 	public ModelAndView dalinProfileRead(String dEmail,Principal principal) throws DalinNotFoundException {
-		return new ModelAndView("main").addObject("viewName","dalin/my_profile.jsp").addObject("readProfile",dalService.readToMyProfile(principal.getName()));
+		return new ModelAndView("main").addObject("viewName","dalin/my_profile.jsp")
+				.addObject("readProfile",dalService.readToMyProfile(principal.getName()));
 	}
 	
 	@Secured("ROLE_DALIN")

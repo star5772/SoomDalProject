@@ -58,10 +58,11 @@ public class DalinService {
 
 	@Transactional
 	public void join(DtoForJoinToDalin dto) {
+		// ModelMapper 객체를 사용해  Dto클래스를 Dalin클래스로 변환
 		Dalin dalin = modelMapper.map(dto, Dalin.class);
-		// 레벨 초기설정값 = 노말
+		// Enum 클래스를 이용해 레벨 초기설정값 = 노말
 		dalin.setDLevel(Level.NORMAL);
-		// 비밀번호 해싱
+		// SpringSecurity PasswordEncoder객체를 사용해 비밀번호 해싱
 		String password = dalin.getDPassword();
 		String encodePwd = pwdEncoder.encode(password);
 		dalin.setDPassword(encodePwd);
@@ -80,20 +81,28 @@ public class DalinService {
 	
 	@Transactional
 	public void delete(String dEmail) {
+		// Controller에서 넘겨받은 dEmail로 달인 테이블에서 정보를 찾음
+		// 달인 정보가 존재하지 않는다면 RuntimException 발생
 		if(dalDao.findByDalin(dEmail)==null)
 			throw new RuntimeException();
+		// 찾았다면 달인테이블에서 정보 삭제 + 권한테이블에서 유저정보,권한 삭제
 		dalDao.deleteToDalin(dEmail);
 		dao.deleteAuthority(dEmail);
 	}
 	
 	
 	public DalinDto.DtoForMyInfo readToMyInfo(String username) throws UserNotFoundException {
+		// Controller에서 받아온 username으로 달인 테이블에서 정보를 찾아 읽음
 		Dalin dalin = dalDao.findByDalin(username);
+		// 읽어온 정보가 null이면 UserNotFoundException 발생
 		if(dalin==null)
 			throw new UserNotFoundException();
+		// 정보가 있다면 출력을 위해 ModelMapper객체를 이용해 Dto클래스로 변환
 		DalinDto.DtoForMyInfo dto = modelMapper.map(dalin,DalinDto.DtoForMyInfo.class);
+		// Level의 Name만 출력
 		Level lev = dalin.getDLevel();
 		dto.setDLevelStr(lev.name());
+		// dto값을 리턴
 		return dto;
 	}
 
@@ -359,13 +368,18 @@ public class DalinService {
 
 	// 달인 본인 프로필읽기
 	public DalinDto.DtoForProfileToDalin readToMyProfile(String dEmail) throws DalinNotFoundException{
+		// 현재 로그인한 아이디로 달인 정보를 불러옴
 		Dalin dalin = dalDao.findByMyProfile(dEmail);
+		// 달인정보가 비었다면 DalinNotFoundException 발생
 		if(dalin==null) {
 			throw new DalinNotFoundException();
 		}
+		// 달인 정보가 있다면 ModelMapper객체를 사용해 찾은 달인정보를 dto클래스로 변경
 		DalinDto.DtoForProfileToDalin dto = modelMapper.map(dalin, DalinDto.DtoForProfileToDalin.class);
-		if(dalin.getPAttachmentCnt()!=0) // 사진 수가 있으면 다 보여주라고
+		// 달인의 첨부파일(사진) 숫자가 0이아니면 프로필사진 모두 출력
+		if(dalin.getPAttachmentCnt()!=0)
 			dto.setProfileAttachments(profileAttachmentDao.findAllById(dEmail));
+		// 달인의 리뷰 갯수가 0이 아니면 리뷰 모두 출력 + 리뷰의 평점출력
 		if(dalin.getRReviewCnt()>0) {
 			dto.setReviews(reviewDao.findAllReview(dto.getDMno()));
 			dto.setRScoreAverage(reviewDao.avgToReview(dto.getDMno()));
@@ -427,19 +441,28 @@ public class DalinService {
 
 	@Transactional
 	public boolean resetPassword(String dEmail, String dTel) throws MessagingException, DalinNotFoundException {
+		// jsp에서 입력받은 dEamil로 달인 정보를 찾는다
 		Dalin dalin = dalDao.findByDalin(dEmail);
+		// 달인 정보가 null이라면 DalinNotFoundException발생
 		if(dalin==null )
 			throw new DalinNotFoundException();
+		/// 찾은 달인의 정보중 데이터베이스의 dEmail,dTel 값이 사용자에게 입력받은 값과 모두 일치하지 않는다면 DalinNotFoundException 발생
 		if(dalin.getDEmail().equals(dEmail)==false || dalin.getDTel().equals(dTel)==false)
 			throw new DalinNotFoundException();
 		else {
+		// 달인의 정보가 사용자에게 입력받은 값과 모두 일치한다면
+		// RandomStrinUtils객체를 불러와 20자리의 랜덤한 문자열을 생성
 			String newPassword = RandomStringUtils.randomAlphanumeric(20);
+		// 데이터베이스에 있는 달인의 비밀번호를 위에서 생성한 20자리 랜덤문자열로 변경후 해싱 , Enabled도  true로 변경	
 			dalDao.updateToDalin(Dalin.builder().dEmail(dEmail).dPassword(pwdEncoder.encode(newPassword)).enabled(true).build());
+		// StringBuffer 객체를 사용해 발송할 메일의 내용및 제목 작성	
 			StringBuffer text = new StringBuffer("<p>임시비밀번호를 발급했습니다</p>");
 			text.append("<p>임시 비밀번호:").append(newPassword).append("</p>");
 			text.append("<p>보안을 위해 로그인 후 바로 비밀번호를 변경하세요</p>");
+		// 작성한 내용을 MailUtil객체를 사용해 20자리 랜덤 임시비밀번호와 함께 발송	
 			Mail mail = Mail.builder().sender("webmaster@icia.com").receiver(dEmail).title("임시비밀번호 발급 안내").content(text.toString()).build();
 			mailUtil.sendMail(mail);
+		// 메일 발송 후 true값 리턴
 			return true;
 		}
 	}

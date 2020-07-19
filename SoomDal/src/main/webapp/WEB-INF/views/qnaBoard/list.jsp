@@ -293,7 +293,7 @@ height: 30px; margin-left: 20px; width: 1024px;  text-align: center;
 						<c:when test="${ q.QIsSecret == 'true' && q.QWriter eq username}">
 							<td class="subject" ><a href="/dal/dalin/qnaBoard/read?qNo=${q.QNo}">${q.QTitle}</a></td>
 						</c:when>
-						<c:when test="${ q.QIsSecret == 'true' && username eq 'admin2'}">
+						<c:when test="${ q.QIsSecret == 'true' && username eq 'admin'}">
 							<td class="subject" ><a href="/dal/dalin/qnaBoard/read?qNo=${q.QNo}">${q.QTitle}</a></td>
 						</c:when>
 						<c:otherwise>

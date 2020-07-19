@@ -236,7 +236,7 @@ $(function() {
 	top:50%;
 	left: 50%;
 	margin-left: -200px;
-	margin-top: -200px;
+	margin-top: -250px;
 	font-size: large; 
 }
 #step-one .input {
