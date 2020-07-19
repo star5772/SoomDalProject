@@ -92,14 +92,14 @@ $(function() {
 		<button id="list" onclick="location.href='list'" style="text-align: center; font-size: 17px; font-weight: bold; color: white; margin-top: 10px;border-radius: 4px;" class="btn btn-warning">목록으로</button>
 	</div>
 	<div id="btn_area" style="display: inline-block;">
-		<button id="report" type="button" style="text-align: center; font-size: 17px; font-weight: bold; color: white;  margin-top: 10px;border-radius: 4px; margin-left: 5px;" class="btn btn-secondary">신고</button>
+		<button id="report" type="button" style="text-align: center; font-size: 17px; font-weight: bold; color: white; margin-top: 10px; border-radius: 4px; margin-left: 5px;" class="btn btn-secondary">신고</button>
 	</div>
-	<div>
-		<button id="deleteToReq" type="button">삭제</button>
+	<div id="btn_area" style="display: inline-block; float: right;">
+		<button id="deleteToReq" type="button" class="btn btn-danger" style="text-align: center; font-size: 17px; font-weight: bold; color: white; margin-top: 10px; border-radius: 4px;">삭제</button>
 	</div>
 	<sec:authorize access="hasRole('ROLE_DALIN')">
-	<div id="btn_area" style="display: inline-block; float: right">
-		<button id="estimate" onclick="location.href='/dal/dalin/estimate/sendEstimate?rNo=${reqRead.RNo}'" style="font-size: 17px; font-weight: bold; color: white;  margin-top: 10px;border-radius: 4px;" class="btn btn-warning">견적서 보내기</button>
+	<div id="btn_area" style="display: inline-block;">
+		<button id="estimate" onclick="location.href='/dal/dalin/estimate/sendEstimate?rNo=${reqRead.RNo}'" style="font-size: 17px; font-weight: bold; color: white; margin-top: 10px; border-radius: 4px; margin-left: 740px;" class="btn btn-warning">견적서 보내기</button>
 	</div>
 	</sec:authorize>
 	</div>

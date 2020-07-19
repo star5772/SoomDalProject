@@ -197,7 +197,7 @@ hr {
 }
 
 #rContent {
-	width: 100px;
+	width: 700px;
 	height: 50px;
 }
 
@@ -415,7 +415,7 @@ hr {
 								</span>
 							<c:choose>	
 								<c:when test="${rv.RWriter == username}">
-									<button type="button" id="deleteReview">리뷰삭제</button>
+									<button type="button" id="deleteReview" class="btn btn-danger" style="margin-left: 5px;">리뷰삭제</button>
 								</c:when>
 							</c:choose>	
 							</div>
@@ -424,7 +424,7 @@ hr {
 							</div>
 						</div>
 						<div id="rContent">
-							<p>${rv.RContent}</p>
+							<span style="font-size: 15px; width: 700px;">${rv.RContent}</span>
 						</div>
 					</c:forEach>
 				</c:when>
