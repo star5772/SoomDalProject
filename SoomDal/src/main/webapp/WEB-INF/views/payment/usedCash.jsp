@@ -24,7 +24,7 @@ th {
 </style>
 </head>
 <body>
-<div style="font-size: medium;width: 700px; text-align: center;">
+<div style="font-size: medium;width: 700px; text-align: center; margin-left: 178px; margin-top: 100px;">
 	<table class="table table-hover" >
 		<colgroup>
 			<col width="30%">

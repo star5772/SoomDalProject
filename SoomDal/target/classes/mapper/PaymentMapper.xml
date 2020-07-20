@@ -76,8 +76,7 @@
 		<![CDATA[
 			select * from		
 				(select n.*, rownum rnum from	
-					(select p_request_refund pRequestPayment,p_code pCode, p_date pDate, p_refund_date pRefundDate,
-					p_refund_is_ok pRefundIsOk,d_email dEmail,p_money pMoney from nowpayment where d_email=#{dEmail}) n
+					(select /*+index_desc(nowpayment payINDEX)*/ p_request_refund pRequestPayment,p_code pCode, p_date pDate, p_refund_date pRefundDate,p_refund_is_ok pRefundIsOk,d_email dEmail,p_money pMoney from nowpayment where d_email=#{dEmail}) n
 				where rownum <=#{endRowNum})	
 			where rnum >=#{startRowNum}
 		]]>	

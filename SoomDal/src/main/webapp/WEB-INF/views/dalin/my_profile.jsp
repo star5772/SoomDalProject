@@ -101,7 +101,7 @@ hr{
 	display: inline-block;
 }
 #rContent{
-	width: 100px;
+	width: 700px;
 	height: 50px;
 }
 #buttonDiv {

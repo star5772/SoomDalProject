@@ -144,7 +144,7 @@ $(function(){
 		</form>
 	</div>
 	<div>
-		<button onclick="openChild()" style="margin-left: 700px;">환불 내역</button>
+		<button onclick="openChild()" style="margin-left: 700px;" class="btn btn-secondary">환불 내역</button>
 	</div>
  	<div style="margin-left:235px; margin-top: 30px;">
 		<table class="table table-hover" style="width:550px;height: 150px; font-size: medium;">
